@@ -1,5 +1,7 @@
 package dessin;
 
-public class ZoneAnimPhysique {
+import javax.swing.JPanel;
+
+public class ZoneAnimPhysique extends JPanel {
 
 }
