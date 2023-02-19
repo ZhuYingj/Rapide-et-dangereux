@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import dessin.ZoneAnimPhysique;
 
 public class AppPrincipale12 extends JFrame {
 
@@ -35,10 +36,11 @@ public class AppPrincipale12 extends JFrame {
 		setBounds(100, 100, 1000, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		ZoneAnimPhysique zoneAnimPhysique = new ZoneAnimPhysique();
+		zoneAnimPhysique.setBounds(10, 38, 634, 544);
+		contentPane.add(zoneAnimPhysique);
 	}
-
-	
-	
 }
