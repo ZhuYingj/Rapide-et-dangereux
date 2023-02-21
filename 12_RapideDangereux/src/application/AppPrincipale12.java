@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import dessin.ZoneAnimPhysique;
+import fenetre.FenetreEditeur;
 import fenetre.ModeDeJeu;
 import fenetre.fenetreMenu;
 import javax.swing.JMenuBar;
@@ -48,6 +49,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenetreMenu fen1 = new fenetreMenu();
 		ModeDeJeu fen2 = new ModeDeJeu();
+		FenetreEditeur fen3 = new FenetreEditeur();
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -77,7 +79,7 @@ public class AppPrincipale12 extends JFrame {
 		fen2.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				switch (evt.getPropertyName()) {
-				case "RETOUR":
+				case "Retour":
 					fen2.setVisible(false);
 					fen1.setVisible(true);
 					setContentPane(fen1);
@@ -86,14 +88,26 @@ public class AppPrincipale12 extends JFrame {
 				}
 			}
 		});
-
 		fen2.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				switch (evt.getPropertyName()) {
-				case "Retour":
+				case "EDITEUR":
 					fen2.setVisible(false);
-					fen1.setVisible(true);
-					setContentPane(fen1);
+					fen3.setVisible(true);
+					setContentPane(fen3);
+					break;
+				
+				}
+			}
+		});
+
+		fen3.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "Retour":
+					fen2.setVisible(true);
+					fen3.setVisible(false);
+					setContentPane(fen2);
 					break;
 				
 				}
