@@ -1,67 +1,62 @@
 package fenetre;
 
-import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+
+import application.Identifiants;
 
 public class fenetreMenu extends JPanel {
-
+	private JLabel lblInfoRecue;
+	private JButton btnJouer;
+	private JButton btnAide;
+	private JButton btnQuitter;
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	
 	/**
 	 * Create the panel.
 	 */
+	
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+	}
+	
 	public fenetreMenu() {
 		setLayout(null);
-		
-		JButton btnQuitter = new JButton("Quitter");
-		btnQuitter.setBounds(369, 409, 101, 34);
-		add(btnQuitter);
-		
-		JButton btnAide = new JButton("Aide");
-		btnAide.setBounds(369, 352, 101, 34);
-		add(btnAide);
-		
-		JButton btnJouer = new JButton("Jouer");
-		btnJouer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnJouer.setBounds(369, 299, 101, 34);
-		add(btnJouer);
 		
 		JLabel lblNewLabel = new JLabel("Rapide et Dangereux");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(230, 203, 349, 75);
+		lblNewLabel.setBounds(293, 146, 349, 75);
 		add(lblNewLabel);
 		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 85, 22);
-		add(menuBar);
+		btnJouer = new JButton("JOUER");
+		btnJouer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("JOUER", 0, -1);
+			}
+		});
+		btnJouer.setBounds(411, 245, 100, 49);
+		add(btnJouer);
 		
-		JMenu mnBarreOutils = new JMenu("New menu");
-		mnBarreOutils.setForeground(Color.WHITE);
-		mnBarreOutils.setBackground(Color.BLUE);
-		menuBar.add(mnBarreOutils);
+		btnAide = new JButton("AIDE");
+		btnAide.setBounds(411, 321, 100, 49);
+		add(btnAide);
 		
-		JMenuItem mntmCentreAide = new JMenuItem("Centre D'aide");
-		mnBarreOutils.add(mntmCentreAide);
-		
-		JMenuItem mntmModeScientifique = new JMenuItem("Mode Scientifique");
-		mnBarreOutils.add(mntmModeScientifique);
-		
-		JMenuItem mntmEffetsSonores = new JMenuItem("Effets Sonores");
-		mnBarreOutils.add(mntmEffetsSonores);
+		btnQuitter = new JButton("QUITTER");
+		btnQuitter.setBounds(411, 402, 100, 49);
+		add(btnQuitter);
 
 		
+	}
+	public void setInfoRecue(Identifiants idRecu) {
+		lblInfoRecue.setText(idRecu.toString());;
 	}
 }

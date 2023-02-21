@@ -2,11 +2,15 @@ package application;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import dessin.ZoneAnimPhysique;
+import fenetre.ModeDeJeu;
+import fenetre.fenetreMenu;
 
 public class AppPrincipale12 extends JFrame {
 
@@ -34,13 +38,48 @@ public class AppPrincipale12 extends JFrame {
 	public AppPrincipale12() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 700);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		ZoneAnimPhysique zoneAnimPhysique = new ZoneAnimPhysique();
-		zoneAnimPhysique.setBounds(10, 38, 634, 544);
-		contentPane.add(zoneAnimPhysique);
+		setTitle("Rapide et Dangereux");
+
+		fenetreMenu fen1 = new fenetreMenu();
+		ModeDeJeu fen2 = new ModeDeJeu();
+
+		setContentPane(fen1);
+
+		fen1.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				if (evt.getPropertyName().equals("JOUER")) {
+					fen1.setVisible(false);
+					fen2.setVisible(true);
+					setContentPane(fen2);
+				}
+			}
+		});
+
+		fen2.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "RETOUR":
+					fen2.setVisible(false);
+					fen1.setVisible(true);
+					setContentPane(fen1);
+					break;
+
+				}
+			}
+		});
+
+		fen2.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "Retour":
+					fen2.setVisible(false);
+					fen1.setVisible(true);
+					setContentPane(fen1);
+					break;
+				
+				}
+			}
+		});
+
 	}
 }
