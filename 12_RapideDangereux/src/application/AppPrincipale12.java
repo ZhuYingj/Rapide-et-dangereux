@@ -11,6 +11,12 @@ import javax.swing.border.EmptyBorder;
 import dessin.ZoneAnimPhysique;
 import fenetre.ModeDeJeu;
 import fenetre.fenetreMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JCheckBoxMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AppPrincipale12 extends JFrame {
 
@@ -42,6 +48,19 @@ public class AppPrincipale12 extends JFrame {
 
 		fenetreMenu fen1 = new fenetreMenu();
 		ModeDeJeu fen2 = new ModeDeJeu();
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("New menu");
+		menuBar.add(mnNewMenu);
+		
+		JCheckBoxMenuItem checkBoxModeScientifique = new JCheckBoxMenuItem("Mode Scientifique");
+		checkBoxModeScientifique.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		mnNewMenu.add(checkBoxModeScientifique);
 
 		setContentPane(fen1);
 
