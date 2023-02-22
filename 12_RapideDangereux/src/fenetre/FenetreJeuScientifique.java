@@ -3,6 +3,9 @@ package fenetre;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 import dessin.ZoneAnimPhysique;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
@@ -14,9 +17,16 @@ import javax.swing.JProgressBar;
 
 public class FenetreJeuScientifique extends JPanel {
 
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	
 	/**
 	 * Create the panel.
 	 */
+
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+	}
+	
 	public FenetreJeuScientifique() {
 		setLayout(null);
 		setBounds(100, 100, 1300, 700);

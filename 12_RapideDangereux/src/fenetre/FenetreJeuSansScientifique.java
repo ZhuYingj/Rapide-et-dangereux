@@ -1,6 +1,8 @@
 package fenetre;
 
 import java.awt.Font;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,9 +16,16 @@ import javax.swing.SwingConstants;
 
 public class FenetreJeuSansScientifique extends JPanel {
 
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	
 	/**
 	 * Create the panel.
 	 */
+	
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+	}
+	
 	public FenetreJeuSansScientifique() {
 		setLayout(null);
 		setBounds(100, 100, 1300, 700);

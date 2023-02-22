@@ -18,20 +18,27 @@ public class ModeDeJeu extends JPanel {
 	private JButton btnEditeur;
 	private JLabel lblTitre;
 	private JButton btnRetour;
-	
+
 	// ajouter le support pour lancer des evenements de type PropertyChange
-		private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-		
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+
 	/**
 	 * Create the panel.
 	 */
-		
-		public void addPropertyChangeListener(PropertyChangeListener listener) {
-			pcs.addPropertyChangeListener(listener);
-		}
+
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+	}
+
 	public ModeDeJeu() {
 		setLayout(null);
 		btnMonde = new JButton("MONDE");
+		btnMonde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("MONDE", 0, -1);
+			}
+		});
+		
 		btnMonde.setForeground(Color.BLACK);
 		btnMonde.setBounds(411, 245, 100, 49);
 		add(btnMonde);
@@ -56,7 +63,7 @@ public class ModeDeJeu extends JPanel {
 		lblTitre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitre.setBounds(293, 146, 349, 75);
 		add(lblTitre);
-		
+
 		btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
