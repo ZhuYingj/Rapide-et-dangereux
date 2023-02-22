@@ -4,11 +4,23 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
 import javax.swing.JPanel;
 
+import interfaces.Dessinable;
+import utilitaireObjets.PisteHorizontale;
+import utilitaireObjets.PisteVerticale;
+import utilitaireObjets.PisteVirageBas;
+import utilitaireObjets.PisteVirageDroit;
+import utilitaireObjets.PisteVirageGauche;
+import utilitaireObjets.PisteVirageHaut;
+import utilitaireObjets.Voiture;
+
 public class ZoneAnimPhysique extends JPanel implements Runnable {
+	
+	
 	
 	/** Largeur du composant en metres. */
 	private double largeurDuComposantEnMetres = 230;
@@ -37,6 +49,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
+		PisteHorizontale pisteVirageDroit = new PisteHorizontale(20,20);
+       pisteVirageDroit.dessiner(g2d);
 		
 
 	}
