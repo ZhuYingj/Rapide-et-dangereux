@@ -14,6 +14,9 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.JProgressBar;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FenetreJeuScientifique extends JPanel {
 
@@ -180,5 +183,14 @@ public class FenetreJeuScientifique extends JPanel {
 		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
 		progressBarFroce.setBounds(519, 11, 30, 157);
 		panelObjet.add(progressBarFroce);
+		
+		JButton btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("Retour", null, -1);
+			}
+		});
+		btnRetour.setBounds(10, 11, 89, 23);
+		add(btnRetour);
 	}
 }
