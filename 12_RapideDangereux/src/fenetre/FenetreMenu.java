@@ -13,7 +13,7 @@ import javax.swing.SwingConstants;
 
 import application.Identifiants;
 
-public class fenetreMenu extends JPanel {
+public class FenetreMenu extends JPanel {
 	private JLabel lblInfoRecue;
 	private JButton btnJouer;
 	private JButton btnAide;
@@ -28,7 +28,7 @@ public class fenetreMenu extends JPanel {
 		pcs.addPropertyChangeListener(listener);
 	}
 	
-	public fenetreMenu() {
+	public FenetreMenu() {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Rapide et Dangereux");

@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import dessin.ZoneAnimPhysique;
 import fenetre.FenetreEditeur;
 import fenetre.ModeDeJeu;
-import fenetre.fenetreMenu;
+import fenetre.FenetreMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -47,7 +47,7 @@ public class AppPrincipale12 extends JFrame {
 		setBounds(100, 100, 1000, 700);
 		setTitle("Rapide et Dangereux");
 
-		fenetreMenu fen1 = new fenetreMenu();
+		FenetreMenu fen1 = new FenetreMenu();
 		ModeDeJeu fen2 = new ModeDeJeu();
 		FenetreEditeur fen3 = new FenetreEditeur();
 		
