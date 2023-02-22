@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import utilitaireObjets.PisteHorizontale;
 import utilitaireObjets.PisteVerticale;
 
+import utilitaireObjets.PisteVirageBas;
+
 import utilitaireObjets.Voiture;
 
 /**
@@ -42,6 +44,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	private PisteHorizontale pisteHorizontale;
 	private PisteVerticale pisteVerticale;
+	private PisteVirageBas pisteVirageBas;
 
 	public ZoneAnimPhysique() {
 		setBackground(Color.gray);
@@ -52,7 +55,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		if (premiereFois) {
 			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
 			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
-//			voiture.setPixelsParMetre(pixelsParMetre);
+
 			premiereFois = false;
 		}
 
@@ -61,13 +64,22 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		g2d.scale(pixelsParMetre, pixelsParMetre);
 
-//		voiture = new Voiture(Color.red);
-//		voiture.dessiner(g2d);
+
 
 		pisteHorizontale = new PisteHorizontale(30, 5);
+
 		// pisteVerticale = new PisteVerticale(30,40);
 
 		pisteHorizontale.dessiner(g2d);
+
+		// pisteVerticale.dessiner(g2d);
+
+		pisteVerticale = new PisteVerticale(5, 100);
+		pisteVerticale.dessiner(g2d);
+
+		pisteVirageBas = new PisteVirageBas(200, 5);
+		pisteVirageBas.dessiner(g2d);
+
 		// pisteVerticale.dessiner(g2d);
 
 	}
