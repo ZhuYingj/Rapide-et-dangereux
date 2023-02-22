@@ -45,7 +45,7 @@ public class AppPrincipale12 extends JFrame {
 	 */
 	public AppPrincipale12() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1300, 700);
+		setBounds(100, 100, 1350, 800);
 		setTitle("Rapide et Dangereux");
 
 		FenetreMenu fenMenu = new FenetreMenu();
@@ -123,15 +123,61 @@ public class AppPrincipale12 extends JFrame {
 				}
 			}
 		});
+		
+		fenModeJeu.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "MONDE":
+					fenModeJeu.setVisible(false);
+					fenOptions.setVisible(true);
+					setContentPane(fenOptions);
+					break;
 
+				}
+			}
+		});
+
+		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "Retour":
+					fenModeJeu.setVisible(true);
+					fenOptions.setVisible(false);
+					setContentPane(fenModeJeu);
+					break;
+
+				}
+			}
+		});
+		
+		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "COMMENCER!":
+					fenJeuScience.setVisible(true);
+					fenOptions.setVisible(false);
+					setContentPane(fenJeuScience);
+					break;
+
+				}
+			}
+		});
+		
 
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("allo");
 				if (checkBoxModeNonScientifique.isSelected()) {
-					fenSansScience.setVisible(false);
+					fenSansScience.setVisible(true);
+					fenJeuScience.setVisible(false);
+					setContentPane(fenSansScience);
+					System.out.println("S");
 				} else {
+					fenSansScience.setVisible(false);
 					fenJeuScience.setVisible(true);
+					setContentPane(fenJeuScience);
+					System.out.println("A");
 				}
 			}
 		});

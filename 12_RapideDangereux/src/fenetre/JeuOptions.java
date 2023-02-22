@@ -48,6 +48,7 @@ public class JeuOptions extends JPanel {
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("COMMENCER!", null, -1);
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);
@@ -69,6 +70,15 @@ public class JeuOptions extends JPanel {
 		JButton btnDroite = new JButton(">");
 		btnDroite.setBounds(1123, 188, 55, 23);
 		add(btnDroite);
+		
+		JButton btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("Retour", 0, -1);
+			}
+		});
+		btnRetour.setBounds(10, 11, 89, 23);
+		add(btnRetour);
 
 	}
 }
