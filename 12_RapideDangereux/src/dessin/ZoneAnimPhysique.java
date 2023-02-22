@@ -8,6 +8,10 @@ import java.awt.geom.Ellipse2D;
 
 import javax.swing.JPanel;
 
+import utilitaireObjets.PisteHorizontale;
+import utilitaireObjets.PisteVerticale;
+import utilitaireObjets.Voiture;
+
 public class ZoneAnimPhysique extends JPanel implements Runnable {
 	
 	/** Largeur du composant en metres. */
@@ -27,6 +31,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private boolean premiereFois = true;
 	/** Temps du sleep de l'application */
 	private int tempsDuSleep = 10;
+	
+	private Voiture voiture;
+	
+	private PisteHorizontale pisteHorizontale;
+	private PisteVerticale pisteVerticale;
 
 	public ZoneAnimPhysique() {
 		setBackground(Color.gray);
@@ -38,7 +47,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
+		voiture = new Voiture(Color.red);
+		voiture.dessiner(g2d);
+		
+		pisteHorizontale = new PisteHorizontale(30, 5);
+		//pisteVerticale = new PisteVerticale(30,40);
 
+		pisteHorizontale.dessiner(g2d);
+		//pisteVerticale.dessiner(g2d);
 	}
 	
 	public void run() {
