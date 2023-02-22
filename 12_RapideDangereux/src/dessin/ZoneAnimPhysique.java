@@ -10,12 +10,21 @@ import javax.swing.JPanel;
 
 public class ZoneAnimPhysique extends JPanel implements Runnable {
 	
+	/** Largeur du composant en metres. */
+	private double largeurDuComposantEnMetres = 230;
+	/** Hauteur du composant en metres. */
+	private double hauteurDuComposantEnMetres;
 	/** Nombre de pixels pas metre. */
 	private double pixelsParMetre;
 	/** Temps du deltaT par d�faut */
 	private double deltaT = 0.01;
 	/** Booleen de l'animation initialise a false */
 	private boolean enCoursDAnimation = false;
+	/**
+	 * Boolean qui dewtermine si c'est la premiere fois qu'on parcourt le
+	 * paintComponent.
+	 */
+	private boolean premiereFois = true;
 	/** Temps du sleep de l'application */
 	private int tempsDuSleep = 10;
 
@@ -29,7 +38,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
-		
+
 	}
 	
 	public void run() {
