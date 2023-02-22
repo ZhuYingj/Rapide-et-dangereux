@@ -42,6 +42,11 @@ public class ModeDeJeu extends JPanel {
 		add(btnCourseMontre);
 
 		btnEditeur = new JButton("EDITEUR");
+		btnEditeur.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("EDITEUR", 0, -1);
+			}
+		});
 		btnEditeur.setForeground(Color.BLACK);
 		btnEditeur.setBounds(411, 402, 100, 49);
 		add(btnEditeur);
@@ -52,10 +57,10 @@ public class ModeDeJeu extends JPanel {
 		lblTitre.setBounds(293, 146, 349, 75);
 		add(lblTitre);
 		
-		btnRetour = new JButton("RETOUR");
+		btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("RETOUR", null, -1);
+				pcs.firePropertyChange("Retour", null, -1);
 			}
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
