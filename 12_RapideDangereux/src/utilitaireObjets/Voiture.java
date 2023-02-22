@@ -78,43 +78,81 @@ public class Voiture implements Dessinable {
 //	public void gererCollisionSol() {
 //	
 //	}
+	/**
+	 * Méthode qui retourne le diametre de la voiture
+	 * 
+	 * @return le diametre de la voiture
+	 */
 
 	public double getDiametre() {
 		return diametre;
 	}
+
+	/**
+	 * Méthode qui change la valeur du diametre par un diametre voulu
+	 * 
+	 * @param diametre le diametre voulu
+	 */
 
 	public void setDiametre(double diametre) {
 		this.diametre = diametre;
 		creerLaGeometrie();
 	}
 
+	/**
+	 * Méthode qui permet de retourner la masse de la voiture en kg
+	 * 
+	 * @return la voiture en kg
+	 */
+
 	public double getMasseEnKg() {
 		return masseEnKg;
 	}
+
+	/**
+	 * Méthode qui change la masse de la voiture par une masse voulu
+	 * 
+	 * @param masseEnKg une masse voulu
+	 */
 
 	public void setMasseEnKg(double masseEnKg) {
 		this.masseEnKg = masseEnKg;
 	}
 
+	/**
+	 * Méthode qui retourne la couleur de la voiture
+	 * 
+	 * @return la couleur de la voiture
+	 */
+
 	public Color getSkin() {
 		return skin;
 	}
 
+	/**
+	 * Méthode qui permet de retourner la couleur de la voiture
+	 * 
+	 * @param skin la couleur voulue
+	 */
 	public void setSkin(Color skin) {
 		this.skin = skin;
 	}
 
-	public Ellipse2D.Double getCercle() {
-		return cercle;
-	}
-
-	public void setCercle(Ellipse2D.Double cercle) {
-		this.cercle = cercle;
-	}
+	/**
+	 * Méthode qui retorune la position de la voiture en vecteur
+	 * 
+	 * @return la position de la voiture en vecteur
+	 */
 
 	public Vecteur2D getPosition() {
 		return position;
 	}
+
+	/**
+	 * Méthode qui permet de changer la position de la voiture par une nouvelle
+	 * 
+	 * @param position nouvelle position de la voiture
+	 */
 
 	public void setPosition(Vecteur2D position) {
 		this.position = position;
