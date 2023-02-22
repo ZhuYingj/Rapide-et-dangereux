@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 
 public class Voiture extends JPanel{
 	
+	private double masse = 50;
+
 	private Color skin;
 	private Ellipse2D.Double voiture;
 	
@@ -19,11 +21,13 @@ public class Voiture extends JPanel{
 		
 	}
 	
-	public void paintComponent(Graphics g) {
-		super.paintComponent( g ); 
-		Graphics2D  g2d = (Graphics2D) g;
-		g2d.setColor(skin);
-		g2d.fill(voiture);
+	
+	
+	public void dessiner(Graphics g2d) {
+		Graphics2D gCopie =  (Graphics2D) g2d.create();
+		
+		gCopie.setColor(skin);
+		gCopie.fill(voiture);
 
 	}
 }

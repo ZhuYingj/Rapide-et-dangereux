@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import dessin.ZoneAnimPhysique;
 
 public class ModeDeJeu extends JPanel {
 	private JButton btnMonde;
@@ -72,5 +73,9 @@ public class ModeDeJeu extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
+		
+		ZoneAnimPhysique zoneAnimPhysique = new ZoneAnimPhysique();
+		zoneAnimPhysique.setBounds(43, 79, 290, 200);
+		add(zoneAnimPhysique);
 	}
 }
