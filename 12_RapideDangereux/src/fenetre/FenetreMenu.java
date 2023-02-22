@@ -30,6 +30,7 @@ public class FenetreMenu extends JPanel {
 	
 	public FenetreMenu() {
 		setLayout(null);
+		setBounds(100,100,1300,700);
 		
 		JLabel lblNewLabel = new JLabel("Rapide et Dangereux");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -51,6 +52,11 @@ public class FenetreMenu extends JPanel {
 		add(btnAide);
 		
 		btnQuitter = new JButton("QUITTER");
+		btnQuitter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnQuitter.setBounds(411, 402, 100, 49);
 		add(btnQuitter);
 
