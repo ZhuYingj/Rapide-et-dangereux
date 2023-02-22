@@ -123,7 +123,7 @@ public class AppPrincipale12 extends JFrame {
 				}
 			}
 		});
-		
+
 		fenModeJeu.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				switch (evt.getPropertyName()) {
@@ -149,7 +149,7 @@ public class AppPrincipale12 extends JFrame {
 				}
 			}
 		});
-		
+
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				switch (evt.getPropertyName()) {
@@ -162,7 +162,45 @@ public class AppPrincipale12 extends JFrame {
 				}
 			}
 		});
-		
+
+		fenMenu.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "Test":
+					fenJeuScience.setVisible(true);
+					fenMenu.setVisible(false);
+					setContentPane(fenJeuScience);
+					break;
+
+				}
+			}
+		});
+
+		fenJeuScience.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "Retour":
+					fenJeuScience.setVisible(false);
+					fenOptions.setVisible(true);
+					setContentPane(fenOptions);
+					break;
+
+				}
+			}
+		});
+
+		fenSansScience.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "Retour":
+					fenSansScience.setVisible(false);
+					fenOptions.setVisible(true);
+					setContentPane(fenOptions);
+					break;
+
+				}
+			}
+		});
 
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
@@ -172,12 +210,12 @@ public class AppPrincipale12 extends JFrame {
 					fenSansScience.setVisible(true);
 					fenJeuScience.setVisible(false);
 					setContentPane(fenSansScience);
-					System.out.println("S");
+
 				} else {
 					fenSansScience.setVisible(false);
 					fenJeuScience.setVisible(true);
 					setContentPane(fenJeuScience);
-					System.out.println("A");
+
 				}
 			}
 		});

@@ -73,9 +73,5 @@ public class ModeDeJeu extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
-		
-		ZoneAnimPhysique zoneAnimPhysique = new ZoneAnimPhysique();
-		zoneAnimPhysique.setBounds(43, 79, 290, 200);
-		add(zoneAnimPhysique);
 	}
 }

@@ -13,6 +13,9 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FenetreJeuSansScientifique extends JPanel {
 
@@ -52,5 +55,14 @@ public class FenetreJeuSansScientifique extends JPanel {
 		lblTitreModeScientifique.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblTitreModeScientifique.setBounds(650, 0, 47, 22);
 		add(lblTitreModeScientifique);
+		
+		JButton btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("Retour", 0, -1);
+			}
+		});
+		btnRetour.setBounds(10, 11, 89, 23);
+		add(btnRetour);
 	}
 }

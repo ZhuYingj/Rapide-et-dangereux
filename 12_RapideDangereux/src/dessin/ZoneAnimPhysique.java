@@ -18,10 +18,23 @@ import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Voiture;
 
+import utilitaireObjets.PisteHorizontale;
+import utilitaireObjets.PisteVerticale;
+
+import utilitaireObjets.PisteVirageBas;
+
+import utilitaireObjets.Voiture;
+
+/**
+ * Cree une piste qui contient un/des voiture(s) et un/des obstacle(s)
+ */
+
 public class ZoneAnimPhysique extends JPanel implements Runnable {
+
 	
 	
 	
+
 	/** Largeur du composant en metres. */
 	private double largeurDuComposantEnMetres = 230;
 	/** Hauteur du composant en metres. */
@@ -40,28 +53,57 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Temps du sleep de l'application */
 	private int tempsDuSleep = 10;
 
+	/** Notre objet voiture **/
+//	private Voiture voiture;
+
+	private PisteHorizontale pisteHorizontale;
+	private PisteVerticale pisteVerticale;
+	private PisteVirageBas pisteVirageBas;
+
 	public ZoneAnimPhysique() {
 		setBackground(Color.gray);
 	}
-	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+		if (premiereFois) {
+			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
+			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
+
+			premiereFois = false;
+		}
+
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
-		PisteHorizontale pisteVirageDroit = new PisteHorizontale(20,20);
-       pisteVirageDroit.dessiner(g2d);
-		
+
+		g2d.scale(pixelsParMetre, pixelsParMetre);
+
+
+
+		pisteHorizontale = new PisteHorizontale(30, 5);
+
+		// pisteVerticale = new PisteVerticale(30,40);
+
+		pisteHorizontale.dessiner(g2d);
+
+		// pisteVerticale.dessiner(g2d);
+
+		pisteVerticale = new PisteVerticale(5, 100);
+		pisteVerticale.dessiner(g2d);
+
+		pisteVirageBas = new PisteVirageBas(200, 5);
+		pisteVirageBas.dessiner(g2d);
+
+		// pisteVerticale.dessiner(g2d);
 
 	}
-	
+
 	public void run() {
 
 		while (enCoursDAnimation) {
 
 			calculerUneIterationPhysique();
-
 
 			repaint();
 			try {
@@ -71,7 +113,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 		} // fin while
 	}
-	
+
 	public void demarrer() {
 
 		if (!enCoursDAnimation) {
@@ -82,8 +124,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 
 	}
-	
-	
+
 	/**
 	 * Change le temps pour le sleep du thread.
 	 * 
@@ -123,7 +164,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public double getDeltaT() {
 		return deltaT;
 	}
-	
+
 	public void avancerUnPas() {
 		arreter();
 		calculerUneIterationPhysique();
@@ -133,12 +174,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private void arreter() {
 		enCoursDAnimation = false;
 		repaint();
-		
+
 	}
 
 	private void calculerUneIterationPhysique() {
-		
+
 	}
-	
-	
+
 }
