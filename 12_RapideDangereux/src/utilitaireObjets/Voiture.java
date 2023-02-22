@@ -11,6 +11,8 @@ import interfaces.Dessinable;
 
 public class Voiture implements Dessinable {
 	
+	private double masse = 50;
+
 	private Color skin;
 	private Ellipse2D.Double voiture;
 	
@@ -20,16 +22,20 @@ public class Voiture implements Dessinable {
 		voiture = new Ellipse2D.Double(120, 120, 10, 10);
 		
 	}
-	
+
 	public void setCouleur(Color couleur) {
 		this.skin = couleur;
 
 	}
 
+
 	@Override
 	public void dessiner(Graphics2D g2d) {
-		g2d.setColor(skin);
-		g2d.fill(voiture);
+Graphics2D gCopie =  (Graphics2D) g2d.create();
+		
+		gCopie.setColor(skin);
+		gCopie.fill(voiture);
+
 		
 	}
 }
