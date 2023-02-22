@@ -7,7 +7,9 @@ import java.awt.geom.Ellipse2D;
 
 import javax.swing.JPanel;
 
-public class Voiture extends JPanel{
+import interfaces.Dessinable;
+
+public class Voiture implements Dessinable {
 	
 	private Color skin;
 	private Ellipse2D.Double voiture;
@@ -15,15 +17,19 @@ public class Voiture extends JPanel{
 	public Voiture (Color skin) {
 		
 		this.skin = skin;
-		voiture = new Ellipse2D.Double(80.0, 30.0, 50.2, 35.4);
+		voiture = new Ellipse2D.Double(120, 120, 10, 10);
 		
 	}
 	
-	public void paintComponent(Graphics g) {
-		super.paintComponent( g ); 
-		Graphics2D  g2d = (Graphics2D) g;
+	public void setCouleur(Color couleur) {
+		this.skin = couleur;
+
+	}
+
+	@Override
+	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(skin);
 		g2d.fill(voiture);
-
+		
 	}
 }
