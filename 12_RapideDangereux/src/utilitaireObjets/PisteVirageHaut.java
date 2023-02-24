@@ -31,7 +31,7 @@ private static final int TAILLE_PISTE = 80;
 		g2d.drawLine(x, y + (TAILLE_PISTE/3), x + (TAILLE_PISTE/3), y + ((TAILLE_PISTE/3)*2));
 		g2d.drawLine(x + (TAILLE_PISTE/3),  y + ((TAILLE_PISTE/3)*2), x + ((TAILLE_PISTE/3)*2), y + TAILLE_PISTE );
 		g2d.drawLine(x + ((TAILLE_PISTE/3)*2), y + TAILLE_PISTE, x + TAILLE_PISTE, y + TAILLE_PISTE  );
-	
+	//	g2d.fillRect(x+TAILLE_PISTE, y, -3-3);
 		
 	}
 	
