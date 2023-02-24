@@ -53,6 +53,9 @@ public class Voiture implements Dessinable, Selectionnable {
 		creerLaGeometrie();
 
 	}
+	/**
+	 * Constructeur défaut avec un diametre fixé d'avance
+	 */
 	public Voiture() {
 		this.diametre = 25;
 	}

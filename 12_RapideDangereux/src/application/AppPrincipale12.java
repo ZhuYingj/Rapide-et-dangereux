@@ -41,8 +41,8 @@ public class AppPrincipale12 extends JFrame {
 					frame.addKeyListener(new KeyAdapter() {
 						@Override
 						public void keyPressed(KeyEvent e) {
-							if(e.getKeyCode() == KeyEvent.VK_P) {
-								JOptionPane.showMessageDialog(null,"sup");
+							if (e.getKeyCode() == KeyEvent.VK_P) {
+								JOptionPane.showMessageDialog(null, "sup");
 							}
 						}
 					});
@@ -171,8 +171,12 @@ public class AppPrincipale12 extends JFrame {
 					pushingP(fenJeuScience);
 //					fenJeuScience.getZoneAnimPhysique().setVoitureMasse(ABORT);
 					break;
-				case "MASSE" :
+				case "MASSE":
 					fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
+				
+				case "DEMARRERANIMATION" :
+					fenJeuScience.getZoneAnimPhysique().demarrer();
+					fenJeuScience.getZoneAnimPhysique().requestFocus();
 				}
 			}
 		});
@@ -198,8 +202,6 @@ public class AppPrincipale12 extends JFrame {
 					fenOptions.setVisible(true);
 					setContentPane(fenOptions);
 					break;
-			
-					
 
 				}
 			}
@@ -238,17 +240,17 @@ public class AppPrincipale12 extends JFrame {
 		});
 		mnNewMenu.add(checkBoxModeNonScientifique);
 	}
-	
+
 	public void pushingP(JPanel fenetreVoulu) {
 		fenetreVoulu.requestFocus();
 		fenetreVoulu.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_P) {
-					JOptionPane.showMessageDialog(null,"sup");
+				if (e.getKeyCode() == KeyEvent.VK_P) {
+					JOptionPane.showMessageDialog(null, "sup");
 				}
 			}
 		});
 	}
-	
+
 }
