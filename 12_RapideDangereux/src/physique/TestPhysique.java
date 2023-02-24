@@ -46,9 +46,9 @@ public class TestPhysique {
 		vit = new Vecteur2D(40, 0);
 		Vecteur2D[] vite = new Vecteur2D[size];
 		Vecteur2D[] posi = new Vecteur2D[size];
-		vitCollision = MoteurPhysique.calculerVitesseCollision(vit);
-
-		vit = vitCollision;
+//		vitCollision = MoteurPhysique.calculerVitesseObjetMur(vit);
+//
+//		vit = vitCollision;
 		for (int i = 0; i < vite.length; i++) {
 
 			vit = MoteurPhysique.calculVitesse(deltaT, vit, acc);
@@ -72,10 +72,6 @@ public class TestPhysique {
 		}//Fin boucle for
 
 		temps = size;
-
-		System.out.println(
-				"\nCollision puisque (" + String.format("%." + 3 + "f", pos.getX()) + "m + 15m) dépasse les 75 m");
-
 
 
 
