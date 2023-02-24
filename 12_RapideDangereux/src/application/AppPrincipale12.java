@@ -196,6 +196,8 @@ public class AppPrincipale12 extends JFrame {
 					fenOptions.setVisible(true);
 					setContentPane(fenOptions);
 					break;
+				case "Test":
+					
 
 				}
 			}

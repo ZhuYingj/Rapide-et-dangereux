@@ -72,6 +72,7 @@ public class FenetreMenu extends JPanel {
 		btnTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("Test", 0, -1);
+				
 			}
 		});
 		btnTest.setBounds(411, 462, 100, 54);

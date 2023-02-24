@@ -87,6 +87,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			enCoursDAnimation = true;
 			premiereFois = false;
 		}
+		System.out.println("ss");
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -116,7 +117,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	public void run() {
 
-		while (enCoursDAnimation) {
+		while (enCoursDAnimation == true) {
 
 			calculerUneIterationPhysique();
 
@@ -132,7 +133,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	public void demarrer() {
 
-		if (!enCoursDAnimation) {
+		if (enCoursDAnimation == false) {
 			Thread proc = new Thread(this);
 			proc.start();
 			enCoursDAnimation = true;
@@ -194,7 +195,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	private void calculerUneIterationPhysique() {
-
+System.out.println("ssasda");
 	}
 
 }
