@@ -9,6 +9,7 @@ import java.awt.geom.Ellipse2D;
 
 import javax.swing.JPanel;
 
+import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import utilitaireObjets.PisteHorizontale;
 import utilitaireObjets.PisteVerticale;
@@ -24,16 +25,14 @@ import utilitaireObjets.PisteVerticale;
 import utilitaireObjets.PisteVirageBas;
 
 import utilitaireObjets.Voiture;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * Cree une piste qui contient un/des voiture(s) et un/des obstacle(s)
  */
 
 public class ZoneAnimPhysique extends JPanel implements Runnable {
-
-	
-	
-	
 
 	/** Largeur du composant en metres. */
 	private double largeurDuComposantEnMetres = 230;
@@ -54,13 +53,29 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private int tempsDuSleep = 10;
 
 	/** Notre objet voiture **/
-//	private Voiture voiture;
+	private Voiture voiture;
 
 	private PisteHorizontale pisteHorizontale;
 	private PisteVerticale pisteVerticale;
 	private PisteVirageBas pisteVirageBas;
 
 	public ZoneAnimPhysique() {
+
+		addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
+					double x = voiture.getPosition().getX();
+					x = x + 150;
+					voiture.setPosition(new Vecteur2D(x, voiture.getPosition().getY()));
+					System.out.println("ss");
+				}
+				repaint();
+			}
+
+		});
 		setBackground(Color.gray);
 	}
 
@@ -69,23 +84,23 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		if (premiereFois) {
 			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
 			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
-
+			enCoursDAnimation = true;
 			premiereFois = false;
 		}
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		
 
-		g2d.scale(pixelsParMetre, pixelsParMetre);
+//		g2d.scale(pixelsParMetre, pixelsParMetre);
+		voiture = new Voiture(new Vecteur2D(0, 0), Color.yellow, 50, 25);
+		voiture.setPixelsParMetre(pixelsParMetre);
+		voiture.dessiner(g2d);
 
-
-
-		pisteHorizontale = new PisteHorizontale(30, 5);
+//		pisteHorizontale = new PisteHorizontale(30, 5);
 
 		// pisteVerticale = new PisteVerticale(30,40);
 
-		pisteHorizontale.dessiner(g2d);
+//		pisteHorizontale.dessiner(g2d);
 
 		// pisteVerticale.dessiner(g2d);
 
@@ -108,6 +123,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			repaint();
 			try {
 				Thread.sleep(tempsDuSleep);
+			
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
