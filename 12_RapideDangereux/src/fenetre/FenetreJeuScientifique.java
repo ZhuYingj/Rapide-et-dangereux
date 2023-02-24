@@ -40,7 +40,6 @@ public class FenetreJeuScientifique extends JPanel {
 		add(lblTitreModeScientifique);
 		
 		ZoneAnimPhysique zoneAnimPhysique = new ZoneAnimPhysique();
-		zoneAnimPhysique.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "ZONE D'ANIMATION", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		zoneAnimPhysique.setBounds(10, 33, 700, 466);
 		add(zoneAnimPhysique);
 		
