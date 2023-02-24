@@ -13,6 +13,7 @@ public class PisteVerticale implements Dessinable {
 	private static final int TAILLE_PISTE = 80;
 	private int x;
 	private int y;
+	
 
 	public PisteVerticale(int x, int y) {
 		this.x = x;

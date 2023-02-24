@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import application.Identifiants;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class FenetreMenu extends JPanel {
 	private JLabel lblInfoRecue;
@@ -30,6 +32,11 @@ public class FenetreMenu extends JPanel {
 	}
 	
 	public FenetreMenu() {
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
 		setLayout(null);
 		setBounds(100,100,1300,700);
 		
@@ -65,6 +72,7 @@ public class FenetreMenu extends JPanel {
 		btnTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("Test", 0, -1);
+				
 			}
 		});
 		btnTest.setBounds(411, 462, 100, 54);

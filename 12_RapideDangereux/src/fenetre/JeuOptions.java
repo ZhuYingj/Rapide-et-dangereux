@@ -1,17 +1,32 @@
 package fenetre;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.awt.event.ActionEvent;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSlider;
+
+import utilitaireObjets.Voiture;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class JeuOptions extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	
+	private final ButtonGroup buttonGroupDiff = new ButtonGroup();
+	private JRadioButton rdbtnFacile;
+	private JRadioButton rdbtnMedium;
+	private JRadioButton rdbtnDifficile;
+	private Voiture voiture;
+	private JSlider slider;
 	/**
 	 * Create the panel.
 	 */
@@ -42,13 +57,54 @@ public class JeuOptions extends JPanel {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(741, 345, 549, 297);
+		panel_1.setBounds(760, 345, 549, 297);
 		add(panel_1);
+		panel_1.setLayout(null);
+		
+		slider = new JSlider();
+		slider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+//				voiture.setMasseEnKg((double) slider.getValue());
+			}
+		});
+		slider.setMajorTickSpacing(10);
+		slider.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		slider.setPaintLabels(true);
+		slider.setSnapToTicks(true);
+		slider.setPaintTicks(true);
+		slider.setMinorTickSpacing(10);
+		slider.setMinimum(50);
+		slider.setBounds(141, 33, 343, 40);
+		panel_1.add(slider);
+		
+		JLabel lblMasse = new JLabel("Masse de la voiture en kg : ");
+		lblMasse.setBounds(10, 39, 132, 20);
+		panel_1.add(lblMasse);
+		
+		JLabel lblDifficulte = new JLabel("Difficulter du jeu : ");
+		lblDifficulte.setBounds(10, 84, 110, 14);
+		panel_1.add(lblDifficulte);
+		
+		rdbtnFacile = new JRadioButton("Facile");
+		rdbtnFacile.setBounds(141, 80, 109, 23);
+		panel_1.add(rdbtnFacile);
+		buttonGroupDiff.add(rdbtnFacile);
+		
+		rdbtnMedium = new JRadioButton("Intermediaire");
+		rdbtnMedium.setBounds(141, 106, 109, 23);
+		panel_1.add(rdbtnMedium);
+		buttonGroupDiff.add(rdbtnMedium);
+		
+		rdbtnDifficile = new JRadioButton("Difficile");
+		rdbtnDifficile.setBounds(141, 132, 109, 23);
+		panel_1.add(rdbtnDifficile);
+		buttonGroupDiff.add(rdbtnDifficile);
 		
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
+				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);
