@@ -64,6 +64,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private PisteHorizontale pisteHorizontale;
 	private PisteVerticale pisteVerticale;
 	private PisteVirageBas pisteVirageBas;
+	private boolean premiereFois = true;
 
 
 	public ZoneAnimPhysique() {
@@ -91,7 +92,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		
 
-		if (premiereFois) {
+		if (premiereFois ) {
 			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
 			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
 			enCoursDAnimation = true;
