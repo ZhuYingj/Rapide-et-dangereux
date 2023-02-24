@@ -1,6 +1,7 @@
 package application;
 
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -10,6 +11,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import fenetre.FenetreEditeur;
@@ -18,6 +20,8 @@ import fenetre.FenetreJeuScientifique;
 import fenetre.FenetreMenu;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AppPrincipale12 extends JFrame {
 
@@ -33,6 +37,15 @@ public class AppPrincipale12 extends JFrame {
 				try {
 					AppPrincipale12 frame = new AppPrincipale12();
 					frame.setVisible(true);
+					frame.requestFocus();
+					frame.addKeyListener(new KeyAdapter() {
+						@Override
+						public void keyPressed(KeyEvent e) {
+							if(e.getKeyCode() == KeyEvent.VK_P) {
+								JOptionPane.showMessageDialog(null,"sup");
+							}
+						}
+					});
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,6 +57,7 @@ public class AppPrincipale12 extends JFrame {
 	 * Create the frame.
 	 */
 	public AppPrincipale12() {
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1350, 800);
 		setTitle("Rapide et Dangereux");
@@ -119,7 +133,6 @@ public class AppPrincipale12 extends JFrame {
 					fenOptions.setVisible(true);
 					setContentPane(fenOptions);
 					break;
-
 				}
 			}
 		});
@@ -132,7 +145,6 @@ public class AppPrincipale12 extends JFrame {
 					fenOptions.setVisible(true);
 					setContentPane(fenOptions);
 					break;
-
 				}
 			}
 		});
@@ -145,7 +157,6 @@ public class AppPrincipale12 extends JFrame {
 					fenOptions.setVisible(false);
 					setContentPane(fenModeJeu);
 					break;
-
 				}
 			}
 		});
@@ -157,6 +168,7 @@ public class AppPrincipale12 extends JFrame {
 					fenJeuScience.setVisible(true);
 					fenOptions.setVisible(false);
 					setContentPane(fenJeuScience);
+					pushingP(fenJeuScience);
 					break;
 
 				}
@@ -210,6 +222,7 @@ public class AppPrincipale12 extends JFrame {
 					fenSansScience.setVisible(true);
 					fenJeuScience.setVisible(false);
 					setContentPane(fenSansScience);
+					pushingP(fenSansScience);
 
 				} else {
 					fenSansScience.setVisible(false);
@@ -221,4 +234,17 @@ public class AppPrincipale12 extends JFrame {
 		});
 		mnNewMenu.add(checkBoxModeNonScientifique);
 	}
+	
+	public void pushingP(JPanel fenetreVoulu) {
+		fenetreVoulu.requestFocus();
+		fenetreVoulu.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_P) {
+					JOptionPane.showMessageDialog(null,"sup");
+				}
+			}
+		});
+	}
+	
 }
