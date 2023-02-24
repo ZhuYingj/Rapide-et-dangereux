@@ -76,7 +76,13 @@ public class MoteurPhysique {
 		return new Vecteur2D(-masse * ACCEL_G * Math.sin(angleRad), 0	);
 	}
 	
-	public static Vecteur2D calculerVitesseCollision(Vecteur2D vitesse) {
+	
+	/**
+	 * 
+	 * @param vitesse Vitesse initiale de l'objet
+	 * @return La vitesse après collision
+	 */
+	public static Vecteur2D calculerVitesseObjetMur(Vecteur2D vitesse) {
 		Vecteur2D deltaVit = Vecteur2D.multiplie(vitesse, 2);
 		Vecteur2D vitFinale = Vecteur2D.soustrait(vitesse, deltaVit);
 		return new Vecteur2D(vitFinale);
