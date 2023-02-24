@@ -53,6 +53,9 @@ public class Voiture implements Dessinable, Selectionnable {
 		creerLaGeometrie();
 
 	}
+	public Voiture() {
+		this.diametre = 25;
+	}
 
 	/**
 	 * Création de la voiture à l'aide d'une ellipse

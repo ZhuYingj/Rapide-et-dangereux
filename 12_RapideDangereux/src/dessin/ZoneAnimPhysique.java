@@ -53,7 +53,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private int tempsDuSleep = 10;
 
 	/** Notre objet voiture **/
-	private Voiture voiture;
+	private Voiture voiture = new Voiture();
 
 	private PisteHorizontale pisteHorizontale;
 	private PisteVerticale pisteVerticale;
@@ -65,7 +65,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				
+
 				if (e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
 					double x = voiture.getPosition().getX();
 					x = x + 150;
@@ -124,7 +124,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			repaint();
 			try {
 				Thread.sleep(tempsDuSleep);
-			
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -195,7 +195,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	private void calculerUneIterationPhysique() {
-System.out.println("ssasda");
+		System.out.println("ssasda");
+	}
+
+	public void setVoitureMasse(double masseVoulu) {
+		this.voiture.setMasseEnKg(masseVoulu);
+
 	}
 
 }

@@ -64,7 +64,7 @@ public class JeuOptions extends JPanel {
 		slider = new JSlider();
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				//voiture.setMasseEnKg((double) slider.getValue());
+//				voiture.setMasseEnKg((double) slider.getValue());
 			}
 		});
 		slider.setMajorTickSpacing(10);
@@ -104,6 +104,7 @@ public class JeuOptions extends JPanel {
 		btnCommencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
+				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);

@@ -169,8 +169,10 @@ public class AppPrincipale12 extends JFrame {
 					fenOptions.setVisible(false);
 					setContentPane(fenJeuScience);
 					pushingP(fenJeuScience);
+//					fenJeuScience.getZoneAnimPhysique().setVoitureMasse(ABORT);
 					break;
-
+				case "MASSE" :
+					fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
 				}
 			}
 		});
@@ -196,7 +198,7 @@ public class AppPrincipale12 extends JFrame {
 					fenOptions.setVisible(true);
 					setContentPane(fenOptions);
 					break;
-				case "Test":
+			
 					
 
 				}

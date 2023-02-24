@@ -23,6 +23,8 @@ public class FenetreJeuScientifique extends JPanel {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
 
+
+
 	/**
 	 * Create the panel.
 	 */
@@ -194,5 +196,13 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
+		
+	}
+	public ZoneAnimPhysique getZoneAnimPhysique() {
+		return zoneAnimPhysique;
+	}
+
+	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
+		this.zoneAnimPhysique = zoneAnimPhysique;
 	}
 }
