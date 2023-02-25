@@ -42,7 +42,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	/** Vecteur de l'acceleration de la voiture **/
 	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
 	private FlecheVectorielle flecheVectorielle;
-	private double angle = 15;
+	private double angle = 0;
 	private Shape voitureTransfo;
 
 	/**
@@ -62,6 +62,7 @@ public class Voiture implements Dessinable, Selectionnable {
 		creerLaGeometrie();
 
 	}
+
 	/**
 	 * Constructeur défaut avec un diametre fixé d'avance
 	 */
@@ -70,12 +71,13 @@ public class Voiture implements Dessinable, Selectionnable {
 	}
 
 	/**
-	 * Création de la voiture à l'aide d'une ellipse
+	 * Création de la voiture à l'aide d'une ellipse et la flèche vectorielle
 	 */
 
 	private void creerLaGeometrie() {
 		cercle = new Rectangle2D.Double(position.getX(), position.getY(), diametre, diametre);
-		flecheVectorielle = new FlecheVectorielle(position.getX() + diametre/2, (position.getY() + diametre/2), diametre, 0);
+		flecheVectorielle = new FlecheVectorielle(position.getX() + diametre / 2, (position.getY() + diametre / 2),
+				diametre, angle);
 		flecheVectorielle.setLongueurTraitDeTete(5);
 		flecheVectorielle.setAngleTete(90);
 
@@ -89,14 +91,15 @@ public class Voiture implements Dessinable, Selectionnable {
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D gCopie = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
-		
-		mat.rotate(angle, position.getX()+ diametre/2, position.getY()+ diametre/2);
+
+		mat.rotate(angle, position.getX() + diametre / 2, position.getY() + diametre / 2);
 		gCopie.setColor(skin);
 		voitureTransfo = mat.createTransformedShape(cercle);
+
 		gCopie.fill(voitureTransfo);
 		gCopie.setColor(Color.RED);
+
 		flecheVectorielle.dessiner(gCopie);
-	
 
 	}
 
@@ -224,15 +227,15 @@ public class Voiture implements Dessinable, Selectionnable {
 		this.accel = accel;
 	}
 
-	
-	
 	public double getAngle() {
 		return angle;
 	}
+
 	public void setAngle(double angle) {
 		this.angle = angle;
 		creerLaGeometrie();
 	}
+
 	/**
 	 * Recalcule l'acceleration de la balle a l'aide la nouvelle somme des forces
 	 * passee en parametre Ceci aura pour consequence de modifier l'acceleration
@@ -282,12 +285,11 @@ public class Voiture implements Dessinable, Selectionnable {
 		return this.pixelsParMetre;
 	}
 
-	//A completer plus tard
+	// A completer plus tard
 	@Override
 	public boolean contient(double xPix, double yPix) {
-		
+
 		return false;
 	}
-	
 
 }

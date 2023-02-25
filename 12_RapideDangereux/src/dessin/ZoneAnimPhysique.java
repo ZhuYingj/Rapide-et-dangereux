@@ -218,6 +218,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void setAngle(int nouvAngle) {
 		angleVoitureRad  = Math.toRadians(nouvAngle);
 		voiture.setAngle(angleVoitureRad);
+		
 		repaint();
 	}
 
