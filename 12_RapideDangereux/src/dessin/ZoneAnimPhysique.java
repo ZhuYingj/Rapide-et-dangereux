@@ -4,31 +4,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
 
-import pisteDeCourse.PisteMexique;
-
 import geometrie.Vecteur2D;
-import interfaces.Dessinable;
-
-import utilitaireObjets.PisteHorizontale;
-
-import utilitaireObjets.PisteVerticale;
-import utilitaireObjets.PisteVirageBas;
-import utilitaireObjets.PisteVirageDroit;
-import utilitaireObjets.PisteVirageGauche;
-import utilitaireObjets.PisteVirageHaut;
-import utilitaireObjets.Voiture;
-
+import pisteDeCourse.PisteMexique;
 import utilitaireObjets.PisteHorizontale;
 import utilitaireObjets.PisteVerticale;
-
 import utilitaireObjets.PisteVirageBas;
-
 import utilitaireObjets.Voiture;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  * Cree une piste qui contient un/des voiture(s) et un/des obstacle(s)
@@ -59,9 +45,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private boolean premiereFois = true;
 
 	/** Position x de la voiture **/
-	int x = 1;
+	double x = 1;
 	/** Position y de la voiture **/
-	int y = 0;
+	double y = 0;
 	private int angleVoitureDegre = 0;
 	private double angleVoitureRad;
 
@@ -75,27 +61,29 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
-					angleVoitureDegre = angleVoitureDegre +1;
+					angleVoitureDegre = angleVoitureDegre +5;
 					setAngle(angleVoitureDegre);
-					
+
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
-					angleVoitureDegre = angleVoitureDegre -1;
+					angleVoitureDegre = angleVoitureDegre -5;
 					setAngle(angleVoitureDegre);
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					x= Math.cos(angleVoitureRad) + x;
+					y= Math.sin(angleVoitureRad) + y;
 
-					y = y + 1;
-					
+
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 
-					y = y - 1;
-				
+					x= Math.cos(angleVoitureRad) + x;
+					y= Math.sin(angleVoitureRad) + y;
+
 				}
 
 				repaint();
@@ -214,7 +202,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		this.voiture.setMasseEnKg(masseVoulu);
 
 	}
-	
+
 	public void setAngle(int nouvAngle) {
 		angleVoitureRad  = Math.toRadians(nouvAngle);
 		voiture.setAngle(angleVoitureRad);
