@@ -3,10 +3,15 @@ package utilitaireObjets;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Double;
 
 import javax.swing.JPanel;
 
+import geometrie.FlecheVectorielle;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
@@ -29,13 +34,16 @@ public class Voiture implements Dessinable, Selectionnable {
 	/** La couleur de la voiture **/
 	private Color skin;
 	/** La forme de la voiture **/
-	private Ellipse2D.Double cercle;
+	private Double cercle;
 	/** Vecteur de la position de la voiture **/
 	private Vecteur2D position;
 	/** Vecteur de la vitesse de la voiture **/
 	private Vecteur2D vitesse = new Vecteur2D(0, 0); // par defaut
 	/** Vecteur de l'acceleration de la voiture **/
 	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
+	private FlecheVectorielle flecheVectorielle;
+	private double angle = 15;
+	private Shape voitureTransfo;
 
 	/**
 	 * Méthode qui permet de construire une voiture avec des paramètres
@@ -45,11 +53,12 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * @param masse    La masse de la voiture
 	 * @param diametre Le diametre de la voiture
 	 */
-	public Voiture(Vecteur2D position, Color skin, double masse, double diametre) {
+	public Voiture(Vecteur2D position, Color skin, double masse, double diametre, double angle) {
 		this.position = position;
 		this.skin = skin;
 		this.masseEnKg = masse;
 		this.diametre = diametre;
+		this.angle = angle;
 		creerLaGeometrie();
 
 	}
@@ -65,7 +74,10 @@ public class Voiture implements Dessinable, Selectionnable {
 	 */
 
 	private void creerLaGeometrie() {
-		cercle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
+		cercle = new Rectangle2D.Double(position.getX(), position.getY(), diametre, diametre);
+		flecheVectorielle = new FlecheVectorielle(position.getX() + diametre/2, (position.getY() + diametre/2), diametre, 0);
+		flecheVectorielle.setLongueurTraitDeTete(5);
+		flecheVectorielle.setAngleTete(90);
 
 	}
 
@@ -76,9 +88,15 @@ public class Voiture implements Dessinable, Selectionnable {
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D gCopie = (Graphics2D) g2d.create();
-		gCopie.scale(pixelsParMetre, pixelsParMetre);
+		AffineTransform mat = new AffineTransform();
+		
+		mat.rotate(angle, position.getX()+ diametre/2, position.getY()+ diametre/2);
 		gCopie.setColor(skin);
-		gCopie.fill(cercle);
+		voitureTransfo = mat.createTransformedShape(cercle);
+		gCopie.fill(voitureTransfo);
+		gCopie.setColor(Color.RED);
+		flecheVectorielle.dessiner(gCopie);
+	
 
 	}
 
@@ -206,6 +224,15 @@ public class Voiture implements Dessinable, Selectionnable {
 		this.accel = accel;
 	}
 
+	
+	
+	public double getAngle() {
+		return angle;
+	}
+	public void setAngle(double angle) {
+		this.angle = angle;
+		creerLaGeometrie();
+	}
 	/**
 	 * Recalcule l'acceleration de la balle a l'aide la nouvelle somme des forces
 	 * passee en parametre Ceci aura pour consequence de modifier l'acceleration
@@ -261,4 +288,6 @@ public class Voiture implements Dessinable, Selectionnable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+
 }

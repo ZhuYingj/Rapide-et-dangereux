@@ -62,6 +62,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	int x = 1;
 	/** Position y de la voiture **/
 	int y = 0;
+	private int angleVoitureDegre = 0;
+	private double angleVoitureRad;
 
 	public ZoneAnimPhysique() {
 
@@ -73,26 +75,27 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
-					x = x + 1;
-					voiture.setPosition(new Vecteur2D(x, voiture.getPosition().getY()));
+					angleVoitureDegre = angleVoitureDegre +1;
+					setAngle(angleVoitureDegre);
+					
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
-					x = x - 1;
-					voiture.setPosition(new Vecteur2D(x, voiture.getPosition().getY()));
+					angleVoitureDegre = angleVoitureDegre -1;
+					setAngle(angleVoitureDegre);
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 
 					y = y + 1;
-					voiture.setPosition(new Vecteur2D(voiture.getPosition().getX(), y));
+					
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 
 					y = y - 1;
-					voiture.setPosition(new Vecteur2D(voiture.getPosition().getX(), y));
+				
 				}
 
 				repaint();
@@ -117,7 +120,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		PisteMexique pisteMexique = new PisteMexique(0, 0);
 		pisteMexique.dessiner(g2d);
 
-		voiture = new Voiture(new Vecteur2D(x, y), Color.yellow, 50, 25);
+		voiture = new Voiture(new Vecteur2D(x, y), Color.yellow, 50, 25, angleVoitureRad);
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
@@ -210,6 +213,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void setVoitureMasse(double masseVoulu) {
 		this.voiture.setMasseEnKg(masseVoulu);
 
+	}
+	
+	public void setAngle(int nouvAngle) {
+		angleVoitureRad  = Math.toRadians(nouvAngle);
+		voiture.setAngle(angleVoitureRad);
+		repaint();
 	}
 
 }
