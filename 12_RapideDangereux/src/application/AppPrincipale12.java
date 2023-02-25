@@ -169,12 +169,12 @@ public class AppPrincipale12 extends JFrame {
 					fenOptions.setVisible(false);
 					setContentPane(fenJeuScience);
 					pushingP(fenJeuScience);
-//					fenJeuScience.getZoneAnimPhysique().setVoitureMasse(ABORT);
+
 					break;
 				case "MASSE":
 					fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
-				
-				case "DEMARRERANIMATION" :
+
+				case "DEMARRERANIMATION":
 					fenJeuScience.getZoneAnimPhysique().demarrer();
 					fenJeuScience.getZoneAnimPhysique().requestFocus();
 				}

@@ -258,7 +258,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	//A completer plus tard
 	@Override
 	public boolean contient(double xPix, double yPix) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 }
