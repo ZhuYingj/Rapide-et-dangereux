@@ -206,14 +206,6 @@ public class FenetreJeuScientifique extends JPanel {
 		panelDonneScientifique.add(lblSeconde);
 
 		lblTempsEcouleValeur = new JLabel("");
-		lblTempsEcouleValeur.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "tempsEcoule":
-					lblTempsEcouleValeur.setText(evt.getNewValue() + "");
-				}
-			}
-		});
 		lblTempsEcouleValeur.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTempsEcouleValeur.setBounds(202, 411, 68, 44);
 		panelDonneScientifique.add(lblTempsEcouleValeur);

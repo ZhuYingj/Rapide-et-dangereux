@@ -90,12 +90,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_RIGHT:
 					droite = true;
+					break;
 				case KeyEvent.VK_LEFT:
 					gauche = true;
+					break;
 				case KeyEvent.VK_DOWN:
 					bas = true;
+					break;
 				case KeyEvent.VK_UP:
 					haut = true;
+					break;
 				}
 
 				if (droite == true) {

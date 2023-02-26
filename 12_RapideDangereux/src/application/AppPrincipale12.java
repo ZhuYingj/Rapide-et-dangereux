@@ -184,7 +184,7 @@ public class AppPrincipale12 extends JFrame {
 					fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
 
 				case "DEMARRERANIMATION":
-					fenJeuScience.getZoneAnimPhysique().demarrer();
+
 					fenJeuScience.getZoneAnimPhysique().requestFocus();
 				}
 			}
@@ -235,7 +235,7 @@ public class AppPrincipale12 extends JFrame {
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("allo");
+	
 				if (checkBoxModeNonScientifique.isSelected()) {
 					fenSansScience.setVisible(true);
 					fenJeuScience.setVisible(false);
