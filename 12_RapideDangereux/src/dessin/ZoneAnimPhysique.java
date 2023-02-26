@@ -31,7 +31,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Nombre de pixels pas metre. */
 	private double pixelsParMetre;
 	/** Temps du deltaT par d�faut */
-	private double deltaT = 0.01;
+	private double deltaT = 0.02;
 	/** Booleen de l'animation initialise a false */
 	private boolean enCoursDAnimation = false;
 	/** Temps du sleep de l'application */
@@ -60,8 +60,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad);
 
 
-		voiture.setSommeDesForces(MoteurPhysique.calculerForceGrav(50, 90)); // test
-		voiture.setVitesse(new Vecteur2D(20, 0));
+		//voiture.setSommeDesForces(MoteurPhysique.calculerForceGrav(50, 90)); // test
+		//voiture.setVitesse(new Vecteur2D(20, 0));
 
 		System.out.println(voiture.getVitesse());
 
@@ -73,20 +73,21 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
-					angleVoitureDegre = angleVoitureDegre + 5;
+					angleVoitureDegre = angleVoitureDegre + 10;
 					setAngle(angleVoitureDegre);
+					voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad),10 * Math.sin(angleVoitureRad)));
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
-					angleVoitureDegre = angleVoitureDegre - 5;
+					angleVoitureDegre = angleVoitureDegre - 10;
+				
 					setAngle(angleVoitureDegre);
+					voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad),10 * Math.sin(angleVoitureRad)));
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					x = Math.cos(angleVoitureRad) + x;
-					y = Math.sin(angleVoitureRad) + y;
-
+				
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 
@@ -100,6 +101,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				}
 
 				repaint();
+				
+				//faire une methode  KeyReleased
 			}
 
 		});
@@ -211,7 +214,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 
 		voiture.avancerUnPas(deltaT);
-		System.out.println(voiture.getVitesse());
+		System.out.println(voiture.getAccel());
 
 
 
