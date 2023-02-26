@@ -34,7 +34,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	/** La couleur de la voiture **/
 	private Color skin;
 	/** La forme de la voiture **/
-	private Double cercle;
+	private Ellipse2D cercle;
 	/** Vecteur de la position de la voiture **/
 	private Vecteur2D position;
 	/** Vecteur de la vitesse de la voiture **/
@@ -75,9 +75,11 @@ public class Voiture implements Dessinable, Selectionnable {
 	 */
 
 	private void creerLaGeometrie() {
-		cercle = new Rectangle2D.Double(position.getX(), position.getY(), diametre, diametre);
+
+		cercle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
 		flecheVectorielle = new FlecheVectorielle(position.getX() + diametre / 2, (position.getY() + diametre / 2),
-				diametre, angle);
+				diametre, 0);
+
 		flecheVectorielle.setLongueurTraitDeTete(5);
 		flecheVectorielle.setAngleTete(90);
 
@@ -98,6 +100,8 @@ public class Voiture implements Dessinable, Selectionnable {
 
 		gCopie.fill(voitureTransfo);
 		gCopie.setColor(Color.RED);
+
+		gCopie.rotate(angle, position.getX() + diametre / 2, (position.getY() + diametre / 2));
 
 		flecheVectorielle.dessiner(gCopie);
 
