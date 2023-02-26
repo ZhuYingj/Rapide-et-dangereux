@@ -151,6 +151,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					bas = false;
 				case KeyEvent.VK_UP:
 					haut = false;
+					
 				}
 
 //				if (e.getKeyCode() == KeyEvent.VK_UP) {
