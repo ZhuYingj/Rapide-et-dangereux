@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 
 import geometrie.Vecteur2D;
+import physique.MoteurPhysique;
 import pisteDeCourse.PisteMexique;
 import utilitaireObjets.PisteHorizontale;
 import utilitaireObjets.PisteVerticale;
@@ -45,14 +46,18 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private boolean premiereFois = true;
 
 	/** Position x de la voiture **/
-	double x = 1;
+	double x = 0;
 	/** Position y de la voiture **/
 	double y = 0;
 	private int angleVoitureDegre = 0;
 	private double angleVoitureRad;
+	private Vecteur2D posInit = new Vecteur2D(0.2, 0.1);
 
 	public ZoneAnimPhysique() {
 
+		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad);
+		voiture.setSommeDesForces(MoteurPhysique.calculerForceGrav(50, 90));
+		
 		addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -81,10 +86,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 
-					voiture.setAccel(new Vecteur2D(5,0));
-System.out.println(voiture.getAccel());
-System.out.println(voiture.getVitesse());
-System.out.println(voiture.getPosition());
+ voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad),10 * Math.sin(angleVoitureRad)));
+
 				}
 
 				repaint();
@@ -109,7 +112,7 @@ System.out.println(voiture.getPosition());
 		PisteMexique pisteMexique = new PisteMexique(0, 0);
 		pisteMexique.dessiner(g2d);
 
-		voiture = new Voiture(new Vecteur2D(x, y), Color.yellow, 50, 25, angleVoitureRad);
+		
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
@@ -198,6 +201,7 @@ System.out.println(voiture.getPosition());
 	private void calculerUneIterationPhysique() {
 
 voiture.avancerUnPas(deltaT);
+System.out.println(voiture.getVitesse());
 	}
 
 	public void setVoitureMasse(double masseVoulu) {
