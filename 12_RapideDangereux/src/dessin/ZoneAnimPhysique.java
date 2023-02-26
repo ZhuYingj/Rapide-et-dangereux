@@ -53,6 +53,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private int angleVoitureDegre = 0;
 	private double angleVoitureRad;
 	private Vecteur2D posInit = new Vecteur2D(0.2, 0.1);
+	private Vecteur2D valeurInit = new Vecteur2D(0.0, 0.0);
+
 	private double tempsTotalEcoule = 0;
 
 	public ZoneAnimPhysique() {
@@ -195,6 +197,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			Thread proc = new Thread(this);
 			proc.start();
 			enCoursDAnimation = true;
+			repaint();
 
 		}
 
@@ -208,6 +211,18 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		arreter();
 		tempsTotalEcoule = 0.000;
 
+		repaint();
+	}
+	
+	public void restartPos() {
+		voiture.setPosition(posInit);
+		voiture.setVitesse(valeurInit);
+		voiture.setAccel(valeurInit);
+		repaint();
+	}
+	
+	public void arreterAnim() {
+		arreter();
 		repaint();
 	}
 	
@@ -286,6 +301,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		voiture.setAngle(angleVoitureRad);
 
 		repaint();
+	}
+	public Vecteur2D getPosInit() {
+		return posInit;
+	}
+
+	public void setPosInit(Vecteur2D posInit) {
+		this.posInit = posInit;
 	}
 
 }

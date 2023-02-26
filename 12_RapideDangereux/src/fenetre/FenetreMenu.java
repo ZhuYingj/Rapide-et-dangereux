@@ -21,7 +21,6 @@ public class FenetreMenu extends JPanel {
 	private JButton btnAide;
 	private JButton btnQuitter;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	private JButton btnTest;
 	
 	/**
 	 * Create the panel.
@@ -67,16 +66,6 @@ public class FenetreMenu extends JPanel {
 		});
 		btnQuitter.setBounds(411, 402, 100, 49);
 		add(btnQuitter);
-		
-		btnTest = new JButton("Test");
-		btnTest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("Test", 0, -1);
-				
-			}
-		});
-		btnTest.setBounds(411, 462, 100, 54);
-		add(btnTest);
 
 		
 	}
