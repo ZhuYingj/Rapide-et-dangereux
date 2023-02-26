@@ -150,7 +150,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		while (enCoursDAnimation == true) {
 
 			calculerUneIterationPhysique();
-
+			testerCollisionsEtAjusterVitesses();
 			repaint();
 			try {
 				Thread.sleep(tempsDuSleep);
@@ -181,6 +181,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		tempsTotalEcoule = 0.000;
 
 		repaint();
+	}
+	
+	private void testerCollisionsEtAjusterVitesses() {
+		voiture.gererCollision(getWidth(), 0, getHeight(), 0);
 	}
 
 	/**
@@ -239,7 +243,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		tempsTotalEcoule += deltaT;
 
 		voiture.avancerUnPas(deltaT);
-		System.out.println(voiture.getAccel());
+		System.out.println(voiture.getVitesse());
 
 	}
 
