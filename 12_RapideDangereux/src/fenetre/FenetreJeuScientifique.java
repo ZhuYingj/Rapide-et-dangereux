@@ -43,7 +43,7 @@ public class FenetreJeuScientifique extends JPanel {
 		add(lblTitreModeScientifique);
 
 		zoneAnimPhysique = new ZoneAnimPhysique();
-		zoneAnimPhysique.setBounds(10, 33, 700, 466);
+		zoneAnimPhysique.setBounds(10, 33, 700, 656);
 		add(zoneAnimPhysique);
 
 		JPanel panelDonneScientifique = new JPanel();
@@ -119,15 +119,10 @@ public class FenetreJeuScientifique extends JPanel {
 		lblKmParHeureV2.setBounds(477, 121, 38, 29);
 		panelDonneScientifique.add(lblKmParHeureV2);
 
-		JLabel lblMCarreV1 = new JLabel("m^2");
+		JLabel lblMCarreV1 = new JLabel("m/s");
 		lblMCarreV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblMCarreV1.setBounds(246, 173, 38, 29);
+		lblMCarreV1.setBounds(246, 173, 56, 29);
 		panelDonneScientifique.add(lblMCarreV1);
-
-		JLabel lblMCarreV2 = new JLabel("m^2");
-		lblMCarreV2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblMCarreV2.setBounds(477, 173, 38, 29);
-		panelDonneScientifique.add(lblMCarreV2);
 
 		JLabel lblNV1 = new JLabel("N");
 		lblNV1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -168,24 +163,34 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNAttractionV2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNAttractionV2.setBounds(477, 371, 38, 29);
 		panelDonneScientifique.add(lblNAttractionV2);
+		
+		JLabel lblNum2 = new JLabel("2");
+		lblNum2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNum2.setBounds(278, 173, 30, 14);
+		panelDonneScientifique.add(lblNum2);
+		
+		JLabel lblMCarreV1_1 = new JLabel("m/s");
+		lblMCarreV1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMCarreV1_1.setBounds(477, 173, 56, 29);
+		panelDonneScientifique.add(lblMCarreV1_1);
+		
+		JLabel lblNum2_1 = new JLabel("2");
+		lblNum2_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNum2_1.setBounds(509, 173, 30, 14);
+		panelDonneScientifique.add(lblNum2_1);
 
-		JPanel panelGraphique = new JPanel();
-		panelGraphique.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelGraphique.setBounds(10, 510, 700, 179);
-		add(panelGraphique);
-
-		JPanel panelObjet = new JPanel();
-		panelObjet.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelObjet.setBounds(720, 510, 570, 179);
-		add(panelObjet);
-		panelObjet.setLayout(null);
+		JPanel panelObjetEtGraphique = new JPanel();
+		panelObjetEtGraphique.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelObjetEtGraphique.setBounds(720, 510, 570, 179);
+		add(panelObjetEtGraphique);
+		panelObjetEtGraphique.setLayout(null);
 
 		JProgressBar progressBarFroce = new JProgressBar();
 		progressBarFroce.setFont(new Font("Tahoma", Font.BOLD, 12));
 		progressBarFroce.setStringPainted(true);
 		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
 		progressBarFroce.setBounds(519, 11, 30, 157);
-		panelObjet.add(progressBarFroce);
+		panelObjetEtGraphique.add(progressBarFroce);
 
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
@@ -194,7 +199,7 @@ public class FenetreJeuScientifique extends JPanel {
 				pcs.firePropertyChange("Test", null, -1);
 			}
 		});
-		btnRetour.setBounds(10, 11, 89, 23);
+		btnRetour.setBounds(10, 3, 89, 23);
 		add(btnRetour);
 		
 	}

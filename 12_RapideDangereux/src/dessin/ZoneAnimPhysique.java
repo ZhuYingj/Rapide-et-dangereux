@@ -54,10 +54,17 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Vecteur2D posInit = new Vecteur2D(0.2, 0.1);
 
 	public ZoneAnimPhysique() {
+	
+
 
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad);
-		voiture.setSommeDesForces(MoteurPhysique.calculerForceGrav(50, 90));
-		
+
+
+		voiture.setSommeDesForces(MoteurPhysique.calculerForceGrav(50, 90)); // test
+		voiture.setVitesse(new Vecteur2D(20, 0));
+
+		System.out.println(voiture.getVitesse());
+
 		addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -66,27 +73,29 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
-					angleVoitureDegre = angleVoitureDegre +5;
+					angleVoitureDegre = angleVoitureDegre + 5;
 					setAngle(angleVoitureDegre);
-
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
-					angleVoitureDegre = angleVoitureDegre -5;
+					angleVoitureDegre = angleVoitureDegre - 5;
 					setAngle(angleVoitureDegre);
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					x= Math.cos(angleVoitureRad) + x;
-					y= Math.sin(angleVoitureRad) + y;
-
-
+					x = Math.cos(angleVoitureRad) + x;
+					y = Math.sin(angleVoitureRad) + y;
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 
- voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad),10 * Math.sin(angleVoitureRad)));
+
+					voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad),10 * Math.sin(angleVoitureRad)));
+
+					System.out.println(voiture.getAccel());
+					System.out.println(voiture.getVitesse());
+					System.out.println(voiture.getPosition());
 
 				}
 
@@ -112,7 +121,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		PisteMexique pisteMexique = new PisteMexique(0, 0);
 		pisteMexique.dessiner(g2d);
 
-		
+
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
@@ -200,8 +209,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	private void calculerUneIterationPhysique() {
 
-voiture.avancerUnPas(deltaT);
-System.out.println(voiture.getVitesse());
+
+		voiture.avancerUnPas(deltaT);
+		System.out.println(voiture.getVitesse());
+
+
+
 	}
 
 	public void setVoitureMasse(double masseVoulu) {
@@ -210,8 +223,9 @@ System.out.println(voiture.getVitesse());
 	}
 
 	public void setAngle(int nouvAngle) {
-		angleVoitureRad  = Math.toRadians(nouvAngle);
+		angleVoitureRad = Math.toRadians(nouvAngle);
 		voiture.setAngle(angleVoitureRad);
+
 		repaint();
 	}
 
