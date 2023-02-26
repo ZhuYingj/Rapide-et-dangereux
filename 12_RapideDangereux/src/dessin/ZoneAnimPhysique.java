@@ -140,9 +140,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					haut = false;
 				}
 
-				if (e.getKeyCode() == KeyEvent.VK_UP) {
-					voiture.setAccel(new Vecteur2D(0, 0));
-				}
+//				if (e.getKeyCode() == KeyEvent.VK_UP) {
+//					voiture.setAccel(new Vecteur2D(0, 0));
+//				}
 				repaint();
 
 			}
@@ -289,3 +289,4 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 }
+
