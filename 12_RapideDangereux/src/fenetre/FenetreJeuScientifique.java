@@ -17,13 +17,13 @@ import javax.swing.JProgressBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeEvent;
 
 public class FenetreJeuScientifique extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
-
-
+	private JLabel lblTempsEcouleValeur;
 
 	/**
 	 * Create the panel.
@@ -43,12 +43,21 @@ public class FenetreJeuScientifique extends JPanel {
 		add(lblTitreModeScientifique);
 
 		zoneAnimPhysique = new ZoneAnimPhysique();
-		zoneAnimPhysique.setBounds(10, 33, 700, 656);
+		zoneAnimPhysique.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "tempsEcoule":
+					lblTempsEcouleValeur.setText(String.format("%.2f", evt.getNewValue()));
+				}
+			}
+		});
+		zoneAnimPhysique.setBounds(10, 33, 700, 466);
 		add(zoneAnimPhysique);
 
 		JPanel panelDonneScientifique = new JPanel();
-		panelDonneScientifique.setBorder(
-				new TitledBorder(null, "DONN\u00C9S SCIENTIFIQUES", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panelDonneScientifique.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"DONN\u00C9ES SCIENTIFIQUES", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelDonneScientifique.setBackground(Color.GRAY);
 		panelDonneScientifique.setBounds(720, 33, 570, 466);
 		add(panelDonneScientifique);
@@ -163,21 +172,44 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNAttractionV2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNAttractionV2.setBounds(477, 371, 38, 29);
 		panelDonneScientifique.add(lblNAttractionV2);
-		
+
 		JLabel lblNum2 = new JLabel("2");
 		lblNum2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNum2.setBounds(278, 173, 30, 14);
 		panelDonneScientifique.add(lblNum2);
-		
+
 		JLabel lblMCarreV1_1 = new JLabel("m/s");
 		lblMCarreV1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblMCarreV1_1.setBounds(477, 173, 56, 29);
 		panelDonneScientifique.add(lblMCarreV1_1);
-		
+
 		JLabel lblNum2_1 = new JLabel("2");
 		lblNum2_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNum2_1.setBounds(509, 173, 30, 14);
 		panelDonneScientifique.add(lblNum2_1);
+
+		JLabel lblTempsEcoule = new JLabel("Temps écoulé :");
+		lblTempsEcoule.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTempsEcoule.setBounds(10, 411, 109, 44);
+		panelDonneScientifique.add(lblTempsEcoule);
+
+		JLabel lblSeconde = new JLabel("S");
+		lblSeconde.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblSeconde.setBounds(246, 411, 38, 44);
+		panelDonneScientifique.add(lblSeconde);
+
+		lblTempsEcouleValeur = new JLabel("");
+		lblTempsEcouleValeur.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "tempsEcoule":
+					lblTempsEcouleValeur.setText(evt.getNewValue() + "");
+				}
+			}
+		});
+		lblTempsEcouleValeur.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTempsEcouleValeur.setBounds(202, 411, 68, 44);
+		panelDonneScientifique.add(lblTempsEcouleValeur);
 
 		JPanel panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -197,12 +229,14 @@ public class FenetreJeuScientifique extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("Retour", null, -1);
 				pcs.firePropertyChange("Test", null, -1);
+
 			}
 		});
 		btnRetour.setBounds(10, 3, 89, 23);
 		add(btnRetour);
-		
+
 	}
+
 	public ZoneAnimPhysique getZoneAnimPhysique() {
 		return zoneAnimPhysique;
 	}
@@ -210,4 +244,5 @@ public class FenetreJeuScientifique extends JPanel {
 	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
 		this.zoneAnimPhysique = zoneAnimPhysique;
 	}
+
 }

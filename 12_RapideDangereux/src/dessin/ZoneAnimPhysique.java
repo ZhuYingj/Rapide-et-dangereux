@@ -16,9 +16,13 @@ import utilitaireObjets.PisteHorizontale;
 import utilitaireObjets.PisteVerticale;
 import utilitaireObjets.PisteVirageBas;
 import utilitaireObjets.Voiture;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeEvent;
 
 /**
- * Cree une piste qui contient un/des voiture(s) et un/des obstacle(s)
+ * Cree une piste qui contient un/des voiture(s), un/des obstacle(s) et une
+ * piste
  */
 
 public class ZoneAnimPhysique extends JPanel implements Runnable {
@@ -27,7 +31,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private double largeurDuComposantEnMetres = 230;
 	/** Hauteur du composant en metres. */
 	private double hauteurDuComposantEnMetres;
-
 	/** Nombre de pixels pas metre. */
 	private double pixelsParMetre;
 	/** Temps du deltaT par d�faut */
@@ -36,24 +39,38 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private boolean enCoursDAnimation = false;
 	/** Temps du sleep de l'application */
 	private int tempsDuSleep = 10;
-
 	/** Notre objet voiture **/
 	private Voiture voiture = new Voiture();
 
 	private PisteHorizontale pisteHorizontale;
 	private PisteVerticale pisteVerticale;
 	private PisteVirageBas pisteVirageBas;
+	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/
 	private boolean premiereFois = true;
+	/** Valeur booléenne pour savoir si ces touches sont appuyés **/
 	private boolean droite, gauche, haut, bas;
-
 	/** Position x de la voiture **/
 	double x = 0;
 	/** Position y de la voiture **/
 	double y = 0;
+	/** L'angle de la voiture en degré **/
 	private int angleVoitureDegre = 0;
+	/** L'angle de la voiture en rad **/
 	private double angleVoitureRad;
+	/** Vecteur de la position initiale de la voiture **/
 	private Vecteur2D posInit = new Vecteur2D(0.2, 0.1);
+	/** Temps écoulé depuis le début de l'animation **/
 	private double tempsTotalEcoule = 0;
+
+	// support pour lancer des evenements de type PropertyChange
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+
+	/**
+	 * methode qui permettra de s'ajouter en tant qu'ecouteur
+	 */
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		this.pcs.addPropertyChangeListener(listener);
+	}
 
 	public ZoneAnimPhysique() {
 
@@ -67,26 +84,17 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-
-				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-
+				switch (e.getKeyCode()) {
+				case KeyEvent.VK_RIGHT:
 					droite = true;
-
-				}
-				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-
+				case KeyEvent.VK_LEFT:
 					gauche = true;
-
-				}
-				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-
+				case KeyEvent.VK_DOWN:
 					bas = true;
-
-				}
-				if (e.getKeyCode() == KeyEvent.VK_UP) {
-
+				case KeyEvent.VK_UP:
 					haut = true;
 				}
+
 				if (droite == true) {
 					angleVoitureDegre = angleVoitureDegre + 10;
 					setAngle(angleVoitureDegre);
@@ -118,9 +126,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 				}
 
-				if (droite == true && haut == true) {
-					System.out.println("En mm temps");
-				}
 				repaint();
 
 				// faire une methode KeyReleased
@@ -131,6 +136,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_RIGHT:
+//					voiture.setAccel(new Vecteur2D(0, 0));
 					droite = false;
 				case KeyEvent.VK_LEFT:
 					gauche = false;
@@ -140,9 +146,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					haut = false;
 				}
 
-				if (e.getKeyCode() == KeyEvent.VK_UP) {
-					voiture.setAccel(new Vecteur2D(0, 0));
-				}
 				repaint();
 
 			}
@@ -151,6 +154,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		setBackground(Color.gray);
 
 	}
+
+	/**
+	 * Permet de dessiner une scene qui inclut ici une simple balle en mouvement
+	 * 
+	 * @param g Contexte graphique
+	 */
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -173,6 +182,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	}
 
+	/**
+	 * Animation de la voiture
+	 */
+
 	public void run() {
 
 		while (enCoursDAnimation == true) {
@@ -189,6 +202,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		} // fin while
 	}
 
+	/**
+	 * Demarre le thread s'il n'est pas deja demarre
+	 */
+
 	public void demarrer() {
 
 		if (enCoursDAnimation == false) {
@@ -198,7 +215,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 
-	}
+	} // fin méthode
 
 	/**
 	 * Recommencer l'application avec les valeurs courantes.
@@ -210,7 +227,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		repaint();
 	}
-	
+
 	private void testerCollisionsEtAjusterVitesses() {
 		voiture.gererCollision(getWidth(), 0, getHeight(), 0);
 	}
@@ -255,11 +272,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		return deltaT;
 	}
 
-	public void avancerUnPas() {
-		arreter();
-		calculerUneIterationPhysique();
-		repaint();
-	}
+	/**
+	 * Demande l'arret du thread (prochain tour de boucle)
+	 */
 
 	private void arreter() {
 		enCoursDAnimation = false;
@@ -270,9 +285,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private void calculerUneIterationPhysique() {
 
 		tempsTotalEcoule += deltaT;
+		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
 
 		voiture.avancerUnPas(deltaT);
-
 
 	}
 
@@ -286,6 +301,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		voiture.setAngle(angleVoitureRad);
 
 		repaint();
+	}
+
+	public double getTempsTotalEcoule() {
+		return tempsTotalEcoule;
+	}
+
+	public void setTempsTotalEcoule(double tempsTotalEcoule) {
+		this.tempsTotalEcoule = tempsTotalEcoule;
 	}
 
 }
