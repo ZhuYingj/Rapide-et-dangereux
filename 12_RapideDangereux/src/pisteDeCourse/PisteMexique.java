@@ -6,6 +6,9 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 
 import interfaces.Dessinable;
+import utilitaireObjets.PisteDeDepart;
+import utilitaireObjets.PisteHorizontale;
+import utilitaireObjets.PisteVirageBas;
 
 public class PisteMexique implements Dessinable {
 
@@ -13,6 +16,12 @@ public class PisteMexique implements Dessinable {
 	
 	private int x;
 	private int y;
+	
+	private PisteDeDepart depart;
+
+	private PisteHorizontale horizontale;
+
+	private PisteVirageBas bas;
 	
 	public PisteMexique(int x, int y) {
 		this.x = x;
@@ -26,96 +35,107 @@ public class PisteMexique implements Dessinable {
 	public void dessiner(Graphics2D g2d) {
 		
 		//piste virgae bas :
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(3f);
-		g2d.setStroke(stroke);
-		g2d.drawLine(x + ((TAILLE_PISTE/3)*2), y, x + TAILLE_PISTE-1, y );
-		g2d.drawLine(x + ((TAILLE_PISTE/3)), y + ((TAILLE_PISTE/3)), x + ((TAILLE_PISTE/3)*2), y );
-		g2d.drawLine(x, y + ((TAILLE_PISTE/3)*2), x + (TAILLE_PISTE/3), y + (TAILLE_PISTE/3) );
-		g2d.drawLine(x , y + TAILLE_PISTE-1, x , y + ((TAILLE_PISTE/3)*2)  );
-		
-		
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke = new BasicStroke(3f);
+//		g2d.setStroke(stroke);
+//		g2d.drawLine(x + ((TAILLE_PISTE/3)*2), y, x + TAILLE_PISTE-1, y );
+//		g2d.drawLine(x + ((TAILLE_PISTE/3)), y + ((TAILLE_PISTE/3)), x + ((TAILLE_PISTE/3)*2), y );
+//		g2d.drawLine(x, y + ((TAILLE_PISTE/3)*2), x + (TAILLE_PISTE/3), y + (TAILLE_PISTE/3) );
+//		g2d.drawLine(x , y + TAILLE_PISTE-1, x , y + ((TAILLE_PISTE/3)*2)  );
+		bas = new PisteVirageBas(x,y);
+		bas.dessiner(g2d);
 		this.x = x + TAILLE_PISTE;
 		
 		//piste horizontale depart :
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke1 = new BasicStroke(3f);
-		g2d.setStroke(stroke1);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
 		
-		g2d.setColor(Color.WHITE);
-		Stroke stroke0= new BasicStroke(5f);
-		g2d.setStroke(stroke0);
-		g2d.drawLine(x+(TAILLE_PISTE/2),  y+(TAILLE_PISTE/7), x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*2));
-		g2d.drawLine(x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*3), x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*4));
-		g2d.drawLine(x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*5), x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*6) );
 		
+		
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke1 = new BasicStroke(3f);
+//		g2d.setStroke(stroke1);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+//		
+//		g2d.setColor(Color.WHITE);
+//		Stroke stroke0= new BasicStroke(5f);
+//		g2d.setStroke(stroke0);
+//		g2d.drawLine(x+(TAILLE_PISTE/2),  y+(TAILLE_PISTE/7), x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*2));
+//		g2d.drawLine(x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*3), x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*4));
+//		g2d.drawLine(x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*5), x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*6) );
+		depart = new PisteDeDepart(x,y);
+		depart.dessiner(g2d);
 		this.x = x + TAILLE_PISTE;
 		
 		//piste horizontale :
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke2 = new BasicStroke(3f);
-		g2d.setStroke(stroke2);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
 		
+		
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke2 = new BasicStroke(3f);
+//		g2d.setStroke(stroke2);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+		horizontale = new PisteHorizontale(x,y);
+		horizontale.dessiner(g2d);
 		this.x = x + TAILLE_PISTE;
 		
 		//piste horizontale :
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke3 = new BasicStroke(3f);
-		g2d.setStroke(stroke3);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
-		
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke3 = new BasicStroke(3f);
+//		g2d.setStroke(stroke3);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+		horizontale = new PisteHorizontale(x,y);
+		horizontale.dessiner(g2d);
 		this.x = x + TAILLE_PISTE;
 		
 		//piste horizontale :
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke4 = new BasicStroke(3f);
-		g2d.setStroke(stroke4);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
-		
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke4 = new BasicStroke(3f);
+//		g2d.setStroke(stroke4);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+		horizontale = new PisteHorizontale(x,y);
+		horizontale.dessiner(g2d);
 		this.x = x + TAILLE_PISTE;
 		
 		//piste horizontale :
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke5 = new BasicStroke(3f);
-		g2d.setStroke(stroke5);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
-		
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke5 = new BasicStroke(3f);
+//		g2d.setStroke(stroke5);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+		horizontale = new PisteHorizontale(x,y);
+		horizontale.dessiner(g2d);
 		this.x = x + TAILLE_PISTE;
 		
 		//piste horizontale :
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke6 = new BasicStroke(3f);
-		g2d.setStroke(stroke6);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
-		
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke6 = new BasicStroke(3f);
+//		g2d.setStroke(stroke6);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+		horizontale = new PisteHorizontale(x,y);
+		horizontale.dessiner(g2d);
 		this.x = x + TAILLE_PISTE;
 		
 		//Piste virage vers la gauche:
@@ -178,67 +198,76 @@ public class PisteMexique implements Dessinable {
 		
 		//piste horizontale :
 		this.x = x - TAILLE_PISTE;
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke12 = new BasicStroke(3f);
-		g2d.setStroke(stroke12);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
-		
-		
-		this.x = x - TAILLE_PISTE;
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke13 = new BasicStroke(3f);
-		g2d.setStroke(stroke13);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
-		
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke12 = new BasicStroke(3f);
+//		g2d.setStroke(stroke12);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+		horizontale = new PisteHorizontale(x,y);
+		horizontale.dessiner(g2d);
 		
 		this.x = x - TAILLE_PISTE;
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke14 = new BasicStroke(3f);
-		g2d.setStroke(stroke14);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke13 = new BasicStroke(3f);
+//		g2d.setStroke(stroke13);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+		horizontale = new PisteHorizontale(x,y);
+		horizontale.dessiner(g2d);
 		
 		this.x = x - TAILLE_PISTE;
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke15 = new BasicStroke(3f);
-		g2d.setStroke(stroke15);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke14 = new BasicStroke(3f);
+//		g2d.setStroke(stroke14);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+		horizontale = new PisteHorizontale(x,y);
+		horizontale.dessiner(g2d);
 		
 		this.x = x - TAILLE_PISTE;
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke16 = new BasicStroke(3f);
-		g2d.setStroke(stroke16);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke15 = new BasicStroke(3f);
+//		g2d.setStroke(stroke15);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+		horizontale = new PisteHorizontale(x,y);
+		horizontale.dessiner(g2d);
 		
 		this.x = x - TAILLE_PISTE;
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
-		Stroke stroke17 = new BasicStroke(3f);
-		g2d.setStroke(stroke17);
-		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke16 = new BasicStroke(3f);
+//		g2d.setStroke(stroke16);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+		horizontale = new PisteHorizontale(x,y);
+		horizontale.dessiner(g2d);
 		
+		this.x = x - TAILLE_PISTE;
+//		g2d.setColor(Color.BLACK);
+//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
+//		g2d.setColor(Color.RED);
+//		g2d.setColor(Color.RED);
+//		Stroke stroke17 = new BasicStroke(3f);
+//		g2d.setStroke(stroke17);
+//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
+//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
+		horizontale = new PisteHorizontale(x,y);
+		horizontale.dessiner(g2d);
 		
 		this.x = x - TAILLE_PISTE;
 		g2d.setColor(Color.BLACK);

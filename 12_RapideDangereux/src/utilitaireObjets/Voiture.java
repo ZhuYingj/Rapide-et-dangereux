@@ -301,4 +301,31 @@ public class Voiture implements Dessinable, Selectionnable {
 		return false;
 	}
 
+	public void gererCollision(double positionXDroite,double positionXGauche, double positionYBas,  double positionYHaut) {
+		
+//pour le bas
+		if(position.getY() > positionYBas-this.diametre) {
+			this.vitesse = getVitesse();
+			setVitesse(new Vecteur2D(vitesse.getX(), -vitesse.getY()));
+			position.setY(positionYBas-this.diametre);
+		}
+		//pour le haut
+		else if (position.getY() < positionYHaut) {
+			this.vitesse = getVitesse();
+			setVitesse(new Vecteur2D(vitesse.getX(), -vitesse.getY()));
+			position.setY(positionYHaut);
+		}
+		//pour la droite
+		else if (position.getX() > positionXDroite-this.diametre) {
+			this.vitesse = getVitesse();
+			setVitesse(new Vecteur2D(-vitesse.getX(), vitesse.getY()));
+			position.setX(positionXDroite-this.diametre);
+		}
+		//pour   la gauche
+		else if (position.getX() < positionXGauche) {
+			this.vitesse = getVitesse();
+			setVitesse(new Vecteur2D(-vitesse.getX(), vitesse.getY()));
+			position.setX(positionXGauche);
+		}
+	}
 }
