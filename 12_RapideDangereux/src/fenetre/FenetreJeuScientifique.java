@@ -1,29 +1,40 @@
 package fenetre;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import dessin.ZoneAnimPhysique;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
-import java.awt.Color;
-import javax.swing.JSeparator;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+<<<<<<< HEAD
 import javax.swing.JProgressBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
+=======
+import javax.swing.border.TitledBorder;
+
+import dessin.ZoneAnimPhysique;
+import physique.TestPhysique;
+>>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
 
 public class FenetreJeuScientifique extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
+<<<<<<< HEAD
 	private JLabel lblTempsEcouleValeur;
+=======
+
+>>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
 
 	/**
 	 * Create the panel.
@@ -43,6 +54,7 @@ public class FenetreJeuScientifique extends JPanel {
 		add(lblTitreModeScientifique);
 
 		zoneAnimPhysique = new ZoneAnimPhysique();
+<<<<<<< HEAD
 		zoneAnimPhysique.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				switch (evt.getPropertyName()) {
@@ -51,6 +63,8 @@ public class FenetreJeuScientifique extends JPanel {
 				}
 			}
 		});
+=======
+>>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
 		zoneAnimPhysique.setBounds(10, 33, 700, 466);
 		add(zoneAnimPhysique);
 
@@ -234,7 +248,47 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnRetour.setBounds(10, 3, 89, 23);
 		add(btnRetour);
+<<<<<<< HEAD
 
+=======
+		
+		JButton btnStart = new JButton("Start");
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.demarrer();
+			}
+		});
+		btnStart.setBounds(10, 563, 89, 76);
+		add(btnStart);
+		
+		JButton btnReset = new JButton("Reset");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.restartPos();
+			}
+		});
+		btnReset.setBounds(175, 563, 89, 76);
+		add(btnReset);
+		
+		JButton btnNextImg = new JButton("Next Img");
+		btnNextImg.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.avancerUnPas();
+			}
+		});
+		btnNextImg.setBounds(355, 563, 89, 76);
+		add(btnNextImg);
+		
+		JButton btnStop = new JButton("Stop");
+		btnStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.arreterAnim();
+			}
+		});
+		btnStop.setBounds(538, 563, 89, 76);
+		add(btnStop);
+		
+>>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
 	}
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {
