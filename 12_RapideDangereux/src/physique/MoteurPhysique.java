@@ -73,7 +73,8 @@ public class MoteurPhysique {
 	 * @return La force de frottement.
 	 */
 	public static Vecteur2D calculerForceFrottement(double mu, double masse, double angleRad) {
-		return new Vecteur2D(-mu * masse * ACCEL_G * Math.cos(angleRad), 0);
+
+		return new Vecteur2D(-mu * masse * ACCEL_G * Math.cos(angleRad), -mu * masse * ACCEL_G * Math.sin(angleRad));
 
 	}
 

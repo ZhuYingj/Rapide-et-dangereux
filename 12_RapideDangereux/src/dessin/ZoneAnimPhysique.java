@@ -53,15 +53,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private int angleVoitureDegre = 0;
 	private double angleVoitureRad;
 	private Vecteur2D posInit = new Vecteur2D(0.2, 0.1);
+	private double tempsTotalEcoule = 0;
 
 	public ZoneAnimPhysique() {
 
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad);
 
-		// voiture.setSommeDesForces(MoteurPhysique.calculerForceGrav(50, 90)); // test
+		// voiture.setSommeDesForces(MoteurPhysique.calculerForceFrottement(0.45,
+		// voiture.getMasseEnKg(), angleVoitureRad)); // test
 		// voiture.setVitesse(new Vecteur2D(20, 0));
-
-	
 
 		addKeyListener(new KeyAdapter() {
 
@@ -69,14 +69,19 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			public void keyPressed(KeyEvent e) {
 
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+
 					droite = true;
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+
 					gauche = true;
+
 				}
 				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+
 					bas = true;
+
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 
@@ -85,14 +90,26 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				if (droite == true) {
 					angleVoitureDegre = angleVoitureDegre + 10;
 					setAngle(angleVoitureDegre);
-					voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+					if (voiture.getAccel().getX() > 0) {
+						voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+					} else if (voiture.getAccel().getY() > 0) {
+						voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+
+					}
 
 				}
 				if (gauche == true) {
+
 					angleVoitureDegre = angleVoitureDegre - 10;
 
 					setAngle(angleVoitureDegre);
-					voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+					if (voiture.getAccel().getX() > 0) {
+						voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+					} else if (voiture.getAccel().getY() > 0) {
+						voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+
+					}
+
 				}
 				if (haut == true) {
 					voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
@@ -111,6 +128,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
+
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_RIGHT:
 					droite = false;
@@ -122,11 +140,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					haut = false;
 				}
 
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					voiture.setAccel(new Vecteur2D(0, 0));
+				}
+				repaint();
+
 			}
-			
+
 		});
 		setBackground(Color.gray);
-	
 
 	}
 
@@ -176,6 +198,17 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 
+	}
+
+	/**
+	 * Recommencer l'application avec les valeurs courantes.
+	 */
+	// Kevin Nguyen
+	public void recommencer() {
+		arreter();
+		tempsTotalEcoule = 0.000;
+
+		repaint();
 	}
 
 	/**
@@ -231,6 +264,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	private void calculerUneIterationPhysique() {
+
+		tempsTotalEcoule += deltaT;
 
 		voiture.avancerUnPas(deltaT);
 
