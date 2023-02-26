@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -12,29 +13,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
-<<<<<<< HEAD
-import javax.swing.JProgressBar;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeEvent;
-=======
 import javax.swing.border.TitledBorder;
 
 import dessin.ZoneAnimPhysique;
-import physique.TestPhysique;
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
+
 
 public class FenetreJeuScientifique extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
-<<<<<<< HEAD
-	private JLabel lblTempsEcouleValeur;
-=======
 
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
+	private JLabel lblTempsEcouleValeur;
+
+
+
 
 	/**
 	 * Create the panel.
@@ -54,7 +48,7 @@ public class FenetreJeuScientifique extends JPanel {
 		add(lblTitreModeScientifique);
 
 		zoneAnimPhysique = new ZoneAnimPhysique();
-<<<<<<< HEAD
+
 		zoneAnimPhysique.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				switch (evt.getPropertyName()) {
@@ -63,8 +57,7 @@ public class FenetreJeuScientifique extends JPanel {
 				}
 			}
 		});
-=======
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
+
 		zoneAnimPhysique.setBounds(10, 33, 700, 466);
 		add(zoneAnimPhysique);
 
@@ -248,9 +241,7 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnRetour.setBounds(10, 3, 89, 23);
 		add(btnRetour);
-<<<<<<< HEAD
 
-=======
 		
 		JButton btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
@@ -288,7 +279,7 @@ public class FenetreJeuScientifique extends JPanel {
 		btnStop.setBounds(538, 563, 89, 76);
 		add(btnStop);
 		
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
+
 	}
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {
