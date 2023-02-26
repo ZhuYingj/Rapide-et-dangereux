@@ -36,7 +36,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	/** La forme de la voiture **/
 	private Ellipse2D cercle;
 	/** Vecteur de la position de la voiture **/
-	private Vecteur2D position = new Vecteur2D(0, 0);
+	private Vecteur2D position ;
 	/** Vecteur de la vitesse de la voiture **/
 	private Vecteur2D vitesse = new Vecteur2D(0, 0); // par defaut
 	/** Vecteur de l'acceleration de la voiture **/
@@ -255,6 +255,7 @@ public class Voiture implements Dessinable, Selectionnable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	
 	}
 
 	/**

@@ -31,7 +31,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Nombre de pixels pas metre. */
 	private double pixelsParMetre;
 	/** Temps du deltaT par d�faut */
-	private double deltaT = 0.01;
+	private double deltaT = 0.02;
 	/** Booleen de l'animation initialise a false */
 	private boolean enCoursDAnimation = false;
 	/** Temps du sleep de l'application */
@@ -44,54 +44,90 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private PisteVerticale pisteVerticale;
 	private PisteVirageBas pisteVirageBas;
 	private boolean premiereFois = true;
+	private boolean droite, gauche, haut, bas;
 
 	/** Position x de la voiture **/
-	double x = 1;
+	double x = 0;
 	/** Position y de la voiture **/
 	double y = 0;
 	private int angleVoitureDegre = 0;
 	private double angleVoitureRad;
+	private Vecteur2D posInit = new Vecteur2D(0.2, 0.1);
 
 	public ZoneAnimPhysique() {
-		voiture = new Voiture(new Vecteur2D(x, y), Color.yellow, 50, 25, angleVoitureRad);
 
-		voiture.setSommeDesForces(MoteurPhysique.calculerForceGrav(50, 90)); // test
-		voiture.setVitesse(new Vecteur2D(20, 0));
+		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad);
 
-		System.out.println(voiture.getVitesse());
+		// voiture.setSommeDesForces(MoteurPhysique.calculerForceGrav(50, 90)); // test
+		// voiture.setVitesse(new Vecteur2D(20, 0));
+
+	
+
 		addKeyListener(new KeyAdapter() {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				System.out.println("En cours d'animation");
 
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-
-					angleVoitureDegre = angleVoitureDegre + 5;
-					setAngle(angleVoitureDegre);
+					droite = true;
 
 				}
 				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-
-					angleVoitureDegre = angleVoitureDegre - 5;
-					setAngle(angleVoitureDegre);
-
+					gauche = true;
 				}
 				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					x = Math.cos(angleVoitureRad) + x;
-					y = Math.sin(angleVoitureRad) + y;
-
+					bas = true;
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 
-				
+					haut = true;
+				}
+				if (droite == true) {
+					angleVoitureDegre = angleVoitureDegre + 10;
+					setAngle(angleVoitureDegre);
+					voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+
+				}
+				if (gauche == true) {
+					angleVoitureDegre = angleVoitureDegre - 10;
+
+					setAngle(angleVoitureDegre);
+					voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+				}
+				if (haut == true) {
+					voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+				}
+				if (bas == true) {
+
 				}
 
+				if (droite == true && haut == true) {
+					System.out.println("En mm temps");
+				}
 				repaint();
+
+				// faire une methode KeyReleased
 			}
 
+			@Override
+			public void keyReleased(KeyEvent e) {
+				switch (e.getKeyCode()) {
+				case KeyEvent.VK_RIGHT:
+					droite = false;
+				case KeyEvent.VK_LEFT:
+					gauche = false;
+				case KeyEvent.VK_DOWN:
+					bas = false;
+				case KeyEvent.VK_UP:
+					haut = false;
+				}
+
+			}
+			
 		});
 		setBackground(Color.gray);
+	
+
 	}
 
 	public void paintComponent(Graphics g) {
