@@ -81,9 +81,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 
-					x= Math.cos(angleVoitureRad) + x;
-					y= Math.sin(angleVoitureRad) + y;
-
+					voiture.setAccel(new Vecteur2D(5,0));
+System.out.println(voiture.getAccel());
+System.out.println(voiture.getVitesse());
+System.out.println(voiture.getPosition());
 				}
 
 				repaint();
@@ -196,6 +197,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	private void calculerUneIterationPhysique() {
 
+voiture.avancerUnPas(deltaT);
 	}
 
 	public void setVoitureMasse(double masseVoulu) {

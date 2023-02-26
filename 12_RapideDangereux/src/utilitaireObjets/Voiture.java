@@ -36,7 +36,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	/** La forme de la voiture **/
 	private Ellipse2D cercle;
 	/** Vecteur de la position de la voiture **/
-	private Vecteur2D position;
+	private Vecteur2D position = new Vecteur2D(0, 0);
 	/** Vecteur de la vitesse de la voiture **/
 	private Vecteur2D vitesse = new Vecteur2D(0, 0); // par defaut
 	/** Vecteur de l'acceleration de la voiture **/
@@ -240,11 +240,11 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param sommeForcesSurLaBalle La somme des forces exercees sur la balle
 	 */
-	public void setSommeDesForces(Vecteur2D sommeForcesSurLaBalle) {
+	public void setSommeDesForces(Vecteur2D sommeForcesSurLaVoiture) {
 		// ici changer les forces signifie recalculer l'acceleration
 		// on relegue cette tache au moteur physique.
 		try {
-			accel = MoteurPhysique.calculAcceleration(sommeForcesSurLaBalle, masseEnKg);
+			accel = MoteurPhysique.calculAcceleration(sommeForcesSurLaVoiture, masseEnKg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -289,6 +289,7 @@ public class Voiture implements Dessinable, Selectionnable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 	
 
 }
