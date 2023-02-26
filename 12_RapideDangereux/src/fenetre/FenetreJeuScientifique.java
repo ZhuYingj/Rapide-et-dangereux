@@ -43,7 +43,7 @@ public class FenetreJeuScientifique extends JPanel {
 		add(lblTitreModeScientifique);
 
 		zoneAnimPhysique = new ZoneAnimPhysique();
-		zoneAnimPhysique.setBounds(10, 33, 700, 656);
+		zoneAnimPhysique.setBounds(10, 33, 700, 466);
 		add(zoneAnimPhysique);
 
 		JPanel panelDonneScientifique = new JPanel();
@@ -201,6 +201,22 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnRetour.setBounds(10, 3, 89, 23);
 		add(btnRetour);
+		
+		JButton btnStart = new JButton("Start");
+		btnStart.setBounds(10, 563, 89, 76);
+		add(btnStart);
+		
+		JButton btnReset = new JButton("Reset");
+		btnReset.setBounds(175, 563, 89, 76);
+		add(btnReset);
+		
+		JButton btnNextImg = new JButton("Next Img");
+		btnNextImg.setBounds(355, 563, 89, 76);
+		add(btnNextImg);
+		
+		JButton btnStop = new JButton("Stop");
+		btnStop.setBounds(538, 563, 89, 76);
+		add(btnStop);
 		
 	}
 	public ZoneAnimPhysique getZoneAnimPhysique() {
