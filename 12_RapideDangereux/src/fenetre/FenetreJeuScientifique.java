@@ -207,7 +207,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		lblTempsEcouleValeur = new JLabel("");
 		lblTempsEcouleValeur.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTempsEcouleValeur.setBounds(202, 411, 68, 44);
+		lblTempsEcouleValeur.setBounds(161, 411, 109, 44);
 		panelDonneScientifique.add(lblTempsEcouleValeur);
 
 		JPanel panelObjetEtGraphique = new JPanel();
@@ -238,6 +238,7 @@ public class FenetreJeuScientifique extends JPanel {
 		JButton btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.demarrer();
 			}
 		});
@@ -247,6 +248,7 @@ public class FenetreJeuScientifique extends JPanel {
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.restartPos();
 			}
 		});
@@ -256,6 +258,7 @@ public class FenetreJeuScientifique extends JPanel {
 		JButton btnNextImg = new JButton("Next Img");
 		btnNextImg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.avancerUnPas();
 			}
 		});
@@ -265,6 +268,7 @@ public class FenetreJeuScientifique extends JPanel {
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.arreterAnim();
 			}
 		});
