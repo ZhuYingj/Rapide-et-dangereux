@@ -84,9 +84,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 
-					System.out.println(voiture.getAccel());
-					System.out.println(voiture.getVitesse());
-					System.out.println(voiture.getPosition());
+				
 				}
 
 				repaint();

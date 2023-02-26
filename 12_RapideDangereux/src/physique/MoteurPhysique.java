@@ -74,6 +74,7 @@ public class MoteurPhysique {
 	 */
 	public static Vecteur2D calculerForceFrottement(double mu, double masse, double angleRad) {
 		return new Vecteur2D(-mu * masse * ACCEL_G * Math.cos(angleRad), 0);
+
 	}
 
 	/**
