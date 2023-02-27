@@ -247,9 +247,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
     }
 
 	public void restartPos() {
+		arreter();
+		tempsTotalEcoule = 0.000;
 		voiture.setPosition(posInit);
 		voiture.setVitesse(valeurInit);
 		voiture.setAccel(valeurInit);
+		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
+		
 		repaint();
 	}
 
@@ -316,7 +320,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		tempsTotalEcoule += deltaT;
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
-
 		voiture.avancerUnPas(deltaT);
 
 	}

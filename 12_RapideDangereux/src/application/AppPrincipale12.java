@@ -19,7 +19,7 @@ import fenetre.FenetreJeuSansScientifique;
 import fenetre.FenetreJeuScientifique;
 import fenetre.FenetreMenu;
 import fenetre.JeuOptions;
-import fenetre.ModeDeJeu;
+import fenetre.ModeDeJeu;	
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -38,7 +38,6 @@ public class AppPrincipale12 extends JFrame {
 					AppPrincipale12 frame = new AppPrincipale12();
 					frame.setVisible(true);
 					frame.requestFocus();
-					frame.checkBoxModeNonScientifique.setEnabled(false);
 					frame.addKeyListener(new KeyAdapter() {
 						@Override
 						public void keyPressed(KeyEvent e) {
@@ -84,7 +83,6 @@ public class AppPrincipale12 extends JFrame {
 					fenMenu.setVisible(false);
 					fenModeJeu.setVisible(true);
 					setContentPane(fenModeJeu);
-					checkBoxModeNonScientifique.setEnabled(false);
 				}
 			}
 		});
@@ -96,7 +94,6 @@ public class AppPrincipale12 extends JFrame {
 					fenModeJeu.setVisible(false);
 					fenMenu.setVisible(true);
 					setContentPane(fenMenu);
-					checkBoxModeNonScientifique.setEnabled(false);
 					break;
 
 				}
@@ -109,7 +106,6 @@ public class AppPrincipale12 extends JFrame {
 					fenModeJeu.setVisible(false);
 					fenEditeur.setVisible(true);
 					setContentPane(fenEditeur);
-					checkBoxModeNonScientifique.setEnabled(false);
 					break;
 
 				}
@@ -123,7 +119,6 @@ public class AppPrincipale12 extends JFrame {
 					fenModeJeu.setVisible(true);
 					fenEditeur.setVisible(false);
 					setContentPane(fenModeJeu);
-					checkBoxModeNonScientifique.setEnabled(false);
 					break;
 
 				}
@@ -137,7 +132,6 @@ public class AppPrincipale12 extends JFrame {
 					fenModeJeu.setVisible(false);
 					fenOptions.setVisible(true);
 					setContentPane(fenOptions);
-					checkBoxModeNonScientifique.setEnabled(false);
 					break;
 				}
 			}
@@ -150,7 +144,6 @@ public class AppPrincipale12 extends JFrame {
 					fenModeJeu.setVisible(false);
 					fenOptions.setVisible(true);
 					setContentPane(fenOptions);
-					checkBoxModeNonScientifique.setEnabled(false);
 					break;
 				}
 			}
@@ -163,7 +156,6 @@ public class AppPrincipale12 extends JFrame {
 					fenModeJeu.setVisible(true);
 					fenOptions.setVisible(false);
 					setContentPane(fenModeJeu);
-					checkBoxModeNonScientifique.setEnabled(false);
 					break;
 				}
 			}
@@ -177,7 +169,6 @@ public class AppPrincipale12 extends JFrame {
 					fenOptions.setVisible(false);
 					setContentPane(fenJeuScience);
 					pushingP(fenJeuScience);
-					checkBoxModeNonScientifique.setEnabled(true);
 
 					break;
 				case "MASSE":
@@ -197,7 +188,6 @@ public class AppPrincipale12 extends JFrame {
 					fenJeuScience.setVisible(true);
 					fenMenu.setVisible(false);
 					setContentPane(fenJeuScience);
-					checkBoxModeNonScientifique.setEnabled(true);
 					break;
 
 				}
@@ -211,7 +201,6 @@ public class AppPrincipale12 extends JFrame {
 					fenJeuScience.setVisible(false);
 					fenOptions.setVisible(true);
 					setContentPane(fenOptions);
-					checkBoxModeNonScientifique.setEnabled(false);
 					break;
 
 				}
@@ -225,7 +214,6 @@ public class AppPrincipale12 extends JFrame {
 					fenSansScience.setVisible(false);
 					fenOptions.setVisible(true);
 					setContentPane(fenOptions);
-					checkBoxModeNonScientifique.setEnabled(false);
 					break;
 
 				}
@@ -235,7 +223,7 @@ public class AppPrincipale12 extends JFrame {
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				System.out.println("allo");
 				if (checkBoxModeNonScientifique.isSelected()) {
 					fenSansScience.setVisible(true);
 					fenJeuScience.setVisible(false);
