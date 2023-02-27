@@ -19,19 +19,18 @@ import javax.swing.border.TitledBorder;
 
 import dessin.ZoneAnimPhysique;
 
-
 public class FenetreJeuScientifique extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
-
+	private JLabel lblAccEnXV1;
 	private JLabel lblTempsEcouleValeur;
-
-
-
+	private JLabel lblAccEnYV1;
+	private JLabel lblVitesseEnXV1;
+	private JLabel lblVitesseEnYV1;
 
 	/**
-	 * Create the panel.
+	 * Creation de la fenetre.
 	 */
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -54,6 +53,14 @@ public class FenetreJeuScientifique extends JPanel {
 				switch (evt.getPropertyName()) {
 				case "tempsEcoule":
 					lblTempsEcouleValeur.setText(String.format("%.2f", evt.getNewValue()));
+				case "accEnXV1":
+					lblAccEnXV1.setText(String.format("%.2f", evt.getNewValue()));
+				case "accEnYV1":
+					lblAccEnYV1.setText(String.format("%.2f", evt.getNewValue()));
+				case "vitEnXV1":
+					lblVitesseEnXV1.setText(String.format("%.2f", evt.getNewValue()));
+				case "vitEnYV1":
+					lblVitesseEnYV1.setText(String.format("%.2f", evt.getNewValue()));
 				}
 			}
 		});
@@ -205,10 +212,40 @@ public class FenetreJeuScientifique extends JPanel {
 		lblSeconde.setBounds(246, 411, 38, 44);
 		panelDonneScientifique.add(lblSeconde);
 
-		lblTempsEcouleValeur = new JLabel("");
+		lblTempsEcouleValeur = new JLabel("0.00");
 		lblTempsEcouleValeur.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTempsEcouleValeur.setBounds(161, 411, 109, 44);
+		lblTempsEcouleValeur.setBounds(177, 411, 109, 44);
 		panelDonneScientifique.add(lblTempsEcouleValeur);
+
+		lblAccEnXV1 = new JLabel("0.00");
+		lblAccEnXV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAccEnXV1.setBounds(119, 173, 65, 29);
+		panelDonneScientifique.add(lblAccEnXV1);
+
+		lblAccEnYV1 = new JLabel("0.00");
+		lblAccEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAccEnYV1.setBounds(194, 173, 65, 29);
+		panelDonneScientifique.add(lblAccEnYV1);
+
+		JLabel lblAccV1Separator = new JLabel("[               ,               ]");
+		lblAccV1Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAccV1Separator.setBounds(106, 173, 162, 29);
+		panelDonneScientifique.add(lblAccV1Separator);
+
+		lblVitesseEnXV1 = new JLabel("0.00");
+		lblVitesseEnXV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseEnXV1.setBounds(119, 121, 65, 29);
+		panelDonneScientifique.add(lblVitesseEnXV1);
+
+		lblVitesseEnYV1 = new JLabel("0.00");
+		lblVitesseEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseEnYV1.setBounds(194, 121, 65, 29);
+		panelDonneScientifique.add(lblVitesseEnYV1);
+
+		JLabel lblVitesseV1Separator = new JLabel("[               ,               ]");
+		lblVitesseV1Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseV1Separator.setBounds(106, 121, 162, 29);
+		panelDonneScientifique.add(lblVitesseV1Separator);
 
 		JPanel panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -234,7 +271,6 @@ public class FenetreJeuScientifique extends JPanel {
 		btnRetour.setBounds(10, 3, 89, 23);
 		add(btnRetour);
 
-		
 		JButton btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -244,7 +280,7 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnStart.setBounds(10, 563, 89, 76);
 		add(btnStart);
-		
+
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -254,7 +290,7 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnReset.setBounds(175, 563, 89, 76);
 		add(btnReset);
-		
+
 		JButton btnNextImg = new JButton("Next Img");
 		btnNextImg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -264,7 +300,7 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnNextImg.setBounds(355, 563, 89, 76);
 		add(btnNextImg);
-		
+
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -274,7 +310,6 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnStop.setBounds(538, 563, 89, 76);
 		add(btnStop);
-		
 
 	}
 
@@ -285,5 +320,4 @@ public class FenetreJeuScientifique extends JPanel {
 	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
 		this.zoneAnimPhysique = zoneAnimPhysique;
 	}
-
 }
