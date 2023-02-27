@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.BevelBorder;
 
 public class FenetreJeuSansScientifique extends JPanel {
 
@@ -34,8 +35,8 @@ public class FenetreJeuSansScientifique extends JPanel {
 		setBounds(100, 100, 1300, 700);
 		
 		ZoneAnimPhysique zoneAnimPhysique = new ZoneAnimPhysique();
-		zoneAnimPhysique.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "ZONE D'ANIMATION", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		zoneAnimPhysique.setBounds(10, 33, 1280, 656);
+		zoneAnimPhysique.setBorder(null);
+		zoneAnimPhysique.setBounds(10, 55, 1280, 515);
 		add(zoneAnimPhysique);
 		zoneAnimPhysique.setLayout(null);
 		

@@ -63,11 +63,7 @@ public class JeuOptions extends JPanel {
 		panel_1.setLayout(null);
 
 		slider = new JSlider();
-		slider.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-//				voiture.setMasseEnKg((double) slider.getValue());
-			}
-		});
+
 		slider.setMajorTickSpacing(10);
 		slider.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		slider.setPaintLabels(true);

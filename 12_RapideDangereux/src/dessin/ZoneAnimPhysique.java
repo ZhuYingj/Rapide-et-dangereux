@@ -103,16 +103,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				}
 
 				if (droite == true) {
-                    angleVoitureDegre = angleVoitureDegre + 10;
-                    setAngle(angleVoitureDegre);
-                    if (voiture.getAccel().getX() > 0) {
-                        voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
-                    } else if (voiture.getAccel().getY() > 0) {
-                        voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+					angleVoitureDegre = angleVoitureDegre + 10;
+					setAngle(angleVoitureDegre);
+					if (voiture.getAccel().getX() > 0) {
+						voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+					} else if (voiture.getAccel().getY() > 0) {
+						voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
 
-                    }
+					}
 
-                }
+				}
 				if (gauche == true) {
 
 					angleVoitureDegre = angleVoitureDegre - 10;
@@ -151,7 +151,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					bas = false;
 				case KeyEvent.VK_UP:
 					haut = false;
-					
+
 				}
 
 //				if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -240,11 +240,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		repaint();
 	}
+
 	public void avancerUnPas() {
-        arreter();
-        calculerUneIterationPhysique();
-        repaint();
-    }
+		arreter();
+		calculerUneIterationPhysique();
+		repaint();
+	}
 
 	public void restartPos() {
 		arreter();
@@ -320,6 +321,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		tempsTotalEcoule += deltaT;
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
+
+		pcs.firePropertyChange("accEnXV1", 0, voiture.getAccel().getX());
+		pcs.firePropertyChange("accEnYV1", 0, voiture.getAccel().getY());
+		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getX());
+		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getY());
 		voiture.avancerUnPas(deltaT);
 
 	}
