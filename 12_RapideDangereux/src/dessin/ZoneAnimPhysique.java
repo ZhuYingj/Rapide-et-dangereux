@@ -23,6 +23,9 @@ import java.beans.PropertyChangeEvent;
 /**
  * Cree une piste qui contient un/des voiture(s), un/des obstacle(s) et une
  * piste
+ * @author Kevin Nguyen
+ * @author Tan Tommy Rin
+ * @author Alexis Pineda
  */
 
 public class ZoneAnimPhysique extends JPanel implements Runnable {
