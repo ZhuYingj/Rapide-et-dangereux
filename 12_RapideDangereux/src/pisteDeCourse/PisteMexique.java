@@ -58,6 +58,7 @@ public class PisteMexique implements Dessinable {
 		this.x = x + TAILLE_PISTE;
 		
 		//piste horizontale depart :
+		depart = new PisteDeDepart(x,y);
 		depart.dessiner(g2d);
 		this.x = x + TAILLE_PISTE;
 		
