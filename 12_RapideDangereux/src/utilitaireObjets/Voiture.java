@@ -21,7 +21,7 @@ import physique.MoteurPhysique;
  * Classe qui permet de gérér et de créer la voiture
  * 
  * @author Tan Tommy Rin
- *@author Kevin Nguyen
+ * @author Kevin Nguyen
  */
 
 public class Voiture implements Dessinable, Selectionnable {
@@ -36,44 +36,55 @@ public class Voiture implements Dessinable, Selectionnable {
 	/** La forme de la voiture **/
 	private Ellipse2D cercle;
 	/** Vecteur de la position de la voiture **/
-	private Vecteur2D position ;
+	private Vecteur2D position;
 	/** Vecteur de la vitesse de la voiture **/
 	private Vecteur2D vitesse = new Vecteur2D(0, 0); // par defaut
 	/** Vecteur de l'acceleration de la voiture **/
 	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
+	/** Fleche vectorielle visuelle **/
 	private FlecheVectorielle flecheVectorielle;
+	/** Angle en degré pour la fleche vectorielle **/
 	private double angle = 0;
+	/** Notre voiture après transformation **/
 	private Shape voitureTransfo;
+	/** Vitesse maximale selon le niveau sélectionné **/
+	private double vitesseMaxSelonNiveau;
 
 	/**
 	 * Méthode qui permet de construire une voiture avec des paramètres
 	 * 
-	 * @param position VecteurPosition voulu
-	 * @param skin     La couleur de la voiture
-	 * @param masse    La masse de la voiture
-	 * @param diametre Le diametre de la voiture
+	 * @param position           VecteurPosition voulu
+	 * @param skin               La couleur de la voiture
+	 * @param masse              La masse de la voiture
+	 * @param diametre           Le diametre de la voiture
+	 * @param vitesseMaxSelonNiv La vitesse maximale selon le niveau selectionné
 	 */
-	public Voiture(Vecteur2D position, Color skin, double masse, double diametre, double angle) {
+	// Par Tan Tommy Rin
+	public Voiture(Vecteur2D position, Color skin, double masse, double diametre, double angle,
+			double vitesseMaxSelonNiv) {
 		this.position = position;
 		this.skin = skin;
 		this.masseEnKg = masse;
 		this.diametre = diametre;
 		this.angle = angle;
+		this.vitesseMaxSelonNiveau = vitesseMaxSelonNiv;
 		creerLaGeometrie();
 
 	}
 
 	/**
-	 * Constructeur défaut avec un diametre fixé d'avance
+	 * Constructeur défaut avec un diametre et une vitesse maximale fixé d'avance
 	 */
+	// Par Tan Tommy Rin
 	public Voiture() {
 		this.diametre = 25;
+		this.vitesseMaxSelonNiveau = 5.0;
 	}
 
 	/**
 	 * Création de la voiture à l'aide d'une ellipse et la flèche vectorielle
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	private void creerLaGeometrie() {
 
 		cercle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
@@ -88,7 +99,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	/**
 	 * Méthode qui permet de dessiner sur la zone d'animation à l'aide du g2d
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D gCopie = (Graphics2D) g2d.create();
@@ -107,15 +118,12 @@ public class Voiture implements Dessinable, Selectionnable {
 
 	}
 
-	//	public void gererCollisionSol() {
-	//	
-	//	}
 	/**
 	 * Méthode qui retourne le diametre de la voiture
 	 * 
 	 * @return le diametre de la voiture
 	 */
-
+	// Par Tan Tommy Rin
 	public double getDiametre() {
 		return diametre;
 	}
@@ -125,7 +133,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param diametre le diametre voulu
 	 */
-
+	// Par Tan Tommy Rin
 	public void setDiametre(double diametre) {
 		this.diametre = diametre;
 		creerLaGeometrie();
@@ -136,7 +144,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @return la voiture en kg
 	 */
-
+	// Par Tan Tommy Rin
 	public double getMasseEnKg() {
 		return masseEnKg;
 	}
@@ -146,7 +154,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param masseEnKg une masse voulu
 	 */
-
+	// Par Tan Tommy Rin
 	public void setMasseEnKg(double masseEnKg) {
 		this.masseEnKg = masseEnKg;
 	}
@@ -156,7 +164,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @return la couleur de la voiture
 	 */
-
+	// Par Tan Tommy Rin
 	public Color getSkin() {
 		return skin;
 	}
@@ -166,6 +174,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param skin la couleur voulue
 	 */
+	// Par Tan Tommy Rin
 	public void setSkin(Color skin) {
 		this.skin = skin;
 	}
@@ -175,7 +184,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @return la position de la voiture en vecteur
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public Vecteur2D getPosition() {
 		return position;
 	}
@@ -185,7 +194,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param position nouvelle position de la voiture
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public void setPosition(Vecteur2D position) {
 		this.position = position;
 		creerLaGeometrie();
@@ -196,7 +205,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @return vecteur de vitesse
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public Vecteur2D getVitesse() {
 		return vitesse;
 	}
@@ -206,7 +215,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param vitesse vitesse voulu
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public void setVitesse(Vecteur2D vitesse) {
 		this.vitesse = vitesse;
 	}
@@ -216,7 +225,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @return le vecteur d'acceleration
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public Vecteur2D getAccel() {
 		return accel;
 	}
@@ -226,25 +235,27 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param accel La nouvelle acceleration
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public void setAccel(Vecteur2D accel) {
 		this.accel = accel;
 	}
 
 	/**
 	 * Retourne l'angle (orientation) de la voiture et de la fleche vectorielle
+	 * 
 	 * @return Angle de la voiture
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public double getAngle() {
 		return angle;
 	}
 
 	/**
 	 * Attribuer un angle a la voiture et a la fleche vectorielle
+	 * 
 	 * @param angle Nouvel angle
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public void setAngle(double angle) {
 		this.angle = angle;
 		creerLaGeometrie();
@@ -256,7 +267,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param sommeForcesSurLaBalle La somme des forces exercees sur la balle
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public void setSommeDesForces(Vecteur2D sommeForcesSurLaVoiture) {
 		// ici changer les forces signifie recalculer l'acceleration
 		// on relegue cette tache au moteur physique.
@@ -275,11 +286,10 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param deltaT intervalle de temps (pas)
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public void avancerUnPas(double deltaT) {
 		this.vitesse = MoteurPhysique.calculVitesse(deltaT, vitesse, accel);
 		this.position = MoteurPhysique.calculPosition(deltaT, position, vitesse);
-
 
 		creerLaGeometrie(); // la position a changé! on recree notre cercle
 
@@ -291,6 +301,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param pixelsParMetreVoulu
 	 */
+	// Par Tan Tommy Rin
 	public void setPixelsParMetre(double pixelsParMetreVoulu) {
 		this.pixelsParMetre = pixelsParMetreVoulu;
 
@@ -301,9 +312,29 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @return nombre de pixel par metre
 	 */
-
+	// Par Tan Tommy Rin
 	public double getPixelsParMetre() {
 		return this.pixelsParMetre;
+	}
+
+	/**
+	 * Méthode qui retourne la vitesse maximale selon le niveau selectionné
+	 * 
+	 * @return la vitesse maximale selon le niveau selectionné
+	 */
+	// Par Tan Tommy Rin
+	public double getVitesseMaxSelonNiveau() {
+		return vitesseMaxSelonNiveau;
+	}
+
+	/**
+	 * Méthode qui permet de changer la vitesse maximale par une autre vitesse voulu
+	 * 
+	 * @param vitesseMaxSelonNiveau La nouvelle vitesse maximale voulue
+	 */
+	// Par Tan Tommy Rin
+	public void setVitesseMaxSelonNiveau(double vitesseMaxSelonNiveau) {
+		this.vitesseMaxSelonNiveau = vitesseMaxSelonNiveau;
 	}
 
 	// A completer plus tard
@@ -314,34 +345,37 @@ public class Voiture implements Dessinable, Selectionnable {
 	}
 
 	/**
-	 * Cette methode permet de determiner si la voiture depasse le composant dessin et changer sa vitesse selon la collision
+	 * Cette methode permet de determiner si la voiture depasse le composant dessin
+	 * et changer sa vitesse selon la collision
+	 * 
 	 * @param positionXDroite Position droite en x du composant
 	 * @param positionXGauche Position gauche en x du composant
-	 * @param positionYBas Position bas en y du composant
-	 * @param positionYHaut Position haut en y du composant
+	 * @param positionYBas    Position bas en y du composant
+	 * @param positionYHaut   Position haut en y du composant
 	 */
-	//Kevin Nguyen
-	public void gererCollision(double positionXDroite,double positionXGauche, double positionYBas,  double positionYHaut) {
+	// Kevin Nguyen
+	public void gererCollision(double positionXDroite, double positionXGauche, double positionYBas,
+			double positionYHaut) {
 
-		//pour le bas
-		if(position.getY() > positionYBas-this.diametre) {
+		// pour le bas
+		if (position.getY() > positionYBas - this.diametre) {
 			this.vitesse = getVitesse();
 			setVitesse(new Vecteur2D(vitesse.getX(), -vitesse.getY()));
-			position.setY(positionYBas-this.diametre);
+			position.setY(positionYBas - this.diametre);
 		}
-		//pour le haut
+		// pour le haut
 		else if (position.getY() < positionYHaut) {
 			this.vitesse = getVitesse();
 			setVitesse(new Vecteur2D(vitesse.getX(), -vitesse.getY()));
 			position.setY(positionYHaut);
 		}
-		//pour la droite
-		else if (position.getX() > positionXDroite-this.diametre) {
+		// pour la droite
+		else if (position.getX() > positionXDroite - this.diametre) {
 			this.vitesse = getVitesse();
 			setVitesse(new Vecteur2D(-vitesse.getX(), vitesse.getY()));
-			position.setX(positionXDroite-this.diametre);
+			position.setX(positionXDroite - this.diametre);
 		}
-		//pour   la gauche
+		// pour la gauche
 		else if (position.getX() < positionXGauche) {
 			this.vitesse = getVitesse();
 			setVitesse(new Vecteur2D(-vitesse.getX(), vitesse.getY()));
