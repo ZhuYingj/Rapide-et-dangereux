@@ -19,9 +19,15 @@ import fenetre.FenetreJeuSansScientifique;
 import fenetre.FenetreJeuScientifique;
 import fenetre.FenetreMenu;
 import fenetre.JeuOptions;
-import fenetre.ModeDeJeu;	
+import fenetre.ModeDeJeu;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+/**
+ * 
+ * @author Alexis Pineda-Alvarado
+ *
+ */
 
 public class AppPrincipale12 extends JFrame {
 
@@ -241,6 +247,13 @@ public class AppPrincipale12 extends JFrame {
 		mnNewMenu.add(checkBoxModeNonScientifique);
 	}
 
+	/**
+	 * Fait en sorte que lorsqu'on appui sur la touche P un panel JOptionPane va
+	 * apparaitre
+	 * 
+	 * @param fenetreVoulu permet de prendre le JPanel specifique
+	 */
+	// Alexis Pineda-Alvarado
 	public void pushingP(JPanel fenetreVoulu) {
 		fenetreVoulu.requestFocus();
 		fenetreVoulu.addKeyListener(new KeyAdapter() {
