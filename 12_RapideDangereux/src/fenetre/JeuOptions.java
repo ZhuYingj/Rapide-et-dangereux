@@ -34,13 +34,13 @@ public class JeuOptions extends JPanel {
 	private Voiture voiture;
 	private JSlider slider;
 
-	/**
-	 * Create the panel.
-	 */
-
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
+
+	/**
+	 * Creation de la fenetre.
+	 */
 
 	public JeuOptions() {
 		setLayout(null);
@@ -113,16 +113,34 @@ public class JeuOptions extends JPanel {
 		panel_1.add(lblDifficulte);
 
 		rdbtnFacile = new JRadioButton("Facile");
+		rdbtnFacile.setSelected(true);
+		rdbtnFacile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				pcs.firePropertyChange("VITESSEMAXFACILE", null, 5.0);
+
+			}
+		});
 		rdbtnFacile.setBounds(141, 80, 109, 23);
 		panel_1.add(rdbtnFacile);
 		buttonGroupDiff.add(rdbtnFacile);
 
 		rdbtnMedium = new JRadioButton("Intermediaire");
+		rdbtnMedium.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("VITESSEMAXMOYEN", null, 10.0);
+			}
+		});
 		rdbtnMedium.setBounds(141, 106, 109, 23);
 		panel_1.add(rdbtnMedium);
 		buttonGroupDiff.add(rdbtnMedium);
 
 		rdbtnDifficile = new JRadioButton("Difficile");
+		rdbtnDifficile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("VITESSEMAXDIFFICILE", null, 15.0);
+			}
+		});
 		rdbtnDifficile.setBounds(141, 132, 109, 23);
 		panel_1.add(rdbtnDifficile);
 		buttonGroupDiff.add(rdbtnDifficile);
@@ -132,7 +150,7 @@ public class JeuOptions extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
 				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
-				pcs.firePropertyChange("DEMARRERANIMATION", null, -1);
+
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);
@@ -144,10 +162,6 @@ public class JeuOptions extends JPanel {
 		add(panel_2);
 
 		JButton btnGauche = new JButton("<");
-		btnGauche.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnGauche.setBounds(905, 188, 55, 23);
 		add(btnGauche);
 

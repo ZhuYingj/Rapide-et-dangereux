@@ -35,7 +35,7 @@ public class AppPrincipale12 extends JFrame {
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
+	 * Lancement de l'application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -44,6 +44,7 @@ public class AppPrincipale12 extends JFrame {
 					AppPrincipale12 frame = new AppPrincipale12();
 					frame.setVisible(true);
 					frame.requestFocus();
+					frame.checkBoxModeNonScientifique.setEnabled(false);
 					frame.addKeyListener(new KeyAdapter() {
 						@Override
 						public void keyPressed(KeyEvent e) {
@@ -60,7 +61,7 @@ public class AppPrincipale12 extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Creation de la fenetre.
 	 */
 	public AppPrincipale12() {
 
@@ -82,7 +83,8 @@ public class AppPrincipale12 extends JFrame {
 		menuBar.add(mnNewMenu);
 
 		setContentPane(fenMenu);
-
+		
+		
 		fenMenu.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (evt.getPropertyName().equals("JOUER")) {
@@ -100,6 +102,7 @@ public class AppPrincipale12 extends JFrame {
 					fenModeJeu.setVisible(false);
 					fenMenu.setVisible(true);
 					setContentPane(fenMenu);
+					checkBoxModeNonScientifique.setEnabled(false);
 					break;
 
 				}
@@ -174,31 +177,29 @@ public class AppPrincipale12 extends JFrame {
 					fenJeuScience.setVisible(true);
 					fenOptions.setVisible(false);
 					setContentPane(fenJeuScience);
+					checkBoxModeNonScientifique.setEnabled(true);
 					pushingP(fenJeuScience);
 
 					break;
 				case "MASSE":
 					fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
-
-				case "DEMARRERANIMATION":
-					fenJeuScience.getZoneAnimPhysique().demarrer();
-					fenJeuScience.getZoneAnimPhysique().requestFocus();
-				}
-			}
-		});
-
-		fenMenu.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "Test":
-					fenJeuScience.setVisible(true);
-					fenMenu.setVisible(false);
-					setContentPane(fenJeuScience);
+					break;
+				case "VITESSEMAXFACILE":
+					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+					break;
+				case "VITESSEMAXMOYEN":
+					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+					break;
+				case "VITESSEMAXDIFFICILE":
+					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 					break;
 
+
 				}
+
 			}
 		});
+
 
 		fenJeuScience.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -229,17 +230,21 @@ public class AppPrincipale12 extends JFrame {
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("allo");
+
 				if (checkBoxModeNonScientifique.isSelected()) {
 					fenSansScience.setVisible(true);
 					fenJeuScience.setVisible(false);
 					setContentPane(fenSansScience);
+
+					checkBoxModeNonScientifique.setEnabled(true);
+					fenSansScience.setZoneAnimPhysique(fenJeuScience.getZoneAnimPhysique());
 					pushingP(fenSansScience);
 
 				} else {
 					fenSansScience.setVisible(false);
 					fenJeuScience.setVisible(true);
 					setContentPane(fenJeuScience);
+					fenJeuScience.setZoneAnimPhysique(fenSansScience.getZoneAnimPhysique());
 
 				}
 			}
@@ -260,10 +265,14 @@ public class AppPrincipale12 extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_P) {
-					JOptionPane.showMessageDialog(null, "sup");
+					JOptionPane.showMessageDialog(null, "Bonjour dans RAPIDE ET DANGEREUX! \nle but de ce jeux et de battre votre combattant"
+							+ " \nles contrôles du jeu sont :  \n↑ : pour avancer la voiture"
+							+ " \n← et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture");
 				}
 			}
 		});
 	}
+	
 
 }
+
