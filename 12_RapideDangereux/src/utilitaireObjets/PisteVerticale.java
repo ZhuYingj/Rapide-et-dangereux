@@ -8,6 +8,13 @@ import java.awt.geom.Rectangle2D;
 
 import interfaces.Dessinable;
 
+/**
+ * Classe qui permet de creer un objet Piste Verticale
+ * 
+ * @author Ludovic Julien
+ *
+ */
+
 public class PisteVerticale implements Dessinable {
 	
 	private static final int TAILLE_PISTE = 80;
@@ -17,6 +24,8 @@ public class PisteVerticale implements Dessinable {
 	private int ligneRougeV2Y;
 	private int x;
 	private int y;
+	private double pixelsParMetre = 1; //Defaut
+	
 	public PisteVerticale(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -47,4 +56,23 @@ public class PisteVerticale implements Dessinable {
         return ligneRougeV2Y;
     }
 
+    /**
+	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
+	 * voulu
+	 * 
+	 * @param pixelsParMetreVoulu
+	 */
+	public void setPixelsParMetre(double pixelsParMetre) {
+		this.pixelsParMetre = pixelsParMetre;
+		
+	}
+	
+	/**
+	 * Méthode qui retourne le nombre de pixels par metre
+	 * 
+	 * @return nombre de pixel par metre
+	 */
+	public double getPixelsParMetre() {
+		return pixelsParMetre;
+	}
 }
