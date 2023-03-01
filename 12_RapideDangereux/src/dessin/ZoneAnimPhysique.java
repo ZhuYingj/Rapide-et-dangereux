@@ -247,8 +247,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Kevin Nguyen
 	public void demarrer() {
-
+		System.out.println(enCoursDAnimation);
 		if (enCoursDAnimation == false) {
+
 			Thread proc = new Thread(this);
 			proc.start();
 			enCoursDAnimation = true;
@@ -356,7 +357,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("accEnYV1", 0, voiture.getAccel().getY());
 		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getX());
 		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getY());
-		
+
 		voiture.avancerUnPas(deltaT);
 
 	}
@@ -431,10 +432,18 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * 
 	 * @param nouvelleVitesseMax la nouvelle vitesse maximale
 	 */
-//Par Tan Tommy Rin
+    //Par Tan Tommy Rin
 	public void setVoitureVitesseMax(double nouvelleVitesseMax) {
 		voiture.setVitesseMaxSelonNiveau(nouvelleVitesseMax);
 
+	}
+
+	public boolean isEnCoursDAnimation() {
+		return enCoursDAnimation;
+	}
+
+	public void setEnCoursDAnimation(boolean enCoursDAnimation) {
+		this.enCoursDAnimation = enCoursDAnimation;
 	}
 
 }

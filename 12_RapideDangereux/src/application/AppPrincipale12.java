@@ -189,9 +189,7 @@ public class AppPrincipale12 extends JFrame {
 				case "VITESSEMAXDIFFICILE":
 					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 					break;
-				case "DEMARRERANIMATION":
-					fenJeuScience.getZoneAnimPhysique().demarrer();
-					fenJeuScience.getZoneAnimPhysique().requestFocus();
+
 
 				}
 

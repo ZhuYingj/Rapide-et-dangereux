@@ -122,8 +122,7 @@ public class JeuOptions extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
 				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
-			
-				pcs.firePropertyChange("DEMARRERANIMATION", null, -1);
+				
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);
