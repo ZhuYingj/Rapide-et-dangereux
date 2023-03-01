@@ -7,11 +7,20 @@ import java.awt.Stroke;
 
 import interfaces.Dessinable;
 
+/**
+ * Class qui permet de creer un objet piste virage droit
+ * 
+ * @author Ludovic Julien
+ *
+ */
+
 public class PisteVirageBas implements Dessinable{
 
-private static final int TAILLE_PISTE = 80;
-	
+	/** Taille de la piste qui est toujours constante **/
+	private static final int TAILLE_PISTE = 80;
+	/** la position en x de depart que l'objet piste qui vas etre creer **/
 	private int x;
+	/** la position en y de depart que l'objet piste qui vas etre creer  **/
 	private int y;
 	
 	public PisteVirageBas(int x, int y) {

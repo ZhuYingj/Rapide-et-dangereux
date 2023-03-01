@@ -24,7 +24,7 @@ public class PisteHorizontale implements Dessinable {
 	private int ligneRougeH1X;
 	/** La position en y du mure de haut **/
 	private int ligneRougeH1Y;
-	/** la position en x de mure de bas **/
+	/** La position en x de mure de bas **/
 	private int ligneRougeH2X;
 	/** La position en y du mure de bas **/
 	private int ligneRougeH2Y;
@@ -32,13 +32,18 @@ public class PisteHorizontale implements Dessinable {
 	private int x;
 	/** la position en y de depart que l'objet piste vas etre creer  **/
 	private int y;
+	/** Pixels par metre par defaut  **/
 	private double pixelsParMetre = 1; //Defaut
 
 	/**
-	 * Methode qui permet de construire la piste horizontale a l'aide de parametre
+	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
 	 * 
 	 * @param x 	position en x de la piste
 	 * @param y		position en y de la piste
+	 * @param ligneRougeV1X		position en x du premier mure		
+	 * @param ligneRougeV1Y		position en y du premier mure
+	 * @param ligneRougeV2X		position en x du deuxieme mure
+	 * @param ligneRougeV2Y		position en y du deuxieme mure
 	 */
 	public PisteHorizontale(int x, int y) {
 		this.x = x;
