@@ -179,7 +179,6 @@ public class AppPrincipale12 extends JFrame {
 					setContentPane(fenJeuScience);
 					checkBoxModeNonScientifique.setEnabled(true);
 					pushingP(fenJeuScience);
-
 					break;
 				case "MASSE":
 					fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
@@ -187,10 +186,10 @@ public class AppPrincipale12 extends JFrame {
 				case "VITESSEMAXFACILE":
 					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 					break;
-				case "VITESSEMAXMOYEN":
+				case "VITESSEMAXINTERMEDIAIRE":
 					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 					break;
-				case "VITESSEMAXDIFFICILE":
+				case "VITESSEMAXAVANCE":
 					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 					break;
 

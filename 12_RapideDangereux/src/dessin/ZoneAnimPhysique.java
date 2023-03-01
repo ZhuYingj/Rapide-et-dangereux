@@ -126,6 +126,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+		PisteMexique mexique = new PisteMexique(1, 1);
+		mexique.dessiner(g2d);
+
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
@@ -189,9 +192,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			angleVoitureDegre = angleVoitureDegre + 10;
 			setAngle(angleVoitureDegre);
 			if (voiture.getAccel().getX() > 0) {
-				voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+				voiture.setAccel(new Vecteur2D(20 * Math.cos(angleVoitureRad), 20 * Math.sin(angleVoitureRad)));
 			} else if (voiture.getAccel().getY() > 0) {
-				voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+				voiture.setAccel(new Vecteur2D(20 * Math.cos(angleVoitureRad), 20 * Math.sin(angleVoitureRad)));
 
 			}
 
@@ -202,15 +205,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			setAngle(angleVoitureDegre);
 			if (voiture.getAccel().getX() > 0) {
-				voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+				voiture.setAccel(new Vecteur2D(20 * Math.cos(angleVoitureRad), 20 * Math.sin(angleVoitureRad)));
 			} else if (voiture.getAccel().getY() > 0) {
-				voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+				voiture.setAccel(new Vecteur2D(20 * Math.cos(angleVoitureRad), 20 * Math.sin(angleVoitureRad)));
 
 			}
 
 		}
 		if (haut == true) {
-			voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+			voiture.setAccel(new Vecteur2D(20 * Math.cos(angleVoitureRad), 20 * Math.sin(angleVoitureRad)));
 		}
 		if (bas == true) {
 
@@ -268,6 +271,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void avancerUnPas() {
 		arreter();
 		calculerUneIterationPhysique();
+		testerCollisionsEtAjusterVitesses();
 		repaint();
 	}
 
@@ -294,6 +298,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	private void testerCollisionsEtAjusterVitesses() {
 		voiture.gererCollision(getWidth(), 0, getHeight(), 0);
+
+//		if (voiture.getVitesse().getX() > voiture.getVitesseMaxSelonNiveau()
+//				|| voiture.getVitesse().getY() > voiture.getVitesseMaxSelonNiveau()) {
+//			voiture.setVitesse(new Vecteur2D(voiture.getVitesseMaxSelonNiveau(), voiture.getVitesseMaxSelonNiveau()));
+//		} 
 	}
 
 	/**
@@ -346,7 +355,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	}
 
-	//Par Tan Tommy Rin
+	// Par Tan Tommy Rin
 	public void changementTexteParIteration() {
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
 
@@ -354,6 +363,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("accEnYV1", 0, voiture.getAccel().getY());
 		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getX());
 		pcs.firePropertyChange("vitEnYV1", 0, voiture.getVitesse().getY());
+
+		pcs.firePropertyChange("posEnXV1", 0, voiture.getPosition().getX() / pixelsParMetre);
+		pcs.firePropertyChange("posEnYV1", 0, voiture.getPosition().getY() / pixelsParMetre);
 	}
 
 	/**
@@ -439,7 +451,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * 
 	 * @param nouvelleVitesseMax la nouvelle vitesse maximale
 	 */
-    //Par Tan Tommy Rin
+	// Par Tan Tommy Rin
 	public void setVoitureVitesseMax(double nouvelleVitesseMax) {
 		voiture.setVitesseMaxSelonNiveau(nouvelleVitesseMax);
 
