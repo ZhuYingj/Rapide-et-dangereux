@@ -2,12 +2,16 @@ package fenetre;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.net.URL;
 
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +21,8 @@ import javax.swing.JSlider;
 import utilitaireObjets.Voiture;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import dessin.ZoneApercupiste;
+import pisteDeCourse.PisteMexique;
 
 public class JeuOptions extends JPanel {
 
@@ -38,6 +44,8 @@ public class JeuOptions extends JPanel {
 
 	public JeuOptions() {
 		setLayout(null);
+		
+		
 
 		JButton btnMexique = new JButton("Mexique");
 		btnMexique.setBounds(130, 77, 126, 78);
@@ -51,10 +59,32 @@ public class JeuOptions extends JPanel {
 		btnItalie.setBounds(474, 77, 126, 78);
 		add(btnItalie);
 
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(10, 208, 635, 481);
-		add(panel);
+		JPanel PanelApercu = new JPanel();
+		PanelApercu.setBackground(Color.WHITE);
+		PanelApercu.setBounds(10, 208, 635, 481);
+		add(PanelApercu);
+		PanelApercu.setLayout(null);
+		
+		ZoneApercupiste zoneApercupiste = new ZoneApercupiste();
+		zoneApercupiste.setBounds(73, 58, 420, 316);
+		PanelApercu.add(zoneApercupiste);
+		
+		JLabel monImg=new JLabel(new ImageIcon("PisteMexique.png"));
+		
+//		String imgUrl="PisteMexique.png";
+//		 ImageIcon icone = new ImageIcon(imgUrl);
+//		
+//		JLabel lblApercu = new JLabel(icone, JLabel.CENTER);
+//		lblApercu.setText("kk\r\n");
+//		lblApercu.setBounds(195, 153, 153, 155);
+//		PanelApercu.add(lblApercu);
+		
+		Icon feuVert = new ImageIcon("green.jpg");
+        JLabel feuGreen = new JLabel();
+        feuGreen.setIcon(feuVert);
+        
+       
+		
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);

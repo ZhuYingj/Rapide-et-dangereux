@@ -125,8 +125,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		PisteMexique pisteMexique = new PisteMexique(0, 0);
-		pisteMexique.dessiner(g2d);
+
+		PisteMexique mexique = new PisteMexique(1, 1);
+		mexique.dessiner(g2d);
+
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
@@ -289,7 +291,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	private void testerCollisionsEtAjusterVitesses() {
 		voiture.gererCollision(getWidth(), 0, getHeight(), 0);
-		
+
 //		if (voiture.getVitesse().getX() > voiture.getVitesseMaxSelonNiveau()
 //				|| voiture.getVitesse().getY() > voiture.getVitesseMaxSelonNiveau()) {
 //			voiture.setVitesse(new Vecteur2D(voiture.getVitesseMaxSelonNiveau(), voiture.getVitesseMaxSelonNiveau()));

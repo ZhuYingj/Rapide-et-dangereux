@@ -17,12 +17,14 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import application.AppPrincipale12;
 import dessin.ZoneAnimPhysique;
 
 public class FenetreJeuScientifique extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
+	private AppPrincipale12 application;
 	private JLabel lblAccEnXV1;
 	private JLabel lblTempsEcouleValeur;
 	private JLabel lblAccEnYV1;
@@ -283,6 +285,7 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.setEnCoursDAnimation(false);
 				zoneAnimPhysique.demarrer();
+				
 			}
 		});
 		btnStart.setBounds(10, 563, 89, 76);
