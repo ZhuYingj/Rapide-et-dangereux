@@ -305,7 +305,7 @@ public class FenetreJeuScientifique extends JPanel {
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.arreterAnim();
+				zoneAnimPhysique.arreter();
 			}
 		});
 		btnStop.setBounds(538, 563, 89, 76);

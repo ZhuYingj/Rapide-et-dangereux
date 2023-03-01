@@ -308,7 +308,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * Demande l'arret du thread (prochain tour de boucle)
 	 */
 	//Kevin Nguyen
-	private void arreter() {
+	public void arreter() {
 		enCoursDAnimation = false;
 		repaint();
 
