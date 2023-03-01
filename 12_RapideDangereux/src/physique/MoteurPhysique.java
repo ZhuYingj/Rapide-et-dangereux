@@ -2,6 +2,13 @@ package physique;
 
 import geometrie.Vecteur2D;
 
+
+/**
+ * Cette classe regroupe les calculs physiques necessaires au mouvement des objets
+ * des divers objets dans la scene.
+ * Utilise la methode d'integration numerique d'Euler semi-implicite. 
+ * @author Kevin Nguyen
+ */
 public class MoteurPhysique {
 
 	/** Coefficient de restitution ayant une valeur fixe. */
@@ -90,7 +97,7 @@ public class MoteurPhysique {
 	}
 
 	/**
-	 * 
+	 * Calcule et retourne la vitesse de la voiture apres une collision
 	 * @param vitesse Vitesse initiale de l'objet
 	 * @return La vitesse après collision
 	 */
