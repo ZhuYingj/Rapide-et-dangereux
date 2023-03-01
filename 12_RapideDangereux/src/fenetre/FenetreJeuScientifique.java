@@ -28,6 +28,8 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblAccEnYV1;
 	private JLabel lblVitesseEnXV1;
 	private JLabel lblVitesseEnYV1;
+	private JLabel lblPositionEnXV1;
+	private JLabel lblPositionEnYV1;
 
 	/**
 	 * Creation de la fenetre.
@@ -83,7 +85,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblVitesse = new JLabel("Vitesse :");
 		lblVitesse.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVitesse.setBounds(10, 121, 109, 29);
+		lblVitesse.setBounds(10, 121, 77, 29);
 		panelDonneScientifique.add(lblVitesse);
 
 		JLabel lblAcceleration = new JLabel("Accélération :");
@@ -121,12 +123,12 @@ public class FenetreJeuScientifique extends JPanel {
 		lblMetreV2.setBounds(477, 71, 24, 29);
 		panelDonneScientifique.add(lblMetreV2);
 
-		JLabel lblKmParHeureV1 = new JLabel("km/h");
+		JLabel lblKmParHeureV1 = new JLabel("m/s");
 		lblKmParHeureV1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblKmParHeureV1.setBounds(246, 121, 38, 29);
 		panelDonneScientifique.add(lblKmParHeureV1);
 
-		JLabel lblKmParHeureV2 = new JLabel("km/h");
+		JLabel lblKmParHeureV2 = new JLabel("m/s");
 		lblKmParHeureV2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblKmParHeureV2.setBounds(477, 121, 38, 29);
 		panelDonneScientifique.add(lblKmParHeureV2);
@@ -236,6 +238,21 @@ public class FenetreJeuScientifique extends JPanel {
 		lblVitesseV1Separator.setBounds(106, 121, 162, 29);
 		panelDonneScientifique.add(lblVitesseV1Separator);
 
+		lblPositionEnYV1 = new JLabel("0.00");
+		lblPositionEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPositionEnYV1.setBounds(194, 69, 65, 29);
+		panelDonneScientifique.add(lblPositionEnYV1);
+
+		lblPositionEnXV1 = new JLabel("0.00");
+		lblPositionEnXV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPositionEnXV1.setBounds(119, 69, 65, 29);
+		panelDonneScientifique.add(lblPositionEnXV1);
+
+		JLabel lblPositionV1Separator = new JLabel("[               ,               ]");
+		lblPositionV1Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPositionV1Separator.setBounds(106, 69, 162, 29);
+		panelDonneScientifique.add(lblPositionV1Separator);
+
 		JPanel panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelObjetEtGraphique.setBounds(720, 510, 570, 179);
@@ -343,6 +360,10 @@ public class FenetreJeuScientifique extends JPanel {
 			lblVitesseEnXV1.setText(String.format("%.2f", evt.getNewValue()));
 		case "vitEnYV1":
 			lblVitesseEnYV1.setText(String.format("%.2f", evt.getNewValue()));
+		case "posEnXV1":
+			lblPositionEnXV1.setText(String.format("%.2f", evt.getNewValue()));
+		case "posEnYV1":
+			lblPositionEnYV1.setText(String.format("%.2f", evt.getNewValue()));
 		}
 	}
 }

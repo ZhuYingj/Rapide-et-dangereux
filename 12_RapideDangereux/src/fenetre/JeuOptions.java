@@ -71,14 +71,14 @@ public class JeuOptions extends JPanel {
 		slider.setPaintTicks(true);
 		slider.setMinorTickSpacing(10);
 		slider.setMinimum(50);
-		slider.setBounds(141, 33, 343, 40);
+		slider.setBounds(165, 33, 343, 40);
 		panel_1.add(slider);
 
 		JLabel lblMasse = new JLabel("Masse de la voiture en kg : ");
-		lblMasse.setBounds(10, 39, 132, 20);
+		lblMasse.setBounds(10, 39, 163, 20);
 		panel_1.add(lblMasse);
 
-		JLabel lblDifficulte = new JLabel("Difficulter du jeu : ");
+		JLabel lblDifficulte = new JLabel("Difficulté du jeu : ");
 		lblDifficulte.setBounds(10, 84, 110, 14);
 		panel_1.add(lblDifficulte);
 
@@ -87,31 +87,31 @@ public class JeuOptions extends JPanel {
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				pcs.firePropertyChange("VITESSEMAXFACILE", null, 5.0);
+				pcs.firePropertyChange("VITESSEMAXFACILE", null, 10.0);
 
 			}
 		});
-		rdbtnFacile.setBounds(141, 80, 109, 23);
+		rdbtnFacile.setBounds(165, 80, 109, 23);
 		panel_1.add(rdbtnFacile);
 		buttonGroupDiff.add(rdbtnFacile);
 
-		rdbtnMedium = new JRadioButton("Intermediaire");
+		rdbtnMedium = new JRadioButton("Intermédiaire");
 		rdbtnMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("VITESSEMAXMOYEN", null, 10.0);
+				pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 15.0);
 			}
 		});
-		rdbtnMedium.setBounds(141, 106, 109, 23);
+		rdbtnMedium.setBounds(165, 105, 109, 23);
 		panel_1.add(rdbtnMedium);
 		buttonGroupDiff.add(rdbtnMedium);
 
-		rdbtnDifficile = new JRadioButton("Difficile");
+		rdbtnDifficile = new JRadioButton("Avancé");
 		rdbtnDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("VITESSEMAXDIFFICILE", null, 15.0);
+				pcs.firePropertyChange("VITESSEMAXDAVANCE", null, 20.0);
 			}
 		});
-		rdbtnDifficile.setBounds(141, 132, 109, 23);
+		rdbtnDifficile.setBounds(165, 131, 109, 23);
 		panel_1.add(rdbtnDifficile);
 		buttonGroupDiff.add(rdbtnDifficile);
 
@@ -132,6 +132,7 @@ public class JeuOptions extends JPanel {
 		add(panel_2);
 
 		JButton btnGauche = new JButton("<");
+
 		btnGauche.setBounds(905, 188, 55, 23);
 		add(btnGauche);
 
