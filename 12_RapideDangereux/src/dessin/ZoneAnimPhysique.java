@@ -52,9 +52,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/
 	private boolean premiereFois = true;
 	/** Valeur booléenne pour savoir si ces touches sont appuyés **/
-	private boolean droite, gauche, haut;
-	/** Valeur booléenne pour savoir si la touche est appuyé **/
-	private boolean bas = false;
+	private boolean droite, gauche, haut, bas;
 	/** Position x de la voiture **/
 	double x = 0;
 	/** Position y de la voiture **/
@@ -65,13 +63,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private double angleVoitureRad;
 	/** Vecteur de la position initiale de la voiture **/
 	private Vecteur2D posInit = new Vecteur2D(0.2, 0.1);
-
 	/** Vecteur qui reset les valeurs a 0 **/
 	private Vecteur2D valeurInit = new Vecteur2D(0.0, 0.0);
-
 	/** Temps écoulé depuis le début de l'animation **/
 	private double tempsTotalEcoule = 0;
-
 	// support pour lancer des evenements de type PropertyChange
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -344,6 +339,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	}
 
+	//Par Tan Tommy Rin
+	public void changementTexteParIteration() {
+		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
+
+		pcs.firePropertyChange("accEnXV1", 0, voiture.getAccel().getX());
+		pcs.firePropertyChange("accEnYV1", 0, voiture.getAccel().getY());
+		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getX());
+		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getY());
+	}
+
 	/**
 	 * Calcul d'une interation physique
 	 */
@@ -351,12 +356,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private void calculerUneIterationPhysique() {
 
 		tempsTotalEcoule += deltaT;
-		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
-
-		pcs.firePropertyChange("accEnXV1", 0, voiture.getAccel().getX());
-		pcs.firePropertyChange("accEnYV1", 0, voiture.getAccel().getY());
-		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getX());
-		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getY());
+		changementTexteParIteration();
 
 		voiture.avancerUnPas(deltaT);
 

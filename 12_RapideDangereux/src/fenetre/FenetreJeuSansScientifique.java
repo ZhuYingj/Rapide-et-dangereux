@@ -21,31 +21,32 @@ import javax.swing.border.BevelBorder;
 public class FenetreJeuSansScientifique extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	
+	private ZoneAnimPhysique zoneAnimPhysique;
+
 	/**
 	 * Create the panel.
 	 */
-	
+
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
-	
+
 	public FenetreJeuSansScientifique() {
 		setLayout(null);
 		setBounds(100, 100, 1300, 700);
-		
-		ZoneAnimPhysique zoneAnimPhysique = new ZoneAnimPhysique();
+
+		zoneAnimPhysique = new ZoneAnimPhysique();
 		zoneAnimPhysique.setBorder(null);
 		zoneAnimPhysique.setBounds(10, 55, 1280, 515);
 		add(zoneAnimPhysique);
 		zoneAnimPhysique.setLayout(null);
-		
+
 		JPanel panelObjet = new JPanel();
 		panelObjet.setBounds(936, 24, 323, 226);
 		zoneAnimPhysique.add(panelObjet);
 		panelObjet.setLayout(null);
 		panelObjet.setBorder(new LineBorder(new Color(0, 0, 0)));
-		
+
 		JProgressBar progressBarFroce = new JProgressBar();
 		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
 		progressBarFroce.setBounds(279, 11, 34, 204);
@@ -56,7 +57,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 		lblTitreModeScientifique.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblTitreModeScientifique.setBounds(650, 0, 47, 22);
 		add(lblTitreModeScientifique);
-		
+
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -65,5 +66,13 @@ public class FenetreJeuSansScientifique extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
+	}
+
+	public ZoneAnimPhysique getZoneAnimPhysique() {
+		return zoneAnimPhysique;
+	}
+
+	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
+		this.zoneAnimPhysique = zoneAnimPhysique;
 	}
 }

@@ -60,7 +60,7 @@ public class AppPrincipale12 extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Creation de la fenetre.
 	 */
 	public AppPrincipale12() {
 
@@ -243,12 +243,14 @@ public class AppPrincipale12 extends JFrame {
 					fenSansScience.setVisible(true);
 					fenJeuScience.setVisible(false);
 					setContentPane(fenSansScience);
+					fenSansScience.setZoneAnimPhysique(fenJeuScience.getZoneAnimPhysique());
 					pushingP(fenSansScience);
 
 				} else {
 					fenSansScience.setVisible(false);
 					fenJeuScience.setVisible(true);
 					setContentPane(fenJeuScience);
+					fenJeuScience.setZoneAnimPhysique(fenSansScience.getZoneAnimPhysique());
 
 				}
 			}
