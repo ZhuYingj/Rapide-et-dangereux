@@ -228,6 +228,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			calculerUneIterationPhysique();
 			testerCollisionsEtAjusterVitesses();
 			repaint();
+			
+			if(voiture.getVitesse().module(voiture.getVitesse())> voiture.getVitesseMaxSelonNiveau()) {
+				voiture.setVitesse(new Vecteur2D(voiture.getVitesseMaxSelonNiveau() * Math.cos(angleVoitureRad), voiture.getVitesseMaxSelonNiveau() * Math.sin(angleVoitureRad)));
+			}
+			
+			
+			
 			try {
 				Thread.sleep(tempsDuSleep);
 
@@ -346,7 +353,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("accEnXV1", 0, voiture.getAccel().getX());
 		pcs.firePropertyChange("accEnYV1", 0, voiture.getAccel().getY());
 		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getX());
-		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getY());
+		pcs.firePropertyChange("vitEnYV1", 0, voiture.getVitesse().getY());
 	}
 
 	/**

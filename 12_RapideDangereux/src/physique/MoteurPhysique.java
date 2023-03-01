@@ -106,4 +106,8 @@ public class MoteurPhysique {
 		Vecteur2D vitFinale = Vecteur2D.soustrait(vitesse, deltaVit);
 		return new Vecteur2D(vitFinale);
 	}
+	
+	public static double calculerNormeVitesse(Vecteur2D vitesse) {
+		return vitesse.module();
+	}
 }
