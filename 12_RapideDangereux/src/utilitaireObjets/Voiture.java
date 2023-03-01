@@ -21,7 +21,7 @@ import physique.MoteurPhysique;
  * Classe qui permet de gérér et de créer la voiture
  * 
  * @author Tan Tommy Rin
- *
+ *@author Kevin Nguyen
  */
 
 public class Voiture implements Dessinable, Selectionnable {
@@ -73,7 +73,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	/**
 	 * Création de la voiture à l'aide d'une ellipse et la flèche vectorielle
 	 */
-
+	//Kevin Nguyen
 	private void creerLaGeometrie() {
 
 		cercle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
@@ -88,7 +88,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	/**
 	 * Méthode qui permet de dessiner sur la zone d'animation à l'aide du g2d
 	 */
-
+	//Kevin Nguyen
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D gCopie = (Graphics2D) g2d.create();
@@ -107,9 +107,9 @@ public class Voiture implements Dessinable, Selectionnable {
 
 	}
 
-//	public void gererCollisionSol() {
-//	
-//	}
+	//	public void gererCollisionSol() {
+	//	
+	//	}
 	/**
 	 * Méthode qui retourne le diametre de la voiture
 	 * 
@@ -175,7 +175,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @return la position de la voiture en vecteur
 	 */
-
+	//Kevin Nguyen
 	public Vecteur2D getPosition() {
 		return position;
 	}
@@ -185,7 +185,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param position nouvelle position de la voiture
 	 */
-
+	//Kevin Nguyen
 	public void setPosition(Vecteur2D position) {
 		this.position = position;
 		creerLaGeometrie();
@@ -196,7 +196,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @return vecteur de vitesse
 	 */
-
+	//Kevin Nguyen
 	public Vecteur2D getVitesse() {
 		return vitesse;
 	}
@@ -206,7 +206,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param vitesse vitesse voulu
 	 */
-
+	//Kevin Nguyen
 	public void setVitesse(Vecteur2D vitesse) {
 		this.vitesse = vitesse;
 	}
@@ -216,7 +216,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @return le vecteur d'acceleration
 	 */
-
+	//Kevin Nguyen
 	public Vecteur2D getAccel() {
 		return accel;
 	}
@@ -226,15 +226,25 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param accel La nouvelle acceleration
 	 */
-
+	//Kevin Nguyen
 	public void setAccel(Vecteur2D accel) {
 		this.accel = accel;
 	}
 
+	/**
+	 * Retourne l'angle (orientation) de la voiture et de la fleche vectorielle
+	 * @return Angle de la voiture
+	 */
+	//Kevin Nguyen
 	public double getAngle() {
 		return angle;
 	}
 
+	/**
+	 * Attribuer un angle a la voiture et a la fleche vectorielle
+	 * @param angle Nouvel angle
+	 */
+	//Kevin Nguyen
 	public void setAngle(double angle) {
 		this.angle = angle;
 		creerLaGeometrie();
@@ -246,16 +256,17 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param sommeForcesSurLaBalle La somme des forces exercees sur la balle
 	 */
+	//Kevin Nguyen
 	public void setSommeDesForces(Vecteur2D sommeForcesSurLaVoiture) {
 		// ici changer les forces signifie recalculer l'acceleration
 		// on relegue cette tache au moteur physique.
 		try {
 			accel = MoteurPhysique.calculAcceleration(sommeForcesSurLaVoiture, masseEnKg);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
+
 	}
 
 	/**
@@ -264,11 +275,12 @@ public class Voiture implements Dessinable, Selectionnable {
 	 * 
 	 * @param deltaT intervalle de temps (pas)
 	 */
+	//Kevin Nguyen
 	public void avancerUnPas(double deltaT) {
 		this.vitesse = MoteurPhysique.calculVitesse(deltaT, vitesse, accel);
 		this.position = MoteurPhysique.calculPosition(deltaT, position, vitesse);
-	
-	
+
+
 		creerLaGeometrie(); // la position a changé! on recree notre cercle
 
 	}
@@ -301,9 +313,17 @@ public class Voiture implements Dessinable, Selectionnable {
 		return false;
 	}
 
+	/**
+	 * Cette methode permet de determiner si la voiture depasse le composant dessin et changer sa vitesse selon la collision
+	 * @param positionXDroite Position droite en x du composant
+	 * @param positionXGauche Position gauche en x du composant
+	 * @param positionYBas Position bas en y du composant
+	 * @param positionYHaut Position haut en y du composant
+	 */
+	//Kevin Nguyen
 	public void gererCollision(double positionXDroite,double positionXGauche, double positionYBas,  double positionYHaut) {
-		
-//pour le bas
+
+		//pour le bas
 		if(position.getY() > positionYBas-this.diametre) {
 			this.vitesse = getVitesse();
 			setVitesse(new Vecteur2D(vitesse.getX(), -vitesse.getY()));
