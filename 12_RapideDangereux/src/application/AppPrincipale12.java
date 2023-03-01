@@ -35,7 +35,7 @@ public class AppPrincipale12 extends JFrame {
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
+	 * Lancement de l'application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -179,11 +179,22 @@ public class AppPrincipale12 extends JFrame {
 					break;
 				case "MASSE":
 					fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
-
+					break;
+				case "VITESSEMAXFACILE":
+					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+					break;
+				case "VITESSEMAXMOYEN":
+					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+					break;
+				case "VITESSEMAXDIFFICILE":
+					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+					break;
 				case "DEMARRERANIMATION":
 					fenJeuScience.getZoneAnimPhysique().demarrer();
 					fenJeuScience.getZoneAnimPhysique().requestFocus();
+
 				}
+
 			}
 		});
 
@@ -229,7 +240,7 @@ public class AppPrincipale12 extends JFrame {
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("allo");
+
 				if (checkBoxModeNonScientifique.isSelected()) {
 					fenSansScience.setVisible(true);
 					fenJeuScience.setVisible(false);

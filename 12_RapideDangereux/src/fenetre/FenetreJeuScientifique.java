@@ -50,18 +50,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		zoneAnimPhysique.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "tempsEcoule":
-					lblTempsEcouleValeur.setText(String.format("%.2f", evt.getNewValue()));
-				case "accEnXV1":
-					lblAccEnXV1.setText(String.format("%.2f", evt.getNewValue()));
-				case "accEnYV1":
-					lblAccEnYV1.setText(String.format("%.2f", evt.getNewValue()));
-				case "vitEnXV1":
-					lblVitesseEnXV1.setText(String.format("%.2f", evt.getNewValue()));
-				case "vitEnYV1":
-					lblVitesseEnYV1.setText(String.format("%.2f", evt.getNewValue()));
-				}
+				changementDeTextePendantLAnimation(evt);
 			}
 		});
 
@@ -313,11 +302,46 @@ public class FenetreJeuScientifique extends JPanel {
 
 	}
 
+	/**
+	 * Méthode qui retourne la zone d'animation physique
+	 * 
+	 * @return la zone d'animation physique
+	 */
+	// Par Tan Tommy Rin
+
 	public ZoneAnimPhysique getZoneAnimPhysique() {
 		return zoneAnimPhysique;
 	}
 
+	/**
+	 * Méthode qui permet de changer la zone d'animation par une nouvelle
+	 * 
+	 * @param zoneAnimPhysique La nouvelle zone d'animation
+	 */
+	// Par Tan Tommy Rin
+
 	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
 		this.zoneAnimPhysique = zoneAnimPhysique;
+	}
+
+	/**
+	 * Méthode qui change le texte/l'information durant l'animation
+	 * 
+	 * @param evt Évènement lorsque l'information change
+	 */
+	// Par Tan Tommy Rin
+	public void changementDeTextePendantLAnimation(PropertyChangeEvent evt) {
+		switch (evt.getPropertyName()) {
+		case "tempsEcoule":
+			lblTempsEcouleValeur.setText(String.format("%.2f", evt.getNewValue()));
+		case "accEnXV1":
+			lblAccEnXV1.setText(String.format("%.2f", evt.getNewValue()));
+		case "accEnYV1":
+			lblAccEnYV1.setText(String.format("%.2f", evt.getNewValue()));
+		case "vitEnXV1":
+			lblVitesseEnXV1.setText(String.format("%.2f", evt.getNewValue()));
+		case "vitEnYV1":
+			lblVitesseEnYV1.setText(String.format("%.2f", evt.getNewValue()));
+		}
 	}
 }

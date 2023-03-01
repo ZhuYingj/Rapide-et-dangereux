@@ -28,6 +28,7 @@ public class JeuOptions extends JPanel {
 	private Voiture voiture;
 	private JSlider slider;
 
+
 	/**
 	 * Create the panel.
 	 */
@@ -83,16 +84,35 @@ public class JeuOptions extends JPanel {
 		panel_1.add(lblDifficulte);
 
 		rdbtnFacile = new JRadioButton("Facile");
+		rdbtnFacile.setSelected(true);
+		rdbtnFacile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (rdbtnFacile.isSelected()) {
+					pcs.firePropertyChange("VITESSEMAXFACILE", null,  5.0);
+					System.out.println("5");
+				}
+			}
+		});
 		rdbtnFacile.setBounds(141, 80, 109, 23);
 		panel_1.add(rdbtnFacile);
 		buttonGroupDiff.add(rdbtnFacile);
 
 		rdbtnMedium = new JRadioButton("Intermediaire");
+		rdbtnMedium.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("VITESSEMAXMOYEN", null,  10.0);
+			}
+		});
 		rdbtnMedium.setBounds(141, 106, 109, 23);
 		panel_1.add(rdbtnMedium);
 		buttonGroupDiff.add(rdbtnMedium);
 
 		rdbtnDifficile = new JRadioButton("Difficile");
+		rdbtnDifficile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("VITESSEMAXDIFFICILE", null,  15.0);
+			}
+		});
 		rdbtnDifficile.setBounds(141, 132, 109, 23);
 		panel_1.add(rdbtnDifficile);
 		buttonGroupDiff.add(rdbtnDifficile);
@@ -102,6 +122,7 @@ public class JeuOptions extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
 				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
+			
 				pcs.firePropertyChange("DEMARRERANIMATION", null, -1);
 			}
 		});

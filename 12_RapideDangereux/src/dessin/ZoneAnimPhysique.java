@@ -356,6 +356,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("accEnYV1", 0, voiture.getAccel().getY());
 		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getX());
 		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getY());
+		
 		voiture.avancerUnPas(deltaT);
 
 	}
@@ -422,6 +423,18 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public void setTempsTotalEcoule(double tempsTotalEcoule) {
 		this.tempsTotalEcoule = tempsTotalEcoule;
+	}
+
+	/**
+	 * Méthode qui permet de changer la vitesse maximale de la voiture dans la zone
+	 * d'animation
+	 * 
+	 * @param nouvelleVitesseMax la nouvelle vitesse maximale
+	 */
+//Par Tan Tommy Rin
+	public void setVoitureVitesseMax(double nouvelleVitesseMax) {
+		voiture.setVitesseMaxSelonNiveau(nouvelleVitesseMax);
+
 	}
 
 }
