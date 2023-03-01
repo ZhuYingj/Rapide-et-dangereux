@@ -12,6 +12,10 @@ import interfaces.Dessinable;
 public class PisteHorizontale implements Dessinable {
 
 	private static final int TAILLE_PISTE = 80;
+	private int ligneRougeH1X;
+	private int ligneRougeH1Y;
+	private int ligneRougeH2X;
+	private int ligneRougeH2Y;
 	private Rectangle2D.Double pisteVerticale;
 	private int x;
 	private int y;
@@ -20,6 +24,10 @@ public class PisteHorizontale implements Dessinable {
 	public PisteHorizontale(int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.ligneRougeH1X = x + 1;
+	    this.ligneRougeH1Y = y;
+	    this.ligneRougeH2X = x + 1;
+	    this.ligneRougeH2Y = y + TAILLE_PISTE;
 
 	}
 
@@ -33,8 +41,8 @@ public class PisteHorizontale implements Dessinable {
 		g2dCopie.setColor(Color.RED);
 		Stroke stroke = new BasicStroke(3f);
 		g2dCopie.setStroke(stroke);
-		g2dCopie.drawLine(x + 1, y, x + TAILLE_PISTE - 1, y);
-		g2dCopie.drawLine(x + 1, y + TAILLE_PISTE, x + TAILLE_PISTE - 1, y + TAILLE_PISTE);
+		g2dCopie.drawLine(ligneRougeH1X, ligneRougeH1Y, x + TAILLE_PISTE - 1, y);
+		g2dCopie.drawLine(ligneRougeH2X, ligneRougeH2Y, x + TAILLE_PISTE - 1, y + TAILLE_PISTE);
 
 	}
 
@@ -46,5 +54,15 @@ public class PisteHorizontale implements Dessinable {
 		this.pixelsParMetre = pixelsParMetre;
 		
 	}
+	
+	public int getLigneRougeH1Y() {
+        return ligneRougeH1Y;
+    }
+
+    public int getLigneRougeH2Y() {
+        return ligneRougeH2Y;
+    }
+    
+
 
 }

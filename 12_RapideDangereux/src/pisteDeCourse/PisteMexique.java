@@ -49,25 +49,6 @@ public class PisteMexique implements Dessinable {
 		this.x = x + TAILLE_PISTE;
 		
 		//piste horizontale depart :
-		
-		
-		
-//		g2d.setColor(Color.BLACK);
-//		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-//		g2d.setColor(Color.RED);
-//		g2d.setColor(Color.RED);
-//		Stroke stroke1 = new BasicStroke(3f);
-//		g2d.setStroke(stroke1);
-//		g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
-//		g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
-//		
-//		g2d.setColor(Color.WHITE);
-//		Stroke stroke0= new BasicStroke(5f);
-//		g2d.setStroke(stroke0);
-//		g2d.drawLine(x+(TAILLE_PISTE/2),  y+(TAILLE_PISTE/7), x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*2));
-//		g2d.drawLine(x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*3), x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*4));
-//		g2d.drawLine(x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*5), x+(TAILLE_PISTE/2), y+((TAILLE_PISTE/7)*6) );
-		depart = new PisteDeDepart(x,y);
 		depart.dessiner(g2d);
 		this.x = x + TAILLE_PISTE;
 		
