@@ -23,9 +23,18 @@ public class PisteVirageBas implements Dessinable{
 	/** la position en y de depart que l'objet piste qui vas etre creer  **/
 	private int y;
 	
+	private int ligneRougeVBFinalX;
+	private int ligneRougeVBFinalY;
+	private int ligneRougeVBDebutX;
+	private int ligneRougeVBDebutY;
+	
 	public PisteVirageBas(int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.ligneRougeVBFinalX =  x + ((TAILLE_PISTE/3)*2); 
+		this.ligneRougeVBFinalY = y; 
+		this.ligneRougeVBDebutX =  x + ((TAILLE_PISTE/3)*2); 
+		this.ligneRougeVBDebutY =  x + ((TAILLE_PISTE/3)*2); 
 	
 	}
 	

@@ -13,10 +13,13 @@ private static final int TAILLE_PISTE = 80;
 	
 	private int x;
 	private int y;
+	private int pente;
 	
 	public PisteVirageHaut(int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.pente = ()
+		
 	
 	}
 	
