@@ -15,6 +15,7 @@ private static final int TAILLE_PISTE = 80;
 	private int y;
 	private int pente;
 	private int a;
+	private int b;
 	private int d;
 	
 	public PisteVirageDroit(int x, int y) {
@@ -22,7 +23,8 @@ private static final int TAILLE_PISTE = 80;
 		this.y = y;
 		this.pente = ((y +(TAILLE_PISTE/3))-(y+TAILLE_PISTE))/((x +TAILLE_PISTE)-(x +(TAILLE_PISTE/3)));
 		this.a = -(pente);
-		//this.d = 
+		this.b = 1;
+		this.d = (-a*(x +(TAILLE_PISTE/3)))-(b*y+TAILLE_PISTE);
 	
 	}
 	

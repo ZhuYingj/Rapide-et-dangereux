@@ -131,6 +131,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+		PisteMexique mexique = new PisteMexique(1,1);
+		mexique.dessiner(g2d);
+		
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
