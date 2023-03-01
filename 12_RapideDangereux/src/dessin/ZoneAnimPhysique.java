@@ -52,7 +52,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/
 	private boolean premiereFois = true;
 	/** Valeur booléenne pour savoir si ces touches sont appuyés **/
-	private boolean droite, gauche, haut, bas;
+	private boolean droite, gauche, haut;
+	/** Valeur booléenne pour savoir si la touche est appuyé **/
+	private boolean bas = false;
 	/** Position x de la voiture **/
 	double x = 0;
 	/** Position y de la voiture **/
@@ -86,61 +88,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public ZoneAnimPhysique() {
 
-		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad);
-
-		// voiture.setSommeDesForces(MoteurPhysique.calculerForceFrottement(0.45,
-		// voiture.getMasseEnKg(), angleVoitureRad)); // test
-		// voiture.setVitesse(new Vecteur2D(20, 0));
+		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 5);
 
 		addKeyListener(new KeyAdapter() {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				switch (e.getKeyCode()) {
-				case KeyEvent.VK_RIGHT:
-					droite = true;
-					break;
-				case KeyEvent.VK_LEFT:
-					gauche = true;
-					break;
-				case KeyEvent.VK_DOWN:
-					bas = true;
-					break;
-				case KeyEvent.VK_UP:
-					haut = true;
-					break;
-				}
-
-				if (droite == true) {
-					angleVoitureDegre = angleVoitureDegre + 10;
-					setAngle(angleVoitureDegre);
-					if (voiture.getAccel().getX() > 0) {
-						voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
-					} else if (voiture.getAccel().getY() > 0) {
-						voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
-
-					}
-
-				}
-				if (gauche == true) {
-
-					angleVoitureDegre = angleVoitureDegre - 10;
-
-					setAngle(angleVoitureDegre);
-					if (voiture.getAccel().getX() > 0) {
-						voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
-					} else if (voiture.getAccel().getY() > 0) {
-						voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
-
-					}
-
-				}
-				if (haut == true) {
-					voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
-				}
-				if (bas == true) {
-
-				}
+				appuyerPlusieursToucheEnMemeTemps(e);
+				OritentationVoitureSelonTouche(e);
 
 				repaint();
 
@@ -149,26 +104,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-
-				switch (e.getKeyCode()) {
-				case KeyEvent.VK_RIGHT:
-					// voiture.setAccel(new Vecteur2D(0, 0));
-					droite = false;
-				case KeyEvent.VK_LEFT:
-					gauche = false;
-				case KeyEvent.VK_DOWN:
-					bas = false;
-				case KeyEvent.VK_UP:
-					haut = false;
-
-				}
-
-				// if (e.getKeyCode() == KeyEvent.VK_UP) {
-				// voiture.setAccel(new Vecteur2D(0, 0));
-				// }
-
+				relachementTouches(e);
 				repaint();
-
 			}
 
 		});
@@ -194,13 +131,95 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		PisteMexique pisteMexique = new PisteMexique(0, 0);
-		pisteMexique.dessiner(g2d);
-
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
 
+	}
+
+	/**
+	 * Méthode qui détecte quand plusieurs touches sont appuyés en même temps
+	 * 
+	 * @param e Évènement de clavier
+	 */
+	// Par Tan Tommy Rin
+	public void appuyerPlusieursToucheEnMemeTemps(KeyEvent e) {
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_RIGHT:
+			droite = true;
+			break;
+		case KeyEvent.VK_LEFT:
+			gauche = true;
+			break;
+		case KeyEvent.VK_DOWN:
+			bas = true;
+			break;
+		case KeyEvent.VK_UP:
+			haut = true;
+			break;
+		}
+	}
+
+	/**
+	 * Méthode qui détecte lorsqu'une touche est relaché et change la valeur associé
+	 * à faux
+	 * 
+	 * @param e Évènement de clavier
+	 */
+	// Par Tan Tommy Rin
+	public void relachementTouches(KeyEvent e) {
+
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_RIGHT:
+			droite = false;
+		case KeyEvent.VK_LEFT:
+			gauche = false;
+		case KeyEvent.VK_DOWN:
+			bas = false;
+		case KeyEvent.VK_UP:
+			haut = false;
+
+		}
+
+	}
+
+	/**
+	 * Méthode qui change l'orientation de la voiture selon la touche appuyé
+	 * 
+	 * @param e Évènement du clavier
+	 */
+	// Kevin Nguyen
+	public void OritentationVoitureSelonTouche(KeyEvent e) {
+		if (droite == true) {
+			angleVoitureDegre = angleVoitureDegre + 10;
+			setAngle(angleVoitureDegre);
+			if (voiture.getAccel().getX() > 0) {
+				voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+			} else if (voiture.getAccel().getY() > 0) {
+				voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+
+			}
+
+		}
+		if (gauche == true) {
+
+			angleVoitureDegre = angleVoitureDegre - 10;
+
+			setAngle(angleVoitureDegre);
+			if (voiture.getAccel().getX() > 0) {
+				voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+			} else if (voiture.getAccel().getY() > 0) {
+				voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+
+			}
+
+		}
+		if (haut == true) {
+			voiture.setAccel(new Vecteur2D(10 * Math.cos(angleVoitureRad), 10 * Math.sin(angleVoitureRad)));
+		}
+		if (bas == true) {
+
+		}
 	}
 
 	/**
