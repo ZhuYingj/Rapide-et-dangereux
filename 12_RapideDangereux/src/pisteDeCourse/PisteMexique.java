@@ -10,7 +10,9 @@ import utilitaireObjets.PisteDeDepart;
 import utilitaireObjets.PisteHorizontale;
 import utilitaireObjets.PisteVerticale;
 import utilitaireObjets.PisteVirageBas;
+import utilitaireObjets.PisteVirageDroit;
 import utilitaireObjets.PisteVirageGauche;
+import utilitaireObjets.PisteVirageHaut;
 
 /**
  * Class qui permet de creer une piste deja faite (PisteMexique)
@@ -32,6 +34,8 @@ public class PisteMexique implements Dessinable {
 	private PisteVerticale verticale;
 	private PisteVirageBas bas;
 	private PisteVirageGauche gauche;
+	private PisteVirageDroit droit;
+	private PisteVirageHaut haut;
 	
 	
 	/**
@@ -54,6 +58,7 @@ public class PisteMexique implements Dessinable {
 	public void dessiner(Graphics2D g2d) {
 		
 		//piste virgae bas :
+		bas = new PisteVirageBas(x,y);
 		bas.dessiner(g2d);
 		this.x = x + TAILLE_PISTE;
 		
@@ -107,9 +112,9 @@ public class PisteMexique implements Dessinable {
 		verticale.dessiner(g2d);
 		this.y = y + TAILLE_PISTE;
 		
-		//piste vers le bas:
-		gauche = new PisteVirageGauche(x,y);
-		gauche.dessiner(g2d);
+		//piste vers le droit:
+		droit = new PisteVirageDroit(x,y);
+		droit.dessiner(g2d);
 		this.x = x - TAILLE_PISTE;
 		
 		//piste horizontale :
@@ -142,16 +147,14 @@ public class PisteMexique implements Dessinable {
 		horizontale.dessiner(g2d);
 		this.x = x - TAILLE_PISTE;
 		
-
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
-		g2d.setColor(Color.RED);
-		Stroke stroke18 = new BasicStroke(3f);
-		g2d.setStroke(stroke18);
-		g2d.drawLine(x, y, x, y + (TAILLE_PISTE/3));
-		g2d.drawLine(x, y + (TAILLE_PISTE/3), x + (TAILLE_PISTE/3), y + ((TAILLE_PISTE/3)*2));
-		g2d.drawLine(x + (TAILLE_PISTE/3),  y + ((TAILLE_PISTE/3)*2), x + ((TAILLE_PISTE/3)*2), y + TAILLE_PISTE );
-		g2d.drawLine(x + ((TAILLE_PISTE/3)*2), y + TAILLE_PISTE, x + TAILLE_PISTE, y + TAILLE_PISTE  );
+		//Piste Virage Haut;
+		haut = new PisteVirageHaut(x,y);
+		haut.dessiner(g2d);
+		this.y = y - TAILLE_PISTE;
+		
+		//piste vertical:
+		verticale = new PisteVerticale(x,y);
+		verticale.dessiner(g2d);	
 		this.y = y - TAILLE_PISTE;
 		
 		//piste vertical:
