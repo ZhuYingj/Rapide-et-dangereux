@@ -60,6 +60,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Vecteur de la position initiale de la voiture **/
 	private Vecteur2D posInit = new Vecteur2D(0.2, 0.1);
 
+	/** Valeur initiale des vecteur vitesse et acceleration**/
 	private Vecteur2D valeurInit = new Vecteur2D(0.0, 0.0);
 
 	/** Temps écoulé depuis le début de l'animation **/
@@ -75,6 +76,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		this.pcs.addPropertyChangeListener(listener);
 	}
 
+	/**
+	 * Creation de la zone d'animation
+	 */
+	//Kevin Nguyen
 	public ZoneAnimPhysique() {
 
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad);
@@ -172,7 +177,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * 
 	 * @param g Contexte graphique
 	 */
-
+	//Kevin Nguyen
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (premiereFois) {
@@ -197,7 +202,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/**
 	 * Animation de la voiture
 	 */
-
+	//Kevin Nguyen
 	public void run() {
 
 		while (enCoursDAnimation == true) {
@@ -217,7 +222,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/**
 	 * Demarre le thread s'il n'est pas deja demarre
 	 */
-
+	//Kevin Nguyen
 	public void demarrer() {
 
 		if (enCoursDAnimation == false) {
@@ -230,23 +235,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	} // fin méthode
 
-	/**
-	 * Recommencer l'application avec les valeurs courantes.
-	 */
-	// Kevin Nguyen
-	public void recommencer() {
-		arreter();
-		tempsTotalEcoule = 0.000;
-
-		repaint();
-	}
-
-	public void avancerUnPas() {
-		arreter();
-		calculerUneIterationPhysique();
-		repaint();
-	}
-
 	public void restartPos() {
 		arreter();
 		tempsTotalEcoule = 0.000;
@@ -258,11 +246,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		repaint();
 	}
 
-	public void arreterAnim() {
-		arreter();
-		repaint();
-	}
+	
 
+	/**
+	 * Tester si les voitures entre en collision avec les extremite du composant dessin.
+	 * On calcule alors les rebonds ainsi que la nouvelle vitesse.
+	 */
+	//Kevin Nguyen
 	private void testerCollisionsEtAjusterVitesses() {
 		voiture.gererCollision(getWidth(), 0, getHeight(), 0);
 	}
@@ -310,13 +300,17 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/**
 	 * Demande l'arret du thread (prochain tour de boucle)
 	 */
-
+//  Kevin Nguyen
 	private void arreter() {
 		enCoursDAnimation = false;
 		repaint();
 
 	}
 
+	/**
+	 * Calcul d'une iteration de l'animation.
+	 */
+	// Kevin Nguyen
 	private void calculerUneIterationPhysique() {
 
 		tempsTotalEcoule += deltaT;
@@ -330,11 +324,21 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	}
 
+	/**
+	 * Attribuer une masse  a la voiture
+	 * @param masseVoulu
+	 */
+	//Kevin Nguyen
 	public void setVoitureMasse(double masseVoulu) {
 		this.voiture.setMasseEnKg(masseVoulu);
 
 	}
 
+	/**
+	 * Attribuer un angle en radians a partir d'un angle en degre
+	 * @param nouvAngle Angle en degre
+	 */
+	//Kevin Nguyen
 	public void setAngle(int nouvAngle) {
 		angleVoitureRad = Math.toRadians(nouvAngle);
 		voiture.setAngle(angleVoitureRad);
@@ -342,18 +346,38 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		repaint();
 	}
 
+	/**
+	 * Retourne la position initiale de la voiture
+	 * @return Position initiale de la voiture
+	 */
+	//Kevin Nguyen
 	public Vecteur2D getPosInit() {
 		return posInit;
 	}
 
+	/**
+	 * Attribuer une position initiale a la voiture
+	 * @param posInit Position initiale voulue
+	 */
+	//Kevin Nguyen
 	public void setPosInit(Vecteur2D posInit) {
 		this.posInit = posInit;
 	}
 
+	/**
+	 * Retourne le temps total ecoule
+	 * @return Temps total ecoule
+	 */
+	//Kevin Nguyen
 	public double getTempsTotalEcoule() {
 		return tempsTotalEcoule;
 	}
 
+	/**
+	 * Attribuer un temps total ecoule initial
+	 * @param tempsTotalEcoule Nouveau temps total ecoule
+	 */
+	//Kevin Nguyen
 	public void setTempsTotalEcoule(double tempsTotalEcoule) {
 		this.tempsTotalEcoule = tempsTotalEcoule;
 	}
