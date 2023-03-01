@@ -60,7 +60,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Vecteur de la position initiale de la voiture **/
 	private Vecteur2D posInit = new Vecteur2D(0.2, 0.1);
 
-	/** Valeur initiale des vecteur vitesse et acceleration**/
 	private Vecteur2D valeurInit = new Vecteur2D(0.0, 0.0);
 
 	/** Temps écoulé depuis le début de l'animation **/
@@ -148,7 +147,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_RIGHT:
-//					voiture.setAccel(new Vecteur2D(0, 0));
+					//					voiture.setAccel(new Vecteur2D(0, 0));
 					droite = false;
 				case KeyEvent.VK_LEFT:
 					gauche = false;
@@ -159,9 +158,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 				}
 
-//				if (e.getKeyCode() == KeyEvent.VK_UP) {
-//					voiture.setAccel(new Vecteur2D(0, 0));
-//				}
+				//				if (e.getKeyCode() == KeyEvent.VK_UP) {
+				//					voiture.setAccel(new Vecteur2D(0, 0));
+				//				}
 
 				repaint();
 
@@ -235,6 +234,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	} // fin méthode
 
+	/**
+	 * Avancer de un pas l'animation
+	 */
+	//Kevin Nguyen
+	public void avancerUnPas() {
+		arreter();
+		calculerUneIterationPhysique();
+		repaint();
+	}
+
 	public void restartPos() {
 		arreter();
 		tempsTotalEcoule = 0.000;
@@ -242,15 +251,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		voiture.setVitesse(valeurInit);
 		voiture.setAccel(valeurInit);
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
-		
+
 		repaint();
 	}
 
-	
-
 	/**
-	 * Tester si les voitures entre en collision avec les extremite du composant dessin.
-	 * On calcule alors les rebonds ainsi que la nouvelle vitesse.
+	 * Tester si la voiture entre en collision avec les extremites du composant dessin.
+	 * Si oui, ajuste la position et calcule la nouvelle vitesse de la voiture.
 	 */
 	//Kevin Nguyen
 	private void testerCollisionsEtAjusterVitesses() {
@@ -300,17 +307,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/**
 	 * Demande l'arret du thread (prochain tour de boucle)
 	 */
-//  Kevin Nguyen
+	//Kevin Nguyen
 	private void arreter() {
 		enCoursDAnimation = false;
 		repaint();
 
 	}
-
 	/**
-	 * Calcul d'une iteration de l'animation.
+	 * Calcul d'une interation physique
 	 */
-	// Kevin Nguyen
+	//Kevin Nguyen
 	private void calculerUneIterationPhysique() {
 
 		tempsTotalEcoule += deltaT;
@@ -323,10 +329,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		voiture.avancerUnPas(deltaT);
 
 	}
-
 	/**
-	 * Attribuer une masse  a la voiture
-	 * @param masseVoulu
+	 * Attribuer une nouvelle masse a la voiture
+	 * @param masseVoulu Nouvelle masse
 	 */
 	//Kevin Nguyen
 	public void setVoitureMasse(double masseVoulu) {
@@ -335,7 +340,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	/**
-	 * Attribuer un angle en radians a partir d'un angle en degre
+	 * Attribuer un nouvel angle en rad
 	 * @param nouvAngle Angle en degre
 	 */
 	//Kevin Nguyen
@@ -356,8 +361,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	/**
-	 * Attribuer une position initiale a la voiture
-	 * @param posInit Position initiale voulue
+	 * Attribuer une nouvelle position initiale a la voiture
+	 * @param posInit Nouvelle position initiale
 	 */
 	//Kevin Nguyen
 	public void setPosInit(Vecteur2D posInit) {
@@ -374,7 +379,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	/**
-	 * Attribuer un temps total ecoule initial
+	 * Attribuer un nouveau temps total ecoule
 	 * @param tempsTotalEcoule Nouveau temps total ecoule
 	 */
 	//Kevin Nguyen
