@@ -44,8 +44,6 @@ public class JeuOptions extends JPanel {
 
 	public JeuOptions() {
 		setLayout(null);
-		
-		
 
 		JButton btnMexique = new JButton("Mexique");
 		btnMexique.setBounds(130, 77, 126, 78);
@@ -64,13 +62,13 @@ public class JeuOptions extends JPanel {
 		PanelApercu.setBounds(10, 208, 635, 481);
 		add(PanelApercu);
 		PanelApercu.setLayout(null);
-		
+
 		ZoneApercupiste zoneApercupiste = new ZoneApercupiste();
 		zoneApercupiste.setBounds(73, 58, 420, 316);
 		PanelApercu.add(zoneApercupiste);
-		
-		JLabel monImg=new JLabel(new ImageIcon("PisteMexique.png"));
-		
+
+		JLabel monImg = new JLabel(new ImageIcon("PisteMexique.png"));
+
 //		String imgUrl="PisteMexique.png";
 //		 ImageIcon icone = new ImageIcon(imgUrl);
 //		
@@ -78,13 +76,10 @@ public class JeuOptions extends JPanel {
 //		lblApercu.setText("kk\r\n");
 //		lblApercu.setBounds(195, 153, 153, 155);
 //		PanelApercu.add(lblApercu);
-		
+
 		Icon feuVert = new ImageIcon("green.jpg");
-        JLabel feuGreen = new JLabel();
-        feuGreen.setIcon(feuVert);
-        
-       
-		
+		JLabel feuGreen = new JLabel();
+		feuGreen.setIcon(feuVert);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
@@ -117,11 +112,7 @@ public class JeuOptions extends JPanel {
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-
-				pcs.firePropertyChange("VITESSEMAXFACILE", null, 20.0);
-
-
-
+				pcs.firePropertyChange("VITESSEMAXFACILE", null, 30.0);
 
 			}
 		});
@@ -133,9 +124,7 @@ public class JeuOptions extends JPanel {
 		rdbtnMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-
-
-				pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 30.0);
+				pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 40.0);
 
 			}
 		});
@@ -147,9 +136,7 @@ public class JeuOptions extends JPanel {
 		rdbtnDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-
-
-				pcs.firePropertyChange("VITESSEMAXDAVANCE", null, 40.0);
+				pcs.firePropertyChange("VITESSEMAXAVANCE", null, 50.0);
 
 			}
 		});
