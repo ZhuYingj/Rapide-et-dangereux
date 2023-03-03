@@ -65,23 +65,13 @@ public class JeuOptions extends JPanel {
 
 		JPanel PanelApercu = new JPanel();
 		PanelApercu.setBackground(Color.WHITE);
-		PanelApercu.setBounds(10, 208, 635, 481);
+		PanelApercu.setBounds(10, 200, 649, 489);
 		add(PanelApercu);
 		PanelApercu.setLayout(null);
 
 		ZoneApercupiste zoneApercupiste = new ZoneApercupiste();
-		zoneApercupiste.setBounds(73, 58, 420, 316);
+		zoneApercupiste.setBounds(0, 0, 650, 405);
 		PanelApercu.add(zoneApercupiste);
-
-		JLabel monImg = new JLabel(new ImageIcon("PisteMexique.png"));
-
-//		String imgUrl="PisteMexique.png";
-//		 ImageIcon icone = new ImageIcon(imgUrl);
-//		
-//		JLabel lblApercu = new JLabel(icone, JLabel.CENTER);
-//		lblApercu.setText("kk\r\n");
-//		lblApercu.setBounds(195, 153, 153, 155);
-//		PanelApercu.add(lblApercu);
 
 		Icon feuVert = new ImageIcon("green.jpg");
 		JLabel feuGreen = new JLabel();
