@@ -290,6 +290,9 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.setEnCoursDAnimation(false);
 				zoneAnimPhysique.demarrer();
 				btnNextImg.setEnabled(false);
+				btnStart.setEnabled(false);
+				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+
 				
 			}
 		});
@@ -302,6 +305,8 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.restartPos();
 				btnNextImg.setEnabled(true);
+				btnStart.setEnabled(true);
+				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
 			}
 		});
 		btnReset.setBounds(175, 563, 89, 76);
@@ -323,6 +328,7 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.arreter();
 				btnNextImg.setEnabled(true);
+				btnStart.setEnabled(true);
 			}
 		});
 		btnStop.setBounds(538, 563, 89, 76);
@@ -377,3 +383,4 @@ public class FenetreJeuScientifique extends JPanel {
 		}
 	}
 }
+

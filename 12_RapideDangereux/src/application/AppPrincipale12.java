@@ -210,6 +210,12 @@ public class AppPrincipale12 extends JFrame {
 					setContentPane(fenOptions);
 					break;
 
+				case "STARTBUTTONACTIVE":
+					checkBoxModeNonScientifique.setEnabled(false);
+					break;
+				case "CHECKBOXACTIVE" : 
+					checkBoxModeNonScientifique.setEnabled(true);
+
 				}
 			}
 		});
@@ -276,4 +282,3 @@ public class AppPrincipale12 extends JFrame {
 	
 
 }
-
