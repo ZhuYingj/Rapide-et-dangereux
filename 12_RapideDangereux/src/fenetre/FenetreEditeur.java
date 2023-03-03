@@ -9,6 +9,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * 
+ * @author Alexis Pineda-Alvarado
+ *
+ */
+
 public class FenetreEditeur extends JPanel {
 
 	private JPanel panelObjets;

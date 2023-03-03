@@ -13,6 +13,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import dessin.ZoneAnimPhysique;
 
+/**
+ * 
+ * @author Alexis Pineda-Alvarado
+ *
+ */
+
 public class ModeDeJeu extends JPanel {
 	private JButton btnMonde;
 	private JButton btnCourseMontre;

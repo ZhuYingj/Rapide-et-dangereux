@@ -26,6 +26,7 @@ import java.awt.event.KeyEvent;
 /**
  * 
  * @author Alexis Pineda-Alvarado
+ * @author Tan Tommy Rin
  *
  */
 
@@ -234,6 +235,7 @@ public class AppPrincipale12 extends JFrame {
 					fenSansScience.setVisible(true);
 					fenJeuScience.setVisible(false);
 					setContentPane(fenSansScience);
+					fenJeuScience.getZoneAnimPhysique().requestFocusInWindow();
 
 					checkBoxModeNonScientifique.setEnabled(true);
 					fenSansScience.setZoneAnimPhysique(fenJeuScience.getZoneAnimPhysique());

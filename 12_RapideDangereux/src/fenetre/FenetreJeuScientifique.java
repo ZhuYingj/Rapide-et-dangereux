@@ -32,6 +32,10 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblVitesseEnYV1;
 	private JLabel lblPositionEnXV1;
 	private JLabel lblPositionEnYV1;
+	private JButton btnStart;
+	private JButton btnNextImg;
+	private JButton btnReset;
+	private JButton btnStop;
 
 	/**
 	 * Creation de la fenetre.
@@ -279,19 +283,20 @@ public class FenetreJeuScientifique extends JPanel {
 		btnRetour.setBounds(10, 3, 89, 23);
 		add(btnRetour);
 
-		JButton btnStart = new JButton("Start");
+		btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.setEnCoursDAnimation(false);
 				zoneAnimPhysique.demarrer();
+				btnNextImg.setEnabled(false);
 				
 			}
 		});
 		btnStart.setBounds(10, 563, 89, 76);
 		add(btnStart);
 
-		JButton btnReset = new JButton("Reset");
+		btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
@@ -301,7 +306,7 @@ public class FenetreJeuScientifique extends JPanel {
 		btnReset.setBounds(175, 563, 89, 76);
 		add(btnReset);
 
-		JButton btnNextImg = new JButton("Next Img");
+		btnNextImg = new JButton("Next Img");
 		btnNextImg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
@@ -311,11 +316,12 @@ public class FenetreJeuScientifique extends JPanel {
 		btnNextImg.setBounds(355, 563, 89, 76);
 		add(btnNextImg);
 
-		JButton btnStop = new JButton("Stop");
+		btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.arreter();
+				btnNextImg.setEnabled(true);
 			}
 		});
 		btnStop.setBounds(538, 563, 89, 76);

@@ -22,6 +22,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
+	
 
 	/**
 	 * Create the panel.
@@ -66,6 +67,47 @@ public class FenetreJeuSansScientifique extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
+		
+		JButton btnStart = new JButton("Start");
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.setEnCoursDAnimation(false);
+				zoneAnimPhysique.demarrer();
+			}
+		});
+		btnStart.setBounds(134, 604, 97, 58);
+		add(btnStart);
+		
+		JButton btnReset = new JButton("Reset");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.restartPos();
+			}
+		});
+		btnReset.setBounds(376, 604, 97, 58);
+		add(btnReset);
+		
+		JButton btnNextImg = new JButton("Next Img");
+		btnNextImg.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.avancerUnPas();
+			}
+		});
+		btnNextImg.setBounds(632, 604, 103, 58);
+		add(btnNextImg);
+		
+		JButton btnStop = new JButton("Stop");
+		btnStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.arreter();
+			}
+		});
+		btnStop.setBounds(953, 604, 103, 58);
+		add(btnStop);
 	}
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {

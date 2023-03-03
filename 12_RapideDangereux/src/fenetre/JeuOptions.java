@@ -24,6 +24,12 @@ import javax.swing.event.ChangeEvent;
 import dessin.ZoneApercupiste;
 import pisteDeCourse.PisteMexique;
 
+/**
+ * 
+ * @author Alexis Pineda-Alvarado
+ *
+ */
+
 public class JeuOptions extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
