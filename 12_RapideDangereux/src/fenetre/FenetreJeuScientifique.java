@@ -56,11 +56,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		zoneAnimPhysique = new ZoneAnimPhysique();
 
-		zoneAnimPhysique.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				changementDeTextePendantLAnimation(evt);
-			}
-		});
+		
 
 		zoneAnimPhysique.setBounds(10, 33, 700, 466);
 		add(zoneAnimPhysique);
@@ -290,6 +286,8 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.setEnCoursDAnimation(false);
 				zoneAnimPhysique.demarrer();
 				btnNextImg.setEnabled(false);
+
+				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 				
 			}
 		});

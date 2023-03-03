@@ -84,8 +84,7 @@ public class AppPrincipale12 extends JFrame {
 		menuBar.add(mnNewMenu);
 
 		setContentPane(fenMenu);
-		
-		
+
 		fenMenu.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (evt.getPropertyName().equals("JOUER")) {
@@ -194,12 +193,10 @@ public class AppPrincipale12 extends JFrame {
 					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 					break;
 
-
 				}
 
 			}
 		});
-
 
 		fenJeuScience.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -209,7 +206,9 @@ public class AppPrincipale12 extends JFrame {
 					fenOptions.setVisible(true);
 					setContentPane(fenOptions);
 					break;
-
+				case "STARTBUTTONACTIVE":
+					checkBoxModeNonScientifique.setEnabled(false);
+					break;
 				}
 			}
 		});
@@ -266,14 +265,13 @@ public class AppPrincipale12 extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_P) {
-					JOptionPane.showMessageDialog(null, "Bonjour dans RAPIDE ET DANGEREUX! \nle but de ce jeux et de battre votre combattant"
-							+ " \nles contrôles du jeu sont :  \n↑ : pour avancer la voiture"
-							+ " \n← et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture");
+					JOptionPane.showMessageDialog(null,
+							"Bonjour dans RAPIDE ET DANGEREUX! \nle but de ce jeux et de battre votre combattant"
+									+ " \nles contrôles du jeu sont :  \n↑ : pour avancer la voiture"
+									+ " \n← et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture");
 				}
 			}
 		});
 	}
-	
 
 }
-
