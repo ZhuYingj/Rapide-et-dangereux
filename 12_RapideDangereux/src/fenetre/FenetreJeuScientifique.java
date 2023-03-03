@@ -301,6 +301,7 @@ public class FenetreJeuScientifique extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.restartPos();
+				btnNextImg.setEnabled(true);
 			}
 		});
 		btnReset.setBounds(175, 563, 89, 76);
