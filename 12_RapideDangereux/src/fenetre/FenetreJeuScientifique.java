@@ -377,3 +377,4 @@ public class FenetreJeuScientifique extends JPanel {
 		}
 	}
 }
+

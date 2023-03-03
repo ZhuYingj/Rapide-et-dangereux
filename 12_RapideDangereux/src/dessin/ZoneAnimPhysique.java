@@ -214,8 +214,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		if (haut == true) {
 			voiture.setAccel(new Vecteur2D(20 * Math.cos(angleVoitureRad), 20 * Math.sin(angleVoitureRad)));
-		} else {
-			voiture.setAccel(valeurInit);
 		}
 		if (bas == true) {
 
@@ -234,12 +232,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			if (voiture.getVitesse().module(voiture.getVitesse()) > voiture.getVitesseMaxSelonNiveau()) {
 				voiture.setVitesse(new Vecteur2D(voiture.getVitesseMaxSelonNiveau() * Math.cos(angleVoitureRad),
 						voiture.getVitesseMaxSelonNiveau() * Math.sin(angleVoitureRad)));
-	
+
 			}
 			testerCollisionsEtAjusterVitesses();
 			repaint();
-
-			
 
 			try {
 				Thread.sleep(tempsDuSleep);
@@ -301,11 +297,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	private void testerCollisionsEtAjusterVitesses() {
 		voiture.gererCollision(getWidth(), 0, getHeight(), 0);
-
-//		if (voiture.getVitesse().getX() > voiture.getVitesseMaxSelonNiveau()
-//				|| voiture.getVitesse().getY() > voiture.getVitesseMaxSelonNiveau()) {
-//			voiture.setVitesse(new Vecteur2D(voiture.getVitesseMaxSelonNiveau(), voiture.getVitesseMaxSelonNiveau()));
-//		} 
+		if (haut == false) {
+			voiture.setAccel(valeurInit);
+		}
 	}
 
 	/**
