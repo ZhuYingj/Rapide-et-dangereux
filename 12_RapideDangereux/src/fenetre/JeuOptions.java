@@ -118,7 +118,7 @@ public class JeuOptions extends JPanel {
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				pcs.firePropertyChange("VITESSEMAXFACILE", null, 30.0);
+				pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
 
 			}
 		});
@@ -130,7 +130,7 @@ public class JeuOptions extends JPanel {
 		rdbtnMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 40.0);
+				pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 80.0);
 
 			}
 		});
@@ -142,7 +142,7 @@ public class JeuOptions extends JPanel {
 		rdbtnDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				pcs.firePropertyChange("VITESSEMAXAVANCE", null, 50.0);
+				pcs.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
 
 			}
 		});

@@ -44,7 +44,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Temps du sleep de l'application */
 	private int tempsDuSleep = 10;
 	/** Notre objet voiture **/
-	private Voiture voiture = new Voiture();
+	private Voiture voiture;
 
 	private PisteHorizontale pisteHorizontale;
 	private PisteVerticale pisteVerticale;
@@ -83,7 +83,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public ZoneAnimPhysique() {
 
-		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 5);
+		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 60);
 
 		addKeyListener(new KeyAdapter() {
 
@@ -214,6 +214,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		if (haut == true) {
 			voiture.setAccel(new Vecteur2D(20 * Math.cos(angleVoitureRad), 20 * Math.sin(angleVoitureRad)));
+		} else {
+			voiture.setAccel(valeurInit);
 		}
 		if (bas == true) {
 
@@ -229,13 +231,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		while (enCoursDAnimation == true) {
 
 			calculerUneIterationPhysique();
-			testerCollisionsEtAjusterVitesses();
-			repaint();
-
 			if (voiture.getVitesse().module(voiture.getVitesse()) > voiture.getVitesseMaxSelonNiveau()) {
 				voiture.setVitesse(new Vecteur2D(voiture.getVitesseMaxSelonNiveau() * Math.cos(angleVoitureRad),
 						voiture.getVitesseMaxSelonNiveau() * Math.sin(angleVoitureRad)));
+	
 			}
+			testerCollisionsEtAjusterVitesses();
+			repaint();
+
+			
 
 			try {
 				Thread.sleep(tempsDuSleep);
