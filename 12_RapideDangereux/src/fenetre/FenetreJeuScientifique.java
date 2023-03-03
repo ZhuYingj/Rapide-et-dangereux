@@ -286,7 +286,6 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.setEnCoursDAnimation(false);
 				zoneAnimPhysique.demarrer();
 				btnNextImg.setEnabled(false);
-
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 				
 			}
@@ -300,6 +299,7 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.restartPos();
 				btnNextImg.setEnabled(true);
+				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
 			}
 		});
 		btnReset.setBounds(175, 563, 89, 76);
