@@ -382,4 +382,12 @@ public class Voiture implements Dessinable, Selectionnable {
 			position.setX(positionXGauche);
 		}
 	}
+
+	public Ellipse2D getCercle() {
+		return cercle;
+	}
+
+	public void setCercle(Ellipse2D cercle) {
+		this.cercle = cercle;
+	}
 }

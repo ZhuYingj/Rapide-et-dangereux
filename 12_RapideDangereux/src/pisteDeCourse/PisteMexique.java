@@ -29,13 +29,13 @@ public class PisteMexique implements Dessinable {
 	/** Position en y de la piste au complet  **/
 	private int y;
 	
-	private PisteDeDepart depart;
-	private PisteHorizontale horizontale;
-	private PisteVerticale verticale;
-	private PisteVirageBas bas;
-	private PisteVirageGauche gauche;
-	private PisteVirageDroit droit;
-	private PisteVirageHaut haut;
+	private PisteDeDepart depart = new PisteDeDepart(0,0);
+	private PisteHorizontale horizontale = new PisteHorizontale(0,0);
+	private PisteVerticale verticale = new PisteVerticale(0,0);;
+	private PisteVirageBas bas = new PisteVirageBas(0,0);;
+	private PisteVirageGauche gauche = new PisteVirageGauche(0,0);;
+	private PisteVirageDroit droit = new PisteVirageDroit(0,0);;
+	private PisteVirageHaut haut = new PisteVirageHaut(0,0);;
 	
 	
 	/**
@@ -167,5 +167,46 @@ public class PisteMexique implements Dessinable {
 		verticale.dessiner(g2d);
 		
 	}
+
+
+	public PisteVirageBas getBas() {
+		return bas;
+	}
+
+
+	public void setBas(PisteVirageBas bas) {
+		this.bas = bas;
+	}
+
+
+	public PisteVirageGauche getGauche() {
+		return gauche;
+	}
+
+
+	public void setGauche(PisteVirageGauche gauche) {
+		this.gauche = gauche;
+	}
+
+
+	public PisteVirageDroit getDroit() {
+		return droit;
+	}
+
+
+	public void setDroit(PisteVirageDroit droit) {
+		this.droit = droit;
+	}
+
+
+	public PisteVirageHaut getHaut() {
+		return haut;
+	}
+
+
+	public void setHaut(PisteVirageHaut haut) {
+		this.haut = haut;
+	}
+	
 
 }

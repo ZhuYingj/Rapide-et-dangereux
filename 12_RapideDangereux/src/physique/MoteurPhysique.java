@@ -107,7 +107,18 @@ public class MoteurPhysique {
 		return new Vecteur2D(vitFinale);
 	}
 	
-	public static double calculerNormeVitesse(Vecteur2D vitesse) {
-		return vitesse.module();
+	public static Vecteur2D calculerVitesseCollisionAngle(Vecteur2D vitesse) throws Exception {
+		
+			Vecteur2D normal = Vecteur2D.normalise(vitesse);
+	
+		
+		double deltaVit = Vecteur2D.prodScalaire(vitesse, normal);
+		
+		deltaVit = deltaVit * 2;
+		
+		Vecteur2D vitFinale = Vecteur2D.multiplie(normal, deltaVit);
+		vitFinale = Vecteur2D.soustrait(vitesse, vitFinale);
+
+		return new Vecteur2D(vitFinale);
 	}
 }

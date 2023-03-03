@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Area;
 
 import javax.swing.JPanel;
 
@@ -61,14 +62,21 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private int angleVoitureDegre = 0;
 	/** L'angle de la voiture en rad **/
 	private double angleVoitureRad;
+	
+	private int angleCoinDegre = 45;
+	
+	private double angleCoinRad = Math.toRadians(angleCoinDegre);
 	/** Vecteur de la position initiale de la voiture **/
-	private Vecteur2D posInit = new Vecteur2D(0.2, 0.1);
+	private Vecteur2D posInit = new Vecteur2D(80, 0.1);
 	/** Vecteur qui reset les valeurs a 0 **/
 	private Vecteur2D valeurInit = new Vecteur2D(0.0, 0.0);
 	/** Temps écoulé depuis le début de l'animation **/
 	private double tempsTotalEcoule = 0;
 	// support pour lancer des evenements de type PropertyChange
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private PisteMexique mexique;
+	private Area aireTriangle;
+	private Area aireVoiture;
 
 	/**
 	 * methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -84,6 +92,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public ZoneAnimPhysique() {
 
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 60);
+	
+		
+		
+		
+		
+		
+		
 
 		addKeyListener(new KeyAdapter() {
 
@@ -126,13 +141,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		PisteMexique mexique = new PisteMexique(1, 1);
+		mexique = new PisteMexique(1, 1);
 		mexique.dessiner(g2d);
-
+		aireTriangle = mexique.getBas().getAireTriangle();
+		
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
 
+		aireVoiture = new Area(voiture.getCercle());
 	}
 
 	/**
@@ -237,6 +254,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	
 			}
 			testerCollisionsEtAjusterVitesses();
+			collisionCote();
 			repaint();
 
 			
@@ -404,6 +422,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void setAngle(int nouvAngle) {
 		angleVoitureRad = Math.toRadians(nouvAngle);
 		voiture.setAngle(angleVoitureRad);
+		
+	
 
 		repaint();
 	}
@@ -466,6 +486,26 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	public void setEnCoursDAnimation(boolean enCoursDAnimation) {
 		this.enCoursDAnimation = enCoursDAnimation;
+	}
+	
+	public void collisionCote() {
+		
+		aireVoiture.intersect(aireTriangle);
+		if(!aireVoiture.isEmpty()) {
+			try {
+			Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse());
+			voiture.setVitesse(new Vecteur2D(vit.getX() * Math.cos(angleCoinRad), vit.getY() * Math.sin(angleCoinDegre)));
+			voiture.setPosition(new Vecteur2D(voiture.getPosition().getX()+1, voiture.getPosition().getY()+1));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+		} else {
+			System.out.println("ez");
+		}
 	}
 
 }
