@@ -18,8 +18,9 @@ public class PisteVirageGauche implements Dessinable {
 	private int x;
 	private int y;
 
+	/** Initialise la forme du triangle **/
 	private Path2D triangle;
-
+	/** Initialise l'aire du triangle **/
 	private Area aireTriangle;
 	
 	public PisteVirageGauche(int x, int y) {
@@ -52,6 +53,10 @@ public class PisteVirageGauche implements Dessinable {
 		
 	}
 	
+	/**
+	 * Retourne l'aire du triangle
+	 * @return l'aire du triangle
+	 */
 	public Area getAireTriangle() {
 		return aireTriangle;
 	}

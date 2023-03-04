@@ -24,24 +24,19 @@ public class PisteVirageBas implements Dessinable{
 	private int x;
 	/** la position en y de depart que l'objet piste qui vas etre creer  **/
 	private int y;
-	
-	private int ligneRougeVBFinalX;
-	private int ligneRougeVBFinalY;
-	private int ligneRougeVBDebutX;
-	private int ligneRougeVBDebutY;
+
+	/** Initialise la forme du triangle **/
 	private Path2D triangle;
+	/** Initialise l'aire du triangle **/
 	private Area aireTriangle;
-	
+
 	public PisteVirageBas(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.ligneRougeVBFinalX =  x + ((TAILLE_PISTE/3)*2); 
-		this.ligneRougeVBFinalY = y; 
-		this.ligneRougeVBDebutX =  x + ((TAILLE_PISTE/3)*2); 
-		this.ligneRougeVBDebutY =  x + ((TAILLE_PISTE/3)*2); 
 	
+
 	}
-	
+
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(Color.BLACK);
@@ -53,29 +48,28 @@ public class PisteVirageBas implements Dessinable{
 		g2d.drawLine(x + ((TAILLE_PISTE/3)), y + ((TAILLE_PISTE/3)), x + ((TAILLE_PISTE/3)*2), y );
 		g2d.drawLine(x, y + ((TAILLE_PISTE/3)*2), x + (TAILLE_PISTE/3), y + (TAILLE_PISTE/3) );
 		g2d.drawLine(x , y + TAILLE_PISTE-1, x , y + ((TAILLE_PISTE/3)*2)  );
-		
-		
+
+
 		triangle = new Path2D.Double();
 		triangle.moveTo(x, y);
 		triangle.lineTo(x + ((TAILLE_PISTE/3)*2), y);
 		triangle.lineTo(x,  y + ((TAILLE_PISTE/3)*2));
 		triangle.closePath();
 		g2d.fill(triangle);
-		
 
-		
-		
 		aireTriangle = new Area(triangle);
-		
-		
+
+
 	}
 
+	/**
+	 * Retourne l'aire du triangle
+	 * @return l'aire du triangle
+	 */
 	public Area getAireTriangle() {
 		return aireTriangle;
 	}
 
-	public void setAireTriangle(Area aireTriangle) {
-		this.aireTriangle = aireTriangle;
-	}
-	
+
+
 }

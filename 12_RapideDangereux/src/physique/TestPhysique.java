@@ -1,9 +1,19 @@
 package physique;
 
 import geometrie.Vecteur2D;
-
+/**
+ * Classe permettant de tester le moteur physique de l'application sans dessin.
+ * 
+ * @author Kevin Nguyen
+ *
+ */
 public class TestPhysique {
-
+	/**
+	 * Demarrage du test du moteur physique sans dessin les affichages se font a
+	 * la console.
+	 * 
+	 * @param args Arguments du programme.
+	 */
 	public static void main(String[] args) {
 
 		//		double masseA = 3200;
@@ -74,7 +84,7 @@ public class TestPhysique {
 		//		temps = size;
 		System.out.println(vit);
 		try {
-			vit = MoteurPhysique.calculerVitesseCollisionAngle(vit, -45, -45);
+			vit = MoteurPhysique.calculerVitesseCollisionAngle(vit, 315);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -337,12 +337,6 @@ public class Voiture implements Dessinable, Selectionnable {
 		this.vitesseMaxSelonNiveau = vitesseMaxSelonNiveau;
 	}
 
-	// A completer plus tard
-	@Override
-	public boolean contient(double xPix, double yPix) {
-
-		return false;
-	}
 
 	/**
 	 * Cette methode permet de determiner si la voiture depasse le composant dessin
@@ -359,35 +353,71 @@ public class Voiture implements Dessinable, Selectionnable {
 
 		// pour le bas
 		if (position.getY() > positionYBas - this.diametre) {
-			this.vitesse = getVitesse();
-			setVitesse(new Vecteur2D(vitesse.getX(), -vitesse.getY()));
+			try {
+				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 90);
+				setVitesse(vit);
 			position.setY(positionYBas - this.diametre);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		// pour le haut
 		else if (position.getY() < positionYHaut) {
-			this.vitesse = getVitesse();
-			setVitesse(new Vecteur2D(vitesse.getX(), -vitesse.getY()));
+			try {
+				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 270);
+				setVitesse(vit);
 			position.setY(positionYHaut);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		// pour la droite
 		else if (position.getX() > positionXDroite - this.diametre) {
-			this.vitesse = getVitesse();
-			setVitesse(new Vecteur2D(-vitesse.getX(), vitesse.getY()));
+			try {
+				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 180);
+				setVitesse(vit);
 			position.setX(positionXDroite - this.diametre);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		// pour la gauche
 		else if (position.getX() < positionXGauche) {
-			this.vitesse = getVitesse();
-			setVitesse(new Vecteur2D(-vitesse.getX(), vitesse.getY()));
-			position.setX(positionXGauche);
+			try {
+				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 0);
+				setVitesse(vit);
+				position.setX(positionXGauche);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
 
+	/**
+	 * Retourne la forme cercle qui est la voiture
+	 * @return la forme cercle
+	 */
+	//Kevin Nguyen
 	public Ellipse2D getCercle() {
 		return cercle;
 	}
 
-	public void setCercle(Ellipse2D cercle) {
-		this.cercle = cercle;
+	@Override
+	/**
+	 * À compléter plus tard
+	 */
+	//Kevin Nguyen
+	public boolean contient(double xPix, double yPix) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+
 }

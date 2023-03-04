@@ -29,11 +29,9 @@ public class PisteVirageHaut implements Dessinable {
 	private int pente;
 
 	private double pixelsParMetre = 1; //Defaut
-
-
+	/** Initialise la forme du triangle **/
 	private Path2D triangle;
-
-
+	/** Initialise l'aire du triangle **/
 	private Area aireTriangle;
 	
 	/**
@@ -88,6 +86,10 @@ public class PisteVirageHaut implements Dessinable {
 		
 	}
 	
+	/**
+	 * Retourne l'aire du triangle
+	 * @return l'aire du triangle
+	 */
 	public Area getAireTriangle() {
 		return aireTriangle;
 	}

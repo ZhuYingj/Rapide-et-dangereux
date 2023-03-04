@@ -168,45 +168,39 @@ public class PisteMexique implements Dessinable {
 		
 	}
 
-
+	/**
+	 * Retourne le composant virage bas
+	 * @return le composant virage bas
+	 */
 	public PisteVirageBas getBas() {
 		return bas;
 	}
 
-
-	public void setBas(PisteVirageBas bas) {
-		this.bas = bas;
-	}
-
-
+	/**
+	 * Retourne le composant virage gauche
+	 * @return le composant virage gauche
+	 */
 	public PisteVirageGauche getGauche() {
 		return gauche;
 	}
 
-
-	public void setGauche(PisteVirageGauche gauche) {
-		this.gauche = gauche;
-	}
-
-
+	/**
+	 * Retourne le composant virage droite
+	 * @return le composant virage droite
+	 */
 	public PisteVirageDroit getDroit() {
 		return droit;
 	}
 
-
-	public void setDroit(PisteVirageDroit droit) {
-		this.droit = droit;
-	}
-
-
+	/**
+	 * Retourne le composant virage haut
+	 * @return le composant virage haut
+	 */
 	public PisteVirageHaut getHaut() {
 		return haut;
 	}
 
 
-	public void setHaut(PisteVirageHaut haut) {
-		this.haut = haut;
-	}
 	
 
 }

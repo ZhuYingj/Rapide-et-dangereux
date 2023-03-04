@@ -107,9 +107,16 @@ public class MoteurPhysique {
 		return new Vecteur2D(vitFinale);
 	}
 
-	public static Vecteur2D calculerVitesseCollisionAngle(Vecteur2D vitesse, double angleX, double angleY) throws Exception {
+	/**
+	 * Calcule et retourne la vitesse de la voiture après une collision sur un virage
+	 * @param vitesse Vitesse initiale de l' objet
+	 * @param angle Angle de la normale
+	 * @return Vitesse finale de la collision
+	 * @throws Exception
+	 */
+	public static Vecteur2D calculerVitesseCollisionAngle(Vecteur2D vitesse, double angle) throws Exception {
 
-		Vecteur2D normal = new Vecteur2D(Math.cos(Math.toRadians(angleX)*1),Math.sin(Math.toRadians(angleY)*1));
+		Vecteur2D normal = new Vecteur2D(Math.cos(Math.toRadians(angle)*1),Math.sin(Math.toRadians(angle)*1));
 
 
 

@@ -21,8 +21,9 @@ private static final int TAILLE_PISTE = 87;
 	private int b;
 	private int d;
 
+	/** Initialise la forme du triangle **/
 	private Path2D triangle;
-
+	/** Initialise l'aire du triangle **/
 	private Area aireTriangle;
 	
 	public PisteVirageDroit(int x, int y) {
@@ -59,6 +60,10 @@ private static final int TAILLE_PISTE = 87;
 		
 	}
 	
+	/**
+	 * Retourne l'aire du triangle
+	 * @return l'aire du triangle
+	 */
 	public Area getAireTriangle() {
 		return aireTriangle;
 	}
