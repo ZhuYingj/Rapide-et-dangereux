@@ -5,8 +5,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
+import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 
 /**
@@ -34,6 +36,10 @@ public class PisteHorizontale implements Dessinable {
 	private int y;
 	/** Pixels par metre par defaut  **/
 	private double pixelsParMetre = 1; //Defaut
+	/** Normale du mur haut **/
+	private Vecteur2D normaleMurHaut = new Vecteur2D(0,1);
+	/** Normale du mur bas **/
+	private Vecteur2D normaleMurBas = new Vecteur2D(0,-1);
 
 	/**
 	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
@@ -113,7 +119,25 @@ public class PisteHorizontale implements Dessinable {
     public int getLigneRougeH2Y() {
         return ligneRougeH2Y;
     }
+    /**
+     * Retourne la normale du mur haut
+     * @return la normale du mur haut
+     */
+	public Vecteur2D getNormaleMurHaut() {
+		return normaleMurHaut;
+	}
+
+	/**
+     * Retourne la normale du mur bas
+     * @return la normale du mur bas
+     */
+	public Vecteur2D getNormaleMurBas() {
+		return normaleMurBas;
+	}
     
+//	public void enCollisionAvec(Area voiture) {
+//		
+//	}
 
 
 }

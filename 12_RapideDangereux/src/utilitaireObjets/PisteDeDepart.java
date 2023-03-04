@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 
+import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 
 /**
@@ -33,6 +34,10 @@ public class PisteDeDepart implements Dessinable{
 	private int y;
 	/** Pixels par metre par defaut  **/
 	private double pixelsParMetre = 1; //Defaut
+	/** Normale du mur haut **/
+	private Vecteur2D normaleMurHaut = new Vecteur2D(0,1);
+	/** Normale du mur bas **/
+	private Vecteur2D normaleMurBas = new Vecteur2D(0,-1);
 	
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -54,6 +59,9 @@ public class PisteDeDepart implements Dessinable{
 		
 		}
 		
+	
+
+
 		/**
 		 * Methode qui permet de dessiner la piste de d�part sur la zone d'animation a l'aide de g2d
 		 */
@@ -116,5 +124,20 @@ public class PisteDeDepart implements Dessinable{
 	        return ligneRougeD2Y;
 	    }
 		
+	    /**
+	     * Retourne la normale du mur haut
+	     * @return la normale du mur haut
+	     */
+		public Vecteur2D getNormaleMurHaut() {
+			return normaleMurHaut;
+		}
+
+		/**
+	     * Retourne la normale du mur bas
+	     * @return la normale du mur bas
+	     */
+		public Vecteur2D getNormaleMurBas() {
+			return normaleMurBas;
+		}
 	
 }

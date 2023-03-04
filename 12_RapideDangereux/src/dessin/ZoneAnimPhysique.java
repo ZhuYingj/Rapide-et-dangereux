@@ -586,6 +586,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 		}
+	
+	
 	}
 
 

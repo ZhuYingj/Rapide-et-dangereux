@@ -25,7 +25,7 @@ import utilitaireObjets.PisteVirageHaut;
 
 public class PisteMexique implements Dessinable {
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 87;
+	private int taillePiste = 87;
 	/** Position en x de la piste au complet **/
 	private int x;
 	/** Position en y de la piste au complet  **/
@@ -64,114 +64,114 @@ public class PisteMexique implements Dessinable {
 		//piste virgae bas :
 		bas = new PisteVirageBas(x,y);
 		bas.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale depart :
 		depart = new PisteDeDepart(x,y);
 		depart.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//Piste virage vers la gauche:
 		gauche = new PisteVirageGauche(x,y);
 		gauche.dessiner(g2d);
-		this.y = y + TAILLE_PISTE;
+		this.y = y + taillePiste;
 		
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);
-		this.y = y + TAILLE_PISTE;
+		this.y = y + taillePiste;
 	
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);
-		this.y = y + TAILLE_PISTE;
+		this.y = y + taillePiste;
 	
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);
-		this.y = y + TAILLE_PISTE;
+		this.y = y + taillePiste;
 		
 		//piste vers le droit:
 		droit = new PisteVirageDroit(x,y);
 		droit.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//Piste Virage Haut;
 		haut = new PisteVirageHaut(x,y);
 		haut.dessiner(g2d);
-		this.y = y - TAILLE_PISTE;
+		this.y = y - taillePiste;
 		
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);	
-		this.y = y - TAILLE_PISTE;
+		this.y = y - taillePiste;
 		
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);	
-		this.y = y - TAILLE_PISTE;
+		this.y = y - taillePiste;
 		
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);
 		
 		
-		rectangle = new Rectangle2D.Double(TAILLE_PISTE+1, TAILLE_PISTE+1 ,TAILLE_PISTE*6-1 ,TAILLE_PISTE*3-1);
+		rectangle = new Rectangle2D.Double(taillePiste+1, taillePiste+1 ,taillePiste*6-1 ,taillePiste*3-1);
 		aireRectangle = new Area(rectangle);
 		g2d.setColor(Color.gray);
 		g2d.fill(aireRectangle);
@@ -219,6 +219,9 @@ public class PisteMexique implements Dessinable {
 		return haut;
 	}
 
+	public int getTaillePiste() {
+		return taillePiste;
+	}
 
 	
 
