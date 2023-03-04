@@ -7,19 +7,15 @@ import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Area;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 import javax.swing.JPanel;
 
 import geometrie.Vecteur2D;
 import physique.MoteurPhysique;
 import pisteDeCourse.PisteMexique;
-import utilitaireObjets.PisteHorizontale;
-import utilitaireObjets.PisteVerticale;
-import utilitaireObjets.PisteVirageBas;
 import utilitaireObjets.Voiture;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.beans.PropertyChangeEvent;
 
 /**
  * Cree une piste qui contient un/des voiture(s), un/des obstacle(s) et une
@@ -524,7 +520,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 
 		if(!aireVoiture1.isEmpty()) {
-			System.out.println("test");
+
 			try {
 				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 45);
 				voiture.setVitesse(vit);
@@ -537,7 +533,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 
 		} else if (!aireVoiture2.isEmpty()) {
-			System.out.println("test");
+
 			try {
 				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 215);
 				voiture.setVitesse(vit);
@@ -549,7 +545,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 
 		} else if (!aireVoiture3.isEmpty()) {
-			System.out.println("test");
+
 			try {
 				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 135);
 				voiture.setVitesse(vit);
@@ -561,7 +557,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 
 		} else if (!aireVoiture4.isEmpty()) {
-			System.out.println("test");
+
 			try {
 				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 315);
 				voiture.setVitesse(vit);

@@ -121,9 +121,9 @@ public class MoteurPhysique {
 
 
 		double deltaVit = Vecteur2D.prodScalaire(vitesse, normal);
-		System.out.println(deltaVit);
+
 		deltaVit = deltaVit*2;
-		System.out.println(deltaVit);
+
 		Vecteur2D vitFinale = Vecteur2D.multiplie(normal, deltaVit);
 
 

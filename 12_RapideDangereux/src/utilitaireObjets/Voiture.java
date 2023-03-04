@@ -1,15 +1,10 @@
 package utilitaireObjets;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Double;
-
-import javax.swing.JPanel;
 
 import geometrie.FlecheVectorielle;
 import geometrie.Vecteur2D;
@@ -356,36 +351,36 @@ public class Voiture implements Dessinable, Selectionnable {
 			try {
 				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 90);
 				setVitesse(vit);
-			position.setY(positionYBas - this.diametre);
+				position.setY(positionYBas - this.diametre);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 		// pour le haut
 		else if (position.getY() < positionYHaut) {
 			try {
 				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 270);
 				setVitesse(vit);
-			position.setY(positionYHaut);
+				position.setY(positionYHaut);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 		// pour la droite
 		else if (position.getX() > positionXDroite - this.diametre) {
 			try {
 				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 180);
 				setVitesse(vit);
-			position.setX(positionXDroite - this.diametre);
+				position.setX(positionXDroite - this.diametre);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 		// pour la gauche
 		else if (position.getX() < positionXGauche) {
@@ -397,7 +392,7 @@ public class Voiture implements Dessinable, Selectionnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
 
