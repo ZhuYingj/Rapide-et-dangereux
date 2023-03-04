@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 import interfaces.Dessinable;
 
 /**
- * Classe qui permet de creer un objet piste de départ
+ * Classe qui permet de creer un objet piste de dï¿½part
  * 
  * @author Ludovic Julien
  *
@@ -18,7 +18,7 @@ import interfaces.Dessinable;
 public class PisteDeDepart implements Dessinable{
 
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 80;
+	private static final int TAILLE_PISTE = 87;
 	/** La position en x du mure de haut **/
 	private int ligneRougeD1X;
 	/** La position en y du mure de haut **/
@@ -55,7 +55,7 @@ public class PisteDeDepart implements Dessinable{
 		}
 		
 		/**
-		 * Methode qui permet de dessiner la piste de départ sur la zone d'animation a l'aide de g2d
+		 * Methode qui permet de dessiner la piste de dï¿½part sur la zone d'animation a l'aide de g2d
 		 */
 		@Override
 		public void dessiner(Graphics2D g2d) {

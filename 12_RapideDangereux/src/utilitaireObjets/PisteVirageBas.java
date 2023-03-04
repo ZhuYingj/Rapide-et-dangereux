@@ -19,7 +19,7 @@ import interfaces.Dessinable;
 public class PisteVirageBas implements Dessinable{
 
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 80;
+	private static final int TAILLE_PISTE = 87;
 	/** la position en x de depart que l'objet piste qui vas etre creer **/
 	private int x;
 	/** la position en y de depart que l'objet piste qui vas etre creer  **/
@@ -44,7 +44,7 @@ public class PisteVirageBas implements Dessinable{
 	
 	@Override
 	public void dessiner(Graphics2D g2d) {
-		g2d.setColor(Color.BLUE);
+		g2d.setColor(Color.BLACK);
 		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
 		g2d.setColor(Color.RED);
 		Stroke stroke = new BasicStroke(3f);
@@ -61,6 +61,8 @@ public class PisteVirageBas implements Dessinable{
 		triangle.lineTo(x,  y + ((TAILLE_PISTE/3)*2));
 		triangle.closePath();
 		g2d.fill(triangle);
+		
+
 		
 		
 		aireTriangle = new Area(triangle);
