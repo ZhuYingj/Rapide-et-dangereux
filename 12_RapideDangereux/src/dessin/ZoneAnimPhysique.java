@@ -62,9 +62,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private int angleVoitureDegre = 0;
 	/** L'angle de la voiture en rad **/
 	private double angleVoitureRad;
-	
+
 	private int angleCoinDegre = 45;
-	
+
 	private double angleCoinRad = Math.toRadians(angleCoinDegre);
 	/** Vecteur de la position initiale de la voiture **/
 	private Vecteur2D posInit = new Vecteur2D(80, 0.1);
@@ -75,8 +75,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// support pour lancer des evenements de type PropertyChange
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private PisteMexique mexique;
-	private Area aireTriangle;
-	private Area aireVoiture;
+	private Area aireTriangle1;
+	private Area aireTriangle2;
+	private Area aireTriangle3;
+	private Area aireTriangle4;
+	private Area aireVoiture1;
+	private Area aireVoiture2;
+	private Area aireVoiture3;
+	private Area aireVoiture4;
 
 	/**
 	 * methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -92,13 +98,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public ZoneAnimPhysique() {
 
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 60);
-	
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
 
 		addKeyListener(new KeyAdapter() {
 
@@ -143,13 +149,19 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		mexique = new PisteMexique(1, 1);
 		mexique.dessiner(g2d);
-		aireTriangle = mexique.getBas().getAireTriangle();
-		
+		aireTriangle1 = mexique.getBas().getAireTriangle();
+		aireTriangle2 = mexique.getDroit().getAireTriangle();
+		aireTriangle3 = mexique.getGauche().getAireTriangle();
+		aireTriangle4 = mexique.getHaut().getAireTriangle();
+
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
 
-		aireVoiture = new Area(voiture.getCercle());
+		aireVoiture1 = new Area(voiture.getCercle());
+		aireVoiture2 = new Area(aireVoiture1);
+		aireVoiture3 = new Area(aireVoiture1);
+		aireVoiture4 = new Area(aireVoiture1);
 	}
 
 	/**
@@ -255,8 +267,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						voiture.getVitesseMaxSelonNiveau() * Math.sin(angleVoitureRad)));
 
 			}
-			testerCollisionsEtAjusterVitesses();
+			
 			collisionCote();
+			testerCollisionsEtAjusterVitesses();
+			
 			repaint();
 
 			try {
@@ -293,6 +307,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		arreter();
 		calculerUneIterationPhysique();
 		testerCollisionsEtAjusterVitesses();
+		collisionCote();
 		repaint();
 	}
 
@@ -322,6 +337,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		if (haut == false) {
 			voiture.setAccel(valeurInit);
 		}
+		//collisionCote();
 	}
 
 	/**
@@ -420,8 +436,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void setAngle(int nouvAngle) {
 		angleVoitureRad = Math.toRadians(nouvAngle);
 		voiture.setAngle(angleVoitureRad);
-		
-	
+
+
 
 		repaint();
 	}
@@ -485,25 +501,68 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void setEnCoursDAnimation(boolean enCoursDAnimation) {
 		this.enCoursDAnimation = enCoursDAnimation;
 	}
-	
+
 	public void collisionCote() {
+
+		double pos = 3;
 		
-		aireVoiture.intersect(aireTriangle);
-		if(!aireVoiture.isEmpty()) {
+		aireVoiture1.intersect(aireTriangle1);
+		aireVoiture2.intersect(aireTriangle2);
+		aireVoiture3.intersect(aireTriangle3);
+		aireVoiture4.intersect(aireTriangle4);
+		
+		
+		
+		if(!aireVoiture1.isEmpty()) {
+			System.out.println("test");
 			try {
-			Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse());
-			voiture.setVitesse(new Vecteur2D(vit.getX() * Math.cos(angleCoinRad), vit.getY() * Math.sin(angleCoinDegre)));
-			voiture.setPosition(new Vecteur2D(voiture.getPosition().getX()+1, voiture.getPosition().getY()+1));
+				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 45, 45);
+				voiture.setVitesse(vit);
+				voiture.setPosition(new Vecteur2D(voiture.getPosition().getX()+pos, voiture.getPosition().getY()+pos));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
-			
-		} else {
-			System.out.println("ez");
-		}
-	}
 
+
+
+		} else if (!aireVoiture2.isEmpty()) {
+			System.out.println("test");
+			try {
+				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), -45, 45);
+				voiture.setVitesse(vit);
+				voiture.setPosition(new Vecteur2D(voiture.getPosition().getX()-pos, voiture.getPosition().getY()-pos));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+		} else if (!aireVoiture3.isEmpty()) {
+			System.out.println("test");
+			try {
+				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 45, -45);
+				voiture.setVitesse(vit);
+				voiture.setPosition(new Vecteur2D(voiture.getPosition().getX()-pos, voiture.getPosition().getY()+pos));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+		} else if (!aireVoiture4.isEmpty()) {
+			System.out.println("test");
+			try {
+				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 45, -45);
+				voiture.setVitesse(vit);
+				voiture.setPosition(new Vecteur2D(voiture.getPosition().getX()+pos, voiture.getPosition().getY()-pos));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+		}
+
+	}
 }

@@ -23,7 +23,7 @@ import utilitaireObjets.PisteVirageHaut;
 
 public class PisteMexique implements Dessinable {
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 80;
+	private static final int TAILLE_PISTE = 87;
 	/** Position en x de la piste au complet **/
 	private int x;
 	/** Position en y de la piste au complet  **/

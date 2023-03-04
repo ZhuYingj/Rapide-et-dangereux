@@ -18,7 +18,7 @@ import interfaces.Dessinable;
 public class PisteVerticale implements Dessinable {
 
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 80;
+	private static final int TAILLE_PISTE = 87;
 	/** La position en x du mure de haut **/
 	private int ligneRougeV1X;
 	/** La position en y du mure de haut **/

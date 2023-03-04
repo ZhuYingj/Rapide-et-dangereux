@@ -4,12 +4,15 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.geom.Area;
+import java.awt.geom.Path2D;
+import java.awt.geom.Path2D.Double;
 
 import interfaces.Dessinable;
 
 public class PisteVirageDroit implements Dessinable{
 
-private static final int TAILLE_PISTE = 80;
+private static final int TAILLE_PISTE = 87;
 	
 	private int x;
 	private int y;
@@ -17,6 +20,10 @@ private static final int TAILLE_PISTE = 80;
 	private int a;
 	private int b;
 	private int d;
+
+	private Path2D triangle;
+
+	private Area aireTriangle;
 	
 	public PisteVirageDroit(int x, int y) {
 		this.x = x;
@@ -39,9 +46,21 @@ private static final int TAILLE_PISTE = 80;
 		g2d.drawLine(x +(TAILLE_PISTE/3), y+TAILLE_PISTE, x +TAILLE_PISTE,y +(TAILLE_PISTE/3));
 		g2d.drawLine(x +TAILLE_PISTE,y +(TAILLE_PISTE/3),x +TAILLE_PISTE,y);
 		
+		triangle = new Path2D.Double();
+		triangle.moveTo(x +(TAILLE_PISTE/3), y+TAILLE_PISTE);
+		triangle.lineTo(x +TAILLE_PISTE, y +(TAILLE_PISTE/3));
+		triangle.lineTo(x+ TAILLE_PISTE,  y + TAILLE_PISTE);
+		triangle.closePath();
+		g2d.fill(triangle);
 		
 		
+		aireTriangle = new Area(triangle);
 		
+		
+	}
+	
+	public Area getAireTriangle() {
+		return aireTriangle;
 	}
 	
 }
