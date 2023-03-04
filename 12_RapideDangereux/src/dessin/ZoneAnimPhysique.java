@@ -7,19 +7,16 @@ import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Area;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 import javax.swing.JPanel;
 
 import geometrie.Vecteur2D;
 import physique.MoteurPhysique;
 import pisteDeCourse.PisteMexique;
-import utilitaireObjets.PisteHorizontale;
-import utilitaireObjets.PisteVerticale;
-import utilitaireObjets.PisteVirageBas;
+import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Voiture;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.beans.PropertyChangeEvent;
 
 /**
  * Cree une piste qui contient un/des voiture(s), un/des obstacle(s) et une
@@ -46,10 +43,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private int tempsDuSleep = 10;
 	/** Notre objet voiture **/
 	private Voiture voiture;
-
-	private PisteHorizontale pisteHorizontale;
-	private PisteVerticale pisteVerticale;
-	private PisteVirageBas pisteVirageBas;
 	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/
 	private boolean premiereFois = true;
 	/** Valeur booléenne pour savoir si ces touches sont appuyés **/
@@ -62,9 +55,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private int angleVoitureDegre = 0;
 	/** L'angle de la voiture en rad **/
 	private double angleVoitureRad;
-
+	/** angle d'un segment de virage en degré **/
 	private int angleCoinDegre = 45;
-
+	/** angle d'un segment de virage en radians **/
 	private double angleCoinRad = Math.toRadians(angleCoinDegre);
 	/** Vecteur de la position initiale de la voiture **/
 	private Vecteur2D posInit = new Vecteur2D(80, 0.1);
@@ -72,17 +65,28 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Vecteur2D valeurInit = new Vecteur2D(0.0, 0.0);
 	/** Temps écoulé depuis le début de l'animation **/
 	private double tempsTotalEcoule = 0;
-	// support pour lancer des evenements de type PropertyChange
+	/** support pour lancer des evenements de type PropertyChange **/
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	/** La premiere piste affiché **/
 	private PisteMexique mexique;
+	/** Aire du triangle superieur gauche **/
 	private Area aireTriangle1;
+	/** Aire du triangle inferieur droit **/
 	private Area aireTriangle2;
+	/** Aire du triangle superieur droit **/
 	private Area aireTriangle3;
+	/** Aire du triangle inferieur gauche **/
 	private Area aireTriangle4;
+	/** Aire de la voiture **/
 	private Area aireVoiture1;
+	/** Premiere copie de l'aire de la voiture **/
 	private Area aireVoiture2;
+	/** Deuxieme copie de l'aire de la voiture **/
 	private Area aireVoiture3;
+	/** Troisieme copie de l'aire de la voiture **/
 	private Area aireVoiture4;
+	/** Aire du rectangle au centre **/
+	private Area aireRectangle;
 
 	/**
 	 * methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -146,6 +150,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		aireTriangle2 = mexique.getDroit().getAireTriangle();
 		aireTriangle3 = mexique.getGauche().getAireTriangle();
 		aireTriangle4 = mexique.getHaut().getAireTriangle();
+
+		aireRectangle = mexique.getRectangle();
 
 		voiture.setPixelsParMetre(pixelsParMetre);
 
@@ -334,7 +340,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		if (haut == false) {
 			voiture.setAccel(valeurInit);
 		}
-		// collisionCote();
+
 	}
 
 	/**
@@ -493,10 +499,22 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	}
 
+	/**
+	 * Retourne la valeur boolean de l'animation
+	 * 
+	 * @return La valeur boolean de l'animation
+	 */
+	// Kevin Nguyen
 	public boolean isEnCoursDAnimation() {
 		return enCoursDAnimation;
 	}
 
+	/**
+	 * Attribue une nouvelle valeur boolean à la zone d'animation
+	 * 
+	 * @param enCoursDAnimation Nouvelle valeur boolean de l'animation
+	 */
+	// Kevin Nguyen
 	public void setEnCoursDAnimation(boolean enCoursDAnimation) {
 		this.enCoursDAnimation = enCoursDAnimation;
 	}
@@ -505,6 +523,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * Méthode permettant de gérer les collisions avec les cotés
 	 * 
 	 */
+	// Kevin Nguyen
+
+//	 * Calcul des collisions sur les virages
+//	 */
 	// Kevin Nguyen
 
 	public void collisionCote() {
@@ -552,8 +574,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
 
-		} else if (!aireVoiture4.isEmpty()) {
+		else if (!aireVoiture4.isEmpty()) {
 
 			try {
 				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 45, -45);
@@ -565,7 +588,57 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				e.printStackTrace();
 			}
 
+			try {
+
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 45);
+
+				voiture.setVitesse(vit);
+				voiture.setPosition(
+						new Vecteur2D(voiture.getPosition().getX() + pos, voiture.getPosition().getY() + pos));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else if (!aireVoiture2.isEmpty()) {
+
+			try {
+
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 215);
+				voiture.setVitesse(vit);
+				voiture.setPosition(
+						new Vecteur2D(voiture.getPosition().getX() - pos, voiture.getPosition().getY() - pos));
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else if (!aireVoiture3.isEmpty()) {
+
+			try {
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 135);
+				voiture.setVitesse(vit);
+				voiture.setPosition(
+						new Vecteur2D(voiture.getPosition().getX() - pos, voiture.getPosition().getY() + pos));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else if (!aireVoiture4.isEmpty()) {
+			try {
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 315);
+				voiture.setVitesse(vit);
+				voiture.setPosition(
+						new Vecteur2D(voiture.getPosition().getX() + pos, voiture.getPosition().getY() - pos));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 
 	}
+
 }

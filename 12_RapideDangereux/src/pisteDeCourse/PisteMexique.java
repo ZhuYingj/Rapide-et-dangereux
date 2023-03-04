@@ -4,6 +4,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 
 import interfaces.Dessinable;
 import utilitaireObjets.PisteDeDepart;
@@ -23,7 +25,7 @@ import utilitaireObjets.PisteVirageHaut;
 
 public class PisteMexique implements Dessinable {
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 87;
+	private int taillePiste = 87;
 	/** Position en x de la piste au complet **/
 	private int x;
 	/** Position en y de la piste au complet  **/
@@ -35,7 +37,9 @@ public class PisteMexique implements Dessinable {
 	private PisteVirageBas bas = new PisteVirageBas(0,0);;
 	private PisteVirageGauche gauche = new PisteVirageGauche(0,0);;
 	private PisteVirageDroit droit = new PisteVirageDroit(0,0);;
-	private PisteVirageHaut haut = new PisteVirageHaut(0,0);;
+	private PisteVirageHaut haut = new PisteVirageHaut(0,0);
+	private Rectangle2D rectangle;
+	private Area aireRectangle;;
 	
 	
 	/**
@@ -60,153 +64,165 @@ public class PisteMexique implements Dessinable {
 		//piste virgae bas :
 		bas = new PisteVirageBas(x,y);
 		bas.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale depart :
 		depart = new PisteDeDepart(x,y);
 		depart.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x + TAILLE_PISTE;
+		this.x = x + taillePiste;
 		
 		//Piste virage vers la gauche:
 		gauche = new PisteVirageGauche(x,y);
 		gauche.dessiner(g2d);
-		this.y = y + TAILLE_PISTE;
+		this.y = y + taillePiste;
 		
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);
-		this.y = y + TAILLE_PISTE;
+		this.y = y + taillePiste;
 	
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);
-		this.y = y + TAILLE_PISTE;
+		this.y = y + taillePiste;
 	
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);
-		this.y = y + TAILLE_PISTE;
+		this.y = y + taillePiste;
 		
 		//piste vers le droit:
 		droit = new PisteVirageDroit(x,y);
 		droit.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
-		this.x = x - TAILLE_PISTE;
+		this.x = x - taillePiste;
 		
 		//Piste Virage Haut;
 		haut = new PisteVirageHaut(x,y);
 		haut.dessiner(g2d);
-		this.y = y - TAILLE_PISTE;
+		this.y = y - taillePiste;
 		
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);	
-		this.y = y - TAILLE_PISTE;
+		this.y = y - taillePiste;
 		
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);	
-		this.y = y - TAILLE_PISTE;
+		this.y = y - taillePiste;
 		
 		//piste vertical:
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);
 		
+		
+		rectangle = new Rectangle2D.Double(taillePiste+1, taillePiste+1 ,taillePiste*6-1 ,taillePiste*3-1);
+		aireRectangle = new Area(rectangle);
+		g2d.setColor(Color.gray);
+		g2d.fill(aireRectangle);
+		g2d.setColor(Color.red);
+		g2d.draw(aireRectangle);
+		
 	}
-
-
+	/**
+	 * Retourne l'aire le rectangle au centre
+	 * @return le rectangle au centre
+	 */
+	public Area getRectangle() {
+		return aireRectangle;
+	}
+	
+	/**
+	 * Retourne le composant virage bas
+	 * @return le composant virage bas
+	 */
 	public PisteVirageBas getBas() {
 		return bas;
 	}
 
-
-	public void setBas(PisteVirageBas bas) {
-		this.bas = bas;
-	}
-
-
+	/**
+	 * Retourne le composant virage gauche
+	 * @return le composant virage gauche
+	 */
 	public PisteVirageGauche getGauche() {
 		return gauche;
 	}
 
-
-	public void setGauche(PisteVirageGauche gauche) {
-		this.gauche = gauche;
-	}
-
-
+	/**
+	 * Retourne le composant virage droite
+	 * @return le composant virage droite
+	 */
 	public PisteVirageDroit getDroit() {
 		return droit;
 	}
 
-
-	public void setDroit(PisteVirageDroit droit) {
-		this.droit = droit;
-	}
-
-
+	/**
+	 * Retourne le composant virage haut
+	 * @return le composant virage haut
+	 */
 	public PisteVirageHaut getHaut() {
 		return haut;
 	}
 
-
-	public void setHaut(PisteVirageHaut haut) {
-		this.haut = haut;
+	public int getTaillePiste() {
+		return taillePiste;
 	}
+
 	
 
 }
