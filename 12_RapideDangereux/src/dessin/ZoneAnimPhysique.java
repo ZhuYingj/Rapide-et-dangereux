@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import geometrie.Vecteur2D;
 import physique.MoteurPhysique;
 import pisteDeCourse.PisteMexique;
+import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Voiture;
 
 /**
@@ -84,6 +85,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Area aireVoiture3;
 	/** Troisieme copie de l'aire de la voiture **/
 	private Area aireVoiture4;
+	/** Aire du rectangle au centre **/
+	private Area aireRectangle;
 
 	/**
 	 * methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -147,6 +150,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		aireTriangle2 = mexique.getDroit().getAireTriangle();
 		aireTriangle3 = mexique.getGauche().getAireTriangle();
 		aireTriangle4 = mexique.getHaut().getAireTriangle();
+		
+		aireRectangle = mexique.getRectangle();
 
 		voiture.setPixelsParMetre(pixelsParMetre);
 

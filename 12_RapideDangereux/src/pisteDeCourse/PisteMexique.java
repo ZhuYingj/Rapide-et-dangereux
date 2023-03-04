@@ -4,6 +4,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 
 import interfaces.Dessinable;
 import utilitaireObjets.PisteDeDepart;
@@ -35,7 +37,9 @@ public class PisteMexique implements Dessinable {
 	private PisteVirageBas bas = new PisteVirageBas(0,0);;
 	private PisteVirageGauche gauche = new PisteVirageGauche(0,0);;
 	private PisteVirageDroit droit = new PisteVirageDroit(0,0);;
-	private PisteVirageHaut haut = new PisteVirageHaut(0,0);;
+	private PisteVirageHaut haut = new PisteVirageHaut(0,0);
+	private Rectangle2D rectangle;
+	private Area aireRectangle;;
 	
 	
 	/**
@@ -166,8 +170,23 @@ public class PisteMexique implements Dessinable {
 		verticale = new PisteVerticale(x,y);
 		verticale.dessiner(g2d);
 		
+		
+		rectangle = new Rectangle2D.Double(TAILLE_PISTE+1, TAILLE_PISTE+1 ,TAILLE_PISTE*6-1 ,TAILLE_PISTE*3-1);
+		aireRectangle = new Area(rectangle);
+		g2d.setColor(Color.gray);
+		g2d.fill(aireRectangle);
+		g2d.setColor(Color.red);
+		g2d.draw(aireRectangle);
+		
 	}
-
+	/**
+	 * Retourne l'aire le rectangle au centre
+	 * @return le rectangle au centre
+	 */
+	public Area getRectangle() {
+		return aireRectangle;
+	}
+	
 	/**
 	 * Retourne le composant virage bas
 	 * @return le composant virage bas
