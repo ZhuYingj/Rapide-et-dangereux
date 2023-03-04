@@ -309,7 +309,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	/**
-	 * va reinitier la position de la voiture
+	 * Méthode qui permet de réinitialiser la position de la voiture
 	 */
 	// Alexis Pineda-Alvarado
 	public void restartPos() {
@@ -386,6 +386,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		repaint();
 
 	}
+
+	/**
+	 * Méthode qui permet de détecter les levés d'évènement et changer le texte
+	 */
 
 	// Par Tan Tommy Rin
 	public void changementTexteParIteration() {
@@ -497,6 +501,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		this.enCoursDAnimation = enCoursDAnimation;
 	}
 
+	/**
+	 * Méthode permettant de gérer les collisions avec les cotés
+	 * 
+	 */
+	// Kevin Nguyen
+
 	public void collisionCote() {
 
 		double pos = 3;
@@ -507,7 +517,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		aireVoiture4.intersect(aireTriangle4);
 
 		if (!aireVoiture1.isEmpty()) {
-	
+
 			try {
 				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 45, 45);
 				voiture.setVitesse(vit);
@@ -519,20 +529,20 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 		} else if (!aireVoiture2.isEmpty()) {
-	
+
 			try {
 				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), -45, 45);
 				voiture.setVitesse(vit);
 				voiture.setPosition(
 						new Vecteur2D(voiture.getPosition().getX() - pos, voiture.getPosition().getY() - pos));
-				
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		} else if (!aireVoiture3.isEmpty()) {
-		
+
 			try {
 				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 45, -45);
 				voiture.setVitesse(vit);
@@ -544,7 +554,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 		} else if (!aireVoiture4.isEmpty()) {
-		
+
 			try {
 				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 45, -45);
 				voiture.setVitesse(vit);
