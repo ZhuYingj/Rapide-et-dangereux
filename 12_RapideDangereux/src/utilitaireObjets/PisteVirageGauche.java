@@ -29,6 +29,12 @@ public class PisteVirageGauche implements Dessinable {
 	
 	}
 	
+	/**
+	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
+	 * 
+	 * @param x 	position en x de la piste
+	 * @param y		position en y de la piste
+	 */
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(Color.BLACK);
