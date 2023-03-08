@@ -15,7 +15,11 @@ import javax.swing.JPanel;
 import geometrie.Vecteur2D;
 import physique.MoteurPhysique;
 import pisteDeCourse.PisteMexique;
+
 import utilitaireObjets.Champignon;
+
+import utilitaireObjets.BouleDeNeige;
+
 import utilitaireObjets.Voiture;
 
 /**
@@ -89,6 +93,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Area aireRectangle;
 	private Champignon champignon;
 
+	private BouleDeNeige bouleDeNeige;
+
 	/**
 	 * methode qui permettra de s'ajouter en tant qu'ecouteur
 	 */
@@ -103,7 +109,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public ZoneAnimPhysique() {
 
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 60);
+
 		champignon = new Champignon(new Vecteur2D(150, 0.1), 25);
+
+
+		bouleDeNeige = new BouleDeNeige(getWidth(), getHeight(), Color.blue, 300, 300);
+
+
 		addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -157,6 +169,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
+		
+		//bouleDeNeige.setPixelsParMetre(pixelsParMetre);
+		
+		//bouleDeNeige.dessiner(g2d);
 
 		aireVoiture1 = new Area(voiture.getCercle());
 		aireVoiture2 = new Area(aireVoiture1);
