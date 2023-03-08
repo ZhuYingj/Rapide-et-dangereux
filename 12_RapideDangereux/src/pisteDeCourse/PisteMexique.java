@@ -8,6 +8,8 @@ import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
 import interfaces.Dessinable;
+import utilitaireObjets.Accelerateur;
+import utilitaireObjets.Colle;
 import utilitaireObjets.PisteDeDepart;
 import utilitaireObjets.PisteHorizontale;
 import utilitaireObjets.PisteVerticale;
@@ -38,6 +40,8 @@ public class PisteMexique implements Dessinable {
 	private PisteVirageGauche gauche = new PisteVirageGauche(0,0);;
 	private PisteVirageDroit droit = new PisteVirageDroit(0,0);;
 	private PisteVirageHaut haut = new PisteVirageHaut(0,0);
+	private Accelerateur vitesse = new Accelerateur(0,0);
+	private Colle colle = new Colle(0,0);
 	private Rectangle2D rectangle;
 	private Area aireRectangle;;
 	
@@ -74,6 +78,13 @@ public class PisteMexique implements Dessinable {
 		//piste horizontale :
 		horizontale = new PisteHorizontale(x,y);
 		horizontale.dessiner(g2d);
+		
+		colle = new Colle(x,y);
+		colle.dessiner(g2d);
+		
+//		vitesse = new Accelerateur(x,y);
+//		vitesse.dessiner(g2d);
+		
 		this.x = x + taillePiste;
 		
 		//piste horizontale :

@@ -114,7 +114,7 @@ public class JeuOptions extends JPanel {
 		add(btnItalie);
 		btnItalie.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-		imageActuelle = OutilsImage.lireImage("Construction.gif");
+		imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
 		zoneApercupiste.setImg(imageActuelle);
 		zoneApercupiste.repaint();
 		}

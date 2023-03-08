@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import geometrie.Vecteur2D;
 import physique.MoteurPhysique;
+import pisteDeCourse.PisteItalie;
 import pisteDeCourse.PisteMexique;
 import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Voiture;
@@ -69,6 +70,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	/** La premiere piste affiché **/
 	private PisteMexique mexique;
+	
+	private PisteItalie italie;
+	
 	/** Aire du triangle superieur gauche **/
 	private Area aireTriangle1;
 	/** Aire du triangle inferieur droit **/
@@ -144,6 +148,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+		
+//		italie = new PisteItalie(1,1);
+//		italie.dessiner(g2d);
 		mexique = new PisteMexique(1, 1);
 		mexique.dessiner(g2d);
 		aireTriangle1 = mexique.getBas().getAireTriangle();
