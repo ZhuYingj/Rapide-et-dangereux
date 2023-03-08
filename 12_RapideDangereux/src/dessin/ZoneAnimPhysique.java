@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import geometrie.Vecteur2D;
 import physique.MoteurPhysique;
 import pisteDeCourse.PisteMexique;
-import utilitaireObjets.PisteVirageHaut;
+import utilitaireObjets.Champignon;
 import utilitaireObjets.Voiture;
 
 /**
@@ -87,6 +87,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Area aireVoiture4;
 	/** Aire du rectangle au centre **/
 	private Area aireRectangle;
+	private Champignon champignon;
 
 	/**
 	 * methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -102,7 +103,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public ZoneAnimPhysique() {
 
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 60);
-
+		champignon = new Champignon(new Vecteur2D(150, 0.1), 25);
 		addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -161,6 +162,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		aireVoiture2 = new Area(aireVoiture1);
 		aireVoiture3 = new Area(aireVoiture1);
 		aireVoiture4 = new Area(aireVoiture1);
+		champignon.setPixelsParMetre(pixelsParMetre);
+		champignon.dessiner(g2d);
 	}
 
 	/**
@@ -340,6 +343,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		if (haut == false) {
 			voiture.setAccel(valeurInit);
 		}
+		
 
 	}
 
