@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
 import geometrie.FlecheVectorielle;
@@ -24,6 +25,8 @@ public class Voiture implements Dessinable, Selectionnable {
 	private double diametre = 1;
 	/** Masse de la voiture **/
 	private double masseEnKg = 50;
+	/**Masse de la voiture **/
+	private double masseEnKgInitial;
 	/** Nombre de pixel par metre **/
 	private double pixelsParMetre;
 	/** La couleur de la voiture **/
@@ -63,6 +66,7 @@ public class Voiture implements Dessinable, Selectionnable {
 		this.diametre = diametre;
 		this.angle = angle;
 		this.vitesseMaxSelonNiveau = vitesseMaxSelonNiv;
+		masseEnKgInitial = masseEnKg;
 		creerLaGeometrie();
 
 	}
@@ -74,6 +78,15 @@ public class Voiture implements Dessinable, Selectionnable {
 	public Voiture() {
 		this.diametre = 25;
 		this.vitesseMaxSelonNiveau = 5.0;
+		masseEnKgInitial = masseEnKg;
+	}
+
+	public double getMasseEnKgInitial() {
+		return masseEnKgInitial;
+	}
+
+	public void setMasseEnKgInitial(double masseEnKgInitial) {
+		this.masseEnKgInitial = masseEnKgInitial;
 	}
 
 	/**
@@ -332,6 +345,13 @@ public class Voiture implements Dessinable, Selectionnable {
 		this.vitesseMaxSelonNiveau = vitesseMaxSelonNiveau;
 	}
 
+	public Shape getVoitureTransfo() {
+		return voitureTransfo;
+	}
+
+	public void setVoitureTransfo(Shape voitureTransfo) {
+		this.voitureTransfo = voitureTransfo;
+	}
 
 	/**
 	 * Cette methode permet de determiner si la voiture depasse le composant dessin
@@ -349,7 +369,7 @@ public class Voiture implements Dessinable, Selectionnable {
 		// pour le bas
 		if (position.getY() > positionYBas - this.diametre) {
 			try {
-				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 90);
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 90);
 				setVitesse(vit);
 				position.setY(positionYBas - this.diametre);
 			} catch (Exception e) {
@@ -361,7 +381,7 @@ public class Voiture implements Dessinable, Selectionnable {
 		// pour le haut
 		else if (position.getY() < positionYHaut) {
 			try {
-				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 270);
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 270);
 				setVitesse(vit);
 				position.setY(positionYHaut);
 			} catch (Exception e) {
@@ -373,7 +393,7 @@ public class Voiture implements Dessinable, Selectionnable {
 		// pour la droite
 		else if (position.getX() > positionXDroite - this.diametre) {
 			try {
-				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 180);
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 180);
 				setVitesse(vit);
 				position.setX(positionXDroite - this.diametre);
 			} catch (Exception e) {
@@ -385,7 +405,7 @@ public class Voiture implements Dessinable, Selectionnable {
 		// pour la gauche
 		else if (position.getX() < positionXGauche) {
 			try {
-				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 0);
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 0);
 				setVitesse(vit);
 				position.setX(positionXGauche);
 			} catch (Exception e) {
@@ -394,15 +414,15 @@ public class Voiture implements Dessinable, Selectionnable {
 			}
 
 		}
-		
-		
+
 	}
 
 	/**
 	 * Retourne la forme cercle qui est la voiture
+	 * 
 	 * @return la forme cercle
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public Ellipse2D getCercle() {
 		return cercle;
 	}
@@ -411,9 +431,9 @@ public class Voiture implements Dessinable, Selectionnable {
 	/**
 	 * À compléter plus tard
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public boolean contient(double xPix, double yPix) {
-		// TODO Auto-generated method stub
+		//
 		return false;
 	}
 

@@ -16,11 +16,8 @@ import geometrie.Vecteur2D;
 import physique.MoteurPhysique;
 import pisteDeCourse.PisteItalie;
 import pisteDeCourse.PisteMexique;
-
-import utilitaireObjets.Champignon;
-
 import utilitaireObjets.BouleDeNeige;
-
+import utilitaireObjets.Champignon;
 import utilitaireObjets.Voiture;
 
 /**
@@ -74,9 +71,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	/** La premiere piste affiché **/
 	private PisteMexique mexique;
-	
+
 	private PisteItalie italie;
-	
+
 	/** Aire du triangle superieur gauche **/
 	private Area aireTriangle1;
 	/** Aire du triangle inferieur droit **/
@@ -95,7 +92,18 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Area aireVoiture4;
 	/** Aire du rectangle au centre **/
 	private Area aireRectangle;
+
+	private Area aireVoiture5;
+
 	private Champignon champignon;
+
+	private Area champignonAire;
+
+	private Area champignonAireCopie1;
+
+	private boolean contactAveChampignon = false;
+
+	private double tempsTemporaire;
 
 	private BouleDeNeige bouleDeNeige;
 
@@ -114,11 +122,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 60);
 
-		champignon = new Champignon(new Vecteur2D(150, 0.1), 25);
-
+		champignon = new Champignon(new Vecteur2D(150, 5), 3);
 
 		bouleDeNeige = new BouleDeNeige(getWidth(), getHeight(), Color.blue, 300, 300);
-
 
 		addKeyListener(new KeyAdapter() {
 
@@ -161,7 +167,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		
 //		italie = new PisteItalie(1,1);
 //		italie.dessiner(g2d);
 		mexique = new PisteMexique(1, 1);
@@ -176,17 +181,23 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
-		
-		//bouleDeNeige.setPixelsParMetre(pixelsParMetre);
-		
-		//bouleDeNeige.dessiner(g2d);
+
+		// bouleDeNeige.setPixelsParMetre(pixelsParMetre);
+
+		// bouleDeNeige.dessiner(g2d);
 
 		aireVoiture1 = new Area(voiture.getCercle());
 		aireVoiture2 = new Area(aireVoiture1);
 		aireVoiture3 = new Area(aireVoiture1);
 		aireVoiture4 = new Area(aireVoiture1);
+		aireVoiture5 = new Area(aireVoiture1);
+
 		champignon.setPixelsParMetre(pixelsParMetre);
 		champignon.dessiner(g2d);
+
+		champignonAire = new Area(champignon.getShapeCercle());
+		champignonAireCopie1 = new Area(champignonAire);
+
 	}
 
 	/**
@@ -299,7 +310,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			collisionCote();
 			testerCollisionsEtAjusterVitesses();
+			collisionAvecChampignon(); // Collision avec champignon
+			if (contactAveChampignon == true) {
+				tempsTemporaire = tempsTotalEcoule;
+				contactAveChampignon = false;
+				System.out.println(tempsTemporaire);
 
+			}
 			repaint();
 
 			try {
@@ -337,7 +354,25 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		calculerUneIterationPhysique();
 		testerCollisionsEtAjusterVitesses();
 		collisionCote();
+		collisionAvecChampignon();
 		repaint();
+	}
+
+	public void collisionAvecChampignon() {
+
+		aireVoiture5.intersect(champignonAireCopie1);
+		if (!aireVoiture5.isEmpty()) {
+			contactAveChampignon = true;
+
+		}
+		if (tempsTemporaire != 0 && tempsTemporaire + 3 > tempsTotalEcoule) {
+			champignon.fonctionChampignonActivation(voiture);
+			System.out.println(voiture.getMasseEnKg() + " masse touche");
+		} else {
+			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
+			System.out.println(voiture.getMasseEnKg());
+		}
+
 	}
 
 	/**
@@ -366,7 +401,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		if (haut == false) {
 			voiture.setAccel(valeurInit);
 		}
-		
 
 	}
 

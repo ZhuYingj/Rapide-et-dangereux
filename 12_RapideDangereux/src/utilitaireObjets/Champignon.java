@@ -19,6 +19,16 @@ public class Champignon implements Dessinable, Selectionnable {
 	private Ellipse2D cercle;
 	Shape shapeCercle;
 
+	public Shape getShapeCercle() {
+		return shapeCercle;
+	}
+
+	public void setShapeCercle(Shape shapeCercle) {
+		this.shapeCercle = shapeCercle;
+
+		creerLaGeometrie();
+	}
+
 	public Champignon(Vecteur2D pos, double diametre) {
 		this.position = pos;
 		this.diametre = diametre;
@@ -28,9 +38,12 @@ public class Champignon implements Dessinable, Selectionnable {
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D gCopie = (Graphics2D) g2d.create();
+		AffineTransform mat = new AffineTransform();
+		mat.scale(pixelParMetre, pixelParMetre);
+		shapeCercle = mat.createTransformedShape(cercle);
 		gCopie.setColor(Color.green);
-		gCopie.scale(pixelParMetre, pixelParMetre);
-		gCopie.fill(cercle);
+
+		gCopie.fill(shapeCercle);
 	}
 
 	public double getPixelsParMetre() {
@@ -52,14 +65,14 @@ public class Champignon implements Dessinable, Selectionnable {
 	}
 
 	private void creerLaGeometrie() {
-		AffineTransform mat = new AffineTransform();
+
 		cercle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
-		shapeCercle = mat.createTransformedShape(cercle);
+
 	}
 
-	public void fonctionChampignon(Voiture voitureAffecte) {
+	public void fonctionChampignonActivation(Voiture voitureAffecte) {
 		// Masse augmente selon le temps
-		final double masseProgressive = voitureAffecte.getMasseEnKg() * 0.05;
+		double masseProgressive = voitureAffecte.getMasseEnKg() * 1.005;
 		voitureAffecte.setMasseEnKg(masseProgressive);
 
 	}
