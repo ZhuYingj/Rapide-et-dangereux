@@ -394,6 +394,8 @@ public class Voiture implements Dessinable, Selectionnable {
 			}
 
 		}
+		
+		
 	}
 
 	/**
