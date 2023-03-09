@@ -38,11 +38,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Nombre de pixels pas metre. */
 	private double pixelsParMetre;
 	/** Temps du deltaT par d�faut */
-	private double deltaT = 0.02;
+	private double deltaT = 0.01;
 	/** Booleen de l'animation initialise a false */
 	private boolean enCoursDAnimation = false;
 	/** Temps du sleep de l'application */
-	private int tempsDuSleep = 10;
+	private int tempsDuSleep = 5;
 	/** Notre objet voiture **/
 	private Voiture voiture;
 	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/
@@ -309,12 +309,21 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 			collisionCote();
+
 			testerCollisionsEtAjusterVitesses();
 			collisionAvecChampignon(); // Collision avec champignon
 			if (contactAveChampignon == true) {
 				tempsTemporaire = tempsTotalEcoule;
 				contactAveChampignon = false;
 				System.out.println(tempsTemporaire);
+
+			enCollisionAvec();
+
+			
+			if (haut == false) {
+				voiture.setAccel(valeurInit);
+			}
+
 
 			}
 			repaint();
@@ -352,9 +361,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void avancerUnPas() {
 		arreter();
 		calculerUneIterationPhysique();
-		testerCollisionsEtAjusterVitesses();
+		
 		collisionCote();
+
 		collisionAvecChampignon();
+
+		enCollisionAvec();
+
 		repaint();
 	}
 
@@ -391,6 +404,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Tester si la voiture entre en collision avec les extremites du composant
 	 * dessin. Si oui, ajuste la position et calcule la nouvelle vitesse de la
 	 * voiture.
@@ -405,6 +419,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	/**
+=======
+>>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
 	 * Change le temps pour le sleep du thread.
 	 * 
 	 * @param tempsDuSleep Nouveua temps a appliquer au sleep.
@@ -586,10 +602,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Kevin Nguyen
 
-//	 * Calcul des collisions sur les virages
-//	 */
-	// Kevin Nguyen
-
 	public void collisionCote() {
 
 		double pos = 3;
@@ -652,6 +664,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 
+	}
+	
+	public void enCollisionAvec() {
+		mexique.enCollisionAvec(voiture);
 	}
 
 }
