@@ -553,10 +553,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Kevin Nguyen
 
-//	 * Calcul des collisions sur les virages
-//	 */
-	// Kevin Nguyen
-
 	public void collisionCote() {
 
 		double pos = 3;
