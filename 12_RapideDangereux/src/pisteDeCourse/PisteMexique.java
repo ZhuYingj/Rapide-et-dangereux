@@ -248,6 +248,13 @@ public class PisteMexique implements Dessinable {
 		for(int i =0;i<verticale.size();  i++) {
 			verticale.get(i).enCollisionAvec(voiture);
 		}
+		
+		for(int i =0;i<bas.size();  i++) {
+			bas.get(i).enCollisionAvec(voiture);
+		}
+		depart.enCollisionAvec(voiture);
+		
+		
 
 
 	}

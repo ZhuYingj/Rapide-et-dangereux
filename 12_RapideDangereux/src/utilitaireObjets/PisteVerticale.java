@@ -21,14 +21,6 @@ public class PisteVerticale implements Dessinable {
 
 	/** Taille de la piste qui est toujours constante **/
 	private static final int TAILLE_PISTE = 87;
-	/** La position en x du mure de haut **/
-	private int ligneRougeV1X;
-	/** La position en y du mure de haut **/
-	private int ligneRougeV1Y;
-	/** La position en x de mure de bas **/
-	private int ligneRougeV2X;
-	/** La position en y du mure de bas **/
-	private int ligneRougeV2Y;
 	/** la position en x de depart que l'objet piste qui vas etre creer **/
 	private int x;
 	/** la position en y de depart que l'objet piste qui vas etre creer  **/
@@ -39,6 +31,10 @@ public class PisteVerticale implements Dessinable {
 	private double angleNormaleMurDroite = 180;
 	/** Normale du mur gauche **/
 	private double angleNormaleMurGauche = 0;
+	private int murDroite;
+	private int murGauche;
+	private int murHaut;
+	private int murBas;
 	
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -53,10 +49,10 @@ public class PisteVerticale implements Dessinable {
 	public PisteVerticale(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.ligneRougeV1X = x;
-	    this.ligneRougeV1Y = y+1;
-	    this.ligneRougeV2X = x + TAILLE_PISTE;
-	    this.ligneRougeV2Y = y + TAILLE_PISTE ;
+		this.murDroite = x +  TAILLE_PISTE;
+		this.murGauche  =  x + 1;
+		this.murHaut    = y+1;
+		this.murBas   = y + TAILLE_PISTE;
 
 	}
 
@@ -80,8 +76,8 @@ public class PisteVerticale implements Dessinable {
 	 * 
 	 * @return une position en Y
 	 */
-	public int getLigneRougeV1X() {
-        return ligneRougeV1Y;
+	public int getMurHaut() {
+        return murHaut;
     }
 
 	/**
@@ -89,8 +85,8 @@ public class PisteVerticale implements Dessinable {
 	 * 
 	 * @return une position en Y
 	 */
-    public int getLigneRougeV2X() {
-        return ligneRougeV2Y;
+    public int getMurBas() {
+        return murBas;
     }
 
     /**
@@ -130,22 +126,22 @@ public class PisteVerticale implements Dessinable {
 	
 	public void enCollisionAvec(Voiture voiture) {
 
-		if(voiture.getPosition().getX() > ligneRougeV1X && voiture.getPosition().getX() < ligneRougeV2X  && voiture.getPosition().getY() > ligneRougeV1Y && voiture.getPosition().getY() < ligneRougeV2Y  ) {
-			if(voiture.getPosition().getX() < ligneRougeV1X + 1) {
+		if(voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas  ) {
+			if(voiture.getPosition().getX() < murGauche + 1) {
 				try {
-					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurDroite);
+					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurGauche);
 					voiture.setVitesse(vit);
-					voiture.getPosition().setX(ligneRougeV1X + 1);
+					voiture.getPosition().setX(murGauche + 1);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}   else if(voiture.getPosition().getX() > ligneRougeV2X - voiture.getDiametre()) {
+			}   else if(voiture.getPosition().getX() > murDroite - voiture.getDiametre()) {
 				try {
-					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurGauche);
+					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurDroite);
 					voiture.setVitesse(vit);
-					voiture.getPosition().setX(ligneRougeV2X- voiture.getDiametre());
+					voiture.getPosition().setX(murDroite- voiture.getDiametre());
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -154,4 +150,6 @@ public class PisteVerticale implements Dessinable {
 			}
 		}
 }
+
+	
 }

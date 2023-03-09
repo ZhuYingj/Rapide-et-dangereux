@@ -299,7 +299,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			collisionCote();
 			enCollisionAvec();
-			testerCollisionsEtAjusterVitesses();
+
+			
+			if (haut == false) {
+				voiture.setAccel(valeurInit);
+			}
 
 			repaint();
 
@@ -336,8 +340,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void avancerUnPas() {
 		arreter();
 		calculerUneIterationPhysique();
-		testerCollisionsEtAjusterVitesses();
+		
 		collisionCote();
+		enCollisionAvec();
 		repaint();
 	}
 
@@ -354,21 +359,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
 
 		repaint();
-	}
-
-	/**
-	 * Tester si la voiture entre en collision avec les extremites du composant
-	 * dessin. Si oui, ajuste la position et calcule la nouvelle vitesse de la
-	 * voiture.
-	 */
-	// Kevin Nguyen
-	private void testerCollisionsEtAjusterVitesses() {
-		voiture.gererCollision(getWidth(), 0, getHeight(), 0);
-		if (haut == false) {
-			voiture.setAccel(valeurInit);
-		}
-		
-
 	}
 
 	/**

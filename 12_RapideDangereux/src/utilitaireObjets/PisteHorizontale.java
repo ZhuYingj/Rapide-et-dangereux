@@ -21,13 +21,13 @@ public class PisteHorizontale implements Dessinable {
 	/** Taille de la piste qui est toujours constante **/
 	private static final int TAILLE_PISTE = 87;
 	/** La position en x du mure de haut **/
-	private int ligneRougeH1X;
+	private int murGauche;
 	/** La position en y du mure de haut **/
-	private int ligneRougeH1Y;
+	private int murHaut;
 	/** La position en x de mure de bas **/
-	private int ligneRougeH2X;
+	private int murDroite;
 	/** La position en y du mure de bas **/
-	private int ligneRougeH2Y;
+	private int murBas;
 	/** la position en x de depart que l'objet piste vas etre creer **/
 	private int x;
 	/** la position en y de depart que l'objet piste vas etre creer  **/
@@ -38,6 +38,8 @@ public class PisteHorizontale implements Dessinable {
 	private double angleNormaleMurHaut = 90;
 	/** Normale du mur bas **/
 	private double angleNormaleMurBas = 270;
+
+	
 
 	/**
 	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
@@ -52,10 +54,10 @@ public class PisteHorizontale implements Dessinable {
 	public PisteHorizontale(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.ligneRougeH1X = x + 1;
-		this.ligneRougeH1Y = y;
-		this.ligneRougeH2X = x + TAILLE_PISTE;
-		this.ligneRougeH2Y = y + TAILLE_PISTE;
+		this.murDroite = x +  TAILLE_PISTE;
+		this.murGauche  =  x ;
+		this.murHaut    = y;
+		this.murBas   = y + TAILLE_PISTE;
 
 	}
 
@@ -73,8 +75,8 @@ public class PisteHorizontale implements Dessinable {
 		g2dCopie.setColor(Color.RED);
 		Stroke stroke = new BasicStroke(3f);
 		g2dCopie.setStroke(stroke);
-		g2dCopie.drawLine(ligneRougeH1X, ligneRougeH1Y, x + TAILLE_PISTE - 1, y);
-		g2dCopie.drawLine(ligneRougeH1X, ligneRougeH2Y, x + TAILLE_PISTE - 1, y + TAILLE_PISTE);
+		g2dCopie.drawLine(murGauche, murHaut, x + TAILLE_PISTE - 1, y);
+		g2dCopie.drawLine(murGauche, murBas, x + TAILLE_PISTE - 1, y + TAILLE_PISTE);
 
 	}
 
@@ -104,8 +106,8 @@ public class PisteHorizontale implements Dessinable {
 	 * 
 	 * @return une position en Y
 	 */
-	public int getLigneRougeH1Y() {
-		return ligneRougeH1Y;
+	public int getmurHaut() {
+		return murHaut;
 	}
 
 
@@ -114,8 +116,8 @@ public class PisteHorizontale implements Dessinable {
 	 * 
 	 * @return une position en Y
 	 */
-	public int getLigneRougeH2Y() {
-		return ligneRougeH2Y;
+	public int getmurBas() {
+		return murBas;
 	}
 	/**
 	 * Retourne la normale du mur haut
@@ -135,22 +137,22 @@ public class PisteHorizontale implements Dessinable {
 
 	public void enCollisionAvec(Voiture voiture) {
 
-		if(voiture.getPosition().getX() > ligneRougeH1X && voiture.getPosition().getX() < ligneRougeH2X  && voiture.getPosition().getY() > ligneRougeH1Y && voiture.getPosition().getY() < ligneRougeH2Y ) {
-			if(voiture.getPosition().getY() < ligneRougeH1Y + 1) {
+		if(voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas ) {
+			if(voiture.getPosition().getY() < murHaut + 1) {
 				try {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurHaut);
 					voiture.setVitesse(vit);
-					voiture.getPosition().setY(ligneRougeH1Y + 1);
+					voiture.getPosition().setY(murHaut + 1);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}   else if(voiture.getPosition().getY()>  ligneRougeH2Y - voiture.getDiametre()) {
+			}   else if(voiture.getPosition().getY()>  murBas - voiture.getDiametre()) {
 				try {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurBas);
 					voiture.setVitesse(vit);
-					voiture.getPosition().setY(ligneRougeH2Y- voiture.getDiametre());
+					voiture.getPosition().setY(murBas- voiture.getDiametre());
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

@@ -8,6 +8,7 @@ import java.awt.geom.Rectangle2D;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import physique.MoteurPhysique;
 
 /**
  * Classe qui permet de creer un objet piste de d�part
@@ -20,14 +21,6 @@ public class PisteDeDepart implements Dessinable{
 
 	/** Taille de la piste qui est toujours constante **/
 	private static final int TAILLE_PISTE = 87;
-	/** La position en x du mure de haut **/
-	private int ligneRougeD1X;
-	/** La position en y du mure de haut **/
-	private int ligneRougeD1Y;
-	/** La position en x de mure de bas **/
-	private int ligneRougeD2X;
-	/** La position en y du mure de bas **/
-	private int ligneRougeD2Y;
 	/** la position en x de depart que l'objet piste vas etre creer **/
 	private int x;
 	/** la position en y de depart que l'objet piste vas etre creer  **/
@@ -35,9 +28,13 @@ public class PisteDeDepart implements Dessinable{
 	/** Pixels par metre par defaut  **/
 	private double pixelsParMetre = 1; //Defaut
 	/** Normale du mur haut **/
-	private Vecteur2D normaleMurHaut = new Vecteur2D(0,1);
+	private double angleNormaleMurHaut = 90;
 	/** Normale du mur bas **/
-	private Vecteur2D normaleMurBas = new Vecteur2D(0,-1);
+	private double angleNormaleMurBas = 270;
+	private int murDroite;
+	private int murGauche;
+	private int murHaut;
+	private int murBas;
 	
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -52,10 +49,10 @@ public class PisteDeDepart implements Dessinable{
 		public PisteDeDepart(int x, int y) {
 			this.x = x;
 			this.y = y;
-			this.ligneRougeD1X = x + 1;
-		    this.ligneRougeD1Y = y;
-		    this.ligneRougeD2X = x + 1;
-		    this.ligneRougeD2Y = y + TAILLE_PISTE;
+			this.murDroite = x +  TAILLE_PISTE;
+			this.murGauche  =  x;
+			this.murHaut    = y;
+			this.murBas   = y + TAILLE_PISTE;
 		
 		}
 		
@@ -110,8 +107,8 @@ public class PisteDeDepart implements Dessinable{
 		 * 
 		 * @return une position en Y
 		 */
-		public int getLigneRodugeD1Y() {
-	        return ligneRougeD1Y;
+		public int getMurHaut() {
+	        return murHaut;
 	    }
 
 		
@@ -120,24 +117,51 @@ public class PisteDeDepart implements Dessinable{
 		 * 
 		 * @return une position en Y
 		 */
-	    public int getLigneRougeD2Y() {
-	        return ligneRougeD2Y;
+	    public int getMurBas() {
+	        return murBas;
 	    }
 		
-	    /**
-	     * Retourne la normale du mur haut
-	     * @return la normale du mur haut
-	     */
-		public Vecteur2D getNormaleMurHaut() {
-			return normaleMurHaut;
+		/**
+		 * Retourne la normale du mur haut
+		 * @return la normale du mur haut
+		 */
+		public double getAngleNormaleMurHaut() {
+			return angleNormaleMurHaut;
 		}
 
 		/**
-	     * Retourne la normale du mur bas
-	     * @return la normale du mur bas
-	     */
-		public Vecteur2D getNormaleMurBas() {
-			return normaleMurBas;
+		 * Retourne la normale du mur bas
+		 * @return la normale du mur bas
+		 */
+		public double getAngleNormaleMurBas() {
+			return angleNormaleMurBas;
 		}
+		
+		public void enCollisionAvec(Voiture voiture) {
+
+			if(voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas ) {
+				if(voiture.getPosition().getY() < murHaut + 1) {
+					try {
+						Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurHaut);
+						voiture.setVitesse(vit);
+						voiture.getPosition().setY(murHaut + 1);
+
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}   else if(voiture.getPosition().getY()>  murBas - voiture.getDiametre()) {
+					try {
+						Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurBas);
+						voiture.setVitesse(vit);
+						voiture.getPosition().setY(murBas- voiture.getDiametre());
+
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		} 
 	
 }
