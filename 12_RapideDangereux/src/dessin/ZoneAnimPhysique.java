@@ -309,23 +309,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 			collisionCote();
-
-			testerCollisionsEtAjusterVitesses();
-			collisionAvecChampignon(); // Collision avec champignon
-			if (contactAveChampignon == true) {
-				tempsTemporaire = tempsTotalEcoule;
-				contactAveChampignon = false;
-				System.out.println(tempsTemporaire);
-
 			enCollisionAvec();
 
-			
 			if (haut == false) {
 				voiture.setAccel(valeurInit);
 			}
+			collisionAvecChampignon(); // Collision avec champignon
 
-
-			}
 			repaint();
 
 			try {
@@ -361,7 +351,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void avancerUnPas() {
 		arreter();
 		calculerUneIterationPhysique();
-		
+
 		collisionCote();
 
 		collisionAvecChampignon();
@@ -371,21 +361,32 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		repaint();
 	}
 
+	/**
+	 * Méhode qui gère la collision de la voiture avec le champignon L'effet est
+	 * appliqué pendant 5 secondes
+	 */
+
 	public void collisionAvecChampignon() {
 
 		aireVoiture5.intersect(champignonAireCopie1);
 		if (!aireVoiture5.isEmpty()) {
 			contactAveChampignon = true;
-
+			tempsTemporaire = tempsTotalEcoule;
+			contactAveChampignon = false;
 		}
-		if (tempsTemporaire != 0 && tempsTemporaire + 3 > tempsTotalEcoule) {
+		if (tempsTemporaire != 0 && tempsTemporaire + 5 > tempsTotalEcoule) {
 			champignon.fonctionChampignonActivation(voiture);
 			System.out.println(voiture.getMasseEnKg() + " masse touche");
 		} else {
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
 			tempsTemporaire = 0;
-			
+
 		}
+//		if (contactAveChampignon == true) {
+//		
+//			tempsTemporaire = tempsTotalEcoule;
+//			contactAveChampignon = false;
+//		}
 
 	}
 
@@ -404,24 +405,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		repaint();
 	}
 
-	/**
-<<<<<<< HEAD
-	 * Tester si la voiture entre en collision avec les extremites du composant
-	 * dessin. Si oui, ajuste la position et calcule la nouvelle vitesse de la
-	 * voiture.
-	 */
-	// Kevin Nguyen
-	private void testerCollisionsEtAjusterVitesses() {
-		voiture.gererCollision(getWidth(), 0, getHeight(), 0);
-		if (haut == false) {
-			voiture.setAccel(valeurInit);
-		}
-
-	}
-
-	/**
-=======
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
+	/*
 	 * Change le temps pour le sleep du thread.
 	 * 
 	 * @param tempsDuSleep Nouveua temps a appliquer au sleep.
@@ -666,7 +650,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 
 	}
-	
+
 	public void enCollisionAvec() {
 		mexique.enCollisionAvec(voiture);
 	}
