@@ -8,6 +8,7 @@ import java.awt.geom.Rectangle2D;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import physique.MoteurPhysique;
 
 /**
  * Classe qui permet de creer un objet Piste Verticale
@@ -35,9 +36,9 @@ public class PisteVerticale implements Dessinable {
 	/** Pixels par metre par defaut  **/
 	private double pixelsParMetre = 1; //Defaut
 	/** Normale du mur droite **/
-	private Vecteur2D normaleMurDroite = new Vecteur2D(-1,0);
+	private double angleNormaleMurDroite = 180;
 	/** Normale du mur gauche **/
-	private Vecteur2D normaleMurGauche = new Vecteur2D(1,0);
+	private double angleNormaleMurGauche = 0;
 	
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -55,7 +56,7 @@ public class PisteVerticale implements Dessinable {
 		this.ligneRougeV1X = x;
 	    this.ligneRougeV1Y = y+1;
 	    this.ligneRougeV2X = x + TAILLE_PISTE;
-	    this.ligneRougeV2Y = y+1;
+	    this.ligneRougeV2Y = y + TAILLE_PISTE ;
 
 	}
 
@@ -115,15 +116,42 @@ public class PisteVerticale implements Dessinable {
      * Retourne la normale du mur droite
      * @return la normale du mur droite
      */
-	public Vecteur2D getNormaleMurDroite() {
-		return normaleMurDroite;
+	public double getAngleNormaleMurDroite() {
+		return angleNormaleMurDroite;
 	}
 
 	/**
      * Retourne la normale du mur gauche
      * @return la normale du mur gauche
      */
-	public Vecteur2D getNormaleMurGauche() {
-		return normaleMurGauche;
+	public double getAngleNormaleMurGauche() {
+		return angleNormaleMurGauche;
 	}
+	
+	public void enCollisionAvec(Voiture voiture) {
+
+		if(voiture.getPosition().getX() > ligneRougeV1X && voiture.getPosition().getX() < ligneRougeV2X  && voiture.getPosition().getY() > ligneRougeV1Y && voiture.getPosition().getY() < ligneRougeV2Y  ) {
+			if(voiture.getPosition().getX() < ligneRougeV1X + 1) {
+				try {
+					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurDroite);
+					voiture.setVitesse(vit);
+					voiture.getPosition().setX(ligneRougeV1X + 1);
+					System.out.println("wow");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}   else if(voiture.getPosition().getX() > ligneRougeV2X - voiture.getDiametre()) {
+				try {
+					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurGauche);
+					voiture.setVitesse(vit);
+					voiture.getPosition().setX(ligneRougeV2X- voiture.getDiametre());
+					System.out.println("wow");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+}
 }

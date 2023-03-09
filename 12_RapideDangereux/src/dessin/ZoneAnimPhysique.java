@@ -41,11 +41,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Nombre de pixels pas metre. */
 	private double pixelsParMetre;
 	/** Temps du deltaT par d�faut */
-	private double deltaT = 0.02;
+	private double deltaT = 0.01;
 	/** Booleen de l'animation initialise a false */
 	private boolean enCoursDAnimation = false;
 	/** Temps du sleep de l'application */
-	private int tempsDuSleep = 10;
+	private int tempsDuSleep = 5;
 	/** Notre objet voiture **/
 	private Voiture voiture;
 	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/
@@ -298,6 +298,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 			collisionCote();
+			enCollisionAvec();
 			testerCollisionsEtAjusterVitesses();
 
 			repaint();
@@ -618,6 +619,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 
+	}
+	
+	public void enCollisionAvec() {
+		mexique.enCollisionAvec(voiture);
 	}
 
 }
