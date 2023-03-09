@@ -141,7 +141,7 @@ public class PisteHorizontale implements Dessinable {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurHaut);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setY(ligneRougeH1Y + 1);
-					System.out.println("wow");
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -151,7 +151,7 @@ public class PisteHorizontale implements Dessinable {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurBas);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setY(ligneRougeH2Y- voiture.getDiametre());
-					System.out.println("wow");
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
