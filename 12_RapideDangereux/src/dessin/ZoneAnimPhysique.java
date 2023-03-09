@@ -383,7 +383,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			System.out.println(voiture.getMasseEnKg() + " masse touche");
 		} else {
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
-			System.out.println(voiture.getMasseEnKg());
+			tempsTemporaire = 0;
+			
 		}
 
 	}

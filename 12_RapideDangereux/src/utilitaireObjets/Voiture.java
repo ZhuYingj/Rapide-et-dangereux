@@ -345,7 +345,7 @@ public class Voiture implements Dessinable, Selectionnable {
 		this.vitesseMaxSelonNiveau = vitesseMaxSelonNiveau;
 	}
 
-<<<<<<< HEAD
+
 	public Shape getVoitureTransfo() {
 		return voitureTransfo;
 	}
@@ -418,8 +418,7 @@ public class Voiture implements Dessinable, Selectionnable {
 
 	}
 
-=======
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
+
 	/**
 	 * Retourne la forme cercle qui est la voiture
 	 * 

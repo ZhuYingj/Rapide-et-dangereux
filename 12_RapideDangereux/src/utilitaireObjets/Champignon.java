@@ -72,7 +72,7 @@ public class Champignon implements Dessinable, Selectionnable {
 
 	public void fonctionChampignonActivation(Voiture voitureAffecte) {
 		// Masse augmente selon le temps
-		double masseProgressive = voitureAffecte.getMasseEnKg() * 1.005;
+		double masseProgressive = voitureAffecte.getMasseEnKg() * 1.0025;
 		voitureAffecte.setMasseEnKg(masseProgressive);
 
 	}
