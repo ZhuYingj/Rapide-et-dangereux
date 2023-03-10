@@ -48,7 +48,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/
 	private boolean premiereFois = true;
 	/** Valeur booléenne pour savoir si ces touches sont appuyés **/
-	private boolean droite, gauche, haut, bas;
+	private boolean droite, gauche, haut, bas, space;
 	/** Position x de la voiture **/
 	double x = 0;
 	/** Position y de la voiture **/
@@ -90,6 +90,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Area aireVoiture3;
 	/** Troisieme copie de l'aire de la voiture **/
 	private Area aireVoiture4;
+	/** Troisieme copie de l'aire de la voiture **/
+	private Area aireVoitureBoule;
 	/** Aire du rectangle au centre **/
 	private Area aireRectangle;
 
@@ -100,9 +102,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Area champignonAire;
 
 	private Area champignonAireCopie1;
+	
+	private Area bouleDeNeigeAire;
+	
+	private Area bouleDeNeigeAireCopie;
 
-	private boolean contactAveChampignon = false;
+	private boolean contactAveChampignon,contactBouleNeige = false;
 
+	
 	private double tempsTemporaire;
 
 	private BouleDeNeige bouleDeNeige;
@@ -124,7 +131,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		champignon = new Champignon(new Vecteur2D(150, 5), 3);
 
-		bouleDeNeige = new BouleDeNeige(getWidth(), getHeight(), Color.blue, 300, 300);
+		bouleDeNeige = new BouleDeNeige(new Vecteur2D(100, 10), 5.0);
 
 		addKeyListener(new KeyAdapter() {
 
@@ -182,21 +189,25 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		voiture.dessiner(g2d);
 
-		// bouleDeNeige.setPixelsParMetre(pixelsParMetre);
+		bouleDeNeige.setPixelsParMetre(pixelsParMetre);
 
-		// bouleDeNeige.dessiner(g2d);
+		bouleDeNeige.dessiner(g2d);
 
 		aireVoiture1 = new Area(voiture.getCercle());
 		aireVoiture2 = new Area(aireVoiture1);
 		aireVoiture3 = new Area(aireVoiture1);
 		aireVoiture4 = new Area(aireVoiture1);
 		aireVoiture5 = new Area(aireVoiture1);
+		aireVoitureBoule = new Area(aireVoiture1);
 
 		champignon.setPixelsParMetre(pixelsParMetre);
 		champignon.dessiner(g2d);
 
 		champignonAire = new Area(champignon.getShapeCercle());
 		champignonAireCopie1 = new Area(champignonAire);
+		
+		bouleDeNeigeAire = new Area(bouleDeNeige.getShapeBoule());
+		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
 
 	}
 
@@ -219,6 +230,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			break;
 		case KeyEvent.VK_UP:
 			haut = true;
+			break;
+		case KeyEvent.VK_Q:
+			space = true;
 			break;
 		}
 	}
@@ -291,6 +305,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		if (bas == true) {
 
 		}
+		if (space == true) {
+			System.out.println("yo");
+		}
 	}
 
 	/**
@@ -314,8 +331,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			if (haut == false) {
 				voiture.setAccel(valeurInit);
 			}
-			collisionAvecChampignon(); // Collision avec champignon
 
+			collisionAvecChampignon(); // Collision avec champignon
+			collisionBouleDeNeige();
 			repaint();
 
 			try {
@@ -365,7 +383,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * Méhode qui gère la collision de la voiture avec le champignon L'effet est
 	 * appliqué pendant 5 secondes
 	 */
-	//Par Tan Tommy Rin
+	// Par Tan Tommy Rin
 
 	public void collisionAvecChampignon() {
 
@@ -389,6 +407,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 //			contactAveChampignon = false;
 //		}
 
+	}
+	
+	public void collisionBouleDeNeige() {
+	
+		aireVoitureBoule.intersect(bouleDeNeigeAireCopie);
+		if(!aireVoitureBoule.isEmpty()) {
+			contactBouleNeige = true;
+			System.out.println("slow down");
+		}
 	}
 
 	/**
