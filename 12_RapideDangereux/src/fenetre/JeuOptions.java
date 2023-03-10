@@ -133,7 +133,7 @@ public class JeuOptions extends JPanel {
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
-				System.out.println(slider.getValue());
+				
 			}
 		});
 
