@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 
+import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 
 public class Accelerateur implements Dessinable{
@@ -15,6 +16,7 @@ public class Accelerateur implements Dessinable{
 	private int x;
 	/** la position en y de depart que l'objet piste vas etre creer  **/
 	private int y;
+	private double pixelParMetre = 1;
 	
 	
 	public Accelerateur(int x, int y) {
@@ -35,5 +37,21 @@ public class Accelerateur implements Dessinable{
 		g2d.drawLine(x + (TAILLE_PISTE/2),y, x+ TAILLE_PISTE, y + (TAILLE_PISTE/2) );
 		g2d.drawLine(x, y+ (TAILLE_PISTE/2) , x + (TAILLE_PISTE/2), y + TAILLE_PISTE);
 	}
+
+	public double getPixelsParMetre() {
+		return pixelParMetre;
+	}
+
+	public void setPixelsParMetre(double pixelParMetre) {
+		this.pixelParMetre = pixelParMetre;
+
+	}
+	
+//	public void fonctionAccelarateur(Voiture voitureAffecte) {
+//		// augmente la vitesse et l'acceleration
+//		final double vitesseAccelerer = voitureAffecte.getVitesseMaxSelonNiveau() * 2;
+//		voitureAffecte.setVitesse(vitesseAccelerer);
+//
+//	}
 	
 }

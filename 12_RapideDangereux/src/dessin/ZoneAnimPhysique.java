@@ -3,6 +3,7 @@ package dessin;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,12 +14,13 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.JPanel;
 
 import geometrie.Vecteur2D;
+import interfaces.Dessinable;
 import physique.MoteurPhysique;
 import pisteDeCourse.PisteItalie;
 import pisteDeCourse.PisteMexique;
 
 import utilitaireObjets.Champignon;
-
+import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BouleDeNeige;
 
 import utilitaireObjets.Voiture;
@@ -73,9 +75,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** support pour lancer des evenements de type PropertyChange **/
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	/** La premiere piste affiché **/
-	private PisteMexique mexique;
 	
+	private PisteMexique mexique;
 	private PisteItalie italie;
+	private int pi;
 	
 	/** Aire du triangle superieur gauche **/
 	private Area aireTriangle1;
@@ -96,6 +99,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Aire du rectangle au centre **/
 	private Area aireRectangle;
 	private Champignon champignon;
+	private Accelerateur accelerateur;
 
 	private BouleDeNeige bouleDeNeige;
 
@@ -112,6 +116,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public ZoneAnimPhysique() {
 
+		accelerateur = new Accelerateur(261,1);
+		
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 60);
 
 		champignon = new Champignon(new Vecteur2D(150, 0.1), 25);
@@ -142,7 +148,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		setBackground(Color.gray);
 
 	}
-
+	
+	
+	
+	
 	/**
 	 * Permet de dessiner une scene qui inclut ici une simple balle en mouvement
 	 * 
@@ -160,12 +169,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
 		
-//		italie = new PisteItalie(1,1);
-//		italie.dessiner(g2d);
+		
 		mexique = new PisteMexique(1, 1);
 		mexique.dessiner(g2d);
+//		italie = new PisteItalie(1,1);
+//		italie.dessiner(g2d);
+		
+		
 		aireTriangle1 = mexique.getBas().getAireTriangle();
 		aireTriangle2 = mexique.getDroit().getAireTriangle();
 		aireTriangle3 = mexique.getGauche().getAireTriangle();
@@ -187,6 +198,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		aireVoiture4 = new Area(aireVoiture1);
 		champignon.setPixelsParMetre(pixelsParMetre);
 		champignon.dessiner(g2d);
+		
+		accelerateur.dessiner(g2d);
 	}
 
 	/**
