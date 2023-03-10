@@ -241,6 +241,7 @@ public class PisteMexique implements Dessinable {
 	}
 
 	public void enCollisionAvec(Voiture voiture) {
+		
 		for(int i =0;i<horizontale.size();  i++) {
 			horizontale.get(i).enCollisionAvec(voiture);
 		}
@@ -252,6 +253,20 @@ public class PisteMexique implements Dessinable {
 		for(int i =0;i<bas.size();  i++) {
 			bas.get(i).enCollisionAvec(voiture);
 		}
+		
+		for(int i=0; i<gauche.size();  i++) {
+			gauche.get(i).enCollisionAvec(voiture);
+		}
+		
+		for(int i=0; i<droit.size();  i++) {
+			droit.get(i).enCollisionAvec(voiture);
+		}
+		
+		for(int i=0; i<haut.size();  i++) {
+			haut.get(i).enCollisionAvec(voiture);
+		}
+		
+		
 		depart.enCollisionAvec(voiture);
 		
 		
