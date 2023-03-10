@@ -3,6 +3,7 @@ package dessin;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,9 +14,15 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.JPanel;
 
 import geometrie.Vecteur2D;
+import interfaces.Dessinable;
 import physique.MoteurPhysique;
 import pisteDeCourse.PisteItalie;
 import pisteDeCourse.PisteMexique;
+
+
+import utilitaireObjets.Champignon;
+import utilitaireObjets.Accelerateur;
+
 import utilitaireObjets.BouleDeNeige;
 import utilitaireObjets.Champignon;
 import utilitaireObjets.Voiture;
@@ -70,9 +77,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** support pour lancer des evenements de type PropertyChange **/
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	/** La premiere piste affiché **/
-	private PisteMexique mexique;
 
+	
+	private PisteMexique mexique;
 	private PisteItalie italie;
+	private int pi;
+	
+
+
 
 	/** Aire du triangle superieur gauche **/
 	private Area aireTriangle1;
@@ -98,6 +110,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Area aireVoiture5;
 
 	private Champignon champignon;
+	private Accelerateur accelerateur;
 
 	private Area champignonAire;
 
@@ -127,6 +140,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public ZoneAnimPhysique() {
 
+		accelerateur = new Accelerateur(261,1);
+		
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 60);
 
 		champignon = new Champignon(new Vecteur2D(150, 5), 3);
@@ -155,7 +170,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		setBackground(Color.gray);
 
 	}
-
+	
+	
+	
+	
 	/**
 	 * Permet de dessiner une scene qui inclut ici une simple balle en mouvement
 	 * 
@@ -169,15 +187,25 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
 			enCoursDAnimation = true;
 			premiereFois = false;
+
 		}
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+		
+		
+
+
 //		italie = new PisteItalie(1,1);
 //		italie.dessiner(g2d);
+
 		mexique = new PisteMexique(1, 1);
 		mexique.dessiner(g2d);
+//		italie = new PisteItalie(1,1);
+//		italie.dessiner(g2d);
+		
+		
 		aireTriangle1 = mexique.getBas().getAireTriangle();
 		aireTriangle2 = mexique.getDroit().getAireTriangle();
 		aireTriangle3 = mexique.getGauche().getAireTriangle();
@@ -203,11 +231,19 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		champignon.setPixelsParMetre(pixelsParMetre);
 		champignon.dessiner(g2d);
 
+		
+		accelerateur.dessiner(g2d);
+
+
 		champignonAire = new Area(champignon.getShapeCercle());
 		champignonAireCopie1 = new Area(champignonAire);
 		
 		bouleDeNeigeAire = new Area(bouleDeNeige.getShapeBoule());
 		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
+
+
+		System.out.println(voiture.getMasseEnKg());
+
 
 	}
 
@@ -395,12 +431,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		if (tempsTemporaire != 0 && tempsTemporaire + 5 > tempsTotalEcoule) {
 			champignon.fonctionChampignonActivation(voiture);
-			System.out.println(voiture.getMasseEnKg() + " masse touche");
-		} else {
+			System.out.println(this.voiture.getMasseEnKg());
+		} 
+		if(tempsTemporaire + 5 < tempsTotalEcoule) {
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
-			tempsTemporaire = 0;
-
+			System.out.println(this.voiture.getMasseEnKg() + " apres");
 		}
+		
 //		if (contactAveChampignon == true) {
 //		
 //			tempsTemporaire = tempsTotalEcoule;
@@ -522,6 +559,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public void setVoitureMasse(double masseVoulu) {
 		this.voiture.setMasseEnKg(masseVoulu);
+		this.voiture.setMasseEnKgInitial(masseVoulu);
 
 	}
 

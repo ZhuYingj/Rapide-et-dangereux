@@ -24,8 +24,8 @@ public class Voiture implements Dessinable, Selectionnable {
 	/** Diametre de la voiture puisque la voiture est un cercle **/
 	private double diametre = 1;
 	/** Masse de la voiture **/
-	private double masseEnKg = 50;
-	/**Masse de la voiture **/
+	private double masseEnKg;
+	/** Masse initiale de la voiture **/
 	private double masseEnKgInitial;
 	/** Nombre de pixel par metre **/
 	private double pixelsParMetre;
@@ -62,10 +62,10 @@ public class Voiture implements Dessinable, Selectionnable {
 			double vitesseMaxSelonNiv) {
 		this.position = position;
 		this.skin = skin;
-		this.masseEnKg = masse;
 		this.diametre = diametre;
 		this.angle = angle;
 		this.vitesseMaxSelonNiveau = vitesseMaxSelonNiv;
+		this.masseEnKg = masse;
 		masseEnKgInitial = masseEnKg;
 		creerLaGeometrie();
 
@@ -345,7 +345,6 @@ public class Voiture implements Dessinable, Selectionnable {
 		this.vitesseMaxSelonNiveau = vitesseMaxSelonNiveau;
 	}
 
-
 	public Shape getVoitureTransfo() {
 		return voitureTransfo;
 	}
@@ -417,7 +416,6 @@ public class Voiture implements Dessinable, Selectionnable {
 		}
 
 	}
-
 
 	/**
 	 * Retourne la forme cercle qui est la voiture
