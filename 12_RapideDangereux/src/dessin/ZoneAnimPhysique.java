@@ -415,6 +415,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		if(!aireVoitureBoule.isEmpty()) {
 			contactBouleNeige = true;
 			System.out.println("slow down");
+			
 		}
 	}
 
