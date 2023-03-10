@@ -191,38 +191,51 @@ public class PisteItalie implements Dessinable{
 				verticale = new PisteVerticale(x,y);
 				verticale.dessiner(g2d);	
 				this.y = y - taillePiste;
+		
 	}
+/**
+ * Retourne l'aire le rectangle au centre
+ * @return le rectangle au centre
+ */
+public Area getRectangle() {
+	return aireRectangle;
+}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+/**
+ * Retourne le composant virage bas
+ * @return le composant virage bas
+ */
+public PisteVirageBas getBas() {
+	return bas;
+}
+
+/**
+ * Retourne le composant virage gauche
+ * @return le composant virage gauche
+ */
+public PisteVirageGauche getGauche() {
+	return gauche;
+}
+
+/**
+ * Retourne le composant virage droite
+ * @return le composant virage droite
+ */
+public PisteVirageDroit getDroit() {
+	return droit;
+}
+
+/**
+ * Retourne le composant virage haut
+ * @return le composant virage haut
+ */
+public PisteVirageHaut getHaut() {
+	return haut;
+}
+
+public int getTaillePiste() {
+	return taillePiste;
+}
 	
 	
 }
