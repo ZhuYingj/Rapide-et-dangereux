@@ -365,6 +365,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * Méhode qui gère la collision de la voiture avec le champignon L'effet est
 	 * appliqué pendant 5 secondes
 	 */
+	//Par Tan Tommy Rin
 
 	public void collisionAvecChampignon() {
 
