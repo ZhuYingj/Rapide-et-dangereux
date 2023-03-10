@@ -8,7 +8,9 @@ import java.awt.geom.Area;
 import java.awt.geom.Path2D;
 import java.awt.geom.Path2D.Double;
 
+import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import physique.MoteurPhysique;
 
 public class PisteVirageDroit implements Dessinable{
 
@@ -16,10 +18,14 @@ private static final int TAILLE_PISTE = 87;
 	
 	private int x;
 	private int y;
-	private int pente;
-	private int a;
-	private int b;
-	private int d;
+	private int murDroite;
+	private int murGauche;
+	private int murHaut;
+	private int murBas;
+	/** Normale du mur bas **/
+	private double angleNormaleMurBas = 270;
+	/** Normale du mur droite **/
+	private double angleNormaleMurDroite = 180;
 
 	/** Initialise la forme du triangle **/
 	private Path2D triangle;
@@ -29,10 +35,10 @@ private static final int TAILLE_PISTE = 87;
 	public PisteVirageDroit(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.pente = ((y +(TAILLE_PISTE/3))-(y+TAILLE_PISTE))/((x +TAILLE_PISTE)-(x +(TAILLE_PISTE/3)));
-		this.a = -(pente);
-		this.b = 1;
-		this.d = (-a*(x +(TAILLE_PISTE/3)))-(b*y+TAILLE_PISTE);
+		this.murDroite = x +  TAILLE_PISTE + 1;
+		this.murGauche  =  x + 1;
+		this.murHaut    = y+1;
+		this.murBas   = y + TAILLE_PISTE + 1;
 	
 	}
 	
@@ -58,6 +64,32 @@ private static final int TAILLE_PISTE = 87;
 		aireTriangle = new Area(triangle);
 		
 		
+	}
+	
+	public void enCollisionAvec(Voiture voiture) {
+		if(voiture.getPosition().getX() > murGauche  && voiture.getPosition().getX() < murDroite && voiture.getPosition().getY()  > murHaut&& voiture.getPosition().getY()  < murBas) {
+			if(voiture.getPosition().getX() > murDroite - voiture.getDiametre()) {
+				try {
+					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurDroite);
+					voiture.setVitesse(vit);
+					voiture.getPosition().setX(murDroite - voiture.getDiametre());
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if(voiture.getPosition().getY()>  murBas - voiture.getDiametre()) {
+				try {
+					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurBas);
+					voiture.setVitesse(vit);
+					voiture.getPosition().setY(murBas- voiture.getDiametre());
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
 	/**

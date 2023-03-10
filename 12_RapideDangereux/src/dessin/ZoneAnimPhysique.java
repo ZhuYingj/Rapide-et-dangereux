@@ -19,10 +19,12 @@ import physique.MoteurPhysique;
 import pisteDeCourse.PisteItalie;
 import pisteDeCourse.PisteMexique;
 
+
 import utilitaireObjets.Champignon;
 import utilitaireObjets.Accelerateur;
-import utilitaireObjets.BouleDeNeige;
 
+import utilitaireObjets.BouleDeNeige;
+import utilitaireObjets.Champignon;
 import utilitaireObjets.Voiture;
 
 /**
@@ -43,11 +45,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Nombre de pixels pas metre. */
 	private double pixelsParMetre;
 	/** Temps du deltaT par d�faut */
-	private double deltaT = 0.02;
+	private double deltaT = 0.01;
 	/** Booleen de l'animation initialise a false */
 	private boolean enCoursDAnimation = false;
 	/** Temps du sleep de l'application */
-	private int tempsDuSleep = 10;
+	private int tempsDuSleep = 5;
 	/** Notre objet voiture **/
 	private Voiture voiture;
 	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/
@@ -75,11 +77,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** support pour lancer des evenements de type PropertyChange **/
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	/** La premiere piste affiché **/
+
 	
 	private PisteMexique mexique;
 	private PisteItalie italie;
 	private int pi;
 	
+
+
+
 	/** Aire du triangle superieur gauche **/
 	private Area aireTriangle1;
 	/** Aire du triangle inferieur droit **/
@@ -98,8 +104,19 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Area aireVoiture4;
 	/** Aire du rectangle au centre **/
 	private Area aireRectangle;
+
+	private Area aireVoiture5;
+
 	private Champignon champignon;
 	private Accelerateur accelerateur;
+
+	private Area champignonAire;
+
+	private Area champignonAireCopie1;
+
+	private boolean contactAveChampignon = false;
+
+	private double tempsTemporaire;
 
 	private BouleDeNeige bouleDeNeige;
 
@@ -120,11 +137,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 60);
 
-		champignon = new Champignon(new Vecteur2D(150, 0.1), 25);
-
+		champignon = new Champignon(new Vecteur2D(150, 5), 3);
 
 		bouleDeNeige = new BouleDeNeige(getWidth(), getHeight(), Color.blue, 300, 300);
-
 
 		addKeyListener(new KeyAdapter() {
 
@@ -165,12 +180,19 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
 			enCoursDAnimation = true;
 			premiereFois = false;
+
 		}
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
 		
 		
+
+
+//		italie = new PisteItalie(1,1);
+//		italie.dessiner(g2d);
+
 		mexique = new PisteMexique(1, 1);
 		mexique.dessiner(g2d);
 //		italie = new PisteItalie(1,1);
@@ -187,19 +209,29 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		voiture.setPixelsParMetre(pixelsParMetre);
 
 		voiture.dessiner(g2d);
-		
-		//bouleDeNeige.setPixelsParMetre(pixelsParMetre);
-		
-		//bouleDeNeige.dessiner(g2d);
+
+		// bouleDeNeige.setPixelsParMetre(pixelsParMetre);
+
+		// bouleDeNeige.dessiner(g2d);
 
 		aireVoiture1 = new Area(voiture.getCercle());
 		aireVoiture2 = new Area(aireVoiture1);
 		aireVoiture3 = new Area(aireVoiture1);
 		aireVoiture4 = new Area(aireVoiture1);
+		aireVoiture5 = new Area(aireVoiture1);
+
 		champignon.setPixelsParMetre(pixelsParMetre);
 		champignon.dessiner(g2d);
+
 		
 		accelerateur.dessiner(g2d);
+
+
+		champignonAire = new Area(champignon.getShapeCercle());
+		champignonAireCopie1 = new Area(champignonAire);
+
+		System.out.println(voiture.getMasseEnKg());
+
 	}
 
 	/**
@@ -311,7 +343,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 			collisionCote();
-			testerCollisionsEtAjusterVitesses();
+			enCollisionAvec();
+
+			if (haut == false) {
+				voiture.setAccel(valeurInit);
+			}
+			collisionAvecChampignon(); // Collision avec champignon
 
 			repaint();
 
@@ -348,9 +385,45 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void avancerUnPas() {
 		arreter();
 		calculerUneIterationPhysique();
-		testerCollisionsEtAjusterVitesses();
+
 		collisionCote();
+
+		collisionAvecChampignon();
+
+		enCollisionAvec();
+
 		repaint();
+	}
+
+	/**
+	 * Méhode qui gère la collision de la voiture avec le champignon L'effet est
+	 * appliqué pendant 5 secondes
+	 */
+	// Par Tan Tommy Rin
+
+	public void collisionAvecChampignon() {
+
+		aireVoiture5.intersect(champignonAireCopie1);
+		if (!aireVoiture5.isEmpty()) {
+			contactAveChampignon = true;
+			tempsTemporaire = tempsTotalEcoule;
+			contactAveChampignon = false;
+		}
+		if (tempsTemporaire != 0 && tempsTemporaire + 5 > tempsTotalEcoule) {
+			champignon.fonctionChampignonActivation(voiture);
+
+		} else {
+			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
+			tempsTemporaire = 0;
+
+		}
+		System.out.println(this.voiture.getMasseEnKg());
+//		if (contactAveChampignon == true) {
+//		
+//			tempsTemporaire = tempsTotalEcoule;
+//			contactAveChampignon = false;
+//		}
+
 	}
 
 	/**
@@ -368,22 +441,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		repaint();
 	}
 
-	/**
-	 * Tester si la voiture entre en collision avec les extremites du composant
-	 * dessin. Si oui, ajuste la position et calcule la nouvelle vitesse de la
-	 * voiture.
-	 */
-	// Kevin Nguyen
-	private void testerCollisionsEtAjusterVitesses() {
-		voiture.gererCollision(getWidth(), 0, getHeight(), 0);
-		if (haut == false) {
-			voiture.setAccel(valeurInit);
-		}
-		
-
-	}
-
-	/**
+	/*
 	 * Change le temps pour le sleep du thread.
 	 * 
 	 * @param tempsDuSleep Nouveua temps a appliquer au sleep.
@@ -565,10 +623,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Kevin Nguyen
 
-//	 * Calcul des collisions sur les virages
-//	 */
-	// Kevin Nguyen
-
 	public void collisionCote() {
 
 		double pos = 3;
@@ -631,6 +685,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 
+	}
+
+	public void enCollisionAvec() {
+		mexique.enCollisionAvec(voiture);
 	}
 
 }

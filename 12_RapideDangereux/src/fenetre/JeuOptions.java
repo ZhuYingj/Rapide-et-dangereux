@@ -30,7 +30,7 @@ import pisteDeCourse.PisteMexique;
 /**
  * 
  * @author Alexis Pineda-Alvarado
- *@author Ludovic Julien
+ * @author Ludovic Julien
  */
 
 public class JeuOptions extends JPanel {
@@ -42,9 +42,8 @@ public class JeuOptions extends JPanel {
 	private JRadioButton rdbtnDifficile;
 	private Voiture voiture;
 	private JSlider slider;
-	
+
 	private Image imageActuelle;
-	
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
@@ -64,62 +63,61 @@ public class JeuOptions extends JPanel {
 		PanelApercu.setLayout(null);
 
 		/**
-		* Creer une zone de dessin "ZoneApercuPiste
-		* 
-		* @author Ludovic Julien
-		*/
+		 * Creer une zone de dessin "ZoneApercuPiste
+		 * 
+		 * @author Ludovic Julien
+		 */
 		ZoneApercupiste zoneApercupiste = new ZoneApercupiste();
 		zoneApercupiste.setBounds(0, 0, 650, 405);
 		PanelApercu.add(zoneApercupiste);
 		/**
-		* Creer le bouton qui permet si appuiyer d'afficher l'apercu de cette piste
-		* 
-		* @author Ludovic Julien
-		*/
+		 * Creer le bouton qui permet si appuiyer d'afficher l'apercu de cette piste
+		 * 
+		 * @author Ludovic Julien
+		 */
 		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");
-		//Icon icone = new ImageIcon(drapeuxMexique);
+		// Icon icone = new ImageIcon(drapeuxMexique);
 		JButton btnMexique = new JButton("Mexique");
-		//btnMexique.setIcon(icone);
+		// btnMexique.setIcon(icone);
 		btnMexique.setBounds(130, 77, 126, 78);
 		add(btnMexique);
 		btnMexique.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		imageActuelle = OutilsImage.lireImage("PisteMexique.png");
-		zoneApercupiste.setImg(imageActuelle);
-		zoneApercupiste.repaint();
-		}
+			public void actionPerformed(ActionEvent e) {
+				imageActuelle = OutilsImage.lireImage("PisteMexique.png");
+				zoneApercupiste.setImg(imageActuelle);
+				zoneApercupiste.repaint();
+			}
 		});
 		/**
-		* Creer le bouton qui permet si appuiyer d'afficher l'apercu de cette piste
-		* 
-		* @author Ludovic Julien
-		*/
+		 * Creer le bouton qui permet si appuiyer d'afficher l'apercu de cette piste
+		 * 
+		 * @author Ludovic Julien
+		 */
 		JButton btnCanada = new JButton("Canada");
 		btnCanada.setBounds(307, 77, 126, 78);
 		add(btnCanada);
 		btnCanada.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		imageActuelle = OutilsImage.lireImage("Construction.gif");
-		zoneApercupiste.setImg(imageActuelle);
-		zoneApercupiste.repaint();
-		}
+			public void actionPerformed(ActionEvent e) {
+				imageActuelle = OutilsImage.lireImage("Construction.gif");
+				zoneApercupiste.setImg(imageActuelle);
+				zoneApercupiste.repaint();
+			}
 		});
 		/**
-		* Creer le bouton qui permet si appuiyer d'afficher l'apercu de cette piste
-		* 
-		* @author Ludovic Julien
-		*/
+		 * Creer le bouton qui permet si appuiyer d'afficher l'apercu de cette piste
+		 * 
+		 * @author Ludovic Julien
+		 */
 		JButton btnItalie = new JButton("Italie");
 		btnItalie.setBounds(474, 77, 126, 78);
 		add(btnItalie);
 		btnItalie.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
-		zoneApercupiste.setImg(imageActuelle);
-		zoneApercupiste.repaint();
-		}
+			public void actionPerformed(ActionEvent e) {
+				imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
+				zoneApercupiste.setImg(imageActuelle);
+				zoneApercupiste.repaint();
+			}
 		});
-
 
 		Icon feuVert = new ImageIcon("green.jpg");
 		JLabel feuGreen = new JLabel();
@@ -132,6 +130,12 @@ public class JeuOptions extends JPanel {
 		panel_1.setLayout(null);
 
 		slider = new JSlider();
+		slider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
+				
+			}
+		});
 
 		slider.setMajorTickSpacing(10);
 		slider.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -156,7 +160,7 @@ public class JeuOptions extends JPanel {
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
+				pcs.firePropertyChange("MASSE", null, 60.0);
 
 			}
 		});

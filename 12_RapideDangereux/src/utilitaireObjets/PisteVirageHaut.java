@@ -8,7 +8,9 @@ import java.awt.geom.Area;
 import java.awt.geom.Path2D;
 import java.awt.geom.Path2D.Double;
 
+import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import physique.MoteurPhysique;
 
 
 /**
@@ -26,7 +28,14 @@ public class PisteVirageHaut implements Dessinable {
 
 	private int x;
 	private int y;
-	private int pente;
+	private int murDroite;
+	private int murGauche;
+	private int murHaut;
+	private int murBas;
+	/** Normale du mur bas **/
+	private double angleNormaleMurBas = 270;
+	/** Normale du mur gauche **/
+	private double angleNormaleMurGauche = 0;
 
 	private double pixelsParMetre = 1; //Defaut
 	/** Initialise la forme du triangle **/
@@ -46,6 +55,10 @@ public class PisteVirageHaut implements Dessinable {
 	public PisteVirageHaut(int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.murDroite = x +  TAILLE_PISTE + 1;
+		this.murGauche  =  x + 1;
+		this.murHaut    = y+1;
+		this.murBas   = y + TAILLE_PISTE + 1;
 
 
 
@@ -84,6 +97,32 @@ public class PisteVirageHaut implements Dessinable {
 		
 		aireTriangle = new Area(triangle);
 		
+	}
+	
+	public void enCollisionAvec(Voiture voiture) {
+		if(voiture.getPosition().getX() > murGauche  && voiture.getPosition().getX() < murDroite&& voiture.getPosition().getY()  > murHaut&& voiture.getPosition().getY()  < murBas) {
+			if(voiture.getPosition().getX() < murGauche + 1) {
+				try {
+					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurGauche);
+					voiture.setVitesse(vit);
+					voiture.getPosition().setX(murGauche + 1);
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if(voiture.getPosition().getY()>  murBas - voiture.getDiametre()) {
+				try {
+					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurBas);
+					voiture.setVitesse(vit);
+					voiture.getPosition().setY(murBas- voiture.getDiametre());
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
 	/**
