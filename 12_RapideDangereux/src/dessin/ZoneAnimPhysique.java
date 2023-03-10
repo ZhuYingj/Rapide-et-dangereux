@@ -162,6 +162,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
 			enCoursDAnimation = true;
 			premiereFois = false;
+
 		}
 
 		Graphics2D g2d = (Graphics2D) g;
@@ -198,6 +199,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		champignonAire = new Area(champignon.getShapeCercle());
 		champignonAireCopie1 = new Area(champignonAire);
 
+		System.out.println(voiture.getMasseEnKg());
 	}
 
 	/**
@@ -365,7 +367,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * Méhode qui gère la collision de la voiture avec le champignon L'effet est
 	 * appliqué pendant 5 secondes
 	 */
-	//Par Tan Tommy Rin
+	// Par Tan Tommy Rin
 
 	public void collisionAvecChampignon() {
 
@@ -377,12 +379,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		if (tempsTemporaire != 0 && tempsTemporaire + 5 > tempsTotalEcoule) {
 			champignon.fonctionChampignonActivation(voiture);
-			System.out.println(voiture.getMasseEnKg() + " masse touche");
+
 		} else {
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
 			tempsTemporaire = 0;
 
 		}
+		System.out.println(this.voiture.getMasseEnKg());
 //		if (contactAveChampignon == true) {
 //		
 //			tempsTemporaire = tempsTotalEcoule;
