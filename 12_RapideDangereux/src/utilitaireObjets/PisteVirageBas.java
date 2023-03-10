@@ -43,11 +43,11 @@ public class PisteVirageBas implements Dessinable{
 	public PisteVirageBas(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.murDroite = x +  TAILLE_PISTE;
+		this.murDroite = x +  TAILLE_PISTE + 1;
 		this.murGauche  =  x + 1;
 		this.murHaut    = y+1;
-		this.murBas   = y + TAILLE_PISTE;
-	
+		this.murBas   = y + TAILLE_PISTE + 1;
+
 
 	}
 
@@ -84,30 +84,30 @@ public class PisteVirageBas implements Dessinable{
 		return aireTriangle;
 	}
 
-public void enCollisionAvec(Voiture voiture) {
-	if(voiture.getPosition().getX() > murGauche  && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY()  > murHaut&& voiture.getPosition().getY()  < murBas) {
-		if(voiture.getPosition().getX() < murGauche + 1) {
-			try {
-				Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurGauche);
-				voiture.setVitesse(vit);
-				voiture.getPosition().setX(murGauche + 1);
+	public void enCollisionAvec(Voiture voiture) {
+		if(voiture.getPosition().getX() > murGauche  && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY()  > murHaut&& voiture.getPosition().getY()  < murBas) {
+			if(voiture.getPosition().getX() < murGauche + 1) {
+				try {
+					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurGauche);
+					voiture.setVitesse(vit);
+					voiture.getPosition().setX(murGauche + 1);
 
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if(voiture.getPosition().getY() < murHaut + 1) {
+				try {
+					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurHaut);
+					voiture.setVitesse(vit);
+					voiture.getPosition().setY(murHaut + 1);
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-	} else if(voiture.getPosition().getY() < murHaut + 1) {
-		try {
-			Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurHaut);
-			voiture.setVitesse(vit);
-			voiture.getPosition().setY(murHaut + 1);
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-}
 	}
-}
 
 }

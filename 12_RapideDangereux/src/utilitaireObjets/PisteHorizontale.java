@@ -54,10 +54,10 @@ public class PisteHorizontale implements Dessinable {
 	public PisteHorizontale(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.murDroite = x +  TAILLE_PISTE;
+		this.murDroite = x +  TAILLE_PISTE + 1;
 		this.murGauche  =  x ;
 		this.murHaut    = y;
-		this.murBas   = y + TAILLE_PISTE;
+		this.murBas   = y + TAILLE_PISTE + 1;
 
 	}
 
