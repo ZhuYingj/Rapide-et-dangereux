@@ -230,7 +230,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		champignonAire = new Area(champignon.getShapeCercle());
 		champignonAireCopie1 = new Area(champignonAire);
 
+
 		System.out.println(voiture.getMasseEnKg());
+
 
 	}
 
@@ -411,13 +413,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		if (tempsTemporaire != 0 && tempsTemporaire + 5 > tempsTotalEcoule) {
 			champignon.fonctionChampignonActivation(voiture);
-
-		} else {
+			System.out.println(this.voiture.getMasseEnKg());
+		} 
+		if(tempsTemporaire + 5 < tempsTotalEcoule) {
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
-			tempsTemporaire = 0;
-
+			System.out.println(this.voiture.getMasseEnKg() + " apres");
 		}
-		System.out.println(this.voiture.getMasseEnKg());
+		
 //		if (contactAveChampignon == true) {
 //		
 //			tempsTemporaire = tempsTotalEcoule;
@@ -529,6 +531,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public void setVoitureMasse(double masseVoulu) {
 		this.voiture.setMasseEnKg(masseVoulu);
+		this.voiture.setMasseEnKgInitial(masseVoulu);
 
 	}
 
