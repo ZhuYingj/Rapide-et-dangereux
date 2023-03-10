@@ -101,8 +101,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	private Area champignonAireCopie1;
 
-	private boolean contactAveChampignon = false;
-
 	private double tempsTemporaire;
 
 	private BouleDeNeige bouleDeNeige;
@@ -290,6 +288,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			voiture.setAccel(new Vecteur2D(20 * Math.cos(angleVoitureRad), 20 * Math.sin(angleVoitureRad)));
 		}
 		if (bas == true) {
+//			voiture.setVitesse(MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), angleVoitureRad));
 
 		}
 	}
@@ -372,19 +371,19 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		aireVoiture5.intersect(champignonAireCopie1);
 		if (!aireVoiture5.isEmpty()) {
-			contactAveChampignon = true;
+
 			tempsTemporaire = tempsTotalEcoule;
-			contactAveChampignon = false;
+
 		}
 		if (tempsTemporaire != 0 && tempsTemporaire + 5 > tempsTotalEcoule) {
 			champignon.fonctionChampignonActivation(voiture);
 			System.out.println(this.voiture.getMasseEnKg());
-		} 
-		if(tempsTemporaire + 5 < tempsTotalEcoule) {
+		}
+		if (tempsTemporaire + 5 < tempsTotalEcoule) {
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
 			System.out.println(this.voiture.getMasseEnKg() + " apres");
 		}
-		
+
 //		if (contactAveChampignon == true) {
 //		
 //			tempsTemporaire = tempsTotalEcoule;
@@ -484,6 +483,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		tempsTotalEcoule += deltaT;
 		changementTexteParIteration();
 
+		Vecteur2D forceTotal = new Vecteur2D(MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), 0));
+
+		if (haut == false && voiture.getVitesse().module() != 0) {
+			voiture.setSommeDesForces(forceTotal);
+		} else {
+			forceTotal = forceTotal.additionne(voiture.getAccel());
+		}
 		voiture.avancerUnPas(deltaT);
 
 	}
