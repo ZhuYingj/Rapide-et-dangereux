@@ -83,16 +83,14 @@ public class PisteMexique implements Dessinable {
 		//piste horizontale :
 		horizontale.add(new PisteHorizontale(x,y));
 		horizontale.get(0).dessiner(g2d);
-
+//		vitesse = new Accelerateur(x,y);
+//		vitesse.dessiner(g2d);
 
 		//		colle = new Colle(x,y);
 		//		colle.dessiner(g2d);
 
-		//		vitesse = new Accelerateur(x,y);
-		//		vitesse.dessiner(g2d);
 
 		this.x = x + taillePiste;
-
 		//piste horizontale :
 		horizontale.add(new PisteHorizontale(x,y));
 		horizontale.get(1).dessiner(g2d);

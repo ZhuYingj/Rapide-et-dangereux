@@ -116,6 +116,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	private Area champignonAireCopie1;
 	
+	private Area accelerrateurAire;
+	private Area accelerrateurAireCopie;
+	
 	private Area bouleDeNeigeAire;
 	
 	private Area bouleDeNeigeAireCopie;
@@ -142,7 +145,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public ZoneAnimPhysique() {
 
-		accelerateur = new Accelerateur(261,1);
+		accelerateur = new Accelerateur(150,1);
 		
 		voiture = new Voiture(posInit, Color.yellow, 50, 25, angleVoitureRad, 60);
 
@@ -239,6 +242,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		champignonAire = new Area(champignon.getShapeCercle());
 		champignonAireCopie1 = new Area(champignonAire);
+		
+		accelerrateurAire = new Area(accelerateur.getShapeCarre());
+		accelerrateurAireCopie = new Area(accelerrateurAire);
 		
 		bouleDeNeigeAire = new Area(bouleDeNeige.getShapeBoule());
 		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
@@ -373,6 +379,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			collisionAvecChampignon(); // Collision avec champignon
 			collisionBouleDeNeige();
+//			collisionAccelerateur();
 			repaint();
 
 			try {
@@ -457,6 +464,27 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			System.out.println("slow down");
 			
 		}
+	}
+	
+	public void collisionAccelerateur() {
+		aireVoiture5.intersect(accelerrateurAireCopie);
+		if(!accelerrateurAireCopie.isEmpty()) {
+			tempsTemporaire = tempsTotalEcoule;
+		}
+		if (tempsTemporaire != 0 && tempsTemporaire + 5 > tempsTotalEcoule) {
+			accelerateur.applyeffect(voiture);
+			System.out.println(this.voiture.getVitesse());
+		}
+		if (tempsTemporaire + 5 < tempsTotalEcoule) {
+			voiture.setVitesse(Vecteur2D(30, 0));
+			System.out.println(this.voiture.getVitesseMaxSelonNiveau() + " apres");
+		}
+	}
+	
+
+	private Vecteur2D Vecteur2D(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
