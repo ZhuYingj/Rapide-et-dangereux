@@ -316,7 +316,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public void OritentationVoitureSelonTouche(KeyEvent e) {
 		if (droite == true) {
-			angleVoitureDegre = angleVoitureDegre + 10;
+			angleVoitureDegre = (int) (Math.toDegrees(voiture.getAngle()) + 10);
 			setAngle(angleVoitureDegre);
 			if (voiture.getAccel().getX() == 0) {
 				voiture.setVitesse(new Vecteur2D(voiture.getVitesse().module() * Math.cos(angleVoitureRad),
@@ -330,7 +330,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		if (gauche == true) {
 
-			angleVoitureDegre = angleVoitureDegre - 10;
+			angleVoitureDegre = (int) (Math.toDegrees(voiture.getAngle()) - 10);
 
 			setAngle(angleVoitureDegre);
 			if (voiture.getAccel().getX() == 0) {
