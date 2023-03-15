@@ -24,9 +24,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 /**
+ * Cette classe crée un JFrame qui va prendre les JPanels des autres classes et va
+ * faire en sorte qu'on peut interchanger entre tout ces JPanels
  * 
  * @author Alexis Pineda-Alvarado
- * @author Tan Tommy Rin
  *
  */
 
