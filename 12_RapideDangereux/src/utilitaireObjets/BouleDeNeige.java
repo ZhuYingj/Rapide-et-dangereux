@@ -4,14 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
+import dessin.ZoneAnimPhysique;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
 
 public class BouleDeNeige implements Dessinable, Selectionnable {
-	private Color col;
 	private double x;
 	private double y;
 	private double diametre;
@@ -20,7 +21,15 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 	private double pixelsParMetre;
 	private Vecteur2D vitesse = new Vecteur2D(100, 0); // par defaut
 	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
+	private boolean good = true;
+	private Voiture voiture;
 	Shape shapeBoule;
+	private Area bouleDeNeigeAire;
+	private Area bouleDeNeigeAireCopie;
+	private Area aireVoiture;
+	private Area aireVoiture1;
+	private ZoneAnimPhysique zoneAnim;
+	private boolean contactBouleNeige = false;
 
 	public BouleDeNeige(Vecteur2D vec, double diametre) {
 
@@ -33,12 +42,14 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 	}
 
 	public void creerLaGeometrie() {
-		boule = new Ellipse2D.Double(posInt.getX(), posInt.getY(), this.diametre, this.diametre);
+		if (good) {
+			boule = new Ellipse2D.Double(posInt.getX(), posInt.getY(), this.diametre, this.diametre);
+		}
+
 	}
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -51,12 +62,39 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 		g2dcop.setColor(Color.cyan);
 		g2dcop.fill(shapeBoule);
 
+		bouleDeNeigeAire = new Area(shapeBoule);
+		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
+
+	}
+
+	public void bouleVisible() {
+		if (good == false) {
+			System.out.println("");
+		}
+	}
+
+	public boolean collisionDeLaBalle(Voiture v) {
+		this.voiture = v;
+
+		aireVoiture = new Area(voiture.getCercle());
+
+		aireVoiture1 = new Area(aireVoiture);
+
+		aireVoiture1.intersect(bouleDeNeigeAireCopie);
+
+		if (contactBouleNeige = true) {
+			if (!aireVoiture1.isEmpty()) {
+				System.out.println("slow down");
+			}
+		}
+
+		return contactBouleNeige;
 	}
 
 	public void deplacementBoule() {
 
 	}
-	
+
 	public void ralentissementVoiture(Voiture valeurVoiture) {
 //		Vecteur2D accelerationDiminue = valeurVoiture.setSommeDesForces(valeurVoiture.getAccel());
 //		valeurVoiture.setAccel(accelerationDiminue);
@@ -114,6 +152,14 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 
 	public void setShapeBoule(Shape shapeBoule) {
 		this.shapeBoule = shapeBoule;
+	}
+
+	public boolean isGood() {
+		return good;
+	}
+
+	public void setGood(boolean good) {
+		this.good = good;
 	}
 
 }

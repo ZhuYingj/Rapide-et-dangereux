@@ -1,5 +1,10 @@
 package application;
 
+/**
+ * 
+ * @author Alexis Pineda-Alvarado
+ *
+ */
 public class Identifiants {
 	private String nomUsager;
 	private String motPasse;

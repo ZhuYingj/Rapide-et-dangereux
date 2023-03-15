@@ -116,12 +116,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	private Area champignonAireCopie1;
 	
-	private Area bouleDeNeigeAire;
-	
-	private Area bouleDeNeigeAireCopie;
 
 
-	private boolean contactAveChampignon,contactBouleNeige = false;
+	private boolean contactAveChampignon = false;
 
 	
 
@@ -239,9 +236,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		champignonAire = new Area(champignon.getShapeCercle());
 		champignonAireCopie1 = new Area(champignonAire);
-		
-		bouleDeNeigeAire = new Area(bouleDeNeige.getShapeBoule());
-		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
+
 
 
 		System.out.println(voiture.getMasseEnKg());
@@ -363,7 +358,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						voiture.getVitesseMaxSelonNiveau() * Math.sin(angleVoitureRad)));
 
 			}
-
+			
 			collisionCote();
 			enCollisionAvec();
 
@@ -372,7 +367,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 			collisionAvecChampignon(); // Collision avec champignon
-			collisionBouleDeNeige();
+			bouleDeNeige.collisionDeLaBalle(voiture);
 			repaint();
 
 			try {
@@ -449,15 +444,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	}
 	
-	public void collisionBouleDeNeige() {
-	
-		aireVoitureBoule.intersect(bouleDeNeigeAireCopie);
-		if(!aireVoitureBoule.isEmpty()) {
-			contactBouleNeige = true;
-			System.out.println("slow down");
-			
-		}
-	}
 
 	/**
 	 * Méthode qui permet de réinitialiser la position de la voiture
