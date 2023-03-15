@@ -29,7 +29,7 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 	private Area aireVoiture;
 	private Area aireVoiture1;
 	private ZoneAnimPhysique zoneAnim;
-	private boolean contactBouleNeige = false;
+	private boolean contactBouleNeige = true;
 
 	public BouleDeNeige(Vecteur2D vec, double diametre) {
 
@@ -42,7 +42,7 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 	}
 
 	public void creerLaGeometrie() {
-		if (good) {
+		if (contactBouleNeige) {
 			boule = new Ellipse2D.Double(posInt.getX(), posInt.getY(), this.diametre, this.diametre);
 		}
 
@@ -68,8 +68,8 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 	}
 
 	public void bouleVisible() {
-		if (good == false) {
-			System.out.println("");
+		if (contactBouleNeige == false) {
+			System.out.println("suck my balls");
 		}
 	}
 
@@ -82,11 +82,11 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 
 		aireVoiture1.intersect(bouleDeNeigeAireCopie);
 
-		if (contactBouleNeige = true) {
+		if (contactBouleNeige = true) 
 			if (!aireVoiture1.isEmpty()) {
 				System.out.println("slow down");
-			}
-		}
+				bouleVisible();
+			}	
 
 		return contactBouleNeige;
 	}
