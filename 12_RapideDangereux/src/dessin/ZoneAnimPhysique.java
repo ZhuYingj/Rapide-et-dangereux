@@ -125,7 +125,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Area bouleDeNeigeAireCopie;
 
 
-	private boolean contactAveChampignon,contactBouleNeige = false;
+	private boolean contactAveChampignon = false;
 
 	Vecteur2D forceFrottement = new Vecteur2D(0,0);
 
@@ -246,9 +246,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		champignonAire = new Area(champignon.getShapeCercle());
 		champignonAireCopie1 = new Area(champignonAire);
 
+
 		bouleDeNeigeAire = new Area(bouleDeNeige.getShapeBoule());
 		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
-
 
 		
 
@@ -369,7 +369,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						voiture.getVitesseMaxSelonNiveau() * Math.sin(angleVoitureRad)));
 
 			}
-
+			
 			collisionCote();
 			enCollisionAvec();
 
@@ -378,7 +378,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 			collisionAvecChampignon(); // Collision avec champignon
-			collisionBouleDeNeige();
+			bouleDeNeige.collisionDeLaBalle(voiture);
 			repaint();
 
 			try {
@@ -453,16 +453,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		//			contactAveChampignon = false;
 		//		}
 
-	}
-
-	public void collisionBouleDeNeige() {
-
-		aireVoitureBoule.intersect(bouleDeNeigeAireCopie);
-		if(!aireVoitureBoule.isEmpty()) {
-			contactBouleNeige = true;
-			System.out.println("slow down");
-
-		}
 	}
 
 	/**
