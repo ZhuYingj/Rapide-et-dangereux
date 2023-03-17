@@ -11,11 +11,13 @@ import dessin.ZoneAnimPhysique;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
+import physique.MoteurPhysique;
 
 public class BouleDeNeige implements Dessinable, Selectionnable {
 	private double x;
 	private double y;
 	private double diametre;
+	private double angleVoitureRad;
 	private Vecteur2D posInt;
 	private Ellipse2D.Double boule;
 	private double pixelsParMetre;
@@ -29,6 +31,7 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 	private Area aireVoiture;
 	private Area aireVoiture1;
 	private ZoneAnimPhysique zoneAnim;
+	private MoteurPhysique motPhys;
 	private boolean contactBouleNeige = true;
 
 	public BouleDeNeige(Vecteur2D vec, double diametre) {
@@ -60,17 +63,13 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 		mat.scale(pixelsParMetre, pixelsParMetre);
 		shapeBoule = mat.createTransformedShape(boule);
 		g2dcop.setColor(Color.cyan);
-		g2dcop.fill(shapeBoule);
+		if (contactBouleNeige == true) {
+			g2dcop.fill(shapeBoule);
+		}
 
 		bouleDeNeigeAire = new Area(shapeBoule);
 		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
 
-	}
-
-	public void bouleVisible() {
-		if (contactBouleNeige == false) {
-			System.out.println("suck my balls");
-		}
 	}
 
 	public boolean collisionDeLaBalle(Voiture v) {
@@ -82,11 +81,10 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 
 		aireVoiture1.intersect(bouleDeNeigeAireCopie);
 
-		if (contactBouleNeige = true) 
+		if (contactBouleNeige)
 			if (!aireVoiture1.isEmpty()) {
-				System.out.println("slow down");
-				bouleVisible();
-			}	
+				contactBouleNeige = false;
+			}
 
 		return contactBouleNeige;
 	}
@@ -95,9 +93,13 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 
 	}
 
-	public void ralentissementVoiture(Voiture valeurVoiture) {
-//		Vecteur2D accelerationDiminue = valeurVoiture.setSommeDesForces(valeurVoiture.getAccel());
-//		valeurVoiture.setAccel(accelerationDiminue);
+	public void ralentissementVoiture(Voiture v) {
+		System.out.println("SLOW DOWN!!!");
+		Vecteur2D voitureSlow = new Vecteur2D();
+		voitureSlow = MoteurPhysique.calculerForceFrottement(5.00, voiture.getMasseEnKg(), voiture.getAngle());
+		v.setSommeDesForces(voitureSlow);
+		System.out.println(voitureSlow);
+		
 	}
 
 	/**
