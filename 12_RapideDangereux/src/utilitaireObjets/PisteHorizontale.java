@@ -146,6 +146,7 @@ public class PisteHorizontale implements Dessinable {
 					System.out.println(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle())- 180) * 2));
 					if(Math.toDegrees(voiture.getAngle()) < 270  && Math.toDegrees(voiture.getAngle()) > 180 ) {
 						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
+//						salut
 						}
 
 				} catch (Exception e) {
