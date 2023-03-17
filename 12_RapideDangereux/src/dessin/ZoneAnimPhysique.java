@@ -166,6 +166,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		bouleDeNeige = new BouleDeNeige(new Vecteur2D(100, 10), 5.0);
 		
+
 	
 
 		addKeyListener(new KeyAdapter() {
@@ -235,7 +236,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		voiture.setPixelsParMetre(pixelsParMetre);
 
-		voiture.dessiner(g2d);
+		
 
 		bouleDeNeige.setPixelsParMetre(pixelsParMetre);
 
@@ -270,7 +271,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
 
 		
-
+		voiture.dessiner(g2d);
 
 	}
 
@@ -336,6 +337,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void OritentationVoitureSelonTouche(KeyEvent e) {
 		if (droite == true) {
 			angleVoitureDegre = (int) (Math.toDegrees(voiture.getAngle()) + 10);
+			if(angleVoitureDegre >350) {
+				angleVoitureDegre = 0;
+			} else if (angleVoitureDegre < 0) {
+				angleVoitureDegre = 360;
+			}
 			setAngle(angleVoitureDegre);
 			if (voiture.getAccel().getX() == 0) {
 				voiture.setVitesse(new Vecteur2D(voiture.getVitesse().module() * Math.cos(angleVoitureRad),
@@ -345,12 +351,17 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						voiture.getVitesse().module() * Math.sin(angleVoitureRad)));
 
 			}
+			System.out.println(angleVoitureDegre);
 
 		}
 		if (gauche == true) {
-
+			
 			angleVoitureDegre = (int) (Math.toDegrees(voiture.getAngle()) - 10);
-
+			if(angleVoitureDegre >370) {
+				angleVoitureDegre = 0;
+			} else if (angleVoitureDegre < 0) {
+				angleVoitureDegre = 360;
+			}
 			setAngle(angleVoitureDegre);
 			if (voiture.getAccel().getX() == 0) {
 				voiture.setVitesse(new Vecteur2D(voiture.getVitesse().module() * Math.cos(angleVoitureRad),
@@ -360,6 +371,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						voiture.getVitesse().module() * Math.sin(angleVoitureRad)));
 
 			}
+			System.out.println(angleVoitureDegre);
 
 		}
 		if (haut == true) {
@@ -439,11 +451,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		arreter();
 		calculerUneIterationPhysique();
 
-		collisionCote();
+//		collisionCote();
 
 		collisionAvecChampignon();
 
-		enCollisionAvec();
+//		enCollisionAvec();
 
 		repaint();
 	}
@@ -619,9 +631,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						}
 					} 
 
-					System.out.println(forceFreinage + " frein");
-					System.out.println(fFrottement + " frottement");
-					System.out.println(forceFreinage.additionne(fFrottement));
+			
 					
 
 					

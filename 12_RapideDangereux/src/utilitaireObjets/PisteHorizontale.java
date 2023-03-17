@@ -138,17 +138,21 @@ public class PisteHorizontale implements Dessinable {
 	public void enCollisionAvec(Voiture voiture) {
 
 		if(voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas ) {
-			if(voiture.getPosition().getY() < murHaut + 1) {
+			if(voiture.getPosition().getY() <= murHaut + 1) {
 				try {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurHaut);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setY(murHaut + 1);
+					System.out.println(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle())- 180) * 2));
+					if(Math.toDegrees(voiture.getAngle()) < 270  && Math.toDegrees(voiture.getAngle()) > 180 ) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
+						}
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}   else if(voiture.getPosition().getY()>  murBas - voiture.getDiametre()) {
+			}   else if(voiture.getPosition().getY() + voiture.getDiametre() >=  murBas ) {
 				try {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurBas);
 					voiture.setVitesse(vit);

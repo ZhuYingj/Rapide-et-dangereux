@@ -86,7 +86,7 @@ public class PisteVirageBas implements Dessinable{
 
 	public void enCollisionAvec(Voiture voiture) {
 		if(voiture.getPosition().getX() > murGauche  && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY()  > murHaut&& voiture.getPosition().getY()  < murBas) {
-			if(voiture.getPosition().getX() < murGauche + 1) {
+			if(voiture.getPosition().getX() <= murGauche + 1) {
 				try {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurGauche);
 					voiture.setVitesse(vit);
@@ -96,7 +96,7 @@ public class PisteVirageBas implements Dessinable{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else if(voiture.getPosition().getY() < murHaut + 1) {
+			} else if(voiture.getPosition().getY() <= murHaut + 1) {
 				try {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurHaut);
 					voiture.setVitesse(vit);

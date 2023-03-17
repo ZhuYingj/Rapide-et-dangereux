@@ -353,69 +353,6 @@ public class Voiture implements Dessinable, Selectionnable {
 		this.voitureTransfo = voitureTransfo;
 	}
 
-	/**
-	 * Cette methode permet de determiner si la voiture depasse le composant dessin
-	 * et changer sa vitesse selon la collision
-	 * 
-	 * @param positionXDroite Position droite en x du composant
-	 * @param positionXGauche Position gauche en x du composant
-	 * @param positionYBas    Position bas en y du composant
-	 * @param positionYHaut   Position haut en y du composant
-	 */
-	// Kevin Nguyen
-	public void gererCollision(double positionXDroite, double positionXGauche, double positionYBas,
-			double positionYHaut) {
-
-		// pour le bas
-		if (position.getY() > positionYBas - this.diametre) {
-			try {
-				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 90);
-				setVitesse(vit);
-				position.setY(positionYBas - this.diametre);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		// pour le haut
-		else if (position.getY() < positionYHaut) {
-			try {
-				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 270);
-				setVitesse(vit);
-				position.setY(positionYHaut);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		// pour la droite
-		else if (position.getX() > positionXDroite - this.diametre) {
-			try {
-				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 180);
-				setVitesse(vit);
-				position.setX(positionXDroite - this.diametre);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		// pour la gauche
-		else if (position.getX() < positionXGauche) {
-			try {
-				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 0);
-				setVitesse(vit);
-				position.setX(positionXGauche);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-
-	}
 
 	/**
 	 * Retourne la forme cercle qui est la voiture
