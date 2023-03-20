@@ -20,6 +20,13 @@ import javax.swing.border.TitledBorder;
 import application.AppPrincipale12;
 import dessin.ZoneAnimPhysique;
 
+/**
+ * Classe qui permet de créer et gérer la fenetre du jeu avec le mode
+ * scientifique activé
+ * 
+ * @author Tan Tommy Rin
+ *
+ */
 public class FenetreJeuScientifique extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
@@ -38,13 +45,15 @@ public class FenetreJeuScientifique extends JPanel {
 	private JButton btnStop;
 
 	/**
-	 * Creation de la fenetre.
+	 * Méthode qui permet de placer un écouteur
 	 */
-
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
 
+	/**
+	 * Creation de la fenetre.
+	 */
 	public FenetreJeuScientifique() {
 		setLayout(null);
 		setBounds(100, 100, 1300, 700);

@@ -74,7 +74,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** La premiere piste affiché **/
 	private PisteMexique mexique;
 	private PisteItalie italie;
-	private int pi;
 
 	/** Aire du triangle superieur gauche **/
 	private Area aireTriangle1;
@@ -119,7 +118,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Regroupement regroupement;
 
 	/**
-	 * methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		this.pcs.addPropertyChangeListener(listener);
@@ -183,7 +182,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		regroupement.setPixelsParMetre(pixelsParMetre);
 		regroupement.dessiner(g2d);
-		
+
 //		groupe.setPixelsParMetre(pixelsParMetre);
 
 //		italie = new PisteItalie(1,1);
@@ -405,9 +404,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void restartPos() {
 		arreter();
 		tempsTotalEcoule = 0.000;
-		voiture.setPosition(posInit);
-		voiture.setVitesse(valeurInit);
-		voiture.setAccel(valeurInit);
+		regroupement.getVoiture().setPosition(posInit);
+		regroupement.getVoiture().setVitesse(valeurInit);
+		regroupement.getVoiture().setAccel(valeurInit);
+		
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
 
 		repaint();

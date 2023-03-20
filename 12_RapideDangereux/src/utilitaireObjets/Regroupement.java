@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import interfaces.TypeObjetSpecial;
 import pisteDeCourse.PisteMexique;
 
 /**
@@ -55,13 +56,22 @@ public class Regroupement implements Dessinable {
 			if (regroupementBoiteMystere.get(a).enCollisionAvecVoiture(voiture) == true) {
 				regroupementBoiteMystere.get(a).getObjetSpecial().fonctionSelonObjet(voiture, tempsTotalEcoule);
 
+				// Pour le champignon
+				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
+					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionChampignon(voiture,
+							tempsTotalEcoule) == false) {
+						regroupementBoiteMystere.remove(a);
+					}
+				} // Fin condition pour le champignon
+
 			}
 
 		}
 	}
 
 	/**
-	 * Méthode qui crée les boites mystères et les place dans une liste
+	 * Méthode qui crée les boites mystères et les place dans une liste avec un
+	 * diametre fixe
 	 */
 	public void creeBoiteDansListe() {
 		regroupementBoiteMystere = new ArrayList<BlocMystere>();

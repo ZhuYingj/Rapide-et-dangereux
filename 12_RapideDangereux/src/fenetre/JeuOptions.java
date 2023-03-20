@@ -45,6 +45,10 @@ public class JeuOptions extends JPanel {
 
 	private Image imageActuelle;
 
+	/**
+	 * Méthode qui permet de placer un écouteur
+	 */
+
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -62,19 +66,10 @@ public class JeuOptions extends JPanel {
 		add(PanelApercu);
 		PanelApercu.setLayout(null);
 
-		/**
-		 * Creer une zone de dessin "ZoneApercuPiste
-		 * 
-		 * @author Ludovic Julien
-		 */
 		ZoneApercupiste zoneApercupiste = new ZoneApercupiste();
 		zoneApercupiste.setBounds(0, 0, 650, 405);
 		PanelApercu.add(zoneApercupiste);
-		/**
-		 * Creer le bouton qui permet si appuiyer d'afficher l'apercu de cette piste
-		 * 
-		 * @author Ludovic Julien
-		 */
+
 		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");
 		// Icon icone = new ImageIcon(drapeuxMexique);
 		JButton btnMexique = new JButton("Mexique");
@@ -88,11 +83,7 @@ public class JeuOptions extends JPanel {
 				zoneApercupiste.repaint();
 			}
 		});
-		/**
-		 * Creer le bouton qui permet si appuiyer d'afficher l'apercu de cette piste
-		 * 
-		 * @author Ludovic Julien
-		 */
+
 		JButton btnCanada = new JButton("Canada");
 		btnCanada.setBounds(307, 77, 126, 78);
 		add(btnCanada);
@@ -103,11 +94,7 @@ public class JeuOptions extends JPanel {
 				zoneApercupiste.repaint();
 			}
 		});
-		/**
-		 * Creer le bouton qui permet si appuiyer d'afficher l'apercu de cette piste
-		 * 
-		 * @author Ludovic Julien
-		 */
+
 		JButton btnItalie = new JButton("Italie");
 		btnItalie.setBounds(474, 77, 126, 78);
 		add(btnItalie);
@@ -133,7 +120,7 @@ public class JeuOptions extends JPanel {
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
-				
+
 			}
 		});
 

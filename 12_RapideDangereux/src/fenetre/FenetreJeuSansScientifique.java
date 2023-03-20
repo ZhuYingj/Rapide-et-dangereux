@@ -40,6 +40,10 @@ public class FenetreJeuSansScientifique extends JPanel {
 		pcs.addPropertyChangeListener(listener);
 	}
 
+	/**
+	 * Méthode qui permet de crée la fenetre
+	 */
+
 	public FenetreJeuSansScientifique() {
 		setLayout(null);
 		setBounds(100, 100, 1300, 700);
