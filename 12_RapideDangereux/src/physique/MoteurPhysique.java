@@ -127,7 +127,6 @@ public class MoteurPhysique {
 
 
 		vitFinale = Vecteur2D.soustrait(vitesse, vitFinale);
-		System.out.println(vitFinale);
 		
 
 		return new Vecteur2D(vitFinale);

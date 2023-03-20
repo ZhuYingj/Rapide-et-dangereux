@@ -263,21 +263,21 @@ public class PisteMexique implements Dessinable {
 			verticale.get(i).enCollisionAvec(voiture);
 		}
 
-		for (int i = 0; i < bas.size(); i++) {
-			bas.get(i).enCollisionAvec(voiture);
-		}
-
-		for (int i = 0; i < gauche.size(); i++) {
-			gauche.get(i).enCollisionAvec(voiture);
-		}
-
-		for (int i = 0; i < droit.size(); i++) {
-			droit.get(i).enCollisionAvec(voiture);
-		}
-
-		for (int i = 0; i < haut.size(); i++) {
-			haut.get(i).enCollisionAvec(voiture);
-		}
+//		for (int i = 0; i < bas.size(); i++) {
+//			bas.get(i).enCollisionAvec(voiture);
+//		}
+//
+//		for (int i = 0; i < gauche.size(); i++) {
+//			gauche.get(i).enCollisionAvec(voiture);
+//		}
+//
+//		for (int i = 0; i < droit.size(); i++) {
+//			droit.get(i).enCollisionAvec(voiture);
+//		}
+//
+//		for (int i = 0; i < haut.size(); i++) {
+//			haut.get(i).enCollisionAvec(voiture);
+//		}
 		
 		depart.get(0).enCollisionAvec(voiture);
 
