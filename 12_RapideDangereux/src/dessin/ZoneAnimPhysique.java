@@ -595,7 +595,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 
 		if (haut == false && voiture.getVitesse().module() != 0) {
-			// voiture.setSommeDesForces(forceTotal);
+			 voiture.setSommeDesForces(forceTotal);
 			if (!bouleDeNeige.collisionDeLaBalle(voiture)) {
 				bouleDeNeige.ralentissementVoiture(voiture);
 			} else {
