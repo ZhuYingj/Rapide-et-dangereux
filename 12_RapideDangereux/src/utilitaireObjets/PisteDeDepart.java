@@ -20,7 +20,7 @@ import physique.MoteurPhysique;
 public class PisteDeDepart implements Dessinable{
 
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 87;
+	private static final int TAILLE_PISTE = 80;
 	/** la position en x de depart que l'objet piste vas etre creer **/
 	private int x;
 	/** la position en y de depart que l'objet piste vas etre creer  **/
@@ -68,7 +68,7 @@ public class PisteDeDepart implements Dessinable{
 			g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
 			g2d.setColor(Color.RED);
 			g2d.setColor(Color.RED);
-			Stroke stroke1 = new BasicStroke(3f);
+			Stroke stroke1 = new BasicStroke(0.5f);
 			g2d.setStroke(stroke1);
 			g2d.drawLine(x+1, y, x + TAILLE_PISTE-1, y);
 			g2d.drawLine(x+1, y + TAILLE_PISTE, x + TAILLE_PISTE -1, y + TAILLE_PISTE);
@@ -145,7 +145,7 @@ public class PisteDeDepart implements Dessinable{
 						Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurHaut);
 						voiture.setVitesse(vit);
 						voiture.getPosition().setY(murHaut + 1);
-
+						System.out.println("en collisionD");
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -155,7 +155,7 @@ public class PisteDeDepart implements Dessinable{
 						Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurBas);
 						voiture.setVitesse(vit);
 						voiture.getPosition().setY(murBas- voiture.getDiametre());
-
+						System.out.println("en collisionD");
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

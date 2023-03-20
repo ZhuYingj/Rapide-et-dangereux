@@ -50,7 +50,7 @@ public class AppPrincipale12 extends JFrame {
 						@Override
 						public void keyPressed(KeyEvent e) {
 							if (e.getKeyCode() == KeyEvent.VK_P) {
-								JOptionPane.showMessageDialog(null, "sup");
+
 							}
 						}
 					});
@@ -87,125 +87,54 @@ public class AppPrincipale12 extends JFrame {
 
 		fenMenu.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				if (evt.getPropertyName().equals("JOUER")) {
-					fenMenu.setVisible(false);
-					fenModeJeu.setVisible(true);
-					setContentPane(fenModeJeu);
-				}
+				actionChangeModeJeu(evt, fenMenu, fenModeJeu);
 			}
 		});
 
 		fenModeJeu.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "Retour":
-					fenModeJeu.setVisible(false);
-					fenMenu.setVisible(true);
-					setContentPane(fenMenu);
-					checkBoxModeNonScientifique.setEnabled(false);
-					break;
-
-				}
+				actionRetourMenu(evt, fenMenu, fenModeJeu);
 			}
 		});
 		fenModeJeu.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "EDITEUR":
-					fenModeJeu.setVisible(false);
-					fenEditeur.setVisible(true);
-					setContentPane(fenEditeur);
-					break;
-
-				}
+				actionChangeEditeur(evt, fenModeJeu, fenEditeur);
 			}
 		});
 
 		fenEditeur.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "Retour":
-					fenModeJeu.setVisible(true);
-					fenEditeur.setVisible(false);
-					setContentPane(fenModeJeu);
-					break;
-
-				}
+				actionRetourModeJeu1(evt, fenModeJeu, fenEditeur);
 			}
 		});
 
 		fenModeJeu.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "MONDE":
-					fenModeJeu.setVisible(false);
-					fenOptions.setVisible(true);
-					setContentPane(fenOptions);
-					break;
-				}
-			}
-		});
-
-		fenModeJeu.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "MONDE":
-					fenModeJeu.setVisible(false);
-					fenOptions.setVisible(true);
-					setContentPane(fenOptions);
-					break;
-				}
+				actionChangeOption(evt, fenModeJeu, fenOptions);
 			}
 		});
 
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "Retour":
-					fenModeJeu.setVisible(true);
-					fenOptions.setVisible(false);
-					setContentPane(fenModeJeu);
-					break;
-				}
+				actionRetourModeJeu2(evt, fenModeJeu, fenOptions);
 			}
 		});
 
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionFenOptions(evt, fenJeuScience, fenOptions);
-
 			}
 		});
 
 		fenJeuScience.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "Retour":
-					fenJeuScience.setVisible(false);
-					fenOptions.setVisible(true);
-					setContentPane(fenOptions);
-					break;
-
-				case "STARTBUTTONACTIVE":
-					checkBoxModeNonScientifique.setEnabled(false);
-					break;
-				case "CHECKBOXACTIVE":
-					checkBoxModeNonScientifique.setEnabled(true);
-
-				}
+				actionRetourOptions(evt, fenJeuScience, fenOptions);
 			}
 		});
 
 		fenSansScience.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "Retour":
-					fenSansScience.setVisible(false);
-					fenOptions.setVisible(true);
-					setContentPane(fenOptions);
-					break;
-
-				}
+				actionRetourOptions2(evt, fenSansScience, fenOptions);
 			}
 		});
 
@@ -214,20 +143,10 @@ public class AppPrincipale12 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (checkBoxModeNonScientifique.isSelected()) {
-					fenSansScience.setVisible(true);
-					fenJeuScience.setVisible(false);
-					setContentPane(fenSansScience);
-					fenJeuScience.getZoneAnimPhysique().requestFocusInWindow();
-
-					checkBoxModeNonScientifique.setEnabled(true);
-					fenSansScience.setZoneAnimPhysique(fenJeuScience.getZoneAnimPhysique());
-					pushingP(fenSansScience);
+					actionChangeDesTypeJeu(fenSansScience, fenJeuScience);
 
 				} else {
-					fenSansScience.setVisible(false);
-					fenJeuScience.setVisible(true);
-					setContentPane(fenJeuScience);
-					fenJeuScience.setZoneAnimPhysique(fenSansScience.getZoneAnimPhysique());
+					actionRetourDesTypeJeu(fenSansScience, fenJeuScience);
 
 				}
 			}
@@ -236,14 +155,17 @@ public class AppPrincipale12 extends JFrame {
 	}
 
 	/**
-	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés à la fenetre de jeu d'options
-	 * @param evt evenement 
+	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
+	 * à la fenetre de jeu d'options
+	 * 
+	 * @param evt           evenement
 	 * @param fenJeuScience la fenetre de jeu avec mode science activé
-	 * @param fenOptions la fenetre de jeu d'options
+	 * @param fenOptions    la fenetre de jeu d'options
 	 */
-    //Par Tan Tommy Rin
+	// Par Tan Tommy Rin
 	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions) {
 		switch (evt.getPropertyName()) {
+		
 		case "COMMENCER!":
 			fenJeuScience.setVisible(true);
 			fenOptions.setVisible(false);
@@ -264,6 +186,218 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			break;
 		}
+	}
+
+	/**
+	 *  Méthode permettant d'accomplir des actions selon des levés d'évènements liés
+	 * à la fenetre du menu et la fenetre mde de jeu
+	 * 
+	 * @param evt
+	 * @param fenMenu
+	 * @param fenModeJeu
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionChangeModeJeu(PropertyChangeEvent evt, FenetreMenu fenMenu, ModeDeJeu fenModeJeu) {
+		if (evt.getPropertyName().equals("JOUER")) {
+			
+			fenMenu.setVisible(false);
+			fenModeJeu.setVisible(true);
+			setContentPane(fenModeJeu);
+		}
+	}
+
+	/**
+	 * Méthode qui permet de retourner au panel précédent selon des levés d'évènements
+	 * liés entre la fenetre menu et celui du mode de jeu
+	 * 
+	 * @param evt
+	 * @param fenMenu
+	 * @param fenModeJeu
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionRetourMenu(PropertyChangeEvent evt, FenetreMenu fenMenu, ModeDeJeu fenModeJeu) {
+		switch (evt.getPropertyName()) {
+		
+		case "Retour":
+			fenModeJeu.setVisible(false);
+			fenMenu.setVisible(true);
+			setContentPane(fenMenu);
+			checkBoxModeNonScientifique.setEnabled(false);
+			break;
+
+		}
+	}
+	
+	/**
+	 * Méthode qui change de la fenetre mode de jeu à la fenetre du mode 
+	 * éditeur avec les levés d'évenements
+	 * 
+	 * @param evt
+	 * @param fenModeJeu
+	 * @param fenEditeur
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionChangeEditeur(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur) {
+		switch (evt.getPropertyName()) {
+		
+		case "EDITEUR":
+			fenModeJeu.setVisible(false);
+			fenEditeur.setVisible(true);
+			setContentPane(fenEditeur);
+			break;
+
+		}
+	}
+	
+	/**
+	 * Méthode qui permet de retourner au panel précédent selon des levés d'évènements
+	 * liés entre la fenetre du mod de jeu et celui du mode éditeur
+	 * 
+	 * @param evt
+	 * @param fenModeJeu
+	 * @param fenEditeur
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionRetourModeJeu1(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur) {
+		switch (evt.getPropertyName()) {
+		
+		case "Retour":
+			fenModeJeu.setVisible(true);
+			fenEditeur.setVisible(false);
+			setContentPane(fenModeJeu);
+			break;
+
+		}
+	}
+
+	/**
+	 * Méthode qui change de la fenetre mode de jeu à la fenetre options
+	 * avec les levés d'évenements
+	 * 
+	 * @param evt
+	 * @param fenModeJeu
+	 * @param fenOptions
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionChangeOption(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, JeuOptions fenOptions) {
+		switch (evt.getPropertyName()) {
+		
+		case "MONDE":
+			fenModeJeu.setVisible(false);
+			fenOptions.setVisible(true);
+			setContentPane(fenOptions);
+			break;
+		}
+	}
+
+	/**
+	 * Méthode qui permet de retourner au panel précédent selon des levés d'évènements
+	 * liés entre la fenetre du mode de jeu et celui de la fenetre des options
+	 * 
+	 * @param evt
+	 * @param fenModeJeu
+	 * @param fenOptions
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionRetourModeJeu2(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, JeuOptions fenOptions) {
+		switch (evt.getPropertyName()) {
+		
+		case "Retour":
+			fenModeJeu.setVisible(true);
+			fenOptions.setVisible(false);
+			setContentPane(fenModeJeu);
+			break;
+		}
+	}
+
+	/**
+	 * Méthode qui permet de retourner au panel précédent selon des levés d'évènements
+	 * liés entre la fenetre du jeu et celui de la fenetre des options
+	 * 
+	 * @param evt
+	 * @param fenJeuScience
+	 * @param fenOptions
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience,
+			JeuOptions fenOptions) {
+		
+		switch (evt.getPropertyName()) {
+		case "Retour":
+			fenJeuScience.setVisible(false);
+			fenOptions.setVisible(true);
+			setContentPane(fenOptions);
+			break;
+
+		case "STARTBUTTONACTIVE":
+			checkBoxModeNonScientifique.setEnabled(false);
+			break;
+		case "CHECKBOXACTIVE":
+			checkBoxModeNonScientifique.setEnabled(true);
+
+		}
+	}
+
+	/**
+	 * Méthode qui permet de retourner au panel précédent selon des levés d'évènements
+	 * liés entre la fenetre du jeu sans les parametres scientifique 
+	 * et celui de la fenetre des options
+	 * 
+	 * @param evt
+	 * @param fenSansScience
+	 * @param fenOptions
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionRetourOptions2(PropertyChangeEvent evt, FenetreJeuSansScientifique fenSansScience,
+			JeuOptions fenOptions) {
+		
+		switch (evt.getPropertyName()) {
+		case "Retour":
+			fenSansScience.setVisible(false);
+			fenOptions.setVisible(true);
+			setContentPane(fenOptions);
+			break;
+
+		}
+	}
+
+	/**
+	 * Méthode qui permet de changer de la fenetre du jeu avec les paremetres scientifiques
+	 * avec la fenetre du jeu sans les paramatres scientifique
+	 * 
+	 * @param fenSansScience
+	 * @param fenJeuScience
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionChangeDesTypeJeu(FenetreJeuSansScientifique fenSansScience,
+			FenetreJeuScientifique fenJeuScience) {
+		
+		fenSansScience.setVisible(true);
+		fenJeuScience.setVisible(false);
+		setContentPane(fenSansScience);
+		fenJeuScience.getZoneAnimPhysique().requestFocusInWindow();
+
+		checkBoxModeNonScientifique.setEnabled(true);
+		fenSansScience.setZoneAnimPhysique(fenJeuScience.getZoneAnimPhysique());
+		pushingP(fenSansScience);
+
+	}
+
+	/**
+	 * Méthode qui permet de changer de la fenetre du jeu avec sans les paremetres scientifiques
+	 * avec la fenetre du jeu avec les paramatres scientifique
+	 * 
+	 * @param fenSansScience
+	 * @param fenJeuScience
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionRetourDesTypeJeu(FenetreJeuSansScientifique fenSansScience,
+			FenetreJeuScientifique fenJeuScience) {
+		
+		fenSansScience.setVisible(false);
+		fenJeuScience.setVisible(true);
+		setContentPane(fenJeuScience);
+		fenJeuScience.setZoneAnimPhysique(fenSansScience.getZoneAnimPhysique());
 	}
 
 	/**

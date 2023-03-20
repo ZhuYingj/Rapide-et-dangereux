@@ -90,8 +90,9 @@ public class Regroupement implements Dessinable {
 
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
-		Graphics2D g2dCopie2 = (Graphics2D) g2d.create();
-		pisteMexique.dessiner(g2dCopie);
+//		Graphics2D g2dCopie2 = (Graphics2D) g2d.create();
+		pisteMexique.setPixelsParMetre(pixelsParMetre);
+		pisteMexique.dessiner(g2d);
 		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
 			regroupementBoiteMystere.get(a).setPixelParMetre(pixelsParMetre);
 			regroupementBoiteMystere.get(a).dessiner(g2dCopie);
@@ -99,7 +100,7 @@ public class Regroupement implements Dessinable {
 		}
 
 		voiture.setPixelsParMetre(pixelsParMetre);
-		voiture.dessiner(g2dCopie2);
+		voiture.dessiner(g2dCopie);
 
 	}
 

@@ -14,7 +14,7 @@ import physique.MoteurPhysique;
 
 public class PisteVirageDroit implements Dessinable{
 
-private static final int TAILLE_PISTE = 87;
+private static final int TAILLE_PISTE = 80;
 	
 	private int x;
 	private int y;
@@ -26,6 +26,8 @@ private static final int TAILLE_PISTE = 87;
 	private double angleNormaleMurBas = 270;
 	/** Normale du mur droite **/
 	private double angleNormaleMurDroite = 180;
+	/** Pixels par metre par defaut  **/
+	private double pixelsParMetre = 1; //Defaut
 
 	/** Initialise la forme du triangle **/
 	private Path2D triangle;
@@ -44,10 +46,11 @@ private static final int TAILLE_PISTE = 87;
 	
 	@Override
 	public void dessiner(Graphics2D g2d) {
+//		g2d.scale(pixelsParMetre, pixelsParMetre);
 		g2d.setColor(Color.BLACK);
 		g2d.fillRect(x, y, TAILLE_PISTE,TAILLE_PISTE);
 		g2d.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(3f);
+		Stroke stroke = new BasicStroke(0.5f);
 		g2d.setStroke(stroke);
 		g2d.drawLine(x, y+TAILLE_PISTE,x +(TAILLE_PISTE/3),y+TAILLE_PISTE);
 		g2d.drawLine(x +(TAILLE_PISTE/3), y+TAILLE_PISTE, x +TAILLE_PISTE,y +(TAILLE_PISTE/3));
