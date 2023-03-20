@@ -1,6 +1,7 @@
 package fenetre;
 
 import java.awt.Font;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -18,14 +19,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 
+/**
+ * Classe qui permet de créer une fenetre de jeu sans le mode scientifique
+ * activé
+ * 
+ * @author Tan Tommy Rin
+ *
+ */
+
 public class FenetreJeuSansScientifique extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
-	
 
 	/**
-	 * Create the panel.
+	 * Creation de la fenetre.
 	 */
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -67,7 +75,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
-		
+
 		JButton btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -78,7 +86,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 		});
 		btnStart.setBounds(134, 604, 97, 58);
 		add(btnStart);
-		
+
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -88,7 +96,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 		});
 		btnReset.setBounds(376, 604, 97, 58);
 		add(btnReset);
-		
+
 		JButton btnNextImg = new JButton("Next Img");
 		btnNextImg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,7 +106,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 		});
 		btnNextImg.setBounds(632, 604, 103, 58);
 		add(btnNextImg);
-		
+
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

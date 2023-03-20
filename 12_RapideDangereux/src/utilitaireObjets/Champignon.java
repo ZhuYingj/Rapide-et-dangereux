@@ -4,83 +4,63 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
-import interfaces.Selectionnable;
+import interfaces.TypeObjetSpecial;
 
-public class Champignon implements Dessinable, Selectionnable {
+/**
+ * Classe qui permet de créer et gérer un champignon
+ * 
+ * @author TanTommyRin
+ *
+ */
+public class Champignon extends ObjetSpecial {
 
 	/** Vecteur de la position de la voiture **/
 	private Vecteur2D position;
-	private double pixelParMetre = 1;
-	private double diametre = 1;
-	private Ellipse2D cercle;
-	Shape shapeCercle;
+	private TypeObjetSpecial typeObjet = TypeObjetSpecial.CHAMPIGNON;
+	private double GRADUATIONPROGESSIVEMASSE = 1.0025;
+	private double GRADUATIONPROGRESSIVEDIAMETRE = 1.0009;
 
-	public Shape getShapeCercle() {
-		return shapeCercle;
-	}
-
-	public void setShapeCercle(Shape shapeCercle) {
-		this.shapeCercle = shapeCercle;
-
-		creerLaGeometrie();
-	}
-
-	public Champignon(Vecteur2D pos, double diametre) {
-		this.position = pos;
-		this.diametre = diametre;
-		creerLaGeometrie();
-	}
-
-	@Override
-	public void dessiner(Graphics2D g2d) {
-		Graphics2D gCopie = (Graphics2D) g2d.create();
-		AffineTransform mat = new AffineTransform();
-		mat.scale(pixelParMetre, pixelParMetre);
-		shapeCercle = mat.createTransformedShape(cercle);
-		gCopie.setColor(Color.green);
-
-		gCopie.fill(shapeCercle);
-	}
-
-	public double getPixelsParMetre() {
-		return pixelParMetre;
-	}
-
-	public void setPixelsParMetre(double pixelParMetre) {
-		this.pixelParMetre = pixelParMetre;
+	/**
+	 * Méthode qui permet de créer un champignon à l'aide de paramètres
+	 * 
+	 * @param pos       Position du champignon
+	 * @param diametre  Diametre du champignon
+	 * @param typeObjet Le type d'objetSpecial
+	 */
+	public Champignon(Vecteur2D pos, double diametre, TypeObjetSpecial typeObjet) {
+		super(pos, diametre, typeObjet);
+		this.position = super.getPositionObjet();
 
 	}
 
-	public double getDiametre() {
-		return diametre;
-	}
-
-	public void setDiametre(double diametre) {
-		this.diametre = diametre;
-		creerLaGeometrie();
-	}
-
-	private void creerLaGeometrie() {
-
-		cercle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
-
-	}
+	/**
+	 * Méthode de la fonction du champignon sur la voiture. Elle augmente la masse
+	 * et le diametre du champignon de façon progressive.
+	 * 
+	 * @param voitureAffecte La voiture affectée
+	 */
 
 	public void fonctionChampignonActivation(Voiture voitureAffecte) {
-		// Masse augmente selon le temps
-		double masseProgressive = voitureAffecte.getMasseEnKg() * 1.0025;
+
+		// Masse augmente pendant une durée voulue
+		double masseProgressive = voitureAffecte.getMasseEnKg() * GRADUATIONPROGESSIVEMASSE;
+		double diametreProgressif = voitureAffecte.getDiametre() * GRADUATIONPROGRESSIVEDIAMETRE;
 		voitureAffecte.setMasseEnKg(masseProgressive);
+		voitureAffecte.setDiametre(diametreProgressif);
 
 	}
 
-	@Override
-	public boolean contient(double xPix, double yPix) {
+	public TypeObjetSpecial getTypeObjet() {
+		return typeObjet;
+	}
 
-		return false;
+	public void setTypeObjet(TypeObjetSpecial typeObjet) {
+		this.typeObjet = typeObjet;
 	}
 
 	public Vecteur2D getPosition() {
@@ -89,10 +69,6 @@ public class Champignon implements Dessinable, Selectionnable {
 
 	public void setPosition(Vecteur2D position) {
 		this.position = position;
-
-	}
-
-	public void gererCollision() {
 
 	}
 

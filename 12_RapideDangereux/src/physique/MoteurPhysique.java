@@ -132,12 +132,4 @@ public class MoteurPhysique {
 
 		return new Vecteur2D(vitFinale);
 	}
-	
-	public static Vecteur2D calculerForceFreinage(double force, double angleRad) {
-		
-
-		Vecteur2D forceFreinage = new Vecteur2D(-force * Math.cos(angleRad), -force * Math.sin(angleRad));
-		
-		return new Vecteur2D(forceFreinage.getX(), forceFreinage.getY());
-	}
 }

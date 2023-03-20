@@ -1,9 +1,10 @@
 package application;
 
 import java.awt.EventQueue;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -20,14 +21,12 @@ import fenetre.FenetreJeuScientifique;
 import fenetre.FenetreMenu;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
- * Cette classe crée un JFrame qui va prendre les JPanels des autres classes et va
- * faire en sorte qu'on peut interchanger entre tout ces JPanels
+ * Application permettant d'illustrer une simulation physique
  * 
  * @author Alexis Pineda-Alvarado
+ * @author Tan Tommy Rin
  *
  */
 
@@ -173,28 +172,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				switch (evt.getPropertyName()) {
-				case "COMMENCER!":
-					fenJeuScience.setVisible(true);
-					fenOptions.setVisible(false);
-					setContentPane(fenJeuScience);
-					checkBoxModeNonScientifique.setEnabled(true);
-					pushingP(fenJeuScience);
-					break;
-				case "MASSE":
-					fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
-					break;
-				case "VITESSEMAXFACILE":
-					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
-					break;
-				case "VITESSEMAXINTERMEDIAIRE":
-					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
-					break;
-				case "VITESSEMAXAVANCE":
-					fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
-					break;
-
-				}
+				actionFenOptions(evt, fenJeuScience, fenOptions);
 
 			}
 		});
@@ -255,6 +233,37 @@ public class AppPrincipale12 extends JFrame {
 			}
 		});
 		mnNewMenu.add(checkBoxModeNonScientifique);
+	}
+
+	/**
+	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés à la fenetre de jeu d'options
+	 * @param evt evenement 
+	 * @param fenJeuScience la fenetre de jeu avec mode science activé
+	 * @param fenOptions la fenetre de jeu d'options
+	 */
+    //Par Tan Tommy Rin
+	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions) {
+		switch (evt.getPropertyName()) {
+		case "COMMENCER!":
+			fenJeuScience.setVisible(true);
+			fenOptions.setVisible(false);
+			setContentPane(fenJeuScience);
+			checkBoxModeNonScientifique.setEnabled(true);
+			pushingP(fenJeuScience);
+			break;
+		case "MASSE":
+			fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
+			break;
+		case "VITESSEMAXFACILE":
+			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			break;
+		case "VITESSEMAXINTERMEDIAIRE":
+			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			break;
+		case "VITESSEMAXAVANCE":
+			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			break;
+		}
 	}
 
 	/**

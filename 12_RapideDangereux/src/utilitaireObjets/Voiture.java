@@ -1,10 +1,10 @@
 package utilitaireObjets;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
 import geometrie.FlecheVectorielle;
@@ -47,6 +47,8 @@ public class Voiture implements Dessinable, Selectionnable {
 	private Shape voitureTransfo;
 	/** Vitesse maximale selon le niveau sélectionné **/
 	private double vitesseMaxSelonNiveau;
+	/** Le diametre de la voiture initial **/
+	private double diametreInitial;
 
 	/**
 	 * Méthode qui permet de construire une voiture avec des paramètres
@@ -67,6 +69,7 @@ public class Voiture implements Dessinable, Selectionnable {
 		this.vitesseMaxSelonNiveau = vitesseMaxSelonNiv;
 		this.masseEnKg = masse;
 		masseEnKgInitial = masseEnKg;
+		diametreInitial = diametre;
 		creerLaGeometrie();
 
 	}
@@ -76,17 +79,10 @@ public class Voiture implements Dessinable, Selectionnable {
 	 */
 	// Par Tan Tommy Rin
 	public Voiture() {
-		this.diametre = 25;
+		this.diametre = 8;
 		this.vitesseMaxSelonNiveau = 5.0;
 		masseEnKgInitial = masseEnKg;
-	}
-
-	public double getMasseEnKgInitial() {
-		return masseEnKgInitial;
-	}
-
-	public void setMasseEnKgInitial(double masseEnKgInitial) {
-		this.masseEnKgInitial = masseEnKgInitial;
+		diametreInitial = diametre;
 	}
 
 	/**
@@ -99,7 +95,7 @@ public class Voiture implements Dessinable, Selectionnable {
 		flecheVectorielle = new FlecheVectorielle(position.getX() + diametre / 2, (position.getY() + diametre / 2),
 				diametre, 0);
 
-		flecheVectorielle.setLongueurTraitDeTete(5);
+		flecheVectorielle.setLongueurTraitDeTete(2.5);
 		flecheVectorielle.setAngleTete(90);
 
 	}
@@ -112,16 +108,16 @@ public class Voiture implements Dessinable, Selectionnable {
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D gCopie = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
+		gCopie.scale(pixelsParMetre, pixelsParMetre);
+		gCopie.rotate(angle, position.getX() + diametre / 2, position.getY() + diametre / 2);
 
-		mat.rotate(angle, position.getX() + diametre / 2, position.getY() + diametre / 2);
 		gCopie.setColor(skin);
 		voitureTransfo = mat.createTransformedShape(cercle);
 
 		gCopie.fill(voitureTransfo);
 		gCopie.setColor(Color.RED);
 
-		gCopie.rotate(angle, position.getX() + diametre / 2, (position.getY() + diametre / 2));
-
+		gCopie.setStroke(new BasicStroke((float) 0.5));
 		flecheVectorielle.dessiner(gCopie);
 
 	}
@@ -304,6 +300,70 @@ public class Voiture implements Dessinable, Selectionnable {
 	}
 
 	/**
+	 * Cette methode permet de determiner si la voiture depasse le composant dessin
+	 * et changer sa vitesse selon la collision
+	 * 
+	 * @param positionXDroite Position droite en x du composant
+	 * @param positionXGauche Position gauche en x du composant
+	 * @param positionYBas    Position bas en y du composant
+	 * @param positionYHaut   Position haut en y du composant
+	 */
+	// Kevin Nguyen
+	public void gererCollision(double positionXDroite, double positionXGauche, double positionYBas,
+			double positionYHaut) {
+
+		// pour le bas
+		if (position.getY() > positionYBas - this.diametre) {
+			try {
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 90);
+				setVitesse(vit);
+				position.setY(positionYBas - this.diametre);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		// pour le haut
+		else if (position.getY() < positionYHaut) {
+			try {
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 270);
+				setVitesse(vit);
+				position.setY(positionYHaut);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		// pour la droite
+		else if (position.getX() > positionXDroite - this.diametre) {
+			try {
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 180);
+				setVitesse(vit);
+				position.setX(positionXDroite - this.diametre);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		// pour la gauche
+		else if (position.getX() < positionXGauche) {
+			try {
+				Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(getVitesse(), 0);
+				setVitesse(vit);
+				position.setX(positionXGauche);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
+	/**
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
 	 * voulu
 	 * 
@@ -353,6 +413,32 @@ public class Voiture implements Dessinable, Selectionnable {
 		this.voitureTransfo = voitureTransfo;
 	}
 
+	/** Méthode qui permet de retourner la masse en kg initiale de la voiture **/
+	// Par TanTommyRin
+	public double getMasseEnKgInitial() {
+		return masseEnKgInitial;
+	}
+
+	/**
+	 * Méthode qui permet de changer la masse initiale de la voiture par une autre
+	 * 
+	 * @param masseEnKgInitial masseInitiale voulue
+	 */
+	// Par Tan Tommy Rin
+
+	public void setMasseEnKgInitial(double masseEnKgInitial) {
+		this.masseEnKgInitial = masseEnKgInitial;
+	}
+
+	/**
+	 * Méthode qui permet de retourner la valeur du diametre initiale de la voiture
+	 * 
+	 * @return la valeur du diametre initiale
+	 */
+	// Par Tan Tommy Rin
+	public double getDiametreInitial() {
+		return diametreInitial;
+	}
 
 	/**
 	 * Retourne la forme cercle qui est la voiture
@@ -373,6 +459,5 @@ public class Voiture implements Dessinable, Selectionnable {
 		//
 		return false;
 	}
-
 
 }

@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * 
+ * Classe qui permet de créer la fenetre éditeur
  * @author Alexis Pineda-Alvarado
  *
  */
@@ -23,7 +23,7 @@ public class FenetreEditeur extends JPanel {
 	
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	/**
-	 * Create the panel.
+	 * Creation de la fenetre.
 	 */
 	
 	public void addPropertyChangeListener(PropertyChangeListener listener) {

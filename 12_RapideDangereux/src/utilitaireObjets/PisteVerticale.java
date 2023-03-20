@@ -50,7 +50,7 @@ public class PisteVerticale implements Dessinable {
 		this.x = x;
 		this.y = y;
 		this.murDroite = x +  TAILLE_PISTE + 1;
-		this.murGauche  =  x;
+		this.murGauche  =  x + 1;
 		this.murHaut    = y+1;
 		this.murBas   = y + TAILLE_PISTE + 1;
 
@@ -127,20 +127,22 @@ public class PisteVerticale implements Dessinable {
 	public void enCollisionAvec(Voiture voiture) {
 
 		if(voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas  ) {
-			if(voiture.getPosition().getX() <= murGauche+1) {
+			if(voiture.getPosition().getX() < murGauche + 1) {
 				try {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurGauche);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setX(murGauche + 1);
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}   else if(voiture.getPosition().getX() + voiture.getDiametre() > murDroite) {
+			}   else if(voiture.getPosition().getX() > murDroite - voiture.getDiametre()) {
 				try {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurDroite);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setX(murDroite- voiture.getDiametre());
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
