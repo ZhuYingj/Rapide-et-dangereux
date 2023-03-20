@@ -34,7 +34,7 @@ import utilitaireObjets.Voiture;
 public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	/** Largeur du composant en metres. */
-	private double largeurDuComposantEnMetres = 230;
+	private double largeurDuComposantEnMetres = 640;
 	/** Hauteur du composant en metres. */
 	private double hauteurDuComposantEnMetres;
 	/** Nombre de pixels pas metre. */
@@ -131,10 +131,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public ZoneAnimPhysique() {
 
-		mexique = new PisteMexique(1, 1);
+		mexique = new PisteMexique(0, 0);
 //		accelerateur = new Accelerateur(261, 1);
 
-		voiture = new Voiture(posInit, Color.yellow, 50, 8, angleVoitureRad, 60);
+		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
 		regroupement = new Regroupement(voiture, 1);
 
 //		bouleDeNeige = new BouleDeNeige(new Vecteur2D(100, 10), 5.0);
@@ -336,7 +336,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						voiture.getVitesseMaxSelonNiveau() * Math.sin(angleVoitureRad)));
 
 			}
-
+mexique.enCollisionAvec(voiture);
 //			collisionCote();
 //			enCollisionAvec();
 
@@ -381,9 +381,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		arreter();
 		calculerUneIterationPhysique();
 
-//		collisionCote();
+		collisionCote();
 
-//		enCollisionAvec();
+		enCollisionAvec();
 
 		repaint();
 	}

@@ -23,7 +23,7 @@ import physique.MoteurPhysique;
 
 public class PisteVirageHaut implements Dessinable {
 
-	private static final int TAILLE_PISTE = 87;
+	private static final int TAILLE_PISTE = 80;
 
 
 	private int x;
