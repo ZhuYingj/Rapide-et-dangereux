@@ -1,0 +1,201 @@
+package utilitaireObjets;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
+
+import geometrie.Vecteur2D;
+import interfaces.Dessinable;
+import interfaces.Selectionnable;
+import interfaces.TypeObjetSpecial;
+
+/**
+ * Classe permettant de créer et de gérer une boite mystere
+ * 
+ * @author TanTommyRin
+ *
+ */
+public class BlocMystere implements Dessinable, Selectionnable {
+	private double pixelParMetre = 1;
+	private double diametre;
+	private Vecteur2D position;
+	private Rectangle2D carre;
+	private Shape shapeCarre;
+	private ObjetSpecial objetSpecial;
+	private boolean enContact = false;
+	private Graphics2D gTempo;
+
+	/**
+	 * Méthode qui permet de construire un bloc mystere avec des parametres
+	 * 
+	 * @param diametre diametre de la voiture
+	 * @param pos      position de la voiture
+	 */
+	public BlocMystere(double diametre, Vecteur2D pos) {
+		this.diametre = diametre;
+		this.position = pos;
+		creerLaGeometrie();
+	}
+
+	/**
+	 * Création de la forme de la boite mystere à l'aide d'un carré
+	 */
+
+	private void creerLaGeometrie() {
+		carre = new Rectangle2D.Double(position.getX(), position.getY(), diametre, diametre);
+
+	}
+
+	/**
+	 * Méthode qui permet de gérer la collision de la boite mystere avec la voiture
+	 * 
+	 * @param voiture Voiture en collision
+	 */
+
+	public boolean enCollisionAvecVoiture(Voiture voiture) {
+
+		Area aireCopieVoiture = new Area(voiture.getCercle());
+		Area shapeCarreCopie = new Area(shapeCarre);
+
+		aireCopieVoiture.intersect(shapeCarreCopie);
+
+		if (!aireCopieVoiture.isEmpty() && enContact == false) {
+			objetRandomChoisi(voiture);
+
+			enContact = true;
+
+		}
+		if (enContact == true) {
+			dessiner(gTempo);
+
+			return true;
+
+		} else {
+			return false;
+		}
+
+	}
+
+	/**
+	 * Méthode qui permet de choisir quel objet sera dans la boite mystere à l'aide
+	 * de probabilité
+	 */
+
+	public void objetRandomChoisi(Voiture voiture) {
+
+		// Crée nombre au hasard de 0 - 1
+		double nombreRandom = 0.1;
+		// 20 % de chance que ce soit un champignon
+		if (nombreRandom < 0.2) {
+			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.CHAMPIGNON);
+
+			System.out.println("Champignon");
+		}
+		// 30 % de chance que ce soit un trou noir
+		else if (nombreRandom < 0.5) {
+
+			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.TROUNOIR);
+
+			System.out.println("Trou noir");
+		}
+		// 30 % de chance que ce soit de la colle
+		else if (nombreRandom < 0.8) {
+			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.COLLE);
+
+			System.out.println("Colle");
+		}
+		// 20 % de chance que ce soit une boule de neige
+		else {
+			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.BOULEDENEIGE);
+
+			System.out.println("Boule de neige");
+		}
+		objetSpecial.setFonctionActive(true);
+
+	}
+
+	/**
+	 * Méthode qui permet de dessiner sur la zone d'animation à l'aide du g2d
+	 */
+
+	@Override
+	public void dessiner(Graphics2D g2d) {
+		gTempo = (Graphics2D) g2d.create();
+		AffineTransform mat = new AffineTransform();
+		gTempo.scale(pixelParMetre, pixelParMetre);
+		shapeCarre = mat.createTransformedShape(carre);
+		gTempo.setColor(Color.orange);
+		if (enContact == false) {
+			gTempo.fill(shapeCarre);
+
+		}
+
+		if (enContact == true) {
+			objetSpecial.dessiner(g2d);
+		}
+
+	}
+
+	public ObjetSpecial getObjetSpecial() {
+		return objetSpecial;
+	}
+
+	public void setObjetSpecial(ObjetSpecial objetSpecial) {
+		this.objetSpecial = objetSpecial;
+	}
+
+	public double getPixelParMetre() {
+		return pixelParMetre;
+	}
+
+	public void setPixelParMetre(double pixelParMetre) {
+		this.pixelParMetre = pixelParMetre;
+
+	}
+
+	public double getDiametre() {
+		return diametre;
+	}
+
+	public void setDiametre(double diametre) {
+		this.diametre = diametre;
+		creerLaGeometrie();
+	}
+
+	public Vecteur2D getPosition() {
+		return position;
+	}
+
+	public void setPosition(Vecteur2D position) {
+		this.position = position;
+		creerLaGeometrie();
+	}
+
+	public Rectangle2D getCarre() {
+		return carre;
+	}
+
+	public void setCarre(Rectangle2D carre) {
+		this.carre = carre;
+		creerLaGeometrie();
+	}
+
+	@Override
+	public boolean contient(double xPix, double yPix) {
+
+		return false;
+	}
+
+	public Graphics2D getgTempo() {
+		return gTempo;
+	}
+
+	public void setgTempo(Graphics2D gTempo) {
+		this.gTempo = gTempo;
+
+	}
+
+}
