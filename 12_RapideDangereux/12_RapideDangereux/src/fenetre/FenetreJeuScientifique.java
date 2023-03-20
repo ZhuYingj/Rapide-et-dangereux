@@ -1,0 +1,384 @@
+package fenetre;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+import application.AppPrincipale12;
+import dessin.ZoneAnimPhysique;
+
+public class FenetreJeuScientifique extends JPanel {
+
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private ZoneAnimPhysique zoneAnimPhysique;
+	private AppPrincipale12 application;
+	private JLabel lblAccEnXV1;
+	private JLabel lblTempsEcouleValeur;
+	private JLabel lblAccEnYV1;
+	private JLabel lblVitesseEnXV1;
+	private JLabel lblVitesseEnYV1;
+	private JLabel lblPositionEnXV1;
+	private JLabel lblPositionEnYV1;
+	private JButton btnStart;
+	private JButton btnNextImg;
+	private JButton btnReset;
+	private JButton btnStop;
+
+	/**
+	 * Creation de la fenetre.
+	 */
+
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+	}
+
+	public FenetreJeuScientifique() {
+		setLayout(null);
+		setBounds(100, 100, 1300, 700);
+
+		JLabel lblTitreModeScientifique = new JLabel("Mode scientifique activé");
+		lblTitreModeScientifique.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblTitreModeScientifique.setBounds(this.getWidth() / 2 - lblTitreModeScientifique.getWidth(), 0, 223, 22);
+		add(lblTitreModeScientifique);
+
+		zoneAnimPhysique = new ZoneAnimPhysique();
+
+		zoneAnimPhysique.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				changementDeTextePendantLAnimation(evt);
+			}
+		});
+
+		zoneAnimPhysique.setBounds(10, 47, 700, 439);
+		add(zoneAnimPhysique);
+
+		JPanel panelDonneScientifique = new JPanel();
+		panelDonneScientifique.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"DONN\u00C9ES SCIENTIFIQUES", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelDonneScientifique.setBackground(Color.GRAY);
+		panelDonneScientifique.setBounds(720, 33, 570, 466);
+		add(panelDonneScientifique);
+		panelDonneScientifique.setLayout(null);
+
+		JLabel lblVoiture1 = new JLabel("Voiture 1");
+		lblVoiture1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblVoiture1.setBounds(139, 29, 83, 29);
+		panelDonneScientifique.add(lblVoiture1);
+
+		JLabel lblVoiture2 = new JLabel("Voiture 2");
+		lblVoiture2.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblVoiture2.setBounds(378, 29, 83, 29);
+		panelDonneScientifique.add(lblVoiture2);
+
+		JLabel lblPosition = new JLabel("Position :");
+		lblPosition.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPosition.setBounds(10, 71, 109, 29);
+		panelDonneScientifique.add(lblPosition);
+
+		JLabel lblVitesse = new JLabel("Vitesse :");
+		lblVitesse.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesse.setBounds(10, 121, 77, 29);
+		panelDonneScientifique.add(lblVitesse);
+
+		JLabel lblAcceleration = new JLabel("Accélération :");
+		lblAcceleration.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAcceleration.setBounds(10, 173, 109, 29);
+		panelDonneScientifique.add(lblAcceleration);
+
+		JLabel lblFrottement = new JLabel("Frottement :");
+		lblFrottement.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblFrottement.setBounds(10, 222, 109, 29);
+		panelDonneScientifique.add(lblFrottement);
+
+		JLabel lblGravite = new JLabel("Gravité :");
+		lblGravite.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblGravite.setBounds(10, 270, 109, 29);
+		panelDonneScientifique.add(lblGravite);
+
+		JLabel lblFreinage = new JLabel("Freinage :");
+		lblFreinage.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblFreinage.setBounds(10, 322, 109, 29);
+		panelDonneScientifique.add(lblFreinage);
+
+		JLabel lblAttraction = new JLabel("Attraction :");
+		lblAttraction.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAttraction.setBounds(10, 371, 109, 29);
+		panelDonneScientifique.add(lblAttraction);
+
+		JLabel lblMetreV1 = new JLabel("m");
+		lblMetreV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMetreV1.setBounds(246, 71, 24, 29);
+		panelDonneScientifique.add(lblMetreV1);
+
+		JLabel lblMetreV2 = new JLabel("m");
+		lblMetreV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMetreV2.setBounds(477, 71, 24, 29);
+		panelDonneScientifique.add(lblMetreV2);
+
+		JLabel lblKmParHeureV1 = new JLabel("m/s");
+		lblKmParHeureV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblKmParHeureV1.setBounds(246, 121, 38, 29);
+		panelDonneScientifique.add(lblKmParHeureV1);
+
+		JLabel lblKmParHeureV2 = new JLabel("m/s");
+		lblKmParHeureV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblKmParHeureV2.setBounds(477, 121, 38, 29);
+		panelDonneScientifique.add(lblKmParHeureV2);
+
+		JLabel lblMCarreV1 = new JLabel("m/s");
+		lblMCarreV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMCarreV1.setBounds(246, 173, 56, 29);
+		panelDonneScientifique.add(lblMCarreV1);
+
+		JLabel lblNV1 = new JLabel("N");
+		lblNV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNV1.setBounds(246, 222, 38, 29);
+		panelDonneScientifique.add(lblNV1);
+
+		JLabel lblNV1_1 = new JLabel("N");
+		lblNV1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNV1_1.setBounds(477, 222, 38, 29);
+		panelDonneScientifique.add(lblNV1_1);
+
+		JLabel lblNGraviteV1 = new JLabel("N");
+		lblNGraviteV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNGraviteV1.setBounds(246, 270, 38, 29);
+		panelDonneScientifique.add(lblNGraviteV1);
+
+		JLabel lblNGraviteV2 = new JLabel("N");
+		lblNGraviteV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNGraviteV2.setBounds(477, 270, 38, 29);
+		panelDonneScientifique.add(lblNGraviteV2);
+
+		JLabel lblNFreinageV1 = new JLabel("N");
+		lblNFreinageV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNFreinageV1.setBounds(246, 322, 38, 29);
+		panelDonneScientifique.add(lblNFreinageV1);
+
+		JLabel lblNAttractionV1 = new JLabel("N");
+		lblNAttractionV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNAttractionV1.setBounds(246, 371, 38, 29);
+		panelDonneScientifique.add(lblNAttractionV1);
+
+		JLabel lblNFreinageV2 = new JLabel("N");
+		lblNFreinageV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNFreinageV2.setBounds(477, 322, 38, 29);
+		panelDonneScientifique.add(lblNFreinageV2);
+
+		JLabel lblNAttractionV2 = new JLabel("N");
+		lblNAttractionV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNAttractionV2.setBounds(477, 371, 38, 29);
+		panelDonneScientifique.add(lblNAttractionV2);
+
+		JLabel lblNum2 = new JLabel("2");
+		lblNum2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNum2.setBounds(278, 173, 30, 14);
+		panelDonneScientifique.add(lblNum2);
+
+		JLabel lblMCarreV1_1 = new JLabel("m/s");
+		lblMCarreV1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMCarreV1_1.setBounds(477, 173, 56, 29);
+		panelDonneScientifique.add(lblMCarreV1_1);
+
+		JLabel lblNum2_1 = new JLabel("2");
+		lblNum2_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNum2_1.setBounds(509, 173, 30, 14);
+		panelDonneScientifique.add(lblNum2_1);
+
+		JLabel lblTempsEcoule = new JLabel("Temps écoulé :");
+		lblTempsEcoule.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTempsEcoule.setBounds(10, 411, 109, 44);
+		panelDonneScientifique.add(lblTempsEcoule);
+
+		JLabel lblSeconde = new JLabel("S");
+		lblSeconde.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblSeconde.setBounds(246, 411, 38, 44);
+		panelDonneScientifique.add(lblSeconde);
+
+		lblTempsEcouleValeur = new JLabel("0.00");
+		lblTempsEcouleValeur.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTempsEcouleValeur.setBounds(177, 411, 109, 44);
+		panelDonneScientifique.add(lblTempsEcouleValeur);
+
+		lblAccEnXV1 = new JLabel("0.00");
+		lblAccEnXV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAccEnXV1.setBounds(119, 173, 65, 29);
+		panelDonneScientifique.add(lblAccEnXV1);
+
+		lblAccEnYV1 = new JLabel("0.00");
+		lblAccEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAccEnYV1.setBounds(194, 173, 65, 29);
+		panelDonneScientifique.add(lblAccEnYV1);
+
+		JLabel lblAccV1Separator = new JLabel("[               ,               ]");
+		lblAccV1Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAccV1Separator.setBounds(106, 173, 162, 29);
+		panelDonneScientifique.add(lblAccV1Separator);
+
+		lblVitesseEnXV1 = new JLabel("0.00");
+		lblVitesseEnXV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseEnXV1.setBounds(119, 121, 65, 29);
+		panelDonneScientifique.add(lblVitesseEnXV1);
+
+		lblVitesseEnYV1 = new JLabel("0.00");
+		lblVitesseEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseEnYV1.setBounds(194, 121, 65, 29);
+		panelDonneScientifique.add(lblVitesseEnYV1);
+
+		JLabel lblVitesseV1Separator = new JLabel("[               ,               ]");
+		lblVitesseV1Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseV1Separator.setBounds(106, 121, 162, 29);
+		panelDonneScientifique.add(lblVitesseV1Separator);
+
+		lblPositionEnYV1 = new JLabel("0.00");
+		lblPositionEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPositionEnYV1.setBounds(194, 69, 65, 29);
+		panelDonneScientifique.add(lblPositionEnYV1);
+
+		lblPositionEnXV1 = new JLabel("0.00");
+		lblPositionEnXV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPositionEnXV1.setBounds(119, 69, 65, 29);
+		panelDonneScientifique.add(lblPositionEnXV1);
+
+		JLabel lblPositionV1Separator = new JLabel("[               ,               ]");
+		lblPositionV1Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPositionV1Separator.setBounds(106, 69, 162, 29);
+		panelDonneScientifique.add(lblPositionV1Separator);
+
+		JPanel panelObjetEtGraphique = new JPanel();
+		panelObjetEtGraphique.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelObjetEtGraphique.setBounds(720, 510, 570, 179);
+		add(panelObjetEtGraphique);
+		panelObjetEtGraphique.setLayout(null);
+
+		JProgressBar progressBarFroce = new JProgressBar();
+		progressBarFroce.setFont(new Font("Tahoma", Font.BOLD, 12));
+		progressBarFroce.setStringPainted(true);
+		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
+		progressBarFroce.setBounds(519, 11, 30, 157);
+		panelObjetEtGraphique.add(progressBarFroce);
+
+		JButton btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("Retour", null, -1);
+				pcs.firePropertyChange("Test", null, -1);
+
+			}
+		});
+		btnRetour.setBounds(10, 3, 89, 23);
+		add(btnRetour);
+
+		btnStart = new JButton("Start");
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.setEnCoursDAnimation(false);
+				zoneAnimPhysique.demarrer();
+				btnNextImg.setEnabled(false);
+				btnStart.setEnabled(false);
+				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+
+			}
+		});
+		btnStart.setBounds(10, 563, 89, 76);
+		add(btnStart);
+
+		btnReset = new JButton("Reset");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.restartPos();
+				btnNextImg.setEnabled(true);
+				btnStart.setEnabled(true);
+				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
+			}
+		});
+		btnReset.setBounds(175, 563, 89, 76);
+		add(btnReset);
+
+		btnNextImg = new JButton("Next Img");
+		btnNextImg.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.avancerUnPas();
+			}
+		});
+		btnNextImg.setBounds(355, 563, 89, 76);
+		add(btnNextImg);
+
+		btnStop = new JButton("Stop");
+		btnStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.arreter();
+				btnNextImg.setEnabled(true);
+				btnStart.setEnabled(true);
+			}
+		});
+		btnStop.setBounds(538, 563, 89, 76);
+		add(btnStop);
+
+	}
+
+	/**
+	 * Méthode qui retourne la zone d'animation physique
+	 * 
+	 * @return la zone d'animation physique
+	 */
+	// Par Tan Tommy Rin
+
+	public ZoneAnimPhysique getZoneAnimPhysique() {
+		return zoneAnimPhysique;
+	}
+
+	/**
+	 * Méthode qui permet de changer la zone d'animation par une nouvelle
+	 * 
+	 * @param zoneAnimPhysique La nouvelle zone d'animation
+	 */
+	// Par Tan Tommy Rin
+
+	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
+		this.zoneAnimPhysique = zoneAnimPhysique;
+	}
+
+	/**
+	 * Méthode qui change le texte/l'information durant l'animation
+	 * 
+	 * @param evt Évènement lorsque l'information change
+	 */
+	// Par Tan Tommy Rin
+	public void changementDeTextePendantLAnimation(PropertyChangeEvent evt) {
+		switch (evt.getPropertyName()) {
+		case "tempsEcoule":
+			lblTempsEcouleValeur.setText(String.format("%.2f", evt.getNewValue()));
+		case "accEnXV1":
+			lblAccEnXV1.setText(String.format("%.2f", evt.getNewValue()));
+		case "accEnYV1":
+			lblAccEnYV1.setText(String.format("%.2f", evt.getNewValue()));
+		case "vitEnXV1":
+			lblVitesseEnXV1.setText(String.format("%.2f", evt.getNewValue()));
+		case "vitEnYV1":
+			lblVitesseEnYV1.setText(String.format("%.2f", evt.getNewValue()));
+		case "posEnXV1":
+			lblPositionEnXV1.setText(String.format("%.2f", evt.getNewValue()));
+		case "posEnYV1":
+			lblPositionEnYV1.setText(String.format("%.2f", evt.getNewValue()));
+		}
+	}
+}
