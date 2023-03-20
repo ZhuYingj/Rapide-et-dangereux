@@ -19,7 +19,7 @@ import physique.MoteurPhysique;
 
 public class PisteHorizontale implements Dessinable {
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 87;
+	private static final int TAILLE_PISTE = 80;
 	/** La position en x du mure de haut **/
 	private int murGauche;
 	/** La position en y du mure de haut **/
@@ -57,7 +57,7 @@ public class PisteHorizontale implements Dessinable {
 		this.murDroite = x +  TAILLE_PISTE + 1;
 		this.murGauche  =  x ;
 		this.murHaut    = y;
-		this.murBas   = y + TAILLE_PISTE + 1;
+		this.murBas   = y + TAILLE_PISTE;
 
 	}
 
@@ -68,12 +68,12 @@ public class PisteHorizontale implements Dessinable {
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
-		g2dCopie.scale(pixelsParMetre, pixelsParMetre);
+//		g2dCopie.scale(pixelsParMetre, pixelsParMetre);
 		g2dCopie.setColor(Color.BLACK);
 		g2dCopie.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
 		g2dCopie.setColor(Color.RED);
 		g2dCopie.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(3f);
+		Stroke stroke = new BasicStroke(0.5f);
 		g2dCopie.setStroke(stroke);
 		g2dCopie.drawLine(murGauche, murHaut, x + TAILLE_PISTE - 1, y);
 		g2dCopie.drawLine(murGauche, murBas, x + TAILLE_PISTE - 1, y + TAILLE_PISTE);
@@ -143,6 +143,7 @@ public class PisteHorizontale implements Dessinable {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurHaut);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setY(murHaut + 1);
+					System.out.println("en collision");
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -153,7 +154,7 @@ public class PisteHorizontale implements Dessinable {
 					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurBas);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setY(murBas- voiture.getDiametre());
-
+					System.out.println("en collision");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

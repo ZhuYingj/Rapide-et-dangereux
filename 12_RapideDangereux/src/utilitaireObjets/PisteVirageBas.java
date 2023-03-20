@@ -21,7 +21,7 @@ import physique.MoteurPhysique;
 public class PisteVirageBas implements Dessinable{
 
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 87;
+	private static final int TAILLE_PISTE = 80;
 	/** la position en x de depart que l'objet piste qui vas etre creer **/
 	private int x;
 	/** la position en y de depart que l'objet piste qui vas etre creer  **/
