@@ -10,6 +10,12 @@ import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.TypeObjetSpecial;
 
+/**
+ * Classe permettant de créer et gérer un objet special
+ * 
+ * @author Tan Tommy Rin
+ *
+ */
 public class ObjetSpecial implements Dessinable {
 
 	private Vecteur2D positionObjet;
@@ -19,12 +25,23 @@ public class ObjetSpecial implements Dessinable {
 	private double tempsTemporaire;
 	private boolean fonctionActive = false;
 
+	/**
+	 * Méthode permettant de créer un objet spécial à l'aide de paramètre
+	 * 
+	 * @param pos       La position de l'objet special
+	 * @param diametre  Le diaetre de l'objet special
+	 * @param typeObjet Le type de l'objet special
+	 */
 	public ObjetSpecial(Vecteur2D pos, double diametre, TypeObjetSpecial typeObjet) {
 		this.positionObjet = pos;
 		this.diametreObjet = diametre;
 		this.type = typeObjet;
 
 	}
+
+	/**
+	 * Méthode permettant de dessiner sur la zone d'animation à l'aide du g2d
+	 */
 
 	@Override
 	public void dessiner(Graphics2D g2d) {
@@ -36,24 +53,57 @@ public class ObjetSpecial implements Dessinable {
 
 	}
 
+	/**
+	 * Méthode permettant d'activer la fonction de l'objet special obtenu
+	 * 
+	 * @param voiture          La voiture affecté
+	 * @param tempsTotalEcoule Le temps total écoulé
+	 */
+
 	public void fonctionSelonObjet(Voiture voiture, double tempsTotalEcoule) {
+
+		// Condition si fonction active est vrai, le temps temporaire est égale à celui
+		// du temps total écoulé et restera fixe tandis que le tempsTotalEcoule changera
+		// de valeur
 		if (fonctionActive == true) {
 
 			tempsTemporaire = tempsTotalEcoule;
 			fonctionActive = false;
-
+			System.out.println(fonctionActive);
 		}
 		// Fonction du champignon
 
 		if (type == TypeObjetSpecial.CHAMPIGNON) {
-			Champignon champignon = new Champignon(this.positionObjet, this.diametreObjet, type);
-			if ((tempsTemporaire + 5 > tempsTotalEcoule) && fonctionActive == false) {
-				champignon.fonctionChampignonActivation(voiture);
-			} else {
-				voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
-				voiture.setDiametre(voiture.getDiametreInitial());
-			}
+			System.out.println(fonctionActive);
 
+			fonctionChampignon(voiture, tempsTotalEcoule);
+
+		} else if (type == TypeObjetSpecial.BOULEDENEIGE) {
+
+		} else if (type == TypeObjetSpecial.COLLE) {
+
+		} else {
+
+		}
+
+	}
+
+	/**
+	 * Méhode qui active la fonction du champignon
+	 * 
+	 * @param voiture          La voiture affecté
+	 * @param tempsTotalEcoule Le temps total écoulé
+	 */
+
+	public boolean fonctionChampignon(Voiture voiture, double tempsTotalEcoule) {
+		Champignon champignon = new Champignon(this.positionObjet, this.diametreObjet, type);
+		if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
+			champignon.fonctionChampignonActivation(voiture);
+			return true;
+		} else {
+			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
+			voiture.setDiametre(voiture.getDiametreInitial());
+			return false;
 		}
 
 	}
