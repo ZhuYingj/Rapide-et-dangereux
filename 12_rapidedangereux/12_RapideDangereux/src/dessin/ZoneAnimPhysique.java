@@ -137,7 +137,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		voiture = new Voiture(posInit, Color.yellow, 50, 8, angleVoitureRad, 60);
 		regroupement = new Regroupement(voiture, 1);
 
-
 //		bouleDeNeige = new BouleDeNeige(new Vecteur2D(100, 10), 5.0);
 //		groupe.setVoiture(voiture);
 		regroupement.setPisteMexique(mexique);
@@ -151,7 +150,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 				repaint();
 
-				// faire une methode KeyReleased
 			}
 
 			@Override
@@ -185,6 +183,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		regroupement.setPixelsParMetre(pixelsParMetre);
 		regroupement.dessiner(g2d);
+		
 //		groupe.setPixelsParMetre(pixelsParMetre);
 
 //		italie = new PisteItalie(1,1);
@@ -198,8 +197,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 //		aireTriangle3 = mexique.getGauche().getAireTriangle();
 //		aireTriangle4 = mexique.getHaut().getAireTriangle();
 //		aireRectangle = mexique.getRectangle();
-
-
 
 //		bouleDeNeige.setPixelsParMetre(pixelsParMetre);
 

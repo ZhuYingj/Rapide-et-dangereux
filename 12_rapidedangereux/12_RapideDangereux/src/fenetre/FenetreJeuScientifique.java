@@ -293,7 +293,6 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 
-				
 			}
 		});
 		btnStart.setBounds(10, 563, 89, 76);
@@ -383,4 +382,3 @@ public class FenetreJeuScientifique extends JPanel {
 		}
 	}
 }
-
