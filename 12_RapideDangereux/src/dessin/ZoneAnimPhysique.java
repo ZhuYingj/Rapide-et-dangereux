@@ -131,13 +131,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public ZoneAnimPhysique() {
 
 		mexique = new PisteMexique(0, 0);
-//		accelerateur = new Accelerateur(261, 1);
+		// accelerateur = new Accelerateur(261, 1);
 
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
 		regroupement = new Regroupement(voiture, 1);
 
-//		bouleDeNeige = new BouleDeNeige(new Vecteur2D(100, 10), 5.0);
-//		groupe.setVoiture(voiture);
+		// bouleDeNeige = new BouleDeNeige(new Vecteur2D(100, 10), 5.0);
+		// groupe.setVoiture(voiture);
 		regroupement.setPisteMexique(mexique);
 
 		addKeyListener(new KeyAdapter() {
@@ -185,33 +185,35 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 //		groupe.setPixelsParMetre(pixelsParMetre);
 
-//		italie = new PisteItalie(1,1);
-//		italie.dessiner(g2d);
+		// groupe.setPixelsParMetre(pixelsParMetre);
 
-//		italie = new PisteItalie(1,1);
-//		italie.dessiner(g2d);
+		// italie = new PisteItalie(1,1);
+		// italie.dessiner(g2d);
 
-//		aireTriangle1 = mexique.getBas().getAireTriangle();
-//		aireTriangle2 = mexique.getDroit().getAireTriangle();
-//		aireTriangle3 = mexique.getGauche().getAireTriangle();
-//		aireTriangle4 = mexique.getHaut().getAireTriangle();
-//		aireRectangle = mexique.getRectangle();
+		// italie = new PisteItalie(1,1);
+		// italie.dessiner(g2d);
 
-//		bouleDeNeige.setPixelsParMetre(pixelsParMetre);
+		// aireTriangle1 = mexique.getBas().getAireTriangle();
+		// aireTriangle2 = mexique.getDroit().getAireTriangle();
+		// aireTriangle3 = mexique.getGauche().getAireTriangle();
+		// aireTriangle4 = mexique.getHaut().getAireTriangle();
+		// aireRectangle = mexique.getRectangle();
 
-//		bouleDeNeige.dessiner(g2d);
+		// bouleDeNeige.setPixelsParMetre(pixelsParMetre);
 
-//		aireVoiture1 = new Area(voiture.getCercle());
-//		aireVoiture2 = new Area(aireVoiture1);
-//		aireVoiture3 = new Area(aireVoiture1);
-//		aireVoiture4 = new Area(aireVoiture1);
-//		aireVoiture5 = new Area(aireVoiture1);
-//		aireVoitureBoule = new Area(aireVoiture1);
+		// bouleDeNeige.dessiner(g2d);
 
-//		accelerateur.dessiner(g2d);
+		// aireVoiture1 = new Area(voiture.getCercle());
+		// aireVoiture2 = new Area(aireVoiture1);
+		// aireVoiture3 = new Area(aireVoiture1);
+		// aireVoiture4 = new Area(aireVoiture1);
+		// aireVoiture5 = new Area(aireVoiture1);
+		// aireVoitureBoule = new Area(aireVoiture1);
 
-//		bouleDeNeigeAire = new Area(bouleDeNeige.getShapeBoule());
-//		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
+		// accelerateur.dessiner(g2d);
+
+		// bouleDeNeigeAire = new Area(bouleDeNeige.getShapeBoule());
+		// bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
 
 	}
 
@@ -311,10 +313,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getVoiture()
 					.setAccel(new Vecteur2D(20 * Math.cos(angleVoitureRad), 20 * Math.sin(angleVoitureRad)));
 		}
-//		if (bas == true) {
-//			regroupement.getVoiture().setSommeDesForces(MoteurPhysique.calculerForceFrottement(0.45, angleCoinRad, 0));
-//			System.out.println("ici");
-//		}
+
 		if (space == true) {
 			System.out.println("yo");
 		}
@@ -335,15 +334,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						voiture.getVitesseMaxSelonNiveau() * Math.sin(angleVoitureRad)));
 
 			}
-			mexique.enCollisionAvec(voiture);
-//			collisionCote();
-//			enCollisionAvec();
+
+			regroupement.getPisteMexique().enCollisionAvec(voiture);
+			// collisionCote();
+			// enCollisionAvec();
 
 			if (haut == false) {
 				voiture.setAccel(valeurInit);
 			}
 
-//			collisionBouleDeNeige();
+			// collisionBouleDeNeige();
 			repaint();
 
 			try {

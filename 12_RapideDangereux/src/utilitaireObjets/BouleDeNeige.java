@@ -4,42 +4,39 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
+import dessin.ZoneAnimPhysique;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
+import interfaces.TypeObjetSpecial;
+import physique.MoteurPhysique;
 
-public class BouleDeNeige implements Dessinable, Selectionnable {
-	private Color col;
-	private double x;
-	private double y;
+public class BouleDeNeige extends ObjetSpecial {
 	private double diametre;
 	private Vecteur2D posInt;
 	private Ellipse2D.Double boule;
 	private double pixelsParMetre;
 	private Vecteur2D vitesse = new Vecteur2D(100, 0); // par defaut
 	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
+	private boolean good = true;
+	private Voiture voiture;
 	Shape shapeBoule;
+	private Area bouleDeNeigeAire;
+	private Area bouleDeNeigeAireCopie;
+	private Area aireVoiture;
+	private Area aireVoiture1;
+	private ZoneAnimPhysique zoneAnim;
+	private MoteurPhysique motPhys;
+	private TypeObjetSpecial typeObjet = TypeObjetSpecial.BOULEDENEIGE;
+	private boolean contactBouleNeige = true;
+	private Vecteur2D position;
 
-	public BouleDeNeige(Vecteur2D vec, double diametre) {
-
-		this.posInt = vec;
-		this.diametre = diametre;
-		this.pixelsParMetre = 1;
-
-		creerLaGeometrie();
-
-	}
-
-	public void creerLaGeometrie() {
-		boule = new Ellipse2D.Double(posInt.getX(), posInt.getY(), this.diametre, this.diametre);
-	}
-
-	@Override
-	public boolean contient(double xPix, double yPix) {
-		// TODO Auto-generated method stub
-		return false;
+	public BouleDeNeige(Vecteur2D pos, double diametre, TypeObjetSpecial typeObjet) {
+		super(pos, diametre, typeObjet);
+		this.position = super.getPositionObjet();
 	}
 
 	@Override
@@ -49,18 +46,42 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 		mat.scale(pixelsParMetre, pixelsParMetre);
 		shapeBoule = mat.createTransformedShape(boule);
 		g2dcop.setColor(Color.cyan);
-		g2dcop.fill(shapeBoule);
+		if (contactBouleNeige == true) {
+			g2dcop.fill(shapeBoule);
+		}
 
+		bouleDeNeigeAire = new Area(shapeBoule);
+		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
+
+	}
+
+	public boolean collisionDeLaBalle(Voiture v) {
+		this.voiture = v;
+
+		aireVoiture = new Area(voiture.getCercle());
+		aireVoiture1 = new Area(aireVoiture);
+		aireVoiture1.intersect(bouleDeNeigeAireCopie);
+
+		if (contactBouleNeige)
+			if (!aireVoiture1.isEmpty()) {
+				contactBouleNeige = false;
+			}
+
+		return contactBouleNeige;
 	}
 
 	public void deplacementBoule() {
 
 	}
-	
-	public void ralentissementVoiture(Voiture valeurVoiture) {
-//		Vecteur2D accelerationDiminue = valeurVoiture.setSommeDesForces(valeurVoiture.getAccel());
-//		valeurVoiture.setAccel(accelerationDiminue);
-	}
+
+//	public void ralentissementVoiture(Voiture v) {
+//		System.out.println("SLOW DOWN!!!");
+//		Vecteur2D voitureSlow = new Vecteur2D();
+//		voitureSlow = MoteurPhysique.calculerForceFrottement(5.00, voiture.getMasseEnKg(), voiture.getAngle());
+//		v.setSommeDesForces(voitureSlow);
+//		System.out.println(voitureSlow);
+//
+//	}
 
 	/**
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
@@ -114,6 +135,22 @@ public class BouleDeNeige implements Dessinable, Selectionnable {
 
 	public void setShapeBoule(Shape shapeBoule) {
 		this.shapeBoule = shapeBoule;
+	}
+
+	public boolean isGood() {
+		return good;
+	}
+
+	public void setGood(boolean good) {
+		this.good = good;
+	}
+
+	public TypeObjetSpecial getTypeObjet() {
+		return typeObjet;
+	}
+
+	public void setTypeObjet(TypeObjetSpecial typeObjet) {
+		this.typeObjet = typeObjet;
 	}
 
 }

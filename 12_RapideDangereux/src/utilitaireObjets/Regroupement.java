@@ -64,6 +64,12 @@ public class Regroupement implements Dessinable {
 					}
 				} // Fin condition pour le champignon
 
+				// Pour la boule de neige
+//				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+//					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(voiture) == false) {
+//						regroupementBoiteMystere.remove(a);
+//					}
+//				}
 			}
 
 		}
