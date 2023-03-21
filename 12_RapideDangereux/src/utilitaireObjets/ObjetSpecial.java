@@ -9,6 +9,7 @@ import java.awt.geom.Ellipse2D;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.TypeObjetSpecial;
+import physique.MoteurPhysique;
 
 /**
  * Classe permettant de créer et gérer un objet special
@@ -50,6 +51,9 @@ public class ObjetSpecial implements Dessinable {
 			Champignon champignon = new Champignon(this.positionObjet, this.diametreObjet, type);
 
 		}
+		if (type == TypeObjetSpecial.BOULEDENEIGE) {
+			BouleDeNeige bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet, type);
+		}
 
 	}
 
@@ -74,11 +78,11 @@ public class ObjetSpecial implements Dessinable {
 		// Fonction du champignon
 
 		if (type == TypeObjetSpecial.CHAMPIGNON) {
-			System.out.println(fonctionActive);
 
 			fonctionChampignon(voiture, tempsTotalEcoule);
 
 		} else if (type == TypeObjetSpecial.BOULEDENEIGE) {
+			fonctionBouleDeNeige(voiture);
 
 		} else if (type == TypeObjetSpecial.COLLE) {
 
@@ -106,6 +110,17 @@ public class ObjetSpecial implements Dessinable {
 			return false;
 		}
 
+	}
+
+	public boolean fonctionBouleDeNeige(Voiture voiture) {
+
+		System.out.println("SLOW DOWN!!!");
+		Vecteur2D voitureSlow = new Vecteur2D();
+		voitureSlow = MoteurPhysique.calculerForceFrottement(5.00, voiture.getMasseEnKg(), voiture.getAngle());
+		voiture.setSommeDesForces(voitureSlow);
+		System.out.println(voitureSlow);
+
+		return fonctionActive;
 	}
 
 	public boolean isFonctionActive() {
