@@ -489,12 +489,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		tempsTotalEcoule += deltaT;
 		changementTexteParIteration();
 
-		Vecteur2D forceTotal = new Vecteur2D(
-				MoteurPhysique.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), 0));
+		Vecteur2D forceTotal = new Vecteur2D(MoteurPhysique.calculerForceFrottement(0.45,
+				regroupement.getVoiture().getMasseEnKg(), angleVoitureRad));
 
 		if (bas == true) {
 			Vecteur2D forceFreinage = new Vecteur2D(MoteurPhysique
-					.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), 0).multiplie(2));
+					.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), angleVoitureRad)
+					.multiplie(2));
 
 			forceTotal = forceTotal.additionne(forceFreinage);
 

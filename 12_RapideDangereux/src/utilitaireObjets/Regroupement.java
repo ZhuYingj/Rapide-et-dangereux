@@ -56,7 +56,8 @@ public class Regroupement implements Dessinable {
 			if (regroupementBoiteMystere.get(a).enCollisionAvecVoiture(voiture) == true) {
 				regroupementBoiteMystere.get(a).getObjetSpecial().fonctionSelonObjet(voiture, tempsTotalEcoule);
 
-				// Pour le champignon
+				// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
+				// retirons la boite mystere contenant ce champignon de la liste.
 				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
 					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionChampignon(voiture,
 							tempsTotalEcoule) == false) {
