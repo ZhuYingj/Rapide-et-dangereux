@@ -278,40 +278,50 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public void OritentationVoitureSelonTouche(KeyEvent e) {
 		if (droite == true) {
-			angleVoitureDegre = angleVoitureDegre + 10;
+			angleVoitureDegre = (int) (Math.toDegrees(regroupement.getVoiture().getAngle()) + 10);
+			if(angleVoitureDegre >350) {
+				angleVoitureDegre = 0;
+			} else if (angleVoitureDegre < 0) {
+				angleVoitureDegre = 360;
+			}
 			setAngle(angleVoitureDegre);
+
 			if (regroupement.getVoiture().getAccel().getX() == 0) {
 				regroupement.getVoiture()
-						.setVitesse((new Vecteur2D(voiture.getVitesse().module() * Math.cos(angleVoitureRad),
-								voiture.getVitesse().module() * Math.sin(angleVoitureRad))));
+						.setVitesse((new Vecteur2D(voiture.getVitesse().module() * Math.cos(regroupement.getVoiture().getAngle()),
+								voiture.getVitesse().module() * Math.sin(regroupement.getVoiture().getAngle()))));
 			} else if (regroupement.getVoiture().getAccel().getY() == 0) {
 				regroupement.getVoiture()
-						.setVitesse(new Vecteur2D(voiture.getVitesse().module() * Math.cos(angleVoitureRad),
-								voiture.getVitesse().module() * Math.sin(angleVoitureRad)));
+						.setVitesse(new Vecteur2D(voiture.getVitesse().module() * Math.cos(regroupement.getVoiture().getAngle()),
+								voiture.getVitesse().module() * Math.sin(regroupement.getVoiture().getAngle())));
 
 			}
 
 		}
 		if (gauche == true) {
 
-			angleVoitureDegre = angleVoitureDegre - 10;
-
+			angleVoitureDegre = (int) (Math.toDegrees(regroupement.getVoiture().getAngle()) - 10);
+			if(angleVoitureDegre >370) {
+				angleVoitureDegre = 0;
+			} else if (angleVoitureDegre < 0) {
+				angleVoitureDegre = 360;
+			}
 			setAngle(angleVoitureDegre);
 			if (regroupement.getVoiture().getAccel().getX() == 0) {
 				regroupement.getVoiture()
-						.setVitesse(new Vecteur2D(voiture.getVitesse().module() * Math.cos(angleVoitureRad),
-								voiture.getVitesse().module() * Math.sin(angleVoitureRad)));
+						.setVitesse(new Vecteur2D(voiture.getVitesse().module() * Math.cos(regroupement.getVoiture().getAngle()),
+								voiture.getVitesse().module() * Math.sin(regroupement.getVoiture().getAngle())));
 			} else if (regroupement.getVoiture().getAccel().getY() == 0) {
 				regroupement.getVoiture()
-						.setVitesse(new Vecteur2D(voiture.getVitesse().module() * Math.cos(angleVoitureRad),
-								voiture.getVitesse().module() * Math.sin(angleVoitureRad)));
+						.setVitesse(new Vecteur2D(voiture.getVitesse().module() * Math.cos(regroupement.getVoiture().getAngle()),
+								voiture.getVitesse().module() * Math.sin(regroupement.getVoiture().getAngle())));
 
 			}
 
 		}
 		if (haut == true) {
 			regroupement.getVoiture()
-					.setAccel(new Vecteur2D(20 * Math.cos(angleVoitureRad), 20 * Math.sin(angleVoitureRad)));
+					.setAccel(new Vecteur2D(20 * Math.cos(regroupement.getVoiture().getAngle()), 20 * Math.sin(regroupement.getVoiture().getAngle())));
 		}
 
 		if (space == true) {
@@ -330,8 +340,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			calculerUneIterationPhysique();
 			if (regroupement.getVoiture().getVitesse().module(voiture.getVitesse()) > voiture
 					.getVitesseMaxSelonNiveau()) {
-				voiture.setVitesse(new Vecteur2D(voiture.getVitesseMaxSelonNiveau() * Math.cos(angleVoitureRad),
-						voiture.getVitesseMaxSelonNiveau() * Math.sin(angleVoitureRad)));
+				voiture.setVitesse(new Vecteur2D(voiture.getVitesseMaxSelonNiveau() * Math.cos(regroupement.getVoiture().getAngle()),
+						voiture.getVitesseMaxSelonNiveau() * Math.sin(regroupement.getVoiture().getAngle())));
 
 			}
 
@@ -490,11 +500,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		changementTexteParIteration();
 
 		Vecteur2D forceTotal = new Vecteur2D(
-				MoteurPhysique.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), angleVoitureRad));
+				MoteurPhysique.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), voiture.getAngle()));
 
 		if (bas == true) {
 			Vecteur2D forceFreinage = new Vecteur2D(MoteurPhysique
-					.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), angleVoitureRad).multiplie(2));
+					.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), voiture.getAngle()).multiplie(2));
 
 			forceTotal = forceTotal.additionne(forceFreinage);
 
