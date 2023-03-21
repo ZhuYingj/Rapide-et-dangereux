@@ -281,7 +281,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			angleVoitureDegre = (int) (Math.toDegrees(regroupement.getVoiture().getAngle()) + 10);
 			if(angleVoitureDegre >350) {
 				angleVoitureDegre = 0;
-			} else if (angleVoitureDegre < 0) {
+			} else if (angleVoitureDegre < 10) {
 				angleVoitureDegre = 360;
 			}
 			setAngle(angleVoitureDegre);
@@ -303,7 +303,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			angleVoitureDegre = (int) (Math.toDegrees(regroupement.getVoiture().getAngle()) - 10);
 			if(angleVoitureDegre >370) {
 				angleVoitureDegre = 0;
-			} else if (angleVoitureDegre < 0) {
+			} else if (angleVoitureDegre < 10) {
 				angleVoitureDegre = 360;
 			}
 			setAngle(angleVoitureDegre);
@@ -512,7 +512,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		if (haut == false && regroupement.getVoiture().getVitesse().module() != 0) {
 
 			regroupement.getVoiture().setSommeDesForces(forceTotal);
-			if (regroupement.getVoiture().getVitesse().module() < 0.1) {
+			if (regroupement.getVoiture().getVitesse().module() < 0.3) {
 				regroupement.getVoiture().setVitesse(new Vecteur2D(0, 0));
 			}
 

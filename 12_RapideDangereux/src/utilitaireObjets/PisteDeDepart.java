@@ -143,7 +143,7 @@ public class PisteDeDepart implements Dessinable{
 				if(voiture.getPosition().getY() < murHaut + 1) {
 					try {
 						Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurHaut);
-						if(  voiture.getVitesse().module() < 0.1 ) {
+						if(  voiture.getVitesse().module() < 0.3 ) {
 							voiture.setVitesse(new Vecteur2D(0,0));
 						} else {
 							voiture.setVitesse(vit);
@@ -154,7 +154,6 @@ public class PisteDeDepart implements Dessinable{
 							voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
 						} else if (Math.toDegrees(voiture.getAngle()) > 270  && Math.toDegrees(voiture.getAngle()) < 360 ) {
 							voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + ((360 -(Math.toDegrees(voiture.getAngle())) * 2))));
-							System.out.println(Math.toDegrees(voiture.getAngle()) + (360 -(Math.toDegrees(voiture.getAngle()) * 2)));
 						}
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -163,7 +162,7 @@ public class PisteDeDepart implements Dessinable{
 				}   else if(voiture.getPosition().getY()>  murBas - voiture.getDiametre()) {
 					try {
 						Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurBas);
-						if(  voiture.getVitesse().module() < 0.1 ) {
+						if(  voiture.getVitesse().module() < 0.3 ) {
 							voiture.setVitesse(new Vecteur2D(0,0));
 						} else {
 							voiture.setVitesse(vit);
