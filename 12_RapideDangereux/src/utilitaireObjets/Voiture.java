@@ -79,7 +79,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 */
 	// Par Tan Tommy Rin
 	public Voiture() {
-		this.diametre = 8;
+		this.diametre = 16;
 		this.vitesseMaxSelonNiveau = 5.0;
 		masseEnKgInitial = masseEnKg;
 		diametreInitial = diametre;

@@ -383,9 +383,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		arreter();
 		calculerUneIterationPhysique();
 
-		collisionCote();
-
-		enCollisionAvec();
+//		collisionCote();
+//
+//		enCollisionAvec();
 
 		repaint();
 	}
