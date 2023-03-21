@@ -311,10 +311,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getVoiture()
 					.setAccel(new Vecteur2D(20 * Math.cos(angleVoitureRad), 20 * Math.sin(angleVoitureRad)));
 		}
-		if (bas == true) {
-//			voiture.setVitesse(MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), angleVoitureRad));
-
-		}
+//		if (bas == true) {
+//			regroupement.getVoiture().setSommeDesForces(MoteurPhysique.calculerForceFrottement(0.45, angleCoinRad, 0));
+//			System.out.println("ici");
+//		}
 		if (space == true) {
 			System.out.println("yo");
 		}
@@ -335,7 +335,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						voiture.getVitesseMaxSelonNiveau() * Math.sin(angleVoitureRad)));
 
 			}
-mexique.enCollisionAvec(voiture);
+			mexique.enCollisionAvec(voiture);
 //			collisionCote();
 //			enCollisionAvec();
 
@@ -407,7 +407,7 @@ mexique.enCollisionAvec(voiture);
 		regroupement.getVoiture().setPosition(posInit);
 		regroupement.getVoiture().setVitesse(valeurInit);
 		regroupement.getVoiture().setAccel(valeurInit);
-		
+
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
 
 		repaint();
@@ -489,15 +489,28 @@ mexique.enCollisionAvec(voiture);
 		tempsTotalEcoule += deltaT;
 		changementTexteParIteration();
 
-		Vecteur2D forceTotal = new Vecteur2D(MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), 0));
+		Vecteur2D forceTotal = new Vecteur2D(
+				MoteurPhysique.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), 0));
 
+		if (bas == true) {
+			Vecteur2D forceFreinage = new Vecteur2D(MoteurPhysique
+					.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), 0).multiplie(2));
+
+			forceTotal = forceTotal.additionne(forceFreinage);
+
+		}
 		if (haut == false && regroupement.getVoiture().getVitesse().module() != 0) {
+
 			regroupement.getVoiture().setSommeDesForces(forceTotal);
+
 		} else if (regroupement.getVoiture().getVitesse().module() == 0) {
 
-			forceTotal = forceTotal.additionne(regroupement.getVoiture().getAccel());
+//			forceTotal = forceTotal.additionne(regroupement.getVoiture().getAccel());
+//			regroupement.getVoiture().setVitesse(new Vecteur2D(0, 0));
 		}
-
+//		System.out.println("FORCE TOTAL " + forceTotal);
+//		System.out.println(
+//				"FROTE " + MoteurPhysique.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), 0));
 		regroupement.avancerGroupe(deltaT, tempsTotalEcoule);
 
 	}
