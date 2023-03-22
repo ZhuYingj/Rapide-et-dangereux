@@ -9,6 +9,7 @@ import java.awt.geom.Path2D;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import interfaces.Selectionnable;
 import physique.MoteurPhysique;
 
 /**
@@ -18,7 +19,7 @@ import physique.MoteurPhysique;
  *
  */
 
-public class PisteVirageBas implements Dessinable{
+public class PisteVirageBas implements Dessinable, Selectionnable{
 
 	/** Taille de la piste qui est toujours constante **/
 	private static final int TAILLE_PISTE = 80;
@@ -85,6 +86,11 @@ public class PisteVirageBas implements Dessinable{
 	}
 
 	public void enCollisionAvec(Voiture voiture) {
+		
+		Area cercle = new Area(voiture.getCercle());
+		cercle.intersect(aireTriangle);
+		double pos = 3;
+		
 		if(voiture.getPosition().getX() > murGauche  && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY()  > murHaut&& voiture.getPosition().getY()  < murBas) {
 			if(voiture.getPosition().getX() < murGauche + 1) {
 				try {
@@ -106,8 +112,28 @@ public class PisteVirageBas implements Dessinable{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			} else if (!cercle.isEmpty()) {
+
+				try {
+
+					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 45);
+
+					voiture.setVitesse(vit);
+					voiture.setPosition(
+							new Vecteur2D(voiture.getPosition().getX() + pos, voiture.getPosition().getY() + pos));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		}
+	}
+
+	@Override
+	public boolean contient(double xPix, double yPix) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

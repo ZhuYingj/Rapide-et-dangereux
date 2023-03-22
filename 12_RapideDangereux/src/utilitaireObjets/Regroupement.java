@@ -97,7 +97,7 @@ public class Regroupement implements Dessinable {
 
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
-//		Graphics2D g2dCopie2 = (Graphics2D) g2d.create();
+
 		pisteMexique.setPixelsParMetre(pixelsParMetre);
 		pisteMexique.dessiner(g2d);
 		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
