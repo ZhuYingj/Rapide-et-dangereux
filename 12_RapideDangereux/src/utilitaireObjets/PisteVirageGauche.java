@@ -100,7 +100,12 @@ public class PisteVirageGauche implements Dessinable {
 							angleNormaleMurDroite);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setX(murDroite - voiture.getDiametre());
-
+					if(Math.toDegrees(voiture.getAngle()) < 90  && Math.toDegrees(voiture.getAngle()) > 0 ) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + ((90 - Math.toDegrees(voiture.getAngle()))* 2 )));
+					} else if (Math.toDegrees(voiture.getAngle()) > 270  && Math.toDegrees(voiture.getAngle()) < 360 ) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle())-270) * 2)));
+					
+					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -111,7 +116,11 @@ public class PisteVirageGauche implements Dessinable {
 							angleNormaleMurHaut);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setY(murHaut + 1);
-
+					if(Math.toDegrees(voiture.getAngle()) < 270  && Math.toDegrees(voiture.getAngle()) > 180 ) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
+					} else if (Math.toDegrees(voiture.getAngle()) > 270  && Math.toDegrees(voiture.getAngle()) < 360 ) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + ((360 -(Math.toDegrees(voiture.getAngle())) * 2))));
+					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -124,7 +133,19 @@ public class PisteVirageGauche implements Dessinable {
 					voiture.setVitesse(vit);
 					voiture.setPosition(
 							new Vecteur2D(voiture.getPosition().getX() - pos, voiture.getPosition().getY() + pos));
-
+					if(Math.toDegrees(voiture.getAngle()) <= 315  && Math.toDegrees(voiture.getAngle()) > 225 ) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 225) * 2)));
+					} else if (Math.toDegrees(voiture.getAngle()) <= 360 && voiture.getAngle() > 315) {
+						
+							voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) +  (360 - Math.toDegrees(voiture.getAngle()) * 2)));
+						System.out.println("test");
+//						double angle = (Math.toDegrees(voiture.getAngle()) + (((45 - Math.toDegrees(voiture.getAngle())) * 2)));
+////						angle = 360 + angle;
+//						System.out.println(angle);
+//						voiture.setAngle(Math.toRadians(angle));
+					} else if (Math.toDegrees(voiture.getAngle()) <= 45 && voiture.getAngle() > 0) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) +  (45 - Math.toDegrees(voiture.getAngle()) * 2)));
+					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
