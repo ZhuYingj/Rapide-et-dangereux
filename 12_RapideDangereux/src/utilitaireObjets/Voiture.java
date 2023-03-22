@@ -20,7 +20,7 @@ import physique.MoteurPhysique;
  * @author Kevin Nguyen
  */
 
-public class Voiture implements Dessinable, Selectionnable {
+public class Voiture implements Dessinable {
 	/** Diametre de la voiture puisque la voiture est un cercle **/
 	private double diametre = 1;
 	/** Masse de la voiture **/
@@ -79,7 +79,7 @@ public class Voiture implements Dessinable, Selectionnable {
 	 */
 	// Par Tan Tommy Rin
 	public Voiture() {
-		this.diametre = 8;
+		this.diametre = 16;
 		this.vitesseMaxSelonNiveau = 5.0;
 		masseEnKgInitial = masseEnKg;
 		diametreInitial = diametre;
@@ -448,16 +448,6 @@ public class Voiture implements Dessinable, Selectionnable {
 	// Kevin Nguyen
 	public Ellipse2D getCercle() {
 		return cercle;
-	}
-
-	@Override
-	/**
-	 * À compléter plus tard
-	 */
-	// Kevin Nguyen
-	public boolean contient(double xPix, double yPix) {
-		//
-		return false;
 	}
 
 }

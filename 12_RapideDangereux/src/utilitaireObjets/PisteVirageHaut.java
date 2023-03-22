@@ -10,8 +10,8 @@ import java.awt.geom.Path2D.Double;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import interfaces.Selectionnable;
 import physique.MoteurPhysique;
-
 
 /**
  * Class qui permet de creer un objet piste virage haut
@@ -19,12 +19,10 @@ import physique.MoteurPhysique;
  * @author Ludovic Julien
  *
  */
-	
 
-public class PisteVirageHaut implements Dessinable {
+public class PisteVirageHaut implements Dessinable, Selectionnable {
 
 	private static final int TAILLE_PISTE = 80;
-
 
 	private int x;
 	private int y;
@@ -37,41 +35,33 @@ public class PisteVirageHaut implements Dessinable {
 	/** Normale du mur gauche **/
 	private double angleNormaleMurGauche = 0;
 
-	private double pixelsParMetre = 1; //Defaut
+	private double pixelsParMetre = 1; // Defaut
 	/** Initialise la forme du triangle **/
 	private Path2D triangle;
 	/** Initialise l'aire du triangle **/
 	private Area aireTriangle;
-	
+
 	/**
 	 * Methode qui permet de construire la piste virage haut a l'aide de parametres
 	 * 
-	 * @param x 	position en x de la piste
-	 * @param y		position en y de la piste
-	 * */
-
-
+	 * @param x position en x de la piste
+	 * @param y position en y de la piste
+	 */
 
 	public PisteVirageHaut(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.murDroite = x +  TAILLE_PISTE + 1;
-		this.murGauche  =  x + 1;
-		this.murHaut    = y+1;
-		this.murBas   = y + TAILLE_PISTE + 1;
-
-
-
+		this.murDroite = x + TAILLE_PISTE + 1;
+		this.murGauche = x + 1;
+		this.murHaut = y + 1;
+		this.murBas = y + TAILLE_PISTE + 1;
 
 	}
 
-	
 	/**
-	 * Methode qui permet de dessiner la piste virage haut sur la zone d'animation a l'aide de g2d
+	 * Methode qui permet de dessiner la piste virage haut sur la zone d'animation a
+	 * l'aide de g2d
 	 */
-	
-
-
 
 	@Override
 	public void dessiner(Graphics2D g2d) {
@@ -88,34 +78,64 @@ public class PisteVirageHaut implements Dessinable {
 		// g2d.fillRect(x+TAILLE_PISTE, y, -3-3);
 
 		triangle = new Path2D.Double();
-		triangle.moveTo(x , y+TAILLE_PISTE);
-		triangle.lineTo(x , y +(TAILLE_PISTE/3));
-		triangle.lineTo(x+ ((TAILLE_PISTE / 3) * 2),  y + TAILLE_PISTE);
+		triangle.moveTo(x, y + TAILLE_PISTE);
+		triangle.lineTo(x, y + (TAILLE_PISTE / 3));
+		triangle.lineTo(x + ((TAILLE_PISTE / 3) * 2), y + TAILLE_PISTE);
 		triangle.closePath();
 		g2d.fill(triangle);
-		
-		
+
 		aireTriangle = new Area(triangle);
-		
+
 	}
-	
+
 	public void enCollisionAvec(Voiture voiture) {
-		if(voiture.getPosition().getX() > murGauche  && voiture.getPosition().getX() < murDroite&& voiture.getPosition().getY()  > murHaut&& voiture.getPosition().getY()  < murBas) {
-			if(voiture.getPosition().getX() < murGauche + 1) {
+
+		Area cercle = new Area(voiture.getCercle());
+		cercle.intersect(aireTriangle);
+		double pos = 3;
+
+		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+			if (voiture.getPosition().getX() < murGauche + 1) {
 				try {
-					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurGauche);
+					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(),
+							angleNormaleMurGauche);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setX(murGauche + 1);
-
+					if(Math.toDegrees(voiture.getAngle()) < 270  && Math.toDegrees(voiture.getAngle()) > 180 ) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + ((270 - Math.toDegrees(voiture.getAngle()))* 2 )));
+						System.out.println(Math.toDegrees(voiture.getAngle()));
+					} else if (Math.toDegrees(voiture.getAngle()) > 90  && Math.toDegrees(voiture.getAngle()) < 180 ) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle())-90) * 2)));
+					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else if(voiture.getPosition().getY()>  murBas - voiture.getDiametre()) {
+			} else if (voiture.getPosition().getY() > murBas - voiture.getDiametre()) {
 				try {
-					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurBas);
+					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(),
+							angleNormaleMurBas);
 					voiture.setVitesse(vit);
-					voiture.getPosition().setY(murBas- voiture.getDiametre());
+					voiture.getPosition().setY(murBas - voiture.getDiametre());
+					if(Math.toDegrees(voiture.getAngle()) < 90  && Math.toDegrees(voiture.getAngle()) > 0 ) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
+					} else if (Math.toDegrees(voiture.getAngle()) > 90  && Math.toDegrees(voiture.getAngle()) < 180 ) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + ((360 -(Math.toDegrees(voiture.getAngle())) * 2))));
+						System.out.println(Math.toDegrees(voiture.getAngle()) + (360 -(Math.toDegrees(voiture.getAngle()) * 2)));
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (!cercle.isEmpty()) {
+
+				try {
+
+					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), 315);
+					voiture.setVitesse(vit);
+					voiture.setPosition(
+							new Vecteur2D(voiture.getPosition().getX() + pos, voiture.getPosition().getY() - pos));
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -123,16 +143,18 @@ public class PisteVirageHaut implements Dessinable {
 				}
 			}
 		}
+
 	}
-	
+
 	/**
 	 * Retourne l'aire du triangle
+	 * 
 	 * @return l'aire du triangle
 	 */
 	public Area getAireTriangle() {
 		return aireTriangle;
 	}
-	
+
 	/**
 	 * Méthode qui retourne le nombre de pixels par metre
 	 * 
@@ -150,9 +172,13 @@ public class PisteVirageHaut implements Dessinable {
 	 */
 	public void setPixelsParMetre(double pixelsParMetre) {
 		this.pixelsParMetre = pixelsParMetre;
-		
-	}
-	
 
+	}
+
+	@Override
+	public boolean contient(double xPix, double yPix) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
