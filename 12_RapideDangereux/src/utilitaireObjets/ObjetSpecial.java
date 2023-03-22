@@ -1,11 +1,8 @@
 package utilitaireObjets;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
 
+import dessin.ZoneAnimPhysique;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.TypeObjetSpecial;
@@ -82,7 +79,7 @@ public class ObjetSpecial implements Dessinable {
 			fonctionChampignon(voiture, tempsTotalEcoule);
 
 		} else if (type == TypeObjetSpecial.BOULEDENEIGE) {
-			fonctionBouleDeNeige(voiture);
+			fonctionBouleDeNeige(voiture, tempsTotalEcoule);
 
 		} else if (type == TypeObjetSpecial.COLLE) {
 
@@ -112,15 +109,22 @@ public class ObjetSpecial implements Dessinable {
 
 	}
 
-	public boolean fonctionBouleDeNeige(Voiture voiture) {
+	public boolean fonctionBouleDeNeige(Voiture voiture, double tempsFinal) {
 
-		System.out.println("SLOW DOWN!!!");
-		Vecteur2D voitureSlow = new Vecteur2D();
-		voitureSlow = MoteurPhysique.calculerForceFrottement(5.00, voiture.getMasseEnKg(), voiture.getAngle());
-		voiture.setSommeDesForces(voitureSlow);
-		System.out.println(voitureSlow);
+		if ((tempsTemporaire + 1 > tempsFinal)) {
+			System.out.println("SLOW DOWN!!!");
+			Vecteur2D voitureSlow = new Vecteur2D();
+			voitureSlow = MoteurPhysique.calculerForceFrottement(2.00, voiture.getMasseEnKg(), voiture.getAngle());
+			voiture.setSommeDesForces(voitureSlow);
+			System.out.println(voitureSlow);
+			return true;
+		} else {
+			Vecteur2D voitureNormal = new Vecteur2D();
+			voitureNormal = MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), voiture.getAngle());
+			voiture.setSommeDesForces(voitureNormal);
+			return false;
+		}
 
-		return fonctionActive;
 	}
 
 	public boolean isFonctionActive() {

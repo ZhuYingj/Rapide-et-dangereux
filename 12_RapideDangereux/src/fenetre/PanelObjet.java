@@ -17,6 +17,9 @@ import utilitaireObjets.PisteVirageDroit;
 import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Voiture;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 
 /**
  * Classe qui permet de crée un panel composé d'objet
@@ -28,6 +31,7 @@ import utilitaireObjets.Voiture;
 public class PanelObjet extends JPanel {
 	private int XOBJET = 75;
 	private int YOBJET = 20;
+	private int X, Y;
 	private BlocMystere blocMystere;
 	private PisteDeDepart pisteDeDepart;
 	private Voiture voiture;
@@ -43,8 +47,23 @@ public class PanelObjet extends JPanel {
 	 * Creation de la fenetre.
 	 */
 	public PanelObjet() {
-		setBackground(SystemColor.activeCaption);
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				X = e.getX();
+				Y = e.getY();
 
+			}
+		});
+		addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				e.getComponent().setLocation((e.getX() + e.getComponent().getX()) - X,
+						(e.getY() + e.getComponent().getY()) - Y);
+			}
+		});
+		setBackground(SystemColor.activeCaption);
+		
 	}
 
 	/**
@@ -54,6 +73,8 @@ public class PanelObjet extends JPanel {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 
+
+		
 		blocMystere = new BlocMystere(75, new Vecteur2D(XOBJET, YOBJET));
 		pisteDeDepart = new PisteDeDepart(XOBJET * 3, YOBJET);
 //		voiture = new Voiture(new Vecteur2D(0,0), Color.yellow, 50, 16, 0, 60);

@@ -74,6 +74,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** La premiere piste affiché **/
 	private PisteMexique mexique;
 	private PisteItalie italie;
+	
+	private double testFrottement = 0.45;
 
 	/** Aire du triangle superieur gauche **/
 	private Area aireTriangle1;
@@ -509,7 +511,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		if (bas == true) {
 			Vecteur2D forceFreinage = new Vecteur2D(MoteurPhysique
-					.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), angleVoitureRad)
+					.calculerForceFrottement(testFrottement, regroupement.getVoiture().getMasseEnKg(), angleVoitureRad)
 					.multiplie(2));
 
 			forceTotal = forceTotal.additionne(forceFreinage);
@@ -622,6 +624,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public void setEnCoursDAnimation(boolean enCoursDAnimation) {
 		this.enCoursDAnimation = enCoursDAnimation;
+	}
+	
+	public double getTestFrottement() {
+		return testFrottement;
+	}
+
+	public void setTestFrottement(double testFrottement) {
+		this.testFrottement = testFrottement;
 	}
 
 }

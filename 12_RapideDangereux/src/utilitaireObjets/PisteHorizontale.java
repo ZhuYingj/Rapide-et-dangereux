@@ -61,6 +61,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 		this.murBas   = y + TAILLE_PISTE;
 
 	}
+	
 
 	/**
 	 * Methode qui permet de dessiner la piste horizontale sur la zone d'animation a l'aide de g2d
