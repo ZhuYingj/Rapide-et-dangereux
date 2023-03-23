@@ -111,7 +111,7 @@ public class ObjetSpecial implements Dessinable {
 
 	public boolean fonctionBouleDeNeige(Voiture voiture, double tempsFinal) {
 
-		if ((tempsTemporaire + 1 > tempsFinal)) {
+		if ((tempsTemporaire + 3 > tempsFinal)) {
 			System.out.println("SLOW DOWN!!!");
 			Vecteur2D voitureSlow = new Vecteur2D();
 			voitureSlow = MoteurPhysique.calculerForceFrottement(2.00, voiture.getMasseEnKg(), voiture.getAngle());
