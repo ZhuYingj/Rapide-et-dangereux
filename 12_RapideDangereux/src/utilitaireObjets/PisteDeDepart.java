@@ -22,6 +22,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 
 	/** Taille de la piste qui est toujours constante **/
 	private static final int TAILLE_PISTE = 80;
+
 	/** la position en x de depart que l'objet piste vas etre creer **/
 	private int x;
 	/** la position en y de depart que l'objet piste vas etre creer **/
@@ -36,6 +37,8 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	private int murGauche;
 	private int murHaut;
 	private int murBas;
+
+	private Voiture voiture;
 
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -54,7 +57,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 		this.murGauche = x;
 		this.murHaut = y;
 		this.murBas = y + TAILLE_PISTE;
-
+		voiture = new Voiture(new Vecteur2D(x, y), Color.yellow, 50, 16, 0, 50);
 	}
 
 	/**
@@ -82,6 +85,11 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 				y + ((TAILLE_PISTE / 7) * 4));
 		g2d.drawLine(x + (TAILLE_PISTE / 2), y + ((TAILLE_PISTE / 7) * 5), x + (TAILLE_PISTE / 2),
 				y + ((TAILLE_PISTE / 7) * 6));
+
+//		Ellipse2D a = new Ellipse2D.Double(x, y, 50, 50);
+//		g2d.draw(a);
+
+		voiture.dessiner(g2d);
 
 	}
 
@@ -198,7 +206,19 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	@Override
 	public boolean contient(double xPix, double yPix) {
 
-		return false;
+		return true;
+	}
+
+	public Voiture getVoiture() {
+		return voiture;
+	}
+
+	public void setVoiture(Voiture voiture) {
+		this.voiture = voiture;
+	}
+
+	public static int getTaillePiste() {
+		return TAILLE_PISTE;
 	}
 
 }

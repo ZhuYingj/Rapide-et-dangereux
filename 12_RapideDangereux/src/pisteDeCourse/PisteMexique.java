@@ -38,6 +38,8 @@ public class PisteMexique implements Dessinable {
 
 	private List<PisteDeDepart> depart = new ArrayList<PisteDeDepart>();
 
+	
+
 	private List<PisteHorizontale> horizontale = new ArrayList<PisteHorizontale>();
 	private List<PisteVerticale> verticale = new ArrayList<PisteVerticale>();
 	private List<PisteVirageBas> bas = new ArrayList<PisteVirageBas>();
@@ -281,6 +283,13 @@ public class PisteMexique implements Dessinable {
 
 		depart.get(0).enCollisionAvec(voiture);
 
+	}
+	public List<PisteDeDepart> getDepart() {
+		return depart;
+	}
+
+	public void setDepart(List<PisteDeDepart> depart) {
+		this.depart = depart;
 	}
 
 }
