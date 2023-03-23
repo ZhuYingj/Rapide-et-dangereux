@@ -42,26 +42,40 @@ public class PanelObjet extends JPanel {
 	private PisteVirageGauche pisteVirageGauche;
 	private PisteVirageHaut pisteVirageHaut;
 	private Accelerateur accelerateur;
+	private boolean selectionObjet = false;
+	private double xPrecedent, yPrecedent;
 
 	/**
 	 * Creation de la fenetre.
 	 */
 	public PanelObjet() {
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				X = e.getX();
-				Y = e.getY();
-
-			}
-		});
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				e.getComponent().setLocation((e.getX() + e.getComponent().getX()) - X,
-						(e.getY() + e.getComponent().getY()) - Y);
+				if(selectionObjet) {
+					XOBJET += e.getX() - xPrecedent;
+					YOBJET += e.getY() - yPrecedent;
+					xPrecedent = e.getX();
+					yPrecedent = e.getY();
+					repaint();
+				}
 			}
 		});
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if(pisteVirageHaut.contient(e.getX(), e.getY())) {
+					selectionObjet = true;
+					xPrecedent = e.getX();
+					yPrecedent = e.getY();				}
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				selectionObjet = false;
+				repaint();
+			}
+		});
+
 		setBackground(SystemColor.activeCaption);
 		
 	}

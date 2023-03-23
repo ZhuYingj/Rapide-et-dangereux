@@ -169,8 +169,8 @@ public class PisteVirageBas implements Dessinable, Selectionnable, MouseListener
 	}
 
 	public void mouseDragged(MouseEvent e) {
-		e.getComponent().setLocation((e.getX() + e.getComponent().getX()) - x,
-				(e.getY() + e.getComponent().getY()) - y);
+//		e.getComponent().setLocation((e.getX() + e.getComponent().getX()) - x,
+//				(e.getY() + e.getComponent().getY()) - y);
 	}
 
 	@Override
