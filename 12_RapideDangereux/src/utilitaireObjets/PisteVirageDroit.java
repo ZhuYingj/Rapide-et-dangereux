@@ -121,7 +121,7 @@ public class PisteVirageDroit implements Dessinable, Selectionnable {
 						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + (((135 - Math.toDegrees(voiture.getAngle())) * 2))));
 					} else if (Math.toDegrees(voiture.getAngle()) <= 360 && Math.toDegrees(voiture.getAngle())> 315 ) {
 						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((( Math.toDegrees(voiture.getAngle())- 315) * 2))));
-//						
+						
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
