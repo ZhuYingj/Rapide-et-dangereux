@@ -108,7 +108,7 @@ public class Voiture implements Dessinable {
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D gCopie = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
-		gCopie.scale(pixelsParMetre, pixelsParMetre);
+//		gCopie.scale(pixelsParMetre, pixelsParMetre);
 		gCopie.rotate(angle, position.getX() + diametre / 2, position.getY() + diametre / 2);
 
 		gCopie.setColor(skin);

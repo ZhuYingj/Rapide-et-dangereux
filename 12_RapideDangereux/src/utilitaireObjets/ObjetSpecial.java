@@ -73,7 +73,7 @@ public class ObjetSpecial implements Dessinable {
 
 			tempsTemporaire = tempsTotalEcoule;
 			fonctionActive = false;
-			System.out.println(fonctionActive);
+
 		}
 		// Fonction du champignon
 

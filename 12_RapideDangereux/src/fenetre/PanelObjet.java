@@ -56,6 +56,8 @@ public class PanelObjet extends JPanel {
 
 		blocMystere = new BlocMystere(75, new Vecteur2D(XOBJET, YOBJET));
 		pisteDeDepart = new PisteDeDepart(XOBJET * 3, YOBJET);
+		pisteDeDepart.getVoiture().getPosition().setX(XOBJET * 2.5);
+		System.out.println(pisteDeDepart.getVoiture().getPosition());
 //		voiture = new Voiture(new Vecteur2D(0,0), Color.yellow, 50, 16, 0, 60);
 		pisteHorizontale = new PisteHorizontale(XOBJET, YOBJET * 7);
 		pisteVerticale = new PisteVerticale(XOBJET * 3, YOBJET * 7);

@@ -50,6 +50,7 @@ public class Champignon extends ObjetSpecial {
 		// Masse augmente pendant une durée voulue
 		double masseProgressive = voitureAffecte.getMasseEnKg() * GRADUATIONPROGESSIVEMASSE;
 		double diametreProgressif = voitureAffecte.getDiametre() * GRADUATIONPROGRESSIVEDIAMETRE;
+
 		voitureAffecte.setMasseEnKg(masseProgressive);
 		voitureAffecte.setDiametre(diametreProgressif);
 

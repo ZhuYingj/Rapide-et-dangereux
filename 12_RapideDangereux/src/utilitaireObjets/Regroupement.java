@@ -20,7 +20,7 @@ import pisteDeCourse.PisteMexique;
 
 public class Regroupement implements Dessinable {
 	/** La voiture **/
-	private Voiture voiture;
+//	private Voiture voiture;
 	/** Liste de boites mysteres **/
 	private ArrayList<BlocMystere> regroupementBoiteMystere;
 	/** Piste mexique **/
@@ -36,8 +36,11 @@ public class Regroupement implements Dessinable {
 	 * @param voiture     La voiture
 	 * @param nombreBoite Le nombre de boite
 	 */
-	public Regroupement(Voiture voiture, int nombreBoite) {
-		this.voiture = voiture;
+	public Regroupement(Voiture voiture, int nombreBoite, PisteMexique pisteMexique) {
+
+//		this.voiture = voiture;
+		this.pisteMexique = pisteMexique;
+		pisteMexique.getDepart().get(0).setVoiture(voiture);
 		this.nombreBoiteMystere = nombreBoite;
 		creeBoiteDansListe();
 	}
@@ -50,17 +53,19 @@ public class Regroupement implements Dessinable {
 	 */
 
 	public void avancerGroupe(double deltaT, double tempsTotalEcoule) {
-		voiture.avancerUnPas(deltaT);
+		pisteMexique.getDepart().get(0).getVoiture().avancerUnPas(deltaT);
 		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
-			regroupementBoiteMystere.get(a).enCollisionAvecVoiture(voiture);
-			if (regroupementBoiteMystere.get(a).enCollisionAvecVoiture(voiture) == true) {
-				regroupementBoiteMystere.get(a).getObjetSpecial().fonctionSelonObjet(voiture, tempsTotalEcoule);
+			regroupementBoiteMystere.get(a).enCollisionAvecVoiture(pisteMexique.getDepart().get(0).getVoiture());
+			if (regroupementBoiteMystere.get(a)
+					.enCollisionAvecVoiture(pisteMexique.getDepart().get(0).getVoiture()) == true) {
+				regroupementBoiteMystere.get(a).getObjetSpecial()
+						.fonctionSelonObjet(pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule);
 
 				// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
 				// retirons la boite mystere contenant ce champignon de la liste.
 				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
-					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionChampignon(voiture,
-							tempsTotalEcoule) == false) {
+					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionChampignon(
+							pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
 						regroupementBoiteMystere.remove(a);
 					}
 				} // Fin condition pour le champignon
@@ -84,7 +89,7 @@ public class Regroupement implements Dessinable {
 		regroupementBoiteMystere = new ArrayList<BlocMystere>();
 		for (int a = 0; a < nombreBoiteMystere; a++) {
 			double diametreBoite = 15;
-			regroupementBoiteMystere.add(new BlocMystere(diametreBoite, new Vecteur2D(150, 5)));
+			regroupementBoiteMystere.add(new BlocMystere(diametreBoite, new Vecteur2D(150 * (a + 1), 5 * (a + 1))));
 		}
 	}
 
@@ -99,6 +104,7 @@ public class Regroupement implements Dessinable {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
 
 		pisteMexique.setPixelsParMetre(pixelsParMetre);
+		pisteMexique.getDepart().get(0).getVoiture().setPixelsParMetre(pixelsParMetre);
 		pisteMexique.dessiner(g2d);
 		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
 			regroupementBoiteMystere.get(a).setPixelParMetre(pixelsParMetre);
@@ -106,8 +112,8 @@ public class Regroupement implements Dessinable {
 
 		}
 
-		voiture.setPixelsParMetre(pixelsParMetre);
-		voiture.dessiner(g2dCopie);
+		
+
 
 	}
 
@@ -134,14 +140,6 @@ public class Regroupement implements Dessinable {
 	public void setPixelsParMetre(double pixelsParMetre) {
 		this.pixelsParMetre = pixelsParMetre;
 
-	}
-
-	public Voiture getVoiture() {
-		return voiture;
-	}
-
-	public void setVoiture(Voiture voiture) {
-		this.voiture = voiture;
 	}
 
 }

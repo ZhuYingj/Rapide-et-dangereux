@@ -134,11 +134,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		// accelerateur = new Accelerateur(261, 1);
 
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
-		regroupement = new Regroupement(voiture, 1);
-
-		// bouleDeNeige = new BouleDeNeige(new Vecteur2D(100, 10), 5.0);
-		// groupe.setVoiture(voiture);
-		regroupement.setPisteMexique(mexique);
+		regroupement = new Regroupement(voiture, 3, mexique);
 
 		addKeyListener(new KeyAdapter() {
 
@@ -278,7 +274,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public void OritentationVoitureSelonTouche(KeyEvent e) {
 		if (droite == true) {
-			angleVoitureDegre = (int) (Math.toDegrees(regroupement.getVoiture().getAngle()) + 10);
+			angleVoitureDegre = (int) (Math
+					.toDegrees(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()) + 10);
 			if (angleVoitureDegre > 350) {
 				angleVoitureDegre = 0;
 			} else if (angleVoitureDegre < 10) {
@@ -286,46 +283,53 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 			setAngle(angleVoitureDegre);
 
-			if (regroupement.getVoiture().getAccel().getX() == 0) {
-				regroupement.getVoiture()
-						.setVitesse((new Vecteur2D(
-								voiture.getVitesse().module() * Math.cos(regroupement.getVoiture().getAngle()),
-								voiture.getVitesse().module() * Math.sin(regroupement.getVoiture().getAngle()))));
-			} else if (regroupement.getVoiture().getAccel().getY() == 0) {
-				regroupement.getVoiture()
-						.setVitesse(new Vecteur2D(
-								voiture.getVitesse().module() * Math.cos(regroupement.getVoiture().getAngle()),
-								voiture.getVitesse().module() * Math.sin(regroupement.getVoiture().getAngle())));
+			if (regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAccel().getX() == 0) {
+				regroupement.getPisteMexique().getDepart().get(0).getVoiture().setVitesse((new Vecteur2D(
+						voiture.getVitesse().module()
+								* Math.cos(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()),
+						voiture.getVitesse().module() * Math
+								.sin(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()))));
+			} else if (regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAccel().getY() == 0) {
+				regroupement.getPisteMexique().getDepart().get(0).getVoiture().setVitesse(new Vecteur2D(
+						voiture.getVitesse().module()
+								* Math.cos(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()),
+						voiture.getVitesse().module()
+								* Math.sin(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle())));
 
 			}
 
 		}
 		if (gauche == true) {
 
-			angleVoitureDegre = (int) (Math.toDegrees(regroupement.getVoiture().getAngle()) - 10);
+			angleVoitureDegre = (int) (Math
+					.toDegrees(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()) - 10);
 			if (angleVoitureDegre > 370) {
 				angleVoitureDegre = 0;
 			} else if (angleVoitureDegre < 10) {
 				angleVoitureDegre = 360;
 			}
 			setAngle(angleVoitureDegre);
-			if (regroupement.getVoiture().getAccel().getX() == 0) {
-				regroupement.getVoiture()
-						.setVitesse(new Vecteur2D(
-								voiture.getVitesse().module() * Math.cos(regroupement.getVoiture().getAngle()),
-								voiture.getVitesse().module() * Math.sin(regroupement.getVoiture().getAngle())));
-			} else if (regroupement.getVoiture().getAccel().getY() == 0) {
-				regroupement.getVoiture()
-						.setVitesse(new Vecteur2D(
-								voiture.getVitesse().module() * Math.cos(regroupement.getVoiture().getAngle()),
-								voiture.getVitesse().module() * Math.sin(regroupement.getVoiture().getAngle())));
+			if (regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAccel().getX() == 0) {
+				regroupement.getPisteMexique().getDepart().get(0).getVoiture().setVitesse(new Vecteur2D(
+						voiture.getVitesse().module()
+								* Math.cos(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()),
+						voiture.getVitesse().module()
+								* Math.sin(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle())));
+			} else if (regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAccel().getY() == 0) {
+				regroupement.getPisteMexique().getDepart().get(0).getVoiture().setVitesse(new Vecteur2D(
+						voiture.getVitesse().module()
+								* Math.cos(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()),
+						voiture.getVitesse().module()
+								* Math.sin(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle())));
 
 			}
 
 		}
 		if (haut == true) {
-			regroupement.getVoiture().setAccel(new Vecteur2D(20 * Math.cos(regroupement.getVoiture().getAngle()),
-					20 * Math.sin(regroupement.getVoiture().getAngle())));
+			regroupement.getPisteMexique().getDepart().get(0).getVoiture()
+					.setAccel(new Vecteur2D(
+							20 * Math.cos(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()),
+							20 * Math.sin(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle())));
 		}
 
 		if (space == true) {
@@ -342,11 +346,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		while (enCoursDAnimation == true) {
 
 			calculerUneIterationPhysique();
-			if (regroupement.getVoiture().getVitesse().module(voiture.getVitesse()) > voiture
-					.getVitesseMaxSelonNiveau()) {
+			if (regroupement.getPisteMexique().getDepart().get(0).getVoiture().getVitesse()
+					.module(voiture.getVitesse()) > voiture.getVitesseMaxSelonNiveau()) {
 				voiture.setVitesse(new Vecteur2D(
-						voiture.getVitesseMaxSelonNiveau() * Math.cos(regroupement.getVoiture().getAngle()),
-						voiture.getVitesseMaxSelonNiveau() * Math.sin(regroupement.getVoiture().getAngle())));
+						voiture.getVitesseMaxSelonNiveau()
+								* Math.cos(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()),
+						voiture.getVitesseMaxSelonNiveau()
+								* Math.sin(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle())));
 
 			}
 
@@ -419,10 +425,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void restartPos() {
 		arreter();
 		tempsTotalEcoule = 0.000;
-		regroupement.getVoiture().setPosition(posInit);
-		regroupement.getVoiture().setVitesse(valeurInit);
-		regroupement.getVoiture().setAccel(valeurInit);
-
+		regroupement.getPisteMexique().getDepart().get(0).getVoiture().setPosition(posInit);
+		regroupement.getPisteMexique().getDepart().get(0).getVoiture().setVitesse(valeurInit);
+		regroupement.getPisteMexique().getDepart().get(0).getVoiture().setAccel(valeurInit);
+		regroupement.getPisteMexique().getDepart().get(0).getVoiture().setAngle(0);
+		angleVoitureDegre = 0;
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
 
 		repaint();
@@ -505,21 +512,23 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		changementTexteParIteration();
 
 		Vecteur2D forceTotal = new Vecteur2D(MoteurPhysique.calculerForceFrottement(0.45,
-				regroupement.getVoiture().getMasseEnKg(), regroupement.getVoiture().getAngle()));
+				regroupement.getPisteMexique().getDepart().get(0).getVoiture().getMasseEnKg(),
+				regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()));
 
 		if (bas == true) {
-			Vecteur2D forceFreinage = new Vecteur2D(MoteurPhysique
-					.calculerForceFrottement(0.45, regroupement.getVoiture().getMasseEnKg(), angleVoitureRad)
+			Vecteur2D forceFreinage = new Vecteur2D(MoteurPhysique.calculerForceFrottement(0.45,
+					regroupement.getPisteMexique().getDepart().get(0).getVoiture().getMasseEnKg(), angleVoitureRad)
 					.multiplie(2));
 
 			forceTotal = forceTotal.additionne(forceFreinage);
 
 		}
-		if (haut == false && regroupement.getVoiture().getVitesse().module() != 0) {
+		if (haut == false
+				&& regroupement.getPisteMexique().getDepart().get(0).getVoiture().getVitesse().module() != 0) {
 
-			regroupement.getVoiture().setSommeDesForces(forceTotal);
-			if (regroupement.getVoiture().getVitesse().module() < 0.3) {
-				regroupement.getVoiture().setVitesse(new Vecteur2D(0, 0));
+			regroupement.getPisteMexique().getDepart().get(0).getVoiture().setSommeDesForces(forceTotal);
+			if (regroupement.getPisteMexique().getDepart().get(0).getVoiture().getVitesse().module() < 0.3) {
+				regroupement.getPisteMexique().getDepart().get(0).getVoiture().setVitesse(new Vecteur2D(0, 0));
 			}
 
 		}

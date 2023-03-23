@@ -58,7 +58,7 @@ public class FenetreEditeur extends JPanel {
 
 		panelObjet = new PanelObjet();
 		panelObjet.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelObjet.setBounds(800, 20, 373, 700);
+		panelObjet.setBounds(800, 20, 373, 675);
 		panelObjet.setBackground(Color.gray);
 		add(panelObjet);
 
