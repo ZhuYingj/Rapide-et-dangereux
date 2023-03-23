@@ -17,6 +17,9 @@ import utilitaireObjets.PisteVirageDroit;
 import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Voiture;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 
 /**
  * Classe qui permet de crée un panel composé d'objet
@@ -28,9 +31,9 @@ import utilitaireObjets.Voiture;
 public class PanelObjet extends JPanel {
 	private int XOBJET = 75;
 	private int YOBJET = 20;
+	private int X, Y;
 	private BlocMystere blocMystere;
 	private PisteDeDepart pisteDeDepart;
-	private Voiture voiture;
 	private PisteHorizontale pisteHorizontale;
 	private PisteVerticale pisteVerticale;
 	private PisteVirageBas pisteVirageBas;
@@ -38,13 +41,42 @@ public class PanelObjet extends JPanel {
 	private PisteVirageGauche pisteVirageGauche;
 	private PisteVirageHaut pisteVirageHaut;
 	private Accelerateur accelerateur;
+	private boolean selectionObjet = false;
+	private double xPrecedent, yPrecedent;
 
 	/**
 	 * Creation de la fenetre.
 	 */
 	public PanelObjet() {
-		setBackground(SystemColor.activeCaption);
+//		addMouseMotionListener(new MouseMotionAdapter() {
+//			@Override
+//			public void mouseDragged(MouseEvent e) {
+//				if (selectionObjet) {
+//					XOBJET += e.getX() - xPrecedent;
+//					YOBJET += e.getY() - yPrecedent;
+//					xPrecedent = e.getX();
+//					yPrecedent = e.getY();
+//					repaint();
+//				}
+//			}
+//		});
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (pisteDeDepart.contient(e.getX(), e.getY())) {
+					System.out.println("ss");
+					selectionObjet = true;
+//					xPrecedent = e.getX();
+//					yPrecedent = e.getY();
+				}
+			}
 
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				selectionObjet = false;
+				repaint();
+			}
+		});
 	}
 
 	/**
@@ -57,7 +89,6 @@ public class PanelObjet extends JPanel {
 		blocMystere = new BlocMystere(75, new Vecteur2D(XOBJET, YOBJET));
 		pisteDeDepart = new PisteDeDepart(XOBJET * 3, YOBJET);
 		pisteDeDepart.getVoiture().getPosition().setX(XOBJET * 2.5);
-		System.out.println(pisteDeDepart.getVoiture().getPosition());
 //		voiture = new Voiture(new Vecteur2D(0,0), Color.yellow, 50, 16, 0, 60);
 		pisteHorizontale = new PisteHorizontale(XOBJET, YOBJET * 7);
 		pisteVerticale = new PisteVerticale(XOBJET * 3, YOBJET * 7);

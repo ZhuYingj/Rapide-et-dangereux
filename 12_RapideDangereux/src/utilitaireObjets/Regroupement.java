@@ -71,11 +71,12 @@ public class Regroupement implements Dessinable {
 				} // Fin condition pour le champignon
 
 				// Pour la boule de neige
-//				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
-//					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(voiture) == false) {
-//						regroupementBoiteMystere.remove(a);
-//					}
-//				}
+				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
+							pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
+						regroupementBoiteMystere.remove(a);
+					}
+				}
 			}
 
 		}
@@ -111,9 +112,6 @@ public class Regroupement implements Dessinable {
 			regroupementBoiteMystere.get(a).dessiner(g2dCopie);
 
 		}
-
-		
-
 
 	}
 

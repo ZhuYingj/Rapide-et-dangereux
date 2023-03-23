@@ -4,7 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
-import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -206,7 +206,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	@Override
 	public boolean contient(double xPix, double yPix) {
 
-		return false;
+		return true;
 	}
 
 	public Voiture getVoiture() {
