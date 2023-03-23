@@ -135,7 +135,16 @@ public class PisteVirageHaut implements Dessinable {
 					voiture.setVitesse(vit);
 					voiture.setPosition(
 							new Vecteur2D(voiture.getPosition().getX() + pos, voiture.getPosition().getY() - pos));
-
+					if (Math.toDegrees(voiture.getAngle()) <= 315 && Math.toDegrees(voiture.getAngle()) > 225) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 225) * 2)));
+					} else if (Math.toDegrees(voiture.getAngle()) <= 360) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) + (450 - Math.toDegrees(voiture.getAngle()) * 2)));
+					} else if (Math.toDegrees(voiture.getAngle()) < 45 && voiture.getAngle() >= 0) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) + (90 - Math.toDegrees(voiture.getAngle()) * 2)));
+					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

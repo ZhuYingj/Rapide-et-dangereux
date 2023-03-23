@@ -115,13 +115,13 @@ public class PisteVirageDroit implements Dessinable {
 					voiture.setVitesse(vit);
 					voiture.setPosition(
 							new Vecteur2D(voiture.getPosition().getX() - pos, voiture.getPosition().getY() - pos));
-					if(Math.toDegrees(voiture.getAngle()) >= 45  ) {
+					if(Math.toDegrees(voiture.getAngle()) >= 45 && Math.toDegrees(voiture.getAngle()) < 135 ) {
 						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 135) * 2)));
 					} else if (Math.toDegrees(voiture.getAngle()) <= 45  ) {
-						double angle =  (Math.toDegrees(voiture.getAngle()) + (((315 - Math.toDegrees(voiture.getAngle())) * 2)));
-						angle = angle - 360;
-						System.out.println(angle);
-						voiture.setAngle(Math.toRadians(angle));
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + (((135 - Math.toDegrees(voiture.getAngle())) * 2))));
+					} else if (Math.toDegrees(voiture.getAngle()) <= 360 && Math.toDegrees(voiture.getAngle())> 315 ) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((( Math.toDegrees(voiture.getAngle())- 315) * 2))));
+						
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
