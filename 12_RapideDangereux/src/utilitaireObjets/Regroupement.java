@@ -56,7 +56,8 @@ public class Regroupement implements Dessinable {
 			if (regroupementBoiteMystere.get(a).enCollisionAvecVoiture(voiture) == true) {
 				regroupementBoiteMystere.get(a).getObjetSpecial().fonctionSelonObjet(voiture, tempsTotalEcoule);
 
-				// Pour le champignon
+				// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
+				// retirons la boite mystere contenant ce champignon de la liste.
 				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
 					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionChampignon(voiture,
 							tempsTotalEcoule) == false) {
@@ -65,11 +66,11 @@ public class Regroupement implements Dessinable {
 				} // Fin condition pour le champignon
 
 				// Pour la boule de neige
-//				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
-//					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(voiture) == false) {
-//						regroupementBoiteMystere.remove(a);
-//					}
-//				}
+				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(voiture, tempsTotalEcoule) == false) {
+						regroupementBoiteMystere.remove(a);
+					}
+				}
 			}
 
 		}
@@ -96,7 +97,7 @@ public class Regroupement implements Dessinable {
 
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
-//		Graphics2D g2dCopie2 = (Graphics2D) g2d.create();
+
 		pisteMexique.setPixelsParMetre(pixelsParMetre);
 		pisteMexique.dessiner(g2d);
 		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {

@@ -4,10 +4,10 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
-import java.awt.geom.Rectangle2D;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import interfaces.Selectionnable;
 import physique.MoteurPhysique;
 
 /**
@@ -17,7 +17,7 @@ import physique.MoteurPhysique;
  *
  */
 
-public class PisteVerticale implements Dessinable {
+public class PisteVerticale implements Dessinable, Selectionnable {
 
 	/** Taille de la piste qui est toujours constante **/
 	private static final int TAILLE_PISTE = 80;
@@ -162,6 +162,12 @@ public class PisteVerticale implements Dessinable {
 			}
 		}
 }
+
+	@Override
+	public boolean contient(double xPix, double yPix) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	
 }

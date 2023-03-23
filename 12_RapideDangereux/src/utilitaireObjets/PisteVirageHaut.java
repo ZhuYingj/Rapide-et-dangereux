@@ -10,6 +10,7 @@ import java.awt.geom.Path2D.Double;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import interfaces.Selectionnable;
 import physique.MoteurPhysique;
 
 /**
@@ -19,7 +20,7 @@ import physique.MoteurPhysique;
  *
  */
 
-public class PisteVirageHaut implements Dessinable {
+public class PisteVirageHaut implements Dessinable, Selectionnable {
 
 	private static final int TAILLE_PISTE = 80;
 
@@ -181,6 +182,12 @@ public class PisteVirageHaut implements Dessinable {
 	public void setPixelsParMetre(double pixelsParMetre) {
 		this.pixelsParMetre = pixelsParMetre;
 
+	}
+
+	@Override
+	public boolean contient(double xPix, double yPix) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

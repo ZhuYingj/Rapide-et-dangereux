@@ -7,6 +7,7 @@ import java.awt.Stroke;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import interfaces.Selectionnable;
 import physique.MoteurPhysique;
 
 /**
@@ -17,7 +18,7 @@ import physique.MoteurPhysique;
  */
 
 
-public class PisteHorizontale implements Dessinable {
+public class PisteHorizontale implements Dessinable, Selectionnable {
 	/** Taille de la piste qui est toujours constante **/
 	private static final int TAILLE_PISTE = 80;
 	/** La position en x du mure de haut **/
@@ -60,6 +61,7 @@ public class PisteHorizontale implements Dessinable {
 		this.murBas   = y + TAILLE_PISTE;
 
 	}
+	
 
 	/**
 	 * Methode qui permet de dessiner la piste horizontale sur la zone d'animation a l'aide de g2d
@@ -180,6 +182,12 @@ public class PisteHorizontale implements Dessinable {
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean contient(double xPix, double yPix) {
+		// TODO Auto-generated method stub
+		return false;
 	} 
 
 

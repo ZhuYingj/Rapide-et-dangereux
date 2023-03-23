@@ -6,13 +6,13 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
-import java.awt.geom.Path2D.Double;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import interfaces.Selectionnable;
 import physique.MoteurPhysique;
 
-public class PisteVirageDroit implements Dessinable {
+public class PisteVirageDroit implements Dessinable, Selectionnable {
 
 	private static final int TAILLE_PISTE = 80;
 
@@ -139,6 +139,12 @@ public class PisteVirageDroit implements Dessinable {
 	 */
 	public Area getAireTriangle() {
 		return aireTriangle;
+	}
+
+	@Override
+	public boolean contient(double xPix, double yPix) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
