@@ -60,23 +60,23 @@ public class PanelObjet extends JPanel {
 //				}
 //			}
 //		});
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (pisteDeDepart.contient(e.getX(), e.getY())) {
-					System.out.println("ss");
-					selectionObjet = true;
+//		addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mousePressed(MouseEvent e) {
+//				if (pisteDeDepart.contient(e.getX(), e.getY())) {
+//					System.out.println("ss");
+//					selectionObjet = true;
 //					xPrecedent = e.getX();
 //					yPrecedent = e.getY();
-				}
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				selectionObjet = false;
-				repaint();
-			}
-		});
+//				}
+//			}
+//
+//			@Override
+//			public void mouseReleased(MouseEvent e) {
+//				selectionObjet = false;
+//				repaint();
+//			}
+//		});
 	}
 
 	/**

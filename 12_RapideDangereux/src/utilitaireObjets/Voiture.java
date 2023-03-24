@@ -10,7 +10,6 @@ import java.awt.geom.Ellipse2D;
 import geometrie.FlecheVectorielle;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
-import interfaces.Selectionnable;
 import physique.MoteurPhysique;
 
 /**
@@ -20,7 +19,7 @@ import physique.MoteurPhysique;
  * @author Kevin Nguyen
  */
 
-public class Voiture implements Dessinable {
+public class Voiture implements Dessinable{
 	/** Diametre de la voiture puisque la voiture est un cercle **/
 	private double diametre = 1;
 	/** Masse de la voiture **/

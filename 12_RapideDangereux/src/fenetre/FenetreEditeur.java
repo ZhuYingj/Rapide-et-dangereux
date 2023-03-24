@@ -1,5 +1,6 @@
 package fenetre;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -40,8 +41,8 @@ public class FenetreEditeur extends JPanel {
 	private JPanel panelPiste;
 	private JButton btnRetour;
 	private Regroupement regroupement;
-	private int XOBJET = 75;
-	private int YOBJET = 20;
+	private int XOBJET = 105;
+	private int YOBJET = 30;
 	private int X, Y;
 	private BlocMystere blocMystere;
 	private PisteDeDepart pisteDeDepart;
@@ -54,7 +55,7 @@ public class FenetreEditeur extends JPanel {
 	private PisteVirageHaut pisteVirageHaut;
 	private Accelerateur accelerateur;
 	private boolean selectionObjet = false;
-	private double xPrecedent, yPrecedent;
+	private int xPrecedent, yPrecedent;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -66,18 +67,28 @@ public class FenetreEditeur extends JPanel {
 	 */
 
 	public FenetreEditeur() {
-		
+
 		setLayout(null);
+
+		setBackground(Color.LIGHT_GRAY);
+
+		btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("Retour", null, -1);
+			}
+		});
+		btnRetour.setBounds(10, 11, 89, 23);
+		add(btnRetour);
+
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				if (selectionObjet) {
-					XOBJET += e.getX() - xPrecedent;
-					YOBJET += e.getY() - yPrecedent;
-					xPrecedent = e.getX();
-					yPrecedent = e.getY();
-					repaint();
+					e.getComponent().setLocation((e.getX() + e.getComponent().getX()) - xPrecedent,
+							(e.getY() + e.getComponent().getY()) - yPrecedent);
 				}
+				repaint();
 			}
 		});
 		addMouseListener(new MouseAdapter() {
@@ -88,9 +99,10 @@ public class FenetreEditeur extends JPanel {
 					selectionObjet = true;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
+					repaint();
 
 				}
-		
+
 			}
 
 			@Override
@@ -99,15 +111,6 @@ public class FenetreEditeur extends JPanel {
 				repaint();
 			}
 		});
-
-		btnRetour = new JButton("Retour");
-		btnRetour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("Retour", null, -1);
-			}
-		});
-		btnRetour.setBounds(10, 11, 89, 23);
-		add(btnRetour);
 
 	}
 
