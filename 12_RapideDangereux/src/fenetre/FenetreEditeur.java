@@ -82,8 +82,14 @@ public class FenetreEditeur extends JPanel {
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				if (selectionObjet) {
-					e.getComponent().setLocation((e.getX() + e.getComponent().getX()) - xPrecedent , (e.getY() + e.getComponent().getY()) - yPrecedent);
+//				if (selectionObjet) {
+//					e.getComponent().setLocation((e.getX() + e.getComponent().getX()) - xPrecedent , (e.getY() + e.getComponent().getY()) - yPrecedent);
+//				}
+				if (accelerateur.contient(e.getX(), e.getY())) {
+					XOBJET += e.getX() - xPrecedent;
+					YOBJET += e.getY() - yPrecedent;
+					xPrecedent = e.getX();
+					yPrecedent = e.getY();
 				}
 				repaint();
 			}
@@ -92,21 +98,21 @@ public class FenetreEditeur extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (accelerateur.contient(e.getX(), e.getY())) {
-					System.out.println("ss");
-					selectionObjet = true;
+//					System.out.println("ss");
+//					selectionObjet = true;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
-					repaint();
+//					repaint();
 
 				}
-				System.out.println(e.getX());
+//				System.out.println(e.getX());
 			}
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				selectionObjet = false;
-				repaint();
-			}
+//			@Override
+//			public void mouseReleased(MouseEvent e) {
+//				selectionObjet = false;
+//				repaint();
+//			}
 		});
 
 	}
@@ -116,6 +122,7 @@ public class FenetreEditeur extends JPanel {
 	 */
 
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 
 //		blocMystere = new BlocMystere(75, new Vecteur2D(XOBJET, YOBJET));

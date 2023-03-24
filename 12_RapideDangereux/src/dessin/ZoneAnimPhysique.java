@@ -143,7 +143,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				appuyerPlusieursToucheEnMemeTemps(e);
-				OritentationVoitureSelonTouche(e);
+				orientationVoitureSelonTouche(e);
 
 				repaint();
 
@@ -274,7 +274,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * @param e Évènement du clavier
 	 */
 	// Kevin Nguyen
-	public void OritentationVoitureSelonTouche(KeyEvent e) {
+	public void orientationVoitureSelonTouche(KeyEvent e) {
 		if (droite == true) {
 			angleVoitureDegre = (int) (Math
 					.toDegrees(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()) + 10);
