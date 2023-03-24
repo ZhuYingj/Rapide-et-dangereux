@@ -64,7 +64,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** angle d'un segment de virage en radians **/
 	private double angleCoinRad = Math.toRadians(angleCoinDegre);
 	/** Vecteur de la position initiale de la voiture **/
-	private Vecteur2D posInit = new Vecteur2D(80, 0.1);
+	private Vecteur2D posInit = new Vecteur2D(90, 20);
 	/** Vecteur qui reset les valeurs a 0 **/
 	private Vecteur2D valeurInit = new Vecteur2D(0.0, 0.0);
 	/** Temps écoulé depuis le début de l'animation **/

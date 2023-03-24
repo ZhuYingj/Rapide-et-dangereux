@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import interfaces.Dessinable;
@@ -203,6 +204,7 @@ public class PisteMexique implements Dessinable {
 
 	/**
 	 * Gérer les collisions avec chaque morceau de piste
+	 * 
 	 * @param voiture La voiture controllée
 	 */
 	// Kevin Nguyen
@@ -213,40 +215,77 @@ public class PisteMexique implements Dessinable {
 			horizontale.get(i).traverserPiste(voiture);
 			if (horizontale.get(i).isCollision() == true) {
 				horizontale.get(i).setColor(Color.blue);
-				boolean  collision = true;
-				
-			}else {
+				boolean collisionH = true;
+
+			} else {
 				horizontale.get(i).setColor(Color.black);
 			}
 		}
 
 		for (int i = 0; i < verticale.size(); i++) {
 			verticale.get(i).enCollisionAvec(voiture);
+			verticale.get(i).traverserPiste(voiture);
+			if (verticale.get(i).isCollision() == true) {
+				verticale.get(i).setColor(Color.blue);
+			} else {
+				verticale.get(i).setColor(Color.black);
+			}
 		}
 
 		for (int i = 0; i < bas.size(); i++) {
 			bas.get(i).enCollisionAvec(voiture);
+			bas.get(i).traverserPiste(voiture);
+			if (bas.get(i).isCollision() == true) {
+				bas.get(i).setColor(Color.blue);
+			} else {
+				bas.get(i).setColor(Color.black);
+			}
 		}
 
 		for (int i = 0; i < gauche.size(); i++) {
 			gauche.get(i).enCollisionAvec(voiture);
+			gauche.get(i).traverserPiste(voiture);
+			if (gauche.get(i).isCollision() == true) {
+				gauche.get(i).setColor(Color.blue);
+			} else {
+				gauche.get(i).setColor(Color.black);
+			}
 		}
 
 		for (int i = 0; i < droit.size(); i++) {
 			droit.get(i).enCollisionAvec(voiture);
+			droit.get(i).traverserPiste(voiture);
+			if (droit.get(i).isCollision() == true) {
+				droit.get(i).setColor(Color.blue);
+			} else {
+				droit.get(i).setColor(Color.black);
+			}
 		}
 
 		for (int i = 0; i < haut.size(); i++) {
 			haut.get(i).enCollisionAvec(voiture);
+			haut.get(i).traverserPiste(voiture);
+			if (haut.get(i).isCollision() == true) {
+				haut.get(i).setColor(Color.blue);
+			} else {
+				haut.get(i).setColor(Color.black);
+			}
 		}
 
 		depart.get(0).enCollisionAvec(voiture);
+		depart.get(0).traverserPiste(voiture);
+		if (depart.get(0).isCollision() == true) {
+			depart.get(0).setColor(Color.blue);
+		} else {
+			depart.get(0).setColor(Color.black);
+		}
 //		traverserPiste(voiture);
-
+		tourComplet(voiture);
 	}
 
 	/**
 	 * Retourne la piste de départ
+	 * 
 	 * @return
 	 */
 	// Kevin Nguyen
@@ -254,16 +293,114 @@ public class PisteMexique implements Dessinable {
 		return depart;
 	}
 
+	public void tourComplet(Voiture voiture) {
 
+		for (int i = 0; i < horizontale.size(); i++) {
+			horizontale.get(i).isCollision();
+		}
+		int count = 0;
+		for (int i = 0; i < horizontale.size(); i++) {
+			if (horizontale.get(i).isCollision() == true) {
+				count++;
+			}
+		}
 
-//	public void traverserPiste(Voiture voiture) {
-//		int taille = horizontale.size();
-//		if (horizontale.get(taille-1).traverserPiste(voiture) == true) {
-//			boolean  collision = true;
-//			System.out.println(collision);
-//			
-//		} else {
-//		
-//		}
-//	}
+		for (int i = 0; i < bas.size(); i++) {
+			bas.get(i).isCollision();
+		}
+
+		for (int i = 0; i < bas.size(); i++) {
+			if (bas.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+
+		for (int i = 0; i < haut.size(); i++) {
+			haut.get(i).isCollision();
+		}
+
+		for (int i = 0; i < haut.size(); i++) {
+			if (haut.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+		for (int i = 0; i < gauche.size(); i++) {
+			gauche.get(i).isCollision();
+		}
+
+		for (int i = 0; i < gauche.size(); i++) {
+			if (gauche.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+		for (int i = 0; i < droit.size(); i++) {
+			droit.get(i).isCollision();
+		}
+
+		for (int i = 0; i < droit.size(); i++) {
+			if (droit.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+		for (int i = 0; i < depart.size(); i++) {
+			depart.get(i).isCollision();
+		}
+
+		for (int i = 0; i < depart.size(); i++) {
+			if (depart.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+		for (int i = 0; i < verticale.size(); i++) {
+			verticale.get(i).isCollision();
+		}
+
+		for (int i = 0; i < verticale.size(); i++) {
+			if (verticale.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+
+		if (count == horizontale.size() + verticale.size() + bas.size() + haut.size() + gauche.size() + droit.size()
+				+ depart.size()) {
+
+			if(depart.get(0).resetTout(voiture)) {
+			resetTour();
+
+			}
+		}
+	}
+
+	public void resetTour() {
+		
+		for (int i = 0; i < droit.size(); i++) {
+			droit.get(i).setCollision(false);
+
+		}
+		for (int i = 0; i < depart.size(); i++) {
+			depart.get(i).setCollision(false);
+		}
+
+		for (int i = 0; i < horizontale.size(); i++) {
+			horizontale.get(i).setCollision(false);
+
+		}
+		for (int i = 0; i < verticale.size(); i++) {
+			verticale.get(i).setCollision(false);
+		}
+
+		for (int i = 0; i < gauche.size(); i++) {
+			gauche.get(i).setCollision(false);
+		}
+
+		for (int i = 0; i < haut.size(); i++) {
+			haut.get(i).setCollision(false);
+		}
+
+		for (int i = 0; i < gauche.size(); i++) {
+			bas.get(i).setCollision(false);
+		}
+
+	}
+
 }

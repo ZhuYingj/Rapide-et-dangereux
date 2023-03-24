@@ -32,6 +32,8 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 	private Path2D triangle;
 	/** Initialise l'aire du triangle **/
 	private Area aireTriangle;
+	private boolean collision = false;
+	private Color color   =  Color.black;
 
 	public PisteVirageGauche(int x, int y) {
 		this.x = x;
@@ -52,7 +54,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 	@Override
 	public void dessiner(Graphics2D g2d) {
 //		g2d.scale(pixelsParMetre, pixelsParMetre);
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(color);
 		g2d.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
 		g2d.setColor(Color.RED);
 		Stroke stroke = new BasicStroke(0.5f);
@@ -152,6 +154,31 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 		}
 	}
 
+	public void traverserPiste(Voiture voiture) {
+		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+			setCollision(true);
+
+		}
+
+	}
+
+	public boolean isCollision() {
+		return collision;
+	}
+
+	public void setCollision(boolean collision) {
+		this.collision = collision;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	
 	@Override
 	public boolean contient(double xPix, double yPix) {
 		// TODO Auto-generated method stub

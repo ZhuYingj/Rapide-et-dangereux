@@ -35,6 +35,8 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	private int murGauche;
 	private int murHaut;
 	private int murBas;
+	private boolean collision = false;
+	private Color color = Color.black;
 
 	private Voiture voiture;
 
@@ -55,7 +57,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 		this.murGauche = x;
 		this.murHaut = y;
 		this.murBas = y + TAILLE_PISTE;
-		voiture = new Voiture(new Vecteur2D(x, y), Color.yellow, 50, 16, 0, 50);
+		voiture = new Voiture(new Vecteur2D(x + TAILLE_PISTE/4, y  + TAILLE_PISTE/4), Color.yellow, 50, 16, 0, 50);
 	}
 
 	/**
@@ -64,7 +66,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	 */
 	@Override
 	public void dessiner(Graphics2D g2d) {
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(color);
 		g2d.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
 		g2d.setColor(Color.RED);
 		g2d.setColor(Color.RED);
@@ -142,6 +144,40 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 				}
 			}
 		}
+	}
+
+	public void traverserPiste(Voiture voiture) {
+		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+			setCollision(true);
+
+		}
+
+	}
+
+	public boolean resetTout(Voiture voiture) {
+		if (voiture.getPosition().getX()  > murGauche + voiture.getDiametre() && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isCollision() {
+		return collision;
+	}
+
+	public void setCollision(boolean collision) {
+		this.collision = collision;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 
 	@Override
