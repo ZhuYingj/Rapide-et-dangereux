@@ -23,24 +23,25 @@ public class Accelerateur implements Dessinable, Selectionnable {
 	public Accelerateur(int x, int y) {
 		this.x = x;
 		this.y = y;
-
+		a = new Rectangle2D.Double(this.x, this.y, TAILLE_PISTE, TAILLE_PISTE);
 	}
 
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D gCopie = (Graphics2D) g2d.create();
-		a = new Rectangle2D.Double(this.x, this.y, TAILLE_PISTE, TAILLE_PISTE);
-		g2d.setColor(Color.GREEN);
-		Stroke stroke = new BasicStroke(3f);
-		g2d.setStroke(stroke);
-		g2d.drawLine(x, y, x + TAILLE_PISTE, y);
-
-		g2d.drawLine(x, y + TAILLE_PISTE - 1, x + TAILLE_PISTE, y + TAILLE_PISTE - 1);
-		g2d.drawLine(x, y, x, y + TAILLE_PISTE);
-		g2d.drawLine(x + TAILLE_PISTE, y, x + TAILLE_PISTE, y + TAILLE_PISTE);
-		g2d.drawLine(x, y, x + TAILLE_PISTE, y + TAILLE_PISTE);
-		g2d.drawLine(x + (TAILLE_PISTE / 2), y, x + TAILLE_PISTE, y + (TAILLE_PISTE / 2));
-		g2d.drawLine(x, y + (TAILLE_PISTE / 2), x + (TAILLE_PISTE / 2), y + TAILLE_PISTE);
 	
+//		g2d.setColor(Color.GREEN);
+//		Stroke stroke = new BasicStroke(3f);
+//		g2d.setStroke(stroke);
+//		g2d.drawLine(x, y, x + TAILLE_PISTE, y);
+//
+//		g2d.drawLine(x, y + TAILLE_PISTE - 1, x + TAILLE_PISTE, y + TAILLE_PISTE - 1);
+//		g2d.drawLine(x, y, x, y + TAILLE_PISTE);
+//		g2d.drawLine(x + TAILLE_PISTE, y, x + TAILLE_PISTE, y + TAILLE_PISTE);
+//		g2d.drawLine(x, y, x + TAILLE_PISTE, y + TAILLE_PISTE);
+//		g2d.drawLine(x + (TAILLE_PISTE / 2), y, x + TAILLE_PISTE, y + (TAILLE_PISTE / 2));
+//		g2d.drawLine(x, y + (TAILLE_PISTE / 2), x + (TAILLE_PISTE / 2), y + TAILLE_PISTE);
+		System.out.println(a.getX() + "       " + a.getY());
+		gCopie.draw(a);
 
 	}
 

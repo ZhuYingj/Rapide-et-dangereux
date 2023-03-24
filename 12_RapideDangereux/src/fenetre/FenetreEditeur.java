@@ -66,16 +66,8 @@ public class FenetreEditeur extends JPanel {
 	 */
 
 	public FenetreEditeur() {
+		
 		setLayout(null);
-
-		btnRetour = new JButton("Retour");
-		btnRetour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("Retour", null, -1);
-			}
-		});
-		btnRetour.setBounds(10, 11, 89, 23);
-		add(btnRetour);
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
@@ -92,13 +84,13 @@ public class FenetreEditeur extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (accelerateur.contient(e.getX(), e.getY())) {
-					System.out.println("ss");
+
 					selectionObjet = true;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
 				}
-				System.out.println(e.getX());
+		
 			}
 
 			@Override
@@ -108,6 +100,15 @@ public class FenetreEditeur extends JPanel {
 			}
 		});
 
+		btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("Retour", null, -1);
+			}
+		});
+		btnRetour.setBounds(10, 11, 89, 23);
+		add(btnRetour);
+
 	}
 
 	/**
@@ -116,7 +117,7 @@ public class FenetreEditeur extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-
+		System.out.println("ss");
 //		blocMystere = new BlocMystere(75, new Vecteur2D(XOBJET, YOBJET));
 //		pisteDeDepart = new PisteDeDepart(XOBJET * 3, YOBJET);
 //		pisteDeDepart.getVoiture().getPosition().setX(XOBJET * 2.5);
