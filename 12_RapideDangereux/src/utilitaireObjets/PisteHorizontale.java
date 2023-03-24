@@ -17,7 +17,6 @@ import physique.MoteurPhysique;
  *
  */
 
-
 public class PisteHorizontale implements Dessinable, Selectionnable {
 	/** Taille de la piste qui est toujours constante **/
 	private static final int TAILLE_PISTE = 80;
@@ -31,47 +30,44 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 	private int murBas;
 	/** la position en x de depart que l'objet piste vas etre creer **/
 	private int x;
-	/** la position en y de depart que l'objet piste vas etre creer  **/
+	/** la position en y de depart que l'objet piste vas etre creer **/
 	private int y;
-	/** Pixels par metre par defaut  **/
-	private double pixelsParMetre = 1; //Defaut
 	/** Normale du mur haut **/
 	private double angleNormaleMurHaut = 90;
 	/** Normale du mur bas **/
 	private double angleNormaleMurBas = 270;
-
-	
+	private Color color = Color.black;
+	private boolean collision  = false;
 
 	/**
 	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
 	 * 
-	 * @param x 	position en x de la piste
-	 * @param y		position en y de la piste
-	 * @param ligneRougeV1X		position en x du premier mure		
-	 * @param ligneRougeV1Y		position en y du premier mure
-	 * @param ligneRougeV2X		position en x du deuxieme mure
-	 * @param ligneRougeV2Y		position en y du deuxieme mure
+	 * @param x             position en x de la piste
+	 * @param y             position en y de la piste
+	 * @param ligneRougeV1X position en x du premier mure
+	 * @param ligneRougeV1Y position en y du premier mure
+	 * @param ligneRougeV2X position en x du deuxieme mure
+	 * @param ligneRougeV2Y position en y du deuxieme mure
 	 */
 	public PisteHorizontale(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.murDroite = x +  TAILLE_PISTE + 1;
-		this.murGauche  =  x ;
-		this.murHaut    = y;
-		this.murBas   = y + TAILLE_PISTE;
+		this.murDroite = x + TAILLE_PISTE + 1;
+		this.murGauche = x;
+		this.murHaut = y;
+		this.murBas = y + TAILLE_PISTE;
 
 	}
-	
 
 	/**
-	 * Methode qui permet de dessiner la piste horizontale sur la zone d'animation a l'aide de g2d
+	 * Methode qui permet de dessiner la piste horizontale sur la zone d'animation a
+	 * l'aide de g2d
 	 */
 
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
-//		g2dCopie.scale(pixelsParMetre, pixelsParMetre);
-		g2dCopie.setColor(Color.BLACK);
+		g2dCopie.setColor(color);
 		g2dCopie.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
 		g2dCopie.setColor(Color.RED);
 		g2dCopie.setColor(Color.RED);
@@ -82,99 +78,52 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 
 	}
 
-
-	/**
-	 * Méthode qui retourne le nombre de pixels par metre
-	 * 
-	 * @return nombre de pixel par metre
-	 */
-	public double getPixelsParMetre() {
-		return pixelsParMetre;
-	}
-
-	/**
-	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
-	 * voulu
-	 * 
-	 * @param pixelsParMetreVoulu
-	 */
-	public void setPixelsParMetre(double pixelsParMetre) {
-		this.pixelsParMetre = pixelsParMetre;
-
-	}
-
-	/**
-	 * Methode qui permet de retouner le postion en y du mure de haut
-	 * 
-	 * @return une position en Y
-	 */
-	public int getmurHaut() {
-		return murHaut;
-	}
-
-
-	/**
-	 * Methode qui permet de retourner la position en Y du mure de bas
-	 * 
-	 * @return une position en Y
-	 */
-	public int getmurBas() {
-		return murBas;
-	}
-	/**
-	 * Retourne la normale du mur haut
-	 * @return la normale du mur haut
-	 */
-	public double getAngleNormaleMurHaut() {
-		return angleNormaleMurHaut;
-	}
-
-	/**
-	 * Retourne la normale du mur bas
-	 * @return la normale du mur bas
-	 */
-	public double getAngleNormaleMurBas() {
-		return angleNormaleMurBas;
-	}
-
 	public void enCollisionAvec(Voiture voiture) {
 
-		if(voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas ) {
-			if(voiture.getPosition().getY() < murHaut + 1) {
+		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+			if (voiture.getPosition().getY() < murHaut + 1) {
 				try {
-					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurHaut);
-					if(  voiture.getVitesse().module() < 0.3 ) {
-						voiture.setVitesse(new Vecteur2D(0,0));
+					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(),
+							angleNormaleMurHaut);
+					if (voiture.getVitesse().module() < 0.3) {
+						voiture.setVitesse(new Vecteur2D(0, 0));
 					} else {
 						voiture.setVitesse(vit);
 					}
 					voiture.getPosition().setY(murHaut + 1);
 					System.out.println("en collision");
-					if(Math.toDegrees(voiture.getAngle()) < 270  && Math.toDegrees(voiture.getAngle()) > 180 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
-					} else if (Math.toDegrees(voiture.getAngle()) > 270  && Math.toDegrees(voiture.getAngle()) < 360 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + ((360 -(Math.toDegrees(voiture.getAngle())) * 2))));
+					if (Math.toDegrees(voiture.getAngle()) < 270 && Math.toDegrees(voiture.getAngle()) > 180) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
+					} else if (Math.toDegrees(voiture.getAngle()) > 270 && Math.toDegrees(voiture.getAngle()) < 360) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle())
+								+ ((360 - (Math.toDegrees(voiture.getAngle())) * 2))));
 					}
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}   else if(voiture.getPosition().getY()>  murBas - voiture.getDiametre()) {
+			} else if (voiture.getPosition().getY() > murBas - voiture.getDiametre()) {
 				try {
-					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurBas);
-					if(  voiture.getVitesse().module() < 0.3 ) {
-						voiture.setVitesse(new Vecteur2D(0,0));
+					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(),
+							angleNormaleMurBas);
+					if (voiture.getVitesse().module() < 0.3) {
+						voiture.setVitesse(new Vecteur2D(0, 0));
 					} else {
 						voiture.setVitesse(vit);
 					}
-					voiture.getPosition().setY(murBas- voiture.getDiametre());
+					voiture.getPosition().setY(murBas - voiture.getDiametre());
 					System.out.println("en collision");
-					if(Math.toDegrees(voiture.getAngle()) < 90  && Math.toDegrees(voiture.getAngle()) > 0 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
-					} else if (Math.toDegrees(voiture.getAngle()) > 90  && Math.toDegrees(voiture.getAngle()) < 180 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + ((360 -(Math.toDegrees(voiture.getAngle())) * 2))));
-						System.out.println(Math.toDegrees(voiture.getAngle()) + (360 -(Math.toDegrees(voiture.getAngle()) * 2)));
+					if (Math.toDegrees(voiture.getAngle()) < 90 && Math.toDegrees(voiture.getAngle()) > 0) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
+					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle())
+								+ ((360 - (Math.toDegrees(voiture.getAngle())) * 2))));
+						System.out.println(
+								Math.toDegrees(voiture.getAngle()) + (360 - (Math.toDegrees(voiture.getAngle()) * 2)));
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -184,11 +133,35 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 		}
 	}
 
+	public void traverserPiste(Voiture voiture) {
+		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+			setCollision(true);
+
+		}
+
+	}
+
+	public boolean isCollision() {
+		return collision;
+	}
+
+	public void setCollision(boolean collision) {
+		this.collision = collision;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 	@Override
 	public boolean contient(double xPix, double yPix) {
 		// TODO Auto-generated method stub
 		return false;
-	} 
-
+	}
 
 }

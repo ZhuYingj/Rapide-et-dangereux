@@ -40,6 +40,8 @@ public class PisteVirageHaut implements Dessinable, Selectionnable {
 	private Path2D triangle;
 	/** Initialise l'aire du triangle **/
 	private Area aireTriangle;
+	private boolean collision = false;
+	private Color color   =  Color.black;
 
 	/**
 	 * Methode qui permet de construire la piste virage haut a l'aide de parametres
@@ -65,10 +67,10 @@ public class PisteVirageHaut implements Dessinable, Selectionnable {
 
 	@Override
 	public void dessiner(Graphics2D g2d) {
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(color);
 		g2d.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
 		g2d.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(3f);
+		Stroke stroke = new BasicStroke(0.5f);
 		g2d.setStroke(stroke);
 		g2d.drawLine(x, y, x, y + (TAILLE_PISTE / 3));
 		g2d.drawLine(x, y + (TAILLE_PISTE / 3), x + (TAILLE_PISTE / 3), y + ((TAILLE_PISTE / 3) * 2));
@@ -155,6 +157,31 @@ public class PisteVirageHaut implements Dessinable, Selectionnable {
 
 	}
 
+	public void traverserPiste(Voiture voiture) {
+		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+			setCollision(true);
+
+		}
+
+	}
+
+	public boolean isCollision() {
+		return collision;
+	}
+
+	public void setCollision(boolean collision) {
+		this.collision = collision;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	
 	/**
 	 * Retourne l'aire du triangle
 	 * 

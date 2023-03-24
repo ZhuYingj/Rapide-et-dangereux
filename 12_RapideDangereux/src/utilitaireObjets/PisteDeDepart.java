@@ -27,8 +27,6 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	private int x;
 	/** la position en y de depart que l'objet piste vas etre creer **/
 	private int y;
-	/** Pixels par metre par defaut **/
-	private double pixelsParMetre = 1; // Defaut
 	/** Normale du mur haut **/
 	private double angleNormaleMurHaut = 90;
 	/** Normale du mur bas **/
@@ -37,6 +35,8 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	private int murGauche;
 	private int murHaut;
 	private int murBas;
+	private boolean collision = false;
+	private Color color = Color.black;
 
 	private Voiture voiture;
 
@@ -57,7 +57,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 		this.murGauche = x;
 		this.murHaut = y;
 		this.murBas = y + TAILLE_PISTE;
-		voiture = new Voiture(new Vecteur2D(x, y), Color.yellow, 50, 16, 0, 50);
+		voiture = new Voiture(new Vecteur2D(x + TAILLE_PISTE/4, y  + TAILLE_PISTE/4), Color.yellow, 50, 16, 0, 50);
 	}
 
 	/**
@@ -66,8 +66,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	 */
 	@Override
 	public void dessiner(Graphics2D g2d) {
-
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(color);
 		g2d.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
 		g2d.setColor(Color.RED);
 		g2d.setColor(Color.RED);
@@ -91,62 +90,6 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 
 		voiture.dessiner(g2d);
 
-	}
-
-	/**
-	 * Méthode qui retourne le nombre de pixels par metre
-	 * 
-	 * @return nombre de pixel par metre
-	 */
-	public double getPixelsParMetre() {
-		return pixelsParMetre;
-	}
-
-	/**
-	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
-	 * voulu
-	 * 
-	 * @param pixelsParMetreVoulu
-	 */
-	public void setPixelsParMetre(double pixelsParMetre) {
-		this.pixelsParMetre = pixelsParMetre;
-
-	}
-
-	/**
-	 * Methode qui permet de retouner le postion en y du mure de haut
-	 * 
-	 * @return une position en Y
-	 */
-	public int getMurHaut() {
-		return murHaut;
-	}
-
-	/**
-	 * Methode qui permet de retourner la position en Y du mure de bas
-	 * 
-	 * @return une position en Y
-	 */
-	public int getMurBas() {
-		return murBas;
-	}
-
-	/**
-	 * Retourne la normale du mur haut
-	 * 
-	 * @return la normale du mur haut
-	 */
-	public double getAngleNormaleMurHaut() {
-		return angleNormaleMurHaut;
-	}
-
-	/**
-	 * Retourne la normale du mur bas
-	 * 
-	 * @return la normale du mur bas
-	 */
-	public double getAngleNormaleMurBas() {
-		return angleNormaleMurBas;
 	}
 
 	public void enCollisionAvec(Voiture voiture) {
@@ -203,6 +146,40 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 		}
 	}
 
+	public void traverserPiste(Voiture voiture) {
+		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+			setCollision(true);
+
+		}
+
+	}
+
+	public boolean resetTout(Voiture voiture) {
+		if (voiture.getPosition().getX()  > murGauche + voiture.getDiametre() && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isCollision() {
+		return collision;
+	}
+
+	public void setCollision(boolean collision) {
+		this.collision = collision;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 	@Override
 	public boolean contient(double xPix, double yPix) {
 
@@ -215,10 +192,6 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 
 	public void setVoiture(Voiture voiture) {
 		this.voiture = voiture;
-	}
-
-	public static int getTaillePiste() {
-		return TAILLE_PISTE;
 	}
 
 }
