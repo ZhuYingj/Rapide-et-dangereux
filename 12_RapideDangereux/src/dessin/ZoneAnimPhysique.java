@@ -13,6 +13,7 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.JPanel;
 
 import geometrie.Vecteur2D;
+import interfaces.TypePiste;
 import physique.MoteurPhysique;
 import pisteDeCourse.PisteItalie;
 import pisteDeCourse.PisteMexique;
@@ -77,43 +78,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	private double testFrottement = 0.45;
 
-	/** Aire du triangle superieur gauche **/
-	private Area aireTriangle1;
-	/** Aire du triangle inferieur droit **/
-	private Area aireTriangle2;
-	/** Aire du triangle superieur droit **/
-	private Area aireTriangle3;
-	/** Aire du triangle inferieur gauche **/
-	private Area aireTriangle4;
-	/** Aire de la voiture **/
-	private Area aireVoiture1;
-	/** Premiere copie de l'aire de la voiture **/
-	private Area aireVoiture2;
-	/** Deuxieme copie de l'aire de la voiture **/
-	private Area aireVoiture3;
-	/** Troisieme copie de l'aire de la voiture **/
-	private Area aireVoiture4;
-	/** Troisieme copie de l'aire de la voiture **/
-	private Area aireVoitureBoule;
-	/** Aire du rectangle au centre **/
-	private Area aireRectangle;
-
-	private Area aireVoiture5;
-
 	private Champignon champignon;
 	private Accelerateur accelerateur;
-
-	private Area champignonAire;
-
-	private Area champignonAireCopie1;
-
-	private Area bouleDeNeigeAire;
-
-	private Area bouleDeNeigeAireCopie;
-
-	private boolean contactBouleNeige = false;
-
-	private double tempsTemporaire;
 
 	private BouleDeNeige bouleDeNeige;
 
@@ -132,18 +98,17 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Kevin Nguyen
 	public ZoneAnimPhysique() {
 
-		mexique = new PisteMexique(0, 0);
 		// accelerateur = new Accelerateur(261, 1);
-
+		mexique = new PisteMexique(0, 0);
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
-		regroupement = new Regroupement(voiture, 3, mexique);
+		regroupement = new Regroupement(voiture, 3, mexique, TypePiste.MEXIQUE);
 
 		addKeyListener(new KeyAdapter() {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
 				appuyerPlusieursToucheEnMemeTemps(e);
-				OritentationVoitureSelonTouche(e);
+				orientationVoitureSelonTouche(e);
 
 				repaint();
 
@@ -180,38 +145,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		regroupement.setPixelsParMetre(pixelsParMetre);
 		regroupement.dessiner(g2d);
-
-//		groupe.setPixelsParMetre(pixelsParMetre);
-
-		// groupe.setPixelsParMetre(pixelsParMetre);
-
-		// italie = new PisteItalie(1,1);
-		// italie.dessiner(g2d);
-
-		// italie = new PisteItalie(1,1);
-		// italie.dessiner(g2d);
-
-		// aireTriangle1 = mexique.getBas().getAireTriangle();
-		// aireTriangle2 = mexique.getDroit().getAireTriangle();
-		// aireTriangle3 = mexique.getGauche().getAireTriangle();
-		// aireTriangle4 = mexique.getHaut().getAireTriangle();
-		// aireRectangle = mexique.getRectangle();
-
-		// bouleDeNeige.setPixelsParMetre(pixelsParMetre);
-
-		// bouleDeNeige.dessiner(g2d);
-
-		// aireVoiture1 = new Area(voiture.getCercle());
-		// aireVoiture2 = new Area(aireVoiture1);
-		// aireVoiture3 = new Area(aireVoiture1);
-		// aireVoiture4 = new Area(aireVoiture1);
-		// aireVoiture5 = new Area(aireVoiture1);
-		// aireVoitureBoule = new Area(aireVoiture1);
-
-		// accelerateur.dessiner(g2d);
-
-		// bouleDeNeigeAire = new Area(bouleDeNeige.getShapeBoule());
-		// bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
 
 	}
 
@@ -274,7 +207,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * @param e Évènement du clavier
 	 */
 	// Kevin Nguyen
-	public void OritentationVoitureSelonTouche(KeyEvent e) {
+	public void orientationVoitureSelonTouche(KeyEvent e) {
 		if (droite == true) {
 			angleVoitureDegre = (int) (Math
 					.toDegrees(regroupement.getPisteMexique().getDepart().get(0).getVoiture().getAngle()) + 10);
@@ -408,16 +341,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 //		enCollisionAvec();
 
 		repaint();
-	}
-
-	public void collisionBouleDeNeige() {
-
-		aireVoitureBoule.intersect(bouleDeNeigeAireCopie);
-		if (!aireVoitureBoule.isEmpty()) {
-			contactBouleNeige = true;
-			System.out.println("slow down");
-
-		}
 	}
 
 	/**

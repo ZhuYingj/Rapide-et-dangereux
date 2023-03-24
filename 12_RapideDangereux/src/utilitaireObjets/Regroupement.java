@@ -1,13 +1,12 @@
 package utilitaireObjets;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.TypeObjetSpecial;
+import interfaces.TypePiste;
 import pisteDeCourse.PisteMexique;
 
 /**
@@ -30,19 +29,24 @@ public class Regroupement implements Dessinable {
 	/** Le nombre de boite mystere **/
 	private int nombreBoiteMystere = 1;
 
+	private TypePiste type;
+
 	/**
 	 * Méthode qui permet de créer un groupe à l'aide de paramètre
 	 * 
 	 * @param voiture     La voiture
 	 * @param nombreBoite Le nombre de boite
 	 */
-	public Regroupement(Voiture voiture, int nombreBoite, PisteMexique pisteMexique) {
+	public Regroupement(Voiture voiture, int nombreBoite, PisteMexique pisteMexique, TypePiste typePiste) {
 
 //		this.voiture = voiture;
 		this.pisteMexique = pisteMexique;
 		pisteMexique.getDepart().get(0).setVoiture(voiture);
 		this.nombreBoiteMystere = nombreBoite;
+		this.type = typePiste;
+
 		creeBoiteDansListe();
+
 	}
 
 	/**
@@ -67,16 +71,17 @@ public class Regroupement implements Dessinable {
 					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionChampignon(
 							pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
 						regroupementBoiteMystere.remove(a);
+						System.out.println(regroupementBoiteMystere.size());
 					}
 				} // Fin condition pour le champignon
 
 				// Pour la boule de neige
-				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
-					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
-							pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
-						regroupementBoiteMystere.remove(a);
-					}
-				}
+//				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+//					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
+//							pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
+//						regroupementBoiteMystere.remove(a);
+//					}
+//				}
 			}
 
 		}

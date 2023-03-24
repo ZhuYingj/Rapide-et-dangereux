@@ -48,35 +48,7 @@ public class PanelObjet extends JPanel {
 	 * Creation de la fenetre.
 	 */
 	public PanelObjet() {
-//		addMouseMotionListener(new MouseMotionAdapter() {
-//			@Override
-//			public void mouseDragged(MouseEvent e) {
-//				if (selectionObjet) {
-//					XOBJET += e.getX() - xPrecedent;
-//					YOBJET += e.getY() - yPrecedent;
-//					xPrecedent = e.getX();
-//					yPrecedent = e.getY();
-//					repaint();
-//				}
-//			}
-//		});
-//		addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mousePressed(MouseEvent e) {
-//				if (pisteDeDepart.contient(e.getX(), e.getY())) {
-//					System.out.println("ss");
-//					selectionObjet = true;
-//					xPrecedent = e.getX();
-//					yPrecedent = e.getY();
-//				}
-//			}
-//
-//			@Override
-//			public void mouseReleased(MouseEvent e) {
-//				selectionObjet = false;
-//				repaint();
-//			}
-//		});
+
 	}
 
 	/**
@@ -89,7 +61,6 @@ public class PanelObjet extends JPanel {
 		blocMystere = new BlocMystere(75, new Vecteur2D(XOBJET, YOBJET));
 		pisteDeDepart = new PisteDeDepart(XOBJET * 3, YOBJET);
 		pisteDeDepart.getVoiture().getPosition().setX(XOBJET * 2.5);
-//		voiture = new Voiture(new Vecteur2D(0,0), Color.yellow, 50, 16, 0, 60);
 		pisteHorizontale = new PisteHorizontale(XOBJET, YOBJET * 7);
 		pisteVerticale = new PisteVerticale(XOBJET * 3, YOBJET * 7);
 		pisteVirageBas = new PisteVirageBas(XOBJET, YOBJET * 14);
@@ -100,7 +71,6 @@ public class PanelObjet extends JPanel {
 
 		pisteDeDepart.dessiner(g2d);
 		blocMystere.dessiner(g2d);
-//		voiture.dessiner(g2d);
 		pisteHorizontale.dessiner(g2d);
 		pisteVerticale.dessiner(g2d);
 		pisteVirageBas.dessiner(g2d);

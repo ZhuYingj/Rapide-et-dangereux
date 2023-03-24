@@ -12,36 +12,37 @@ import interfaces.Selectionnable;
 public class Accelerateur implements Dessinable, Selectionnable {
 
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 87;
+	private int taillePiste = 87;
+	
+
 	/** la position en x de depart que l'objet piste vas etre creer **/
 	private int x;
+
 	/** la position en y de depart que l'objet piste vas etre creer **/
 	private int y;
-	private double pixelParMetre = 1;
-	private Rectangle2D.Double a;
+	private double pixelParMetre;
+	private Rectangle2D.Double formeAire;
 
 	public Accelerateur(int x, int y) {
 		this.x = x;
 		this.y = y;
-		a = new Rectangle2D.Double(this.x, this.y, TAILLE_PISTE, TAILLE_PISTE);
+		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
 	public void dessiner(Graphics2D g2d) {
-		Graphics2D gCopie = (Graphics2D) g2d.create();
-	
-//		g2d.setColor(Color.GREEN);
-//		Stroke stroke = new BasicStroke(3f);
-//		g2d.setStroke(stroke);
-//		g2d.drawLine(x, y, x + TAILLE_PISTE, y);
-//
-//		g2d.drawLine(x, y + TAILLE_PISTE - 1, x + TAILLE_PISTE, y + TAILLE_PISTE - 1);
-//		g2d.drawLine(x, y, x, y + TAILLE_PISTE);
-//		g2d.drawLine(x + TAILLE_PISTE, y, x + TAILLE_PISTE, y + TAILLE_PISTE);
-//		g2d.drawLine(x, y, x + TAILLE_PISTE, y + TAILLE_PISTE);
-//		g2d.drawLine(x + (TAILLE_PISTE / 2), y, x + TAILLE_PISTE, y + (TAILLE_PISTE / 2));
-//		g2d.drawLine(x, y + (TAILLE_PISTE / 2), x + (TAILLE_PISTE / 2), y + TAILLE_PISTE);
-		System.out.println(a.getX() + "       " + a.getY());
-		gCopie.draw(a);
+
+		g2d.setColor(Color.GREEN);
+
+		Stroke stroke = new BasicStroke(3f);
+		g2d.setStroke(stroke);
+		g2d.drawLine(x, y, x + taillePiste, y);
+
+		g2d.drawLine(x, y + taillePiste - 1, x + taillePiste, y + taillePiste - 1);
+		g2d.drawLine(x, y, x, y + taillePiste);
+		g2d.drawLine(x + taillePiste, y, x + taillePiste, y + taillePiste);
+		g2d.drawLine(x, y, x + taillePiste, y + taillePiste);
+		g2d.drawLine(x + (taillePiste / 2), y, x + taillePiste, y + (taillePiste / 2));
+		g2d.drawLine(x, y + (taillePiste / 2), x + (taillePiste / 2), y + taillePiste);
 
 	}
 
@@ -56,7 +57,8 @@ public class Accelerateur implements Dessinable, Selectionnable {
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
-		if (a.contains(xPix, yPix)) {
+		if (formeAire.contains(xPix, yPix)) {
+			System.out.println("oui");
 			return true;
 		} else {
 			return false;
@@ -64,6 +66,33 @@ public class Accelerateur implements Dessinable, Selectionnable {
 
 	}
 
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+
+	}
+	public int getTaillePiste() {
+		return taillePiste;
+	}
+
+	public void setTaillePiste(int taillePiste) {
+		this.taillePiste = taillePiste;
+	}
+
+	public Rectangle2D.Double getFormeAire() {
+		return formeAire;
+	}
+
+	public void setFormeAire(Rectangle2D.Double formeAire) {
+		this.formeAire = formeAire;
+	}
 //	public void fonctionAccelarateur(Voiture voitureAffecte) {
 //		// augmente la vitesse et l'acceleration
 //		final double vitesseAccelerer = voitureAffecte.getVitesseMaxSelonNiveau() * 2;

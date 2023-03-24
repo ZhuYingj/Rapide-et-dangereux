@@ -3,12 +3,10 @@ package fenetre;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.net.URL;
 
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
@@ -18,14 +16,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
-
-import utilitaireObjets.Voiture;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import dessin.OutilsImage;
 import dessin.ZoneApercupiste;
-import pisteDeCourse.PisteMexique;
+import utilitaireObjets.Regroupement;
+import utilitaireObjets.Voiture;
 
 /**
  * 
@@ -42,6 +39,7 @@ public class JeuOptions extends JPanel {
 	private JRadioButton rdbtnDifficile;
 	private Voiture voiture;
 	private JSlider slider;
+	private Regroupement regroupement;
 
 	private Image imageActuelle;
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import interfaces.Dessinable;
+import interfaces.TypePiste;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.Colle;
 import utilitaireObjets.PisteDeDepart;
@@ -38,8 +39,6 @@ public class PisteMexique implements Dessinable {
 
 	private List<PisteDeDepart> depart = new ArrayList<PisteDeDepart>();
 
-	
-
 	private List<PisteHorizontale> horizontale = new ArrayList<PisteHorizontale>();
 	private List<PisteVerticale> verticale = new ArrayList<PisteVerticale>();
 	private List<PisteVirageBas> bas = new ArrayList<PisteVirageBas>();
@@ -51,6 +50,8 @@ public class PisteMexique implements Dessinable {
 	private Colle colle = new Colle(0, 0);
 	private Rectangle2D rectangle;
 	private Area aireRectangle;;
+
+	private TypePiste type = TypePiste.MEXIQUE;
 
 	/**
 	 * Methode qui permet de construire la piste Mexique a l'aide de parametres
@@ -164,14 +165,14 @@ public class PisteMexique implements Dessinable {
 		Graphics2D gCopie = (Graphics2D) g2d.create();
 		// piste virgae bas :
 		gCopie.scale(pixelsParMetre, pixelsParMetre);
-		for(int i = 0; i< bas.size(); i++) {
+		for (int i = 0; i < bas.size(); i++) {
 			bas.get(i).dessiner(gCopie);
 		}
-		
+
 		for (int i = 0; i < horizontale.size(); i++) {
 			horizontale.get(i).dessiner(gCopie);
 		}
-		
+
 		for (int i = 0; i < verticale.size(); i++) {
 			verticale.get(i).dessiner(gCopie);
 		}
@@ -193,8 +194,6 @@ public class PisteMexique implements Dessinable {
 		}
 
 		depart.get(0).dessiner(gCopie);
-
-
 
 	}
 
@@ -284,12 +283,41 @@ public class PisteMexique implements Dessinable {
 		depart.get(0).enCollisionAvec(voiture);
 
 	}
+
 	public List<PisteDeDepart> getDepart() {
 		return depart;
 	}
 
 	public void setDepart(List<PisteDeDepart> depart) {
 		this.depart = depart;
+	}
+
+	public TypePiste getType() {
+		return type;
+	}
+
+	public void setType(TypePiste type) {
+		this.type = type;
+	}
+
+	public List<PisteHorizontale> getHorizontale() {
+		return horizontale;
+	}
+
+	public void setHorizontale(List<PisteHorizontale> horizontale) {
+		this.horizontale = horizontale;
+	}
+
+	public void setGauche(List<PisteVirageGauche> gauche) {
+		this.gauche = gauche;
+	}
+
+	public void setDroit(List<PisteVirageDroit> droit) {
+		this.droit = droit;
+	}
+
+	public void setHaut(List<PisteVirageHaut> haut) {
+		this.haut = haut;
 	}
 
 }

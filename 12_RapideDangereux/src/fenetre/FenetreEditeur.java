@@ -8,15 +8,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
-import geometrie.Vecteur2D;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BlocMystere;
 import utilitaireObjets.PisteDeDepart;
@@ -38,25 +37,23 @@ import utilitaireObjets.Regroupement;
 public class FenetreEditeur extends JPanel {
 
 	private PanelObjet panelObjet;
-	private JPanel panelPiste;
 	private JButton btnRetour;
 	private Regroupement regroupement;
-	private int XOBJET = 105;
-	private int YOBJET = 30;
-	private int X, Y;
+	private int xAccelerateur = 105;
+	private int yAccelerateur = 30;
 	private BlocMystere blocMystere;
 	private PisteDeDepart pisteDeDepart;
-
 	private PisteHorizontale pisteHorizontale;
 	private PisteVerticale pisteVerticale;
 	private PisteVirageBas pisteVirageBas;
 	private PisteVirageDroit pisteVirageDroit;
 	private PisteVirageGauche pisteVirageGauche;
 	private PisteVirageHaut pisteVirageHaut;
-	private Accelerateur accelerateur;
-	private boolean selectionObjet = false;
 	private int xPrecedent, yPrecedent;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private ArrayList<Accelerateur> listeAcc = new ArrayList<Accelerateur>();
+	private Accelerateur acc;
+	private boolean objetSelectionne = false;
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
@@ -81,35 +78,73 @@ public class FenetreEditeur extends JPanel {
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
+		PanelObjet panelObjet = new PanelObjet();
+		panelObjet.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelObjet.setBounds(920, 11, 386, 720);
+		add(panelObjet);
+		panelObjet.setLayout(null);
+		panelObjet.setEnabled(false);
+
+		JButton btnNewButton = new JButton("+");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Accelerateur accelerateur = new Accelerateur(100, 50);
+				listeAcc.add(accelerateur);
+				repaint();
+			}
+		});
+		btnNewButton.setBounds(72, 102, 41, 23);
+		panelObjet.add(btnNewButton);
+
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				if (selectionObjet) {
-					e.getComponent().setLocation((e.getX() + e.getComponent().getX()) - xPrecedent,
-							(e.getY() + e.getComponent().getY()) - yPrecedent);
+
+				if (listeAcc.size() != 0 && objetSelectionne == true) {
+					xAccelerateur += e.getX() - xPrecedent;
+					yAccelerateur += e.getY() - yPrecedent;
+
+					xPrecedent = e.getX();
+					yPrecedent = e.getY();
+					acc.setX(xAccelerateur);
+					acc.setY(yAccelerateur);
+					acc.getFormeAire().setRect(xAccelerateur, yAccelerateur, acc.getTaillePiste(),
+							acc.getTaillePiste());
+//					System.out.println("X " + acc.getFormeAire().getX());
+
 				}
+				if (objetSelectionne == false) {
+
+				}
+
 				repaint();
+
 			}
 		});
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (accelerateur.contient(e.getX(), e.getY())) {
+				for (int a = 0; a < listeAcc.size(); a++) {
+					if (listeAcc.get(a).contient(e.getX(), e.getY())) {
 
-					selectionObjet = true;
-					xPrecedent = e.getX();
-					yPrecedent = e.getY();
-					repaint();
+						xPrecedent = e.getX();
+						yPrecedent = e.getY();
+						acc = listeAcc.get(a);
+						System.out.println(a + " PRIS");
+						System.out.println(xPrecedent + "  " + xAccelerateur);
+						objetSelectionne = true;
 
-				}
+						break;
+
+					} else {
+						objetSelectionne = false;
+
+					}
+
+				} // Fin loop
 
 			}
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				selectionObjet = false;
-				repaint();
-			}
 		});
 
 	}
@@ -119,10 +154,19 @@ public class FenetreEditeur extends JPanel {
 	 */
 
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		System.out.println("ss");
+		if (listeAcc.size() != 0) {
+
+			for (int a = 0; a < listeAcc.size(); a++) {
+
+				listeAcc.get(a).dessiner(g2d);
+
+			}
+
+		}
 //		blocMystere = new BlocMystere(75, new Vecteur2D(XOBJET, YOBJET));
-//		pisteDeDepart = new PisteDeDepart(XOBJET * 3, YOBJET);
+//		pisteDeDepart = new PisteDeDepart(xAccelera * 3, YOBJET);
 //		pisteDeDepart.getVoiture().getPosition().setX(XOBJET * 2.5);
 //
 //		pisteHorizontale = new PisteHorizontale(XOBJET, YOBJET * 7);
@@ -131,7 +175,6 @@ public class FenetreEditeur extends JPanel {
 //		pisteVirageDroit = new PisteVirageDroit(XOBJET * 3, YOBJET * 14);
 //		pisteVirageGauche = new PisteVirageGauche(XOBJET, YOBJET * 21);
 //		pisteVirageHaut = new PisteVirageHaut(XOBJET * 3, YOBJET * 21);
-		accelerateur = new Accelerateur(XOBJET, YOBJET);
 
 //		pisteDeDepart.dessiner(g2d);
 //		blocMystere.dessiner(g2d);
@@ -142,7 +185,7 @@ public class FenetreEditeur extends JPanel {
 //		pisteVirageDroit.dessiner(g2d);
 //		pisteVirageGauche.dessiner(g2d);
 //		pisteVirageHaut.dessiner(g2d);
-		accelerateur.dessiner(g2d);
+//		accelerateur.dessiner(g2d);
 
 	}
 }
