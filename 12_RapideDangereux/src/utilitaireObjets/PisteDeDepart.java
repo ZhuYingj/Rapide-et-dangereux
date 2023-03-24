@@ -27,8 +27,6 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	private int x;
 	/** la position en y de depart que l'objet piste vas etre creer **/
 	private int y;
-	/** Pixels par metre par defaut **/
-	private double pixelsParMetre = 1; // Defaut
 	/** Normale du mur haut **/
 	private double angleNormaleMurHaut = 90;
 	/** Normale du mur bas **/
@@ -66,7 +64,6 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	 */
 	@Override
 	public void dessiner(Graphics2D g2d) {
-
 		g2d.setColor(Color.BLACK);
 		g2d.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
 		g2d.setColor(Color.RED);
@@ -91,62 +88,6 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 
 		voiture.dessiner(g2d);
 
-	}
-
-	/**
-	 * Méthode qui retourne le nombre de pixels par metre
-	 * 
-	 * @return nombre de pixel par metre
-	 */
-	public double getPixelsParMetre() {
-		return pixelsParMetre;
-	}
-
-	/**
-	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
-	 * voulu
-	 * 
-	 * @param pixelsParMetreVoulu
-	 */
-	public void setPixelsParMetre(double pixelsParMetre) {
-		this.pixelsParMetre = pixelsParMetre;
-
-	}
-
-	/**
-	 * Methode qui permet de retouner le postion en y du mure de haut
-	 * 
-	 * @return une position en Y
-	 */
-	public int getMurHaut() {
-		return murHaut;
-	}
-
-	/**
-	 * Methode qui permet de retourner la position en Y du mure de bas
-	 * 
-	 * @return une position en Y
-	 */
-	public int getMurBas() {
-		return murBas;
-	}
-
-	/**
-	 * Retourne la normale du mur haut
-	 * 
-	 * @return la normale du mur haut
-	 */
-	public double getAngleNormaleMurHaut() {
-		return angleNormaleMurHaut;
-	}
-
-	/**
-	 * Retourne la normale du mur bas
-	 * 
-	 * @return la normale du mur bas
-	 */
-	public double getAngleNormaleMurBas() {
-		return angleNormaleMurBas;
 	}
 
 	public void enCollisionAvec(Voiture voiture) {
@@ -215,10 +156,6 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 
 	public void setVoiture(Voiture voiture) {
 		this.voiture = voiture;
-	}
-
-	public static int getTaillePiste() {
-		return TAILLE_PISTE;
 	}
 
 }

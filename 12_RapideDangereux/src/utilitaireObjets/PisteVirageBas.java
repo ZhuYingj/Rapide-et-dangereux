@@ -60,7 +60,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, MouseListener
 		g2d.setColor(Color.BLACK);
 		g2d.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
 		g2d.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(3f);
+		Stroke stroke = new BasicStroke(0.5f);
 		g2d.setStroke(stroke);
 		g2d.drawLine(x + ((TAILLE_PISTE / 3) * 2), y, x + TAILLE_PISTE - 1, y);
 		g2d.drawLine(x + ((TAILLE_PISTE / 3)), y + ((TAILLE_PISTE / 3)), x + ((TAILLE_PISTE / 3) * 2), y);

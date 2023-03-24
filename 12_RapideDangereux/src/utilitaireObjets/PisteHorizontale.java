@@ -33,14 +33,13 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 	private int x;
 	/** la position en y de depart que l'objet piste vas etre creer  **/
 	private int y;
-	/** Pixels par metre par defaut  **/
-	private double pixelsParMetre = 1; //Defaut
 	/** Normale du mur haut **/
 	private double angleNormaleMurHaut = 90;
 	/** Normale du mur bas **/
 	private double angleNormaleMurBas = 270;
+	private Color color  = Color.black;
+	private boolean collision= false;
 
-	
 
 	/**
 	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
@@ -70,8 +69,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
-//		g2dCopie.scale(pixelsParMetre, pixelsParMetre);
-		g2dCopie.setColor(Color.BLACK);
+		g2dCopie.setColor(color);
 		g2dCopie.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
 		g2dCopie.setColor(Color.RED);
 		g2dCopie.setColor(Color.RED);
@@ -82,60 +80,6 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 
 	}
 
-
-	/**
-	 * Méthode qui retourne le nombre de pixels par metre
-	 * 
-	 * @return nombre de pixel par metre
-	 */
-	public double getPixelsParMetre() {
-		return pixelsParMetre;
-	}
-
-	/**
-	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
-	 * voulu
-	 * 
-	 * @param pixelsParMetreVoulu
-	 */
-	public void setPixelsParMetre(double pixelsParMetre) {
-		this.pixelsParMetre = pixelsParMetre;
-
-	}
-
-	/**
-	 * Methode qui permet de retouner le postion en y du mure de haut
-	 * 
-	 * @return une position en Y
-	 */
-	public int getmurHaut() {
-		return murHaut;
-	}
-
-
-	/**
-	 * Methode qui permet de retourner la position en Y du mure de bas
-	 * 
-	 * @return une position en Y
-	 */
-	public int getmurBas() {
-		return murBas;
-	}
-	/**
-	 * Retourne la normale du mur haut
-	 * @return la normale du mur haut
-	 */
-	public double getAngleNormaleMurHaut() {
-		return angleNormaleMurHaut;
-	}
-
-	/**
-	 * Retourne la normale du mur bas
-	 * @return la normale du mur bas
-	 */
-	public double getAngleNormaleMurBas() {
-		return angleNormaleMurBas;
-	}
 
 	public void enCollisionAvec(Voiture voiture) {
 
@@ -183,6 +127,26 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 			}
 		}
 	}
+	
+	public void traverserPiste(Voiture voiture) {
+		if(voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas )  {
+			setCollision(true);
+
+			
+		
+		} 
+		
+	}
+
+	public boolean isCollision() {
+		return collision;
+	}
+
+
+	public void setCollision(boolean collision) {
+		this.collision = collision;
+	}
+
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
@@ -190,5 +154,13 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 		return false;
 	} 
 
+	public Color getColor() {
+		return color;
+	}
+
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
 
 }

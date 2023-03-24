@@ -133,6 +133,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public ZoneAnimPhysique() {
 
 		mexique = new PisteMexique(0, 0);
+		italie  =  new PisteItalie(0,0);
 		// accelerateur = new Accelerateur(261, 1);
 
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);

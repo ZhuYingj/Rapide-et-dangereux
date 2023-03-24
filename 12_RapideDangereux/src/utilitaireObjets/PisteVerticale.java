@@ -25,8 +25,7 @@ public class PisteVerticale implements Dessinable, Selectionnable {
 	private int x;
 	/** la position en y de depart que l'objet piste qui vas etre creer  **/
 	private int y;
-	/** Pixels par metre par defaut  **/
-	private double pixelsParMetre = 1; //Defaut
+
 	/** Normale du mur droite **/
 	private double angleNormaleMurDroite = 180;
 	/** Normale du mur gauche **/
@@ -69,59 +68,6 @@ public class PisteVerticale implements Dessinable, Selectionnable {
 	g2d.drawLine(x, y +1, x, y + TAILLE_PISTE -1);
 	g2d.drawLine(x + TAILLE_PISTE, y+1, x + TAILLE_PISTE, y + TAILLE_PISTE-1);
 
-	}
-	
-	/**
-	 * Methode qui permet de retouner le postion en y du premier mure
-	 * 
-	 * @return une position en Y
-	 */
-	public int getMurHaut() {
-        return murHaut;
-    }
-
-	/**
-	 * Methode qui permet de retouner le postion en y du deuxieme mure
-	 * 
-	 * @return une position en Y
-	 */
-    public int getMurBas() {
-        return murBas;
-    }
-
-    /**
-	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
-	 * voulu
-	 * 
-	 * @param pixelsParMetreVoulu
-	 */
-	public void setPixelsParMetre(double pixelsParMetre) {
-		this.pixelsParMetre = pixelsParMetre;
-		
-	}
-	
-	/**
-	 * Méthode qui retourne le nombre de pixels par metre
-	 * 
-	 * @return nombre de pixel par metre
-	 */
-	public double getPixelsParMetre() {
-		return pixelsParMetre;
-	}
-	 /**
-     * Retourne la normale du mur droite
-     * @return la normale du mur droite
-     */
-	public double getAngleNormaleMurDroite() {
-		return angleNormaleMurDroite;
-	}
-
-	/**
-     * Retourne la normale du mur gauche
-     * @return la normale du mur gauche
-     */
-	public double getAngleNormaleMurGauche() {
-		return angleNormaleMurGauche;
 	}
 	
 	public void enCollisionAvec(Voiture voiture) {

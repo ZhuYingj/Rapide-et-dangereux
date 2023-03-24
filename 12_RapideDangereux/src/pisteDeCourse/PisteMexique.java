@@ -23,6 +23,7 @@ import utilitaireObjets.Voiture;
  * Class qui permet de creer une piste deja faite (PisteMexique)
  * 
  * @author Ludovic Julien
+ * @author Kevin Nguyen
  *
  */
 
@@ -37,8 +38,6 @@ public class PisteMexique implements Dessinable {
 	private double pixelsParMetre;
 
 	private List<PisteDeDepart> depart = new ArrayList<PisteDeDepart>();
-
-	
 
 	private List<PisteHorizontale> horizontale = new ArrayList<PisteHorizontale>();
 	private List<PisteVerticale> verticale = new ArrayList<PisteVerticale>();
@@ -151,8 +150,6 @@ public class PisteMexique implements Dessinable {
 		// piste vertical:
 		verticale.add(new PisteVerticale(x, y));
 
-//	rectangle = new Rectangle2D.Double(TAILLE_PISTE + 1, TAILLE_PISTE + 1, TAILLE_PISTE * 6 - 1, TAILLE_PISTE * 3 - 1);
-//	aireRectangle = new Area(rectangle);
 	}
 
 	/**
@@ -164,14 +161,14 @@ public class PisteMexique implements Dessinable {
 		Graphics2D gCopie = (Graphics2D) g2d.create();
 		// piste virgae bas :
 		gCopie.scale(pixelsParMetre, pixelsParMetre);
-		for(int i = 0; i< bas.size(); i++) {
+		for (int i = 0; i < bas.size(); i++) {
 			bas.get(i).dessiner(gCopie);
 		}
-		
+
 		for (int i = 0; i < horizontale.size(); i++) {
 			horizontale.get(i).dessiner(gCopie);
 		}
-		
+
 		for (int i = 0; i < verticale.size(); i++) {
 			verticale.get(i).dessiner(gCopie);
 		}
@@ -194,8 +191,6 @@ public class PisteMexique implements Dessinable {
 
 		depart.get(0).dessiner(gCopie);
 
-
-
 	}
 
 	public double getPixelsParMetre() {
@@ -207,58 +202,22 @@ public class PisteMexique implements Dessinable {
 	}
 
 	/**
-	 * Retourne l'aire le rectangle au centre
-	 * 
-	 * @return le rectangle au centre
+	 * Gérer les collisions avec chaque morceau de piste
+	 * @param voiture La voiture controllée
 	 */
-	public Area getRectangle() {
-		return aireRectangle;
-	}
-
-	/**
-	 * Retourne le composant virage bas
-	 * 
-	 * @return le composant virage bas
-	 */
-	public PisteVirageBas getBas() {
-		return bas.get(0);
-	}
-
-	/**
-	 * Retourne le composant virage gauche
-	 * 
-	 * @return le composant virage gauche
-	 */
-	public PisteVirageGauche getGauche() {
-		return gauche.get(0);
-	}
-
-	/**
-	 * Retourne le composant virage droite
-	 * 
-	 * @return le composant virage droite
-	 */
-	public PisteVirageDroit getDroit() {
-		return droit.get(0);
-	}
-
-	/**
-	 * Retourne le composant virage haut
-	 * 
-	 * @return le composant virage haut
-	 */
-	public PisteVirageHaut getHaut() {
-		return haut.get(0);
-	}
-
-	public int getTAILLE_PISTE() {
-		return TAILLE_PISTE;
-	}
-
+	// Kevin Nguyen
 	public void enCollisionAvec(Voiture voiture) {
 
 		for (int i = 0; i < horizontale.size(); i++) {
 			horizontale.get(i).enCollisionAvec(voiture);
+			horizontale.get(i).traverserPiste(voiture);
+			if (horizontale.get(i).isCollision() == true) {
+				horizontale.get(i).setColor(Color.blue);
+				boolean  collision = true;
+				
+			}else {
+				horizontale.get(i).setColor(Color.black);
+			}
 		}
 
 		for (int i = 0; i < verticale.size(); i++) {
@@ -282,14 +241,29 @@ public class PisteMexique implements Dessinable {
 		}
 
 		depart.get(0).enCollisionAvec(voiture);
+//		traverserPiste(voiture);
 
 	}
+
+	/**
+	 * Retourne la piste de départ
+	 * @return
+	 */
+	// Kevin Nguyen
 	public List<PisteDeDepart> getDepart() {
 		return depart;
 	}
 
-	public void setDepart(List<PisteDeDepart> depart) {
-		this.depart = depart;
-	}
 
+
+//	public void traverserPiste(Voiture voiture) {
+//		int taille = horizontale.size();
+//		if (horizontale.get(taille-1).traverserPiste(voiture) == true) {
+//			boolean  collision = true;
+//			System.out.println(collision);
+//			
+//		} else {
+//		
+//		}
+//	}
 }
