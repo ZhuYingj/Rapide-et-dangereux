@@ -34,7 +34,6 @@ public class AppPrincipale12 extends JFrame {
 
 	private JCheckBoxMenuItem checkBoxModeNonScientifique;
 	private JPanel contentPane;
-	private FenetreEditeur fenEditeur;
 
 	/**
 	 * Lancement de l'application.
@@ -73,7 +72,7 @@ public class AppPrincipale12 extends JFrame {
 
 		FenetreMenu fenMenu = new FenetreMenu();
 		ModeDeJeu fenModeJeu = new ModeDeJeu();
-		fenEditeur = new FenetreEditeur();
+		FenetreEditeur fenEditeur = new FenetreEditeur();
 		FenetreJeuSansScientifique fenSansScience = new FenetreJeuSansScientifique();
 		FenetreJeuScientifique fenJeuScience = new FenetreJeuScientifique();
 		JeuOptions fenOptions = new JeuOptions();
@@ -106,7 +105,7 @@ public class AppPrincipale12 extends JFrame {
 		fenEditeur.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionRetourModeJeu1(evt, fenModeJeu, fenEditeur);
-			
+
 			}
 		});
 

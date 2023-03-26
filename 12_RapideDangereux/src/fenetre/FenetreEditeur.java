@@ -39,8 +39,8 @@ public class FenetreEditeur extends JPanel {
 	private PanelObjet panelObjet;
 	private JButton btnRetour;
 	private Regroupement regroupement;
-	private int xAccelerateur = 105;
-	private int yAccelerateur = 30;
+	private double xAccelerateur = 105;
+	private double yAccelerateur = 30;
 	private BlocMystere blocMystere;
 	private PisteDeDepart pisteDeDepart;
 	private PisteHorizontale pisteHorizontale;
@@ -101,16 +101,16 @@ public class FenetreEditeur extends JPanel {
 			public void mouseDragged(MouseEvent e) {
 
 				if (listeAcc.size() != 0 && objetSelectionne == true) {
+
 					xAccelerateur += e.getX() - xPrecedent;
 					yAccelerateur += e.getY() - yPrecedent;
 
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
-					acc.setX(xAccelerateur);
-					acc.setY(yAccelerateur);
+					acc.setX((int) xAccelerateur);
+					acc.setY((int) yAccelerateur);
 					acc.getFormeAire().setRect(xAccelerateur, yAccelerateur, acc.getTaillePiste(),
 							acc.getTaillePiste());
-//					System.out.println("X " + acc.getFormeAire().getX());
 
 				}
 				if (objetSelectionne == false) {
@@ -129,9 +129,10 @@ public class FenetreEditeur extends JPanel {
 
 						xPrecedent = e.getX();
 						yPrecedent = e.getY();
+						xAccelerateur = listeAcc.get(a).getFormeAire().getX();
+						yAccelerateur = listeAcc.get(a).getFormeAire().getY();
 						acc = listeAcc.get(a);
-						System.out.println(a + " PRIS");
-						System.out.println(xPrecedent + "  " + xAccelerateur);
+
 						objetSelectionne = true;
 
 						break;

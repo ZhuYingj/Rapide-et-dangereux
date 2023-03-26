@@ -8,12 +8,16 @@ import java.awt.geom.Rectangle2D;
 
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
-
+/**
+ * Classe permettant de gérer et créer un accélérateur
+ * @author Tan Tommy Rin
+ * @author 
+ *
+ */
 public class Accelerateur implements Dessinable, Selectionnable {
 
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 87;
-	
 
 	/** la position en x de depart que l'objet piste vas etre creer **/
 	private int x;
@@ -58,7 +62,7 @@ public class Accelerateur implements Dessinable, Selectionnable {
 	@Override
 	public boolean contient(double xPix, double yPix) {
 		if (formeAire.contains(xPix, yPix)) {
-			System.out.println("oui");
+
 			return true;
 		} else {
 			return false;
@@ -78,6 +82,7 @@ public class Accelerateur implements Dessinable, Selectionnable {
 		this.y = y;
 
 	}
+
 	public int getTaillePiste() {
 		return taillePiste;
 	}
