@@ -115,7 +115,14 @@ public class ObjetSpecial implements Dessinable {
 		}
 
 	}
-
+	
+	/**
+	 * 
+	 * @param voiture		la valeur de la voiture qui va être affecté
+	 * @param tempsFinal	le temps total finaux qui va être écoulé
+	 * @return				la valeur du fonctionnement de la boule de neige causer par le temps
+	 */
+	//Alexis Pineda-Alvarado
 	public boolean fonctionBouleDeNeige(Voiture voiture, double tempsFinal) {
 
 		if ((tempsTemporaire + 1 > tempsFinal)) {
