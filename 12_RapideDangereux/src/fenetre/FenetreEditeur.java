@@ -109,7 +109,7 @@ public class FenetreEditeur extends JPanel {
 					acc.setX(xAccelerateur);
 					acc.setY(yAccelerateur);
 					acc.getFormeAire().setRect(xAccelerateur, yAccelerateur, acc.getTaillePiste(),
-							acc.getTaillePiste());
+					acc.getTaillePiste());
 //					System.out.println("X " + acc.getFormeAire().getX());
 
 				}
