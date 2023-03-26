@@ -1,6 +1,10 @@
 package utilitaireObjets;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
 
 import dessin.ZoneAnimPhysique;
 import geometrie.Vecteur2D;
@@ -22,6 +26,7 @@ public class ObjetSpecial implements Dessinable {
 	private double pixelParMetre = 1;
 	private double tempsTemporaire;
 	private boolean fonctionActive = false;
+
 
 	/**
 	 * Méthode permettant de créer un objet spécial à l'aide de paramètre
@@ -50,6 +55,7 @@ public class ObjetSpecial implements Dessinable {
 		}
 		if (type == TypeObjetSpecial.BOULEDENEIGE) {
 			BouleDeNeige bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet, type);
+			
 		}
 
 	}
@@ -79,8 +85,9 @@ public class ObjetSpecial implements Dessinable {
 			fonctionChampignon(voiture, tempsTotalEcoule);
 
 		} else if (type == TypeObjetSpecial.BOULEDENEIGE) {
+			
 			fonctionBouleDeNeige(voiture, tempsTotalEcoule);
-
+			
 		} else if (type == TypeObjetSpecial.COLLE) {
 
 		} else {
@@ -111,7 +118,7 @@ public class ObjetSpecial implements Dessinable {
 
 	public boolean fonctionBouleDeNeige(Voiture voiture, double tempsFinal) {
 
-		if ((tempsTemporaire + 3 > tempsFinal)) {
+		if ((tempsTemporaire + 1 > tempsFinal)) {
 			System.out.println("SLOW DOWN!!!");
 			Vecteur2D voitureSlow = new Vecteur2D();
 			voitureSlow = MoteurPhysique.calculerForceFrottement(2.00, voiture.getMasseEnKg(), voiture.getAngle());
@@ -119,6 +126,7 @@ public class ObjetSpecial implements Dessinable {
 			System.out.println(voitureSlow);
 			return true;
 		} else {
+			System.out.println("NORMAL SPEED!!!");
 			Vecteur2D voitureNormal = new Vecteur2D();
 			voitureNormal = MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), voiture.getAngle());
 			voiture.setSommeDesForces(voitureNormal);

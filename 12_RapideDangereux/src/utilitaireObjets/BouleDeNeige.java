@@ -16,7 +16,6 @@ import physique.MoteurPhysique;
 
 public class BouleDeNeige extends ObjetSpecial {
 	private double diametre;
-	private Vecteur2D posInt;
 	private Ellipse2D.Double boule;
 	private double pixelsParMetre;
 	private Vecteur2D vitesse = new Vecteur2D(100, 0); // par defaut
@@ -28,8 +27,6 @@ public class BouleDeNeige extends ObjetSpecial {
 	private Area bouleDeNeigeAireCopie;
 	private Area aireVoiture;
 	private Area aireVoiture1;
-	private ZoneAnimPhysique zoneAnim;
-	private MoteurPhysique motPhys;
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.BOULEDENEIGE;
 	private boolean contactBouleNeige = true;
 	private Vecteur2D position;
@@ -73,6 +70,7 @@ public class BouleDeNeige extends ObjetSpecial {
 	public void deplacementBoule() {
 
 	}
+	
 
 //	public void ralentissementVoiture(Voiture v) {
 //		System.out.println("SLOW DOWN!!!");
