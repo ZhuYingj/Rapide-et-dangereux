@@ -18,8 +18,7 @@ import pisteDeCourse.PisteMexique;
  */
 
 public class Regroupement implements Dessinable {
-	/** La voiture **/
-//	private Voiture voiture;
+
 	/** Liste de boites mysteres **/
 	private ArrayList<BlocMystere> regroupementBoiteMystere;
 	/** Piste mexique **/
@@ -29,8 +28,6 @@ public class Regroupement implements Dessinable {
 	/** Le nombre de boite mystere **/
 	private int nombreBoiteMystere = 1;
 
-	private TypePiste type;
-
 	/**
 	 * Méthode qui permet de créer un groupe à l'aide de paramètre
 	 * 
@@ -39,11 +36,9 @@ public class Regroupement implements Dessinable {
 	 */
 	public Regroupement(Voiture voiture, int nombreBoite, PisteMexique pisteMexique, TypePiste typePiste) {
 
-//		this.voiture = voiture;
 		this.pisteMexique = pisteMexique;
 		pisteMexique.getDepart().get(0).setVoiture(voiture);
 		this.nombreBoiteMystere = nombreBoite;
-		this.type = typePiste;
 
 		creeBoiteDansListe();
 

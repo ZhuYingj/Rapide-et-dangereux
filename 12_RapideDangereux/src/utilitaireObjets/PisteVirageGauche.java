@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -14,7 +15,7 @@ import physique.MoteurPhysique;
 
 public class PisteVirageGauche implements Dessinable, Selectionnable {
 
-	private static final int TAILLE_PISTE = 80;
+	private int taillePiste = 80;
 
 	private int x;
 	private int y;
@@ -33,16 +34,17 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 	/** Initialise l'aire du triangle **/
 	private Area aireTriangle;
 	private boolean collision = false;
-	private Color color   =  Color.black;
+	private Color color = Color.black;
+	private Rectangle2D.Double formeAire;
 
 	public PisteVirageGauche(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.murDroite = x + TAILLE_PISTE + 1;
+		this.murDroite = x + taillePiste + 1;
 		this.murGauche = x + 1;
 		this.murHaut = y + 1;
-		this.murBas = y + TAILLE_PISTE + 1;
-
+		this.murBas = y + taillePiste + 1;
+		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
 	/**
@@ -55,20 +57,19 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 	public void dessiner(Graphics2D g2d) {
 //		g2d.scale(pixelsParMetre, pixelsParMetre);
 		g2d.setColor(color);
-		g2d.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
+		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);
 		Stroke stroke = new BasicStroke(0.5f);
 		g2d.setStroke(stroke);
-		g2d.drawLine(x + 1, y, x + (TAILLE_PISTE / 3), y);
-		g2d.drawLine(x + (TAILLE_PISTE / 3), y, x + ((TAILLE_PISTE / 3) * 2), y + (TAILLE_PISTE / 3));
-		g2d.drawLine(x + ((TAILLE_PISTE / 3) * 2), y + (TAILLE_PISTE / 3), x + TAILLE_PISTE,
-				y + ((TAILLE_PISTE / 3) * 2));
-		g2d.drawLine(x + TAILLE_PISTE, y + ((TAILLE_PISTE / 3) * 2), x + TAILLE_PISTE, y + TAILLE_PISTE - 1);
+		g2d.drawLine(x + 1, y, x + (taillePiste / 3), y);
+		g2d.drawLine(x + (taillePiste / 3), y, x + ((taillePiste / 3) * 2), y + (taillePiste / 3));
+		g2d.drawLine(x + ((taillePiste / 3) * 2), y + (taillePiste / 3), x + taillePiste, y + ((taillePiste / 3) * 2));
+		g2d.drawLine(x + taillePiste, y + ((taillePiste / 3) * 2), x + taillePiste, y + taillePiste - 1);
 
 		triangle = new Path2D.Double();
-		triangle.moveTo(x + (TAILLE_PISTE / 3), y);
-		triangle.lineTo(x + TAILLE_PISTE, y + ((TAILLE_PISTE / 3) * 2));
-		triangle.lineTo(x + TAILLE_PISTE, y);
+		triangle.moveTo(x + (taillePiste / 3), y);
+		triangle.lineTo(x + taillePiste, y + ((taillePiste / 3) * 2));
+		triangle.lineTo(x + taillePiste, y);
 		triangle.closePath();
 		g2d.fill(triangle);
 
@@ -83,6 +84,14 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 	 */
 	public Area getAireTriangle() {
 		return aireTriangle;
+	}
+
+	public int getTaillePiste() {
+		return taillePiste;
+	}
+
+	public void setTaillePiste(int taillePiste) {
+		this.taillePiste = taillePiste;
 	}
 
 	public void enCollisionAvec(Voiture voiture) {
@@ -163,6 +172,30 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 
 	}
 
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public Rectangle2D.Double getFormeAire() {
+		return formeAire;
+	}
+
+	public void setFormeAire(Rectangle2D.Double formeAire) {
+		this.formeAire = formeAire;
+	}
+
 	public boolean isCollision() {
 		return collision;
 	}
@@ -178,10 +211,14 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
+
 	@Override
 	public boolean contient(double xPix, double yPix) {
-		// TODO Auto-generated method stub
-		return false;
+		if (formeAire.contains(xPix, yPix)) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 }

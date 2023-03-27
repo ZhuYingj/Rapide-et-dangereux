@@ -8,10 +8,13 @@ import java.awt.geom.Rectangle2D;
 
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
+import interfaces.TypeObjetDeplacable;
+
 /**
  * Classe permettant de gérer et créer un accélérateur
+ * 
  * @author Tan Tommy Rin
- * @author 
+ * @author
  *
  */
 public class Accelerateur implements Dessinable, Selectionnable {

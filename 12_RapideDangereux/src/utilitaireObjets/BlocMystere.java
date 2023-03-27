@@ -193,8 +193,12 @@ public class BlocMystere implements Dessinable, Selectionnable {
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
+		if (carre.contains(xPix, yPix)) {
+			return true;
+		} else {
+			return false;
+		}
 
-		return false;
 	}
 
 	public Graphics2D getgTempo() {
