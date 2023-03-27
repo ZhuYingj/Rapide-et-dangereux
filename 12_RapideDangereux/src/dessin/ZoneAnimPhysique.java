@@ -6,13 +6,13 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.geom.Area;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 import javax.swing.JPanel;
 
 import geometrie.Vecteur2D;
+import interfaces.TypeObjetSpecial;
 import interfaces.TypePiste;
 import physique.MoteurPhysique;
 import pisteDeCourse.PisteItalie;
@@ -20,6 +20,7 @@ import pisteDeCourse.PisteMexique;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BouleDeNeige;
 import utilitaireObjets.Champignon;
+import utilitaireObjets.ObjetSpecial;
 import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
 
@@ -85,6 +86,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	private Regroupement regroupement;
 
+	private ObjetSpecial objSpecial;
+
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
 	 */
@@ -104,6 +107,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		mexique = new PisteMexique(0, 0);
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
 		regroupement = new Regroupement(voiture, 3, mexique, TypePiste.MEXIQUE);
+		objSpecial = new ObjetSpecial(new Vecteur2D(20, 20), 20, TypeObjetSpecial.BOULEDENEIGE);
 
 		addKeyListener(new KeyAdapter() {
 
@@ -147,6 +151,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		regroupement.setPixelsParMetre(pixelsParMetre);
 		regroupement.dessiner(g2d);
+		objSpecial.setPixelParMetre(pixelsParMetre);
+		objSpecial.dessiner(g2d);
 
 	}
 

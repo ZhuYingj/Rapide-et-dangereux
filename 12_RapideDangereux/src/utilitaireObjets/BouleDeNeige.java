@@ -36,9 +36,6 @@ public class BouleDeNeige extends ObjetSpecial {
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.BOULEDENEIGE;
 	private boolean contactBouleNeige = true;
 	private Vecteur2D position;
-	private final double PROPORTION_CERCLES = 1 / 5.0;
-	private double taille;
-	private double x, y;
 
 	/**
 	 * Méthode qui crée la boule de neige
@@ -68,6 +65,8 @@ public class BouleDeNeige extends ObjetSpecial {
 		g2dcop.setColor(Color.cyan);
 		g2dcop.fill(shapeBoule);
 
+
+
 		bouleDeNeigeAire = new Area(shapeBoule);
 		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
 
@@ -75,7 +74,7 @@ public class BouleDeNeige extends ObjetSpecial {
 
 	private void creerLaGeometrie() {
 
-		boule = new Ellipse2D.Double(30, 50, diametre, diametre);
+		boule = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
 	}
 
 	/**

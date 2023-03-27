@@ -1,7 +1,6 @@
 package utilitaireObjets;
 
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -49,7 +48,7 @@ public class ObjetSpecial implements Dessinable {
 
 		}
 		if (type == TypeObjetSpecial.BOULEDENEIGE) {
-			BouleDeNeige bouleDeNeige = new BouleDeNeige(new Vecteur2D(10, 10), 15.0, TypeObjetSpecial.BOULEDENEIGE);
+			BouleDeNeige bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet, type);
 			bouleDeNeige.dessiner(g2d);
 		}
 
