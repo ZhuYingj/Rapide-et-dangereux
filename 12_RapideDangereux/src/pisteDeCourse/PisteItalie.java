@@ -44,7 +44,7 @@ public class PisteItalie implements Dessinable {
 
 	private Area aireRectangle;
 	private double pixelsParMetre;
-	private int TAILLE_PISTE;
+
 
 	public PisteItalie(int x, int y) {
 		this.x = x;

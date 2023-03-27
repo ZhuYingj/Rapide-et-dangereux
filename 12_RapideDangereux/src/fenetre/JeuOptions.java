@@ -21,6 +21,7 @@ import javax.swing.event.ChangeListener;
 
 import dessin.OutilsImage;
 import dessin.ZoneApercupiste;
+import interfaces.TypePiste;
 import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
 
@@ -40,7 +41,7 @@ public class JeuOptions extends JPanel {
 	private Voiture voiture;
 	private JSlider slider;
 	private Regroupement regroupement;
-
+	private TypePiste type = TypePiste.MEXIQUE;
 	private Image imageActuelle;
 
 	/**
@@ -76,6 +77,7 @@ public class JeuOptions extends JPanel {
 		add(btnMexique);
 		btnMexique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				type = TypePiste.MEXIQUE;
 				imageActuelle = OutilsImage.lireImage("PisteMexique.png");
 				zoneApercupiste.setImg(imageActuelle);
 				zoneApercupiste.repaint();
@@ -87,6 +89,7 @@ public class JeuOptions extends JPanel {
 		add(btnCanada);
 		btnCanada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+//				type = TypePiste.CANADA;
 				imageActuelle = OutilsImage.lireImage("Construction.gif");
 				zoneApercupiste.setImg(imageActuelle);
 				zoneApercupiste.repaint();
@@ -98,9 +101,11 @@ public class JeuOptions extends JPanel {
 		add(btnItalie);
 		btnItalie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				type = TypePiste.ITALIE;
 				imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
 				zoneApercupiste.setImg(imageActuelle);
 				zoneApercupiste.repaint();
+		
 			}
 		});
 
@@ -182,7 +187,7 @@ public class JeuOptions extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
 				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
-
+				pcs.firePropertyChange("TYPEPISTE", null, type);
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);

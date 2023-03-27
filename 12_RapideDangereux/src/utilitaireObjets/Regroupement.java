@@ -7,6 +7,7 @@ import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.TypeObjetSpecial;
 import interfaces.TypePiste;
+import pisteDeCourse.PisteItalie;
 import pisteDeCourse.PisteMexique;
 
 /**
@@ -22,11 +23,15 @@ public class Regroupement implements Dessinable {
 	/** Liste de boites mysteres **/
 	private ArrayList<BlocMystere> regroupementBoiteMystere;
 	/** Piste mexique **/
-	private PisteMexique pisteMexique;
+	private PisteMexique pisteMexique = new PisteMexique(0, 0);
+
+	private PisteItalie pisteItalie = new PisteItalie(0, 0);
 	/** Le nombre de pixels par metre **/
 	private double pixelsParMetre = 1;
 	/** Le nombre de boite mystere **/
 	private int nombreBoiteMystere = 1;
+
+	private TypePiste type;
 
 	/**
 	 * Méthode qui permet de créer un groupe à l'aide de paramètre
@@ -34,10 +39,17 @@ public class Regroupement implements Dessinable {
 	 * @param voiture     La voiture
 	 * @param nombreBoite Le nombre de boite
 	 */
-	public Regroupement(Voiture voiture, int nombreBoite, PisteMexique pisteMexique, TypePiste typePiste) {
+	public Regroupement(Voiture voiture, int nombreBoite, TypePiste typePiste) {
+		type = typePiste;
 
-		this.pisteMexique = pisteMexique;
-		pisteMexique.getDepart().get(0).setVoiture(voiture);
+		if (type == TypePiste.MEXIQUE) {
+
+			pisteMexique.getDepart().get(0).setVoiture(voiture);
+		} else if (type == TypePiste.ITALIE) {
+
+			pisteItalie.getDepart().get(0).setVoiture(voiture);
+		}
+
 		this.nombreBoiteMystere = nombreBoite;
 
 		creeBoiteDansListe();
@@ -52,34 +64,59 @@ public class Regroupement implements Dessinable {
 	 */
 
 	public void avancerGroupe(double deltaT, double tempsTotalEcoule) {
-		pisteMexique.getDepart().get(0).getVoiture().avancerUnPas(deltaT);
-		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
-			regroupementBoiteMystere.get(a).enCollisionAvecVoiture(pisteMexique.getDepart().get(0).getVoiture());
-			if (regroupementBoiteMystere.get(a)
-					.enCollisionAvecVoiture(pisteMexique.getDepart().get(0).getVoiture()) == true) {
-				regroupementBoiteMystere.get(a).getObjetSpecial()
-						.fonctionSelonObjet(pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule);
+		if (type == TypePiste.MEXIQUE) {
+			pisteMexique.getDepart().get(0).getVoiture().avancerUnPas(deltaT);
+			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
+				regroupementBoiteMystere.get(a).enCollisionAvecVoiture(pisteMexique.getDepart().get(0).getVoiture());
+				if (regroupementBoiteMystere.get(a)
+						.enCollisionAvecVoiture(pisteMexique.getDepart().get(0).getVoiture()) == true) {
+					regroupementBoiteMystere.get(a).getObjetSpecial()
+							.fonctionSelonObjet(pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule);
 
-				// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
-				// retirons la boite mystere contenant ce champignon de la liste.
-				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
-					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionChampignon(
-							pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
-						regroupementBoiteMystere.remove(a);
-						System.out.println(regroupementBoiteMystere.size());
-					}
-				} // Fin condition pour le champignon
+					// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
+					// retirons la boite mystere contenant ce champignon de la liste.
+					if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
+						if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionChampignon(
+								pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
+							regroupementBoiteMystere.remove(a);
 
-				// Pour la boule de neige
-//				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
-//					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
-//							pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
-//						regroupementBoiteMystere.remove(a);
+						}
+					} // Fin condition pour le champignon
+
+					// Pour la boule de neige
+//					if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+//						if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
+//								pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
+//							regroupementBoiteMystere.remove(a);
+//						}
 //					}
-//				}
-			}
+				}
 
+			}
+		} else if (type == TypePiste.ITALIE) {
+			pisteItalie.getDepart().get(0).getVoiture().avancerUnPas(deltaT);
+			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
+				regroupementBoiteMystere.get(a).enCollisionAvecVoiture(pisteItalie.getDepart().get(0).getVoiture());
+				if (regroupementBoiteMystere.get(a)
+						.enCollisionAvecVoiture(pisteItalie.getDepart().get(0).getVoiture()) == true) {
+					regroupementBoiteMystere.get(a).getObjetSpecial()
+							.fonctionSelonObjet(pisteItalie.getDepart().get(0).getVoiture(), tempsTotalEcoule);
+
+					// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
+					// retirons la boite mystere contenant ce champignon de la liste.
+					if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
+						if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionChampignon(
+								pisteItalie.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
+							regroupementBoiteMystere.remove(a);
+
+						}
+					} // Fin condition pour le champignon
+
+				}
+
+			}
 		}
+
 	}
 
 	/**
@@ -104,15 +141,32 @@ public class Regroupement implements Dessinable {
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
 
-		pisteMexique.setPixelsParMetre(pixelsParMetre);
-		pisteMexique.getDepart().get(0).getVoiture().setPixelsParMetre(pixelsParMetre);
-		pisteMexique.dessiner(g2d);
+		if (type == TypePiste.MEXIQUE) {
+
+			pisteMexique.setPixelsParMetre(pixelsParMetre);
+			pisteMexique.getDepart().get(0).getVoiture().setPixelsParMetre(pixelsParMetre);
+			pisteMexique.dessiner(g2d);
+		}
+		if (type == TypePiste.ITALIE) {
+			pisteItalie.setPixelsParMetre(pixelsParMetre);
+			pisteItalie.getDepart().get(0).getVoiture().setPixelsParMetre(pixelsParMetre);
+			pisteItalie.dessiner(g2d);
+		}
+
 		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
 			regroupementBoiteMystere.get(a).setPixelParMetre(pixelsParMetre);
 			regroupementBoiteMystere.get(a).dessiner(g2dCopie);
 
 		}
 
+	}
+
+	public PisteItalie getPisteItalie() {
+		return pisteItalie;
+	}
+
+	public void setPisteItalie(PisteItalie pisteItalie) {
+		this.pisteItalie = pisteItalie;
 	}
 
 	public PisteMexique getPisteMexique() {
@@ -138,6 +192,14 @@ public class Regroupement implements Dessinable {
 	public void setPixelsParMetre(double pixelsParMetre) {
 		this.pixelsParMetre = pixelsParMetre;
 
+	}
+
+	public TypePiste getType() {
+		return type;
+	}
+
+	public void setType(TypePiste type) {
+		this.type = type;
 	}
 
 }
