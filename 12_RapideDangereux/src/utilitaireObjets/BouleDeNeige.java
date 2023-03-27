@@ -27,7 +27,6 @@ public class BouleDeNeige extends ObjetSpecial {
 	private double pixelsParMetre;
 	private Vecteur2D vitesse = new Vecteur2D(100, 0); // par defaut
 	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
-	private boolean good = true;
 	private Voiture voiture;
 	Shape shapeBoule;
 	private Area bouleDeNeigeAire;
@@ -38,46 +37,54 @@ public class BouleDeNeige extends ObjetSpecial {
 	private boolean contactBouleNeige = true;
 	private Vecteur2D position;
 
-	
 	/**
 	 * Méthode qui crée la boule de neige
 	 * 
-	 * @param pos			le positionnement de la boule de neige
-	 * @param diametre		le diametre de la boule de neige
-	 * @param typeObjet		le type d'objet spéciale
+	 * @param pos       le positionnement de la boule de neige
+	 * @param diametre  le diametre de la boule de neige
+	 * @param typeObjet le type d'objet spéciale
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public BouleDeNeige(Vecteur2D pos, double diametre, TypeObjetSpecial typeObjet) {
 		super(pos, diametre, typeObjet);
+		this.diametre = super.getDiametreObjet();
 		this.position = super.getPositionObjet();
+
+		creerLaGeometrie();
 	}
 
 	/**
 	 * Méthode qui dessine la boule de neige
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dcop = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
 		mat.scale(pixelsParMetre, pixelsParMetre);
 		shapeBoule = mat.createTransformedShape(boule);
 		g2dcop.setColor(Color.cyan);
-		if (contactBouleNeige == true) {
-			g2dcop.fill(shapeBoule);
-		}
+		g2dcop.fill(shapeBoule);
+
+
 
 		bouleDeNeigeAire = new Area(shapeBoule);
 		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
 
 	}
+
+	private void creerLaGeometrie() {
+
+		boule = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
+	}
+
 	/**
 	 * 
 	 * méthode qui détecte la collision de la voiture et la boule de neige
 	 * 
-	 * @param v	ceci est la valeur de la voiture
-	 * @return	la valeur de la collision en true or false
+	 * @param v ceci est la valeur de la voiture
+	 * @return la valeur de la collision en true or false
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public boolean collisionDeLaBalle(Voiture v) {
 		this.voiture = v;
 
@@ -100,7 +107,6 @@ public class BouleDeNeige extends ObjetSpecial {
 	public void deplacementBoule() {
 
 	}
-	
 
 	/**
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
