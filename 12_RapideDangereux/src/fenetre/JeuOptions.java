@@ -21,13 +21,16 @@ import javax.swing.event.ChangeListener;
 
 import dessin.OutilsImage;
 import dessin.ZoneApercupiste;
+import interfaces.TypePiste;
 import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
 
 /**
+ * Classe qui crée la fenêtre pour choisir les paramètres pour le mode de jeu
+ * Monde
  * 
  * @author Alexis Pineda-Alvarado
- * @author Ludovic Julien
+ * 
  */
 
 public class JeuOptions extends JPanel {
@@ -40,7 +43,7 @@ public class JeuOptions extends JPanel {
 	private Voiture voiture;
 	private JSlider slider;
 	private Regroupement regroupement;
-
+	private TypePiste type = TypePiste.MEXIQUE;
 	private Image imageActuelle;
 
 	/**
@@ -60,12 +63,12 @@ public class JeuOptions extends JPanel {
 
 		JPanel PanelApercu = new JPanel();
 		PanelApercu.setBackground(Color.WHITE);
-		PanelApercu.setBounds(10, 200, 649, 489);
+		PanelApercu.setBounds(10, 200, 700, 439);
 		add(PanelApercu);
 		PanelApercu.setLayout(null);
 
 		ZoneApercupiste zoneApercupiste = new ZoneApercupiste();
-		zoneApercupiste.setBounds(0, 0, 650, 405);
+		zoneApercupiste.setBounds(0, 0, 700, 439);
 		PanelApercu.add(zoneApercupiste);
 
 		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");
@@ -76,6 +79,7 @@ public class JeuOptions extends JPanel {
 		add(btnMexique);
 		btnMexique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				type = TypePiste.MEXIQUE;
 				imageActuelle = OutilsImage.lireImage("PisteMexique.png");
 				zoneApercupiste.setImg(imageActuelle);
 				zoneApercupiste.repaint();
@@ -87,6 +91,7 @@ public class JeuOptions extends JPanel {
 		add(btnCanada);
 		btnCanada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+//				type = TypePiste.CANADA;
 				imageActuelle = OutilsImage.lireImage("Construction.gif");
 				zoneApercupiste.setImg(imageActuelle);
 				zoneApercupiste.repaint();
@@ -98,9 +103,11 @@ public class JeuOptions extends JPanel {
 		add(btnItalie);
 		btnItalie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				type = TypePiste.ITALIE;
 				imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
 				zoneApercupiste.setImg(imageActuelle);
 				zoneApercupiste.repaint();
+		
 			}
 		});
 
@@ -176,13 +183,25 @@ public class JeuOptions extends JPanel {
 		rdbtnDifficile.setBounds(165, 131, 109, 23);
 		panel_1.add(rdbtnDifficile);
 		buttonGroupDiff.add(rdbtnDifficile);
+		
+		JLabel lblVitesseFacile = new JLabel("60 m/s");
+		lblVitesseFacile.setBounds(280, 84, 46, 14);
+		panel_1.add(lblVitesseFacile);
+		
+		JLabel lblVitesseIntermediaire = new JLabel("80 m/s");
+		lblVitesseIntermediaire.setBounds(280, 109, 46, 14);
+		panel_1.add(lblVitesseIntermediaire);
+		
+		JLabel lblVitesseAvance = new JLabel("100 m/s");
+		lblVitesseAvance.setBounds(280, 135, 46, 14);
+		panel_1.add(lblVitesseAvance);
 
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
 				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
-
+				pcs.firePropertyChange("TYPEPISTE", null, type);
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);
@@ -194,7 +213,6 @@ public class JeuOptions extends JPanel {
 		add(panel_2);
 
 		JButton btnGauche = new JButton("<");
-
 		btnGauche.setBounds(905, 188, 55, 23);
 		add(btnGauche);
 

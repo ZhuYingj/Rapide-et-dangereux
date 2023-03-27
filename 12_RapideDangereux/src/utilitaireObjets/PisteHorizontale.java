@@ -15,7 +15,7 @@ import physique.MoteurPhysique;
  * Classe qui permet de creer un objet: Piste Horizontale
  * 
  * @author Ludovic Julien
- *
+ * @author Kevin Nguyen
  */
 
 public class PisteHorizontale implements Dessinable, Selectionnable {
@@ -81,6 +81,11 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 
 	}
 
+	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste ainsi que de calculer l'angle de réflexion
+	 * @param voiture La voiture controllée
+	 */
+	// Kevin Nguyen
 	public void enCollisionAvec(Voiture voiture) {
 
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
@@ -95,7 +100,6 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 						voiture.setVitesse(vit);
 					}
 					voiture.getPosition().setY(murHaut + 1);
-					System.out.println("en collision");
 					if (Math.toDegrees(voiture.getAngle()) < 270 && Math.toDegrees(voiture.getAngle()) > 180) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
@@ -118,7 +122,6 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 						voiture.setVitesse(vit);
 					}
 					voiture.getPosition().setY(murBas - voiture.getDiametre());
-					System.out.println("en collision");
 					if (Math.toDegrees(voiture.getAngle()) < 90 && Math.toDegrees(voiture.getAngle()) > 0) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
@@ -136,6 +139,11 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 		}
 	}
 
+	/**
+	 * Méthode permettant de savoir si la voiture est passée sur la piste
+	 * @param voiture La voiture controllée
+	 */
+	// Kevin Nguyen
 	public void traverserPiste(Voiture voiture) {
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {

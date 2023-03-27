@@ -13,15 +13,30 @@ import interfaces.Dessinable;
 import interfaces.Selectionnable;
 import physique.MoteurPhysique;
 
+/**
+ * Classe qui permet de creer un objet piste virage gauche
+ * 
+ * @author Ludovic Julien
+ * @author Kevin Nguyen
+ */
+
 public class PisteVirageGauche implements Dessinable, Selectionnable {
 
+	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 
+	/** la position en x de depart que l'objet piste qui vas etre creer **/
 	private int x;
+
+	/** la position en y de depart que l'objet piste qui vas etre creer **/
 	private int y;
+	/** Position en x du côté droit du morceau de piste**/
 	private int murDroite;
+	/** Position en x du côté gauche du morceau de piste**/
 	private int murGauche;
+	/** Position en y du côté haut du morceau de piste**/
 	private int murHaut;
+	/** Position en y du côté bas du morceau de piste**/
 	private int murBas;
 	/** Normale du mur droite **/
 	private double angleNormaleMurDroite = 180;
@@ -29,14 +44,25 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 	private double angleNormaleMurHaut = 90;
 	/** Pixels par metre par defaut **/
 	private double pixelsParMetre = 1; // Defaut
+
 	/** Initialise la forme du triangle **/
 	private Path2D triangle;
 	/** Initialise l'aire du triangle **/
 	private Area aireTriangle;
+	/** Boolean collision initié à faux **/
 	private boolean collision = false;
+	/** Couleur de la piste initié à noir**/
 	private Color color = Color.black;
+	/** Aire du morceau de piste**/
 	private Rectangle2D.Double formeAire;
 
+	
+	/**
+	 * Methode qui permet de construire la piste virage gauche a l'aide de parametres
+	 * 
+	 * @param x position en x de la piste
+	 * @param y position en y de la piste
+	 */
 	public PisteVirageGauche(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -94,6 +120,11 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 		this.taillePiste = taillePiste;
 	}
 
+	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste ainsi que de calculer l'angle de réflexion
+	 * @param voiture La voiture controllée
+	 */
+	// Kevin Nguyen
 	public void enCollisionAvec(Voiture voiture) {
 
 		Area cercle = new Area(voiture.getCercle());
@@ -163,6 +194,11 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 		}
 	}
 
+	/**
+	 * Méthode permettant de savoir si la voiture est passée sur la piste
+	 * @param voiture La voiture controllée
+	 */
+	// Kevin Nguyen
 	public void traverserPiste(Voiture voiture) {
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {

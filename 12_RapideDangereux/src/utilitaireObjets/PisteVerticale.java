@@ -15,7 +15,7 @@ import physique.MoteurPhysique;
  * Classe qui permet de creer un objet Piste Verticale
  * 
  * @author Ludovic Julien
- *
+ * @author Kevin Nguyen
  */
 
 public class PisteVerticale implements Dessinable, Selectionnable {
@@ -76,6 +76,11 @@ public class PisteVerticale implements Dessinable, Selectionnable {
 
 	}
 
+	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste ainsi que de calculer l'angle de réflexion
+	 * @param voiture La voiture controllée
+	 */
+	// Kevin Nguyen
 	public void enCollisionAvec(Voiture voiture) {
 
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
@@ -122,6 +127,11 @@ public class PisteVerticale implements Dessinable, Selectionnable {
 		}
 	}
 
+	/**
+	 * Méthode permettant de savoir si la voiture est passée sur la piste
+	 * @param voiture La voiture controllée
+	 */
+	// Kevin Nguyen
 	public void traverserPiste(Voiture voiture) {
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {

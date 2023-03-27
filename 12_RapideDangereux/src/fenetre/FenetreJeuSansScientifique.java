@@ -31,6 +31,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
+	private JButton btnNextImg;
 
 	/**
 	 * Creation de la fenetre.
@@ -86,6 +87,9 @@ public class FenetreJeuSansScientifique extends JPanel {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.setEnCoursDAnimation(false);
 				zoneAnimPhysique.demarrer();
+				btnNextImg.setEnabled(false);
+				btnStart.setEnabled(false);
+				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 			}
 		});
 		btnStart.setBounds(134, 604, 97, 58);
@@ -96,12 +100,15 @@ public class FenetreJeuSansScientifique extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.restartPos();
+				btnNextImg.setEnabled(true);
+				btnStart.setEnabled(true);
+				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
 			}
 		});
 		btnReset.setBounds(376, 604, 97, 58);
 		add(btnReset);
 
-		JButton btnNextImg = new JButton("Next Img");
+		btnNextImg = new JButton("Next Img");
 		btnNextImg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
@@ -116,6 +123,8 @@ public class FenetreJeuSansScientifique extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.arreter();
+				btnNextImg.setEnabled(true);
+				btnStart.setEnabled(true);
 			}
 		});
 		btnStop.setBounds(953, 604, 103, 58);
