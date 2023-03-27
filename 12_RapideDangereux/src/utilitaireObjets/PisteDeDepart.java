@@ -15,7 +15,7 @@ import physique.MoteurPhysique;
  * Classe qui permet de creer un objet piste de d�part
  * 
  * @author Ludovic Julien
- *
+ * @author Kevin Nguyen
  */
 
 public class PisteDeDepart implements Dessinable, Selectionnable {
@@ -89,6 +89,11 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 
 	}
 
+	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste ainsi que de calculer l'angle de réflexion
+	 * @param voiture La voiture controllée
+	 */
+	// Kevin Nguyen
 	public void enCollisionAvec(Voiture voiture) {
 
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
@@ -143,6 +148,11 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 		}
 	}
 
+	/**
+	 * Méthode permettant de savoir si la voiture est passée sur la piste
+	 * @param voiture La voiture controllée
+	 */
+	// Kevin Nguyen
 	public void traverserPiste(Voiture voiture) {
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
@@ -152,6 +162,12 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 
 	}
 
+	/**
+	 * Méthode permettant de savoir si la voiture est repassée par le point de départ
+	 * @param voiture La voiture controllée
+	 * @return La valeur booléene
+	 */
+	// Kevin Nguyen
 	public boolean resetTout(Voiture voiture) {
 		if (voiture.getPosition().getX() > murGauche + voiture.getDiametre() && voiture.getPosition().getX() < murDroite
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {

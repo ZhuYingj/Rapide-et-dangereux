@@ -25,25 +25,33 @@ public class Regroupement implements Dessinable {
 	private ArrayList<BlocMystere> regroupementBoiteMystere;
 
 //	private ArrayList<Accelerateur> listeAccelerateur = new ArrayList<Accelerateur>();
+	/** Piste Horizontale **/
 	private ArrayList<PisteHorizontale> listePisteHorizontale = new ArrayList<PisteHorizontale>();
-
+	/** Piste Virage Bas **/
 	private ArrayList<PisteVirageBas> listePisteVirageBas = new ArrayList<PisteVirageBas>();
+	/** Piste Virage Gauche **/
 	private ArrayList<PisteVirageGauche> listePisteVirageGauche = new ArrayList<PisteVirageGauche>();
+	/** Piste Verticale **/
 	private ArrayList<PisteVerticale> listePisteVerticale = new ArrayList<PisteVerticale>();
+	/** Piste De Depart **/
 	private ArrayList<PisteDeDepart> listePisteDeDepart = new ArrayList<PisteDeDepart>();
+	/** Piste Virage Droit **/
 	private ArrayList<PisteVirageDroit> listePisteVirageDroit = new ArrayList<PisteVirageDroit>();
+	/** Piste Virage Haut **/
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
 
-	/** Piste mexique **/
+	/** Piste Mexique **/
 	private PisteMexique pisteMexique = new PisteMexique(0, 0);
-
+	/** Piste Italie **/
 	private PisteItalie pisteItalie = new PisteItalie(0, 0);
 	/** Le nombre de pixels par metre **/
 	private double pixelsParMetre = 1;
 	/** Le nombre de boite mystere **/
 	private int nombreBoiteMystere = 1;
-
+	/** Type de piste **/
 	private TypePiste type;
+	/** Nombre de tour initial  **/
+	private int tour = 0;
 
 	/**
 	 * Méthode qui permet de créer un groupe à l'aide de paramètre
@@ -270,8 +278,6 @@ public class Regroupement implements Dessinable {
 			listePisteHorizontale.get(i).traverserPiste(voiture);
 			if (listePisteHorizontale.get(i).isCollision() == true) {
 				listePisteHorizontale.get(i).setColor(Color.blue);
-				boolean collision = true;
-
 			} else {
 				listePisteHorizontale.get(i).setColor(Color.black);
 			}
@@ -279,34 +285,73 @@ public class Regroupement implements Dessinable {
 
 		for (int i = 0; i < listePisteVerticale.size(); i++) {
 			listePisteVerticale.get(i).enCollisionAvec(voiture);
+			listePisteVerticale.get(i).traverserPiste(voiture);
+			if (listePisteVerticale.get(i).isCollision() == true) {
+				listePisteVerticale.get(i).setColor(Color.blue);
+			} else {
+				listePisteVerticale.get(i).setColor(Color.black);
+			}
 		}
 
 		for (int i = 0; i < listePisteVirageBas.size(); i++) {
 			listePisteVirageBas.get(i).enCollisionAvec(voiture);
+			listePisteVirageBas.get(i).traverserPiste(voiture);
+			if (listePisteVirageBas.get(i).isCollision() == true) {
+				listePisteVirageBas.get(i).setColor(Color.blue);
+			} else {
+				listePisteVirageBas.get(i).setColor(Color.black);
+			}
 		}
 
 		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
 			listePisteVirageGauche.get(i).enCollisionAvec(voiture);
+			listePisteVirageGauche.get(i).traverserPiste(voiture);
+			if (listePisteVirageGauche.get(i).isCollision() == true) {
+				listePisteVirageGauche.get(i).setColor(Color.blue);
+			} else {
+				listePisteVirageGauche.get(i).setColor(Color.black);
+			}
 		}
 
 		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
 			listePisteVirageDroit.get(i).enCollisionAvec(voiture);
+			listePisteVirageDroit.get(i).traverserPiste(voiture);
+			if (listePisteVirageDroit.get(i).isCollision() == true) {
+				listePisteVirageDroit.get(i).setColor(Color.blue);
+			} else {
+				listePisteVirageDroit.get(i).setColor(Color.black);
+			}
 		}
 
 		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
 			listePisteVirageHaut.get(i).enCollisionAvec(voiture);
+			listePisteVirageHaut.get(i).traverserPiste(voiture);
+			if (listePisteVirageHaut.get(i).isCollision() == true) {
+				listePisteVirageHaut.get(i).setColor(Color.blue);
+			} else {
+				listePisteVirageHaut.get(i).setColor(Color.black);
+			}
 		}
 
 		listePisteDeDepart.get(0).enCollisionAvec(voiture);
+		listePisteDeDepart.get(0).traverserPiste(voiture);
+		if (listePisteDeDepart.get(0).isCollision() == true) {
+			listePisteDeDepart.get(0).setColor(Color.blue);
+		} else {
+			listePisteDeDepart.get(0).setColor(Color.black);
+		}
 
 		tourComplet(voiture);
 	}
 
+	/**
+	 * Méthode permettant de savoir si la voiture à fait un tour complet en sachant
+	 * si elle est passée par chaque morceau de piste
+	 * 
+	 * @param voiture La voiture controllée
+	 */
+	// Kevin Nguyen
 	public void tourComplet(Voiture voiture) {
-
-		for (int i = 0; i < listePisteHorizontale.size(); i++) {
-			listePisteHorizontale.get(i).isCollision();
-		}
 		int count = 0;
 		for (int i = 0; i < listePisteHorizontale.size(); i++) {
 			if (listePisteHorizontale.get(i).isCollision() == true) {
@@ -381,36 +426,48 @@ public class Regroupement implements Dessinable {
 		}
 	}
 
+	/**
+	 * Méthode permettant de compter le nombre de tour fait par une voiture et
+	 * réinitialise le boolean de passage de la voiture d'un morceau de piste
+	 */
+	// Kevin Nguyen
 	public void resetTour() {
 
 		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
 			listePisteVirageDroit.get(i).setCollision(false);
+			listePisteVirageDroit.get(i).setColor(Color.black);
 
 		}
 		for (int i = 0; i < listePisteDeDepart.size(); i++) {
 			listePisteDeDepart.get(i).setCollision(false);
+			listePisteDeDepart.get(i).setColor(Color.black);
 		}
 
 		for (int i = 0; i < listePisteHorizontale.size(); i++) {
 			listePisteHorizontale.get(i).setCollision(false);
+			listePisteHorizontale.get(i).setColor(Color.black);
 
 		}
 		for (int i = 0; i < listePisteVerticale.size(); i++) {
 			listePisteVerticale.get(i).setCollision(false);
+			listePisteVerticale.get(i).setColor(Color.black);
 		}
 
 		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
 			listePisteVirageGauche.get(i).setCollision(false);
+			listePisteVirageGauche.get(i).setColor(Color.black);
 		}
 
 		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
 			listePisteVirageHaut.get(i).setCollision(false);
+			listePisteVirageHaut.get(i).setColor(Color.black);
 		}
 
 		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
 			listePisteVirageGauche.get(i).setCollision(false);
+			listePisteVirageGauche.get(i).setColor(Color.black);
 		}
-
+		tour++;
 	}
 
 }

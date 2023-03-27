@@ -61,12 +61,12 @@ public class JeuOptions extends JPanel {
 
 		JPanel PanelApercu = new JPanel();
 		PanelApercu.setBackground(Color.WHITE);
-		PanelApercu.setBounds(10, 200, 649, 489);
+		PanelApercu.setBounds(10, 200, 700, 439);
 		add(PanelApercu);
 		PanelApercu.setLayout(null);
 
 		ZoneApercupiste zoneApercupiste = new ZoneApercupiste();
-		zoneApercupiste.setBounds(0, 0, 650, 405);
+		zoneApercupiste.setBounds(0, 0, 700, 439);
 		PanelApercu.add(zoneApercupiste);
 
 		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");

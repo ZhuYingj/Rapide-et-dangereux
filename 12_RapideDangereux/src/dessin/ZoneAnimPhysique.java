@@ -343,7 +343,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void avancerUnPas() {
 		arreter();
 		calculerUneIterationPhysique();
+		if (regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse()
+				.module(voiture.getVitesse()) > voiture.getVitesseMaxSelonNiveau()) {
+			voiture.setVitesse(new Vecteur2D(
+					voiture.getVitesseMaxSelonNiveau()
+							* Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
+					voiture.getVitesseMaxSelonNiveau()
+							* Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
 
+		}
+		regroupement.enCollisionAvec(voiture);
 		repaint();
 	}
 
@@ -361,6 +370,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.getListePisteDeDepart().get(0).getVoiture().setAngle(0);
 
 		angleVoitureDegre = 0;
+		regroupement.resetTour();
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
 
 		repaint();

@@ -38,18 +38,21 @@ public class PisteMexique {
 	/** Nombre de pixel par metre **/
 	private double pixelsParMetre;
 
+	/** Piste de depart **/
 	private ArrayList<PisteDeDepart> depart = new ArrayList<PisteDeDepart>();
-
+	/** Piste Horizontale **/
 	private ArrayList<PisteHorizontale> horizontale = new ArrayList<PisteHorizontale>();
-
+	/** Piste Verticale **/
 	private ArrayList<PisteVerticale> verticale = new ArrayList<PisteVerticale>();
+	/** Piste Virage Bas **/
 	private ArrayList<PisteVirageBas> bas = new ArrayList<PisteVirageBas>();
+	/** Piste Virage Gauche **/
 	private ArrayList<PisteVirageGauche> gauche = new ArrayList<PisteVirageGauche>();
+	/** Piste Virage Droit **/
 	private ArrayList<PisteVirageDroit> droit = new ArrayList<PisteVirageDroit>();
+	/** Piste Virage Haut **/
 	private ArrayList<PisteVirageHaut> haut = new ArrayList<PisteVirageHaut>();
-
-	private Accelerateur vitesse = new Accelerateur(0, 0);
-	private Colle colle = new Colle(0, 0);
+	
 
 	private TypePiste type = TypePiste.MEXIQUE;
 

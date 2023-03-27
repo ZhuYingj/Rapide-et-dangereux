@@ -26,17 +26,22 @@ public class PisteItalie {
 	private int x;
 	/** Position en y de la piste au complet **/
 	private int y;
-
+	/** Piste de depart **/
 	private ArrayList<PisteDeDepart> depart = new ArrayList<PisteDeDepart>();
-
+	/** Piste Horizontale **/
 	private ArrayList<PisteHorizontale> horizontale = new ArrayList<PisteHorizontale>();
-
+	/** Piste Verticale **/
 	private ArrayList<PisteVerticale> verticale = new ArrayList<PisteVerticale>();
+	/** Piste Virage Bas **/
 	private ArrayList<PisteVirageBas> bas = new ArrayList<PisteVirageBas>();
+	/** Piste Virage Gauche **/
 	private ArrayList<PisteVirageGauche> gauche = new ArrayList<PisteVirageGauche>();
+	/** Piste Virage Droit **/
 	private ArrayList<PisteVirageDroit> droit = new ArrayList<PisteVirageDroit>();
+	/** Piste Virage Haut **/
 	private ArrayList<PisteVirageHaut> haut = new ArrayList<PisteVirageHaut>();
-
+	
+	/** Nombre de pixels par metre **/
 	private double pixelsParMetre;
 
 	public PisteItalie(int x, int y) {
