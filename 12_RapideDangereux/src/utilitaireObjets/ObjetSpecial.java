@@ -1,6 +1,7 @@
 package utilitaireObjets;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -33,7 +34,7 @@ public class ObjetSpecial implements Dessinable {
 		this.positionObjet = pos;
 		this.diametreObjet = diametre;
 		this.type = typeObjet;
-
+		
 	}
 
 	/**
@@ -50,9 +51,11 @@ public class ObjetSpecial implements Dessinable {
 		if (type == TypeObjetSpecial.BOULEDENEIGE) {
 			BouleDeNeige bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet, type);
 			bouleDeNeige.dessiner(g2d);
+			
 		}
 
 	}
+	
 
 	/**
 	 * Méthode permettant d'activer la fonction de l'objet special obtenu

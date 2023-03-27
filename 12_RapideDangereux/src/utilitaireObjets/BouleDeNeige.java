@@ -66,7 +66,6 @@ public class BouleDeNeige extends ObjetSpecial {
 		g2dcop.fill(shapeBoule);
 
 
-
 		bouleDeNeigeAire = new Area(shapeBoule);
 		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
 
