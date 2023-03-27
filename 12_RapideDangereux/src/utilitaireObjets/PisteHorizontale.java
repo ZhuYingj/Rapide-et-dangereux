@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.geom.Rectangle2D;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -19,7 +20,8 @@ import physique.MoteurPhysique;
 
 public class PisteHorizontale implements Dessinable, Selectionnable {
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 80;
+	private int taillePiste = 80;
+
 	/** La position en x du mure de haut **/
 	private int murGauche;
 	/** La position en y du mure de haut **/
@@ -37,7 +39,8 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 	/** Normale du mur bas **/
 	private double angleNormaleMurBas = 270;
 	private Color color = Color.black;
-	private boolean collision  = false;
+	private boolean collision = false;
+	private Rectangle2D.Double formeAire;
 
 	/**
 	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
@@ -52,11 +55,11 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 	public PisteHorizontale(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.murDroite = x + TAILLE_PISTE + 1;
+		this.murDroite = x + taillePiste + 1;
 		this.murGauche = x;
 		this.murHaut = y;
-		this.murBas = y + TAILLE_PISTE;
-
+		this.murBas = y + taillePiste;
+		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
 	/**
@@ -68,13 +71,13 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
 		g2dCopie.setColor(color);
-		g2dCopie.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
+		g2dCopie.fillRect(x, y, taillePiste, taillePiste);
 		g2dCopie.setColor(Color.RED);
 		g2dCopie.setColor(Color.RED);
 		Stroke stroke = new BasicStroke(0.5f);
 		g2dCopie.setStroke(stroke);
-		g2dCopie.drawLine(murGauche, murHaut, x + TAILLE_PISTE - 1, y);
-		g2dCopie.drawLine(murGauche, murBas, x + TAILLE_PISTE - 1, y + TAILLE_PISTE);
+		g2dCopie.drawLine(x, y, x + taillePiste, y);
+		g2dCopie.drawLine(x, y + taillePiste, x + taillePiste, y + taillePiste);
 
 	}
 
@@ -142,12 +145,32 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 
 	}
 
+	public int getTaillePiste() {
+		return taillePiste;
+	}
+
 	public boolean isCollision() {
 		return collision;
 	}
 
 	public void setCollision(boolean collision) {
 		this.collision = collision;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 	public Color getColor() {
@@ -160,8 +183,20 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
-		// TODO Auto-generated method stub
-		return false;
+		if (formeAire.contains(xPix, yPix)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public Rectangle2D.Double getFormeAire() {
+		return formeAire;
+	}
+
+	public void setFormeAire(Rectangle2D.Double formeAire) {
+		this.formeAire = formeAire;
 	}
 
 }

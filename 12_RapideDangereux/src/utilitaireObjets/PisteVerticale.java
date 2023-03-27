@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.geom.Rectangle2D;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -20,10 +21,11 @@ import physique.MoteurPhysique;
 public class PisteVerticale implements Dessinable, Selectionnable {
 
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 80;
+	private int taillePiste = 80;
+
 	/** la position en x de depart que l'objet piste qui vas etre creer **/
 	private int x;
-	/** la position en y de depart que l'objet piste qui vas etre creer  **/
+	/** la position en y de depart que l'objet piste qui vas etre creer **/
 	private int y;
 
 	/** Normale du mur droite **/
@@ -35,73 +37,82 @@ public class PisteVerticale implements Dessinable, Selectionnable {
 	private int murHaut;
 	private int murBas;
 	private boolean collision = false;
-	private Color color   =  Color.black;
-	
+	private Color color = Color.black;
+	private Rectangle2D.Double formeAire;
+
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
 	 * 
-	 * @param x		position en x de la piste
-	 * @param y		position en y de la piste
-	 * @param ligneRougeV1X		position en x du premier mure		
-	 * @param ligneRougeV1Y		position en y du premier mure
-	 * @param ligneRougeV2X		position en x du deuxieme mure
-	 * @param ligneRougeV2Y		position en y du deuxieme mure
+	 * @param x             position en x de la piste
+	 * @param y             position en y de la piste
+	 * @param ligneRougeV1X position en x du premier mure
+	 * @param ligneRougeV1Y position en y du premier mure
+	 * @param ligneRougeV2X position en x du deuxieme mure
+	 * @param ligneRougeV2Y position en y du deuxieme mure
 	 */
 	public PisteVerticale(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.murDroite = x +  TAILLE_PISTE + 1;
-		this.murGauche  =  x + 1;
-		this.murHaut    = y+1;
-		this.murBas   = y + TAILLE_PISTE ;
-
+		this.murDroite = x + taillePiste + 1;
+		this.murGauche = x + 1;
+		this.murHaut = y + 1;
+		this.murBas = y + taillePiste;
+		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
 	/**
-	 * Methode qui permet de dessiner la piste verticale sur la zone d'animation a l'aide de g2d
+	 * Methode qui permet de dessiner la piste verticale sur la zone d'animation a
+	 * l'aide de g2d
 	 */
 	@Override
 	public void dessiner(Graphics2D g2d) {
-	g2d.setColor(color);
-	g2d.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
-	g2d.setColor(Color.RED);
-	Stroke stroke = new BasicStroke(0.5f);
-	g2d.setStroke(stroke);
-	g2d.drawLine(x, y +1, x, y + TAILLE_PISTE -1);
-	g2d.drawLine(x + TAILLE_PISTE, y+1, x + TAILLE_PISTE, y + TAILLE_PISTE-1);
+		g2d.setColor(color);
+		g2d.fillRect(x, y, taillePiste, taillePiste);
+		g2d.setColor(Color.RED);
+		Stroke stroke = new BasicStroke(0.5f);
+		g2d.setStroke(stroke);
+		g2d.drawLine(x, y + 1, x, y + taillePiste - 1);
+		g2d.drawLine(x + taillePiste, y + 1, x + taillePiste, y + taillePiste - 1);
 
 	}
-	
+
 	public void enCollisionAvec(Voiture voiture) {
 
-		if(voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas  ) {
-			if(voiture.getPosition().getX() < murGauche + 1) {
+		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+			if (voiture.getPosition().getX() < murGauche + 1) {
 				try {
-					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurGauche);
+					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(),
+							angleNormaleMurGauche);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setX(murGauche + 1);
 					System.out.println("en collisionV");
-					if(Math.toDegrees(voiture.getAngle()) < 270  && Math.toDegrees(voiture.getAngle()) > 180 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + ((270 - Math.toDegrees(voiture.getAngle()))* 2 )));
+					if (Math.toDegrees(voiture.getAngle()) < 270 && Math.toDegrees(voiture.getAngle()) > 180) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) + ((270 - Math.toDegrees(voiture.getAngle())) * 2)));
 						System.out.println(Math.toDegrees(voiture.getAngle()));
-					} else if (Math.toDegrees(voiture.getAngle()) > 90  && Math.toDegrees(voiture.getAngle()) < 180 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle())-90) * 2)));
+					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 90) * 2)));
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}   else if(voiture.getPosition().getX() > murDroite - voiture.getDiametre()) {
+			} else if (voiture.getPosition().getX() > murDroite - voiture.getDiametre()) {
 				try {
-					Vecteur2D vit =	MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(), angleNormaleMurDroite);
+					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(),
+							angleNormaleMurDroite);
 					voiture.setVitesse(vit);
-					voiture.getPosition().setX(murDroite- voiture.getDiametre());
+					voiture.getPosition().setX(murDroite - voiture.getDiametre());
 					System.out.println("en collisionV");
-					if(Math.toDegrees(voiture.getAngle()) < 90  && Math.toDegrees(voiture.getAngle()) > 0 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + ((90 - Math.toDegrees(voiture.getAngle()))* 2 )));
-					} else if (Math.toDegrees(voiture.getAngle()) > 270  && Math.toDegrees(voiture.getAngle()) < 360 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle())-270) * 2)));
-					
+					if (Math.toDegrees(voiture.getAngle()) < 90 && Math.toDegrees(voiture.getAngle()) > 0) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) + ((90 - Math.toDegrees(voiture.getAngle())) * 2)));
+					} else if (Math.toDegrees(voiture.getAngle()) > 270 && Math.toDegrees(voiture.getAngle()) < 360) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 270) * 2)));
+
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -109,21 +120,20 @@ public class PisteVerticale implements Dessinable, Selectionnable {
 				}
 			}
 		}
-}
+	}
+
 	public void traverserPiste(Voiture voiture) {
-		if(voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite  && voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas )  {
+		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
 			setCollision(true);
 
-			
-		
-		} 
-		
+		}
+
 	}
 
 	public boolean isCollision() {
-		return collision ;
+		return collision;
 	}
-
 
 	public void setCollision(boolean collision) {
 		this.collision = collision;
@@ -131,13 +141,48 @@ public class PisteVerticale implements Dessinable, Selectionnable {
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
-		// TODO Auto-generated method stub
-		return false;
+
+		if (formeAire.contains(xPix, yPix)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-		public void setColor(Color color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 
-	
+	public int getTaillePiste() {
+		return taillePiste;
+	}
+
+	public void setTaillePiste(int taillePiste) {
+		this.taillePiste = taillePiste;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public Rectangle2D.Double getFormeAire() {
+		return formeAire;
+	}
+
+	public void setFormeAire(Rectangle2D.Double formeAire) {
+		this.formeAire = formeAire;
+	}
+
 }

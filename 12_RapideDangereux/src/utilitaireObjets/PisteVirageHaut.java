@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.geom.Path2D.Double;
 
 import geometrie.Vecteur2D;
@@ -22,7 +23,7 @@ import physique.MoteurPhysique;
 
 public class PisteVirageHaut implements Dessinable, Selectionnable {
 
-	private static final int TAILLE_PISTE = 80;
+	private int taillePiste = 80;
 
 	private int x;
 	private int y;
@@ -41,7 +42,8 @@ public class PisteVirageHaut implements Dessinable, Selectionnable {
 	/** Initialise l'aire du triangle **/
 	private Area aireTriangle;
 	private boolean collision = false;
-	private Color color   =  Color.black;
+	private Color color = Color.black;
+	private Rectangle2D.Double formeAire;
 
 	/**
 	 * Methode qui permet de construire la piste virage haut a l'aide de parametres
@@ -53,11 +55,11 @@ public class PisteVirageHaut implements Dessinable, Selectionnable {
 	public PisteVirageHaut(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.murDroite = x + TAILLE_PISTE + 1;
+		this.murDroite = x + taillePiste + 1;
 		this.murGauche = x + 1;
 		this.murHaut = y + 1;
-		this.murBas = y + TAILLE_PISTE + 1;
-
+		this.murBas = y + taillePiste + 1;
+		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
 	/**
@@ -68,21 +70,20 @@ public class PisteVirageHaut implements Dessinable, Selectionnable {
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
-		g2d.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
+		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);
 		Stroke stroke = new BasicStroke(0.5f);
 		g2d.setStroke(stroke);
-		g2d.drawLine(x, y, x, y + (TAILLE_PISTE / 3));
-		g2d.drawLine(x, y + (TAILLE_PISTE / 3), x + (TAILLE_PISTE / 3), y + ((TAILLE_PISTE / 3) * 2));
-		g2d.drawLine(x + (TAILLE_PISTE / 3), y + ((TAILLE_PISTE / 3) * 2), x + ((TAILLE_PISTE / 3) * 2),
-				y + TAILLE_PISTE);
-		g2d.drawLine(x + ((TAILLE_PISTE / 3) * 2), y + TAILLE_PISTE, x + TAILLE_PISTE, y + TAILLE_PISTE);
-		// g2d.fillRect(x+TAILLE_PISTE, y, -3-3);
+		g2d.drawLine(x, y, x, y + (taillePiste / 3));
+		g2d.drawLine(x, y + (taillePiste / 3), x + (taillePiste / 3), y + ((taillePiste / 3) * 2));
+		g2d.drawLine(x + (taillePiste / 3), y + ((taillePiste / 3) * 2), x + ((taillePiste / 3) * 2), y + taillePiste);
+		g2d.drawLine(x + ((taillePiste / 3) * 2), y + taillePiste, x + taillePiste, y + taillePiste);
+		// g2d.fillRect(x+taillePiste, y, -3-3);
 
 		triangle = new Path2D.Double();
-		triangle.moveTo(x, y + TAILLE_PISTE);
-		triangle.lineTo(x, y + (TAILLE_PISTE / 3));
-		triangle.lineTo(x + ((TAILLE_PISTE / 3) * 2), y + TAILLE_PISTE);
+		triangle.moveTo(x, y + taillePiste);
+		triangle.lineTo(x, y + (taillePiste / 3));
+		triangle.lineTo(x + ((taillePiste / 3) * 2), y + taillePiste);
 		triangle.closePath();
 		g2d.fill(triangle);
 
@@ -104,11 +105,13 @@ public class PisteVirageHaut implements Dessinable, Selectionnable {
 							angleNormaleMurGauche);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setX(murGauche + 1);
-					if(Math.toDegrees(voiture.getAngle()) < 270  && Math.toDegrees(voiture.getAngle()) > 180 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + ((270 - Math.toDegrees(voiture.getAngle()))* 2 )));
+					if (Math.toDegrees(voiture.getAngle()) < 270 && Math.toDegrees(voiture.getAngle()) > 180) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) + ((270 - Math.toDegrees(voiture.getAngle())) * 2)));
 						System.out.println(Math.toDegrees(voiture.getAngle()));
-					} else if (Math.toDegrees(voiture.getAngle()) > 90  && Math.toDegrees(voiture.getAngle()) < 180 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle())-90) * 2)));
+					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 90) * 2)));
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -120,11 +123,14 @@ public class PisteVirageHaut implements Dessinable, Selectionnable {
 							angleNormaleMurBas);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setY(murBas - voiture.getDiametre());
-					if(Math.toDegrees(voiture.getAngle()) < 90  && Math.toDegrees(voiture.getAngle()) > 0 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
-					} else if (Math.toDegrees(voiture.getAngle()) > 90  && Math.toDegrees(voiture.getAngle()) < 180 ) {
-						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle()) + ((360 -(Math.toDegrees(voiture.getAngle())) * 2))));
-						System.out.println(Math.toDegrees(voiture.getAngle()) + (360 -(Math.toDegrees(voiture.getAngle()) * 2)));
+					if (Math.toDegrees(voiture.getAngle()) < 90 && Math.toDegrees(voiture.getAngle()) > 0) {
+						voiture.setAngle(Math.toRadians(
+								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
+					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
+						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle())
+								+ ((360 - (Math.toDegrees(voiture.getAngle())) * 2))));
+						System.out.println(
+								Math.toDegrees(voiture.getAngle()) + (360 - (Math.toDegrees(voiture.getAngle()) * 2)));
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -181,7 +187,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
+
 	/**
 	 * Retourne l'aire du triangle
 	 * 
@@ -213,8 +219,43 @@ public class PisteVirageHaut implements Dessinable, Selectionnable {
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
-		// TODO Auto-generated method stub
-		return false;
+		if (formeAire.contains(xPix, yPix)) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
+	public int getTaillePiste() {
+		return taillePiste;
+	}
+
+	public void setTaillePiste(int taillePiste) {
+		this.taillePiste = taillePiste;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public Rectangle2D.Double getFormeAire() {
+		return formeAire;
+	}
+
+	public void setFormeAire(Rectangle2D.Double formeAire) {
+		this.formeAire = formeAire;
+	}
 }

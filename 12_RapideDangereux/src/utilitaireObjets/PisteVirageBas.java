@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import geometrie.Vecteur2D;
@@ -23,12 +24,14 @@ import physique.MoteurPhysique;
  *
  */
 
-public class PisteVirageBas implements Dessinable, Selectionnable, MouseListener, MouseMotionListener {
+public class PisteVirageBas implements Dessinable, Selectionnable {
 
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 80;
+	private int taillePiste = 80;
+
 	/** la position en x de depart que l'objet piste qui vas etre creer **/
 	private int x;
+
 	/** la position en y de depart que l'objet piste qui vas etre creer **/
 	private int y;
 	private int murDroite;
@@ -45,34 +48,35 @@ public class PisteVirageBas implements Dessinable, Selectionnable, MouseListener
 	/** Initialise l'aire du triangle **/
 	private Area aireTriangle;
 	private boolean collision = false;
-	private Color color   =  Color.black;
+	private Color color = Color.black;
+	private Rectangle2D.Double formeAire;
 
 	public PisteVirageBas(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.murDroite = x + TAILLE_PISTE + 1;
+		this.murDroite = x + taillePiste + 1;
 		this.murGauche = x + 1;
 		this.murHaut = y + 1;
-		this.murBas = y + TAILLE_PISTE + 1;
-
+		this.murBas = y + taillePiste + 1;
+		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
-		g2d.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
+		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);
 		Stroke stroke = new BasicStroke(0.5f);
 		g2d.setStroke(stroke);
-		g2d.drawLine(x + ((TAILLE_PISTE / 3) * 2), y, x + TAILLE_PISTE - 1, y);
-		g2d.drawLine(x + ((TAILLE_PISTE / 3)), y + ((TAILLE_PISTE / 3)), x + ((TAILLE_PISTE / 3) * 2), y);
-		g2d.drawLine(x, y + ((TAILLE_PISTE / 3) * 2), x + (TAILLE_PISTE / 3), y + (TAILLE_PISTE / 3));
-		g2d.drawLine(x, y + TAILLE_PISTE - 1, x, y + ((TAILLE_PISTE / 3) * 2));
+		g2d.drawLine(x + ((taillePiste / 3) * 2), y, x + taillePiste - 1, y);
+		g2d.drawLine(x + ((taillePiste / 3)), y + ((taillePiste / 3)), x + ((taillePiste / 3) * 2), y);
+		g2d.drawLine(x, y + ((taillePiste / 3) * 2), x + (taillePiste / 3), y + (taillePiste / 3));
+		g2d.drawLine(x, y + taillePiste - 1, x, y + ((taillePiste / 3) * 2));
 
 		triangle = new Path2D.Double();
 		triangle.moveTo(x, y);
-		triangle.lineTo(x + ((TAILLE_PISTE / 3) * 2), y);
-		triangle.lineTo(x, y + ((TAILLE_PISTE / 3) * 2));
+		triangle.lineTo(x + ((taillePiste / 3) * 2), y);
+		triangle.lineTo(x, y + ((taillePiste / 3) * 2));
 		triangle.closePath();
 		g2d.fill(triangle);
 
@@ -87,6 +91,10 @@ public class PisteVirageBas implements Dessinable, Selectionnable, MouseListener
 	 */
 	public Area getAireTriangle() {
 		return aireTriangle;
+	}
+
+	public int getTaillePiste() {
+		return taillePiste;
 	}
 
 	public void enCollisionAvec(Voiture voiture) {
@@ -157,7 +165,6 @@ public class PisteVirageBas implements Dessinable, Selectionnable, MouseListener
 		}
 	}
 
-
 	public void traverserPiste(Voiture voiture) {
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
@@ -165,6 +172,14 @@ public class PisteVirageBas implements Dessinable, Selectionnable, MouseListener
 
 		}
 
+	}
+
+	public Rectangle2D.Double getFormeAire() {
+		return formeAire;
+	}
+
+	public void setFormeAire(Rectangle2D.Double formeAire) {
+		this.formeAire = formeAire;
 	}
 
 	public boolean isCollision() {
@@ -183,47 +198,29 @@ public class PisteVirageBas implements Dessinable, Selectionnable, MouseListener
 		this.color = color;
 	}
 
-	
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
 	@Override
 	public boolean contient(double xPix, double yPix) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public void mousePressed(MouseEvent e) {
-		x = e.getX();
-		y = e.getY();
-
-		System.out.println("tperhesrh");
-	}
-
-	public void mouseDragged(MouseEvent e) {
-//		e.getComponent().setLocation((e.getX() + e.getComponent().getX()) - x,
-//				(e.getY() + e.getComponent().getY()) - y);
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		System.out.println("tperhesrh");
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
+		if (formeAire.contains(xPix, yPix)) {
+			return true;
+		} else {
+			return false;
+		}
 
 	}
 

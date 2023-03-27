@@ -22,16 +22,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 
 /**
- * Classe qui permet de crée un panel composé d'objet
+ * Classe qui permet de crée un panel composé d'objet. Ce panel servira de
+ * visuel pour les objets
  * 
  * @author Tan Tommy Rin
  *
  */
 
 public class PanelObjet extends JPanel {
-	private int XOBJET = 75;
-	private int YOBJET = 20;
-	private int X, Y;
+	public PanelObjet() {
+	}
+	private int xObjet = 75;
+	private int yObjet = 20;
 	private BlocMystere blocMystere;
 	private PisteDeDepart pisteDeDepart;
 	private PisteHorizontale pisteHorizontale;
@@ -41,15 +43,6 @@ public class PanelObjet extends JPanel {
 	private PisteVirageGauche pisteVirageGauche;
 	private PisteVirageHaut pisteVirageHaut;
 	private Accelerateur accelerateur;
-	private boolean selectionObjet = false;
-	private double xPrecedent, yPrecedent;
-
-	/**
-	 * Creation de la fenetre.
-	 */
-	public PanelObjet() {
-
-	}
 
 	/**
 	 * Méthode permettant de dessiner sur la fenetre
@@ -58,16 +51,16 @@ public class PanelObjet extends JPanel {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 
-		blocMystere = new BlocMystere(75, new Vecteur2D(XOBJET, YOBJET));
-		pisteDeDepart = new PisteDeDepart(XOBJET * 3, YOBJET);
-		pisteDeDepart.getVoiture().getPosition().setX(XOBJET * 2.5);
-		pisteHorizontale = new PisteHorizontale(XOBJET, YOBJET * 7);
-		pisteVerticale = new PisteVerticale(XOBJET * 3, YOBJET * 7);
-		pisteVirageBas = new PisteVirageBas(XOBJET, YOBJET * 14);
-		pisteVirageDroit = new PisteVirageDroit(XOBJET * 3, YOBJET * 14);
-		pisteVirageGauche = new PisteVirageGauche(XOBJET, YOBJET * 21);
-		pisteVirageHaut = new PisteVirageHaut(XOBJET * 3, YOBJET * 21);
-		accelerateur = new Accelerateur(XOBJET, YOBJET * 28);
+		blocMystere = new BlocMystere(75, new Vecteur2D(xObjet, yObjet));
+		pisteDeDepart = new PisteDeDepart(xObjet * 3, yObjet);
+		pisteDeDepart.getVoiture().getPosition().setX(xObjet * 2.5);
+		pisteHorizontale = new PisteHorizontale(xObjet, yObjet * 7);
+		pisteVerticale = new PisteVerticale(xObjet * 3, yObjet * 7);
+		pisteVirageBas = new PisteVirageBas(xObjet, yObjet * 14);
+		pisteVirageDroit = new PisteVirageDroit(xObjet * 3, yObjet * 14);
+		pisteVirageGauche = new PisteVirageGauche(xObjet, yObjet * 21);
+		pisteVirageHaut = new PisteVirageHaut(xObjet * 3, yObjet * 21);
+		accelerateur = new Accelerateur(xObjet, yObjet * 28);
 
 		pisteDeDepart.dessiner(g2d);
 		blocMystere.dessiner(g2d);

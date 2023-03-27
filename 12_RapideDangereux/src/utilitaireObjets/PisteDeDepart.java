@@ -21,7 +21,7 @@ import physique.MoteurPhysique;
 public class PisteDeDepart implements Dessinable, Selectionnable {
 
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 80;
+	private int taillePiste = 80;
 
 	/** la position en x de depart que l'objet piste vas etre creer **/
 	private int x;
@@ -37,7 +37,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	private int murBas;
 	private boolean collision = false;
 	private Color color = Color.black;
-
+	private Rectangle2D.Double formeAire;
 	private Voiture voiture;
 
 	/**
@@ -53,11 +53,12 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	public PisteDeDepart(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.murDroite = x + TAILLE_PISTE;
+		this.murDroite = x + taillePiste;
 		this.murGauche = x;
 		this.murHaut = y;
-		this.murBas = y + TAILLE_PISTE;
-		voiture = new Voiture(new Vecteur2D(x + TAILLE_PISTE/4, y  + TAILLE_PISTE/4), Color.yellow, 50, 16, 0, 50);
+		this.murBas = y + taillePiste;
+		voiture = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste / 4), Color.yellow, 50, 16, 0, 50);
+		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
 	/**
@@ -67,26 +68,22 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
-		g2d.fillRect(x, y, TAILLE_PISTE, TAILLE_PISTE);
+		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);
 		g2d.setColor(Color.RED);
 		Stroke stroke1 = new BasicStroke(0.5f);
 		g2d.setStroke(stroke1);
-		g2d.drawLine(x + 1, y, x + TAILLE_PISTE - 1, y);
-		g2d.drawLine(x + 1, y + TAILLE_PISTE, x + TAILLE_PISTE - 1, y + TAILLE_PISTE);
+		g2d.drawLine(x + 1, y, x + taillePiste - 1, y);
+		g2d.drawLine(x + 1, y + taillePiste, x + taillePiste - 1, y + taillePiste);
 
 		g2d.setColor(Color.WHITE);
 		Stroke stroke0 = new BasicStroke(5f);
 		g2d.setStroke(stroke0);
-		g2d.drawLine(x + (TAILLE_PISTE / 2), y + (TAILLE_PISTE / 7), x + (TAILLE_PISTE / 2),
-				y + ((TAILLE_PISTE / 7) * 2));
-		g2d.drawLine(x + (TAILLE_PISTE / 2), y + ((TAILLE_PISTE / 7) * 3), x + (TAILLE_PISTE / 2),
-				y + ((TAILLE_PISTE / 7) * 4));
-		g2d.drawLine(x + (TAILLE_PISTE / 2), y + ((TAILLE_PISTE / 7) * 5), x + (TAILLE_PISTE / 2),
-				y + ((TAILLE_PISTE / 7) * 6));
-
-//		Ellipse2D a = new Ellipse2D.Double(x, y, 50, 50);
-//		g2d.draw(a);
+		g2d.drawLine(x + (taillePiste / 2), y + (taillePiste / 7), x + (taillePiste / 2), y + ((taillePiste / 7) * 2));
+		g2d.drawLine(x + (taillePiste / 2), y + ((taillePiste / 7) * 3), x + (taillePiste / 2),
+				y + ((taillePiste / 7) * 4));
+		g2d.drawLine(x + (taillePiste / 2), y + ((taillePiste / 7) * 5), x + (taillePiste / 2),
+				y + ((taillePiste / 7) * 6));
 
 		voiture.dessiner(g2d);
 
@@ -156,7 +153,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 	}
 
 	public boolean resetTout(Voiture voiture) {
-		if (voiture.getPosition().getX()  > murGauche + voiture.getDiametre() && voiture.getPosition().getX() < murDroite
+		if (voiture.getPosition().getX() > murGauche + voiture.getDiametre() && voiture.getPosition().getX() < murDroite
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
 			return true;
 		} else {
@@ -182,8 +179,12 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
+		if (formeAire.contains(xPix, yPix)) {
+			return true;
+		} else {
+			return false;
+		}
 
-		return true;
 	}
 
 	public Voiture getVoiture() {
@@ -192,6 +193,38 @@ public class PisteDeDepart implements Dessinable, Selectionnable {
 
 	public void setVoiture(Voiture voiture) {
 		this.voiture = voiture;
+	}
+
+	public int getTaillePiste() {
+		return taillePiste;
+	}
+
+	public void setTaillePiste(int taillePiste) {
+		this.taillePiste = taillePiste;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public Rectangle2D.Double getFormeAire() {
+		return formeAire;
+	}
+
+	public void setFormeAire(Rectangle2D.Double formeAire) {
+		this.formeAire = formeAire;
 	}
 
 }

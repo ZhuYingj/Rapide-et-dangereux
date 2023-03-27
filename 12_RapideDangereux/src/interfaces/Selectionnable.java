@@ -1,23 +1,23 @@
 package interfaces;
 
 /**
- * Interface qui définit la méthode qu'un objet doit implémenter pour pouvoir
- * être sélectionné 
- *  
+ * Interface qui dï¿½finit la mï¿½thode qu'un objet doit implï¿½menter pour pouvoir
+ * ï¿½tre sï¿½lectionnï¿½
+ * 
  * @author Caroline Houle
  *
  */
 
 public interface Selectionnable {
-	
+
 	/**
-	 * Retourne vrai si le point passé en paramètre fait partie de l'objet dessinable
-	 * sur lequel cette methode sera appelée
+	 * Retourne vrai si le point passï¿½ en paramï¿½tre fait partie de l'objet
+	 * dessinable sur lequel cette methode sera appelï¿½e
 	 * 
 	 * 
-	 * @param xPix Coordonnée en x du point (exprimé en pixels) 
-	 * @param yPix Coordonnée en y du point (exprimé en pixels)
+	 * @param xPix Coordonnï¿½e en x du point (exprimï¿½ en pixels)
+	 * @param yPix Coordonnï¿½e en y du point (exprimï¿½ en pixels)
 	 */
 	public boolean contient(double xPix, double yPix);
-	
+
 }
