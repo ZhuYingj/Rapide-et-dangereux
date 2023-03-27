@@ -124,7 +124,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionFenOptions(evt, fenJeuScience, fenOptions);
+				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience);
 			}
 		});
 
@@ -165,7 +165,8 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenOptions    la fenetre de jeu d'options
 	 */
 	// Par Tan Tommy Rin
-	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions) {
+	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
+			FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
 
 		case "COMMENCER!":
@@ -177,18 +178,23 @@ public class AppPrincipale12 extends JFrame {
 			break;
 		case "MASSE":
 			fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
 			break;
 		case "VITESSEMAXFACILE":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			break;
 		case "VITESSEMAXINTERMEDIAIRE":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			break;
 		case "VITESSEMAXAVANCE":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			break;
 		case "TYPEPISTE":
 			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			break;
 		}
 	}
@@ -384,7 +390,6 @@ public class AppPrincipale12 extends JFrame {
 		fenJeuScience.getZoneAnimPhysique().requestFocusInWindow();
 
 		checkBoxModeNonScientifique.setEnabled(true);
-		fenSansScience.setZoneAnimPhysique(fenJeuScience.getZoneAnimPhysique());
 		pushingP(fenSansScience);
 
 	}
@@ -403,7 +408,7 @@ public class AppPrincipale12 extends JFrame {
 		fenSansScience.setVisible(false);
 		fenJeuScience.setVisible(true);
 		setContentPane(fenJeuScience);
-		fenJeuScience.setZoneAnimPhysique(fenSansScience.getZoneAnimPhysique());
+
 	}
 
 	/**

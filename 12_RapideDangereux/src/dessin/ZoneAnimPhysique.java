@@ -343,8 +343,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void avancerUnPas() {
 		arreter();
 		calculerUneIterationPhysique();
-		if (regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse()
-				.module(voiture.getVitesse()) > voiture.getVitesseMaxSelonNiveau()) {
+		if (regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module(voiture.getVitesse()) > voiture
+				.getVitesseMaxSelonNiveau()) {
 			voiture.setVitesse(new Vecteur2D(
 					voiture.getVitesseMaxSelonNiveau()
 							* Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
@@ -585,10 +585,23 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		this.testFrottement = testFrottement;
 	}
 
+	/**
+	 * Méthode qui permet de retourner le type de piste
+	 * 
+	 * @return le type de piste
+	 */
+	// Par Tan Tommy Rin
 	public TypePiste getTypePiste() {
 		return typePiste;
 	}
 
+	/**
+	 * Méthode qui change le type de piste et change tous les listes des morceaux
+	 * par ceux de la piste choisi
+	 * 
+	 * @param typePiste le type de piste voulu
+	 */
+	// Par Tan Tommy Rin
 	public void setTypePiste(TypePiste typePiste) {
 		this.typePiste = typePiste;
 		regroupement.setType(typePiste);
