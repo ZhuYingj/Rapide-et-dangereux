@@ -14,9 +14,15 @@ import interfaces.Selectionnable;
 import interfaces.TypeObjetSpecial;
 import physique.MoteurPhysique;
 
+/**
+ * Classe qui crée et gère tous ce qui de la boule de neige
+ * 
+ * @author Alexis Pineda-Alvarado
+ *
+ */
+
 public class BouleDeNeige extends ObjetSpecial {
 	private double diametre;
-	private Vecteur2D posInt;
 	private Ellipse2D.Double boule;
 	private double pixelsParMetre;
 	private Vecteur2D vitesse = new Vecteur2D(100, 0); // par defaut
@@ -28,18 +34,28 @@ public class BouleDeNeige extends ObjetSpecial {
 	private Area bouleDeNeigeAireCopie;
 	private Area aireVoiture;
 	private Area aireVoiture1;
-	private ZoneAnimPhysique zoneAnim;
-	private MoteurPhysique motPhys;
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.BOULEDENEIGE;
 	private boolean contactBouleNeige = true;
 	private Vecteur2D position;
 
+	
+	/**
+	 * Méthode qui crée la boule de neige
+	 * 
+	 * @param pos			le positionnement de la boule de neige
+	 * @param diametre		le diametre de la boule de neige
+	 * @param typeObjet		le type d'objet spéciale
+	 */
+	//Alexis Pineda-Alvarado
 	public BouleDeNeige(Vecteur2D pos, double diametre, TypeObjetSpecial typeObjet) {
 		super(pos, diametre, typeObjet);
 		this.position = super.getPositionObjet();
 	}
 
-	@Override
+	/**
+	 * Méthode qui dessine la boule de neige
+	 */
+	//Alexis Pineda-Alvarado
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dcop = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
@@ -54,7 +70,14 @@ public class BouleDeNeige extends ObjetSpecial {
 		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
 
 	}
-
+	/**
+	 * 
+	 * méthode qui détecte la collision de la voiture et la boule de neige
+	 * 
+	 * @param v	ceci est la valeur de la voiture
+	 * @return	la valeur de la collision en true or false
+	 */
+	//Alexis Pineda-Alvarado
 	public boolean collisionDeLaBalle(Voiture v) {
 		this.voiture = v;
 
@@ -70,18 +93,14 @@ public class BouleDeNeige extends ObjetSpecial {
 		return contactBouleNeige;
 	}
 
+	/**
+	 * Méthode qui gére le déplacement de la boule de neige
+	 * 
+	 */
 	public void deplacementBoule() {
 
 	}
-
-//	public void ralentissementVoiture(Voiture v) {
-//		System.out.println("SLOW DOWN!!!");
-//		Vecteur2D voitureSlow = new Vecteur2D();
-//		voitureSlow = MoteurPhysique.calculerForceFrottement(5.00, voiture.getMasseEnKg(), voiture.getAngle());
-//		v.setSommeDesForces(voitureSlow);
-//		System.out.println(voitureSlow);
-//
-//	}
+	
 
 	/**
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
@@ -135,14 +154,6 @@ public class BouleDeNeige extends ObjetSpecial {
 
 	public void setShapeBoule(Shape shapeBoule) {
 		this.shapeBoule = shapeBoule;
-	}
-
-	public boolean isGood() {
-		return good;
-	}
-
-	public void setGood(boolean good) {
-		this.good = good;
 	}
 
 	public TypeObjetSpecial getTypeObjet() {

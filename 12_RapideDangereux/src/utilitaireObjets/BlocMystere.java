@@ -80,13 +80,11 @@ public class BlocMystere implements Dessinable, Selectionnable {
 		}
 		if (enContact == true) {
 			dessiner(gTempo);
-
 			return true;
 
 		} else {
 			return false;
 		}
-
 	}
 
 	/**

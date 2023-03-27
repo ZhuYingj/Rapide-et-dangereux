@@ -193,9 +193,9 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
 	 * à la fenetre du menu et la fenetre mde de jeu
 	 * 
-	 * @param evt
-	 * @param fenMenu
-	 * @param fenModeJeu
+	 * @param evt			evenement
+	 * @param fenMenu		la fenêtre du menu 
+	 * @param fenModeJeu	la fenêtre du mode de jeu a choisir qui va être activé
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionChangeModeJeu(PropertyChangeEvent evt, FenetreMenu fenMenu, ModeDeJeu fenModeJeu) {
@@ -211,9 +211,9 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui permet de retourner au panel précédent selon des levés
 	 * d'évènements liés entre la fenetre menu et celui du mode de jeu
 	 * 
-	 * @param evt
-	 * @param fenMenu
-	 * @param fenModeJeu
+	 * @param evt			evenement
+	 * @param fenMenu		la fenêtre du menu qui va être activé
+	 * @param fenModeJeu	la fenêtre du mode de jeu a choisir
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourMenu(PropertyChangeEvent evt, FenetreMenu fenMenu, ModeDeJeu fenModeJeu) {
@@ -233,9 +233,9 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui change de la fenetre mode de jeu à la fenetre du mode éditeur
 	 * avec les levés d'évenements
 	 * 
-	 * @param evt
-	 * @param fenModeJeu
-	 * @param fenEditeur
+	 * @param evt			evenement
+	 * @param fenModeJeu	la fenêtre du mode de jeu a choisir
+	 * @param fenEditeur	fenêtre du mode editeur qui est activé
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionChangeEditeur(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur) {
@@ -254,9 +254,9 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui permet de retourner au panel précédent selon des levés
 	 * d'évènements liés entre la fenetre du mod de jeu et celui du mode éditeur
 	 * 
-	 * @param evt
-	 * @param fenModeJeu
-	 * @param fenEditeur
+	 * @param evt			evenement
+	 * @param fenModeJeu	la fenêtre du mode de jeu a choisir qui est activé
+	 * @param fenEditeur	fenêtre du mode editeur
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourModeJeu1(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur) {
@@ -275,9 +275,9 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui change de la fenetre mode de jeu à la fenetre options avec les
 	 * levés d'évenements
 	 * 
-	 * @param evt
-	 * @param fenModeJeu
-	 * @param fenOptions
+	 * @param evt			evenement
+	 * @param fenModeJeu	la fenêtre du mode de jeu a choisir
+	 * @param fenOptions	fenêtre des options du jeu qui va être activé
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionChangeOption(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, JeuOptions fenOptions) {
@@ -296,9 +296,9 @@ public class AppPrincipale12 extends JFrame {
 	 * d'évènements liés entre la fenetre du mode de jeu et celui de la fenetre des
 	 * options
 	 * 
-	 * @param evt
-	 * @param fenModeJeu
-	 * @param fenOptions
+	 * @param evt			evenement
+	 * @param fenModeJeu	la fenêtre du mode de jeu a choisir qui va être acrivé
+	 * @param fenOptions	fenêtre des options du jeu
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourModeJeu2(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, JeuOptions fenOptions) {
@@ -316,9 +316,9 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui permet de retourner au panel précédent selon des levés
 	 * d'évènements liés entre la fenetre du jeu et celui de la fenetre des options
 	 * 
-	 * @param evt
-	 * @param fenJeuScience
-	 * @param fenOptions
+	 * @param evt			evenement
+	 * @param fenJeuScience		fenêtre du jeu avec les paramètres scientifiques
+	 * @param fenOptions	fenêtre des options du jeu qui va être activé
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience,
@@ -345,9 +345,9 @@ public class AppPrincipale12 extends JFrame {
 	 * d'évènements liés entre la fenetre du jeu sans les parametres scientifique et
 	 * celui de la fenetre des options
 	 * 
-	 * @param evt
-	 * @param fenSansScience
-	 * @param fenOptions
+	 * @param evt			evenement
+	 * @param fenSansScience	fenêtre du jeu sans les paramètres scientifiques
+	 * @param fenOptionsfenêtre des options du jeu qui va être activé
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourOptions2(PropertyChangeEvent evt, FenetreJeuSansScientifique fenSansScience,
@@ -367,8 +367,8 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui permet de changer de la fenetre du jeu avec les paremetres
 	 * scientifiques avec la fenetre du jeu sans les paramatres scientifique
 	 * 
-	 * @param fenSansScience
-	 * @param fenJeuScience
+	 * @param fenSansScience	fenêtre du jeu sans les paramètres scientifiques
+	 * @param fenJeuScience		fenêtre du jeu avec les paramètres scientifiques
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionChangeDesTypeJeu(FenetreJeuSansScientifique fenSansScience,
@@ -389,8 +389,8 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui permet de changer de la fenetre du jeu avec sans les paremetres
 	 * scientifiques avec la fenetre du jeu avec les paramatres scientifique
 	 * 
-	 * @param fenSansScience
-	 * @param fenJeuScience
+	 * @param fenSansScience	fenêtre du jeu sans les paramètres scientifiques
+	 * @param fenJeuScience		fenêtre du jeu avec les paramètres scientifiques
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourDesTypeJeu(FenetreJeuSansScientifique fenSansScience,
