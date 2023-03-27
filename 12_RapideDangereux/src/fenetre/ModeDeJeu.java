@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import dessin.ZoneAnimPhysique;
 
 /**
+ * Classe qui crée la fenêtre pour choisir les modes de jeux
  * 
  * @author Alexis Pineda-Alvarado
  *
@@ -51,6 +52,11 @@ public class ModeDeJeu extends JPanel {
 		add(btnMonde);
 
 		btnCourseMontre = new JButton("COURSE CONTRE LA MONTRE");
+		btnCourseMontre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("COURSE CONTRE LA MONTRE", 0, -1);
+			}
+		});
 		btnCourseMontre.setForeground(Color.BLACK);
 		btnCourseMontre.setBounds(346, 319, 227, 49);
 		add(btnCourseMontre);

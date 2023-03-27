@@ -26,9 +26,11 @@ import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
 
 /**
+ * Classe qui crée la fenêtre pour choisir les paramètres pour le mode de jeu
+ * Monde
  * 
  * @author Alexis Pineda-Alvarado
- * @author Ludovic Julien
+ * 
  */
 
 public class JeuOptions extends JPanel {
@@ -181,6 +183,18 @@ public class JeuOptions extends JPanel {
 		rdbtnDifficile.setBounds(165, 131, 109, 23);
 		panel_1.add(rdbtnDifficile);
 		buttonGroupDiff.add(rdbtnDifficile);
+		
+		JLabel lblVitesseFacile = new JLabel("60 m/s");
+		lblVitesseFacile.setBounds(280, 84, 46, 14);
+		panel_1.add(lblVitesseFacile);
+		
+		JLabel lblVitesseIntermediaire = new JLabel("80 m/s");
+		lblVitesseIntermediaire.setBounds(280, 109, 46, 14);
+		panel_1.add(lblVitesseIntermediaire);
+		
+		JLabel lblVitesseAvance = new JLabel("100 m/s");
+		lblVitesseAvance.setBounds(280, 135, 46, 14);
+		panel_1.add(lblVitesseAvance);
 
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.addActionListener(new ActionListener() {
@@ -199,7 +213,6 @@ public class JeuOptions extends JPanel {
 		add(panel_2);
 
 		JButton btnGauche = new JButton("<");
-
 		btnGauche.setBounds(905, 188, 55, 23);
 		add(btnGauche);
 
