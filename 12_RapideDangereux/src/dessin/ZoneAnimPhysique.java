@@ -107,7 +107,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		regroupement = new Regroupement(voiture, 3, typePiste);
 
-		objSpecial = new ObjetSpecial(new Vecteur2D(20, 20), 20, TypeObjetSpecial.BOULEDENEIGE);
+		objSpecial = new ObjetSpecial(new Vecteur2D(90, 40), 20, TypeObjetSpecial.BOULEDENEIGE);
 
 		addKeyListener(new KeyAdapter() {
 
