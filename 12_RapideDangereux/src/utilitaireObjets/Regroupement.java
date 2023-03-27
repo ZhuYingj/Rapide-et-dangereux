@@ -1,5 +1,6 @@
 package utilitaireObjets;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -15,13 +16,24 @@ import pisteDeCourse.PisteMexique;
  * la/les voiture(s) et les morceaux de piste.
  * 
  * @author Tan Tommy Rin
- *
+ * @author Kevin Nguyen
  */
 
 public class Regroupement implements Dessinable {
 
 	/** Liste de boites mysteres **/
 	private ArrayList<BlocMystere> regroupementBoiteMystere;
+
+//	private ArrayList<Accelerateur> listeAccelerateur = new ArrayList<Accelerateur>();
+	private ArrayList<PisteHorizontale> listePisteHorizontale = new ArrayList<PisteHorizontale>();
+
+	private ArrayList<PisteVirageBas> listePisteVirageBas = new ArrayList<PisteVirageBas>();
+	private ArrayList<PisteVirageGauche> listePisteVirageGauche = new ArrayList<PisteVirageGauche>();
+	private ArrayList<PisteVerticale> listePisteVerticale = new ArrayList<PisteVerticale>();
+	private ArrayList<PisteDeDepart> listePisteDeDepart = new ArrayList<PisteDeDepart>();
+	private ArrayList<PisteVirageDroit> listePisteVirageDroit = new ArrayList<PisteVirageDroit>();
+	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
+
 	/** Piste mexique **/
 	private PisteMexique pisteMexique = new PisteMexique(0, 0);
 
@@ -39,16 +51,9 @@ public class Regroupement implements Dessinable {
 	 * @param voiture     La voiture
 	 * @param nombreBoite Le nombre de boite
 	 */
+	// Par Tan Tommy Rin
 	public Regroupement(Voiture voiture, int nombreBoite, TypePiste typePiste) {
 		type = typePiste;
-
-		if (type == TypePiste.MEXIQUE) {
-
-			pisteMexique.getDepart().get(0).setVoiture(voiture);
-		} else if (type == TypePiste.ITALIE) {
-
-			pisteItalie.getDepart().get(0).setVoiture(voiture);
-		}
 
 		this.nombreBoiteMystere = nombreBoite;
 
@@ -62,57 +67,34 @@ public class Regroupement implements Dessinable {
 	 * @param deltaT           L'intervalle de temps(pas)
 	 * @param tempsTotalEcoule Le temps total écoulé
 	 */
-
+	// Par Tan Tommy Rin
 	public void avancerGroupe(double deltaT, double tempsTotalEcoule) {
-		if (type == TypePiste.MEXIQUE) {
-			pisteMexique.getDepart().get(0).getVoiture().avancerUnPas(deltaT);
-			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
-				regroupementBoiteMystere.get(a).enCollisionAvecVoiture(pisteMexique.getDepart().get(0).getVoiture());
-				if (regroupementBoiteMystere.get(a)
-						.enCollisionAvecVoiture(pisteMexique.getDepart().get(0).getVoiture()) == true) {
-					regroupementBoiteMystere.get(a).getObjetSpecial()
-							.fonctionSelonObjet(pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule);
 
-					// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
-					// retirons la boite mystere contenant ce champignon de la liste.
-					if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
-						if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionChampignon(
-								pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
-							regroupementBoiteMystere.remove(a);
+		listePisteDeDepart.get(0).getVoiture().avancerUnPas(deltaT);
+		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
+			regroupementBoiteMystere.get(a).enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture());
+			if (regroupementBoiteMystere.get(a)
+					.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
+				regroupementBoiteMystere.get(a).getObjetSpecial()
+						.fonctionSelonObjet(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule);
 
-						}
-					} // Fin condition pour le champignon
+				// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
+				// retirons la boite mystere contenant ce champignon de la liste.
+				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
+					if (regroupementBoiteMystere.get(a).getObjetSpecial()
+							.fonctionChampignon(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule) == false) {
+						regroupementBoiteMystere.remove(a);
 
-					// Pour la boule de neige
+					}
+				} // Fin condition pour le champignon
+
+				// Pour la boule de neige
 //					if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
 //						if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
 //								pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
 //							regroupementBoiteMystere.remove(a);
 //						}
 //					}
-				}
-
-			}
-		} else if (type == TypePiste.ITALIE) {
-			pisteItalie.getDepart().get(0).getVoiture().avancerUnPas(deltaT);
-			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
-				regroupementBoiteMystere.get(a).enCollisionAvecVoiture(pisteItalie.getDepart().get(0).getVoiture());
-				if (regroupementBoiteMystere.get(a)
-						.enCollisionAvecVoiture(pisteItalie.getDepart().get(0).getVoiture()) == true) {
-					regroupementBoiteMystere.get(a).getObjetSpecial()
-							.fonctionSelonObjet(pisteItalie.getDepart().get(0).getVoiture(), tempsTotalEcoule);
-
-					// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
-					// retirons la boite mystere contenant ce champignon de la liste.
-					if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
-						if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionChampignon(
-								pisteItalie.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
-							regroupementBoiteMystere.remove(a);
-
-						}
-					} // Fin condition pour le champignon
-
-				}
 
 			}
 		}
@@ -123,6 +105,7 @@ public class Regroupement implements Dessinable {
 	 * Méthode qui crée les boites mystères et les place dans une liste avec un
 	 * diametre fixe
 	 */
+	// Par Tan Tommy Rin
 	public void creeBoiteDansListe() {
 		regroupementBoiteMystere = new ArrayList<BlocMystere>();
 		for (int a = 0; a < nombreBoiteMystere; a++) {
@@ -137,24 +120,39 @@ public class Regroupement implements Dessinable {
 	 * 
 	 * @param g2d Le contexte graphique du composant sur lequel on dessine
 	 */
+	// Par Tan Tommy Rin
 
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
-
-		if (type == TypePiste.MEXIQUE) {
-
-			pisteMexique.setPixelsParMetre(pixelsParMetre);
-			pisteMexique.getDepart().get(0).getVoiture().setPixelsParMetre(pixelsParMetre);
-			pisteMexique.dessiner(g2d);
+		g2dCopie.scale(pixelsParMetre, pixelsParMetre);
+		for (int i = 0; i < listePisteVirageBas.size(); i++) {
+			listePisteVirageBas.get(i).dessiner(g2dCopie);
 		}
-		if (type == TypePiste.ITALIE) {
-			pisteItalie.setPixelsParMetre(pixelsParMetre);
-			pisteItalie.getDepart().get(0).getVoiture().setPixelsParMetre(pixelsParMetre);
-			pisteItalie.dessiner(g2d);
+
+		for (int i = 0; i < listePisteHorizontale.size(); i++) {
+			listePisteHorizontale.get(i).dessiner(g2dCopie);
 		}
+
+		for (int i = 0; i < listePisteVerticale.size(); i++) {
+			listePisteVerticale.get(i).dessiner(g2dCopie);
+		}
+
+		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
+			listePisteVirageGauche.get(i).dessiner(g2dCopie);
+		}
+
+		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
+			listePisteVirageDroit.get(i).dessiner(g2dCopie);
+		}
+
+		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
+			listePisteVirageHaut.get(i).dessiner(g2dCopie);
+		}
+
+		listePisteDeDepart.get(0).dessiner(g2dCopie);
 
 		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
-			regroupementBoiteMystere.get(a).setPixelParMetre(pixelsParMetre);
+
 			regroupementBoiteMystere.get(a).dessiner(g2dCopie);
 
 		}
@@ -200,6 +198,219 @@ public class Regroupement implements Dessinable {
 
 	public void setType(TypePiste type) {
 		this.type = type;
+	}
+
+	public ArrayList<PisteHorizontale> getListePisteHorizontale() {
+		return listePisteHorizontale;
+	}
+
+	public void setListePisteHorizontale(ArrayList<PisteHorizontale> listePisteHorizontale) {
+		this.listePisteHorizontale = listePisteHorizontale;
+	}
+
+	public ArrayList<PisteVirageBas> getListePisteVirageBas() {
+		return listePisteVirageBas;
+	}
+
+	public void setListePisteVirageBas(ArrayList<PisteVirageBas> listePisteVirageBas) {
+		this.listePisteVirageBas = listePisteVirageBas;
+	}
+
+	public ArrayList<PisteVirageGauche> getListePisteVirageGauche() {
+		return listePisteVirageGauche;
+	}
+
+	public void setListePisteVirageGauche(ArrayList<PisteVirageGauche> listePisteVirageGauche) {
+		this.listePisteVirageGauche = listePisteVirageGauche;
+	}
+
+	public ArrayList<PisteVerticale> getListePisteVerticale() {
+		return listePisteVerticale;
+	}
+
+	public void setListePisteVerticale(ArrayList<PisteVerticale> listePisteVerticale) {
+		this.listePisteVerticale = listePisteVerticale;
+	}
+
+	public ArrayList<PisteDeDepart> getListePisteDeDepart() {
+		return listePisteDeDepart;
+	}
+
+	public void setListePisteDeDepart(ArrayList<PisteDeDepart> listePisteDeDepart) {
+		this.listePisteDeDepart = listePisteDeDepart;
+	}
+
+	public ArrayList<PisteVirageDroit> getListePisteVirageDroit() {
+		return listePisteVirageDroit;
+	}
+
+	public void setListePisteVirageDroit(ArrayList<PisteVirageDroit> listePisteVirageDroit) {
+		this.listePisteVirageDroit = listePisteVirageDroit;
+	}
+
+	public ArrayList<PisteVirageHaut> getListePisteVirageHaut() {
+		return listePisteVirageHaut;
+	}
+
+	public void setListePisteVirageHaut(ArrayList<PisteVirageHaut> listePisteVirageHaut) {
+		this.listePisteVirageHaut = listePisteVirageHaut;
+	}
+
+	/**
+	 * Gérer les collisions avec chaque morceau de piste
+	 * 
+	 * @param voiture La voiture controllée
+	 */
+	// Kevin Nguyen
+
+	public void enCollisionAvec(Voiture voiture) {
+
+		for (int i = 0; i < listePisteHorizontale.size(); i++) {
+			listePisteHorizontale.get(i).enCollisionAvec(voiture);
+			listePisteHorizontale.get(i).traverserPiste(voiture);
+			if (listePisteHorizontale.get(i).isCollision() == true) {
+				listePisteHorizontale.get(i).setColor(Color.blue);
+				boolean collision = true;
+
+			} else {
+				listePisteHorizontale.get(i).setColor(Color.black);
+			}
+		}
+
+		for (int i = 0; i < listePisteVerticale.size(); i++) {
+			listePisteVerticale.get(i).enCollisionAvec(voiture);
+		}
+
+		for (int i = 0; i < listePisteVirageBas.size(); i++) {
+			listePisteVirageBas.get(i).enCollisionAvec(voiture);
+		}
+
+		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
+			listePisteVirageGauche.get(i).enCollisionAvec(voiture);
+		}
+
+		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
+			listePisteVirageDroit.get(i).enCollisionAvec(voiture);
+		}
+
+		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
+			listePisteVirageHaut.get(i).enCollisionAvec(voiture);
+		}
+
+		listePisteDeDepart.get(0).enCollisionAvec(voiture);
+
+		tourComplet(voiture);
+	}
+
+	public void tourComplet(Voiture voiture) {
+
+		for (int i = 0; i < listePisteHorizontale.size(); i++) {
+			listePisteHorizontale.get(i).isCollision();
+		}
+		int count = 0;
+		for (int i = 0; i < listePisteHorizontale.size(); i++) {
+			if (listePisteHorizontale.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+
+		for (int i = 0; i < listePisteVirageBas.size(); i++) {
+			listePisteVirageBas.get(i).isCollision();
+		}
+
+		for (int i = 0; i < listePisteVirageBas.size(); i++) {
+			if (listePisteVirageBas.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+
+		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
+			listePisteVirageHaut.get(i).isCollision();
+		}
+
+		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
+			if (listePisteVirageHaut.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
+			listePisteVirageGauche.get(i).isCollision();
+		}
+
+		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
+			if (listePisteVirageGauche.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
+			listePisteVirageDroit.get(i).isCollision();
+		}
+
+		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
+			if (listePisteVirageDroit.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+		for (int i = 0; i < listePisteDeDepart.size(); i++) {
+			listePisteDeDepart.get(i).isCollision();
+		}
+
+		for (int i = 0; i < listePisteDeDepart.size(); i++) {
+			if (listePisteDeDepart.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+		for (int i = 0; i < listePisteVerticale.size(); i++) {
+			listePisteVerticale.get(i).isCollision();
+		}
+
+		for (int i = 0; i < listePisteVerticale.size(); i++) {
+			if (listePisteVerticale.get(i).isCollision() == true) {
+				count++;
+			}
+		}
+
+		if (count == listePisteHorizontale.size() + listePisteVerticale.size() + listePisteVirageBas.size()
+				+ listePisteVirageHaut.size() + listePisteVirageGauche.size() + listePisteVirageDroit.size()
+				+ listePisteDeDepart.size()) {
+
+			if (listePisteDeDepart.get(0).resetTout(voiture)) {
+				resetTour();
+
+			}
+		}
+	}
+
+	public void resetTour() {
+
+		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
+			listePisteVirageDroit.get(i).setCollision(false);
+
+		}
+		for (int i = 0; i < listePisteDeDepart.size(); i++) {
+			listePisteDeDepart.get(i).setCollision(false);
+		}
+
+		for (int i = 0; i < listePisteHorizontale.size(); i++) {
+			listePisteHorizontale.get(i).setCollision(false);
+
+		}
+		for (int i = 0; i < listePisteVerticale.size(); i++) {
+			listePisteVerticale.get(i).setCollision(false);
+		}
+
+		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
+			listePisteVirageGauche.get(i).setCollision(false);
+		}
+
+		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
+			listePisteVirageHaut.get(i).setCollision(false);
+		}
+
+		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
+			listePisteVirageGauche.get(i).setCollision(false);
+		}
+
 	}
 
 }

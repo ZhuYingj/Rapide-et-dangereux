@@ -6,7 +6,7 @@ import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 
 import interfaces.Dessinable;
 import interfaces.TypePiste;
@@ -25,11 +25,10 @@ import utilitaireObjets.Voiture;
  * Class qui permet de creer une piste deja faite (PisteMexique)
  * 
  * @author Ludovic Julien
- * @author Kevin Nguyen
  *
  */
 
-public class PisteMexique implements Dessinable {
+public class PisteMexique {
 	/** Taille de la piste qui est toujours constante **/
 	private final int TAILLE_PISTE = 80;
 	/** Position en x de la piste au complet **/
@@ -39,19 +38,18 @@ public class PisteMexique implements Dessinable {
 	/** Nombre de pixel par metre **/
 	private double pixelsParMetre;
 
-	private List<PisteDeDepart> depart = new ArrayList<PisteDeDepart>();
+	private ArrayList<PisteDeDepart> depart = new ArrayList<PisteDeDepart>();
 
-	private List<PisteHorizontale> horizontale = new ArrayList<PisteHorizontale>();
-	private List<PisteVerticale> verticale = new ArrayList<PisteVerticale>();
-	private List<PisteVirageBas> bas = new ArrayList<PisteVirageBas>();
-	private List<PisteVirageGauche> gauche = new ArrayList<PisteVirageGauche>();
-	private List<PisteVirageDroit> droit = new ArrayList<PisteVirageDroit>();
-	private List<PisteVirageHaut> haut = new ArrayList<PisteVirageHaut>();
+	private ArrayList<PisteHorizontale> horizontale = new ArrayList<PisteHorizontale>();
+
+	private ArrayList<PisteVerticale> verticale = new ArrayList<PisteVerticale>();
+	private ArrayList<PisteVirageBas> bas = new ArrayList<PisteVirageBas>();
+	private ArrayList<PisteVirageGauche> gauche = new ArrayList<PisteVirageGauche>();
+	private ArrayList<PisteVirageDroit> droit = new ArrayList<PisteVirageDroit>();
+	private ArrayList<PisteVirageHaut> haut = new ArrayList<PisteVirageHaut>();
 
 	private Accelerateur vitesse = new Accelerateur(0, 0);
 	private Colle colle = new Colle(0, 0);
-	private Rectangle2D rectangle;
-	private Area aireRectangle;;
 
 	private TypePiste type = TypePiste.MEXIQUE;
 
@@ -156,47 +154,6 @@ public class PisteMexique implements Dessinable {
 
 	}
 
-	/**
-	 * Methode qui permet de dessiner la piste Mexique sur la zone d'animation a
-	 * l'aide de g2d
-	 */
-	@Override
-	public void dessiner(Graphics2D g2d) {
-		Graphics2D gCopie = (Graphics2D) g2d.create();
-		// piste virgae bas :
-		gCopie.scale(pixelsParMetre, pixelsParMetre);
-		for (int i = 0; i < bas.size(); i++) {
-			bas.get(i).dessiner(gCopie);
-		}
-
-		for (int i = 0; i < horizontale.size(); i++) {
-			horizontale.get(i).dessiner(gCopie);
-		}
-
-		for (int i = 0; i < verticale.size(); i++) {
-			verticale.get(i).dessiner(gCopie);
-		}
-
-		for (int i = 0; i < bas.size(); i++) {
-			bas.get(i).dessiner(gCopie);
-		}
-
-		for (int i = 0; i < gauche.size(); i++) {
-			gauche.get(i).dessiner(gCopie);
-		}
-
-		for (int i = 0; i < droit.size(); i++) {
-			droit.get(i).dessiner(gCopie);
-		}
-
-		for (int i = 0; i < haut.size(); i++) {
-			haut.get(i).dessiner(gCopie);
-		}
-
-		depart.get(0).dessiner(gCopie);
-
-	}
-
 	public double getPixelsParMetre() {
 		return pixelsParMetre;
 	}
@@ -206,206 +163,14 @@ public class PisteMexique implements Dessinable {
 	}
 
 	/**
-	 * Gérer les collisions avec chaque morceau de piste
-	 * 
-	 * @param voiture La voiture controllée
-	 */
-	// Kevin Nguyen
-	public void enCollisionAvec(Voiture voiture) {
-
-		for (int i = 0; i < horizontale.size(); i++) {
-			horizontale.get(i).enCollisionAvec(voiture);
-			horizontale.get(i).traverserPiste(voiture);
-			if (horizontale.get(i).isCollision() == true) {
-				horizontale.get(i).setColor(Color.blue);
-				boolean collisionH = true;
-
-			} else {
-				horizontale.get(i).setColor(Color.black);
-			}
-		}
-
-		for (int i = 0; i < verticale.size(); i++) {
-			verticale.get(i).enCollisionAvec(voiture);
-			verticale.get(i).traverserPiste(voiture);
-			if (verticale.get(i).isCollision() == true) {
-				verticale.get(i).setColor(Color.blue);
-			} else {
-				verticale.get(i).setColor(Color.black);
-			}
-		}
-
-		for (int i = 0; i < bas.size(); i++) {
-			bas.get(i).enCollisionAvec(voiture);
-			bas.get(i).traverserPiste(voiture);
-			if (bas.get(i).isCollision() == true) {
-				bas.get(i).setColor(Color.blue);
-			} else {
-				bas.get(i).setColor(Color.black);
-			}
-		}
-
-		for (int i = 0; i < gauche.size(); i++) {
-			gauche.get(i).enCollisionAvec(voiture);
-			gauche.get(i).traverserPiste(voiture);
-			if (gauche.get(i).isCollision() == true) {
-				gauche.get(i).setColor(Color.blue);
-			} else {
-				gauche.get(i).setColor(Color.black);
-			}
-		}
-
-		for (int i = 0; i < droit.size(); i++) {
-			droit.get(i).enCollisionAvec(voiture);
-			droit.get(i).traverserPiste(voiture);
-			if (droit.get(i).isCollision() == true) {
-				droit.get(i).setColor(Color.blue);
-			} else {
-				droit.get(i).setColor(Color.black);
-			}
-		}
-
-		for (int i = 0; i < haut.size(); i++) {
-			haut.get(i).enCollisionAvec(voiture);
-			haut.get(i).traverserPiste(voiture);
-			if (haut.get(i).isCollision() == true) {
-				haut.get(i).setColor(Color.blue);
-			} else {
-				haut.get(i).setColor(Color.black);
-			}
-		}
-
-		depart.get(0).enCollisionAvec(voiture);
-		depart.get(0).traverserPiste(voiture);
-		if (depart.get(0).isCollision() == true) {
-			depart.get(0).setColor(Color.blue);
-		} else {
-			depart.get(0).setColor(Color.black);
-		}
-//		traverserPiste(voiture);
-		tourComplet(voiture);
-	}
-
-
-	/**
 	 * Retourne la piste de départ
 	 * 
 	 * @return
 	 */
 	// Kevin Nguyen
 
-	public List<PisteDeDepart> getDepart() {
+	public ArrayList<PisteDeDepart> getDepart() {
 		return depart;
-	}
-
-	public void tourComplet(Voiture voiture) {
-
-		for (int i = 0; i < horizontale.size(); i++) {
-			horizontale.get(i).isCollision();
-		}
-		int count = 0;
-		for (int i = 0; i < horizontale.size(); i++) {
-			if (horizontale.get(i).isCollision() == true) {
-				count++;
-			}
-		}
-
-		for (int i = 0; i < bas.size(); i++) {
-			bas.get(i).isCollision();
-		}
-
-		for (int i = 0; i < bas.size(); i++) {
-			if (bas.get(i).isCollision() == true) {
-				count++;
-			}
-		}
-
-		for (int i = 0; i < haut.size(); i++) {
-			haut.get(i).isCollision();
-		}
-
-		for (int i = 0; i < haut.size(); i++) {
-			if (haut.get(i).isCollision() == true) {
-				count++;
-			}
-		}
-		for (int i = 0; i < gauche.size(); i++) {
-			gauche.get(i).isCollision();
-		}
-
-		for (int i = 0; i < gauche.size(); i++) {
-			if (gauche.get(i).isCollision() == true) {
-				count++;
-			}
-		}
-		for (int i = 0; i < droit.size(); i++) {
-			droit.get(i).isCollision();
-		}
-
-		for (int i = 0; i < droit.size(); i++) {
-			if (droit.get(i).isCollision() == true) {
-				count++;
-			}
-		}
-		for (int i = 0; i < depart.size(); i++) {
-			depart.get(i).isCollision();
-		}
-
-		for (int i = 0; i < depart.size(); i++) {
-			if (depart.get(i).isCollision() == true) {
-				count++;
-			}
-		}
-		for (int i = 0; i < verticale.size(); i++) {
-			verticale.get(i).isCollision();
-		}
-
-		for (int i = 0; i < verticale.size(); i++) {
-			if (verticale.get(i).isCollision() == true) {
-				count++;
-			}
-		}
-
-		if (count == horizontale.size() + verticale.size() + bas.size() + haut.size() + gauche.size() + droit.size()
-				+ depart.size()) {
-
-			if(depart.get(0).resetTout(voiture)) {
-			resetTour();
-
-			}
-		}
-	}
-
-	public void resetTour() {
-		
-		for (int i = 0; i < droit.size(); i++) {
-			droit.get(i).setCollision(false);
-
-		}
-		for (int i = 0; i < depart.size(); i++) {
-			depart.get(i).setCollision(false);
-		}
-
-		for (int i = 0; i < horizontale.size(); i++) {
-			horizontale.get(i).setCollision(false);
-
-		}
-		for (int i = 0; i < verticale.size(); i++) {
-			verticale.get(i).setCollision(false);
-		}
-
-		for (int i = 0; i < gauche.size(); i++) {
-			gauche.get(i).setCollision(false);
-		}
-
-		for (int i = 0; i < haut.size(); i++) {
-			haut.get(i).setCollision(false);
-		}
-
-		for (int i = 0; i < gauche.size(); i++) {
-			bas.get(i).setCollision(false);
-		}
-
 	}
 
 	public TypePiste getType() {
@@ -416,24 +181,56 @@ public class PisteMexique implements Dessinable {
 		this.type = type;
 	}
 
-	public List<PisteHorizontale> getHorizontale() {
+	public ArrayList<PisteHorizontale> getHorizontale() {
 		return horizontale;
 	}
 
-	public void setHorizontale(List<PisteHorizontale> horizontale) {
+	public void setHorizontale(ArrayList<PisteHorizontale> horizontale) {
 		this.horizontale = horizontale;
 	}
 
-	public void setGauche(List<PisteVirageGauche> gauche) {
+	public void setGauche(ArrayList<PisteVirageGauche> gauche) {
 		this.gauche = gauche;
 	}
 
-	public void setDroit(List<PisteVirageDroit> droit) {
+	public void setDroit(ArrayList<PisteVirageDroit> droit) {
 		this.droit = droit;
 	}
 
-	public void setHaut(List<PisteVirageHaut> haut) {
+	public void setHaut(ArrayList<PisteVirageHaut> haut) {
 		this.haut = haut;
+	}
+
+	public ArrayList<PisteVerticale> getVerticale() {
+		return verticale;
+	}
+
+	public void setVerticale(ArrayList<PisteVerticale> verticale) {
+		this.verticale = verticale;
+	}
+
+	public ArrayList<PisteVirageBas> getBas() {
+		return bas;
+	}
+
+	public void setBas(ArrayList<PisteVirageBas> bas) {
+		this.bas = bas;
+	}
+
+	public ArrayList<PisteVirageGauche> getGauche() {
+		return gauche;
+	}
+
+	public ArrayList<PisteVirageDroit> getDroit() {
+		return droit;
+	}
+
+	public ArrayList<PisteVirageHaut> getHaut() {
+		return haut;
+	}
+
+	public void setDepart(ArrayList<PisteDeDepart> depart) {
+		this.depart = depart;
 	}
 
 }

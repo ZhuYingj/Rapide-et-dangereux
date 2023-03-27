@@ -87,7 +87,7 @@ public class FenetreEditeur extends JPanel {
 
 	private boolean objetSelectionne = false;
 
-	private TypeObjetDeplacable type = TypeObjetDeplacable.ACCELERATEUR;
+	private TypeObjetDeplacable type;
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
@@ -252,7 +252,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVerticale = new JButton("+");
 		btnAjouterPisteVerticale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVerticale pisteVerticale = new PisteVerticale(100, 450);
+				PisteVerticale pisteVerticale = new PisteVerticale(250, 450);
 				listePisteVerticale.add(pisteVerticale);
 				repaint();
 			}
