@@ -33,6 +33,7 @@ import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
+import javax.swing.JComboBox;
 
 /**
  * Classe qui permet de créer et gérer la fenetre éditeur. La sauvegarde d'un
@@ -67,6 +68,8 @@ public class FenetreEditeur extends JPanel {
 
 	private JButton btnRetour;
 	private JButton btnAjouterPisteDeDepart;
+	private JComboBox<String> comboBoxPiste;
+	private Regroupement regroupementSauvegarde;
 
 	private Regroupement regroupement;
 	private BlocMystere blocMystere;
@@ -340,20 +343,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnSauvegarde = new JButton("SAUVEGARDER LA PISTE");
 		btnSauvegarde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Voiture voiture = new Voiture(new Vecteur2D(0, 0), Color.yellow, 50, 16, 0, 60);
-				regroupement = new Regroupement(voiture, 3, TypePiste.MEXIQUE);
-				regroupement.setListeAccelerateur(listeAccelerateur);
-				regroupement.setListePisteDeDepart(listePisteDeDepart);
-				regroupement.setListePisteHorizontale(listePisteHorizontale);
-				regroupement.setListePisteVerticale(listePisteVerticale);
-				regroupement.setListePisteVirageBas(listePisteVirageBas);
-				regroupement.setListePisteVirageDroit(listePisteVirageDroit);
-				regroupement.setListePisteVirageGauche(listePisteVirageGauche);
-				regroupement.setListePisteVirageHaut(listePisteVirageHaut);
-				regroupement.setRegroupementObjet(listeBlocMystere);
-
-				gestionFich.ecrireFichierBinBureau(regroupement);
-				JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU");
+				sauvegardeUnePiste();
 			}
 		});
 		btnSauvegarde.setBounds(363, 11, 205, 23);
@@ -362,84 +352,16 @@ public class FenetreEditeur extends JPanel {
 		JButton btnChargerPisteSauvegarde = new JButton("CHARGER LA PISTE SAUVEGARDÉ");
 		btnChargerPisteSauvegarde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Regroupement regroupementSauvegarde = gestionFich.lireFichierBinBureau();
+				chargementUnePiste();
 
-				// Pour les accelerateurs
-				if (regroupementSauvegarde.getListeAccelerateur().size() != 0) {
-					listeAccelerateur.clear();
-					for (int a = 0; a < regroupementSauvegarde.getListeAccelerateur().size(); a++) {
-						listeAccelerateur.add(regroupementSauvegarde.getListeAccelerateur().get(a));
-					}
-				}
-
-				// Pour piste virage bas
-				if (regroupementSauvegarde.getListePisteVirageBas().size() != 0) {
-					listePisteVirageBas.clear();
-					for (int a = 0; a < regroupementSauvegarde.getListePisteVirageBas().size(); a++) {
-						listePisteVirageBas.add(regroupementSauvegarde.getListePisteVirageBas().get(a));
-					}
-				}
-
-				// Pour piste virage haut
-				if (regroupementSauvegarde.getListePisteVirageHaut().size() != 0) {
-					listePisteVirageHaut.clear();
-					for (int a = 0; a < regroupementSauvegarde.getListePisteVirageHaut().size(); a++) {
-						listePisteVirageHaut.add(regroupementSauvegarde.getListePisteVirageHaut().get(a));
-					}
-				}
-
-				// Pour piste virage droite
-				if (regroupementSauvegarde.getListePisteVirageDroit().size() != 0) {
-					listePisteVirageDroit.clear();
-					for (int a = 0; a < regroupementSauvegarde.getListePisteVirageDroit().size(); a++) {
-						listePisteVirageDroit.add(regroupementSauvegarde.getListePisteVirageDroit().get(a));
-					}
-				}
-
-				// Pour piste virage gauche
-				if (regroupementSauvegarde.getListePisteVirageGauche().size() != 0) {
-					listePisteVirageGauche.clear();
-					for (int a = 0; a < regroupementSauvegarde.getListePisteVirageGauche().size(); a++) {
-						listePisteVirageGauche.add(regroupementSauvegarde.getListePisteVirageGauche().get(a));
-					}
-				}
-
-				// Pour piste verticale
-				if (regroupementSauvegarde.getListePisteVerticale().size() != 0) {
-					listePisteVerticale.clear();
-					for (int a = 0; a < regroupementSauvegarde.getListePisteVerticale().size(); a++) {
-						listePisteVerticale.add(regroupementSauvegarde.getListePisteVerticale().get(a));
-					}
-				}
-
-				// Pour piste horizontale
-				if (regroupementSauvegarde.getListePisteHorizontale().size() != 0) {
-					listePisteHorizontale.clear();
-					for (int a = 0; a < regroupementSauvegarde.getListePisteHorizontale().size(); a++) {
-						listePisteHorizontale.add(regroupementSauvegarde.getListePisteHorizontale().get(a));
-					}
-				}
-				// Pour piste de depart
-				if (regroupementSauvegarde.getListePisteDeDepart().size() != 0) {
-					listePisteDeDepart.clear();
-					for (int a = 0; a < regroupementSauvegarde.getListePisteDeDepart().size(); a++) {
-						listePisteDeDepart.add(regroupementSauvegarde.getListePisteDeDepart().get(a));
-					}
-				}
-				// Pour bloc mystere
-				if (regroupementSauvegarde.getRegroupementBoiteMystere().size() != 0) {
-					listeBlocMystere.clear();
-					for (int a = 0; a < regroupementSauvegarde.getRegroupementBoiteMystere().size(); a++) {
-						listeBlocMystere.add(regroupementSauvegarde.getRegroupementBoiteMystere().get(a));
-					}
-				}
-				repaint();
-
-				JOptionPane.showMessageDialog(null, "PISTE CHARGÉ AVEC SUCCÈS !");
 			}
 		});
 		btnChargerPisteSauvegarde.setBounds(596, 11, 214, 23);
 		add(btnChargerPisteSauvegarde);
+
+		comboBoxPiste = new JComboBox();
+		comboBoxPiste.setBounds(596, 45, 214, 43);
+		add(comboBoxPiste);
 
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -613,6 +535,121 @@ public class FenetreEditeur extends JPanel {
 	private void relachementSouris(MouseEvent e) {
 		objetSelectionne = false;
 		repaint();
+	}
+
+	/**
+	 * Méhode qui permet de sauvegarder une piste sur le bureau en fichier binaire
+	 */
+	private void sauvegardeUnePiste() {
+		Voiture voiture = new Voiture(new Vecteur2D(0, 0), Color.yellow, 50, 16, 0, 60);
+		regroupement = new Regroupement(voiture, 3, TypePiste.MEXIQUE);
+		regroupement.setListeAccelerateur(listeAccelerateur);
+		regroupement.setListePisteDeDepart(listePisteDeDepart);
+		regroupement.setListePisteHorizontale(listePisteHorizontale);
+		regroupement.setListePisteVerticale(listePisteVerticale);
+		regroupement.setListePisteVirageBas(listePisteVirageBas);
+		regroupement.setListePisteVirageDroit(listePisteVirageDroit);
+		regroupement.setListePisteVirageGauche(listePisteVirageGauche);
+		regroupement.setListePisteVirageHaut(listePisteVirageHaut);
+		regroupement.setRegroupementObjet(listeBlocMystere);
+
+		gestionFich.ecrireFichierBinBureau(regroupement);
+
+		comboBoxPiste.addItem(gestionFich.getNomFichBinEtud());
+
+		JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU");
+
+	}
+
+	/**
+	 * Méthode qui permet de charger une piste qui est sur le bureau
+	 */
+
+	private void chargementUnePiste() {
+		regroupementSauvegarde = gestionFich.lireFichierBinBureau((String) comboBoxPiste.getSelectedItem());
+		listeAccelerateur.clear();
+		listePisteVirageBas.clear();
+		listePisteVirageHaut.clear();
+		listePisteVirageDroit.clear();
+		listePisteVirageGauche.clear();
+		listePisteVerticale.clear();
+		listePisteHorizontale.clear();
+		listePisteDeDepart.clear();
+		listeBlocMystere.clear();
+
+		// Pour les accelerateurs
+		if (regroupementSauvegarde.getListeAccelerateur().size() != 0) {
+
+			for (int a = 0; a < regroupementSauvegarde.getListeAccelerateur().size(); a++) {
+				listeAccelerateur.add(regroupementSauvegarde.getListeAccelerateur().get(a));
+			}
+		}
+
+		// Pour piste virage bas
+		if (regroupementSauvegarde.getListePisteVirageBas().size() != 0) {
+
+			for (int a = 0; a < regroupementSauvegarde.getListePisteVirageBas().size(); a++) {
+				listePisteVirageBas.add(regroupementSauvegarde.getListePisteVirageBas().get(a));
+			}
+		}
+
+		// Pour piste virage haut
+		if (regroupementSauvegarde.getListePisteVirageHaut().size() != 0) {
+
+			for (int a = 0; a < regroupementSauvegarde.getListePisteVirageHaut().size(); a++) {
+				listePisteVirageHaut.add(regroupementSauvegarde.getListePisteVirageHaut().get(a));
+			}
+		}
+
+		// Pour piste virage droite
+		if (regroupementSauvegarde.getListePisteVirageDroit().size() != 0) {
+
+			for (int a = 0; a < regroupementSauvegarde.getListePisteVirageDroit().size(); a++) {
+				listePisteVirageDroit.add(regroupementSauvegarde.getListePisteVirageDroit().get(a));
+			}
+		}
+
+		// Pour piste virage gauche
+		if (regroupementSauvegarde.getListePisteVirageGauche().size() != 0) {
+
+			for (int a = 0; a < regroupementSauvegarde.getListePisteVirageGauche().size(); a++) {
+				listePisteVirageGauche.add(regroupementSauvegarde.getListePisteVirageGauche().get(a));
+			}
+		}
+
+		// Pour piste verticale
+		if (regroupementSauvegarde.getListePisteVerticale().size() != 0) {
+
+			for (int a = 0; a < regroupementSauvegarde.getListePisteVerticale().size(); a++) {
+				listePisteVerticale.add(regroupementSauvegarde.getListePisteVerticale().get(a));
+			}
+		}
+
+		// Pour piste horizontale
+		if (regroupementSauvegarde.getListePisteHorizontale().size() != 0) {
+
+			for (int a = 0; a < regroupementSauvegarde.getListePisteHorizontale().size(); a++) {
+				listePisteHorizontale.add(regroupementSauvegarde.getListePisteHorizontale().get(a));
+			}
+		}
+		// Pour piste de depart
+		if (regroupementSauvegarde.getListePisteDeDepart().size() != 0) {
+
+			for (int a = 0; a < regroupementSauvegarde.getListePisteDeDepart().size(); a++) {
+				listePisteDeDepart.add(regroupementSauvegarde.getListePisteDeDepart().get(a));
+			}
+		}
+		// Pour bloc mystere
+		if (regroupementSauvegarde.getRegroupementBoiteMystere().size() != 0) {
+
+			for (int a = 0; a < regroupementSauvegarde.getRegroupementBoiteMystere().size(); a++) {
+				listeBlocMystere.add(regroupementSauvegarde.getRegroupementBoiteMystere().get(a));
+			}
+
+		}
+		repaint();
+
+		JOptionPane.showMessageDialog(null, "PISTE CHARGÉ AVEC SUCCÈS !");
 	}
 
 	/**
