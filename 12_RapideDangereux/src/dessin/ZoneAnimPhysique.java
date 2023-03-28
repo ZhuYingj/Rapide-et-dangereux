@@ -15,6 +15,7 @@ import geometrie.Vecteur2D;
 import interfaces.TypeObjetSpecial;
 import interfaces.TypePiste;
 import physique.MoteurPhysique;
+import pisteDeCourse.PisteCanada;
 import pisteDeCourse.PisteItalie;
 import pisteDeCourse.PisteMexique;
 import utilitaireObjets.Accelerateur;
@@ -84,9 +85,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** L'objet regroupement **/
 	private Regroupement regroupement;
 	/** Le type de piste choisi **/
-	private TypePiste typePiste = TypePiste.MEXIQUE;
+	private TypePiste typePiste = TypePiste.CANADA;
 	/** L'objet special **/
 	private ObjetSpecial objSpecial;
+	/** Piste Canada**/
+	private PisteCanada pisteCanada;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -103,14 +106,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		pisteMexique = new PisteMexique(0, 0);
 		pisteItalie = new PisteItalie(0, 0);
+		pisteCanada = new PisteCanada(0, 0);
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
 
-		regroupement = new Regroupement(voiture, 3, TypePiste.MEXIQUE);
+		regroupement = new Regroupement(voiture, 3, typePiste);
 		objSpecial = new ObjetSpecial(new Vecteur2D(getWidth() / 2.0, getHeight() / 2.0), 20,
 				TypeObjetSpecial.BOULEDENEIGE);
 
-
-		regroupement = new Regroupement(voiture, 3, typePiste);
+		
 
 		objSpecial = new ObjetSpecial(new Vecteur2D(90, 40), 20, TypeObjetSpecial.BOULEDENEIGE);
 		addKeyListener(new KeyAdapter() {
@@ -630,6 +633,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 		}
 
+		if (typePiste == TypePiste.CANADA) {
+			regroupement.setListePisteDeDepart(pisteCanada.getDepart());
+			regroupement.setListePisteHorizontale(pisteCanada.getHorizontale());
+			regroupement.setListePisteVerticale(pisteCanada.getVerticale());
+			regroupement.setListePisteVirageBas(pisteCanada.getBas());
+			regroupement.setListePisteVirageDroit(pisteCanada.getDroit());
+			regroupement.setListePisteVirageGauche(pisteCanada.getGauche());
+			regroupement.setListePisteVirageHaut(pisteCanada.getHaut());
+			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 	}
-
+	}
 }
