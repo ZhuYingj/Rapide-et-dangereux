@@ -14,11 +14,14 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import application.GestionnaireDeFichiersSurLeBureau;
 import geometrie.Vecteur2D;
 import interfaces.TypeObjetDeplacable;
+import interfaces.TypePiste;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BlocMystere;
 import utilitaireObjets.PisteDeDepart;
@@ -29,6 +32,9 @@ import utilitaireObjets.PisteVirageDroit;
 import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Regroupement;
+import utilitaireObjets.Voiture;
+import javax.swing.JComboBox;
+import java.beans.PropertyChangeEvent;
 
 /**
  * Classe qui permet de créer et gérer la fenetre éditeur. La sauvegarde d'un
@@ -59,8 +65,13 @@ public class FenetreEditeur extends JPanel {
 	private double xPisteVirageHaut;
 	private double yPisteVirageHaut;
 
+	private GestionnaireDeFichiersSurLeBureau gestionFich;
+
+	private JButton btnJouer;
 	private JButton btnRetour;
 	private JButton btnAjouterPisteDeDepart;
+	private JComboBox<String> comboBoxPiste;
+	private Regroupement regroupementSauvegarde;
 
 	private Regroupement regroupement;
 	private BlocMystere blocMystere;
@@ -98,7 +109,7 @@ public class FenetreEditeur extends JPanel {
 	 */
 
 	public FenetreEditeur() {
-
+		gestionFich = new GestionnaireDeFichiersSurLeBureau();
 		setLayout(null);
 
 		setBackground(Color.LIGHT_GRAY);
@@ -122,7 +133,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterAccelerateur = new JButton("+");
 		btnAjouterAccelerateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Accelerateur accelerateur = new Accelerateur(100, 50);
+				Accelerateur accelerateur = new Accelerateur(10, 50);
 				listeAccelerateur.add(accelerateur);
 				repaint();
 			}
@@ -145,7 +156,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterBlocMystere = new JButton("+");
 		btnAjouterBlocMystere.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BlocMystere blocMystere = new BlocMystere(15, new Vecteur2D(100, 150));
+				BlocMystere blocMystere = new BlocMystere(15, new Vecteur2D(120, 50));
 				listeBlocMystere.add(blocMystere);
 				repaint();
 
@@ -169,7 +180,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteHorizontale = new JButton("+");
 		btnAjouterPisteHorizontale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteHorizontale pisteHorizontale = new PisteHorizontale(100, 250);
+				PisteHorizontale pisteHorizontale = new PisteHorizontale(150, 50);
 				listePisteHorizontale.add(pisteHorizontale);
 				repaint();
 			}
@@ -180,7 +191,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageBas = new JButton("+");
 		btnAjouterPisteVirageBas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageBas pisteVirageBas = new PisteVirageBas(100, 350);
+				PisteVirageBas pisteVirageBas = new PisteVirageBas(250, 50);
 				listePisteVirageBas.add(pisteVirageBas);
 				repaint();
 			}
@@ -191,7 +202,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageGauche = new JButton("+");
 		btnAjouterPisteVirageGauche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageGauche pisteVirageGauche = new PisteVirageGauche(100, 450);
+				PisteVirageGauche pisteVirageGauche = new PisteVirageGauche(350, 50);
 				listePisteVirageGauche.add(pisteVirageGauche);
 				repaint();
 			}
@@ -239,7 +250,7 @@ public class FenetreEditeur extends JPanel {
 		btnAjouterPisteDeDepart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (listePisteDeDepart.size() == 0) {
-					PisteDeDepart pisteDeDepart = new PisteDeDepart(100, 550);
+					PisteDeDepart pisteDeDepart = new PisteDeDepart(450, 50);
 					listePisteDeDepart.add(pisteDeDepart);
 					btnAjouterPisteDeDepart.setEnabled(false);
 				}
@@ -252,7 +263,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVerticale = new JButton("+");
 		btnAjouterPisteVerticale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVerticale pisteVerticale = new PisteVerticale(250, 450);
+				PisteVerticale pisteVerticale = new PisteVerticale(550, 50);
 				listePisteVerticale.add(pisteVerticale);
 				repaint();
 			}
@@ -288,7 +299,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageDroite = new JButton("+");
 		btnAjouterPisteVirageDroite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageDroit psiteVirageDroit = new PisteVirageDroit(100, 650);
+				PisteVirageDroit psiteVirageDroit = new PisteVirageDroit(650, 50);
 				listePisteVirageDroit.add(psiteVirageDroit);
 				repaint();
 			}
@@ -311,7 +322,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageHaut = new JButton("+");
 		btnAjouterPisteVirageHaut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageHaut pisteVirageHaut = new PisteVirageHaut(250, 150);
+				PisteVirageHaut pisteVirageHaut = new PisteVirageHaut(750, 50);
 				listePisteVirageHaut.add(pisteVirageHaut);
 				repaint();
 			}
@@ -330,6 +341,41 @@ public class FenetreEditeur extends JPanel {
 		});
 		btnSupprimerPisteVirageHaut.setBounds(267, 517, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageHaut);
+
+		JButton btnSauvegarde = new JButton("SAUVEGARDER LA PISTE");
+		btnSauvegarde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sauvegardeUnePiste();
+			}
+		});
+		btnSauvegarde.setBounds(132, 11, 205, 23);
+		add(btnSauvegarde);
+
+		JButton btnChargerPisteSauvegarde = new JButton("CHARGER LA PISTE SAUVEGARDÉ");
+		btnChargerPisteSauvegarde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chargementUnePiste();
+
+			}
+		});
+		btnChargerPisteSauvegarde.setBounds(347, 11, 214, 23);
+		add(btnChargerPisteSauvegarde);
+
+		comboBoxPiste = new JComboBox();
+		comboBoxPiste.setBounds(571, 11, 214, 23);
+		add(comboBoxPiste);
+
+		btnJouer = new JButton("JOUER");
+		btnJouer.setEnabled(false);
+		btnJouer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("JOUEREDITEUR", null, -1);
+				pcs.firePropertyChange("REGROUPEMENT", null, regroupement);
+			}
+		});
+
+		btnJouer.setBounds(812, 11, 89, 23);
+		add(btnJouer);
 
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -403,92 +449,62 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param g Le contexte graphique de la zone de dessin
 	 */
-	// Par Tan Tommy Rin
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		if (listePisteVirageDroit.size() != 0) {
 
-			for (int a = 0; a < listePisteVirageDroit.size(); a++) {
+		for (int a = 0; a < listePisteVirageDroit.size(); a++) {
 
-				listePisteVirageDroit.get(a).dessiner(g2d);
-
-			}
+			listePisteVirageDroit.get(a).dessiner(g2d);
 
 		}
 
-		if (listePisteDeDepart.size() != 0) {
+		for (int a = 0; a < listePisteDeDepart.size(); a++) {
 
-			for (int a = 0; a < listePisteDeDepart.size(); a++) {
-
-				listePisteDeDepart.get(a).dessiner(g2d);
-
-			}
+			listePisteDeDepart.get(a).dessiner(g2d);
 
 		}
 
-		if (listePisteHorizontale.size() != 0) {
+		for (int a = 0; a < listePisteHorizontale.size(); a++) {
 
-			for (int a = 0; a < listePisteHorizontale.size(); a++) {
-
-				listePisteHorizontale.get(a).dessiner(g2d);
-
-			}
+			listePisteHorizontale.get(a).dessiner(g2d);
 
 		}
 
-		if (listePisteVirageBas.size() != 0) {
+		for (int a = 0; a < listePisteVirageBas.size(); a++) {
 
-			for (int a = 0; a < listePisteVirageBas.size(); a++) {
-
-				listePisteVirageBas.get(a).dessiner(g2d);
-
-			}
-		}
-
-		if (listePisteVirageGauche.size() != 0) {
-
-			for (int a = 0; a < listePisteVirageGauche.size(); a++) {
-
-				listePisteVirageGauche.get(a).dessiner(g2d);
-
-			}
-		}
-		if (listePisteVerticale.size() != 0) {
-
-			for (int a = 0; a < listePisteVerticale.size(); a++) {
-
-				listePisteVerticale.get(a).dessiner(g2d);
-
-			}
+			listePisteVirageBas.get(a).dessiner(g2d);
 
 		}
-		if (listePisteVirageHaut.size() != 0) {
 
-			for (int a = 0; a < listePisteVirageHaut.size(); a++) {
+		for (int a = 0; a < listePisteVirageGauche.size(); a++) {
 
-				listePisteVirageHaut.get(a).dessiner(g2d);
-
-			}
+			listePisteVirageGauche.get(a).dessiner(g2d);
 
 		}
-		if (listeAccelerateur.size() != 0) {
 
-			for (int a = 0; a < listeAccelerateur.size(); a++) {
+		for (int a = 0; a < listePisteVerticale.size(); a++) {
 
-				listeAccelerateur.get(a).dessiner(g2d);
-
-			}
+			listePisteVerticale.get(a).dessiner(g2d);
 
 		}
-		if (listeBlocMystere.size() != 0) {
 
-			for (int a = 0; a < listeBlocMystere.size(); a++) {
+		for (int a = 0; a < listePisteVirageHaut.size(); a++) {
 
-				listeBlocMystere.get(a).dessiner(g2d);
+			listePisteVirageHaut.get(a).dessiner(g2d);
 
-			}
+		}
+
+		for (int a = 0; a < listeAccelerateur.size(); a++) {
+
+			listeAccelerateur.get(a).dessiner(g2d);
+
+		}
+
+		for (int a = 0; a < listeBlocMystere.size(); a++) {
+
+			listeBlocMystere.get(a).dessiner(g2d);
 
 		}
 
@@ -500,10 +516,113 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void relachementSouris(MouseEvent e) {
 		objetSelectionne = false;
 		repaint();
+	}
+
+	/**
+	 * Méhode qui permet de sauvegarder une piste sur le bureau en fichier binaire
+	 */
+	private void sauvegardeUnePiste() {
+
+		Voiture voiture = new Voiture(new Vecteur2D(0, 0), Color.yellow, 50, 16, 0, 60);
+		regroupement = new Regroupement(voiture, 3, TypePiste.AUTRE);
+		regroupement.setListeAccelerateur(listeAccelerateur);
+		regroupement.setListePisteDeDepart(listePisteDeDepart);
+		regroupement.setListePisteHorizontale(listePisteHorizontale);
+		regroupement.setListePisteVerticale(listePisteVerticale);
+		regroupement.setListePisteVirageBas(listePisteVirageBas);
+		regroupement.setListePisteVirageDroit(listePisteVirageDroit);
+		regroupement.setListePisteVirageGauche(listePisteVirageGauche);
+		regroupement.setListePisteVirageHaut(listePisteVirageHaut);
+		regroupement.setRegroupementObjet(listeBlocMystere);
+
+		gestionFich.ecrireFichierBinBureau(regroupement);
+
+		comboBoxPiste.addItem(gestionFich.getNomFichBinEtud());
+		btnJouer.setEnabled(true);
+		JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU");
+
+	}
+
+	/**
+	 * Méthode qui permet de charger une piste qui est sur le bureau
+	 */
+
+	private void chargementUnePiste() {
+		regroupementSauvegarde = gestionFich.lireFichierBinBureau((String) comboBoxPiste.getSelectedItem());
+		listeAccelerateur.clear();
+		listePisteVirageBas.clear();
+		listePisteVirageHaut.clear();
+		listePisteVirageDroit.clear();
+		listePisteVirageGauche.clear();
+		listePisteVerticale.clear();
+		listePisteHorizontale.clear();
+		listePisteDeDepart.clear();
+		listeBlocMystere.clear();
+
+		// Pour les accelerateurs
+
+		for (int a = 0; a < regroupementSauvegarde.getListeAccelerateur().size(); a++) {
+			listeAccelerateur.add(regroupementSauvegarde.getListeAccelerateur().get(a));
+		}
+
+		// Pour piste virage bas
+
+		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageBas().size(); a++) {
+			listePisteVirageBas.add(regroupementSauvegarde.getListePisteVirageBas().get(a));
+		}
+
+		// Pour piste virage haut
+
+		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageHaut().size(); a++) {
+			listePisteVirageHaut.add(regroupementSauvegarde.getListePisteVirageHaut().get(a));
+
+		}
+
+		// Pour piste virage droite
+
+		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageDroit().size(); a++) {
+			listePisteVirageDroit.add(regroupementSauvegarde.getListePisteVirageDroit().get(a));
+		}
+
+		// Pour piste virage gauche
+
+		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageGauche().size(); a++) {
+			listePisteVirageGauche.add(regroupementSauvegarde.getListePisteVirageGauche().get(a));
+
+		}
+
+		// Pour piste verticale
+
+		for (int a = 0; a < regroupementSauvegarde.getListePisteVerticale().size(); a++) {
+			listePisteVerticale.add(regroupementSauvegarde.getListePisteVerticale().get(a));
+
+		}
+
+		// Pour piste horizontale
+
+		for (int a = 0; a < regroupementSauvegarde.getListePisteHorizontale().size(); a++) {
+			listePisteHorizontale.add(regroupementSauvegarde.getListePisteHorizontale().get(a));
+
+		}
+		// Pour piste de depart
+
+		for (int a = 0; a < regroupementSauvegarde.getListePisteDeDepart().size(); a++) {
+			listePisteDeDepart.add(regroupementSauvegarde.getListePisteDeDepart().get(a));
+
+		}
+		// Pour bloc mystere
+
+		for (int a = 0; a < regroupementSauvegarde.getRegroupementBoiteMystere().size(); a++) {
+			listeBlocMystere.add(regroupementSauvegarde.getRegroupementBoiteMystere().get(a));
+		}
+
+		repaint();
+
+		JOptionPane.showMessageDialog(null, "PISTE CHARGÉ AVEC SUCCÈS !");
 	}
 
 	/**
@@ -512,7 +631,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteVirageDroitDrag(MouseEvent e) {
 		if (listePisteVirageDroit.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEDROIT) {
@@ -535,7 +654,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteDeDepartDrag(MouseEvent e) {
 		if (listePisteDeDepart.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEDEDEPART) {
 			xPisteDeDepart += e.getX() - xPrecedent;
@@ -559,7 +678,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteVerticaleDrag(MouseEvent e) {
 		if (listePisteVerticale.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEVERTICALE) {
 			xPisteVerticale += e.getX() - xPrecedent;
@@ -581,7 +700,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteVirageHautDrag(MouseEvent e) {
 		if (listePisteVirageHaut.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEHAUT) {
@@ -604,7 +723,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteVirageGaucheDrag(MouseEvent e) {
 		if (listePisteVirageGauche.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEGAUCHE) {
@@ -627,7 +746,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteVirageBasDrag(MouseEvent e) {
 		if (listePisteVirageBas.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEVIRAGEBAS) {
 			xPisteVirageBas += e.getX() - xPrecedent;
@@ -649,7 +768,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteHorizontaleDrag(MouseEvent e) {
 		if (listePisteHorizontale.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEHORIZONTALE) {
@@ -672,7 +791,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteVirageHautPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageHaut.size(); a++) {
@@ -702,7 +821,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteVirageDroitPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageDroit.size(); a++) {
@@ -732,7 +851,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteDeDepartPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteDeDepart.size(); a++) {
@@ -762,7 +881,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteVerticalePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVerticale.size(); a++) {
@@ -792,7 +911,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteVirageGauchePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageGauche.size(); a++) {
@@ -822,7 +941,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteVirageBasPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageBas.size(); a++) {
@@ -852,7 +971,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void pisteHorizontalePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteHorizontale.size(); a++) {
@@ -882,7 +1001,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void accelerateurPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listeAccelerateur.size(); a++) {
@@ -911,7 +1030,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void blocMysterePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listeBlocMystere.size(); a++) {
@@ -940,7 +1059,6 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
 
 	private void accelerateurDrag(MouseEvent e) {
 		if (listeAccelerateur.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.ACCELERATEUR) {
@@ -963,7 +1081,7 @@ public class FenetreEditeur extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+
 	private void blocMystereDrag(MouseEvent e) {
 		if (listeBlocMystere.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.BLOCMYSTERE) {
 

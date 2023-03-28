@@ -40,6 +40,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblPositionEnXV1;
 	private JLabel lblPositionEnYV1;
 	private JLabel lblAngleVoiture1Rad;
+	private JLabel lblNombreToursVoiture1;
 	private JButton btnStart;
 	private JButton btnNextImg;
 	private JButton btnReset;
@@ -299,7 +300,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNombreToursV1.setBounds(10, 382, 132, 29);
 		panelDonneScientifique.add(lblNombreToursV1);
 
-		JLabel lblNombreToursVoiture1 = new JLabel("0.00");
+		lblNombreToursVoiture1 = new JLabel("0");
 		lblNombreToursVoiture1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNombreToursVoiture1.setBounds(157, 382, 65, 29);
 		panelDonneScientifique.add(lblNombreToursVoiture1);
@@ -336,6 +337,7 @@ public class FenetreJeuScientifique extends JPanel {
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("Retour", null, -1);
+
 				pcs.firePropertyChange("Test", null, -1);
 
 			}
@@ -441,6 +443,8 @@ public class FenetreJeuScientifique extends JPanel {
 			lblPositionEnYV1.setText(String.format("%.2f", evt.getNewValue()));
 		case "angleV1":
 			lblAngleVoiture1Rad.setText(String.format("%.2f", evt.getNewValue()));
+		case "nombreToursV1":
+			lblNombreToursVoiture1.setText(String.format("%.0f", evt.getNewValue()));
 		}
 	}
 }

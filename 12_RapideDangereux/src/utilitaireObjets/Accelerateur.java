@@ -5,10 +5,10 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
-import interfaces.TypeObjetDeplacable;
 
 /**
  * Classe permettant de gérer et créer un accélérateur
@@ -17,7 +17,12 @@ import interfaces.TypeObjetDeplacable;
  * @author
  *
  */
-public class Accelerateur implements Dessinable, Selectionnable {
+public class Accelerateur implements Dessinable, Selectionnable, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -542387902394258937L;
 
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 87;

@@ -25,11 +25,13 @@ public class BouleDeNeige {
 	private Vecteur2D vitesse = new Vecteur2D(100, 0); // par defaut
 	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
 	private Voiture voiture;
-	private Shape shapeBoule;
-	private Area bouleDeNeigeAire;
-	private Area bouleDeNeigeAireCopie;
-	private Area aireVoiture;
-	private Area aireVoiture1;
+
+	private transient Shape shapeBoule;
+	private transient Area bouleDeNeigeAire;
+	private transient Area bouleDeNeigeAireCopie;
+	private transient Area aireVoiture;
+	private transient Area aireVoiture1;
+
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.BOULEDENEIGE;
 	private boolean contactBouleNeige = true;
 	private Vecteur2D position;

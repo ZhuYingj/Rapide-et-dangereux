@@ -2,14 +2,13 @@ package utilitaireObjets;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.TypeObjetSpecial;
 import interfaces.TypePiste;
-import pisteDeCourse.PisteItalie;
-import pisteDeCourse.PisteMexique;
 
 /**
  * Méthode qui regroupe tout un circuit/piste. Il y a les objets spéciaux,
@@ -19,12 +18,17 @@ import pisteDeCourse.PisteMexique;
  * @author Kevin Nguyen
  */
 
-public class Regroupement implements Dessinable {
+public class Regroupement implements Dessinable, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -787642010013354365L;
 
 	/** Liste de boites mysteres **/
 	private ArrayList<BlocMystere> regroupementBoiteMystere;
-
-//	private ArrayList<Accelerateur> listeAccelerateur = new ArrayList<Accelerateur>();
+	/** Liste d'accelerateur **/
+	private ArrayList<Accelerateur> listeAccelerateur = new ArrayList<Accelerateur>();
 	/** Piste Horizontale **/
 	private ArrayList<PisteHorizontale> listePisteHorizontale = new ArrayList<PisteHorizontale>();
 	/** Piste Virage Bas **/
@@ -40,10 +44,6 @@ public class Regroupement implements Dessinable {
 	/** Piste Virage Haut **/
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
 
-	/** Piste Mexique **/
-	private PisteMexique pisteMexique = new PisteMexique(0, 0);
-	/** Piste Italie **/
-	private PisteItalie pisteItalie = new PisteItalie(0, 0);
 	/** Le nombre de pixels par metre **/
 	private double pixelsParMetre = 1;
 	/** Le nombre de boite mystere **/
@@ -51,15 +51,20 @@ public class Regroupement implements Dessinable {
 	/** Type de piste **/
 	private TypePiste type;
 	/** Nombre de tour initial **/
+
 	private int tour = 0;
 	
 	private ObjetSpecial objSpecial;
+
+	private double tours = 0;
+
 
 	/**
 	 * Méthode qui permet de créer un groupe à l'aide de paramètre
 	 * 
 	 * @param voiture     La voiture
 	 * @param nombreBoite Le nombre de boite
+	 * @param typePiste   Le type de piste
 	 */
 	// Par Tan Tommy Rin
 	public Regroupement(Voiture voiture, int nombreBoite, TypePiste typePiste) {
@@ -101,10 +106,10 @@ public class Regroupement implements Dessinable {
 				// Pour la boule de neige
 				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
 					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
-							pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
+							getListePisteDeDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
 						regroupementBoiteMystere.remove(a);
 					}
-				}// Fin condition pour la boule de neige
+				} // Fin condition pour la boule de neige
 			}
 		}
 
@@ -160,109 +165,16 @@ public class Regroupement implements Dessinable {
 
 		listePisteDeDepart.get(0).dessiner(g2dCopie);
 
+		for (int i = 0; i < listeAccelerateur.size(); i++) {
+			listeAccelerateur.get(i).dessiner(g2dCopie);
+		}
+
 		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
 
 			regroupementBoiteMystere.get(a).dessiner(g2dCopie);
 
 		}
 
-	}
-
-	public PisteItalie getPisteItalie() {
-		return pisteItalie;
-	}
-
-	public void setPisteItalie(PisteItalie pisteItalie) {
-		this.pisteItalie = pisteItalie;
-	}
-
-	public PisteMexique getPisteMexique() {
-		return pisteMexique;
-	}
-
-	public void setPisteMexique(PisteMexique pisteMexique) {
-		this.pisteMexique = pisteMexique;
-	}
-
-	public ArrayList<BlocMystere> getRegroupementBoiteMystere() {
-		return regroupementBoiteMystere;
-	}
-
-	public void setRegroupementObjet(ArrayList<BlocMystere> regroupementBoiteMystere) {
-		this.regroupementBoiteMystere = regroupementBoiteMystere;
-	}
-
-	public double getPixelsParMetre() {
-		return pixelsParMetre;
-	}
-
-	public void setPixelsParMetre(double pixelsParMetre) {
-		this.pixelsParMetre = pixelsParMetre;
-
-	}
-
-	public TypePiste getType() {
-		return type;
-	}
-
-	public void setType(TypePiste type) {
-		this.type = type;
-	}
-
-	public ArrayList<PisteHorizontale> getListePisteHorizontale() {
-		return listePisteHorizontale;
-	}
-
-	public void setListePisteHorizontale(ArrayList<PisteHorizontale> listePisteHorizontale) {
-		this.listePisteHorizontale = listePisteHorizontale;
-	}
-
-	public ArrayList<PisteVirageBas> getListePisteVirageBas() {
-		return listePisteVirageBas;
-	}
-
-	public void setListePisteVirageBas(ArrayList<PisteVirageBas> listePisteVirageBas) {
-		this.listePisteVirageBas = listePisteVirageBas;
-	}
-
-	public ArrayList<PisteVirageGauche> getListePisteVirageGauche() {
-		return listePisteVirageGauche;
-	}
-
-	public void setListePisteVirageGauche(ArrayList<PisteVirageGauche> listePisteVirageGauche) {
-		this.listePisteVirageGauche = listePisteVirageGauche;
-	}
-
-	public ArrayList<PisteVerticale> getListePisteVerticale() {
-		return listePisteVerticale;
-	}
-
-	public void setListePisteVerticale(ArrayList<PisteVerticale> listePisteVerticale) {
-		this.listePisteVerticale = listePisteVerticale;
-	}
-
-	public ArrayList<PisteDeDepart> getListePisteDeDepart() {
-		return listePisteDeDepart;
-	}
-
-	public void setListePisteDeDepart(ArrayList<PisteDeDepart> listePisteDeDepart) {
-		this.listePisteDeDepart = listePisteDeDepart;
-	}
-
-	public ArrayList<PisteVirageDroit> getListePisteVirageDroit() {
-		return listePisteVirageDroit;
-	}
-
-	public void setListePisteVirageDroit(ArrayList<PisteVirageDroit> listePisteVirageDroit) {
-		this.listePisteVirageDroit = listePisteVirageDroit;
-	}
-
-	public ArrayList<PisteVirageHaut> getListePisteVirageHaut() {
-		return listePisteVirageHaut;
-	}
-
-	public void setListePisteVirageHaut(ArrayList<PisteVirageHaut> listePisteVirageHaut) {
-		this.listePisteVirageHaut = listePisteVirageHaut;
 	}
 
 	/**
@@ -469,6 +381,103 @@ public class Regroupement implements Dessinable {
 			listePisteVirageBas.get(i).setColor(Color.black);
 		}
 		tour++;
+	}
+
+	public double getTour() {
+		return tour;
+	}
+
+	public void setTour(double tour) {
+		this.tours = tour;
+	}
+
+	public ArrayList<BlocMystere> getRegroupementBoiteMystere() {
+		return regroupementBoiteMystere;
+	}
+
+	public void setRegroupementObjet(ArrayList<BlocMystere> regroupementBoiteMystere) {
+		this.regroupementBoiteMystere = regroupementBoiteMystere;
+	}
+
+	public double getPixelsParMetre() {
+		return pixelsParMetre;
+	}
+
+	public void setPixelsParMetre(double pixelsParMetre) {
+		this.pixelsParMetre = pixelsParMetre;
+
+	}
+
+	public TypePiste getType() {
+		return type;
+	}
+
+	public void setType(TypePiste type) {
+		this.type = type;
+	}
+
+	public ArrayList<PisteHorizontale> getListePisteHorizontale() {
+		return listePisteHorizontale;
+	}
+
+	public void setListePisteHorizontale(ArrayList<PisteHorizontale> listePisteHorizontale) {
+		this.listePisteHorizontale = listePisteHorizontale;
+	}
+
+	public ArrayList<PisteVirageBas> getListePisteVirageBas() {
+		return listePisteVirageBas;
+	}
+
+	public void setListePisteVirageBas(ArrayList<PisteVirageBas> listePisteVirageBas) {
+		this.listePisteVirageBas = listePisteVirageBas;
+	}
+
+	public ArrayList<PisteVirageGauche> getListePisteVirageGauche() {
+		return listePisteVirageGauche;
+	}
+
+	public void setListePisteVirageGauche(ArrayList<PisteVirageGauche> listePisteVirageGauche) {
+		this.listePisteVirageGauche = listePisteVirageGauche;
+	}
+
+	public ArrayList<PisteVerticale> getListePisteVerticale() {
+		return listePisteVerticale;
+	}
+
+	public void setListePisteVerticale(ArrayList<PisteVerticale> listePisteVerticale) {
+		this.listePisteVerticale = listePisteVerticale;
+	}
+
+	public ArrayList<PisteDeDepart> getListePisteDeDepart() {
+		return listePisteDeDepart;
+	}
+
+	public void setListePisteDeDepart(ArrayList<PisteDeDepart> listePisteDeDepart) {
+		this.listePisteDeDepart = listePisteDeDepart;
+	}
+
+	public ArrayList<PisteVirageDroit> getListePisteVirageDroit() {
+		return listePisteVirageDroit;
+	}
+
+	public void setListePisteVirageDroit(ArrayList<PisteVirageDroit> listePisteVirageDroit) {
+		this.listePisteVirageDroit = listePisteVirageDroit;
+	}
+
+	public ArrayList<PisteVirageHaut> getListePisteVirageHaut() {
+		return listePisteVirageHaut;
+	}
+
+	public void setListePisteVirageHaut(ArrayList<PisteVirageHaut> listePisteVirageHaut) {
+		this.listePisteVirageHaut = listePisteVirageHaut;
+	}
+
+	public ArrayList<Accelerateur> getListeAccelerateur() {
+		return listeAccelerateur;
+	}
+
+	public void setListeAccelerateur(ArrayList<Accelerateur> listeAccelerateur) {
+		this.listeAccelerateur = listeAccelerateur;
 	}
 
 }

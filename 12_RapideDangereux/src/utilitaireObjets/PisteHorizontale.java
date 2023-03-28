@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -18,7 +19,10 @@ import physique.MoteurPhysique;
  * @author Kevin Nguyen
  */
 
-public class PisteHorizontale implements Dessinable, Selectionnable {
+public class PisteHorizontale implements Dessinable, Selectionnable, Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 
@@ -82,7 +86,9 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 	}
 
 	/**
-	 * Méthode permettant de calculer la collision avec les murs du morceau de piste ainsi que de calculer l'angle de réflexion
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
+	 * ainsi que de calculer l'angle de réflexion
+	 * 
 	 * @param voiture La voiture controllée
 	 */
 	// Kevin Nguyen
@@ -141,6 +147,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable {
 
 	/**
 	 * Méthode permettant de savoir si la voiture est passée sur la piste
+	 * 
 	 * @param voiture La voiture controllée
 	 */
 	// Kevin Nguyen

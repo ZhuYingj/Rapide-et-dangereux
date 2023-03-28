@@ -18,6 +18,12 @@ import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Voiture;
 
+/**
+ * Classe qui crée la piste Italie
+ * 
+ * @author Kevin Nguyen
+ *
+ */
 public class PisteItalie {
 
 	/** Taille de la piste qui est toujours constante **/
@@ -40,16 +46,26 @@ public class PisteItalie {
 	private ArrayList<PisteVirageDroit> droit = new ArrayList<PisteVirageDroit>();
 	/** Piste Virage Haut **/
 	private ArrayList<PisteVirageHaut> haut = new ArrayList<PisteVirageHaut>();
-	
+
 	/** Nombre de pixels par metre **/
 	private double pixelsParMetre;
 
+	/**
+	 * Constructeur que l'on spécifie la position du coin supérieur gauche du
+	 * circuit
+	 * 
+	 * @param x position en x de la piste
+	 * @param y position en y de la piste
+	 */
 	public PisteItalie(int x, int y) {
 		this.x = x;
 		this.y = y;
 		creerLaGeometrie();
 	}
 
+	/**
+	 * Méthode qui crée le circuit complet
+	 */
 	public void creerLaGeometrie() {
 		bas.add(new PisteVirageBas(x, y));
 		this.x = x + taillePiste;

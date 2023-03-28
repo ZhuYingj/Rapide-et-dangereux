@@ -131,7 +131,7 @@ public class ObjetSpecial implements Dessinable {
 			voiture.setSommeDesForces(voitureSlow);
 			System.out.println(voitureSlow);
 			return true;
-		}else {
+		} else {
 			System.out.println("NORMAL SPEED!!!");
 			Vecteur2D voitureNormal = new Vecteur2D();
 			voitureNormal = MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), voiture.getAngle());
