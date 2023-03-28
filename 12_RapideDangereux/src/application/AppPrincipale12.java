@@ -156,7 +156,6 @@ public class AppPrincipale12 extends JFrame {
 			}
 		});
 		
-		
 
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {

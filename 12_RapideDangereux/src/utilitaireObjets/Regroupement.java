@@ -463,9 +463,9 @@ public class Regroupement implements Dessinable {
 			listePisteVirageHaut.get(i).setColor(Color.black);
 		}
 
-		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
-			listePisteVirageGauche.get(i).setCollision(false);
-			listePisteVirageGauche.get(i).setColor(Color.black);
+		for (int i = 0; i < listePisteVirageBas.size(); i++) {
+			listePisteVirageBas.get(i).setCollision(false);
+			listePisteVirageBas.get(i).setColor(Color.black);
 		}
 		tour++;
 	}
