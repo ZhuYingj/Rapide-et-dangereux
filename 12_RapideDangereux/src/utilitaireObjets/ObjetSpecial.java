@@ -49,7 +49,7 @@ public class ObjetSpecial implements Dessinable {
 
 		}
 		if (type == TypeObjetSpecial.BOULEDENEIGE) {
-			BouleDeNeige bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet, type);
+			BouleDeNeige bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet);
 			bouleDeNeige.dessiner(g2d);
 			
 		}
