@@ -91,8 +91,8 @@ public class JeuOptions extends JPanel {
 		add(btnCanada);
 		btnCanada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				type = TypePiste.CANADA;
-				imageActuelle = OutilsImage.lireImage("Construction.gif");
+				type = TypePiste.CANADA;
+				imageActuelle = OutilsImage.lireImage("PisteCanada.png");
 				zoneApercupiste.setImg(imageActuelle);
 				zoneApercupiste.repaint();
 			}
