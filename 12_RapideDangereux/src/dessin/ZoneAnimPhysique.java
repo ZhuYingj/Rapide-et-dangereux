@@ -9,8 +9,10 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import application.GestionnaireDeFichiersSurLeBureau;
 import geometrie.Vecteur2D;
 import interfaces.TypeObjetSpecial;
 import interfaces.TypePiste;
@@ -35,6 +37,7 @@ import utilitaireObjets.Voiture;
  */
 
 public class ZoneAnimPhysique extends JPanel implements Runnable {
+	private GestionnaireDeFichiersSurLeBureau gestionFich;
 
 	/** Largeur du composant en metres. */
 	private double largeurDuComposantEnMetres = 640;
@@ -53,7 +56,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/
 	private boolean premiereFois = true;
 	/** Valeur booléenne pour savoir si ces touches sont appuyés **/
-	private boolean droite, gauche, haut, bas, space;
+	private boolean droite, gauche, haut, bas, boutonSpace;
 	/** Position x de la voiture **/
 	double x = 0;
 	/** Position y de la voiture **/
@@ -88,8 +91,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private TypePiste typePiste = TypePiste.CANADA;
 	/** L'objet special **/
 	private ObjetSpecial objSpecial;
-	/** Piste Canada**/
+	/** Piste Canada **/
 	private PisteCanada pisteCanada;
+	/**
+	 * De type canada mais c'est une autre piste que l'on changera tout par un
+	 * setter
+	 **/
+	private PisteCanada pisteAutre;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -103,17 +111,23 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Kevin Nguyen
 	public ZoneAnimPhysique() {
-
+		gestionFich = new GestionnaireDeFichiersSurLeBureau();
 		pisteMexique = new PisteMexique(0, 0);
 		pisteItalie = new PisteItalie(0, 0);
 		pisteCanada = new PisteCanada(0, 0);
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
 
-		regroupement = new Regroupement(voiture, 3, typePiste);
+
+		regroupement = new Regroupement(voiture, 3, TypePiste.MEXIQUE);
 		objSpecial = new ObjetSpecial(new Vecteur2D(getWidth() / 2.0, getHeight() / 2.0), 20,
 				TypeObjetSpecial.BOULEDENEIGE);
 
-		
+
+		regroupement = new Regroupement(voiture, 3, typePiste);
+
+		objSpecial = new ObjetSpecial(new Vecteur2D(getWidth() / 2.0, getHeight() / 2.0), 20,
+				TypeObjetSpecial.BOULEDENEIGE);
+
 
 		objSpecial = new ObjetSpecial(new Vecteur2D(90, 40), 20, TypeObjetSpecial.BOULEDENEIGE);
 		addKeyListener(new KeyAdapter() {
@@ -182,8 +196,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		case KeyEvent.VK_UP:
 			haut = true;
 			break;
-		case KeyEvent.VK_Q:
-			space = true;
+		case KeyEvent.VK_SPACE:
+			boutonSpace = true;
 			break;
 		}
 	}
@@ -210,7 +224,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		case KeyEvent.VK_UP:
 			haut = false;
 			break;
-
+		case KeyEvent.VK_SPACE:
+			boutonSpace = false;
+			break;
 		}
 
 	}
@@ -282,8 +298,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 							20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
 							20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
 		}
-
-		if (space == true) {
+		if (boutonSpace == true) {
 			System.out.println("yo");
 		}
 	}
@@ -602,6 +617,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		return typePiste;
 	}
 
+	public Regroupement getRegroupement() {
+		return regroupement;
+	}
+
+	public void setRegroupement(Regroupement regroupement) {
+		this.regroupement = regroupement;
+	}
+
 	/**
 	 * Méthode qui change le type de piste et change tous les listes des morceaux
 	 * par ceux de la piste choisi
@@ -632,7 +655,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageHaut(pisteItalie.getHaut());
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 		}
-
 		if (typePiste == TypePiste.CANADA) {
 			regroupement.setListePisteDeDepart(pisteCanada.getDepart());
 			regroupement.setListePisteHorizontale(pisteCanada.getHorizontale());
@@ -642,6 +664,22 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageGauche(pisteCanada.getGauche());
 			regroupement.setListePisteVirageHaut(pisteCanada.getHaut());
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
-	}
+
+		}
+		if (typePiste == TypePiste.AUTRE) {
+			Regroupement regroupementTempo = (gestionFich.lireFichierBinBureau("regroupement1.dat"));
+			regroupement.setListePisteDeDepart(regroupementTempo.getListePisteDeDepart());
+			regroupement.setListePisteHorizontale(regroupementTempo.getListePisteHorizontale());
+			regroupement.setListePisteVerticale(regroupementTempo.getListePisteVerticale());
+			regroupement.setListePisteVirageBas(regroupementTempo.getListePisteVirageBas());
+			regroupement.setListePisteVirageDroit(regroupementTempo.getListePisteVirageDroit());
+			regroupement.setListePisteVirageGauche(regroupementTempo.getListePisteVirageGauche());
+			regroupement.setListePisteVirageHaut(regroupementTempo.getListePisteVirageHaut());
+			voiture.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+					regroupement.getListePisteDeDepart().get(0).getY()));
+
+			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
+
+		}
 	}
 }

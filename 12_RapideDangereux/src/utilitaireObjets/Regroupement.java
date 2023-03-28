@@ -9,8 +9,6 @@ import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.TypeObjetSpecial;
 import interfaces.TypePiste;
-import pisteDeCourse.PisteItalie;
-import pisteDeCourse.PisteMexique;
 
 /**
  * Méthode qui regroupe tout un circuit/piste. Il y a les objets spéciaux,
@@ -53,7 +51,13 @@ public class Regroupement implements Dessinable, Serializable {
 	/** Type de piste **/
 	private TypePiste type;
 	/** Nombre de tour initial **/
-	private double tour = 0;
+
+	private int tour = 0;
+	
+	private ObjetSpecial objSpecial;
+
+	private double tours = 0;
+
 
 	/**
 	 * Méthode qui permet de créer un groupe à l'aide de paramètre
@@ -384,7 +388,7 @@ public class Regroupement implements Dessinable, Serializable {
 	}
 
 	public void setTour(double tour) {
-		this.tour = tour;
+		this.tours = tour;
 	}
 
 	public ArrayList<BlocMystere> getRegroupementBoiteMystere() {

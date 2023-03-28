@@ -145,7 +145,6 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 
 		if (enContact == true) {
 			objetSpecial.dessiner(g2d);
-			
 		}
 
 	}

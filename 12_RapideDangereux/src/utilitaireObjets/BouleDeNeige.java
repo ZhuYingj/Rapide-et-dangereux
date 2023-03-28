@@ -3,16 +3,13 @@ package utilitaireObjets;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
-import dessin.ZoneAnimPhysique;
 import geometrie.Vecteur2D;
-import interfaces.Dessinable;
-import interfaces.Selectionnable;
 import interfaces.TypeObjetSpecial;
-import physique.MoteurPhysique;
 
 /**
  * Classe qui crée et gère tous ce qui de la boule de neige
@@ -38,6 +35,7 @@ public class BouleDeNeige {
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.BOULEDENEIGE;
 	private boolean contactBouleNeige = true;
 	private Vecteur2D position;
+	private boolean boutonQ;
 
 	/**
 	 * Méthode qui crée la boule de neige
@@ -53,6 +51,7 @@ public class BouleDeNeige {
 		this.position = pos;
 
 		creerLaGeometrie();
+		
 	}
 
 	/**
@@ -107,6 +106,7 @@ public class BouleDeNeige {
 	public void deplacementBoule() {
 
 	}
+
 
 	/**
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
