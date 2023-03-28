@@ -115,7 +115,6 @@ public class GestionnaireDeFichiersSurLeBureau {
 		}
 
 		try {
-			System.out.println("OUI");
 			ois = new ObjectInputStream(new FileInputStream(fichierDeTravail));
 			regroupement = (Regroupement) ois.readObject();
 

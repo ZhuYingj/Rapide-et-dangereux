@@ -70,6 +70,7 @@ public class FenetreEditeur extends JPanel {
 	private JButton btnAjouterPisteDeDepart;
 	private JComboBox<String> comboBoxPiste;
 	private Regroupement regroupementSauvegarde;
+	private PanelObjet panelObjet;
 
 	private Regroupement regroupement;
 	private BlocMystere blocMystere;
@@ -121,7 +122,7 @@ public class FenetreEditeur extends JPanel {
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
-		PanelObjet panelObjet = new PanelObjet();
+		panelObjet = new PanelObjet();
 		panelObjet.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelObjet.setBounds(920, 11, 386, 720);
 		add(panelObjet);
@@ -1053,9 +1054,12 @@ public class FenetreEditeur extends JPanel {
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
-			acc.setX((int) xAccelerateur);
-			acc.setY((int) yAccelerateur);
-			acc.getFormeAire().setRect(xAccelerateur, yAccelerateur, acc.getTaillePiste(), acc.getTaillePiste());
+			if (xAccelerateur + acc.getTaillePiste() < panelObjet.getX()) {
+				acc.setX((int) xAccelerateur);
+				acc.setY((int) yAccelerateur);
+				acc.getFormeAire().setRect(xAccelerateur, yAccelerateur, acc.getTaillePiste(), acc.getTaillePiste());
+
+			}
 
 		}
 	}
