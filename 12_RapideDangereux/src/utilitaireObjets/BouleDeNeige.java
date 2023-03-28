@@ -21,18 +21,20 @@ import physique.MoteurPhysique;
  *
  */
 
-public class BouleDeNeige extends ObjetSpecial {
+public class BouleDeNeige {
 	private double diametre;
 	private Ellipse2D.Double boule;
 	private double pixelsParMetre;
 	private Vecteur2D vitesse = new Vecteur2D(100, 0); // par defaut
 	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
 	private Voiture voiture;
+
 	private transient Shape shapeBoule;
 	private transient Area bouleDeNeigeAire;
 	private transient Area bouleDeNeigeAireCopie;
 	private transient Area aireVoiture;
 	private transient Area aireVoiture1;
+
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.BOULEDENEIGE;
 	private boolean contactBouleNeige = true;
 	private Vecteur2D position;
@@ -45,10 +47,10 @@ public class BouleDeNeige extends ObjetSpecial {
 	 * @param typeObjet le type d'objet spéciale
 	 */
 	// Alexis Pineda-Alvarado
-	public BouleDeNeige(Vecteur2D pos, double diametre, TypeObjetSpecial typeObjet) {
-		super(pos, diametre, typeObjet);
-		this.diametre = super.getDiametreObjet();
-		this.position = super.getPositionObjet();
+	public BouleDeNeige(Vecteur2D pos, double diametre) {
+
+		this.diametre = diametre;
+		this.position = pos;
 
 		creerLaGeometrie();
 	}
@@ -60,12 +62,10 @@ public class BouleDeNeige extends ObjetSpecial {
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dcop = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
-		mat.scale(pixelsParMetre, pixelsParMetre);
+//		mat.scale(pixelsParMetre, pixelsParMetre);
 		shapeBoule = mat.createTransformedShape(boule);
 		g2dcop.setColor(Color.cyan);
 		g2dcop.fill(shapeBoule);
-
-
 
 		bouleDeNeigeAire = new Area(shapeBoule);
 		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);

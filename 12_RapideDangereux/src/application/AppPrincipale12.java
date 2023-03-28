@@ -15,7 +15,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import fenetre.FenetreCourseMontre;
 import fenetre.FenetreEditeur;
+import fenetre.FenetreJeuMontre;
 import fenetre.FenetreJeuSansScientifique;
 import fenetre.FenetreJeuScientifique;
 import fenetre.FenetreMenu;
@@ -77,6 +79,8 @@ public class AppPrincipale12 extends JFrame {
 		FenetreJeuSansScientifique fenSansScience = new FenetreJeuSansScientifique();
 		FenetreJeuScientifique fenJeuScience = new FenetreJeuScientifique();
 		JeuOptions fenOptions = new JeuOptions();
+		FenetreJeuMontre fenJeuMontre = new FenetreJeuMontre();
+		FenetreCourseMontre fenOptionMontre = new FenetreCourseMontre();
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -139,6 +143,19 @@ public class AppPrincipale12 extends JFrame {
 				actionRetourOptions2(evt, fenSansScience, fenOptions);
 			}
 		});
+		
+		fenModeJeu.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				actionChangeJeuOptionCourse(evt, fenModeJeu, fenOptionMontre);
+			}
+		});
+		
+		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				actionChangeJeuCourse(evt, fenOptionMontre, fenJeuMontre);
+			}
+		});
+		
 
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
@@ -409,6 +426,42 @@ public class AppPrincipale12 extends JFrame {
 		fenJeuScience.setVisible(true);
 		setContentPane(fenJeuScience);
 
+	}
+	
+	/**
+	 * Méthode qui change la fenêtre du mode de jeu avec la fenêtre des options
+	 * pour le mode Course contre la montre
+	 * 
+	 * @param evt			evenement
+	 * @param fenModeJeu	fenêtre de la selection de mode de jeu
+	 * @param fenOptionMontre	fenêtre des paramètres a choisir dans le mode course contre la montre
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionChangeJeuOptionCourse(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreCourseMontre fenOptionMontre) {
+		switch (evt.getPropertyName()) {
+		case "COURSE CONTRE LA MONTRE" : 
+			fenOptionMontre.setVisible(true);
+			fenModeJeu.setVisible(false);
+			setContentPane(fenOptionMontre);
+		}
+	}
+	
+	/**
+	 * Méthode qui change la fenêtre des options pour le mode de jeu course contre la montre avec
+	 * la fenêtre du jeu
+	 * 
+	 * @param evt			evenement
+	 * @param fenOptionMontre	fenêtre des paramètres a choisir dans le mode course contre la montre
+	 * @param fenJeuMontre	fenêtre du jeu avec les paramètres scientifiques pour le mode de jeu course contre la montre
+	 */
+	//Alexis Pineda-Alvarado
+	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreCourseMontre fenOptionMontre, FenetreJeuMontre fenJeuMontre) {
+		switch (evt.getPropertyName()) {
+		case "COMMENCER!" : 
+			fenOptionMontre.setVisible(false);
+			fenJeuMontre.setVisible(true);
+			setContentPane(fenJeuMontre);
+		}
 	}
 
 	/**

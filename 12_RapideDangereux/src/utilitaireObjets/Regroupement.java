@@ -100,13 +100,12 @@ public class Regroupement implements Dessinable, Serializable {
 				} // Fin condition pour le champignon
 
 				// Pour la boule de neige
-//					if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
-//						if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
-//								pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
-//							regroupementBoiteMystere.remove(a);
-//						}
-//					}
-
+				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
+							getListePisteDeDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
+						regroupementBoiteMystere.remove(a);
+					}
+				} // Fin condition pour la boule de neige
 			}
 		}
 
@@ -373,9 +372,9 @@ public class Regroupement implements Dessinable, Serializable {
 			listePisteVirageHaut.get(i).setColor(Color.black);
 		}
 
-		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
-			listePisteVirageGauche.get(i).setCollision(false);
-			listePisteVirageGauche.get(i).setColor(Color.black);
+		for (int i = 0; i < listePisteVirageBas.size(); i++) {
+			listePisteVirageBas.get(i).setCollision(false);
+			listePisteVirageBas.get(i).setColor(Color.black);
 		}
 		tour++;
 	}

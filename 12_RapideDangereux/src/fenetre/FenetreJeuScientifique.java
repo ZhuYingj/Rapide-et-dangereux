@@ -341,7 +341,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 			}
 		});
-		btnRetour.setBounds(10, 3, 89, 23);
+		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
 		btnStart = new JButton("Start");

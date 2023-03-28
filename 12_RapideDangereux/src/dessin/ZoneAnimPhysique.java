@@ -105,10 +105,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pisteItalie = new PisteItalie(0, 0);
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
 
+		regroupement = new Regroupement(voiture, 3, TypePiste.MEXIQUE);
+		objSpecial = new ObjetSpecial(new Vecteur2D(getWidth() / 2.0, getHeight() / 2.0), 20,
+				TypeObjetSpecial.BOULEDENEIGE);
+
+
 		regroupement = new Regroupement(voiture, 3, typePiste);
 
-		objSpecial = new ObjetSpecial(new Vecteur2D(20, 20), 20, TypeObjetSpecial.BOULEDENEIGE);
-
+		objSpecial = new ObjetSpecial(new Vecteur2D(90, 40), 20, TypeObjetSpecial.BOULEDENEIGE);
 		addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -153,7 +157,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.dessiner(g2d);
 		objSpecial.setPixelParMetre(pixelsParMetre);
 		objSpecial.dessiner(g2d);
-
 	}
 
 	/**
