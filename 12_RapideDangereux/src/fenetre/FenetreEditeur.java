@@ -131,7 +131,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterAccelerateur = new JButton("+");
 		btnAjouterAccelerateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Accelerateur accelerateur = new Accelerateur(100, 50);
+				Accelerateur accelerateur = new Accelerateur(10, 50);
 				listeAccelerateur.add(accelerateur);
 				repaint();
 			}
@@ -154,7 +154,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterBlocMystere = new JButton("+");
 		btnAjouterBlocMystere.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BlocMystere blocMystere = new BlocMystere(15, new Vecteur2D(100, 150));
+				BlocMystere blocMystere = new BlocMystere(15, new Vecteur2D(120, 50));
 				listeBlocMystere.add(blocMystere);
 				repaint();
 
@@ -178,7 +178,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteHorizontale = new JButton("+");
 		btnAjouterPisteHorizontale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteHorizontale pisteHorizontale = new PisteHorizontale(100, 250);
+				PisteHorizontale pisteHorizontale = new PisteHorizontale(150, 50);
 				listePisteHorizontale.add(pisteHorizontale);
 				repaint();
 			}
@@ -189,7 +189,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageBas = new JButton("+");
 		btnAjouterPisteVirageBas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageBas pisteVirageBas = new PisteVirageBas(100, 350);
+				PisteVirageBas pisteVirageBas = new PisteVirageBas(250, 50);
 				listePisteVirageBas.add(pisteVirageBas);
 				repaint();
 			}
@@ -200,7 +200,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageGauche = new JButton("+");
 		btnAjouterPisteVirageGauche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageGauche pisteVirageGauche = new PisteVirageGauche(100, 450);
+				PisteVirageGauche pisteVirageGauche = new PisteVirageGauche(350, 50);
 				listePisteVirageGauche.add(pisteVirageGauche);
 				repaint();
 			}
@@ -248,7 +248,7 @@ public class FenetreEditeur extends JPanel {
 		btnAjouterPisteDeDepart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (listePisteDeDepart.size() == 0) {
-					PisteDeDepart pisteDeDepart = new PisteDeDepart(100, 550);
+					PisteDeDepart pisteDeDepart = new PisteDeDepart(450, 50);
 					listePisteDeDepart.add(pisteDeDepart);
 					btnAjouterPisteDeDepart.setEnabled(false);
 				}
@@ -261,7 +261,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVerticale = new JButton("+");
 		btnAjouterPisteVerticale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVerticale pisteVerticale = new PisteVerticale(250, 450);
+				PisteVerticale pisteVerticale = new PisteVerticale(550, 50);
 				listePisteVerticale.add(pisteVerticale);
 				repaint();
 			}
@@ -297,7 +297,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageDroite = new JButton("+");
 		btnAjouterPisteVirageDroite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageDroit psiteVirageDroit = new PisteVirageDroit(100, 650);
+				PisteVirageDroit psiteVirageDroit = new PisteVirageDroit(650, 50);
 				listePisteVirageDroit.add(psiteVirageDroit);
 				repaint();
 			}
@@ -320,7 +320,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageHaut = new JButton("+");
 		btnAjouterPisteVirageHaut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageHaut pisteVirageHaut = new PisteVirageHaut(250, 150);
+				PisteVirageHaut pisteVirageHaut = new PisteVirageHaut(750, 50);
 				listePisteVirageHaut.add(pisteVirageHaut);
 				repaint();
 			}
@@ -346,7 +346,7 @@ public class FenetreEditeur extends JPanel {
 				sauvegardeUnePiste();
 			}
 		});
-		btnSauvegarde.setBounds(363, 11, 205, 23);
+		btnSauvegarde.setBounds(132, 11, 205, 23);
 		add(btnSauvegarde);
 
 		JButton btnChargerPisteSauvegarde = new JButton("CHARGER LA PISTE SAUVEGARDÉ");
@@ -356,11 +356,11 @@ public class FenetreEditeur extends JPanel {
 
 			}
 		});
-		btnChargerPisteSauvegarde.setBounds(596, 11, 214, 23);
+		btnChargerPisteSauvegarde.setBounds(347, 11, 214, 23);
 		add(btnChargerPisteSauvegarde);
 
 		comboBoxPiste = new JComboBox();
-		comboBoxPiste.setBounds(596, 45, 214, 43);
+		comboBoxPiste.setBounds(571, 11, 214, 23);
 		add(comboBoxPiste);
 
 		addMouseMotionListener(new MouseMotionAdapter() {
@@ -439,87 +439,58 @@ public class FenetreEditeur extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		if (listePisteVirageDroit.size() != 0) {
 
-			for (int a = 0; a < listePisteVirageDroit.size(); a++) {
+		for (int a = 0; a < listePisteVirageDroit.size(); a++) {
 
-				listePisteVirageDroit.get(a).dessiner(g2d);
-
-			}
+			listePisteVirageDroit.get(a).dessiner(g2d);
 
 		}
 
-		if (listePisteDeDepart.size() != 0) {
+		for (int a = 0; a < listePisteDeDepart.size(); a++) {
 
-			for (int a = 0; a < listePisteDeDepart.size(); a++) {
-
-				listePisteDeDepart.get(a).dessiner(g2d);
-
-			}
+			listePisteDeDepart.get(a).dessiner(g2d);
 
 		}
 
-		if (listePisteHorizontale.size() != 0) {
+		for (int a = 0; a < listePisteHorizontale.size(); a++) {
 
-			for (int a = 0; a < listePisteHorizontale.size(); a++) {
-
-				listePisteHorizontale.get(a).dessiner(g2d);
-
-			}
+			listePisteHorizontale.get(a).dessiner(g2d);
 
 		}
 
-		if (listePisteVirageBas.size() != 0) {
+		for (int a = 0; a < listePisteVirageBas.size(); a++) {
 
-			for (int a = 0; a < listePisteVirageBas.size(); a++) {
-
-				listePisteVirageBas.get(a).dessiner(g2d);
-
-			}
-		}
-
-		if (listePisteVirageGauche.size() != 0) {
-
-			for (int a = 0; a < listePisteVirageGauche.size(); a++) {
-
-				listePisteVirageGauche.get(a).dessiner(g2d);
-
-			}
-		}
-		if (listePisteVerticale.size() != 0) {
-
-			for (int a = 0; a < listePisteVerticale.size(); a++) {
-
-				listePisteVerticale.get(a).dessiner(g2d);
-
-			}
+			listePisteVirageBas.get(a).dessiner(g2d);
 
 		}
-		if (listePisteVirageHaut.size() != 0) {
 
-			for (int a = 0; a < listePisteVirageHaut.size(); a++) {
+		for (int a = 0; a < listePisteVirageGauche.size(); a++) {
 
-				listePisteVirageHaut.get(a).dessiner(g2d);
-
-			}
+			listePisteVirageGauche.get(a).dessiner(g2d);
 
 		}
-		if (listeAccelerateur.size() != 0) {
 
-			for (int a = 0; a < listeAccelerateur.size(); a++) {
+		for (int a = 0; a < listePisteVerticale.size(); a++) {
 
-				listeAccelerateur.get(a).dessiner(g2d);
-
-			}
+			listePisteVerticale.get(a).dessiner(g2d);
 
 		}
-		if (listeBlocMystere.size() != 0) {
 
-			for (int a = 0; a < listeBlocMystere.size(); a++) {
+		for (int a = 0; a < listePisteVirageHaut.size(); a++) {
 
-				listeBlocMystere.get(a).dessiner(g2d);
+			listePisteVirageHaut.get(a).dessiner(g2d);
 
-			}
+		}
+
+		for (int a = 0; a < listeAccelerateur.size(); a++) {
+
+			listeAccelerateur.get(a).dessiner(g2d);
+
+		}
+
+		for (int a = 0; a < listeBlocMystere.size(); a++) {
+
+			listeBlocMystere.get(a).dessiner(g2d);
 
 		}
 
@@ -578,75 +549,62 @@ public class FenetreEditeur extends JPanel {
 		listeBlocMystere.clear();
 
 		// Pour les accelerateurs
-		if (regroupementSauvegarde.getListeAccelerateur().size() != 0) {
 
-			for (int a = 0; a < regroupementSauvegarde.getListeAccelerateur().size(); a++) {
-				listeAccelerateur.add(regroupementSauvegarde.getListeAccelerateur().get(a));
-			}
+		for (int a = 0; a < regroupementSauvegarde.getListeAccelerateur().size(); a++) {
+			listeAccelerateur.add(regroupementSauvegarde.getListeAccelerateur().get(a));
 		}
 
 		// Pour piste virage bas
-		if (regroupementSauvegarde.getListePisteVirageBas().size() != 0) {
 
-			for (int a = 0; a < regroupementSauvegarde.getListePisteVirageBas().size(); a++) {
-				listePisteVirageBas.add(regroupementSauvegarde.getListePisteVirageBas().get(a));
-			}
+		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageBas().size(); a++) {
+			listePisteVirageBas.add(regroupementSauvegarde.getListePisteVirageBas().get(a));
 		}
 
 		// Pour piste virage haut
-		if (regroupementSauvegarde.getListePisteVirageHaut().size() != 0) {
 
-			for (int a = 0; a < regroupementSauvegarde.getListePisteVirageHaut().size(); a++) {
-				listePisteVirageHaut.add(regroupementSauvegarde.getListePisteVirageHaut().get(a));
-			}
+		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageHaut().size(); a++) {
+			listePisteVirageHaut.add(regroupementSauvegarde.getListePisteVirageHaut().get(a));
+
 		}
 
 		// Pour piste virage droite
-		if (regroupementSauvegarde.getListePisteVirageDroit().size() != 0) {
 
-			for (int a = 0; a < regroupementSauvegarde.getListePisteVirageDroit().size(); a++) {
-				listePisteVirageDroit.add(regroupementSauvegarde.getListePisteVirageDroit().get(a));
-			}
+		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageDroit().size(); a++) {
+			listePisteVirageDroit.add(regroupementSauvegarde.getListePisteVirageDroit().get(a));
 		}
 
 		// Pour piste virage gauche
-		if (regroupementSauvegarde.getListePisteVirageGauche().size() != 0) {
 
-			for (int a = 0; a < regroupementSauvegarde.getListePisteVirageGauche().size(); a++) {
-				listePisteVirageGauche.add(regroupementSauvegarde.getListePisteVirageGauche().get(a));
-			}
+		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageGauche().size(); a++) {
+			listePisteVirageGauche.add(regroupementSauvegarde.getListePisteVirageGauche().get(a));
+
 		}
 
 		// Pour piste verticale
-		if (regroupementSauvegarde.getListePisteVerticale().size() != 0) {
 
-			for (int a = 0; a < regroupementSauvegarde.getListePisteVerticale().size(); a++) {
-				listePisteVerticale.add(regroupementSauvegarde.getListePisteVerticale().get(a));
-			}
+		for (int a = 0; a < regroupementSauvegarde.getListePisteVerticale().size(); a++) {
+			listePisteVerticale.add(regroupementSauvegarde.getListePisteVerticale().get(a));
+
 		}
 
 		// Pour piste horizontale
-		if (regroupementSauvegarde.getListePisteHorizontale().size() != 0) {
 
-			for (int a = 0; a < regroupementSauvegarde.getListePisteHorizontale().size(); a++) {
-				listePisteHorizontale.add(regroupementSauvegarde.getListePisteHorizontale().get(a));
-			}
+		for (int a = 0; a < regroupementSauvegarde.getListePisteHorizontale().size(); a++) {
+			listePisteHorizontale.add(regroupementSauvegarde.getListePisteHorizontale().get(a));
+
 		}
 		// Pour piste de depart
-		if (regroupementSauvegarde.getListePisteDeDepart().size() != 0) {
 
-			for (int a = 0; a < regroupementSauvegarde.getListePisteDeDepart().size(); a++) {
-				listePisteDeDepart.add(regroupementSauvegarde.getListePisteDeDepart().get(a));
-			}
+		for (int a = 0; a < regroupementSauvegarde.getListePisteDeDepart().size(); a++) {
+			listePisteDeDepart.add(regroupementSauvegarde.getListePisteDeDepart().get(a));
+
 		}
 		// Pour bloc mystere
-		if (regroupementSauvegarde.getRegroupementBoiteMystere().size() != 0) {
 
-			for (int a = 0; a < regroupementSauvegarde.getRegroupementBoiteMystere().size(); a++) {
-				listeBlocMystere.add(regroupementSauvegarde.getRegroupementBoiteMystere().get(a));
-			}
-
+		for (int a = 0; a < regroupementSauvegarde.getRegroupementBoiteMystere().size(); a++) {
+			listeBlocMystere.add(regroupementSauvegarde.getRegroupementBoiteMystere().get(a));
 		}
+
 		repaint();
 
 		JOptionPane.showMessageDialog(null, "PISTE CHARGÉ AVEC SUCCÈS !");

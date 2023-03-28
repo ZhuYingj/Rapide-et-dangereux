@@ -46,8 +46,8 @@ public class GestionnaireDeFichiersSurLeBureau {
 		nomFichBinRegroupement = "regroupement" + nombrePiste + ".dat";
 
 		// on commence par creer un objet voiture. Ce dernier a une position, une
-		// Adresse, et
-		// une collection de notes (al�atoires)
+		// couleur, une masse, un diametre, un angle et une vitesse maximale selon le
+		// niveau choisi
 		Voiture voiture = new Voiture(new Vecteur2D(0, 0), Color.yellow, 50, 16, 0, 60);
 
 		// chemin d'acces au dossier
