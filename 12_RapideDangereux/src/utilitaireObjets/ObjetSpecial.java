@@ -1,6 +1,7 @@
 package utilitaireObjets;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Area;
 import java.util.ArrayList;
 
 import geometrie.Vecteur2D;
@@ -112,6 +113,7 @@ public class ObjetSpecial implements Dessinable {
 		}
 
 	}
+	
 
 	/**
 	 * 
@@ -125,7 +127,7 @@ public class ObjetSpecial implements Dessinable {
 		if ((tempsTemporaire + 1 > tempsFinal)) {
 			System.out.println("SLOW DOWN!!!");
 			Vecteur2D voitureSlow = new Vecteur2D();
-			voitureSlow = MoteurPhysique.calculerForceFrottement(2.00, voiture.getMasseEnKg(), voiture.getAngle());
+			voitureSlow = MoteurPhysique.calculerForceFrottement(2.50, voiture.getMasseEnKg(), voiture.getAngle());
 			voiture.setSommeDesForces(voitureSlow);
 			System.out.println(voitureSlow);
 			return true;
@@ -138,6 +140,7 @@ public class ObjetSpecial implements Dessinable {
 		}
 
 	}
+	
 
 	public boolean isFonctionActive() {
 		return fonctionActive;

@@ -142,7 +142,6 @@ public class BlocMystere implements Dessinable, Selectionnable {
 
 		if (enContact == true) {
 			objetSpecial.dessiner(g2d);
-			
 		}
 
 	}

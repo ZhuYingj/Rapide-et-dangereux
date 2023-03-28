@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import geometrie.Vecteur2D;
@@ -52,7 +53,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/
 	private boolean premiereFois = true;
 	/** Valeur booléenne pour savoir si ces touches sont appuyés **/
-	private boolean droite, gauche, haut, bas, space;
+	private boolean droite, gauche, haut, bas, boutonSpace;
 	/** Position x de la voiture **/
 	double x = 0;
 	/** Position y de la voiture **/
@@ -108,7 +109,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement = new Regroupement(voiture, 3, TypePiste.MEXIQUE);
 		objSpecial = new ObjetSpecial(new Vecteur2D(getWidth() / 2.0, getHeight() / 2.0), 20,
 				TypeObjetSpecial.BOULEDENEIGE);
-
 
 		regroupement = new Regroupement(voiture, 3, typePiste);
 
@@ -179,8 +179,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		case KeyEvent.VK_UP:
 			haut = true;
 			break;
-		case KeyEvent.VK_Q:
-			space = true;
+		case KeyEvent.VK_SPACE:
+			boutonSpace = true;
 			break;
 		}
 	}
@@ -207,7 +207,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		case KeyEvent.VK_UP:
 			haut = false;
 			break;
-
+		case KeyEvent.VK_SPACE:
+			boutonSpace = false;
+			break;
 		}
 
 	}
@@ -279,8 +281,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 							20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
 							20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
 		}
-
-		if (space == true) {
+		if (boutonSpace == true) {
 			System.out.println("yo");
 		}
 	}

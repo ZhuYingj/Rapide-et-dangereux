@@ -52,6 +52,8 @@ public class Regroupement implements Dessinable {
 	private TypePiste type;
 	/** Nombre de tour initial **/
 	private int tour = 0;
+	
+	private ObjetSpecial objSpecial;
 
 	/**
 	 * Méthode qui permet de créer un groupe à l'aide de paramètre
