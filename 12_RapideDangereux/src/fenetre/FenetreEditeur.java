@@ -34,6 +34,7 @@ import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
 import javax.swing.JComboBox;
+import java.beans.PropertyChangeEvent;
 
 /**
  * Classe qui permet de créer et gérer la fenetre éditeur. La sauvegarde d'un
@@ -66,6 +67,7 @@ public class FenetreEditeur extends JPanel {
 
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
 
+	private JButton btnJouer;
 	private JButton btnRetour;
 	private JButton btnAjouterPisteDeDepart;
 	private JComboBox<String> comboBoxPiste;
@@ -363,6 +365,18 @@ public class FenetreEditeur extends JPanel {
 		comboBoxPiste.setBounds(571, 11, 214, 23);
 		add(comboBoxPiste);
 
+		btnJouer = new JButton("JOUER");
+		btnJouer.setEnabled(false);
+		btnJouer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("JOUEREDITEUR", null, -1);
+				pcs.firePropertyChange("REGROUPEMENT", null, regroupement);
+			}
+		});
+
+		btnJouer.setBounds(812, 11, 89, 23);
+		add(btnJouer);
+
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
@@ -512,8 +526,9 @@ public class FenetreEditeur extends JPanel {
 	 * Méhode qui permet de sauvegarder une piste sur le bureau en fichier binaire
 	 */
 	private void sauvegardeUnePiste() {
+
 		Voiture voiture = new Voiture(new Vecteur2D(0, 0), Color.yellow, 50, 16, 0, 60);
-		regroupement = new Regroupement(voiture, 3, TypePiste.MEXIQUE);
+		regroupement = new Regroupement(voiture, 3, TypePiste.AUTRE);
 		regroupement.setListeAccelerateur(listeAccelerateur);
 		regroupement.setListePisteDeDepart(listePisteDeDepart);
 		regroupement.setListePisteHorizontale(listePisteHorizontale);
@@ -527,7 +542,7 @@ public class FenetreEditeur extends JPanel {
 		gestionFich.ecrireFichierBinBureau(regroupement);
 
 		comboBoxPiste.addItem(gestionFich.getNomFichBinEtud());
-
+		btnJouer.setEnabled(true);
 		JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU");
 
 	}

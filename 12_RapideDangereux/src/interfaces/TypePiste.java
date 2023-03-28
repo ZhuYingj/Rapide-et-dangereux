@@ -10,6 +10,6 @@ import java.io.Serializable;
 
 public enum TypePiste implements Serializable {
 
-	CANADA, ITALIE, MEXIQUE;
+	CANADA, ITALIE, MEXIQUE, AUTRE;
 
 }

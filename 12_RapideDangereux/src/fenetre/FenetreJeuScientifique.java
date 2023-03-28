@@ -337,6 +337,7 @@ public class FenetreJeuScientifique extends JPanel {
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("Retour", null, -1);
+
 				pcs.firePropertyChange("Test", null, -1);
 
 			}
