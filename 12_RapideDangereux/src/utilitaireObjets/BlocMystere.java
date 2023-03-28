@@ -74,7 +74,7 @@ public class BlocMystere implements Dessinable, Selectionnable {
 
 		if (!aireCopieVoiture.isEmpty() && enContact == false) {
 			objetRandomChoisi(voiture);
-
+			
 			enContact = true;
 
 		}
