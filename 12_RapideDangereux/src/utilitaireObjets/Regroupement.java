@@ -50,7 +50,7 @@ public class Regroupement implements Dessinable {
 	private int nombreBoiteMystere = 1;
 	/** Type de piste **/
 	private TypePiste type;
-	/** Nombre de tour initial  **/
+	/** Nombre de tour initial **/
 	private int tour = 0;
 
 	/**
@@ -97,13 +97,12 @@ public class Regroupement implements Dessinable {
 				} // Fin condition pour le champignon
 
 				// Pour la boule de neige
-//					if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
-//						if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
-//								pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
-//							regroupementBoiteMystere.remove(a);
-//						}
-//					}
-
+				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
+							pisteMexique.getDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
+						regroupementBoiteMystere.remove(a);
+					}
+				}// Fin condition pour la boule de neige
 			}
 		}
 
