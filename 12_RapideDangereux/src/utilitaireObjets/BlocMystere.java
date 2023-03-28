@@ -6,6 +6,7 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -18,7 +19,9 @@ import interfaces.TypeObjetSpecial;
  * @author TanTommyRin
  *
  */
-public class BlocMystere implements Dessinable, Selectionnable {
+public class BlocMystere implements Dessinable, Selectionnable, Serializable {
+
+	private static final long serialVersionUID = 1L;
 	/** Le nombre de pixel par metre **/
 	private double pixelParMetre = 1;
 	/** Le diametre de la boite **/
@@ -27,11 +30,11 @@ public class BlocMystere implements Dessinable, Selectionnable {
 	private Vecteur2D position;
 	/** La forme de la boite **/
 	private Rectangle2D carre;
-	private Shape shapeCarre;
+	private transient Shape shapeCarre;
 	private ObjetSpecial objetSpecial;
 	/** Boolean pour savoir si la voiture est en contact avec la boite **/
 	private boolean enContact = false;
-	private Graphics2D gTempo;
+	private transient Graphics2D gTempo;
 
 	/**
 	 * Méthode qui permet de construire un bloc mystere avec des parametres

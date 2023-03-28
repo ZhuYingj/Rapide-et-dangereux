@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.io.Serializable;
 
 import geometrie.FlecheVectorielle;
 import geometrie.Vecteur2D;
@@ -19,7 +20,9 @@ import physique.MoteurPhysique;
  * @author Kevin Nguyen
  */
 
-public class Voiture implements Dessinable{
+public class Voiture implements Dessinable, Serializable {
+
+	private static final long serialVersionUID = 1L;
 	/** Diametre de la voiture puisque la voiture est un cercle **/
 	private double diametre = 1;
 	/** Masse de la voiture **/
@@ -43,7 +46,7 @@ public class Voiture implements Dessinable{
 	/** Angle en degré pour la fleche vectorielle **/
 	private double angle = 0;
 	/** Notre voiture après transformation **/
-	private Shape voitureTransfo;
+	private transient Shape voitureTransfo;
 	/** Vitesse maximale selon le niveau sélectionné **/
 	private double vitesseMaxSelonNiveau;
 	/** Le diametre de la voiture initial **/
@@ -297,7 +300,6 @@ public class Voiture implements Dessinable{
 		creerLaGeometrie(); // la position a changé! on recree notre cercle
 
 	}
-
 
 	/**
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre

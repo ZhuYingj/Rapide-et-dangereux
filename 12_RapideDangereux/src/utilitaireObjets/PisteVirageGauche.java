@@ -7,6 +7,7 @@ import java.awt.Stroke;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -20,7 +21,12 @@ import physique.MoteurPhysique;
  * @author Kevin Nguyen
  */
 
-public class PisteVirageGauche implements Dessinable, Selectionnable {
+public class PisteVirageGauche implements Dessinable, Selectionnable, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
@@ -48,7 +54,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable {
 	/** Initialise la forme du triangle **/
 	private Path2D triangle;
 	/** Initialise l'aire du triangle **/
-	private Area aireTriangle;
+	private transient Area aireTriangle;
 	/** Boolean collision initié à faux **/
 	private boolean collision = false;
 	/** Couleur de la piste initié à noir**/

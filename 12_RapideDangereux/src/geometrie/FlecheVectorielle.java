@@ -3,12 +3,13 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
+import java.io.Serializable;
 
 import interfaces.Dessinable;
 
 /**
  * Cette classe permet de dessiner une fleche, dans un contexte ou le programmeur
- * désire utiliser cette fleche pour illustrer visuellement un vecteur.
+ * dï¿½sire utiliser cette fleche pour illustrer visuellement un vecteur.
  * La position de la tete de la fleche est trouvee grace aux composantes fournies 
  * dans le constructeur.
  * 
@@ -23,8 +24,13 @@ import interfaces.Dessinable;
  * @author Caroline Houle
  *
  */
-public class FlecheVectorielle implements Dessinable {
+public class FlecheVectorielle implements Dessinable, Serializable {
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2966771360580481375L;
 	private double x1, y1;
 	private double x2, y2;
 	private Line2D.Double corps, traitDeTete;   //geometrie necessaire
@@ -34,7 +40,7 @@ public class FlecheVectorielle implements Dessinable {
 
 	/**
 	 * Cree une fleche en specifiant son origine ainsi qu'un vecteur qui indique
-	 * ses composantes (longueurs des déplacements en x et en y pour déterminer ou se
+	 * ses composantes (longueurs des dï¿½placements en x et en y pour dï¿½terminer ou se
 	 * trouve la pointe de la fleche)
 	 * @param x1 origine en x
 	 * @param y1 origine en y
@@ -50,7 +56,7 @@ public class FlecheVectorielle implements Dessinable {
 	
 	/**
 	 * Cree une fleche en specifiant son origine et la dimension de ses composantes (longueurs
-	 * des déplacements en x et en y pour déterminer ou se trouve la pointe de la fleche)
+	 * des dï¿½placements en x et en y pour dï¿½terminer ou se trouve la pointe de la fleche)
 	 * @param x1 origine en x
 	 * @param y1 origine en y
 	 * @param dx longueur de la composante en x
@@ -73,8 +79,8 @@ public class FlecheVectorielle implements Dessinable {
 		corps = new Line2D.Double(x1, y1, x2, y2);
 		
 		/*
-		 En utilisant la theorie des triangles semblables, créer un petit trait qui se
-		 confond avec le corps de la flèche. En ajoutant des rotations a ce trait au moment
+		 En utilisant la theorie des triangles semblables, crï¿½er un petit trait qui se
+		 confond avec le corps de la flï¿½che. En ajoutant des rotations a ce trait au moment
 		 du dessin on obtiendra la positionde la pointe de la fleche.
 		*/
 		double longueurFleche = Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
@@ -86,7 +92,7 @@ public class FlecheVectorielle implements Dessinable {
 	}
 	
 	/**
-	 * Dessiner la flèche
+	 * Dessiner la flï¿½che
 	 * @param g2d Le contexte graphique
 	 */
 	@Override
@@ -105,8 +111,8 @@ public class FlecheVectorielle implements Dessinable {
 	}// fin
 	
 	/**
-	 * Permet de modifier la longueur du corps en multipliant le tout par un facteur spécifié.
-	 * L'orgine de la fleche demeure la même, mais sa deuxieme extremite (positionde la pointe) se 
+	 * Permet de modifier la longueur du corps en multipliant le tout par un facteur spï¿½cifiï¿½.
+	 * L'orgine de la fleche demeure la mï¿½me, mais sa deuxieme extremite (positionde la pointe) se 
 	 * trouvera modifiee!
 	 * @param facteurRedim Facteur multiplicatif pour la  longueur du corps. Un facteur 1 ne changera rien.
 	 */
@@ -118,7 +124,7 @@ public class FlecheVectorielle implements Dessinable {
 	
 	/**
 	 * Retourne la valeur de l'angle entre les deux traits formant la tete de la fleche 
-	 * @return L'angle entre les deux pointes de la flèche, en degres
+	 * @return L'angle entre les deux pointes de la flï¿½che, en degres
 	 */
 	public double getAngleTete() {
 		return angleTete;
@@ -134,7 +140,7 @@ public class FlecheVectorielle implements Dessinable {
 	}
 
 	/**
-	 * Retourne la longueur du segment utilisé pour tracer la tete de la flèche 
+	 * Retourne la longueur du segment utilisï¿½ pour tracer la tete de la flï¿½che 
 	 * @return Longueur du segment
 	 */
 	public double getLongueurTraitDeTete() {
@@ -142,7 +148,7 @@ public class FlecheVectorielle implements Dessinable {
 	}
 
 	/**
-	 * Modifie la longueur du segment utilisé pour tracer la tete de la flèche 
+	 * Modifie la longueur du segment utilisï¿½ pour tracer la tete de la flï¿½che 
 	 * @param longueurTete longueur du segment de tete
 	 */
 	public void setLongueurTraitDeTete(double longueurTete) {

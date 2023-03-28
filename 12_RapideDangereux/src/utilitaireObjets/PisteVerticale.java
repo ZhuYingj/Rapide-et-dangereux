@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -18,7 +19,12 @@ import physique.MoteurPhysique;
  * @author Kevin Nguyen
  */
 
-public class PisteVerticale implements Dessinable, Selectionnable {
+public class PisteVerticale implements Dessinable, Selectionnable, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;

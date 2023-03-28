@@ -433,7 +433,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Par Tan Tommy Rin
 	public void changementTexteParIteration() {
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
-
 		pcs.firePropertyChange("accEnXV1", 0, voiture.getAccel().getX());
 		pcs.firePropertyChange("accEnYV1", 0, voiture.getAccel().getY());
 		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getX());
@@ -441,6 +440,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("posEnXV1", 0, voiture.getPosition().getX() / pixelsParMetre);
 		pcs.firePropertyChange("posEnYV1", 0, voiture.getPosition().getY() / pixelsParMetre);
 		pcs.firePropertyChange("angleV1", 0, voiture.getAngle());
+		pcs.firePropertyChange("nombreToursV1", 0, regroupement.getTour());
+
 	}
 
 	/**

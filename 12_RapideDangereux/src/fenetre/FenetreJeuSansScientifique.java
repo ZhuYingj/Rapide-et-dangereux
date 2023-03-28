@@ -51,7 +51,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 
 		zoneAnimPhysique = new ZoneAnimPhysique();
 		zoneAnimPhysique.setBorder(null);
-		zoneAnimPhysique.setBounds(10, 55, 1280, 515);
+		zoneAnimPhysique.setBounds(10, 40, 910, 571);
 		add(zoneAnimPhysique);
 		zoneAnimPhysique.setLayout(null);
 
