@@ -1,5 +1,11 @@
-/fenetre/
-/dessin/
-/utilitaireObjets/
-/pisteDeCourse/
+/Construction.gif
+/PisteItalie.PNG
+/PisteMexique.PNG
 /application/
+/dessin/
+/fenetre/
+/geometrie/
+/interfaces/
+/physique/
+/pisteDeCourse/
+/utilitaireObjets/

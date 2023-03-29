@@ -95,6 +95,7 @@ public class ZoneVitesse extends JPanel{
 	 * methode qui ajoute une seconde au tableau temps
 	 */
 	public void ajouterTemps() {
+		int k;
 		int n = temps.size();
 		temps.add(n);
 		repaint();
