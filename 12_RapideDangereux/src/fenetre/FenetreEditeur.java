@@ -376,6 +376,10 @@ public class FenetreEditeur extends JPanel {
 
 		btnJouer.setBounds(812, 11, 89, 23);
 		add(btnJouer);
+		
+		PanelQuadrillage panelQuadrillage = new PanelQuadrillage();
+		panelQuadrillage.setBounds(0, 0, 639, 400);
+		add(panelQuadrillage);
 
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
