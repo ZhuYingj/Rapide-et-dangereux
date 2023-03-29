@@ -391,7 +391,7 @@ public class FenetreJeuScientifique extends JPanel {
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("Retour", null, -1);
+				pcs.firePropertyChange("RetourDuJeuScience", null, -1);
 
 				pcs.firePropertyChange("Test", null, -1);
 
@@ -450,6 +450,14 @@ public class FenetreJeuScientifique extends JPanel {
 		btnStop.setBounds(538, 563, 89, 76);
 		add(btnStop);
 
+	}
+
+	public JButton getBtnStart() {
+		return btnStart;
+	}
+
+	public void setBtnStart(JButton btnStart) {
+		this.btnStart = btnStart;
 	}
 
 	/**

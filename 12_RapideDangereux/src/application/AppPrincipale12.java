@@ -15,16 +15,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import fenetre.FenetreCourseMontre;
+import fenetre.FenetreOptionMontre;
 import fenetre.FenetreEditeur;
-import fenetre.FenetreJeuMontre;
 import fenetre.FenetreJeuSansScientifique;
 import fenetre.FenetreJeuScientifique;
 import fenetre.FenetreMenu;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
 import interfaces.TypePiste;
-import utilitaireObjets.Regroupement;
 
 /**
  * Application permettant d'illustrer une simulation physique
@@ -80,8 +78,7 @@ public class AppPrincipale12 extends JFrame {
 		FenetreJeuSansScientifique fenSansScience = new FenetreJeuSansScientifique();
 		FenetreJeuScientifique fenJeuScience = new FenetreJeuScientifique();
 		JeuOptions fenOptions = new JeuOptions();
-		FenetreJeuMontre fenJeuMontre = new FenetreJeuMontre();
-		FenetreCourseMontre fenOptionMontre = new FenetreCourseMontre();
+		FenetreOptionMontre fenOptionMontre = new FenetreOptionMontre();
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -110,7 +107,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenEditeur.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionRetourModeJeu1(evt, fenModeJeu, fenEditeur);
+				actionRetourModeJeu1(evt, fenModeJeu, fenEditeur , fenJeuScience);
 
 			}
 		});
@@ -142,7 +139,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenJeuScience.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionRetourOptions(evt, fenJeuScience, fenOptions, fenEditeur);
+				actionRetourOptions(evt, fenJeuScience, fenModeJeu);
 			}
 		});
 
@@ -160,7 +157,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionChangeJeuCourse(evt, fenOptionMontre, fenJeuMontre);
+				actionChangeJeuCourse(evt, fenOptionMontre, fenJeuScience);
 			}
 		});
 
@@ -293,7 +290,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenEditeur fenêtre du mode editeur
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionRetourModeJeu1(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur) {
+	public void actionRetourModeJeu1(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur, FenetreJeuScientifique fenJeuScience) {
 		switch (evt.getPropertyName()) {
 
 		case "Retour":
@@ -301,6 +298,8 @@ public class AppPrincipale12 extends JFrame {
 			fenModeJeu.setVisible(true);
 			fenEditeur.setVisible(false);
 			setContentPane(fenModeJeu);
+			fenJeuScience.getZoneAnimPhysique().restartPos();
+			fenJeuScience.getBtnStart().setEnabled(true);
 			break;
 
 		}
@@ -385,13 +384,16 @@ public class AppPrincipale12 extends JFrame {
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience,
-			JeuOptions fenOptions, FenetreEditeur fenEdition) {
+			ModeDeJeu fenModeJeu) {
 
 		switch (evt.getPropertyName()) {
-		case "Retour":
+		case "RetourDuJeuScience":
 			fenJeuScience.setVisible(false);
-			fenOptions.setVisible(true);
-			setContentPane(fenOptions);
+			fenModeJeu.setVisible(true);
+			setContentPane(fenModeJeu);
+			fenJeuScience.getZoneAnimPhysique().restartPos();
+			fenJeuScience.getBtnStart().setEnabled(true);
+			
 			break;
 
 		case "STARTBUTTONACTIVE":
@@ -475,12 +477,13 @@ public class AppPrincipale12 extends JFrame {
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionChangeJeuOptionCourse(PropertyChangeEvent evt, ModeDeJeu fenModeJeu,
-			FenetreCourseMontre fenOptionMontre) {
+			FenetreOptionMontre fenOptionMontre) {
 		switch (evt.getPropertyName()) {
 		case "COURSE CONTRE LA MONTRE":
 			fenOptionMontre.setVisible(true);
 			fenModeJeu.setVisible(false);
 			setContentPane(fenOptionMontre);
+			break;
 		}
 	}
 
@@ -495,13 +498,15 @@ public class AppPrincipale12 extends JFrame {
 	 *                        le mode de jeu course contre la montre
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreCourseMontre fenOptionMontre,
-			FenetreJeuMontre fenJeuMontre) {
+	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
+			FenetreJeuScientifique fenJeuScience) {
 		switch (evt.getPropertyName()) {
-		case "COMMENCER!":
+		case "COMMENCER COURSE MONTRE":
 			fenOptionMontre.setVisible(false);
-			fenJeuMontre.setVisible(true);
-			setContentPane(fenJeuMontre);
+			fenJeuScience.setVisible(true);
+			setContentPane(fenJeuScience);
+			break;
+
 		}
 	}
 
@@ -521,7 +526,8 @@ public class AppPrincipale12 extends JFrame {
 					JOptionPane.showMessageDialog(null,
 							"Bonjour dans RAPIDE ET DANGEREUX! \nle but de ce jeux et de battre votre combattant"
 									+ " \nles contrôles du jeu sont :  \n↑ : pour avancer la voiture"
-									+ " \n← et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture");
+									+ " \n← et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture"
+									+ "\nLes boîtes jaunes choisisent un effet mis sur la voiture au hasard lorsque vous la toucher");
 				}
 			}
 		});
