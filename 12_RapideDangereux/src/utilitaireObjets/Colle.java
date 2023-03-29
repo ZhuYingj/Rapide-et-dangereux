@@ -10,7 +10,7 @@ import java.awt.geom.Ellipse2D;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.TypeObjetSpecial;
-<<<<<<< HEAD
+
 /**
  * class qui permet de creer un objet colle
  * 
@@ -18,12 +18,7 @@ import interfaces.TypeObjetSpecial;
  *
  */
 public class Colle implements Dessinable {
-=======
 
-public class Colle {
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
-
-<<<<<<< HEAD
 	/** Taille de la piste qui est toujours constante **/
 	private static final int TAILLE_PISTE = 87;
 	/** la position en x de depart que l'objet piste vas etre creer **/
@@ -31,6 +26,19 @@ public class Colle {
 	/** la position en y de depart que l'objet piste vas etre creer  **/
 	private int y;
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.COLLE;
+	private transient Shape shapeColle;
+	private transient Area bouleDeNeigeAire;
+	private transient Area bouleDeNeigeAireCopie;
+	private transient Area aireVoiture;
+
+	private double pixelsParMetre;;
+
+	private Ellipse2D.Double colle;
+
+	private double diametre;
+	private Vecteur2D position;
+
+	
 	
 	/**
 	 * Méthode qui permet de créer un objet colle à l'aide de paramètres
@@ -42,38 +50,24 @@ public class Colle {
 	public Colle(int x, int y) {
 		this.x = x;
 		this.y = y;
-=======
-	private transient Shape shapeColle;
-	private transient Area bouleDeNeigeAire;
-	private transient Area bouleDeNeigeAireCopie;
-	private transient Area aireVoiture;
-
-	private TypeObjetSpecial typeObjet = TypeObjetSpecial.COLLE;
-
-	private double pixelsParMetre;;
-
-	private Ellipse2D.Double colle;
-
-	private double diametre;
-	private Vecteur2D position;
+	}
 
 	public Colle(Vecteur2D pos, double diametre) {
 		this.diametre = diametre;
 		this.position = pos;
 
 		creerLaGeometrie();
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
+
 	}
-<<<<<<< HEAD
+
 	
 	/**
 	 * Methode qui permet de dessiner l'objet colle sur la zone d'animation a
 	 * l'aide de g2d
 	 */
 	@Override
-=======
 
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
+
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dcop = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
@@ -87,7 +81,7 @@ public class Colle {
 
 	}
 
-<<<<<<< HEAD
+
 	public TypeObjetSpecial getTypeObjet() {
 		return typeObjet;
 	}
@@ -96,10 +90,7 @@ public class Colle {
 		this.typeObjet = typeObjet;
 	}
 
-	}
-	
 
-=======
 	private void creerLaGeometrie() {
 
 		colle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
@@ -128,4 +119,4 @@ public class Colle {
 	}
 
 }
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
+
