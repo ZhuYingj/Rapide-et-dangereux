@@ -299,6 +299,7 @@ public class AppPrincipale12 extends JFrame {
 			fenEditeur.setVisible(false);
 			setContentPane(fenModeJeu);
 			fenJeuScience.getZoneAnimPhysique().restartPos();
+			fenJeuScience.getBtnStart().setEnabled(true);
 			break;
 
 		}
@@ -391,6 +392,8 @@ public class AppPrincipale12 extends JFrame {
 			fenModeJeu.setVisible(true);
 			setContentPane(fenModeJeu);
 			fenJeuScience.getZoneAnimPhysique().restartPos();
+			fenJeuScience.getBtnStart().setEnabled(true);
+			
 			break;
 
 		case "STARTBUTTONACTIVE":

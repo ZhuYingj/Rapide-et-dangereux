@@ -397,6 +397,14 @@ public class FenetreJeuScientifique extends JPanel {
 
 	}
 
+	public JButton getBtnStart() {
+		return btnStart;
+	}
+
+	public void setBtnStart(JButton btnStart) {
+		this.btnStart = btnStart;
+	}
+
 	/**
 	 * Méthode qui retourne la zone d'animation physique
 	 * 
