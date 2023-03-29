@@ -1,5 +1,6 @@
 package fenetre;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -121,7 +122,7 @@ public class FenetreEditeur extends JPanel {
 				pcs.firePropertyChange("Retour", null, -1);
 			}
 		});
-		btnRetour.setBounds(10, 11, 89, 23);
+		btnRetour.setBounds(11, 411, 89, 23);
 		add(btnRetour);
 
 		panelObjet = new PanelObjet();
@@ -349,7 +350,7 @@ public class FenetreEditeur extends JPanel {
 				sauvegardeUnePiste();
 			}
 		});
-		btnSauvegarde.setBounds(132, 11, 205, 23);
+		btnSauvegarde.setBounds(110, 411, 205, 23);
 		add(btnSauvegarde);
 
 		JButton btnChargerPisteSauvegarde = new JButton("CHARGER LA PISTE SAUVEGARDÉ");
@@ -359,11 +360,11 @@ public class FenetreEditeur extends JPanel {
 
 			}
 		});
-		btnChargerPisteSauvegarde.setBounds(347, 11, 214, 23);
+		btnChargerPisteSauvegarde.setBounds(325, 411, 214, 23);
 		add(btnChargerPisteSauvegarde);
 
 		comboBoxPiste = new JComboBox();
-		comboBoxPiste.setBounds(571, 11, 214, 23);
+		comboBoxPiste.setBounds(11, 445, 214, 23);
 		add(comboBoxPiste);
 
 		btnJouer = new JButton("JOUER");
@@ -375,12 +376,8 @@ public class FenetreEditeur extends JPanel {
 			}
 		});
 
-		btnJouer.setBounds(812, 11, 89, 23);
+		btnJouer.setBounds(235, 445, 89, 23);
 		add(btnJouer);
-		
-		PanelQuadrillage panelQuadrillage = new PanelQuadrillage();
-		panelQuadrillage.setBounds(0, 0, 639, 400);
-		add(panelQuadrillage);
 
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -512,6 +509,7 @@ public class FenetreEditeur extends JPanel {
 			listeBlocMystere.get(a).dessiner(g2d);
 
 		}
+		creationQuadrillage(g2d);
 
 	}
 
@@ -1124,6 +1122,28 @@ public class FenetreEditeur extends JPanel {
 			blocMystere.setPosition(new Vecteur2D(xBlocMystere, yBlocMystere));
 			blocMystere.setCarre(new Rectangle2D.Double(xBlocMystere, yBlocMystere, 87, 87));
 
+		}
+	}
+	
+	/**
+	 * Méthode qui dessine le quadrillage 
+	 * 
+	 * @param g2d	paramètre qui permet a dessiner
+	 */
+	//Alexis Pineda-Alvarado
+	private void creationQuadrillage(Graphics2D g2d) {
+		Graphics2D g2dCopie = (Graphics2D) g2d.create();
+		int x = 80;
+		int y = 80;
+		 int tailleDuCarre = 80;
+		
+		for (int i = 0; i < 8; i++) {
+			for (int b = 0; b < 5; b++) {
+				g2dCopie.setStroke(new BasicStroke(1));
+				g2dCopie.setColor(Color.black);
+				g2dCopie.drawRect(x * i, y * b, tailleDuCarre, tailleDuCarre);
+
+			}
 		}
 	}
 }
