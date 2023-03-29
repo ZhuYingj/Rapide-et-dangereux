@@ -121,9 +121,9 @@ public class FenetreOptionMontre extends JPanel {
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("COMMENCER COURSE MONTRE", null, -1);
-//				pcs.firePropertyChange("MASSEMONTRE", null, (double) slider.getValue());
-//				pcs.firePropertyChange("CHOISIRPYSTE", null, type);
+				pcs.firePropertyChange("COMMENCER!", null, -1);
+				//pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
+				pcs.firePropertyChange("TYPEPISTE", null, type);
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);

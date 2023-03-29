@@ -107,7 +107,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenEditeur.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionRetourModeJeu1(evt, fenModeJeu, fenEditeur , fenJeuScience);
+				actionRetourModeJeu1(evt, fenModeJeu, fenEditeur, fenJeuScience);
 
 			}
 		});
@@ -158,6 +158,12 @@ public class AppPrincipale12 extends JFrame {
 		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionChangeJeuCourse(evt, fenOptionMontre, fenJeuScience);
+			}
+		});
+
+		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				actionChangeOptionMontre(evt, fenOptionMontre, fenModeJeu);
 			}
 		});
 
@@ -290,7 +296,8 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenEditeur fenêtre du mode editeur
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionRetourModeJeu1(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur, FenetreJeuScientifique fenJeuScience) {
+	public void actionRetourModeJeu1(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur,
+			FenetreJeuScientifique fenJeuScience) {
 		switch (evt.getPropertyName()) {
 
 		case "Retour":
@@ -299,6 +306,7 @@ public class AppPrincipale12 extends JFrame {
 			fenEditeur.setVisible(false);
 			setContentPane(fenModeJeu);
 			fenJeuScience.getZoneAnimPhysique().restartPos();
+			fenJeuScience.getBtnStart().setEnabled(true);
 			break;
 
 		}
@@ -391,6 +399,8 @@ public class AppPrincipale12 extends JFrame {
 			fenModeJeu.setVisible(true);
 			setContentPane(fenModeJeu);
 			fenJeuScience.getZoneAnimPhysique().restartPos();
+			fenJeuScience.getBtnStart().setEnabled(true);
+
 			break;
 
 		case "STARTBUTTONACTIVE":
@@ -485,14 +495,13 @@ public class AppPrincipale12 extends JFrame {
 	}
 
 	/**
-	 * Méthode qui change la fenêtre des options pour le mode de jeu course contre
-	 * la montre avec la fenêtre du jeu
+	 * Méthode qui permet de changer de la fenêtre des options pour le mode Course
+	 * contre la montre à la fenêtre du jeu
 	 * 
 	 * @param evt             evenement
-	 * @param fenOptionMontre fenêtre des paramètres a choisir dans le mode course
-	 *                        contre la montre
-	 * @param fenJeuMontre    fenêtre du jeu avec les paramètres scientifiques pour
-	 *                        le mode de jeu course contre la montre
+	 * @param fenOptionMontre fenêtre des paramàtres pour le mode course contre la
+	 *                        montre
+	 * @param fenJeuScience   fenêtre du jeu avec les paramàtres scientifiques
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
@@ -504,6 +513,27 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenJeuScience);
 			break;
 
+		}
+	}
+
+	/**
+	 * Méthode qui permet de revenir dans la fenêtre des modes de jeu a partir de la
+	 * fenêtre des options pour le mode de jeu course contre la montre
+	 * 
+	 * @param evt				evenement
+	 * @param fenOptionMontre	fenêtre des paramàtres pour le mode course contre la
+	 *                        	montre
+	 * @param fenModeJeu		fenêtre de la selection de mode de jeu
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionChangeOptionMontre(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
+			ModeDeJeu fenModeJeu) {
+		switch (evt.getPropertyName()) {
+		case "Retour":
+			fenOptionMontre.setVisible(false);
+			fenModeJeu.setVisible(true);
+			setContentPane(fenModeJeu);
+			break;
 		}
 	}
 
@@ -522,9 +552,20 @@ public class AppPrincipale12 extends JFrame {
 				if (e.getKeyCode() == KeyEvent.VK_P) {
 					JOptionPane.showMessageDialog(null,
 							"Bonjour dans RAPIDE ET DANGEREUX! \nle but de ce jeux et de battre votre combattant"
-									+ " \nles contrôles du jeu sont :  \n↑ : pour avancer la voiture"
-									+ " \n← et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture"
-									+ "\nLes boîtes jaunes choisisent un effet mis sur la voiture au hasard lorsque vous la toucher");
+									+ "\nles contrôles du jeu pour la voiture 1 sont :  "
+									+ "\n↑ : pour avancer la voiture"
+									+ "\n← et → : pour tourner a gauche et a droite "
+									+ "\n↓ : pour freiner "
+									+ "\nles contrôles du jeu pour la voiture 2 sont : "
+									+ "\nW : pour avancer la voiture"
+									+ "\nA et D : pour tourner à gauche et à droite"
+									+ "\nS : pour freiner"
+									+ "\nLes boîtes jaunes choisisent un effet mis sur la voiture au hasard lorsque vous la touchez."
+									+ "\nLes probabilités pour les objets sont : "
+									+ "\n-20% pour le champignon"
+									+ "\n-30% pour le trou noir"
+									+ "\n-30% pour la colle"
+									+ "\n-20% pour la boule de neige");
 				}
 			}
 		});

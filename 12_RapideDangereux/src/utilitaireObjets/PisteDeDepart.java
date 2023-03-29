@@ -46,6 +46,8 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	private Rectangle2D.Double formeAire;
 	private Voiture voiture;
 
+	private Voiture voiture2;
+
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
 	 * 
@@ -64,6 +66,8 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 		this.murHaut = y;
 		this.murBas = y + taillePiste;
 		voiture = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste / 4), Color.yellow, 50, 16, 0, 50);
+		voiture2 = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste * 3 / 4), Color.white, 50, 16, 0, 60);
+		
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
@@ -92,6 +96,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 				y + ((taillePiste / 7) * 6));
 
 		voiture.dessiner(g2d);
+		voiture2.dessiner(g2d);
 
 	}
 
@@ -221,6 +226,15 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void setVoiture(Voiture voiture) {
 		this.voiture = voiture;
 	}
+	
+	public Voiture getVoiture2() {
+		return voiture2;
+	}
+
+	public void setVoiture2(Voiture voiture2) {
+		this.voiture2 = voiture2;
+	}
+	
 
 	public int getTaillePiste() {
 		return taillePiste;
