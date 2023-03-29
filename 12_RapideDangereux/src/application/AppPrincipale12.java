@@ -117,7 +117,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenEditeur.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionJouerDeEditeur(evt, fenEditeur, fenSansScience);
+				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience);
 
 			}
 		});
@@ -318,17 +318,17 @@ public class AppPrincipale12 extends JFrame {
 	// Par Tan Tommy Rin
 
 	public void actionJouerDeEditeur(PropertyChangeEvent evt, FenetreEditeur fenEditeur,
-			FenetreJeuSansScientifique fenSansScience) {
+			FenetreJeuScientifique fenScience) {
 		switch (evt.getPropertyName()) {
 
 		case "JOUEREDITEUR":
 
-			fenSansScience.setVisible(true);
+			fenScience.setVisible(true);
 			fenEditeur.setVisible(false);
-			setContentPane(fenSansScience);
+			setContentPane(fenScience);
 			break;
 		case "REGROUPEMENT":
-			fenSansScience.getZoneAnimPhysique().setTypePiste(TypePiste.AUTRE);
+			fenScience.getZoneAnimPhysique().setTypePiste(TypePiste.AUTRE);
 
 		}
 	}

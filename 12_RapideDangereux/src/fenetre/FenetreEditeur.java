@@ -528,7 +528,8 @@ public class FenetreEditeur extends JPanel {
 	 */
 	private void sauvegardeUnePiste() {
 
-		Voiture voiture = new Voiture(new Vecteur2D(0, 0), Color.yellow, 50, 16, 0, 60);
+		Voiture voiture = new Voiture(new Vecteur2D(listePisteDeDepart.get(0).getX(), listePisteDeDepart.get(0).getY()),
+				Color.yellow, 50, 16, 0, 60);
 		regroupement = new Regroupement(voiture, 3, TypePiste.AUTRE);
 		regroupement.setListeAccelerateur(listeAccelerateur);
 		regroupement.setListePisteDeDepart(listePisteDeDepart);
@@ -645,7 +646,10 @@ public class FenetreEditeur extends JPanel {
 			pisteVirageDroit.setY((int) yPisteVirageDroit);
 			pisteVirageDroit.getFormeAire().setRect(xPisteVirageDroit, yPisteVirageDroit,
 					pisteVirageDroit.getTaillePiste(), pisteVirageDroit.getTaillePiste());
-
+			pisteVirageDroit.setMurHaut((int) yPisteVirageDroit);
+			pisteVirageDroit.setMurBas((int) yPisteVirageDroit + pisteDeDepart.getTaillePiste());
+			pisteVirageDroit.setMurDroite((int) xPisteVirageDroit + pisteDeDepart.getTaillePiste());
+			pisteVirageDroit.setMurGauche((int) xPisteVirageDroit);
 		}
 	}
 
@@ -669,6 +673,10 @@ public class FenetreEditeur extends JPanel {
 					yPisteDeDepart + pisteDeDepart.getTaillePiste() / 4));
 			pisteDeDepart.getFormeAire().setRect(xPisteDeDepart, yPisteDeDepart, pisteDeDepart.getTaillePiste(),
 					pisteDeDepart.getTaillePiste());
+			pisteDeDepart.setMurHaut((int) yPisteDeDepart);
+			pisteDeDepart.setMurBas((int) yPisteDeDepart + pisteDeDepart.getTaillePiste());
+			pisteDeDepart.setMurDroite((int) xPisteDeDepart + pisteDeDepart.getTaillePiste());
+			pisteDeDepart.setMurGauche((int) xPisteDeDepart);
 
 		}
 	}
@@ -691,7 +699,10 @@ public class FenetreEditeur extends JPanel {
 			pisteVerticale.setY((int) yPisteVerticale);
 			pisteVerticale.getFormeAire().setRect(xPisteVerticale, yPisteVerticale, pisteVerticale.getTaillePiste(),
 					pisteVerticale.getTaillePiste());
-
+			pisteVerticale.setMurHaut((int) yPisteVerticale);
+			pisteVerticale.setMurBas((int) yPisteVerticale + pisteDeDepart.getTaillePiste());
+			pisteVerticale.setMurDroite((int) xPisteVerticale + pisteDeDepart.getTaillePiste());
+			pisteVerticale.setMurGauche((int) xPisteVerticale);
 		}
 	}
 
@@ -714,7 +725,10 @@ public class FenetreEditeur extends JPanel {
 			pisteVirageHaut.setY((int) yPisteVirageHaut);
 			pisteVirageHaut.getFormeAire().setRect(xPisteVirageHaut, yPisteVirageHaut, pisteVirageHaut.getTaillePiste(),
 					pisteVirageHaut.getTaillePiste());
-
+			pisteVirageHaut.setMurBas((int) yPisteVirageHaut + pisteHorizontale.getTaillePiste());
+			pisteVirageHaut.setMurHaut((int) yPisteVirageHaut);
+			pisteVirageHaut.setMurDroite((int) xPisteVirageHaut + pisteHorizontale.getTaillePiste() + 1);
+			pisteVirageHaut.setMurGauche((int) xPisteVirageHaut);
 		}
 	}
 
@@ -737,7 +751,10 @@ public class FenetreEditeur extends JPanel {
 			pisteVirageGauche.setY((int) yPisteVirageGauche);
 			pisteVirageGauche.getFormeAire().setRect(xPisteVirageGauche, yPisteVirageGauche,
 					pisteVirageGauche.getTaillePiste(), pisteVirageGauche.getTaillePiste());
-
+			pisteVirageGauche.setMurBas((int) yPisteVirageGauche + pisteVirageGauche.getTaillePiste() + 1);
+			pisteVirageGauche.setMurGauche((int) xPisteVirageGauche + 1);
+			pisteVirageGauche.setMurHaut((int) yPisteVirageGauche + 1);
+			pisteVirageGauche.setMurDroite((int) xPisteVirageGauche + pisteVirageGauche.getTaillePiste() + 1);
 		}
 	}
 
@@ -759,7 +776,10 @@ public class FenetreEditeur extends JPanel {
 			pisteVirageBas.setY((int) yPisteVirageBas);
 			pisteVirageBas.getFormeAire().setRect(xPisteVirageBas, yPisteVirageBas, pisteVirageBas.getTaillePiste(),
 					pisteVirageBas.getTaillePiste());
-
+			pisteVirageBas.setMurBas((int) yPisteVirageBas + pisteVirageBas.getTaillePiste() + 1);
+			pisteVirageBas.setMurGauche((int) xPisteVirageBas + 1);
+			pisteVirageBas.setMurHaut((int) yPisteVirageBas + 1);
+			pisteVirageBas.setMurDroite((int) xPisteVirageBas + pisteVirageBas.getTaillePiste() + 1);
 		}
 	}
 
@@ -782,7 +802,10 @@ public class FenetreEditeur extends JPanel {
 			pisteHorizontale.setY((int) yPisteHorizontale);
 			pisteHorizontale.getFormeAire().setRect(xPisteHorizontale, yPisteHorizontale,
 					pisteHorizontale.getTaillePiste(), pisteHorizontale.getTaillePiste());
-
+			pisteHorizontale.setMurBas((int) yPisteHorizontale + pisteHorizontale.getTaillePiste());
+			pisteHorizontale.setMurHaut((int) yPisteHorizontale);
+			pisteHorizontale.setMurDroite((int) xPisteHorizontale + pisteHorizontale.getTaillePiste() + 1);
+			pisteHorizontale.setMurGauche((int) xPisteHorizontale);
 		}
 	}
 

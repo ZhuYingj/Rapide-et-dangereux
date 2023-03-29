@@ -36,13 +36,14 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 
 	/** la position en y de depart que l'objet piste qui vas etre creer **/
 	private int y;
-	/** Position en x du côté droit du morceau de piste**/
+	/** Position en x du côté droit du morceau de piste **/
 	private int murDroite;
-	/** Position en x du côté gauche du morceau de piste**/
+
+	/** Position en x du côté gauche du morceau de piste **/
 	private int murGauche;
-	/** Position en y du côté haut du morceau de piste**/
+	/** Position en y du côté haut du morceau de piste **/
 	private int murHaut;
-	/** Position en y du côté bas du morceau de piste**/
+	/** Position en y du côté bas du morceau de piste **/
 	private int murBas;
 	/** Normale du mur bas **/
 	private double angleNormaleMurBas = 270;
@@ -57,9 +58,9 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	private transient Area aireTriangle;
 	/** Boolean collision initié à faux **/
 	private boolean collision = false;
-	/** Couleur de la piste initié à noir**/
+	/** Couleur de la piste initié à noir **/
 	private Color color = Color.black;
-	/** Aire du morceau de piste**/
+	/** Aire du morceau de piste **/
 	private Rectangle2D.Double formeAire;
 
 	/**
@@ -109,7 +110,9 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	}
 
 	/**
-	 * Méthode permettant de calculer la collision avec les murs du morceau de piste ainsi que de calculer l'angle de réflexion
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
+	 * ainsi que de calculer l'angle de réflexion
+	 * 
 	 * @param voiture La voiture controllée
 	 */
 	// Kevin Nguyen
@@ -187,6 +190,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 
 	/**
 	 * Méthode permettant de savoir si la voiture est passée sur la piste
+	 * 
 	 * @param voiture La voiture controllée
 	 */
 	// Kevin Nguyen
@@ -284,5 +288,37 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 
 	public void setFormeAire(Rectangle2D.Double formeAire) {
 		this.formeAire = formeAire;
+	}
+
+	public int getMurDroite() {
+		return murDroite;
+	}
+
+	public void setMurDroite(int murDroite) {
+		this.murDroite = murDroite;
+	}
+
+	public int getMurGauche() {
+		return murGauche;
+	}
+
+	public void setMurGauche(int murGauche) {
+		this.murGauche = murGauche;
+	}
+
+	public int getMurHaut() {
+		return murHaut;
+	}
+
+	public void setMurHaut(int murHaut) {
+		this.murHaut = murHaut;
+	}
+
+	public int getMurBas() {
+		return murBas;
+	}
+
+	public void setMurBas(int murBas) {
+		this.murBas = murBas;
 	}
 }

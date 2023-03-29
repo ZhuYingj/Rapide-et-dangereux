@@ -96,7 +96,9 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	}
 
 	/**
-	 * Méthode permettant de calculer la collision avec les murs du morceau de piste ainsi que de calculer l'angle de réflexion
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
+	 * ainsi que de calculer l'angle de réflexion
+	 * 
 	 * @param voiture La voiture controllée
 	 */
 	// Kevin Nguyen
@@ -156,6 +158,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 
 	/**
 	 * Méthode permettant de savoir si la voiture est passée sur la piste
+	 * 
 	 * @param voiture La voiture controllée
 	 */
 	// Kevin Nguyen
@@ -169,7 +172,9 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	}
 
 	/**
-	 * Méthode permettant de savoir si la voiture est repassée par le point de départ
+	 * Méthode permettant de savoir si la voiture est repassée par le point de
+	 * départ
+	 * 
 	 * @param voiture La voiture controllée
 	 * @return La valeur booléene
 	 */
@@ -247,6 +252,38 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 
 	public void setFormeAire(Rectangle2D.Double formeAire) {
 		this.formeAire = formeAire;
+	}
+
+	public int getMurDroite() {
+		return murDroite;
+	}
+
+	public void setMurDroite(int murDroite) {
+		this.murDroite = murDroite;
+	}
+
+	public int getMurGauche() {
+		return murGauche;
+	}
+
+	public void setMurGauche(int murGauche) {
+		this.murGauche = murGauche;
+	}
+
+	public int getMurHaut() {
+		return murHaut;
+	}
+
+	public void setMurHaut(int murHaut) {
+		this.murHaut = murHaut;
+	}
+
+	public int getMurBas() {
+		return murBas;
+	}
+
+	public void setMurBas(int murBas) {
+		this.murBas = murBas;
 	}
 
 }

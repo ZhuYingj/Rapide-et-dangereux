@@ -117,17 +117,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pisteCanada = new PisteCanada(0, 0);
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
 
-
 		regroupement = new Regroupement(voiture, 3, TypePiste.MEXIQUE);
+
 		objSpecial = new ObjetSpecial(new Vecteur2D(getWidth() / 2.0, getHeight() / 2.0), 20,
 				TypeObjetSpecial.BOULEDENEIGE);
-
 
 		regroupement = new Regroupement(voiture, 3, typePiste);
 
 		objSpecial = new ObjetSpecial(new Vecteur2D(getWidth() / 2.0, getHeight() / 2.0), 20,
 				TypeObjetSpecial.BOULEDENEIGE);
-
 
 		objSpecial = new ObjetSpecial(new Vecteur2D(90, 40), 20, TypeObjetSpecial.BOULEDENEIGE);
 		addKeyListener(new KeyAdapter() {
@@ -165,7 +163,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
 			enCoursDAnimation = true;
 			premiereFois = false;
-
+			regroupement.getListePisteDeDepart().get(0).getVoiture()
+					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+							regroupement.getListePisteDeDepart().get(0).getY()));
 		}
 
 		Graphics2D g2d = (Graphics2D) g;
