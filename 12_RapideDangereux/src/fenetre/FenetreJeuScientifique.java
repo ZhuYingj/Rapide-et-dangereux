@@ -30,6 +30,7 @@ import utilitaireObjets.Voiture;
  * scientifique activÃ©
  * 
  * @author Tan Tommy Rin
+ * @author Ludovic Julien
  *
  */
 public class FenetreJeuScientifique extends JPanel {
@@ -358,7 +359,12 @@ public class FenetreJeuScientifique extends JPanel {
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 		
-		
+		/**
+		 * @author Ludovic Julien
+		 * 
+		 * méthode qui permet avec un timer de prendre la valeur de la vitesse acutel de la voiture a chaquee 0.1 seconde 
+		 * et de l'ajouter dans le tableau "vitesse" pour permettre de faire les graphiques
+		 */
 		Timer timerVitesse = new Timer(100, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		     //	maVoiture.ajouterVitesseParSeconde();
@@ -371,6 +377,12 @@ public class FenetreJeuScientifique extends JPanel {
 		    }
 		});
 		
+		/**
+		 * @author Ludovic Julien
+		 * 
+		 * méthode qui permet avec un timer de prendre la valeur de l'acceleration acutel de la voiture a chaquee 0.1 seconde 
+		 * et de l'ajouter dans le tableau "acceleration" pour permettre de faire les graphiques
+		 */
 		Timer timerAcc = new Timer(100, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -383,6 +395,12 @@ public class FenetreJeuScientifique extends JPanel {
 			
 		});
 		
+		/**
+		 * @author Ludovic Julien
+		 * 
+		 * méthode qui permet avec un timer d'ajouter une seconde supplementaire dans le tableaux temps en appelant la methode "ajouterTemps"
+		 * a chaque 0.1 seconde pour permettre de faire les graphiques
+		 */
 		Timer timerTemps = new Timer(100, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 zoneVitesse.ajouterTemps();
@@ -400,6 +418,9 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(false);
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+				
+				//Ludovic Julien
+				//active les timer "timerVitesse","timerAcc" et "timerTemps"
 				timerVitesse.start();
 				timerAcc.start();
 				timerTemps.start();
@@ -417,9 +438,12 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(true);
 				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
 				
+					//Ludovic Julien
+					//appelle la methode renouvler pour clear les tableaux des graphique
 					zoneVitesse.renouvlerTemps();
 	                zoneVitesse.renouvlerVitesse();
 	                zoneAcceleration.renouvlerAcceleration();
+	                zoneAcceleration.renouvlerTemps();
 			}
 		});
 		btnReset.setBounds(175, 563, 89, 76);
@@ -442,6 +466,9 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.arreter();
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
+				
+				//Ludovic Julien
+				//arrete les timer "timerVitesse","timerAcc" et "timerTemps"
 				timerVitesse.stop();
 				timerTemps.stop();
 				timerAcc.stop();

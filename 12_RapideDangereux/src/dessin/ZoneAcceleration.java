@@ -83,7 +83,7 @@ public class ZoneAcceleration extends JPanel {
 	}
 	
 	/**
-	 * methode qui ajoute la nouvelle valeur de la vitesse dans le tableaux vitesse
+	 * methode qui ajoute la nouvelle valeur de l'acceleration dans le tableaux vitesse
 	 * 
 	 * @param acc 	la vitesse actuel de la voiture
 	 */
@@ -92,6 +92,9 @@ public class ZoneAcceleration extends JPanel {
         repaint(); 
     }
 	
+	/**
+	 * methode qui ajoute une seconde au tableau temps
+	 */
 	public void ajouterTemps() {
 		int n = temps.size();
 		temps.add(n);

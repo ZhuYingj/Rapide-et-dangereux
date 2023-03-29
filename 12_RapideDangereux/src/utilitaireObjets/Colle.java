@@ -8,7 +8,12 @@ import java.awt.Stroke;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.TypeObjetSpecial;
-
+/**
+ * class qui permet de creer un objet colle
+ * 
+ * @author Ludovic Julien
+ *
+ */
 public class Colle implements Dessinable {
 
 	/** Taille de la piste qui est toujours constante **/
@@ -19,12 +24,22 @@ public class Colle implements Dessinable {
 	private int y;
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.COLLE;
 	
-	
+	/**
+	 * Méthode qui permet de créer un objet colle à l'aide de paramètres
+	 * 
+	 * @param x position en x
+	 * @param y position en y
+	 
+	 */
 	public Colle(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
+	/**
+	 * Methode qui permet de dessiner l'objet colle sur la zone d'animation a
+	 * l'aide de g2d
+	 */
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(Color.ORANGE);

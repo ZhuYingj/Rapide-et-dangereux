@@ -12,30 +12,57 @@ import javax.swing.JPanel;
 
 import utilitaireObjets.Voiture;
 
+/**
+ * Zone de dessin permettant d'afficher le graphique de la vitesse en fonction du temps
+ * 
+ * @author Ludovic Julien
+ *
+ */
 public class ZoneVitesse extends JPanel{
+	/** Tableau du temps **/
 	private List<Integer> temps;
+	/** Tableau de la vitesse **/
 	private List<Integer> vitesses;
 	
+	/**
+	 * Methode qui permet de construire les deux tableaux
+	 */
 	public ZoneVitesse() {
         temps = new ArrayList<>(Arrays.asList(0));
        vitesses = new ArrayList<>(Arrays.asList(0));
     }
 	
+	/**
+	 * methode qui clear le tableau vitesse
+	 */
 	public void renouvlerVitesse() {
 		vitesses.clear();
 		repaint();
 	}
 	
+	/**
+	 * methode qui clear le tableau temps
+	 */
 	public void renouvlerTemps() {
 		temps.clear();
 		repaint();
 	}
 	
+	/**
+	 * methode qui ajoute la nouvelle valeur de la vitesse dans le tableaux vitesse
+	 * 
+	 * @param acc 	la vitesse actuel de la voiture
+	 */
 	public void ajouterVitesse(double vitesse) {
         vitesses.add((int) vitesse);
         repaint(); 
     }
 	
+	
+	/**
+	 * Methode qui permet de dessiner le graphiquet sur la zone d'animation a
+	 * l'aide de g2d
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -64,6 +91,9 @@ public class ZoneVitesse extends JPanel{
         }
 }
 
+	/**
+	 * methode qui ajoute une seconde au tableau temps
+	 */
 	public void ajouterTemps() {
 		int n = temps.size();
 		temps.add(n);
