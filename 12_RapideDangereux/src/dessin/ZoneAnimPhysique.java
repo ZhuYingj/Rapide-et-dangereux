@@ -70,7 +70,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private double angleCoinRad = Math.toRadians(angleCoinDegre);
 	/** Vecteur de la position initiale de la voiture **/
 	private Vecteur2D posInit = new Vecteur2D(90, 20);
-	
+
 	/** Vecteur de la position initiale de la voiture **/
 	private Vecteur2D posInit2 = new Vecteur2D(90, 40);
 	/** Vecteur qui reset les valeurs a 0 **/
@@ -119,7 +119,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pisteItalie = new PisteItalie(0, 0);
 		pisteCanada = new PisteCanada(0, 0);
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
-		
+
 		voiture2 = new Voiture(posInit2, Color.white, 50, 16, angleVoitureRad2, 60);
 
 		regroupement = new Regroupement(voiture, 3, typePiste);
@@ -166,10 +166,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).getVoiture()
 					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
 							regroupement.getListePisteDeDepart().get(0).getY()));
-			
+
 			regroupement.getListePisteDeDepart().get(0).getVoiture2()
-			.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-					regroupement.getListePisteDeDepart().get(0).getY() + 50));
+					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+							regroupement.getListePisteDeDepart().get(0).getY() + 50));
 		}
 
 		Graphics2D g2d = (Graphics2D) g;
@@ -384,7 +384,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 							20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()),
 							20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle())));
 		}
-		
+
 		if (space == true) {
 			System.out.println("yo");
 		}
@@ -409,7 +409,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 								* Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
 
 			}
-			
+
 			if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse()
 					.module(voiture2.getVitesse()) > voiture2.getVitesseMaxSelonNiveau()) {
 				voiture2.setVitesse(new Vecteur2D(
@@ -426,7 +426,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			if (haut == false) {
 				voiture.setAccel(valeurInit);
 			}
-			
+
 			if (w == false) {
 				voiture2.setAccel(valeurInit);
 			}
@@ -475,9 +475,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 							* Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
 
 		}
-		
-		if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module(voiture2.getVitesse()) > voiture2
-				.getVitesseMaxSelonNiveau()) {
+
+		if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse()
+				.module(voiture2.getVitesse()) > voiture2.getVitesseMaxSelonNiveau()) {
 			voiture2.setVitesse(new Vecteur2D(
 					voiture2.getVitesseMaxSelonNiveau()
 							* Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()),
@@ -502,7 +502,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(valeurInit);
 		regroupement.getListePisteDeDepart().get(0).getVoiture().setAccel(valeurInit);
 		regroupement.getListePisteDeDepart().get(0).getVoiture().setAngle(0);
-		
+
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setPosition(posInit2);
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(valeurInit);
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setAccel(valeurInit);
@@ -510,7 +510,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		angleVoitureDegre = 0;
 		angleVoitureDegre2 = 0;
-				
+
 		regroupement.resetTour();
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
 
@@ -582,7 +582,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("posEnYV1", 0, voiture.getPosition().getY() / pixelsParMetre);
 		pcs.firePropertyChange("angleV1", 0, voiture.getAngle());
 		pcs.firePropertyChange("nombreToursV1", 0, regroupement.getTour());
-		
+
 		pcs.firePropertyChange("accEnXV2", 0, voiture2.getAccel().getX());
 		pcs.firePropertyChange("accEnYV2", 0, voiture2.getAccel().getY());
 		pcs.firePropertyChange("vitEnXV2", 0, voiture2.getVitesse().getX());
@@ -626,7 +626,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 		}
-		
+
 		Vecteur2D forceTotal2 = new Vecteur2D(MoteurPhysique.calculerForceFrottement(0.45,
 				regroupement.getListePisteDeDepart().get(0).getVoiture2().getMasseEnKg(),
 				regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()));
@@ -666,7 +666,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		this.voiture.setMasseEnKgInitial(masseVoulu);
 
 	}
-	
+
 	/**
 	 * Attribuer une nouvelle masse a la voiture
 	 * 
@@ -691,7 +691,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		repaint();
 	}
-	
+
 	/**
 	 * Attribuer un nouvel angle en rad
 	 * 
@@ -851,7 +851,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		if (typePiste == TypePiste.AUTRE) {
 
-			Regroupement regroupementTempo = (gestionFich.lireFichierBinBureau(nomFichierRegroupement));
+			Regroupement regroupementTempo = (gestionFich.lireFichierBinBureauRegroupement(nomFichierRegroupement));
 			regroupement.setListePisteDeDepart(regroupementTempo.getListePisteDeDepart());
 			regroupement.setListePisteHorizontale(regroupementTempo.getListePisteHorizontale());
 			regroupement.setListePisteVerticale(regroupementTempo.getListePisteVerticale());

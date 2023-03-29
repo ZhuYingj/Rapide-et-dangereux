@@ -7,6 +7,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -33,9 +38,17 @@ import interfaces.TypePiste;
  */
 
 public class AppPrincipale12 extends JFrame {
-
+	/** CheckBox **/
 	private JCheckBoxMenuItem checkBoxModeNonScientifique;
 	private JPanel contentPane;
+
+	private int nombrePiste = 1;
+	private String nomFichBinRegroupement = "regroupement" + nombrePiste + ".dat";
+
+	private String sousDossierSurBureau = "SauvegardePiste";
+
+	File fichierDeTravail = new File(System.getProperty("user.home"),
+			"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
 
 	/**
 	 * Lancement de l'application.
@@ -64,13 +77,31 @@ public class AppPrincipale12 extends JFrame {
 	}
 
 	/**
+	 * Méthode qui permet de mettre les pistes déja enregistré sur le comboBox s'il
+	 * existe des fichiers
+	 * 
+	 * @param fenEditeur la fenetre d'édition
+	 */
+// Par Tan Tommy Rin
+	public void ajouterModeEditeurComboBox(FenetreEditeur fenEditeur) {
+		while (fichierDeTravail.exists()) {
+
+			fenEditeur.getComboBoxPiste().addItem((String) nomFichBinRegroupement);
+			nombrePiste++;
+			nomFichBinRegroupement = ("regroupement" + nombrePiste + ".dat");
+
+			fichierDeTravail = new File(System.getProperty("user.home"),
+					"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
+			fenEditeur.getGestionFich().setNombrePiste(nombrePiste);
+
+		}
+	}
+
+	/**
 	 * Creation de la fenetre.
 	 */
+// Alexis Pineda-Alvarado
 	public AppPrincipale12() {
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1350, 800);
-		setTitle("Rapide et Dangereux");
 
 		FenetreMenu fenMenu = new FenetreMenu();
 		ModeDeJeu fenModeJeu = new ModeDeJeu();
@@ -79,6 +110,12 @@ public class AppPrincipale12 extends JFrame {
 		FenetreJeuScientifique fenJeuScience = new FenetreJeuScientifique();
 		JeuOptions fenOptions = new JeuOptions();
 		FenetreOptionMontre fenOptionMontre = new FenetreOptionMontre();
+
+//		ajouterModeEditeurComboBox(fenEditeur);
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1350, 800);
+		setTitle("Rapide et Dangereux");
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -161,12 +198,6 @@ public class AppPrincipale12 extends JFrame {
 			}
 		});
 
-		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				actionChangeOptionMontre(evt, fenOptionMontre, fenModeJeu);
-			}
-		});
-
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -181,6 +212,7 @@ public class AppPrincipale12 extends JFrame {
 			}
 		});
 		mnNewMenu.add(checkBoxModeNonScientifique);
+
 	}
 
 	/**
@@ -191,7 +223,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenJeuScience la fenetre de jeu avec mode science activé
 	 * @param fenOptions    la fenetre de jeu d'options
 	 */
-	// Par Tan Tommy Rin
+// Par Tan Tommy Rin
 	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
 			FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
@@ -234,7 +266,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenMenu    la fenêtre du menu
 	 * @param fenModeJeu la fenêtre du mode de jeu a choisir qui va être activé
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionChangeModeJeu(PropertyChangeEvent evt, FenetreMenu fenMenu, ModeDeJeu fenModeJeu) {
 		if (evt.getPropertyName().equals("JOUER")) {
 
@@ -252,7 +284,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenMenu    la fenêtre du menu qui va être activé
 	 * @param fenModeJeu la fenêtre du mode de jeu a choisir
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionRetourMenu(PropertyChangeEvent evt, FenetreMenu fenMenu, ModeDeJeu fenModeJeu) {
 		switch (evt.getPropertyName()) {
 
@@ -274,13 +306,14 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenModeJeu la fenêtre du mode de jeu a choisir
 	 * @param fenEditeur fenêtre du mode editeur qui est activé
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionChangeEditeur(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur) {
 		switch (evt.getPropertyName()) {
 
 		case "EDITEUR":
 			fenModeJeu.setVisible(false);
 			fenEditeur.setVisible(true);
+
 			setContentPane(fenEditeur);
 			break;
 
@@ -295,7 +328,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenModeJeu la fenêtre du mode de jeu a choisir qui est activé
 	 * @param fenEditeur fenêtre du mode editeur
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionRetourModeJeu1(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur,
 			FenetreJeuScientifique fenJeuScience) {
 		switch (evt.getPropertyName()) {
@@ -321,7 +354,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenEditeur fenêtre du mode editeur
 	 * @param fenScience la fenetre de jeu avec le mode scientifique
 	 */
-	// Par Tan Tommy Rin
+// Par Tan Tommy Rin
 
 	public void actionJouerDeEditeur(PropertyChangeEvent evt, FenetreEditeur fenEditeur,
 			FenetreJeuScientifique fenScience) {
@@ -348,7 +381,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenModeJeu la fenêtre du mode de jeu a choisir
 	 * @param fenOptions fenêtre des options du jeu qui va être activé
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionChangeOption(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, JeuOptions fenOptions) {
 		switch (evt.getPropertyName()) {
 
@@ -369,7 +402,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenModeJeu la fenêtre du mode de jeu a choisir qui va être acrivé
 	 * @param fenOptions fenêtre des options du jeu
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionRetourModeJeu2(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, JeuOptions fenOptions) {
 		switch (evt.getPropertyName()) {
 
@@ -389,7 +422,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenJeuScience fenêtre du jeu avec les paramètres scientifiques
 	 * @param fenOptions    fenêtre des options du jeu qui va être activé
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience,
 			ModeDeJeu fenModeJeu) {
 
@@ -421,7 +454,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenSansScience    fenêtre du jeu sans les paramètres scientifiques
 	 * @param fenOptionsfenêtre des options du jeu qui va être activé
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionRetourOptions2(PropertyChangeEvent evt, FenetreJeuSansScientifique fenSansScience,
 			JeuOptions fenOptions) {
 
@@ -442,7 +475,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenSansScience fenêtre du jeu sans les paramètres scientifiques
 	 * @param fenJeuScience  fenêtre du jeu avec les paramètres scientifiques
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionChangeDesTypeJeu(FenetreJeuSansScientifique fenSansScience,
 			FenetreJeuScientifique fenJeuScience) {
 
@@ -463,7 +496,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenSansScience fenêtre du jeu sans les paramètres scientifiques
 	 * @param fenJeuScience  fenêtre du jeu avec les paramètres scientifiques
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionRetourDesTypeJeu(FenetreJeuSansScientifique fenSansScience,
 			FenetreJeuScientifique fenJeuScience) {
 
@@ -482,7 +515,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenOptionMontre fenêtre des paramètres a choisir dans le mode course
 	 *                        contre la montre
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionChangeJeuOptionCourse(PropertyChangeEvent evt, ModeDeJeu fenModeJeu,
 			FenetreOptionMontre fenOptionMontre) {
 		switch (evt.getPropertyName()) {
@@ -495,15 +528,16 @@ public class AppPrincipale12 extends JFrame {
 	}
 
 	/**
-	 * Méthode qui permet de changer de la fenêtre des options pour le mode Course
-	 * contre la montre à la fenêtre du jeu
+	 * Méthode qui change la fenêtre des options pour le mode de jeu course contre
+	 * la montre avec la fenêtre du jeu
 	 * 
 	 * @param evt             evenement
-	 * @param fenOptionMontre fenêtre des paramàtres pour le mode course contre la
-	 *                        montre
-	 * @param fenJeuScience   fenêtre du jeu avec les paramàtres scientifiques
+	 * @param fenOptionMontre fenêtre des paramètres a choisir dans le mode course
+	 *                        contre la montre
+	 * @param fenJeuMontre    fenêtre du jeu avec les paramètres scientifiques pour
+	 *                        le mode de jeu course contre la montre
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
 			FenetreJeuScientifique fenJeuScience) {
 		switch (evt.getPropertyName()) {
@@ -517,33 +551,12 @@ public class AppPrincipale12 extends JFrame {
 	}
 
 	/**
-	 * Méthode qui permet de revenir dans la fenêtre des modes de jeu a partir de la
-	 * fenêtre des options pour le mode de jeu course contre la montre
-	 * 
-	 * @param evt				evenement
-	 * @param fenOptionMontre	fenêtre des paramàtres pour le mode course contre la
-	 *                        	montre
-	 * @param fenModeJeu		fenêtre de la selection de mode de jeu
-	 */
-	// Alexis Pineda-Alvarado
-	public void actionChangeOptionMontre(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
-			ModeDeJeu fenModeJeu) {
-		switch (evt.getPropertyName()) {
-		case "Retour":
-			fenOptionMontre.setVisible(false);
-			fenModeJeu.setVisible(true);
-			setContentPane(fenModeJeu);
-			break;
-		}
-	}
-
-	/**
 	 * Fait en sorte que lorsqu'on appui sur la touche P un panel JOptionPane va
 	 * apparaitre
 	 * 
 	 * @param fenetreVoulu permet de prendre le JPanel specifique
 	 */
-	// Alexis Pineda-Alvarado
+// Alexis Pineda-Alvarado
 	public void pushingP(JPanel fenetreVoulu) {
 		fenetreVoulu.requestFocus();
 		fenetreVoulu.addKeyListener(new KeyAdapter() {
@@ -552,20 +565,9 @@ public class AppPrincipale12 extends JFrame {
 				if (e.getKeyCode() == KeyEvent.VK_P) {
 					JOptionPane.showMessageDialog(null,
 							"Bonjour dans RAPIDE ET DANGEREUX! \nle but de ce jeux et de battre votre combattant"
-									+ "\nles contrôles du jeu pour la voiture 1 sont :  "
-									+ "\n↑ : pour avancer la voiture"
-									+ "\n← et → : pour tourner a gauche et a droite "
-									+ "\n↓ : pour freiner "
-									+ "\nles contrôles du jeu pour la voiture 2 sont : "
-									+ "\nW : pour avancer la voiture"
-									+ "\nA et D : pour tourner à gauche et à droite"
-									+ "\nS : pour freiner"
-									+ "\nLes boîtes jaunes choisisent un effet mis sur la voiture au hasard lorsque vous la touchez."
-									+ "\nLes probabilités pour les objets sont : "
-									+ "\n-20% pour le champignon"
-									+ "\n-30% pour le trou noir"
-									+ "\n-30% pour la colle"
-									+ "\n-20% pour la boule de neige");
+									+ " \nles contrôles du jeu sont :  \n↑ : pour avancer la voiture"
+									+ " \n← et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture"
+									+ "\nLes boîtes jaunes choisisent un effet mis sur la voiture au hasard lorsque vous la toucher");
 				}
 			}
 		});

@@ -30,8 +30,7 @@ import java.awt.event.MouseAdapter;
  */
 
 public class PanelObjet extends JPanel {
-	public PanelObjet() {
-	}
+
 	private int xObjet = 75;
 	private int yObjet = 20;
 	private BlocMystere blocMystere;
