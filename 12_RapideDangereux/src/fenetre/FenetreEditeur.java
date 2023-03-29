@@ -1,5 +1,6 @@
 package fenetre;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -324,7 +325,9 @@ public class FenetreEditeur extends JPanel {
 				sauvegardeUnePiste();
 			}
 		});
-		btnSauvegarde.setBounds(109, 11, 205, 23);
+
+		btnSauvegarde.setBounds(132, 508, 173, 23);
+
 		add(btnSauvegarde);
 
 		JButton btnChargerPisteSauvegarde = new JButton("CHARGER LA PISTE SAUVEGARDÉ");
@@ -334,11 +337,15 @@ public class FenetreEditeur extends JPanel {
 
 			}
 		});
-		btnChargerPisteSauvegarde.setBounds(324, 11, 248, 23);
+
+		btnChargerPisteSauvegarde.setBounds(335, 508, 214, 23);
+
 		add(btnChargerPisteSauvegarde);
 
 		comboBoxPiste = new JComboBox();
-		comboBoxPiste.setBounds(582, 11, 214, 23);
+
+		comboBoxPiste.setBounds(592, 508, 181, 23);
+
 		add(comboBoxPiste);
 
 		btnJouer = new JButton("JOUER");
@@ -350,7 +357,7 @@ public class FenetreEditeur extends JPanel {
 			}
 		});
 
-		btnJouer.setBounds(812, 11, 89, 23);
+		btnJouer.setBounds(335, 553, 214, 63);
 		add(btnJouer);
 
 		panelRegroupement = new PanelRegroupement();
@@ -466,4 +473,5 @@ public class FenetreEditeur extends JPanel {
 
 		JOptionPane.showMessageDialog(null, "PISTE CHARGÉ AVEC SUCCÈS !");
 	}
+
 }

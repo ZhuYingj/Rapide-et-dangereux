@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import application.GestionnaireDeFichiersSurLeBureau;
@@ -56,7 +55,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/
 	private boolean premiereFois = true;
 	/** Valeur booléenne pour savoir si ces touches sont appuyés **/
-	private boolean droite, gauche, haut, bas, boutonSpace;
+	private boolean droite, gauche, haut, bas, space;
 	/** Position x de la voiture **/
 	double x = 0;
 	/** Position y de la voiture **/
@@ -188,8 +187,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		case KeyEvent.VK_UP:
 			haut = true;
 			break;
-		case KeyEvent.VK_SPACE:
-			boutonSpace = true;
+		case KeyEvent.VK_Q:
+			space = true;
 			break;
 		}
 	}
@@ -216,9 +215,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		case KeyEvent.VK_UP:
 			haut = false;
 			break;
-		case KeyEvent.VK_SPACE:
-			boutonSpace = false;
-			break;
+
 		}
 
 	}
@@ -290,7 +287,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 							20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
 							20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
 		}
-		if (boutonSpace == true) {
+
+		if (space == true) {
 			System.out.println("yo");
 		}
 	}
