@@ -8,6 +8,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -45,6 +46,14 @@ public class FenetreJeuScientifique extends JPanel {
 	private JButton btnNextImg;
 	private JButton btnReset;
 	private JButton btnStop;
+	private JLabel lblAngleVoiture2Rad;
+	private JLabel lblAccEnXV2;
+	private JLabel lblAccEnYV2;
+	private JLabel lblVitesseEnXV2;
+	private JLabel lblVitesseEnYV2;
+	private JLabel lblPositionEnXV2;
+	private JLabel lblPositionEnYV2;
+	private JLabel lblNombreToursVoiture2;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -234,11 +243,26 @@ public class FenetreJeuScientifique extends JPanel {
 		lblAccEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAccEnYV1.setBounds(194, 132, 65, 29);
 		panelDonneScientifique.add(lblAccEnYV1);
+		
+		lblAccEnXV2 = new JLabel("0.00");
+		lblAccEnXV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAccEnXV2.setBounds(361, 132, 65, 29);
+		panelDonneScientifique.add(lblAccEnXV2);
+
+		lblAccEnYV2 = new JLabel("0.00");
+		lblAccEnYV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAccEnYV2.setBounds(433, 132, 65, 29);
+		panelDonneScientifique.add(lblAccEnYV2);
 
 		JLabel lblAccV1Separator = new JLabel("[               ,               ]");
 		lblAccV1Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAccV1Separator.setBounds(108, 132, 162, 29);
 		panelDonneScientifique.add(lblAccV1Separator);
+		
+		JLabel lblAccV2Separator = new JLabel("[               ,               ]");
+		lblAccV2Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAccV2Separator.setBounds(350, 132, 162, 29);
+		panelDonneScientifique.add(lblAccV2Separator);
 
 		lblVitesseEnXV1 = new JLabel("0.00");
 		lblVitesseEnXV1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -249,6 +273,16 @@ public class FenetreJeuScientifique extends JPanel {
 		lblVitesseEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblVitesseEnYV1.setBounds(194, 92, 65, 29);
 		panelDonneScientifique.add(lblVitesseEnYV1);
+		
+		lblVitesseEnXV2 = new JLabel("0.00");
+		lblVitesseEnXV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseEnXV2.setBounds(361, 92, 65, 29);
+		panelDonneScientifique.add(lblVitesseEnXV2);
+
+		lblVitesseEnYV2 = new JLabel("0.00");
+		lblVitesseEnYV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseEnYV2.setBounds(433, 92, 65, 29);
+		panelDonneScientifique.add(lblVitesseEnYV2);
 
 		JLabel lblVitesseV1Separator = new JLabel("[               ,               ]");
 		lblVitesseV1Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -264,11 +298,31 @@ public class FenetreJeuScientifique extends JPanel {
 		lblPositionEnXV1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPositionEnXV1.setBounds(121, 52, 65, 29);
 		panelDonneScientifique.add(lblPositionEnXV1);
+		
+		JLabel lblVitesseV2Separator = new JLabel("[               ,               ]");
+		lblVitesseV2Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseV2Separator.setBounds(350, 92, 162, 29);
+		panelDonneScientifique.add(lblVitesseV2Separator);
+		
+		lblPositionEnYV2 = new JLabel("0.00");
+		lblPositionEnYV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPositionEnYV2.setBounds(433, 52, 65, 29);
+		panelDonneScientifique.add(lblPositionEnYV2);
+
+		lblPositionEnXV2 = new JLabel("0.00");
+		lblPositionEnXV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPositionEnXV2.setBounds(361, 52, 65, 29);
+		panelDonneScientifique.add(lblPositionEnXV2);
 
 		JLabel lblPositionV1Separator = new JLabel("[               ,               ]");
 		lblPositionV1Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPositionV1Separator.setBounds(108, 52, 162, 29);
 		panelDonneScientifique.add(lblPositionV1Separator);
+		
+		JLabel lblPositionV2Separator = new JLabel("[               ,               ]");
+		lblPositionV2Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPositionV2Separator.setBounds(350, 52, 162, 29);
+		panelDonneScientifique.add(lblPositionV2Separator);
 
 		JLabel lblAngleVoiture1 = new JLabel("Angle :");
 		lblAngleVoiture1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -285,7 +339,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblRadVoiture1.setBounds(244, 342, 38, 29);
 		panelDonneScientifique.add(lblRadVoiture1);
 
-		JLabel lblAngleVoiture2Rad = new JLabel("0.00");
+		lblAngleVoiture2Rad = new JLabel("0.00");
 		lblAngleVoiture2Rad.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAngleVoiture2Rad.setBounds(404, 342, 65, 29);
 		panelDonneScientifique.add(lblAngleVoiture2Rad);
@@ -294,6 +348,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblRadVoiture2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblRadVoiture2.setBounds(523, 337, 38, 29);
 		panelDonneScientifique.add(lblRadVoiture2);
+		
 
 		JLabel lblNombreToursV1 = new JLabel("Nombre de tours :");
 		lblNombreToursV1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -310,7 +365,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNombreTourV1.setBounds(244, 382, 56, 29);
 		panelDonneScientifique.add(lblNombreTourV1);
 
-		JLabel lblNombreToursVoiture2 = new JLabel("0.00");
+		lblNombreToursVoiture2 = new JLabel("0.00");
 		lblNombreToursVoiture2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNombreToursVoiture2.setBounds(404, 382, 65, 29);
 		panelDonneScientifique.add(lblNombreToursVoiture2);
@@ -453,6 +508,22 @@ public class FenetreJeuScientifique extends JPanel {
 			lblAngleVoiture1Rad.setText(String.format("%.2f", evt.getNewValue()));
 		case "nombreToursV1":
 			lblNombreToursVoiture1.setText(String.format("%.0f", evt.getNewValue()));
+		case "accEnXV2":
+			lblAccEnXV2.setText(String.format("%.2f", evt.getNewValue()));
+		case "accEnYV2":
+			lblAccEnYV2.setText(String.format("%.2f", evt.getNewValue()));
+		case "vitEnXV2":
+			lblVitesseEnXV2.setText(String.format("%.2f", evt.getNewValue()));
+		case "vitEnYV2":
+			lblVitesseEnYV2.setText(String.format("%.2f", evt.getNewValue()));
+		case "posEnXV2":
+			lblPositionEnXV2.setText(String.format("%.2f", evt.getNewValue()));
+		case "posEnYV2":
+			lblPositionEnYV2.setText(String.format("%.2f", evt.getNewValue()));
+		case "angleV2":
+			lblAngleVoiture2Rad.setText(String.format("%.2f", evt.getNewValue()));
+		case "nombreToursV2":
+			lblNombreToursVoiture2.setText(String.format("%.0f", evt.getNewValue()));
 		}
 	}
 }
