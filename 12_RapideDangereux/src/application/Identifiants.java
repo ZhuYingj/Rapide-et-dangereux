@@ -1,6 +1,7 @@
 package application;
 
 /**
+ * Classe qui identifie les panels
  * 
  * @author Caroline Houle
  *
