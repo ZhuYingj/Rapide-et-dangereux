@@ -57,10 +57,6 @@ public class ObjetSpecial implements Dessinable {
 
 		}
 		
-		if (type == TypeObjetSpecial.ACCELERATEUR) {
-			Accelerateur accelerateur = new Accelerateur(this.x, this.y);
-			accelerateur.dessiner(g2d);
-		}
 
 	}
 
@@ -119,24 +115,6 @@ public class ObjetSpecial implements Dessinable {
 		}
 
 	}
-	
-	
-	
-	public boolean fonctionAcceleration(Voiture voiture, double tempsTotalEcoule) {
-		Accelerateur accelerateur = new Accelerateur(this.x, this.y);
-		if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
-			accelerateur.fonctionAccelarateur(voiture);
-			return true;
-		} else {
-			voiture.setVitesseMaxSelonNiveau(voiture.getVitesseMaxSelonNiveau());
-			
-			return false;
-		}
-
-	}
-	
-	
-	
 
 	/**
 	 * 

@@ -53,7 +53,10 @@ public class PisteMexique {
 	/** Piste Virage Haut **/
 	private ArrayList<PisteVirageHaut> haut = new ArrayList<PisteVirageHaut>();
 	
-
+	private ArrayList<Accelerateur> acc = new ArrayList<Accelerateur>();
+	
+	private ArrayList<Colle> colle = new ArrayList<Colle>();
+	
 	private TypePiste type = TypePiste.MEXIQUE;
 
 	/**

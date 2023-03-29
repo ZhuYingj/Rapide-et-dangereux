@@ -39,15 +39,6 @@ public class Colle implements Dessinable {
 		g2d.drawLine(x, y+ (TAILLE_PISTE/2) , x + (TAILLE_PISTE/2), y + TAILLE_PISTE);
 		
 	}
-	
-	
-	public void fonctionChampignonActivation(Voiture voitureAffecte) {
-
-		/// augmente la vitesse 
-		final double vitesseDiminuer = voitureAffecte.getVitesseMaxSelonNiveau() / 2;
-		voitureAffecte.setVitesseMaxSelonNiveau(vitesseDiminuer);
-
-	}
 
 	public TypeObjetSpecial getTypeObjet() {
 		return typeObjet;

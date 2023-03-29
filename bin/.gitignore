@@ -1,7 +1,4 @@
 /fenetre/
-/geometrie/
-/interfaces/
-/physique/
-/pisteDeCourse/
-/utilitaireObjets/
 /dessin/
+/utilitaireObjets/
+/pisteDeCourse/

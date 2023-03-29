@@ -59,7 +59,7 @@ public class ZoneVitesse extends JPanel{
             double vitesseEnMps = vitesses.get(i);
             int posX = x + (int) (tempsEnS * largeur / temps.get(temps.size() - 1));
             int posY = y + (int) (hauteur - vitesseEnMps * hauteur / 120.0);
-            g.fillOval(posX - 3, posY - 3, 6, 6);
+            g.fillOval(posX - 3, posY - 3, 4, 4);
             System.out.println("la valeur de la vitesse est: "+ vitesseEnMps + " et la valeur du temps est: " + tempsEnS);
         }
 }
