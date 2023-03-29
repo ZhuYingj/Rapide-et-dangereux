@@ -47,13 +47,14 @@ import utilitaireObjets.Voiture;
 public class FenetreEditeur extends JPanel {
 
 	private PanelRegroupement panelRegroupement;
-
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
+
 	private JButton btnSauvegarde;
 	private JButton btnJouer;
 	private JButton btnRetour;
 	private JButton btnAjouterPisteDeDepart;
 	private JComboBox<String> comboBoxPiste;
+
 	private Regroupement regroupementSauvegarde;
 	private PanelObjet panelObjet;
 
@@ -94,7 +95,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterAccelerateur = new JButton("+");
 		btnAjouterAccelerateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Accelerateur accelerateur = new Accelerateur(panelRegroupement.getX() + 100, 50);
+				Accelerateur accelerateur = new Accelerateur(650, 50);
 				panelRegroupement.getListeAccelerateur().add(accelerateur);
 
 				repaint();
@@ -119,7 +120,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterBlocMystere = new JButton("+");
 		btnAjouterBlocMystere.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BlocMystere blocMystere = new BlocMystere(15, new Vecteur2D(panelRegroupement.getX() + 15, 50));
+				BlocMystere blocMystere = new BlocMystere(15, new Vecteur2D(650, 170));
 
 				panelRegroupement.getListeBlocMystere().add(blocMystere);
 				repaint();
@@ -144,7 +145,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteHorizontale = new JButton("+");
 		btnAjouterPisteHorizontale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteHorizontale pisteHorizontale = new PisteHorizontale(150, 50);
+				PisteHorizontale pisteHorizontale = new PisteHorizontale(650, 190);
 				panelRegroupement.getListePisteHorizontale().add(pisteHorizontale);
 				repaint();
 			}
@@ -155,7 +156,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageBas = new JButton("+");
 		btnAjouterPisteVirageBas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageBas pisteVirageBas = new PisteVirageBas(250, 50);
+				PisteVirageBas pisteVirageBas = new PisteVirageBas(650, 70);
 				panelRegroupement.getListePisteVirageBas().add(pisteVirageBas);
 				repaint();
 			}
@@ -167,12 +168,12 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageGauche = new JButton("+");
 		btnAjouterPisteVirageGauche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageGauche pisteVirageGauche = new PisteVirageGauche(250, 150);
+				PisteVirageGauche pisteVirageGauche = new PisteVirageGauche(650, 90);
 				panelRegroupement.getListePisteVirageGauche().add(pisteVirageGauche);
 				repaint();
 			}
 		});
-		btnAjouterPisteVirageGauche.setBounds(64, 517, 41, 23);
+		btnAjouterPisteVirageGauche.setBounds(217, 378, 41, 23);
 		panelObjet.add(btnAjouterPisteVirageGauche);
 
 		JButton btnSupprimerPisteHorizontale = new JButton("-");
@@ -211,14 +212,14 @@ public class FenetreEditeur extends JPanel {
 				}
 			}
 		});
-		btnSupprimerPisteVirageGauche.setBounds(114, 517, 41, 23);
+		btnSupprimerPisteVirageGauche.setBounds(268, 378, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageGauche);
 
 		btnAjouterPisteDeDepart = new JButton("+");
 		btnAjouterPisteDeDepart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (panelRegroupement.getListePisteDeDepart().size() == 0) {
-					PisteDeDepart pisteDeDepart = new PisteDeDepart(450, 50);
+					PisteDeDepart pisteDeDepart = new PisteDeDepart(650, 150);
 					panelRegroupement.getListePisteDeDepart().add(pisteDeDepart);
 					btnAjouterPisteDeDepart.setEnabled(false);
 					btnSauvegarde.setEnabled(true);
@@ -234,7 +235,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVerticale = new JButton("+");
 		btnAjouterPisteVerticale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVerticale pisteVerticale = new PisteVerticale(550, 50);
+				PisteVerticale pisteVerticale = new PisteVerticale(650, 50);
 				panelRegroupement.getListePisteVerticale().add(pisteVerticale);
 				repaint();
 			}
@@ -273,12 +274,12 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageDroite = new JButton("+");
 		btnAjouterPisteVirageDroite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageDroit pisteVirageDroit = new PisteVirageDroit(panelRegroupement.getX() + 50, 250);
+				PisteVirageDroit pisteVirageDroit = new PisteVirageDroit(650, 110);
 				panelRegroupement.getListePisteVirageDroit().add(pisteVirageDroit);
 				repaint();
 			}
 		});
-		btnAjouterPisteVirageDroite.setBounds(217, 378, 41, 23);
+		btnAjouterPisteVirageDroite.setBounds(217, 517, 41, 23);
 		panelObjet.add(btnAjouterPisteVirageDroite);
 
 		JButton btnSupprimerPisteVirageDroite = new JButton("-");
@@ -291,18 +292,18 @@ public class FenetreEditeur extends JPanel {
 				}
 			}
 		});
-		btnSupprimerPisteVirageDroite.setBounds(267, 378, 41, 23);
+		btnSupprimerPisteVirageDroite.setBounds(268, 517, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageDroite);
 
 		JButton btnAjouterPisteVirageHaut = new JButton("+");
 		btnAjouterPisteVirageHaut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageHaut pisteVirageHaut = new PisteVirageHaut(panelRegroupement.getX() + 200, 50);
+				PisteVirageHaut pisteVirageHaut = new PisteVirageHaut(650, 210);
 				panelRegroupement.getListePisteVirageHaut().add(pisteVirageHaut);
 				repaint();
 			}
 		});
-		btnAjouterPisteVirageHaut.setBounds(217, 517, 41, 23);
+		btnAjouterPisteVirageHaut.setBounds(64, 517, 41, 23);
 		panelObjet.add(btnAjouterPisteVirageHaut);
 
 		JButton btnSupprimerPisteVirageHaut = new JButton("-");
@@ -315,7 +316,7 @@ public class FenetreEditeur extends JPanel {
 				}
 			}
 		});
-		btnSupprimerPisteVirageHaut.setBounds(267, 517, 41, 23);
+		btnSupprimerPisteVirageHaut.setBounds(114, 517, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageHaut);
 
 		btnSauvegarde = new JButton("SAUVEGARDER LA PISTE");
@@ -362,7 +363,7 @@ public class FenetreEditeur extends JPanel {
 
 		panelRegroupement = new PanelRegroupement();
 		panelRegroupement.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelRegroupement.setBounds(132, 96, 640, 400);
+		panelRegroupement.setBounds(132, 96, 769, 400);
 		add(panelRegroupement);
 
 	}
@@ -386,9 +387,10 @@ public class FenetreEditeur extends JPanel {
 		regroupement.setListePisteVirageHaut(panelRegroupement.getListePisteVirageHaut());
 		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
 
-		gestionFich.ecrireFichierBinBureau(regroupement);
+		gestionFich.ecrireFichierBinBureauRegroupement(regroupement);
 
-		comboBoxPiste.addItem(gestionFich.getNomFichBinEtud());
+		comboBoxPiste.addItem(gestionFich.getNomFichBinRegroupement());
+
 		btnJouer.setEnabled(true);
 		JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU");
 
@@ -399,7 +401,10 @@ public class FenetreEditeur extends JPanel {
 	 */
 
 	private void chargementUnePiste() {
-		regroupementSauvegarde = gestionFich.lireFichierBinBureau((String) comboBoxPiste.getSelectedItem());
+
+		btnSauvegarde.setEnabled(true);
+		btnJouer.setEnabled(true);
+		regroupementSauvegarde = gestionFich.lireFichierBinBureauRegroupement((String) comboBoxPiste.getSelectedItem());
 
 		panelRegroupement.getListeAccelerateur().clear();
 		panelRegroupement.getListePisteVirageBas().clear();
@@ -411,32 +416,32 @@ public class FenetreEditeur extends JPanel {
 		panelRegroupement.getListePisteDeDepart().clear();
 		panelRegroupement.getListeBlocMystere().clear();
 
-		// Pour les accelerateurs
+// Pour les accelerateurs
 
 		for (int a = 0; a < regroupementSauvegarde.getListeAccelerateur().size(); a++) {
 			panelRegroupement.getListeAccelerateur().add(regroupementSauvegarde.getListeAccelerateur().get(a));
 		}
 
-		// Pour piste virage bas
+// Pour piste virage bas
 
 		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageBas().size(); a++) {
 			panelRegroupement.getListePisteVirageBas().add(regroupementSauvegarde.getListePisteVirageBas().get(a));
 		}
 
-		// Pour piste virage haut
+// Pour piste virage haut
 
 		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageHaut().size(); a++) {
 			panelRegroupement.getListePisteVirageHaut().add(regroupementSauvegarde.getListePisteVirageHaut().get(a));
 
 		}
 
-		// Pour piste virage droite
+// Pour piste virage droite
 
 		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageDroit().size(); a++) {
 			panelRegroupement.getListePisteVirageDroit().add(regroupementSauvegarde.getListePisteVirageDroit().get(a));
 		}
 
-		// Pour piste virage gauche
+// Pour piste virage gauche
 
 		for (int a = 0; a < regroupementSauvegarde.getListePisteVirageGauche().size(); a++) {
 			panelRegroupement.getListePisteVirageGauche()
@@ -444,26 +449,26 @@ public class FenetreEditeur extends JPanel {
 
 		}
 
-		// Pour piste verticale
+// Pour piste verticale
 
 		for (int a = 0; a < regroupementSauvegarde.getListePisteVerticale().size(); a++) {
 			panelRegroupement.getListePisteVerticale().add(regroupementSauvegarde.getListePisteVerticale().get(a));
 
 		}
 
-		// Pour piste horizontale
+// Pour piste horizontale
 
 		for (int a = 0; a < regroupementSauvegarde.getListePisteHorizontale().size(); a++) {
 			panelRegroupement.getListePisteHorizontale().add(regroupementSauvegarde.getListePisteHorizontale().get(a));
 
 		}
-		// Pour piste de depart
+// Pour piste de depart
 
 		for (int a = 0; a < regroupementSauvegarde.getListePisteDeDepart().size(); a++) {
 			panelRegroupement.getListePisteDeDepart().add(regroupementSauvegarde.getListePisteDeDepart().get(a));
 
 		}
-		// Pour bloc mystere
+// Pour bloc mystere
 
 		for (int a = 0; a < regroupementSauvegarde.getRegroupementBoiteMystere().size(); a++) {
 			panelRegroupement.getListeBlocMystere().add(regroupementSauvegarde.getRegroupementBoiteMystere().get(a));
@@ -472,6 +477,22 @@ public class FenetreEditeur extends JPanel {
 		repaint();
 
 		JOptionPane.showMessageDialog(null, "PISTE CHARGÉ AVEC SUCCÈS !");
+	}
+
+	public JComboBox getComboBoxPiste() {
+		return comboBoxPiste;
+	}
+
+	public void setComboBoxPiste(JComboBox comboBoxPiste) {
+		this.comboBoxPiste = comboBoxPiste;
+	}
+
+	public GestionnaireDeFichiersSurLeBureau getGestionFich() {
+		return gestionFich;
+	}
+
+	public void setGestionFich(GestionnaireDeFichiersSurLeBureau gestionFich) {
+		this.gestionFich = gestionFich;
 	}
 
 }

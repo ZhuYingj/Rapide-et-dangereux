@@ -38,6 +38,10 @@ public class ModeDeJeu extends JPanel {
 		pcs.addPropertyChangeListener(listener);
 	}
 
+	/**
+	 * Méthode qui permet la création de la fenetre mode de jeu
+	 */
+
 	public ModeDeJeu() {
 		setLayout(null);
 		btnMonde = new JButton("MONDE");
@@ -46,7 +50,7 @@ public class ModeDeJeu extends JPanel {
 				pcs.firePropertyChange("MONDE", 0, -1);
 			}
 		});
-		
+
 		btnMonde.setForeground(Color.BLACK);
 		btnMonde.setBounds(411, 245, 100, 49);
 		add(btnMonde);

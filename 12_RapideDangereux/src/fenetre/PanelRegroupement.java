@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import java.awt.event.MouseMotionAdapter;
  * 
  * @author Tan Tommy Rin
  * @author Alexis Pineda-Alvarado
+ * @author Kevin Nguyen
  *
  */
 
@@ -83,6 +85,9 @@ public class PanelRegroupement extends JPanel {
 	private boolean objetSelectionne = false;
 
 	private TypeObjetDeplacable type;
+	private int tailleDuCarre;
+	private int longueur;
+	private int hauteur;
 
 	/**
 	 * Constructeur du panel de regroupement
@@ -248,14 +253,14 @@ public class PanelRegroupement extends JPanel {
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
-			pisteVirageDroit.setX((int) xPisteVirageDroit);
-			pisteVirageDroit.setY((int) yPisteVirageDroit);
+			pisteVirageDroit.setX(collerX(e));
+			pisteVirageDroit.setY(collerY(e));
 			pisteVirageDroit.getFormeAire().setRect(xPisteVirageDroit, yPisteVirageDroit,
 					pisteVirageDroit.getTaillePiste(), pisteVirageDroit.getTaillePiste());
-			pisteVirageDroit.setMurHaut((int) yPisteVirageDroit);
-			pisteVirageDroit.setMurBas((int) yPisteVirageDroit + pisteDeDepart.getTaillePiste());
-			pisteVirageDroit.setMurDroite((int) xPisteVirageDroit + pisteDeDepart.getTaillePiste());
-			pisteVirageDroit.setMurGauche((int) xPisteVirageDroit);
+			pisteVirageDroit.setMurHaut((int) collerY(e));
+			pisteVirageDroit.setMurBas((int) collerY(e) + tailleDuCarre);
+			pisteVirageDroit.setMurDroite((int) collerX(e) + tailleDuCarre);
+			pisteVirageDroit.setMurGauche((int) collerX(e));
 		}
 	}
 
@@ -273,16 +278,16 @@ public class PanelRegroupement extends JPanel {
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
-			pisteDeDepart.setX((int) xPisteDeDepart);
-			pisteDeDepart.setY((int) yPisteDeDepart);
+			pisteDeDepart.setX(collerX(e));
+			pisteDeDepart.setY(collerY(e));
 			pisteDeDepart.getVoiture().setPosition(new Vecteur2D(xPisteDeDepart + pisteDeDepart.getTaillePiste() / 4,
 					yPisteDeDepart + pisteDeDepart.getTaillePiste() / 4));
 			pisteDeDepart.getFormeAire().setRect(xPisteDeDepart, yPisteDeDepart, pisteDeDepart.getTaillePiste(),
 					pisteDeDepart.getTaillePiste());
-			pisteDeDepart.setMurHaut((int) yPisteDeDepart);
-			pisteDeDepart.setMurBas((int) yPisteDeDepart + pisteDeDepart.getTaillePiste());
-			pisteDeDepart.setMurDroite((int) xPisteDeDepart + pisteDeDepart.getTaillePiste());
-			pisteDeDepart.setMurGauche((int) xPisteDeDepart);
+			pisteDeDepart.setMurHaut((int) collerY(e));
+			pisteDeDepart.setMurBas((int) collerY(e) + tailleDuCarre);
+			pisteDeDepart.setMurDroite((int) collerX(e) + tailleDuCarre);
+			pisteDeDepart.setMurGauche((int) collerX(e));
 
 		}
 	}
@@ -301,14 +306,14 @@ public class PanelRegroupement extends JPanel {
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
-			pisteVerticale.setX((int) xPisteVerticale);
-			pisteVerticale.setY((int) yPisteVerticale);
+			pisteVerticale.setX(collerX(e));
+			pisteVerticale.setY(collerY(e));
 			pisteVerticale.getFormeAire().setRect(xPisteVerticale, yPisteVerticale, pisteVerticale.getTaillePiste(),
 					pisteVerticale.getTaillePiste());
-			pisteVerticale.setMurHaut((int) yPisteVerticale);
-			pisteVerticale.setMurBas((int) yPisteVerticale + pisteDeDepart.getTaillePiste());
-			pisteVerticale.setMurDroite((int) xPisteVerticale + pisteDeDepart.getTaillePiste());
-			pisteVerticale.setMurGauche((int) xPisteVerticale);
+			pisteVerticale.setMurHaut((int) collerY(e));
+			pisteVerticale.setMurBas((int) collerY(e) + tailleDuCarre);
+			pisteVerticale.setMurDroite((int) collerX(e) + tailleDuCarre);
+			pisteVerticale.setMurGauche((int) collerX(e));
 		}
 	}
 
@@ -327,14 +332,14 @@ public class PanelRegroupement extends JPanel {
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
-			pisteVirageHaut.setX((int) xPisteVirageHaut);
-			pisteVirageHaut.setY((int) yPisteVirageHaut);
+			pisteVirageHaut.setX(collerX(e));
+			pisteVirageHaut.setY(collerY(e));
 			pisteVirageHaut.getFormeAire().setRect(xPisteVirageHaut, yPisteVirageHaut, pisteVirageHaut.getTaillePiste(),
 					pisteVirageHaut.getTaillePiste());
-			pisteVirageHaut.setMurBas((int) yPisteVirageHaut + pisteVirageHaut.getTaillePiste());
-			pisteVirageHaut.setMurHaut((int) yPisteVirageHaut);
-			pisteVirageHaut.setMurDroite((int) xPisteVirageHaut + pisteVirageHaut.getTaillePiste() + 1);
-			pisteVirageHaut.setMurGauche((int) xPisteVirageHaut);
+			pisteVirageHaut.setMurHaut((int) collerY(e));
+			pisteVirageHaut.setMurBas((int) collerY(e) + tailleDuCarre);
+			pisteVirageHaut.setMurDroite((int) collerX(e) + tailleDuCarre);
+			pisteVirageHaut.setMurGauche((int) collerX(e));
 		}
 	}
 
@@ -353,14 +358,14 @@ public class PanelRegroupement extends JPanel {
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
-			pisteVirageGauche.setX((int) xPisteVirageGauche);
-			pisteVirageGauche.setY((int) yPisteVirageGauche);
+			pisteVirageGauche.setX(collerX(e));
+			pisteVirageGauche.setY(collerY(e));
 			pisteVirageGauche.getFormeAire().setRect(xPisteVirageGauche, yPisteVirageGauche,
 					pisteVirageGauche.getTaillePiste(), pisteVirageGauche.getTaillePiste());
-			pisteVirageGauche.setMurBas((int) yPisteVirageGauche + pisteVirageGauche.getTaillePiste() + 1);
-			pisteVirageGauche.setMurGauche((int) xPisteVirageGauche + 1);
-			pisteVirageGauche.setMurHaut((int) yPisteVirageGauche + 1);
-			pisteVirageGauche.setMurDroite((int) xPisteVirageGauche + pisteVirageGauche.getTaillePiste() + 1);
+			pisteVirageGauche.setMurHaut((int) collerY(e));
+			pisteVirageGauche.setMurBas((int) collerY(e) + tailleDuCarre);
+			pisteVirageGauche.setMurDroite((int) collerX(e) + tailleDuCarre);
+			pisteVirageGauche.setMurGauche((int) collerX(e));
 		}
 	}
 
@@ -378,14 +383,14 @@ public class PanelRegroupement extends JPanel {
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
-			pisteVirageBas.setX((int) xPisteVirageBas);
-			pisteVirageBas.setY((int) yPisteVirageBas);
+			pisteVirageBas.setX(collerX(e));
+			pisteVirageBas.setY(collerY(e));
 			pisteVirageBas.getFormeAire().setRect(xPisteVirageBas, yPisteVirageBas, pisteVirageBas.getTaillePiste(),
 					pisteVirageBas.getTaillePiste());
-			pisteVirageBas.setMurBas((int) yPisteVirageBas + pisteVirageBas.getTaillePiste() + 1);
-			pisteVirageBas.setMurGauche((int) xPisteVirageBas + 1);
-			pisteVirageBas.setMurHaut((int) yPisteVirageBas + 1);
-			pisteVirageBas.setMurDroite((int) xPisteVirageBas + pisteVirageBas.getTaillePiste() + 1);
+			pisteVirageBas.setMurHaut((int) collerY(e));
+			pisteVirageBas.setMurBas((int) collerY(e) + tailleDuCarre);
+			pisteVirageBas.setMurDroite((int) collerX(e) + tailleDuCarre);
+			pisteVirageBas.setMurGauche((int) collerX(e));
 		}
 	}
 
@@ -404,14 +409,15 @@ public class PanelRegroupement extends JPanel {
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
-			pisteHorizontale.setX((int) xPisteHorizontale);
-			pisteHorizontale.setY((int) yPisteHorizontale);
+
+			pisteHorizontale.setX(collerX(e));
+			pisteHorizontale.setY(collerY(e));
 			pisteHorizontale.getFormeAire().setRect(xPisteHorizontale, yPisteHorizontale,
 					pisteHorizontale.getTaillePiste(), pisteHorizontale.getTaillePiste());
-			pisteHorizontale.setMurBas((int) yPisteHorizontale + pisteHorizontale.getTaillePiste());
-			pisteHorizontale.setMurHaut((int) yPisteHorizontale);
-			pisteHorizontale.setMurDroite((int) xPisteHorizontale + pisteHorizontale.getTaillePiste() + 1);
-			pisteHorizontale.setMurGauche((int) xPisteHorizontale);
+			pisteHorizontale.setMurHaut((int) collerY(e));
+			pisteHorizontale.setMurBas((int) collerY(e) + tailleDuCarre);
+			pisteHorizontale.setMurDroite((int) collerX(e) + tailleDuCarre);
+			pisteHorizontale.setMurGauche((int) collerX(e));
 		}
 	}
 
@@ -699,8 +705,8 @@ public class PanelRegroupement extends JPanel {
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 
-			acc.setX((int) xAccelerateur);
-			acc.setY((int) yAccelerateur);
+			acc.setX(collerX(e));
+			acc.setY(collerY(e));
 			acc.getFormeAire().setRect(xAccelerateur, yAccelerateur, acc.getTaillePiste(), acc.getTaillePiste());
 
 		}
@@ -737,7 +743,7 @@ public class PanelRegroupement extends JPanel {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
 		int x = 80;
 		int y = 80;
-		int tailleDuCarre = 80;
+		tailleDuCarre = 80;
 
 		for (int i = 0; i < 8; i++) {
 			for (int b = 0; b < 5; b++) {
@@ -749,6 +755,32 @@ public class PanelRegroupement extends JPanel {
 		}
 	}
 
+	/**
+	 * Effet aimant pour coller un morceau de piste dans un carre en x
+	 * @param e Évenement de souris
+	 * @return Le x du coin supérieur gauche
+	 */
+	// Kevin Nguyen
+	private int collerX(MouseEvent e) {
+		xPrecedent = e.getX();
+		
+		longueur = (int) (xPrecedent/tailleDuCarre) % 8 * tailleDuCarre;
+		return longueur;
+	}
+	
+	/**
+	 * Effet aimant pour coller un morceau de piste dans un carre en y
+	 * @param e Évenement de souris
+	 * @return Le y du coin supérieur gauche
+	 */
+	// Kevin Nguyen
+	private int collerY(MouseEvent e) {
+		yPrecedent = e.getY();
+		
+		hauteur = (int) (yPrecedent/tailleDuCarre) % 5 * tailleDuCarre;
+		return hauteur;
+	}
+	
 	public ArrayList<BlocMystere> getListeBlocMystere() {
 		return listeBlocMystere;
 	}

@@ -7,40 +7,48 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
+import interfaces.TypeObjetSpecial;
 
 /**
  * Classe permettant de gérer et créer un accélérateur
  * 
  * @author Tan Tommy Rin
- * @author
+ * @author Ludovic Julien
  *
  */
 public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -542387902394258937L;
-
 	/** Taille de la piste qui est toujours constante **/
-	private int taillePiste = 87;
+	private int taillePiste = 80;
 
 	/** la position en x de depart que l'objet piste vas etre creer **/
 	private int x;
 
 	/** la position en y de depart que l'objet piste vas etre creer **/
 	private int y;
+	/** Nombre de pixel par metre **/
 	private double pixelParMetre;
 	private Rectangle2D.Double formeAire;
 
+	/**
+	 * Methode qui permet de construire l'objet Accelerateur a l'aide de parametres
+	 * 
+	 * @param x position en x de la piste
+	 * @param y position en y de la piste
+	 */
 	public Accelerateur(int x, int y) {
 		this.x = x;
 		this.y = y;
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
+	/**
+	 * Methode qui permet de dessiner l'accelerateur sur la zone d'animation a
+	 * l'aide de g2d
+	 */
 	public void dessiner(Graphics2D g2d) {
 
 		g2d.setColor(Color.GREEN);
@@ -106,11 +114,12 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 	public void setFormeAire(Rectangle2D.Double formeAire) {
 		this.formeAire = formeAire;
 	}
+	
 //	public void fonctionAccelarateur(Voiture voitureAffecte) {
-//		// augmente la vitesse et l'acceleration
+//		// augmente la vitesse 
 //		final double vitesseAccelerer = voitureAffecte.getVitesseMaxSelonNiveau() * 2;
-//		voitureAffecte.setVitesse(vitesseAccelerer);
-//
+//		//voitureAffecte.setVitesse(vitesseAccelerer);
+//		voitureAffecte.setVitesseMaxSelonNiveau(vitesseAccelerer);
 //	}
 
 }

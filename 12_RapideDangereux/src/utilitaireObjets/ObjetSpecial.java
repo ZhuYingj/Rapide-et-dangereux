@@ -16,13 +16,15 @@ import physique.MoteurPhysique;
  *
  */
 public class ObjetSpecial implements Dessinable {
-
+	
 	private Vecteur2D positionObjet;
 	private double diametreObjet;
 	private TypeObjetSpecial type;
 	private double pixelParMetre = 1;
 	private double tempsTemporaire;
 	private boolean fonctionActive = false;
+	private int x;
+	private int y;
 
 	/**
 	 * Méthode permettant de créer un objet spécial à l'aide de paramètre
@@ -55,7 +57,25 @@ public class ObjetSpecial implements Dessinable {
 
 		}
 
-	}
+
+		
+
+
+		if(type == TypeObjetSpecial.TROUNOIR) {
+			TrouNoir trouNoir = new TrouNoir(this.positionObjet, this.diametreObjet);
+			trouNoir.dessiner(g2d);
+		}
+		if(type == TypeObjetSpecial.COLLE) {
+			Colle colle = new Colle(this.positionObjet, this.diametreObjet);
+			colle.dessiner(g2d);
+
+		}
+
+		}
+
+
+
+	
 
 	/**
 	 * Méthode permettant d'activer la fonction de l'objet special obtenu

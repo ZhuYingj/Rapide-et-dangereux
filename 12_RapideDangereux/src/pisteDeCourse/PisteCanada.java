@@ -12,6 +12,8 @@ import utilitaireObjets.PisteVirageHaut;
 
 /**
  * Classe qui crée la piste Canada
+ * 
+ * @author Ludovic Julien
  * @author Kevin Nguyen
  *
  */
