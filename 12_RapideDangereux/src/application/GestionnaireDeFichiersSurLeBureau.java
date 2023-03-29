@@ -19,7 +19,7 @@ import utilitaireObjets.Voiture;
 
 /**
  * Classe offrant un ensemble de m�thodes pour illustrer le fonctionnement des
- * fichiers texte et binaires
+ * fichiers texte et binaires.
  * 
  * @author Caroline Houle
  * @author Tan Tommy Rin
