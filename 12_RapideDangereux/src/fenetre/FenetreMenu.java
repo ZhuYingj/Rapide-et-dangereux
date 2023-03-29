@@ -14,7 +14,11 @@ import javax.swing.SwingConstants;
 import application.Identifiants;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+/**
+ * 
+ * @author Kraftt
+ *
+ */
 public class FenetreMenu extends JPanel {
 	private JLabel lblInfoRecue;
 	private JButton btnJouer;
@@ -69,7 +73,7 @@ public class FenetreMenu extends JPanel {
 
 		
 	}
-	public void setInfoRecue(Identifiants idRecu) {
-		lblInfoRecue.setText(idRecu.toString());;
-	}
+//	public void setInfoRecue(Identifiants idRecu) {
+//		lblInfoRecue.setText(idRecu.toString());;
+//	}
 }

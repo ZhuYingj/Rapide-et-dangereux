@@ -56,9 +56,9 @@ public class ObjetSpecial implements Dessinable {
 			bouleDeNeige.dessiner(g2d);
 
 		}
-<<<<<<< HEAD
+
 		
-=======
+
 		if(type == TypeObjetSpecial.TROUNOIR) {
 			TrouNoir trouNoir = new TrouNoir(this.positionObjet, this.diametreObjet);
 			trouNoir.dessiner(g2d);
@@ -67,7 +67,6 @@ public class ObjetSpecial implements Dessinable {
 			Colle colle = new Colle(this.positionObjet, this.diametreObjet);
 			colle.dessiner(g2d);
 		}
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
 
 	}
 
