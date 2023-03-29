@@ -93,11 +93,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private ObjetSpecial objSpecial;
 	/** Piste Canada **/
 	private PisteCanada pisteCanada;
-	/**
-	 * De type canada mais c'est une autre piste que l'on changera tout par un
-	 * setter
-	 **/
-	private PisteCanada pisteAutre;
+
+	private String nomFichierRegroupement = "regroupement2.dat";
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -116,11 +113,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pisteItalie = new PisteItalie(0, 0);
 		pisteCanada = new PisteCanada(0, 0);
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
-
-		regroupement = new Regroupement(voiture, 3, TypePiste.MEXIQUE);
-
-		objSpecial = new ObjetSpecial(new Vecteur2D(getWidth() / 2.0, getHeight() / 2.0), 20,
-				TypeObjetSpecial.BOULEDENEIGE);
 
 		regroupement = new Regroupement(voiture, 3, typePiste);
 
@@ -633,6 +625,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Par Tan Tommy Rin
 	public void setTypePiste(TypePiste typePiste) {
+
 		this.typePiste = typePiste;
 		regroupement.setType(typePiste);
 		if (typePiste == TypePiste.MEXIQUE) {
@@ -644,6 +637,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageGauche(pisteMexique.getGauche());
 			regroupement.setListePisteVirageHaut(pisteMexique.getHaut());
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
+
 		}
 		if (typePiste == TypePiste.ITALIE) {
 			regroupement.setListePisteDeDepart(pisteItalie.getDepart());
@@ -667,7 +661,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 		if (typePiste == TypePiste.AUTRE) {
-			Regroupement regroupementTempo = (gestionFich.lireFichierBinBureau("regroupement1.dat"));
+
+			Regroupement regroupementTempo = (gestionFich.lireFichierBinBureau(nomFichierRegroupement));
 			regroupement.setListePisteDeDepart(regroupementTempo.getListePisteDeDepart());
 			regroupement.setListePisteHorizontale(regroupementTempo.getListePisteHorizontale());
 			regroupement.setListePisteVerticale(regroupementTempo.getListePisteVerticale());
@@ -681,5 +676,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 
 		}
+
 	}
+
+	public String getNomFichierRegroupement() {
+		return nomFichierRegroupement;
+	}
+
+	public void setNomFichierRegroupement(String nomFichierRegroupement) {
+		this.nomFichierRegroupement = nomFichierRegroupement;
+	}
+
 }

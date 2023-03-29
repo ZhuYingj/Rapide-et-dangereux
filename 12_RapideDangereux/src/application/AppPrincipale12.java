@@ -311,9 +311,9 @@ public class AppPrincipale12 extends JFrame {
 	 * selon des levés d'évènements liés entre la fenetre du jeu sans le mode
 	 * scientifique et celui du mode éditeur
 	 * 
-	 * @param evt            evenement
-	 * @param fenEditeur     fenêtre du mode editeur
-	 * @param fenSansScience la fenetre de jeu sans le mode scientifique
+	 * @param evt        evenement
+	 * @param fenEditeur fenêtre du mode editeur
+	 * @param fenScience la fenetre de jeu avec le mode scientifique
 	 */
 	// Par Tan Tommy Rin
 
@@ -328,6 +328,7 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenScience);
 			break;
 		case "REGROUPEMENT":
+			fenScience.getZoneAnimPhysique().setNomFichierRegroupement((String) evt.getNewValue());
 			fenScience.getZoneAnimPhysique().setTypePiste(TypePiste.AUTRE);
 
 		}

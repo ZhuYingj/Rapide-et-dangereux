@@ -53,11 +53,10 @@ public class Regroupement implements Dessinable, Serializable {
 	/** Nombre de tour initial **/
 
 	private int tour = 0;
-	
+
 	private ObjetSpecial objSpecial;
 
 	private double tours = 0;
-
 
 	/**
 	 * Méthode qui permet de créer un groupe à l'aide de paramètre
@@ -125,7 +124,9 @@ public class Regroupement implements Dessinable, Serializable {
 		for (int a = 0; a < nombreBoiteMystere; a++) {
 			double diametreBoite = 15;
 			regroupementBoiteMystere.add(new BlocMystere(diametreBoite, new Vecteur2D(150 * (a + 1), 5 * (a + 1))));
+
 		}
+
 	}
 
 	/**

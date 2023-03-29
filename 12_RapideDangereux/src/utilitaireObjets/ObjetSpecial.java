@@ -35,7 +35,7 @@ public class ObjetSpecial implements Dessinable {
 		this.positionObjet = pos;
 		this.diametreObjet = diametre;
 		this.type = typeObjet;
-		
+
 	}
 
 	/**
@@ -52,11 +52,10 @@ public class ObjetSpecial implements Dessinable {
 		if (type == TypeObjetSpecial.BOULEDENEIGE) {
 			BouleDeNeige bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet);
 			bouleDeNeige.dessiner(g2d);
-			
+
 		}
 
 	}
-	
 
 	/**
 	 * Méthode permettant d'activer la fonction de l'objet special obtenu
@@ -113,7 +112,6 @@ public class ObjetSpecial implements Dessinable {
 		}
 
 	}
-	
 
 	/**
 	 * 
@@ -140,7 +138,6 @@ public class ObjetSpecial implements Dessinable {
 		}
 
 	}
-	
 
 	public boolean isFonctionActive() {
 		return fonctionActive;
