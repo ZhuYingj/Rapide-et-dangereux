@@ -336,7 +336,7 @@ public class FenetreJeuScientifique extends JPanel {
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("Retour", null, -1);
+				pcs.firePropertyChange("RetourDuJeuScience", null, -1);
 
 				pcs.firePropertyChange("Test", null, -1);
 
