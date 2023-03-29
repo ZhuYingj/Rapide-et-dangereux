@@ -28,6 +28,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 
 	/** La position en x du mure de haut **/
 	private int murGauche;
+
 	/** La position en y du mure de haut **/
 	private int murHaut;
 	/** La position en x de mure de bas **/
@@ -212,6 +213,38 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 
 	public void setFormeAire(Rectangle2D.Double formeAire) {
 		this.formeAire = formeAire;
+	}
+
+	public int getMurGauche() {
+		return murGauche;
+	}
+
+	public void setMurGauche(int murGauche) {
+		this.murGauche = murGauche;
+	}
+
+	public int getMurHaut() {
+		return murHaut;
+	}
+
+	public void setMurHaut(int murHaut) {
+		this.murHaut = murHaut;
+	}
+
+	public int getMurDroite() {
+		return murDroite;
+	}
+
+	public void setMurDroite(int murDroite) {
+		this.murDroite = murDroite;
+	}
+
+	public int getMurBas() {
+		return murBas;
+	}
+
+	public void setMurBas(int murBas) {
+		this.murBas = murBas;
 	}
 
 }
