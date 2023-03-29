@@ -115,10 +115,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		regroupement = new Regroupement(voiture, 3, typePiste);
 
-		objSpecial = new ObjetSpecial(new Vecteur2D(getWidth() / 2.0, getHeight() / 2.0), 20,
-				TypeObjetSpecial.BOULEDENEIGE);
+//		objSpecial = new ObjetSpecial(new Vecteur2D(getWidth() / 2.0, getHeight() / 2.0), 20,
+//				TypeObjetSpecial.BOULEDENEIGE);
 
-		objSpecial = new ObjetSpecial(new Vecteur2D(90, 40), 20, TypeObjetSpecial.BOULEDENEIGE);
+//		objSpecial = new ObjetSpecial(new Vecteur2D(90, 40), 20, TypeObjetSpecial.BOULEDENEIGE);
 		addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -163,8 +163,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		regroupement.setPixelsParMetre(pixelsParMetre);
 		regroupement.dessiner(g2d);
-		objSpecial.setPixelParMetre(pixelsParMetre);
-		objSpecial.dessiner(g2d);
+//		objSpecial.setPixelParMetre(pixelsParMetre);
+//		objSpecial.dessiner(g2d);
 	}
 
 	/**
