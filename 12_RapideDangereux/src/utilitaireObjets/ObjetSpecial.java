@@ -57,7 +57,9 @@ public class ObjetSpecial implements Dessinable {
 
 		}
 
+
 		
+
 
 		if(type == TypeObjetSpecial.TROUNOIR) {
 			TrouNoir trouNoir = new TrouNoir(this.positionObjet, this.diametreObjet);
@@ -66,9 +68,14 @@ public class ObjetSpecial implements Dessinable {
 		if(type == TypeObjetSpecial.COLLE) {
 			Colle colle = new Colle(this.positionObjet, this.diametreObjet);
 			colle.dessiner(g2d);
+
 		}
 
-	}
+		}
+
+
+
+	
 
 	/**
 	 * Méthode permettant d'activer la fonction de l'objet special obtenu
