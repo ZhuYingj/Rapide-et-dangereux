@@ -1,20 +1,16 @@
 package application;
 
 import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import geometrie.Vecteur2D;
@@ -23,10 +19,10 @@ import utilitaireObjets.Voiture;
 
 /**
  * Classe offrant un ensemble de m�thodes pour illustrer le fonctionnement des
- * fichiers texte et binaires
+ * fichiers texte et binaires.
  * 
  * @author Caroline Houle
- *
+ * @author Tan Tommy Rin
  */
 public class GestionnaireDeFichiersSurLeBureau {
 
@@ -34,31 +30,32 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 	private int nombrePiste = 1;
 
-	// fichiers binaires (objets)
+// fichiers binaires (objets)
 	private String nomFichBinRegroupement = "regroupement" + nombrePiste + ".dat";
+
+	private String nomFichBinComboBox = "comboBox.dat";
 
 	/**
 	 * crée un fichier binaire et y inscrit un objet regroupement (composé de
 	 * d'autres objets) Le place à un endroit spécifique sur le Bureau de
 	 * l'utilisateur
+	 * 
+	 * @param regroupement Le groupe que l'on sauvegarde
 	 */
-	public void ecrireFichierBinBureau(Regroupement regroupement) {
+// Par Tan Tommy Rin
+
+	public void ecrireFichierBinBureauRegroupement(Regroupement regroupement) {
 		nomFichBinRegroupement = "regroupement" + nombrePiste + ".dat";
 
-		// on commence par creer un objet voiture. Ce dernier a une position, une
-		// couleur, une masse, un diametre, un angle et une vitesse maximale selon le
-		// niveau choisi
-		Voiture voiture = new Voiture(new Vecteur2D(0, 0), Color.yellow, 50, 16, 0, 60);
-
-		// chemin d'acces au dossier
+// chemin d'acces au dossier
 		File dossier = new File(System.getProperty("user.home"), "Desktop" + "\\" + sousDossierSurBureau);
 
-		// on cree le dossier s'il n'existe pas
+// on cree le dossier s'il n'existe pas
 		if (dossier.mkdir()) {
 			System.out.println("\nLe dossier " + dossier.toString() + " a été créé car il n'existait pas...");
 		}
 
-		// chemin d'acces au fichier de travail
+// chemin d'acces au fichier de travail
 		File fichierDeTravail = new File(dossier + "\\" + nomFichBinRegroupement);
 
 		ObjectOutputStream oos = null;
@@ -67,9 +64,8 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 			oos = new ObjectOutputStream(new FileOutputStream(fichierDeTravail));
 
-			// on �crit chacun des objets
+// on �crit chacun des objets
 			oos.writeObject(regroupement);
-			oos.writeObject(voiture);
 			System.out.println(
 					"\nLes informations sur la voiture et le regroupement sont écrites avec succès. \nLe fichier "
 							+ fichierDeTravail.toString() + " est pret pour la lecture!");
@@ -84,7 +80,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 		}
 
 		finally {
-			// on ex�cutera toujours ceci, erreur ou pas
+// on ex�cutera toujours ceci, erreur ou pas
 			try {
 				oos.close();
 			} catch (IOException e) {
@@ -98,17 +94,22 @@ public class GestionnaireDeFichiersSurLeBureau {
 	/**
 	 * lit un fichier binaire et y lit un objet regroupement (compos� de d'autres
 	 * objets) Le fichier est a un endroti sp�cifique sur le Bureau de l'utilisateur
+	 * 
+	 * @param nomFichierVoulu le nom du fichier voulu
+	 * @return le groupe lue
 	 */
-	public Regroupement lireFichierBinBureau(String nomFichierVoulu) {
+// Par Tan Tommy Rin
+
+	public Regroupement lireFichierBinBureauRegroupement(String nomFichierVoulu) {
 		nomFichBinRegroupement = nomFichierVoulu;
 		Regroupement regroupement = null;
 		ObjectInputStream ois = null;
 
-		// chemin d'acces au fichier de travail, qui sera sur le Bureau
+// chemin d'acces au fichier de travail, qui sera sur le Bureau
 		File fichierDeTravail = new File(System.getProperty("user.home"),
 				"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
 
-		// on teste si le fichier � lire existe
+// on teste si le fichier � lire existe
 		if (!fichierDeTravail.exists()) {
 			JOptionPane.showMessageDialog(null,
 					"Probl�me! Le fichier " + fichierDeTravail.toString() + " n'existe pas...");
@@ -141,7 +142,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 		}
 
 		finally {
-			// on ex�cutera toujours ceci, erreur ou pas
+// on ex�cutera toujours ceci, erreur ou pas
 			try {
 				ois.close();
 			} catch (IOException e) {
@@ -153,12 +154,28 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 	}
 
-	public String getNomFichBinEtud() {
+	public String getNomFichBinRegroupement() {
 		return nomFichBinRegroupement;
 	}
 
-	public void setNomFichBinEtud(String nomFichBinEtud) {
-		this.nomFichBinRegroupement = nomFichBinEtud;
+	public void setNomFichBinRegroupement(String nomFichBinRegroupement) {
+		this.nomFichBinRegroupement = nomFichBinRegroupement;
+	}
+
+	public String getNomFichBinComboBox() {
+		return nomFichBinComboBox;
+	}
+
+	public void setNomFichBinComboBox(String nomFichBinComboBox) {
+		this.nomFichBinComboBox = nomFichBinComboBox;
+	}
+
+	public int getNombrePiste() {
+		return nombrePiste;
+	}
+
+	public void setNombrePiste(int nombrePiste) {
+		this.nombrePiste = nombrePiste;
 	}
 
 }

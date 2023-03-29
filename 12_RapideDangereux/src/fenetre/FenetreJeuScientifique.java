@@ -14,24 +14,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
-import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import application.AppPrincipale12;
-import dessin.ZoneAcceleration;
 import dessin.ZoneAnimPhysique;
-import dessin.ZoneVitesse;
-import physique.MoteurPhysique;
-import utilitaireObjets.Voiture;
 
 /**
  * Classe qui permet de cr√©er et g√©rer la fenetre du jeu avec le mode
  * scientifique activ√©
  * 
  * @author Tan Tommy Rin
- * @author Ludovic Julien
  *
  */
 public class FenetreJeuScientifique extends JPanel {
@@ -393,14 +387,6 @@ public class FenetreJeuScientifique extends JPanel {
 		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
 		progressBarFroce.setBounds(519, 11, 30, 157);
 		panelObjetEtGraphique.add(progressBarFroce);
-		
-		ZoneVitesse zoneVitesse = new ZoneVitesse();
-		zoneVitesse.setBounds(-50, -33, 250, 274);
-		panelObjetEtGraphique.add(zoneVitesse);
-		
-		ZoneAcceleration zoneAcceleration = new ZoneAcceleration();
-		zoneAcceleration.setBounds(200, -33, 250, 274);
-		panelObjetEtGraphique.add(zoneAcceleration);
 
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
@@ -413,57 +399,7 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
-		
-		/**
-		 * 
-		 * mÈthode qui permet avec un timer de prendre la valeur de la vitesse acutel de la voiture a chaquee 0.1 seconde 
-		 * et de l'ajouter dans le tableau "vitesse" pour permettre de faire les graphiques
-		 */
-		// Ludovic Julien
-		Timer timerVitesse = new Timer(100, new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		     //	maVoiture.ajouterVitesseParSeconde();
-		    	double vitesseActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getVitesse().module();
-		    	  if (vitesseActuelle < 0) {
-				    	vitesseActuelle = (vitesseActuelle*-1);
-				    } 
-               zoneVitesse.ajouterVitesse(vitesseActuelle);
-                System.out.println("la vitesse est de: "+ vitesseActuelle);
-		    }
-		});
-		
-		/**
-		 * 
-		 * mÈthode qui permet avec un timer de prendre la valeur de l'acceleration acutel de la voiture a chaquee 0.1 seconde 
-		 * et de l'ajouter dans le tableau "acceleration" pour permettre de faire les graphiques
-		 */
-		// Ludovic Julien
-		Timer timerAcc = new Timer(100, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				double AccActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getAccel().module();
-				if (AccActuelle < 0) {
-					AccActuelle = (AccActuelle*-1);
-			    } 
-				zoneAcceleration.ajouterAcceleration(AccActuelle);
-			}
-			
-		});
-		
-		/**
-		 * 
-		 * mÈthode qui permet avec un timer d'ajouter une seconde supplementaire dans le tableaux temps en appelant la methode "ajouterTemps"
-		 * a chaque 0.1 seconde pour permettre de faire les graphiques
-		 */
-		//Ludovic Julien
-		Timer timerTemps = new Timer(100, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 zoneVitesse.ajouterTemps();
-				 zoneAcceleration.ajouterTemps();
-			}
-			
-		});
-		
+
 		btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -473,12 +409,7 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(false);
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
-				
-				//Ludovic Julien
-				//active les timer "timerVitesse","timerAcc" et "timerTemps"
-				timerVitesse.start();
-				timerAcc.start();
-				timerTemps.start();
+
 			}
 		});
 		btnStart.setBounds(10, 563, 89, 76);
@@ -492,13 +423,6 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
 				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
-				
-					//Ludovic Julien
-					//appelle la methode renouvler pour clear les tableaux des graphique
-					zoneVitesse.renouvlerTemps();
-	                zoneVitesse.renouvlerVitesse();
-	                zoneAcceleration.renouvlerAcceleration();
-	                zoneAcceleration.renouvlerTemps();
 			}
 		});
 		btnReset.setBounds(175, 563, 89, 76);
@@ -521,12 +445,6 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.arreter();
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
-				
-				//Ludovic Julien
-				//arrete les timer "timerVitesse","timerAcc" et "timerTemps"
-				timerVitesse.stop();
-				timerTemps.stop();
-				timerAcc.stop();
 			}
 		});
 		btnStop.setBounds(538, 563, 89, 76);

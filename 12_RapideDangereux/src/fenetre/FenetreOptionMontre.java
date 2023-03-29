@@ -85,9 +85,8 @@ public class FenetreOptionMontre extends JPanel {
 
 			}
 		});
-		
+
 		JButton btnMexique = new JButton("Mexique");
-		// btnMexique.setIcon(icone);
 		btnMexique.setBounds(130, 77, 126, 78);
 		add(btnMexique);
 		btnMexique.addActionListener(new ActionListener() {
@@ -122,7 +121,7 @@ public class FenetreOptionMontre extends JPanel {
 		btnCommencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
-				//pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
+				// pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
 				pcs.firePropertyChange("TYPEPISTE", null, type);
 			}
 		});

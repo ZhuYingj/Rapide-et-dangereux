@@ -14,9 +14,11 @@ import javax.swing.SwingConstants;
 import application.Identifiants;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 /**
+ * Classe qui crée la premiere fenêtre
  * 
- * @author Kraftt
+ * @author Ludovic Julien
  *
  */
 public class FenetreMenu extends JPanel {
@@ -25,15 +27,18 @@ public class FenetreMenu extends JPanel {
 	private JButton btnAide;
 	private JButton btnQuitter;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	
+
 	/**
 	 * Create the panel.
 	 */
-	
+
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
-	
+
+	/**
+	 * Méthode qui permet la création du panel
+	 */
 	public FenetreMenu() {
 		addKeyListener(new KeyAdapter() {
 			@Override
@@ -41,14 +46,14 @@ public class FenetreMenu extends JPanel {
 			}
 		});
 		setLayout(null);
-		setBounds(100,100,1300,700);
-		
+		setBounds(100, 100, 1300, 700);
+
 		JLabel lblNewLabel = new JLabel("Rapide et Dangereux");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(293, 146, 349, 75);
 		add(lblNewLabel);
-		
+
 		btnJouer = new JButton("JOUER");
 		btnJouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -57,11 +62,11 @@ public class FenetreMenu extends JPanel {
 		});
 		btnJouer.setBounds(411, 245, 100, 49);
 		add(btnJouer);
-		
+
 		btnAide = new JButton("AIDE");
 		btnAide.setBounds(411, 321, 100, 49);
 		add(btnAide);
-		
+
 		btnQuitter = new JButton("QUITTER");
 		btnQuitter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -71,9 +76,6 @@ public class FenetreMenu extends JPanel {
 		btnQuitter.setBounds(411, 402, 100, 49);
 		add(btnQuitter);
 
-		
 	}
-//	public void setInfoRecue(Identifiants idRecu) {
-//		lblInfoRecue.setText(idRecu.toString());;
-//	}
+
 }
