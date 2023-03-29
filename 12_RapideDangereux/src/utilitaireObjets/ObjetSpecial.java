@@ -16,13 +16,15 @@ import physique.MoteurPhysique;
  *
  */
 public class ObjetSpecial implements Dessinable {
-
+	
 	private Vecteur2D positionObjet;
 	private double diametreObjet;
 	private TypeObjetSpecial type;
 	private double pixelParMetre = 1;
 	private double tempsTemporaire;
 	private boolean fonctionActive = false;
+	private int x;
+	private int y;
 
 	/**
 	 * Méthode permettant de créer un objet spécial à l'aide de paramètre
@@ -53,6 +55,11 @@ public class ObjetSpecial implements Dessinable {
 			BouleDeNeige bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet);
 			bouleDeNeige.dessiner(g2d);
 
+		}
+		
+		if (type == TypeObjetSpecial.ACCELERATEUR) {
+			Accelerateur accelerateur = new Accelerateur(this.x, this.y);
+			accelerateur.dessiner(g2d);
 		}
 
 	}
@@ -112,6 +119,24 @@ public class ObjetSpecial implements Dessinable {
 		}
 
 	}
+	
+	
+	
+	public boolean fonctionAcceleration(Voiture voiture, double tempsTotalEcoule) {
+		Accelerateur accelerateur = new Accelerateur(this.x, this.y);
+		if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
+			accelerateur.fonctionAccelarateur(voiture);
+			return true;
+		} else {
+			voiture.setVitesseMaxSelonNiveau(voiture.getVitesseMaxSelonNiveau());
+			
+			return false;
+		}
+
+	}
+	
+	
+	
 
 	/**
 	 * 

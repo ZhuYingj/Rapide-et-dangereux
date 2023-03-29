@@ -5,7 +5,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 
+import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import interfaces.TypeObjetSpecial;
 
 public class Colle implements Dessinable {
 
@@ -15,6 +17,7 @@ public class Colle implements Dessinable {
 	private int x;
 	/** la position en y de depart que l'objet piste vas etre creer  **/
 	private int y;
+	private TypeObjetSpecial typeObjet = TypeObjetSpecial.COLLE;
 	
 	
 	public Colle(int x, int y) {
@@ -36,5 +39,24 @@ public class Colle implements Dessinable {
 		g2d.drawLine(x, y+ (TAILLE_PISTE/2) , x + (TAILLE_PISTE/2), y + TAILLE_PISTE);
 		
 	}
+	
+	
+	public void fonctionChampignonActivation(Voiture voitureAffecte) {
 
-}
+		/// augmente la vitesse 
+		final double vitesseDiminuer = voitureAffecte.getVitesseMaxSelonNiveau() / 2;
+		voitureAffecte.setVitesseMaxSelonNiveau(vitesseDiminuer);
+
+	}
+
+	public TypeObjetSpecial getTypeObjet() {
+		return typeObjet;
+	}
+
+	public void setTypeObjet(TypeObjetSpecial typeObjet) {
+		this.typeObjet = typeObjet;
+	}
+
+	}
+	
+

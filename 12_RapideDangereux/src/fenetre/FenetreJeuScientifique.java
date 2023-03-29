@@ -13,12 +13,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import application.AppPrincipale12;
 import dessin.ZoneAnimPhysique;
+import dessin.ZoneVitesse;
+import physique.MoteurPhysique;
+import utilitaireObjets.Voiture;
 
 /**
  * Classe qui permet de créer et gérer la fenetre du jeu avec le mode
@@ -332,6 +336,10 @@ public class FenetreJeuScientifique extends JPanel {
 		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
 		progressBarFroce.setBounds(519, 11, 30, 157);
 		panelObjetEtGraphique.add(progressBarFroce);
+		
+		ZoneVitesse zoneVitesse = new ZoneVitesse();
+		zoneVitesse.setBounds(0, -33, 286, 274);
+		panelObjetEtGraphique.add(zoneVitesse);
 
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
@@ -344,7 +352,29 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
-
+		
+		
+		Voiture maVoiture = new Voiture();
+		Timer timerVitesse = new Timer(1000, new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		     //	maVoiture.ajouterVitesseParSeconde();
+		    	double vitesseActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getVitesse().module();
+		    	  if (vitesseActuelle < 0) {
+				    	vitesseActuelle = (vitesseActuelle*-1);
+				    } 
+               zoneVitesse.ajouterVitesse(vitesseActuelle);
+                System.out.println("la vitesse est de: "+ vitesseActuelle);
+		    }
+		});
+		
+		Timer timerTemps = new Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 zoneVitesse.ajouterTemps();
+				
+			}
+			
+		});
+		
 		btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -354,7 +384,8 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(false);
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
-
+				timerVitesse.start();
+				timerTemps.start();
 			}
 		});
 		btnStart.setBounds(10, 563, 89, 76);
@@ -368,6 +399,9 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
 				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
+				
+					zoneVitesse.renouvlerTemps();
+	                zoneVitesse.renouvlerVitesse();
 			}
 		});
 		btnReset.setBounds(175, 563, 89, 76);
@@ -390,6 +424,8 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.arreter();
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
+				timerVitesse.stop();
+				timerTemps.stop();
 			}
 		});
 		btnStop.setBounds(538, 563, 89, 76);

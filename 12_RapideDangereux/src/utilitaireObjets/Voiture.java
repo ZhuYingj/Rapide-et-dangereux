@@ -7,7 +7,9 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import dessin.ZoneVitesse;
 import geometrie.FlecheVectorielle;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -51,6 +53,8 @@ public class Voiture implements Dessinable, Serializable {
 	private double vitesseMaxSelonNiveau;
 	/** Le diametre de la voiture initial **/
 	private double diametreInitial;
+	
+	public static ArrayList<Double> vitessesParSeconde;
 
 	/**
 	 * Méthode qui permet de construire une voiture avec des paramètres
@@ -73,7 +77,7 @@ public class Voiture implements Dessinable, Serializable {
 		masseEnKgInitial = masseEnKg;
 		diametreInitial = diametre;
 		creerLaGeometrie();
-
+		vitessesParSeconde = new ArrayList<Double>();
 	}
 
 	/**
@@ -388,4 +392,13 @@ public class Voiture implements Dessinable, Serializable {
 		return cercle;
 	}
 
+//	 public void ajouterVitesseParSeconde() {
+//		    double vitesseActuelle = (vitesse.getX()+vitesse.getY());
+//		    if (vitesseActuelle > 0) {
+//		    	vitesseActuelle = (vitesseActuelle*-1);
+//		    } 
+//	        vitessesParSeconde.add(vitesseActuelle);
+//	        System.out.println("Viettes de la voiture � ce moment est: " + vitesseActuelle);
+//		}
+	 
 }

@@ -7,8 +7,10 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
+import interfaces.TypeObjetSpecial;
 
 /**
  * Classe permettant de gérer et créer un accélérateur
@@ -18,11 +20,6 @@ import interfaces.Selectionnable;
  *
  */
 public class Accelerateur implements Dessinable, Selectionnable, Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -542387902394258937L;
 
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 87;
@@ -34,12 +31,17 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 	private int y;
 	private double pixelParMetre;
 	private Rectangle2D.Double formeAire;
+	private TypeObjetSpecial typeObjet = TypeObjetSpecial.ACCELERATEUR;
 
 	public Accelerateur(int x, int y) {
 		this.x = x;
 		this.y = y;
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
+//
+//	public Accelerateur(Vecteur2D positionX, TypeObjetSpecial typee) {
+//		// TODO Auto-generated constructor stub
+//	}
 
 	public void dessiner(Graphics2D g2d) {
 
@@ -106,11 +108,12 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 	public void setFormeAire(Rectangle2D.Double formeAire) {
 		this.formeAire = formeAire;
 	}
-//	public void fonctionAccelarateur(Voiture voitureAffecte) {
-//		// augmente la vitesse et l'acceleration
-//		final double vitesseAccelerer = voitureAffecte.getVitesseMaxSelonNiveau() * 2;
-//		voitureAffecte.setVitesse(vitesseAccelerer);
-//
-//	}
+	
+	public void fonctionAccelarateur(Voiture voitureAffecte) {
+		// augmente la vitesse 
+		final double vitesseAccelerer = voitureAffecte.getVitesseMaxSelonNiveau() * 2;
+		//voitureAffecte.setVitesse(vitesseAccelerer);
+		voitureAffecte.setVitesseMaxSelonNiveau(vitesseAccelerer);
+	}
 
 }

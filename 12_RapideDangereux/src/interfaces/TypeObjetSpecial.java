@@ -7,5 +7,5 @@ public enum TypeObjetSpecial {
 	 * @author Tan Tommy Rin
 	 */
 
-	CHAMPIGNON, BOULEDENEIGE, COLLE, TROUNOIR
+	CHAMPIGNON, BOULEDENEIGE, COLLE, TROUNOIR, ACCELERATEUR
 }
