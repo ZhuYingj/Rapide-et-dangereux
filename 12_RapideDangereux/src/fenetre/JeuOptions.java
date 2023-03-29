@@ -30,7 +30,7 @@ import utilitaireObjets.Voiture;
  * Monde
  * 
  * @author Alexis Pineda-Alvarado
- * 
+ * @author Ludovic Julien
  */
 
 public class JeuOptions extends JPanel {
@@ -71,6 +71,9 @@ public class JeuOptions extends JPanel {
 		zoneApercupiste.setBounds(0, 0, 700, 439);
 		PanelApercu.add(zoneApercupiste);
 
+		
+		//LudovicJulien
+		//permet au bouton d'afficher la bonne image
 		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");
 		// Icon icone = new ImageIcon(drapeuxMexique);
 		JButton btnMexique = new JButton("Mexique");
@@ -86,6 +89,8 @@ public class JeuOptions extends JPanel {
 			}
 		});
 
+		//LudovicJulien
+			//permet au bouton d'afficher la bonne image
 		JButton btnCanada = new JButton("Canada");
 		btnCanada.setBounds(307, 77, 126, 78);
 		add(btnCanada);
@@ -98,6 +103,8 @@ public class JeuOptions extends JPanel {
 			}
 		});
 
+		//LudovicJulien
+		//permet au bouton d'afficher la bonne image
 		JButton btnItalie = new JButton("Italie");
 		btnItalie.setBounds(474, 77, 126, 78);
 		add(btnItalie);

@@ -415,11 +415,11 @@ public class FenetreJeuScientifique extends JPanel {
 		add(btnRetour);
 		
 		/**
-		 * @author Ludovic Julien
 		 * 
 		 * méthode qui permet avec un timer de prendre la valeur de la vitesse acutel de la voiture a chaquee 0.1 seconde 
 		 * et de l'ajouter dans le tableau "vitesse" pour permettre de faire les graphiques
 		 */
+		// Ludovic Julien
 		Timer timerVitesse = new Timer(100, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		     //	maVoiture.ajouterVitesseParSeconde();
@@ -433,11 +433,11 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		
 		/**
-		 * @author Ludovic Julien
 		 * 
 		 * méthode qui permet avec un timer de prendre la valeur de l'acceleration acutel de la voiture a chaquee 0.1 seconde 
 		 * et de l'ajouter dans le tableau "acceleration" pour permettre de faire les graphiques
 		 */
+		// Ludovic Julien
 		Timer timerAcc = new Timer(100, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -451,11 +451,11 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		
 		/**
-		 * @author Ludovic Julien
 		 * 
 		 * méthode qui permet avec un timer d'ajouter une seconde supplementaire dans le tableaux temps en appelant la methode "ajouterTemps"
 		 * a chaque 0.1 seconde pour permettre de faire les graphiques
 		 */
+		//Ludovic Julien
 		Timer timerTemps = new Timer(100, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 zoneVitesse.ajouterTemps();
