@@ -57,9 +57,9 @@ public class PanelObjet extends JPanel {
 		pisteHorizontale = new PisteHorizontale(xObjet, yObjet * 7);
 		pisteVerticale = new PisteVerticale(xObjet * 3, yObjet * 7);
 		pisteVirageBas = new PisteVirageBas(xObjet, yObjet * 14);
-		pisteVirageDroit = new PisteVirageDroit(xObjet * 3, yObjet * 14);
-		pisteVirageGauche = new PisteVirageGauche(xObjet, yObjet * 21);
-		pisteVirageHaut = new PisteVirageHaut(xObjet * 3, yObjet * 21);
+		pisteVirageDroit = new PisteVirageDroit(xObjet * 3, yObjet * 21);
+		pisteVirageGauche = new PisteVirageGauche(xObjet * 3, yObjet * 14);
+		pisteVirageHaut = new PisteVirageHaut(xObjet, yObjet * 21);
 		accelerateur = new Accelerateur(xObjet, yObjet * 28);
 
 		pisteDeDepart.dessiner(g2d);

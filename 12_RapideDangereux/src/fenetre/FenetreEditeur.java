@@ -172,7 +172,7 @@ public class FenetreEditeur extends JPanel {
 				repaint();
 			}
 		});
-		btnAjouterPisteVirageGauche.setBounds(64, 517, 41, 23);
+		btnAjouterPisteVirageGauche.setBounds(217, 378, 41, 23);
 		panelObjet.add(btnAjouterPisteVirageGauche);
 
 		JButton btnSupprimerPisteHorizontale = new JButton("-");
@@ -211,7 +211,7 @@ public class FenetreEditeur extends JPanel {
 				}
 			}
 		});
-		btnSupprimerPisteVirageGauche.setBounds(114, 517, 41, 23);
+		btnSupprimerPisteVirageGauche.setBounds(268, 378, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageGauche);
 
 		btnAjouterPisteDeDepart = new JButton("+");
@@ -278,7 +278,7 @@ public class FenetreEditeur extends JPanel {
 				repaint();
 			}
 		});
-		btnAjouterPisteVirageDroite.setBounds(217, 378, 41, 23);
+		btnAjouterPisteVirageDroite.setBounds(217, 517, 41, 23);
 		panelObjet.add(btnAjouterPisteVirageDroite);
 
 		JButton btnSupprimerPisteVirageDroite = new JButton("-");
@@ -291,7 +291,7 @@ public class FenetreEditeur extends JPanel {
 				}
 			}
 		});
-		btnSupprimerPisteVirageDroite.setBounds(267, 378, 41, 23);
+		btnSupprimerPisteVirageDroite.setBounds(268, 517, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageDroite);
 
 		JButton btnAjouterPisteVirageHaut = new JButton("+");
@@ -302,7 +302,7 @@ public class FenetreEditeur extends JPanel {
 				repaint();
 			}
 		});
-		btnAjouterPisteVirageHaut.setBounds(217, 517, 41, 23);
+		btnAjouterPisteVirageHaut.setBounds(64, 517, 41, 23);
 		panelObjet.add(btnAjouterPisteVirageHaut);
 
 		JButton btnSupprimerPisteVirageHaut = new JButton("-");
@@ -315,7 +315,7 @@ public class FenetreEditeur extends JPanel {
 				}
 			}
 		});
-		btnSupprimerPisteVirageHaut.setBounds(267, 517, 41, 23);
+		btnSupprimerPisteVirageHaut.setBounds(114, 517, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageHaut);
 
 		btnSauvegarde = new JButton("SAUVEGARDER LA PISTE");
