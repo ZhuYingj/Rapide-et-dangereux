@@ -94,7 +94,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterAccelerateur = new JButton("+");
 		btnAjouterAccelerateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Accelerateur accelerateur = new Accelerateur(panelRegroupement.getX() + 100, 50);
+				Accelerateur accelerateur = new Accelerateur(650, 50);
 				panelRegroupement.getListeAccelerateur().add(accelerateur);
 
 				repaint();
@@ -119,7 +119,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterBlocMystere = new JButton("+");
 		btnAjouterBlocMystere.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BlocMystere blocMystere = new BlocMystere(15, new Vecteur2D(panelRegroupement.getX() + 15, 50));
+				BlocMystere blocMystere = new BlocMystere(15, new Vecteur2D(650, 170));
 
 				panelRegroupement.getListeBlocMystere().add(blocMystere);
 				repaint();
@@ -144,7 +144,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteHorizontale = new JButton("+");
 		btnAjouterPisteHorizontale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteHorizontale pisteHorizontale = new PisteHorizontale(150, 50);
+				PisteHorizontale pisteHorizontale = new PisteHorizontale(650, 190);
 				panelRegroupement.getListePisteHorizontale().add(pisteHorizontale);
 				repaint();
 			}
@@ -155,7 +155,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageBas = new JButton("+");
 		btnAjouterPisteVirageBas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageBas pisteVirageBas = new PisteVirageBas(250, 50);
+				PisteVirageBas pisteVirageBas = new PisteVirageBas(650, 70);
 				panelRegroupement.getListePisteVirageBas().add(pisteVirageBas);
 				repaint();
 			}
@@ -167,7 +167,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageGauche = new JButton("+");
 		btnAjouterPisteVirageGauche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageGauche pisteVirageGauche = new PisteVirageGauche(250, 150);
+				PisteVirageGauche pisteVirageGauche = new PisteVirageGauche(650, 90);
 				panelRegroupement.getListePisteVirageGauche().add(pisteVirageGauche);
 				repaint();
 			}
@@ -218,7 +218,7 @@ public class FenetreEditeur extends JPanel {
 		btnAjouterPisteDeDepart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (panelRegroupement.getListePisteDeDepart().size() == 0) {
-					PisteDeDepart pisteDeDepart = new PisteDeDepart(450, 50);
+					PisteDeDepart pisteDeDepart = new PisteDeDepart(650, 150);
 					panelRegroupement.getListePisteDeDepart().add(pisteDeDepart);
 					btnAjouterPisteDeDepart.setEnabled(false);
 					btnSauvegarde.setEnabled(true);
@@ -234,7 +234,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVerticale = new JButton("+");
 		btnAjouterPisteVerticale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVerticale pisteVerticale = new PisteVerticale(550, 50);
+				PisteVerticale pisteVerticale = new PisteVerticale(650, 50);
 				panelRegroupement.getListePisteVerticale().add(pisteVerticale);
 				repaint();
 			}
@@ -273,7 +273,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageDroite = new JButton("+");
 		btnAjouterPisteVirageDroite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageDroit pisteVirageDroit = new PisteVirageDroit(panelRegroupement.getX() + 50, 250);
+				PisteVirageDroit pisteVirageDroit = new PisteVirageDroit(650, 110);
 				panelRegroupement.getListePisteVirageDroit().add(pisteVirageDroit);
 				repaint();
 			}
@@ -297,7 +297,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageHaut = new JButton("+");
 		btnAjouterPisteVirageHaut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageHaut pisteVirageHaut = new PisteVirageHaut(panelRegroupement.getX() + 200, 50);
+				PisteVirageHaut pisteVirageHaut = new PisteVirageHaut(650, 210);
 				panelRegroupement.getListePisteVirageHaut().add(pisteVirageHaut);
 				repaint();
 			}
@@ -362,7 +362,7 @@ public class FenetreEditeur extends JPanel {
 
 		panelRegroupement = new PanelRegroupement();
 		panelRegroupement.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelRegroupement.setBounds(132, 96, 640, 400);
+		panelRegroupement.setBounds(132, 96, 769, 400);
 		add(panelRegroupement);
 
 	}
