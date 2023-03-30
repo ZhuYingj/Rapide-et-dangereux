@@ -165,7 +165,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			premiereFois = false;
 			regroupement.getListePisteDeDepart().get(0).getVoiture()
 					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-							regroupement.getListePisteDeDepart().get(0).getY()));
+							regroupement.getListePisteDeDepart().get(0).getY() + 10));
 
 			regroupement.getListePisteDeDepart().get(0).getVoiture2()
 					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
@@ -200,7 +200,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		case KeyEvent.VK_UP:
 			haut = true;
 			break;
-		case KeyEvent.VK_Q:
+		case KeyEvent.VK_SPACE:
 			space = true;
 			break;
 		case KeyEvent.VK_D:
@@ -252,7 +252,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		case KeyEvent.VK_W:
 			w = false;
 			break;
-
+		case KeyEvent.VK_SPACE:
+			space = false;
+			break;
 		}
 
 	}
@@ -385,9 +387,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 							20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle())));
 		}
 
-		if (space == true) {
-			System.out.println("yo");
-		}
 	}
 
 	/**
@@ -425,6 +424,19 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			if (haut == false) {
 				voiture.setAccel(valeurInit);
+			}
+			if (space == true) {
+
+				if (regroupement.getObjSpecial() != null) {
+					regroupement.setBoutonAppuye(true);
+					regroupement.getObjSpecial().setVitesse(new Vecteur2D(
+							50 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
+							50 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
+					regroupement.getObjSpecial().setSommeDesForces((new Vecteur2D(
+							50 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
+							50 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()))));
+				}
+
 			}
 
 			if (w == false) {
@@ -623,7 +635,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).getVoiture().setSommeDesForces(forceTotal);
 			if (regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() < 0.5) {
 				regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(new Vecteur2D(0, 0));
-				System.out.println("ici");
+
 			}
 
 		}

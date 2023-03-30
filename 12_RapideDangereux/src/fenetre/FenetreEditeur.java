@@ -392,7 +392,8 @@ public class FenetreEditeur extends JPanel {
 		comboBoxPiste.addItem(gestionFich.getNomFichBinRegroupement());
 
 		btnJouer.setEnabled(true);
-		JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU");
+		JOptionPane.showMessageDialog(null,
+				"PISTE SAUVEGARDER SUR LE BUREAU\nNOM :" + gestionFich.getNomFichBinRegroupement());
 
 	}
 

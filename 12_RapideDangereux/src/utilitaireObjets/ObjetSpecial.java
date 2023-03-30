@@ -2,6 +2,7 @@ package utilitaireObjets;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 
 import geometrie.Vecteur2D;
@@ -17,6 +18,11 @@ import physique.MoteurPhysique;
  */
 public class ObjetSpecial implements Dessinable {
 
+	/** Vecteur de la vitesse de la voiture **/
+	private Vecteur2D vitesse = new Vecteur2D(0, 0); // par defaut
+
+	/** Vecteur de l'acceleration de la voiture **/
+	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
 	private Vecteur2D positionObjet;
 	private double diametreObjet;
 	private TypeObjetSpecial type;
@@ -25,6 +31,7 @@ public class ObjetSpecial implements Dessinable {
 	private boolean fonctionActive = false;
 	private int x;
 	private int y;
+	private BouleDeNeige bouleDeNeige;
 
 	/**
 	 * Méthode permettant de créer un objet spécial à l'aide de paramètre
@@ -37,6 +44,7 @@ public class ObjetSpecial implements Dessinable {
 		this.positionObjet = pos;
 		this.diametreObjet = diametre;
 		this.type = typeObjet;
+		bouleDeNeige = new BouleDeNeige(positionObjet, diametre);
 
 	}
 
@@ -52,7 +60,7 @@ public class ObjetSpecial implements Dessinable {
 
 		}
 		if (type == TypeObjetSpecial.BOULEDENEIGE) {
-			BouleDeNeige bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet);
+			bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet);
 			bouleDeNeige.dessiner(g2d);
 
 		}
@@ -95,7 +103,7 @@ public class ObjetSpecial implements Dessinable {
 
 		} else if (type == TypeObjetSpecial.BOULEDENEIGE) {
 
-			fonctionBouleDeNeige(voiture, tempsTotalEcoule);
+//			fonctionBouleDeNeige(voiture, tempsTotalEcoule);
 
 		} else if (type == TypeObjetSpecial.COLLE) {
 
@@ -121,7 +129,6 @@ public class ObjetSpecial implements Dessinable {
 		} else {
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
 			voiture.setDiametre(voiture.getDiametreInitial());
-			System.out.println("a");
 			fonctionActive = false;
 			return false;
 		}
@@ -137,21 +144,54 @@ public class ObjetSpecial implements Dessinable {
 	// Alexis Pineda-Alvarado
 	public boolean fonctionBouleDeNeige(Voiture voiture, double tempsFinal) {
 
-		if ((tempsTemporaire + 3 > tempsFinal)) {
+		if (tempsTemporaire + 3 > tempsFinal) {
+
 			System.out.println("SLOW DOWN!!!");
 			Vecteur2D voitureSlow = new Vecteur2D();
 			voitureSlow = MoteurPhysique.calculerForceFrottement(2.50, voiture.getMasseEnKg(), voiture.getAngle());
 			voiture.setSommeDesForces(voitureSlow);
-			System.out.println(voitureSlow);
-			fonctionActive = true;
+
 			return true;
 		} else {
 			System.out.println("NORMAL SPEED!!!");
 			Vecteur2D voitureNormal = new Vecteur2D();
 			voitureNormal = MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), voiture.getAngle());
 			voiture.setSommeDesForces(voitureNormal);
-			fonctionActive = false;
+			
+
 			return false;
+		}
+
+	}
+
+	/**
+	 * Calcule la nouvelle vitesse et la nouvelle position de la balle apres cet
+	 * nouvel intervalle de temps.
+	 * 
+	 * @param deltaT intervalle de temps (pas)
+	 */
+	// Par Tan Tommy Rin
+	public void avancerUnPas(double deltaT) {
+		this.vitesse = MoteurPhysique.calculVitesse(deltaT, vitesse, accel);
+		this.positionObjet = MoteurPhysique.calculPosition(deltaT, positionObjet, vitesse);
+
+	}
+
+	/**
+	 * Recalcule l'acceleration de la voiture a l'aide la nouvelle somme des forces
+	 * passee en parametre Ceci aura pour consequence de modifier l'acceleration
+	 * 
+	 * @param sommeForcesSurLaBalle La somme des forces exercees sur la voiture
+	 */
+	// Par Tan Tommy Rin
+	public void setSommeDesForces(Vecteur2D sommeForcesSurLaVoiture) {
+		// ici changer les forces signifie recalculer l'acceleration
+		// on relegue cette tache au moteur physique.
+		try {
+			accel = MoteurPhysique.calculAcceleration(sommeForcesSurLaVoiture, 50);
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -203,6 +243,22 @@ public class ObjetSpecial implements Dessinable {
 
 	public void setPixelParMetre(double pixelParMetre) {
 		this.pixelParMetre = pixelParMetre;
+	}
+
+	public Vecteur2D getVitesse() {
+		return vitesse;
+	}
+
+	public void setVitesse(Vecteur2D vitesse) {
+		this.vitesse = vitesse;
+	}
+
+	public BouleDeNeige getBouleDeNeige() {
+		return bouleDeNeige;
+	}
+
+	public void setBouleDeNeige(BouleDeNeige bouleDeNeige) {
+		this.bouleDeNeige = bouleDeNeige;
 	}
 
 }

@@ -191,6 +191,38 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	}
 
 	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
+	 * et la boule de neige
+	 * 
+	 * @param L'objet special de type boule de neige
+	 */
+	// Tan Tommy Rin
+	public void enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
+
+		Area cercle = new Area(objetSpecial.getBouleDeNeige().getBoule());
+		cercle.intersect(aireTriangle);
+		double pos = 3;
+
+		if (objetSpecial.getBouleDeNeige().getBoule().getX() > murGauche
+				&& objetSpecial.getBouleDeNeige().getBoule().getX() < murDroite
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() > murHaut
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() < murBas) {
+			if (objetSpecial.getBouleDeNeige().getBoule().getX() < murGauche + 1) {
+				objetSpecial.setDiametreObjet(0);
+
+			} else if (objetSpecial.getBouleDeNeige().getBoule().getX() > murBas
+					- objetSpecial.getBouleDeNeige().getDiametre()) {
+
+				objetSpecial.setDiametreObjet(0);
+			} else if (!cercle.isEmpty()) {
+
+				objetSpecial.setDiametreObjet(0);
+			}
+		}
+
+	}
+
+	/**
 	 * Méthode permettant de savoir si la voiture est passée sur la piste
 	 * 
 	 * @param voiture La voiture controllée

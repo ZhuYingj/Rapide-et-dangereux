@@ -21,6 +21,7 @@ import interfaces.TypeObjetSpecial;
 public class BouleDeNeige {
 	private double diametre;
 	private Ellipse2D.Double boule;
+
 	private double pixelsParMetre;
 	private Vecteur2D vitesse = new Vecteur2D(100, 0); // par defaut
 	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
@@ -33,9 +34,8 @@ public class BouleDeNeige {
 	private transient Area aireVoiture1;
 
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.BOULEDENEIGE;
-	private boolean contactBouleNeige = true;
+	private boolean contactBouleNeige = false;
 	private Vecteur2D position;
-	private boolean boutonQ;
 
 	/**
 	 * Méthode qui crée la boule de neige
@@ -51,7 +51,7 @@ public class BouleDeNeige {
 		this.position = pos;
 
 		creerLaGeometrie();
-		
+
 	}
 
 	/**
@@ -85,16 +85,20 @@ public class BouleDeNeige {
 	 */
 	// Alexis Pineda-Alvarado
 	public boolean collisionDeLaBalle(Voiture v) {
-		this.voiture = v;
 
+		this.voiture = v;
+		bouleDeNeigeAireCopie = new Area(boule);
 		aireVoiture = new Area(voiture.getCercle());
 		aireVoiture1 = new Area(aireVoiture);
 		aireVoiture1.intersect(bouleDeNeigeAireCopie);
-
-		if (contactBouleNeige)
+		if (contactBouleNeige == false) {
 			if (!aireVoiture1.isEmpty()) {
+				contactBouleNeige = true;
+
+			} else {
 				contactBouleNeige = false;
 			}
+		}
 
 		return contactBouleNeige;
 	}
@@ -106,7 +110,6 @@ public class BouleDeNeige {
 	public void deplacementBoule() {
 
 	}
-
 
 	/**
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
@@ -168,6 +171,14 @@ public class BouleDeNeige {
 
 	public void setTypeObjet(TypeObjetSpecial typeObjet) {
 		this.typeObjet = typeObjet;
+	}
+
+	public Ellipse2D.Double getBoule() {
+		return boule;
+	}
+
+	public void setBoule(Ellipse2D.Double boule) {
+		this.boule = boule;
 	}
 
 }
