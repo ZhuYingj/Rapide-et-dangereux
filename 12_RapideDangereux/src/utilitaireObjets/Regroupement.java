@@ -55,17 +55,19 @@ public class Regroupement implements Dessinable, Serializable {
 	private int tour = 0;
 
 	private ObjetSpecial objSpecial;
-	private ObjetSpecial objSpecialTemporaire;
 
 	private ObjetSpecial objSpecial2;
 
 	private double tours = 0;
 
 	private double tempsTemp;
+	private double tempsTemp2;
 
 	private boolean boutonAppuye = false;
+	private boolean boutonAppuye2 = false;
+
 	private boolean firstTime = false;
-	private boolean objetEnCours;
+	private boolean firstTime2 = false;
 
 	/**
 	 * Méthode qui permet de créer un groupe à l'aide de paramètre
@@ -106,18 +108,31 @@ public class Regroupement implements Dessinable, Serializable {
 				regroupementBoiteMystere.remove(a).getObjetSpecial();
 				break;
 			}
+
 			if (regroupementBoiteMystere.get(a)
 					.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
-				boutonAppuye = false;
+				boutonAppuye2 = false;
 				objSpecial2 = regroupementBoiteMystere.get(a).getObjetSpecial();
-//Peut etre faire tempsTemp une autre fois (2ieme variable pour voiture 2)
-//				tempsTemp = tempsTotalEcoule;
+
+				tempsTemp2 = tempsTotalEcoule;
 				regroupementBoiteMystere.remove(a).getObjetSpecial();
 				break;
 			}
 
-		} // fin v1 for
+		} // Fin for loop
+		fonctionDesObjetsPossibles(tempsTotalEcoule, deltaT);
 
+	}
+
+	/**
+	 * Méthode qui permet de gérer la fonction des objets possibles dans le bloc
+	 * mystère. Cette méthode est activé à chaque avancement du groupe.
+	 * 
+	 * @param tempsTotalEcoule Le temps total écoulé depuis la simulation
+	 * @param deltaT           Le pas
+	 */
+	// Tan Tommy Rin
+	public void fonctionDesObjetsPossibles(double tempsTotalEcoule, double deltaT) {
 		// Pour v1
 		if (objSpecial != null) {
 			if (objSpecial.getType() == TypeObjetSpecial.CHAMPIGNON) {
@@ -166,39 +181,69 @@ public class Regroupement implements Dessinable, Serializable {
 				}
 
 			} // Fin condition pour le type "Boule de neige"
-			if (objSpecial.getType() == TypeObjetSpecial.TROUNOIR) {
-
-			}
-			if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
-
-			}
-		}
-
-		// Pour v2
-//		if (objSpecial2 != null)
-//
-//		{
-//			if (objSpecial2.getType() == TypeObjetSpecial.CHAMPIGNON) {
-//				objSpecial2.setTempsTemporaire(tempsTemp);
-//
-//				if (objSpecial2.isFonctionActive() == true) {
-//
-//					objSpecial2.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule);
-//				}
-//
-//			}
-//			if (objSpecial2.getType() == TypeObjetSpecial.BOULEDENEIGE) {
-//				objSpecial2.setTempsTemporaire(tempsTemp);
-//				if (objSpecial2.isFonctionActive() == true) {
-//					objSpecial2.fonctionBouleDeNeige(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule);
-//				}
-//
-//			}
 //			if (objSpecial.getType() == TypeObjetSpecial.TROUNOIR) {
-////						objSpecial.dessiner(g2d)
 //
 //			}
+//			if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
+//
+//			}
+		} // Fin pour v1
+			// Pour v2
+		if (objSpecial2 != null) {
+			if (objSpecial2.getType() == TypeObjetSpecial.CHAMPIGNON) {
+				objSpecial2.setTempsTemporaire(tempsTemp2);
 
+				objSpecial2.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule);
+
+			}
+			if (objSpecial2.getType() == TypeObjetSpecial.BOULEDENEIGE) {
+				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
+				// diametre et masse aux valeurs initiales.
+				listePisteDeDepart.get(0).getVoiture2()
+						.setMasseEnKg(listePisteDeDepart.get(0).getVoiture2().getMasseEnKgInitial());
+				listePisteDeDepart.get(0).getVoiture2()
+						.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
+
+				// Si la boule de neige est lancé on avance d'un pas.
+
+				if (boutonAppuye2 == true) {
+
+					objSpecial2.avancerUnPas(deltaT);
+					// Si la boule de neige rentre en collision avec la voiture1
+					if (objSpecial2.getBouleDeNeige()
+							.collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
+
+						tempsTemp2 = tempsTotalEcoule;
+						objSpecial2.setTempsTemporaire(tempsTemp2);
+						firstTime2 = true;
+					}
+					if (firstTime2 == true) {
+						// Ici la fonction est activé si la voiture1 est en collision et on set le
+						// diametre à 0 (Pour pas voir l'objet) et on set sa vitesse à 0, car sinon elle
+						// peut faire des collisions avec les murs et l'objet sera mis à null
+						objSpecial2.setDiametreObjet(0);
+						objSpecial2.setVitesse(new Vecteur2D(0, 0));
+						objSpecial2.fonctionBouleDeNeige(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule);
+						if (objSpecial2.fonctionBouleDeNeige(listePisteDeDepart.get(0).getVoiture(),
+								tempsTotalEcoule) == false) {
+							boutonAppuye2 = false;
+							firstTime2 = false;
+							objSpecial2 = null;
+							System.out.println("3 sec pass");
+
+						}
+					}
+
+				}
+
+			} // Fin condition pour le type "Boule de neige"
+//			if (objSpecial2.getType() == TypeObjetSpecial.TROUNOIR) {
+//
+//			}
+//			if (objSpecial2.getType() == TypeObjetSpecial.COLLE) {
+//
+//			}
+		} // Fin pour v2
 	}
 
 	/**
@@ -276,6 +321,23 @@ public class Regroupement implements Dessinable, Serializable {
 				}
 
 				objSpecial.dessiner(g2dCopie);
+			}
+
+		}
+		// Pour la voiture 2
+		if (objSpecial2 != null) {
+			if (objSpecial2.getType() == TypeObjetSpecial.COLLE) {
+
+				objSpecial2.dessiner(g2dCopie);
+			}
+			if (objSpecial2.getType() == TypeObjetSpecial.BOULEDENEIGE) {
+
+				if (boutonAppuye2 == false) {
+					objSpecial2.setPositionObjet(listePisteDeDepart.get(0).getVoiture2().getPosition());
+
+				}
+
+				objSpecial2.dessiner(g2dCopie);
 			}
 
 		}
@@ -383,6 +445,13 @@ public class Regroupement implements Dessinable, Serializable {
 				boutonAppuye = false;
 			}
 		}
+		if (objSpecial2 != null) {
+			if (listePisteDeDepart.get(i).enCollisionAvecBouleDeNeige(objSpecial2) == true && boutonAppuye2 == true) {
+
+				objSpecial2 = null;
+				boutonAppuye2 = false;
+			}
+		}
 	}
 
 	/**
@@ -398,6 +467,14 @@ public class Regroupement implements Dessinable, Serializable {
 
 				objSpecial = null;
 				boutonAppuye = false;
+			}
+		}
+		if (objSpecial2 != null) {
+			if (listePisteHorizontale.get(i).enCollisionAvecBouleDeNeige(objSpecial2) == true
+					&& boutonAppuye2 == true) {
+
+				objSpecial2 = null;
+				boutonAppuye2 = false;
 			}
 		}
 	}
@@ -417,6 +494,13 @@ public class Regroupement implements Dessinable, Serializable {
 				boutonAppuye = false;
 			}
 		}
+		if (objSpecial2 != null) {
+			if (listePisteVerticale.get(i).enCollisionAvecBouleDeNeige(objSpecial2) == true && boutonAppuye2 == true) {
+
+				objSpecial2 = null;
+				boutonAppuye2 = false;
+			}
+		}
 	}
 
 	/**
@@ -434,6 +518,15 @@ public class Regroupement implements Dessinable, Serializable {
 
 				objSpecial = null;
 				boutonAppuye = false;
+			}
+
+		}
+		if (objSpecial2 != null) {
+
+			if (listePisteVirageBas.get(i).enCollisionAvecBouleDeNeige(objSpecial2) == true && boutonAppuye2 == true) {
+
+				objSpecial2 = null;
+				boutonAppuye2 = false;
 			}
 
 		}
@@ -457,6 +550,16 @@ public class Regroupement implements Dessinable, Serializable {
 			}
 
 		}
+		if (objSpecial2 != null) {
+
+			if (listePisteVirageDroit.get(i).enCollisionAvecBouleDeNeige(objSpecial2) == true
+					&& boutonAppuye2 == true) {
+
+				objSpecial2 = null;
+				boutonAppuye2 = false;
+			}
+
+		}
 	}
 
 	/**
@@ -477,6 +580,16 @@ public class Regroupement implements Dessinable, Serializable {
 			}
 
 		}
+		if (objSpecial2 != null) {
+
+			if (listePisteVirageGauche.get(i).enCollisionAvecBouleDeNeige(objSpecial2) == true
+					&& boutonAppuye2 == true) {
+
+				objSpecial2 = null;
+				boutonAppuye2 = false;
+			}
+
+		}
 	}
 
 	/**
@@ -492,6 +605,13 @@ public class Regroupement implements Dessinable, Serializable {
 
 				objSpecial = null;
 				boutonAppuye = false;
+			}
+		}
+		if (objSpecial2 != null) {
+			if (listePisteVirageHaut.get(i).enCollisionAvecBouleDeNeige(objSpecial2) == true && boutonAppuye2 == true) {
+
+				objSpecial2 = null;
+				boutonAppuye2 = false;
 			}
 		}
 	}
@@ -743,4 +863,11 @@ public class Regroupement implements Dessinable, Serializable {
 		this.boutonAppuye = boutonAppuye;
 	}
 
+	public boolean isBoutonAppuye2() {
+		return boutonAppuye2;
+	}
+
+	public void setBoutonAppuye2(boolean boutonAppuye2) {
+		this.boutonAppuye2 = boutonAppuye2;
+	}
 }
