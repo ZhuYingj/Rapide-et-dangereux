@@ -28,7 +28,6 @@ public class ObjetSpecial implements Dessinable {
 	private TypeObjetSpecial type;
 	private double pixelParMetre = 1;
 	private double tempsTemporaire;
-	private boolean fonctionActive = false;
 	private BouleDeNeige bouleDeNeige;
 
 	/**
@@ -80,6 +79,7 @@ public class ObjetSpecial implements Dessinable {
 	 * 
 	 * @param voiture          La voiture affecté
 	 * @param tempsTotalEcoule Le temps total écoulé
+	 * @return si la fonction est en cours
 	 */
 	// Par Tan Tommy Rin
 
@@ -87,12 +87,12 @@ public class ObjetSpecial implements Dessinable {
 		Champignon champignon = new Champignon(this.positionObjet, this.diametreObjet, type);
 		if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
 			champignon.fonctionChampignonActivation(voiture);
-			fonctionActive = true;
+
 			return true;
 		} else {
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
 			voiture.setDiametre(voiture.getDiametreInitial());
-			fonctionActive = false;
+
 			return false;
 		}
 
@@ -159,14 +159,6 @@ public class ObjetSpecial implements Dessinable {
 			e.printStackTrace();
 		}
 
-	}
-
-	public boolean isFonctionActive() {
-		return fonctionActive;
-	}
-
-	public void setFonctionActive(boolean fonctionActive) {
-		this.fonctionActive = fonctionActive;
 	}
 
 	public double getTempsTemporaire() {

@@ -23,8 +23,7 @@ public class BouleDeNeige {
 	private Ellipse2D.Double boule;
 
 	private double pixelsParMetre;
-	private Vecteur2D vitesse = new Vecteur2D(100, 0); // par defaut
-	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
+
 	private Voiture voiture;
 
 	private transient Shape shapeBoule;
@@ -40,9 +39,8 @@ public class BouleDeNeige {
 	/**
 	 * Méthode qui crée la boule de neige
 	 * 
-	 * @param pos       le positionnement de la boule de neige
-	 * @param diametre  le diametre de la boule de neige
-	 * @param typeObjet le type d'objet spéciale
+	 * @param pos      le positionnement de la boule de neige
+	 * @param diametre le diametre de la boule de neige
 	 */
 	// Alexis Pineda-Alvarado
 	public BouleDeNeige(Vecteur2D pos, double diametre) {
@@ -139,22 +137,6 @@ public class BouleDeNeige {
 
 	public void setDiametre(double diametre) {
 		this.diametre = diametre;
-	}
-
-	public Vecteur2D getVitesse() {
-		return vitesse;
-	}
-
-	public void setVitesse(Vecteur2D vitesse) {
-		this.vitesse = vitesse;
-	}
-
-	public Vecteur2D getAccel() {
-		return accel;
-	}
-
-	public void setAccel(Vecteur2D accel) {
-		this.accel = accel;
 	}
 
 	public Shape getShapeBoule() {
