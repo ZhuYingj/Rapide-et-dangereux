@@ -15,16 +15,16 @@ import interfaces.TypeObjetSpecial;
 /**
  * class qui permet de creer un objet colle
  * 
- * @author Ludovic Julien
+ * @author Alexis Pineda-Alvarado
  *
  */
 public class Colle implements Dessinable {
 
 	/** Taille de la piste qui est toujours constante **/
-	private static final int TAILLE_PISTE = 87;
+	private int taillePiste = 80;
 	/** la position en x de depart que l'objet piste vas etre creer **/
 	private int x;
-	/** la position en y de depart que l'objet piste vas etre creer  **/
+	/** la position en y de depart que l'objet piste vas etre creer **/
 	private int y;
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.COLLE;
 	private transient Shape shapeColle;
@@ -39,20 +39,12 @@ public class Colle implements Dessinable {
 	private double diametre;
 	private Vecteur2D position;
 
-	
-	
 	/**
-	 * Méthode qui permet de créer un objet colle à l'aide de paramètres
+	 * Constructeur permettant de créer une colle
 	 * 
-	 * @param z
-	 * @param diametre  Diametre du champignon
-	 
+	 * @param pos      La position en vecteur2D
+	 * @param diametre Le diametre de la colle
 	 */
-	public Colle(int x, int y) {
-		this.x = x;
-		this.y = y;
-
-	}
 
 	public Colle(Vecteur2D pos, double diametre) {
 		this.diametre = diametre;
@@ -60,27 +52,36 @@ public class Colle implements Dessinable {
 
 		creerLaGeometrie();
 
-
 	}
 
-
+	/**
+	 * Méthode qui permet de dessiner sur le g2d
+	 * 
+	 * @param g2d Le composant graphique
+	 */
 
 	@Override
 
-
-
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(Color.ORANGE);
-		Stroke stroke = new BasicStroke(3f);
-		g2d.setStroke(stroke);
-		g2d.drawLine(x, y, x + TAILLE_PISTE , y);
-		g2d.drawLine(x, y+ TAILLE_PISTE-1, x + TAILLE_PISTE , y+ TAILLE_PISTE-1);
-		g2d.drawLine(x, y, x, y+TAILLE_PISTE);
-		g2d.drawLine(x+TAILLE_PISTE, y, x+TAILLE_PISTE, y+TAILLE_PISTE);
-		g2d.drawLine(x,y, x+ TAILLE_PISTE, y + TAILLE_PISTE );
-		g2d.drawLine(x + (TAILLE_PISTE/2),y, x+ TAILLE_PISTE, y + (TAILLE_PISTE/2) );
-		g2d.drawLine(x, y+ (TAILLE_PISTE/2) , x + (TAILLE_PISTE/2), y + TAILLE_PISTE);
-		
+
+		g2d.setStroke(new BasicStroke(3f));
+		g2d.drawLine((int) this.position.getX(), (int) this.position.getY(), (int) this.position.getX() + taillePiste,
+				(int) this.position.getY());
+		g2d.drawLine((int) this.position.getX(), (int) this.position.getY() + taillePiste - 1,
+				(int) this.position.getX() + taillePiste, (int) this.position.getY() + taillePiste - 1);
+		g2d.drawLine((int) this.position.getX(), (int) this.position.getY(), (int) this.position.getX(),
+				(int) this.position.getY() + taillePiste);
+		g2d.drawLine((int) this.position.getX() + taillePiste, (int) this.position.getY(),
+				(int) this.position.getX() + taillePiste, (int) this.position.getY() + taillePiste);
+		g2d.drawLine((int) this.position.getX(), (int) this.position.getY(), (int) this.position.getX() + taillePiste,
+				(int) this.position.getY() + taillePiste);
+		g2d.drawLine((int) this.position.getX() + (taillePiste / 2), (int) this.position.getY(),
+				(int) this.position.getX() + taillePiste, (int) this.position.getY() + (taillePiste / 2));
+		g2d.drawLine((int) this.position.getX(), (int) this.position.getY() + (taillePiste / 2),
+				(int) this.position.getX() + (taillePiste / 2), (int) this.position.getY() + taillePiste);
+		System.out.println(x);
+
 	}
 
 	public TypeObjetSpecial getTypeObjet() {
@@ -91,11 +92,9 @@ public class Colle implements Dessinable {
 		this.typeObjet = typeObjet;
 	}
 
-
-	
-	
-
-
+	/**
+	 * Méthode permetant de créer la géométrie de cet objet
+	 */
 
 	private void creerLaGeometrie() {
 
@@ -125,5 +124,3 @@ public class Colle implements Dessinable {
 	}
 
 }
-
-

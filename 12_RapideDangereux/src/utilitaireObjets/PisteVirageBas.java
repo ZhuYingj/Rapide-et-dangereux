@@ -66,6 +66,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
+	// Ludovic Julien
 	public PisteVirageBas(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -75,6 +76,11 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 		this.murBas = y + taillePiste + 1;
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
+
+	/**
+	 * Méthode permettant de dessiner sur le composant graphique
+	 */
+	// Ludovic Julien
 
 	@Override
 	public void dessiner(Graphics2D g2d) {
@@ -241,6 +247,11 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
 
 	@Override
 	public boolean contient(double xPix, double yPix) {

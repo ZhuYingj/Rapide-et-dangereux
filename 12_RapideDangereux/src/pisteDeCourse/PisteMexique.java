@@ -52,11 +52,11 @@ public class PisteMexique {
 	private ArrayList<PisteVirageDroit> droit = new ArrayList<PisteVirageDroit>();
 	/** Piste Virage Haut **/
 	private ArrayList<PisteVirageHaut> haut = new ArrayList<PisteVirageHaut>();
-	
+
 	private ArrayList<Accelerateur> acc = new ArrayList<Accelerateur>();
-	
+
 	private ArrayList<Colle> colle = new ArrayList<Colle>();
-	
+
 	private TypePiste type = TypePiste.MEXIQUE;
 
 	/**
@@ -167,13 +167,6 @@ public class PisteMexique {
 	public void setPixelsParMetre(double pixelsParMetre) {
 		this.pixelsParMetre = pixelsParMetre;
 	}
-
-	/**
-	 * Retourne la piste de départ
-	 * 
-	 * @return
-	 */
-	// Kevin Nguyen
 
 	public ArrayList<PisteDeDepart> getDepart() {
 		return depart;

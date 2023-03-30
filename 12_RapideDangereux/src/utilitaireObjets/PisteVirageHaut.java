@@ -70,6 +70,8 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * @param y position en y de la piste
 	 */
 
+	// Ludovic Julien
+
 	public PisteVirageHaut(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -84,7 +86,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * Methode qui permet de dessiner la piste virage haut sur la zone d'animation a
 	 * l'aide de g2d
 	 */
-
+	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
@@ -247,6 +249,11 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 		this.pixelsParMetre = pixelsParMetre;
 
 	}
+
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
 
 	@Override
 	public boolean contient(double xPix, double yPix) {

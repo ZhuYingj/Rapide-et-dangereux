@@ -51,13 +51,11 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
 	 * 
-	 * @param x             position en x de la piste
-	 * @param y             position en y de la piste
-	 * @param ligneRougeV1X position en x du premier mure
-	 * @param ligneRougeV1Y position en y du premier mure
-	 * @param ligneRougeV2X position en x du deuxieme mure
-	 * @param ligneRougeV2Y position en y du deuxieme mure
+	 * @param x position en x de la piste
+	 * @param y position en y de la piste
+	 * 
 	 */
+	// Ludovic Julien
 	public PisteDeDepart(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -67,7 +65,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 		this.murBas = y + taillePiste;
 		voiture = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste / 4), Color.yellow, 50, 16, 0, 50);
 		voiture2 = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste * 3 / 4), Color.white, 50, 16, 0, 60);
-		
+
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
@@ -75,6 +73,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	 * Methode qui permet de dessiner la piste de d�part sur la zone d'animation a
 	 * l'aide de g2d
 	 */
+	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
@@ -209,6 +208,11 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 		this.color = color;
 	}
 
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
+
 	@Override
 	public boolean contient(double xPix, double yPix) {
 		if (formeAire.contains(xPix, yPix)) {
@@ -226,7 +230,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void setVoiture(Voiture voiture) {
 		this.voiture = voiture;
 	}
-	
+
 	public Voiture getVoiture2() {
 		return voiture2;
 	}
@@ -234,7 +238,6 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void setVoiture2(Voiture voiture2) {
 		this.voiture2 = voiture2;
 	}
-	
 
 	public int getTaillePiste() {
 		return taillePiste;

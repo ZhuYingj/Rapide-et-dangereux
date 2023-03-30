@@ -621,8 +621,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		if (haut == false && regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() != 0) {
 
 			regroupement.getListePisteDeDepart().get(0).getVoiture().setSommeDesForces(forceTotal);
-			if (regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() < 0.3) {
+			if (regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() < 0.5) {
 				regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(new Vecteur2D(0, 0));
+				System.out.println("ici");
 			}
 
 		}
@@ -824,6 +825,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageHaut(pisteMexique.getHaut());
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
+			regroupement.creeBoiteDansListe();
 
 		}
 		if (typePiste == TypePiste.ITALIE) {
@@ -836,6 +838,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageHaut(pisteItalie.getHaut());
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
+			regroupement.creeBoiteDansListe();
 		}
 		if (typePiste == TypePiste.CANADA) {
 			regroupement.setListePisteDeDepart(pisteCanada.getDepart());
@@ -847,7 +850,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageHaut(pisteCanada.getHaut());
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
-
+			regroupement.creeBoiteDansListe();
 		}
 		if (typePiste == TypePiste.AUTRE) {
 
@@ -864,7 +867,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
-
+			regroupement.setRegroupementObjet(regroupementTempo.getRegroupementBoiteMystere());
 		}
 
 	}

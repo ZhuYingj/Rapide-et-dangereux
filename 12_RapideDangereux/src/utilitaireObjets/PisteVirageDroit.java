@@ -68,6 +68,7 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
+	// Ludovic Julien
 	public PisteVirageDroit(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -78,6 +79,11 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
+	/**
+	 * Méthode qui permet de dessiner le composant g2d
+	 * 
+	 */
+	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
 //		g2d.scale(pixelsParMetre, pixelsParMetre);
@@ -252,6 +258,11 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 	public Area getAireTriangle() {
 		return aireTriangle;
 	}
+
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
 
 	@Override
 	public boolean contient(double xPix, double yPix) {

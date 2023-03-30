@@ -57,6 +57,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	 * @param ligneRougeV2X position en x du deuxieme mure
 	 * @param ligneRougeV2Y position en y du deuxieme mure
 	 */
+	// Ludovic Julien
 	public PisteVerticale(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -71,6 +72,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	 * Methode qui permet de dessiner la piste verticale sur la zone d'animation a
 	 * l'aide de g2d
 	 */
+	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
@@ -158,6 +160,11 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	public void setCollision(boolean collision) {
 		this.collision = collision;
 	}
+
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
 
 	@Override
 	public boolean contient(double xPix, double yPix) {

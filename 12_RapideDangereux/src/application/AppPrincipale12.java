@@ -111,7 +111,7 @@ public class AppPrincipale12 extends JFrame {
 		JeuOptions fenOptions = new JeuOptions();
 		FenetreOptionMontre fenOptionMontre = new FenetreOptionMontre();
 
-//		ajouterModeEditeurComboBox(fenEditeur);
+		ajouterModeEditeurComboBox(fenEditeur);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1350, 800);

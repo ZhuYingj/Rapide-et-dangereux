@@ -16,7 +16,7 @@ import physique.MoteurPhysique;
  *
  */
 public class ObjetSpecial implements Dessinable {
-	
+
 	private Vecteur2D positionObjet;
 	private double diametreObjet;
 	private TypeObjetSpecial type;
@@ -57,25 +57,17 @@ public class ObjetSpecial implements Dessinable {
 
 		}
 
-
-		
-
-
-		if(type == TypeObjetSpecial.TROUNOIR) {
+		if (type == TypeObjetSpecial.TROUNOIR) {
 			TrouNoir trouNoir = new TrouNoir(this.positionObjet, this.diametreObjet);
 			trouNoir.dessiner(g2d);
 		}
-		if(type == TypeObjetSpecial.COLLE) {
+		if (type == TypeObjetSpecial.COLLE) {
 			Colle colle = new Colle(this.positionObjet, this.diametreObjet);
 			colle.dessiner(g2d);
 
 		}
 
-		}
-
-
-
-	
+	}
 
 	/**
 	 * Méthode permettant d'activer la fonction de l'objet special obtenu
@@ -124,10 +116,13 @@ public class ObjetSpecial implements Dessinable {
 		Champignon champignon = new Champignon(this.positionObjet, this.diametreObjet, type);
 		if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
 			champignon.fonctionChampignonActivation(voiture);
+			fonctionActive = true;
 			return true;
 		} else {
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
 			voiture.setDiametre(voiture.getDiametreInitial());
+			System.out.println("a");
+			fonctionActive = false;
 			return false;
 		}
 
@@ -148,12 +143,14 @@ public class ObjetSpecial implements Dessinable {
 			voitureSlow = MoteurPhysique.calculerForceFrottement(2.50, voiture.getMasseEnKg(), voiture.getAngle());
 			voiture.setSommeDesForces(voitureSlow);
 			System.out.println(voitureSlow);
+			fonctionActive = true;
 			return true;
 		} else {
 			System.out.println("NORMAL SPEED!!!");
 			Vecteur2D voitureNormal = new Vecteur2D();
 			voitureNormal = MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), voiture.getAngle());
 			voiture.setSommeDesForces(voitureNormal);
+			fonctionActive = false;
 			return false;
 		}
 

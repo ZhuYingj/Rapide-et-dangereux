@@ -70,6 +70,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
+	//Ludovic Julien
 	public PisteVirageGauche(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -86,6 +87,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
+	//Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
 //		g2d.scale(pixelsParMetre, pixelsParMetre);
@@ -257,6 +259,10 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	public void setColor(Color color) {
 		this.color = color;
 	}
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
 
 	@Override
 	public boolean contient(double xPix, double yPix) {

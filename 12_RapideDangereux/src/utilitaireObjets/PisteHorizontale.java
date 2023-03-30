@@ -50,13 +50,11 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	/**
 	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
 	 * 
-	 * @param x             position en x de la piste
-	 * @param y             position en y de la piste
-	 * @param ligneRougeV1X position en x du premier mure
-	 * @param ligneRougeV1Y position en y du premier mure
-	 * @param ligneRougeV2X position en x du deuxieme mure
-	 * @param ligneRougeV2Y position en y du deuxieme mure
+	 * @param x position en x de la piste
+	 * @param y position en y de la piste
+	 * 
 	 */
+	// Ludovic Julien
 	public PisteHorizontale(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -71,7 +69,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	 * Methode qui permet de dessiner la piste horizontale sur la zone d'animation a
 	 * l'aide de g2d
 	 */
-
+	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
@@ -196,6 +194,11 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	public void setColor(Color color) {
 		this.color = color;
 	}
+
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
 
 	@Override
 	public boolean contient(double xPix, double yPix) {

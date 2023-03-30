@@ -757,30 +757,32 @@ public class PanelRegroupement extends JPanel {
 
 	/**
 	 * Effet aimant pour coller un morceau de piste dans un carre en x
+	 * 
 	 * @param e Évenement de souris
 	 * @return Le x du coin supérieur gauche
 	 */
 	// Kevin Nguyen
 	private int collerX(MouseEvent e) {
 		xPrecedent = e.getX();
-		
-		longueur = (int) (xPrecedent/tailleDuCarre) % 8 * tailleDuCarre;
+
+		longueur = (int) (xPrecedent / tailleDuCarre) % 8 * tailleDuCarre;
 		return longueur;
 	}
-	
+
 	/**
 	 * Effet aimant pour coller un morceau de piste dans un carre en y
+	 * 
 	 * @param e Évenement de souris
 	 * @return Le y du coin supérieur gauche
 	 */
 	// Kevin Nguyen
 	private int collerY(MouseEvent e) {
 		yPrecedent = e.getY();
-		
-		hauteur = (int) (yPrecedent/tailleDuCarre) % 5 * tailleDuCarre;
+
+		hauteur = (int) (yPrecedent / tailleDuCarre) % 5 * tailleDuCarre;
 		return hauteur;
 	}
-	
+
 	public ArrayList<BlocMystere> getListeBlocMystere() {
 		return listeBlocMystere;
 	}

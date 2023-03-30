@@ -34,6 +34,7 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	private ObjetSpecial objetSpecial;
 	/** Boolean pour savoir si la voiture est en contact avec la boite **/
 	private boolean enContact = false;
+
 	private transient Graphics2D gTempo;
 
 	/**
@@ -81,6 +82,10 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 			enContact = true;
 
 		}
+
+		if (aireCopieVoiture.isEmpty()) {
+			enContact = false;
+		}
 		if (enContact == true) {
 			dessiner(gTempo);
 			return true;
@@ -98,7 +103,7 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	public void objetRandomChoisi(Voiture voiture) {
 
 		// Crée nombre au hasard de 0 - 1
-		double nombreRandom = Math.random();
+		double nombreRandom =0.7;
 		// 20 % de chance que ce soit un champignon
 		if (nombreRandom < 0.2) {
 			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.CHAMPIGNON);
@@ -193,6 +198,10 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 		creerLaGeometrie();
 	}
 
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+
 	@Override
 	public boolean contient(double xPix, double yPix) {
 		if (carre.contains(xPix, yPix)) {
@@ -210,6 +219,14 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	public void setgTempo(Graphics2D gTempo) {
 		this.gTempo = gTempo;
 
+	}
+
+	public boolean isEnContact() {
+		return enContact;
+	}
+
+	public void setEnContact(boolean enContact) {
+		this.enContact = enContact;
 	}
 
 }

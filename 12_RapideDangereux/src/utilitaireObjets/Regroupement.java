@@ -58,6 +58,8 @@ public class Regroupement implements Dessinable, Serializable {
 
 	private double tours = 0;
 
+	private double tempsTemp;
+
 	/**
 	 * Méthode qui permet de créer un groupe à l'aide de paramètre
 	 * 
@@ -71,8 +73,6 @@ public class Regroupement implements Dessinable, Serializable {
 
 		this.nombreBoiteMystere = nombreBoite;
 
-		creeBoiteDansListe();
-
 	}
 
 	/**
@@ -85,63 +85,69 @@ public class Regroupement implements Dessinable, Serializable {
 	public void avancerGroupe(double deltaT, double tempsTotalEcoule) {
 
 		listePisteDeDepart.get(0).getVoiture().avancerUnPas(deltaT);
-		listePisteDeDepart.get(0).getVoiture2().avancerUnPas(deltaT);
-		
+
 		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
-			regroupementBoiteMystere.get(a).enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture());
+
 			if (regroupementBoiteMystere.get(a)
 					.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
-				regroupementBoiteMystere.get(a).getObjetSpecial()
-						.fonctionSelonObjet(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule);
 
-				// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
-				// retirons la boite mystere contenant ce champignon de la liste.
-				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
-					if (regroupementBoiteMystere.get(a).getObjetSpecial()
-							.fonctionChampignon(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule) == false) {
-						regroupementBoiteMystere.remove(a);
+				objSpecial = regroupementBoiteMystere.get(a).getObjetSpecial();
 
-					}
-				} // Fin condition pour le champignon
-
-				// Pour la boule de neige
-				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
-					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
-							getListePisteDeDepart().get(0).getVoiture(), tempsTotalEcoule) == false) {
-						regroupementBoiteMystere.remove(a);
-					}
-				} // Fin condition pour la boule de neige
+				tempsTemp = tempsTotalEcoule;
+				regroupementBoiteMystere.remove(a).getObjetSpecial();
 			}
+
+		}
+		if (objSpecial != null) {
+			if (objSpecial.getType() == TypeObjetSpecial.CHAMPIGNON) {
+				objSpecial.setTempsTemporaire(tempsTemp);
+				if (objSpecial.isFonctionActive() == true) {
+					objSpecial.fonctionChampignon(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule);
+				}
+
+			}
+			if (objSpecial.getType() == TypeObjetSpecial.BOULEDENEIGE) {
+				objSpecial.setTempsTemporaire(tempsTemp);
+				if (objSpecial.isFonctionActive() == true) {
+					objSpecial.fonctionBouleDeNeige(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule);
+				}
+
+			}
+			if (objSpecial.getType() == TypeObjetSpecial.TROUNOIR) {
+//				objSpecial.dessiner(g2d)
+
+			}
+
 		}
 
-		
-		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
-			regroupementBoiteMystere.get(a).enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture2());
-			if (regroupementBoiteMystere.get(a)
-					.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
-				regroupementBoiteMystere.get(a).getObjetSpecial()
-						.fonctionSelonObjet(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule);
-
-				// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
-				// retirons la boite mystere contenant ce champignon de la liste.
-				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
-					if (regroupementBoiteMystere.get(a).getObjetSpecial()
-							.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule) == false) {
-						regroupementBoiteMystere.remove(a);
-
-					}
-				} // Fin condition pour le champignon
-
-				// Pour la boule de neige
-				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
-					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
-							getListePisteDeDepart().get(0).getVoiture2(), tempsTotalEcoule) == false) {
-						regroupementBoiteMystere.remove(a);
-					}
-				} // Fin condition pour la boule de neige
-			}
-		}
 	}
+
+//		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
+//			regroupementBoiteMystere.get(a).enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture2());
+//			if (regroupementBoiteMystere.get(a)
+//					.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
+//				regroupementBoiteMystere.get(a).getObjetSpecial()
+//						.fonctionSelonObjet(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule);
+//
+//				// Pour le champignon, lorsque la fonctionnalité du champignon est fini, nous
+//				// retirons la boite mystere contenant ce champignon de la liste.
+//				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
+//					if (regroupementBoiteMystere.get(a).getObjetSpecial()
+//							.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule) == false) {
+//						regroupementBoiteMystere.remove(a);
+//
+//					}
+//				} // Fin condition pour le champignon
+//
+//				// Pour la boule de neige
+//				if (regroupementBoiteMystere.get(a).getObjetSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+//					if (regroupementBoiteMystere.get(a).getObjetSpecial().fonctionBouleDeNeige(
+//							getListePisteDeDepart().get(0).getVoiture2(), tempsTotalEcoule) == false) {
+//						regroupementBoiteMystere.remove(a);
+//					}
+//				} // Fin condition pour la boule de neige
+//			}
+//		}
 
 	/**
 	 * Méthode qui crée les boites mystères et les place dans une liste avec un
@@ -152,7 +158,8 @@ public class Regroupement implements Dessinable, Serializable {
 		regroupementBoiteMystere = new ArrayList<BlocMystere>();
 		for (int a = 0; a < nombreBoiteMystere; a++) {
 			double diametreBoite = 15;
-			regroupementBoiteMystere.add(new BlocMystere(diametreBoite, new Vecteur2D(150 * (a + 1), 5 * (a + 1))));
+			regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+					new Vecteur2D(listePisteHorizontale.get(a).getX(), listePisteHorizontale.get(a).getY())));
 
 		}
 
@@ -204,7 +211,14 @@ public class Regroupement implements Dessinable, Serializable {
 			regroupementBoiteMystere.get(a).dessiner(g2dCopie);
 
 		}
+		if (objSpecial != null) {
+			if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
+//				System.out.println(objSpecial.getPositionObjet());
 
+				objSpecial.dessiner(g2dCopie);
+			}
+
+		}
 	}
 
 	/**
