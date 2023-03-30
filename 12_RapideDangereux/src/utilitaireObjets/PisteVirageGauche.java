@@ -19,6 +19,7 @@ import physique.MoteurPhysique;
  * 
  * @author Ludovic Julien
  * @author Kevin Nguyen
+ * @author Tan Tommy Rin
  */
 
 public class PisteVirageGauche implements Dessinable, Selectionnable, Serializable {
@@ -70,7 +71,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public PisteVirageGauche(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -87,7 +88,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
 //		g2d.scale(pixelsParMetre, pixelsParMetre);
@@ -220,6 +221,41 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 
 	}
 
+	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
+	 * et la boule de neige
+	 * 
+	 * @param L'objet special de type boule de neige
+	 */
+	//Tan Tommy Rin
+	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
+
+		Area cercle = new Area(objetSpecial.getBouleDeNeige().getBoule());
+		cercle.intersect(aireTriangle);
+		// Cette variable est juste pour returner la valeur de vérité si la boule de
+		// neige est en collision avec ce morceau de piste
+		boolean enCollision = false;
+
+		if (objetSpecial.getBouleDeNeige().getBoule().getX() > murGauche
+				&& objetSpecial.getBouleDeNeige().getBoule().getX() < murDroite
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() > murHaut
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() < murBas) {
+			if (objetSpecial.getBouleDeNeige().getBoule().getX() > murDroite
+					- objetSpecial.getBouleDeNeige().getDiametre()) {
+
+				enCollision = true;
+			} else if (objetSpecial.getBouleDeNeige().getBoule().getY() < murHaut + 1) {
+
+				enCollision = true;
+			} else if (!cercle.isEmpty()) {
+
+				enCollision = true;
+			}
+		}
+		return enCollision;
+
+	}
+
 	public int getX() {
 		return x;
 	}
@@ -259,6 +295,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	public void setColor(Color color) {
 		this.color = color;
 	}
+
 	/**
 	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
 	 */

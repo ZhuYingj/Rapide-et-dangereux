@@ -17,6 +17,7 @@ import physique.MoteurPhysique;
  * 
  * @author Ludovic Julien
  * @author Kevin Nguyen
+ * @author Tan Tommy Rin
  */
 
 public class PisteHorizontale implements Dessinable, Selectionnable, Serializable {
@@ -142,6 +143,31 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 				}
 			}
 		}
+	}
+
+	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
+	 * et la boule de neige
+	 * 
+	 * @param L'objet special de type boule de neige
+	 */
+	// Tan Tommy Rin
+	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
+		// Cette variable est juste pour returner la valeur de vérité si la boule de
+		// neige est en collision avec ce morceau de piste
+		boolean enCollision = false;
+
+		if (objetSpecial.getBouleDeNeige().getBoule().getX() > murGauche
+				&& objetSpecial.getBouleDeNeige().getBoule().getX() < murDroite
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() > murHaut
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() < murBas) {
+			if (objetSpecial.getBouleDeNeige().getBoule().getY() < murHaut + 1) {
+				enCollision = true;
+			} else if (objetSpecial.getBouleDeNeige().getBoule().getY() > murBas - objetSpecial.getDiametreObjet()) {
+				enCollision = true;
+			}
+		}
+		return enCollision;
 	}
 
 	/**

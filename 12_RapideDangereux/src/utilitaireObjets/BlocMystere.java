@@ -16,7 +16,7 @@ import interfaces.TypeObjetSpecial;
 /**
  * Classe permettant de créer et de gérer une boite mystere
  * 
- * @author TanTommyRin
+ * @author Tan Tommy Rin
  *
  */
 public class BlocMystere implements Dessinable, Selectionnable, Serializable {

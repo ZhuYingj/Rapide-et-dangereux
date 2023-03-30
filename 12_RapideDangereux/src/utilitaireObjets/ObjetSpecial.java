@@ -29,8 +29,6 @@ public class ObjetSpecial implements Dessinable {
 	private double pixelParMetre = 1;
 	private double tempsTemporaire;
 	private boolean fonctionActive = false;
-	private int x;
-	private int y;
 	private BouleDeNeige bouleDeNeige;
 
 	/**
@@ -78,47 +76,12 @@ public class ObjetSpecial implements Dessinable {
 	}
 
 	/**
-	 * Méthode permettant d'activer la fonction de l'objet special obtenu
-	 * 
-	 * @param voiture          La voiture affecté
-	 * @param tempsTotalEcoule Le temps total écoulé
-	 */
-
-	public void fonctionSelonObjet(Voiture voiture, double tempsTotalEcoule) {
-
-		// Condition si fonction active est vrai, le temps temporaire est égale à celui
-		// du temps total écoulé et restera fixe tandis que le tempsTotalEcoule changera
-		// de valeur
-		if (fonctionActive == true) {
-
-			tempsTemporaire = tempsTotalEcoule;
-			fonctionActive = false;
-
-		}
-		// Fonction du champignon
-
-		if (type == TypeObjetSpecial.CHAMPIGNON) {
-
-			fonctionChampignon(voiture, tempsTotalEcoule);
-
-		} else if (type == TypeObjetSpecial.BOULEDENEIGE) {
-
-//			fonctionBouleDeNeige(voiture, tempsTotalEcoule);
-
-		} else if (type == TypeObjetSpecial.COLLE) {
-
-		} else {
-
-		}
-
-	}
-
-	/**
 	 * Méhode qui active la fonction du champignon
 	 * 
 	 * @param voiture          La voiture affecté
 	 * @param tempsTotalEcoule Le temps total écoulé
 	 */
+	// Par Tan Tommy Rin
 
 	public boolean fonctionChampignon(Voiture voiture, double tempsTotalEcoule) {
 		Champignon champignon = new Champignon(this.positionObjet, this.diametreObjet, type);
@@ -157,7 +120,6 @@ public class ObjetSpecial implements Dessinable {
 			Vecteur2D voitureNormal = new Vecteur2D();
 			voitureNormal = MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), voiture.getAngle());
 			voiture.setSommeDesForces(voitureNormal);
-			
 
 			return false;
 		}
@@ -165,8 +127,8 @@ public class ObjetSpecial implements Dessinable {
 	}
 
 	/**
-	 * Calcule la nouvelle vitesse et la nouvelle position de la balle apres cet
-	 * nouvel intervalle de temps.
+	 * Calcule la nouvelle vitesse et la nouvelle position de la boule de neige ou
+	 * trou noir apres cet nouvel intervalle de temps.
 	 * 
 	 * @param deltaT intervalle de temps (pas)
 	 */
@@ -178,17 +140,20 @@ public class ObjetSpecial implements Dessinable {
 	}
 
 	/**
-	 * Recalcule l'acceleration de la voiture a l'aide la nouvelle somme des forces
-	 * passee en parametre Ceci aura pour consequence de modifier l'acceleration
+	 * Recalcule l'acceleration de la boule de neige ou le trou noir a l'aide la
+	 * nouvelle somme des forces passee en parametre Ceci aura pour consequence de
+	 * modifier l'acceleration
 	 * 
-	 * @param sommeForcesSurLaBalle La somme des forces exercees sur la voiture
+	 * @param sommeForcesSurLaBouleDeNeigeOuTrouNoir La somme des forces exercees
+	 *                                               sur la boule de neige ou le
+	 *                                               trou noir
 	 */
 	// Par Tan Tommy Rin
-	public void setSommeDesForces(Vecteur2D sommeForcesSurLaVoiture) {
+	public void setSommeDesForces(Vecteur2D sommeForcesSurLaBouleDeNeigeOuTrouNoir) {
 		// ici changer les forces signifie recalculer l'acceleration
 		// on relegue cette tache au moteur physique.
 		try {
-			accel = MoteurPhysique.calculAcceleration(sommeForcesSurLaVoiture, 50);
+			accel = MoteurPhysique.calculAcceleration(sommeForcesSurLaBouleDeNeigeOuTrouNoir, 50);
 
 		} catch (Exception e) {
 			e.printStackTrace();

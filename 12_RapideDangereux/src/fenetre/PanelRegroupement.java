@@ -92,7 +92,7 @@ public class PanelRegroupement extends JPanel {
 	/**
 	 * Constructeur du panel de regroupement
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	public PanelRegroupement() {
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -163,7 +163,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param g Le contexte graphique de la zone de dessin
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -232,7 +232,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void relachementSouris(MouseEvent e) {
 		objetSelectionne = false;
 		repaint();
@@ -244,7 +244,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteVirageDroitDrag(MouseEvent e) {
 		if (listePisteVirageDroit.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEDROIT) {
@@ -270,7 +270,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteDeDepartDrag(MouseEvent e) {
 		if (listePisteDeDepart.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEDEDEPART) {
 			xPisteDeDepart += e.getX() - xPrecedent;
@@ -298,7 +298,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteVerticaleDrag(MouseEvent e) {
 		if (listePisteVerticale.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEVERTICALE) {
 			xPisteVerticale += e.getX() - xPrecedent;
@@ -323,7 +323,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteVirageHautDrag(MouseEvent e) {
 		if (listePisteVirageHaut.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEHAUT) {
@@ -349,7 +349,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteVirageGaucheDrag(MouseEvent e) {
 		if (listePisteVirageGauche.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEGAUCHE) {
@@ -375,7 +375,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteVirageBasDrag(MouseEvent e) {
 		if (listePisteVirageBas.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEVIRAGEBAS) {
 			xPisteVirageBas += e.getX() - xPrecedent;
@@ -400,7 +400,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteHorizontaleDrag(MouseEvent e) {
 		if (listePisteHorizontale.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEHORIZONTALE) {
@@ -427,7 +427,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteVirageHautPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageHaut.size(); a++) {
@@ -457,7 +457,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteVirageDroitPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageDroit.size(); a++) {
@@ -487,7 +487,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteDeDepartPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteDeDepart.size(); a++) {
@@ -517,7 +517,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteVerticalePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVerticale.size(); a++) {
@@ -547,7 +547,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteVirageGauchePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageGauche.size(); a++) {
@@ -577,7 +577,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteVirageBasPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageBas.size(); a++) {
@@ -607,7 +607,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void pisteHorizontalePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteHorizontale.size(); a++) {
@@ -637,7 +637,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void accelerateurPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listeAccelerateur.size(); a++) {
@@ -666,7 +666,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void blocMysterePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listeBlocMystere.size(); a++) {
@@ -695,7 +695,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void accelerateurDrag(MouseEvent e) {
 		if (listeAccelerateur.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.ACCELERATEUR) {
 
@@ -718,7 +718,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	private void blocMystereDrag(MouseEvent e) {
 		if (listeBlocMystere.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.BLOCMYSTERE) {
 

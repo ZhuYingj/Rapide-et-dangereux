@@ -185,7 +185,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * 
 	 * @param e Évènement de clavier
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	public void appuyerPlusieursToucheEnMemeTemps(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_RIGHT:
@@ -224,7 +224,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * 
 	 * @param e Évènement de clavier
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	public void relachementTouches(KeyEvent e) {
 
 		switch (e.getKeyCode()) {
@@ -583,7 +583,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * Méthode qui permet de détecter les levés d'évènement et changer le texte
 	 */
 
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	public void changementTexteParIteration() {
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
 		pcs.firePropertyChange("accEnXV1", 0, voiture.getAccel().getX());
@@ -764,7 +764,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * 
 	 * @param nouvelleVitesseMax la nouvelle vitesse maximale
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	public void setVoitureVitesseMax(double nouvelleVitesseMax) {
 		voiture.setVitesseMaxSelonNiveau(nouvelleVitesseMax);
 		voiture2.setVitesseMaxSelonNiveau(nouvelleVitesseMax);
@@ -803,7 +803,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * 
 	 * @return le type de piste
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	public TypePiste getTypePiste() {
 		return typePiste;
 	}
@@ -822,7 +822,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * 
 	 * @param typePiste le type de piste voulu
 	 */
-	// Par Tan Tommy Rin
+	//Tan Tommy Rin
 	public void setTypePiste(TypePiste typePiste) {
 
 		this.typePiste = typePiste;

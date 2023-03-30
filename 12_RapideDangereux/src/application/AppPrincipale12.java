@@ -82,7 +82,7 @@ public class AppPrincipale12 extends JFrame {
 	 * 
 	 * @param fenEditeur la fenetre d'édition
 	 */
-// Par Tan Tommy Rin
+//Tan Tommy Rin
 	public void ajouterModeEditeurComboBox(FenetreEditeur fenEditeur) {
 		while (fichierDeTravail.exists()) {
 

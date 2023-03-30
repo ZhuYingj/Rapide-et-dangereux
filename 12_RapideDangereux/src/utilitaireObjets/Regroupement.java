@@ -72,7 +72,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * @param nombreBoite Le nombre de boite
 	 * @param typePiste   Le type de piste
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public Regroupement(Voiture voiture, int nombreBoite, TypePiste typePiste) {
 		type = typePiste;
 
@@ -86,7 +86,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * @param deltaT           L'intervalle de temps(pas)
 	 * @param tempsTotalEcoule Le temps total écoulé
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public void avancerGroupe(double deltaT, double tempsTotalEcoule) {
 
 		listePisteDeDepart.get(0).getVoiture().avancerUnPas(deltaT);
@@ -133,7 +133,7 @@ public class Regroupement implements Dessinable, Serializable {
 					objSpecial.avancerUnPas(deltaT);
 					// Si la boule de neige rentre en collision avec la voiture 2
 					if (objSpecial.getBouleDeNeige()
-							.collisionDeLaBalle(listePisteDeDepart.get(0).getVoiture2()) == true) {
+							.collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
 
 						tempsTemp = tempsTotalEcoule;
 						objSpecial.setTempsTemporaire(tempsTemp);
@@ -219,7 +219,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * Méthode qui crée les boites mystères et les place dans une liste avec un
 	 * diametre fixe
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public void creeBoiteDansListe() {
 		regroupementBoiteMystere = new ArrayList<BlocMystere>();
 		for (int a = 0; a < nombreBoiteMystere; a++) {
@@ -237,7 +237,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param g2d Le contexte graphique du composant sur lequel on dessine
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
@@ -279,16 +279,16 @@ public class Regroupement implements Dessinable, Serializable {
 		}
 		if (objSpecial != null) {
 			if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
-//				System.out.println(objSpecial.getPositionObjet());
 
 				objSpecial.dessiner(g2dCopie);
 			}
 			if (objSpecial.getType() == TypeObjetSpecial.BOULEDENEIGE) {
-//				System.out.println(objSpecial.getPositionObjet());
+
 				if (boutonAppuye == false) {
 					objSpecial.setPositionObjet(listePisteDeDepart.get(0).getVoiture().getPosition());
 
 				}
+
 				objSpecial.dessiner(g2dCopie);
 			}
 
@@ -307,6 +307,7 @@ public class Regroupement implements Dessinable, Serializable {
 		for (int i = 0; i < listePisteHorizontale.size(); i++) {
 			listePisteHorizontale.get(i).enCollisionAvec(voiture);
 			listePisteHorizontale.get(i).traverserPiste(voiture);
+			collisionBouleDeNeigeAvecPisteHorizontale(i);
 			if (listePisteHorizontale.get(i).isCollision() == true) {
 				listePisteHorizontale.get(i).setColor(Color.blue);
 			} else {
@@ -317,6 +318,7 @@ public class Regroupement implements Dessinable, Serializable {
 		for (int i = 0; i < listePisteVerticale.size(); i++) {
 			listePisteVerticale.get(i).enCollisionAvec(voiture);
 			listePisteVerticale.get(i).traverserPiste(voiture);
+			collisionBouleDeNeigeAvecPisteVerticale(i);
 			if (listePisteVerticale.get(i).isCollision() == true) {
 				listePisteVerticale.get(i).setColor(Color.blue);
 			} else {
@@ -327,6 +329,7 @@ public class Regroupement implements Dessinable, Serializable {
 		for (int i = 0; i < listePisteVirageBas.size(); i++) {
 			listePisteVirageBas.get(i).enCollisionAvec(voiture);
 			listePisteVirageBas.get(i).traverserPiste(voiture);
+			collisionBouleDeNeigeAvecPisteVirageBas(i);
 			if (listePisteVirageBas.get(i).isCollision() == true) {
 				listePisteVirageBas.get(i).setColor(Color.blue);
 			} else {
@@ -337,6 +340,7 @@ public class Regroupement implements Dessinable, Serializable {
 		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
 			listePisteVirageGauche.get(i).enCollisionAvec(voiture);
 			listePisteVirageGauche.get(i).traverserPiste(voiture);
+			collisionBouleDeNeigeAvecPisteVirageGauche(i);
 			if (listePisteVirageGauche.get(i).isCollision() == true) {
 				listePisteVirageGauche.get(i).setColor(Color.blue);
 			} else {
@@ -347,6 +351,7 @@ public class Regroupement implements Dessinable, Serializable {
 		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
 			listePisteVirageDroit.get(i).enCollisionAvec(voiture);
 			listePisteVirageDroit.get(i).traverserPiste(voiture);
+			collisionBouleDeNeigeAvecPisteVirageDroit(i);
 			if (listePisteVirageDroit.get(i).isCollision() == true) {
 				listePisteVirageDroit.get(i).setColor(Color.blue);
 			} else {
@@ -357,10 +362,7 @@ public class Regroupement implements Dessinable, Serializable {
 		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
 			listePisteVirageHaut.get(i).enCollisionAvec(voiture);
 			listePisteVirageHaut.get(i).traverserPiste(voiture);
-			if (objSpecial != null) {
-				listePisteVirageHaut.get(i).enCollisionAvecBouleDeNeige(objSpecial);
-			}
-
+			collisionBouleDeNeigeAvecPisteVirageHaut(i);
 			if (listePisteVirageHaut.get(i).isCollision() == true) {
 				listePisteVirageHaut.get(i).setColor(Color.blue);
 			} else {
@@ -370,6 +372,7 @@ public class Regroupement implements Dessinable, Serializable {
 
 		listePisteDeDepart.get(0).enCollisionAvec(voiture);
 		listePisteDeDepart.get(0).traverserPiste(voiture);
+		collisionBouleDeNeigeAvecPisteDeDepart(0);
 		if (listePisteDeDepart.get(0).isCollision() == true) {
 			listePisteDeDepart.get(0).setColor(Color.blue);
 		} else {
@@ -377,6 +380,134 @@ public class Regroupement implements Dessinable, Serializable {
 		}
 
 		tourComplet(voiture);
+	}
+
+	/**
+	 * Méthode qui permet de savoir si le morceau de piste est en collision avec la
+	 * boule de neige
+	 * 
+	 * @param i La piste courante de la loop
+	 */
+//Par Tan Tommy Rin
+	public void collisionBouleDeNeigeAvecPisteDeDepart(int i) {
+		if (objSpecial != null) {
+			if (listePisteDeDepart.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
+
+				objSpecial = null;
+				boutonAppuye = false;
+			}
+		}
+	}
+
+	/**
+	 * Méthode qui permet de savoir si le morceau de piste est en collision avec la
+	 * boule de neige
+	 * 
+	 * @param i La piste courante de la loop
+	 */
+//Par Tan Tommy Rin
+	public void collisionBouleDeNeigeAvecPisteHorizontale(int i) {
+		if (objSpecial != null) {
+			if (listePisteHorizontale.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
+
+				objSpecial = null;
+				boutonAppuye = false;
+			}
+		}
+	}
+
+	/**
+	 * Méthode qui permet de savoir si le morceau de piste est en collision avec la
+	 * boule de neige
+	 * 
+	 * @param i La piste courante de la loop
+	 */
+//Par Tan Tommy Rin
+	public void collisionBouleDeNeigeAvecPisteVerticale(int i) {
+		if (objSpecial != null) {
+			if (listePisteVerticale.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
+
+				objSpecial = null;
+				boutonAppuye = false;
+			}
+		}
+	}
+
+	/**
+	 * Méthode qui permet de savoir si le morceau de piste est en collision avec la
+	 * boule de neige
+	 * 
+	 * @param i La piste courante de la loop
+	 */
+//Par Tan Tommy Rin
+	public void collisionBouleDeNeigeAvecPisteVirageBas(int i) {
+
+		if (objSpecial != null) {
+
+			if (listePisteVirageBas.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
+
+				objSpecial = null;
+				boutonAppuye = false;
+			}
+
+		}
+	}
+
+	/**
+	 * Méthode qui permet de savoir si le morceau de piste est en collision avec la
+	 * boule de neige
+	 * 
+	 * @param i La piste courante de la loop
+	 */
+//Par Tan Tommy Rin
+	public void collisionBouleDeNeigeAvecPisteVirageDroit(int i) {
+
+		if (objSpecial != null) {
+
+			if (listePisteVirageDroit.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
+
+				objSpecial = null;
+				boutonAppuye = false;
+			}
+
+		}
+	}
+
+	/**
+	 * Méthode qui permet de savoir si le morceau de piste est en collision avec la
+	 * boule de neige
+	 * 
+	 * @param i La piste courante de la loop
+	 */
+//Par Tan Tommy Rin
+	public void collisionBouleDeNeigeAvecPisteVirageGauche(int i) {
+
+		if (objSpecial != null) {
+
+			if (listePisteVirageGauche.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
+
+				objSpecial = null;
+				boutonAppuye = false;
+			}
+
+		}
+	}
+
+	/**
+	 * Méthode qui permet de savoir si le morceau de piste est en collision avec la
+	 * boule de neige
+	 * 
+	 * @param i La piste courante de la loop
+	 */
+//Par Tan Tommy Rin
+	public void collisionBouleDeNeigeAvecPisteVirageHaut(int i) {
+		if (objSpecial != null) {
+			if (listePisteVirageHaut.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
+
+				objSpecial = null;
+				boutonAppuye = false;
+			}
+		}
 	}
 
 	/**

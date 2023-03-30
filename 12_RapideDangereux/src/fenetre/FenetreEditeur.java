@@ -1,18 +1,10 @@
 package fenetre;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.geom.Rectangle2D;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,7 +14,6 @@ import javax.swing.border.LineBorder;
 
 import application.GestionnaireDeFichiersSurLeBureau;
 import geometrie.Vecteur2D;
-import interfaces.TypeObjetDeplacable;
 import interfaces.TypePiste;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BlocMystere;

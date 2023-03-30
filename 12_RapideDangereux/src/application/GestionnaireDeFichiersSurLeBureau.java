@@ -42,7 +42,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 	 * 
 	 * @param regroupement Le groupe que l'on sauvegarde
 	 */
-// Par Tan Tommy Rin
+//Tan Tommy Rin
 
 	public void ecrireFichierBinBureauRegroupement(Regroupement regroupement) {
 		nomFichBinRegroupement = "regroupement" + nombrePiste + ".dat";
@@ -98,7 +98,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 	 * @param nomFichierVoulu le nom du fichier voulu
 	 * @return le groupe lue
 	 */
-// Par Tan Tommy Rin
+//Tan Tommy Rin
 
 	public Regroupement lireFichierBinBureauRegroupement(String nomFichierVoulu) {
 		nomFichBinRegroupement = nomFichierVoulu;

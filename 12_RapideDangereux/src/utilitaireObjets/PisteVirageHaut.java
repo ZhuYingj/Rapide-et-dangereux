@@ -19,6 +19,7 @@ import physique.MoteurPhysique;
  * 
  * @author Ludovic Julien
  * @author Kevin Nguyen
+ * @author Tan Tommy Rin
  */
 
 public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable {
@@ -196,29 +197,32 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * 
 	 * @param L'objet special de type boule de neige
 	 */
-	// Tan Tommy Rin
-	public void enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
+	//Tan Tommy Rin
+	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
 
 		Area cercle = new Area(objetSpecial.getBouleDeNeige().getBoule());
 		cercle.intersect(aireTriangle);
-		double pos = 3;
+		// Cette variable est juste pour returner la valeur de vérité si la boule de
+		// neige est en collision avec ce morceau de piste
+		boolean enCollision = false;
 
 		if (objetSpecial.getBouleDeNeige().getBoule().getX() > murGauche
 				&& objetSpecial.getBouleDeNeige().getBoule().getX() < murDroite
 				&& objetSpecial.getBouleDeNeige().getBoule().getY() > murHaut
 				&& objetSpecial.getBouleDeNeige().getBoule().getY() < murBas) {
 			if (objetSpecial.getBouleDeNeige().getBoule().getX() < murGauche + 1) {
-				objetSpecial.setDiametreObjet(0);
+				enCollision = true;
 
 			} else if (objetSpecial.getBouleDeNeige().getBoule().getX() > murBas
 					- objetSpecial.getBouleDeNeige().getDiametre()) {
 
-				objetSpecial.setDiametreObjet(0);
+				enCollision = true;
 			} else if (!cercle.isEmpty()) {
 
-				objetSpecial.setDiametreObjet(0);
+				enCollision = true;
 			}
 		}
+		return enCollision;
 
 	}
 

@@ -14,7 +14,7 @@ import interfaces.TypeObjetSpecial;
 /**
  * Classe qui permet de créer et gérer un champignon
  * 
- * @author TanTommyRin
+ * @author Tan Tommy Rin
  *
  */
 public class Champignon extends ObjetSpecial {

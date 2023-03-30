@@ -84,7 +84,7 @@ public class BouleDeNeige {
 	 * @return la valeur de la collision en true or false
 	 */
 	// Alexis Pineda-Alvarado
-	public boolean collisionDeLaBalle(Voiture v) {
+	public boolean collisionDeLaVoiture(Voiture v) {
 
 		this.voiture = v;
 		bouleDeNeigeAireCopie = new Area(boule);
