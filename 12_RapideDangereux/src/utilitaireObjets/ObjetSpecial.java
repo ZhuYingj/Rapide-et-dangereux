@@ -14,6 +14,7 @@ import physique.MoteurPhysique;
  * Classe permettant de créer et gérer un objet special
  * 
  * @author Tan Tommy Rin
+ * @author Alexis Pineda-Alvarado
  *
  */
 public class ObjetSpecial implements Dessinable {
@@ -33,12 +34,13 @@ public class ObjetSpecial implements Dessinable {
 	private Colle colle;
 
 	/**
-	 * Méthode permettant de créer un objet spécial à l'aide de paramètre
+	 * Constructeur permettant de créer un objet spécial
 	 * 
 	 * @param pos       La position de l'objet special
 	 * @param diametre  Le diaetre de l'objet special
 	 * @param typeObjet Le type de l'objet special
 	 */
+	// Par Tan Tommy Rin
 	public ObjetSpecial(Vecteur2D pos, double diametre, TypeObjetSpecial typeObjet) {
 		this.positionObjet = pos;
 		this.diametreObjet = diametre;
@@ -51,7 +53,7 @@ public class ObjetSpecial implements Dessinable {
 	/**
 	 * Méthode permettant de dessiner sur la zone d'animation à l'aide du g2d
 	 */
-
+	// Par Tan Tommy Rin
 	@Override
 	public void dessiner(Graphics2D g2d) {
 
@@ -86,7 +88,7 @@ public class ObjetSpecial implements Dessinable {
 	 * @param voiture      La voiture affectée
 	 * @param toucheActive Si la touche d'acceleration est activée
 	 */
-
+	// Par Tan Tommy Rin
 	public void fonctionColle(Voiture voiture, boolean toucheActive) {
 
 		if (toucheActive == true) {

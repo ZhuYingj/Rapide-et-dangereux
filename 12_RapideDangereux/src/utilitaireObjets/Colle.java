@@ -117,7 +117,7 @@ public class Colle implements Dessinable {
 
 	/**
 	 * 
-	 * méthode qui détecte la collision de la voiture et la boule de neige
+	 * méthode qui détecte la collision de la voiture et la colle
 	 * 
 	 * @param v ceci est la valeur de la voiture
 	 * @return la valeur de la collision en true or false
