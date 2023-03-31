@@ -13,12 +13,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import application.AppPrincipale12;
+import dessin.ZoneAcceleration;
 import dessin.ZoneAnimPhysique;
+import dessin.ZoneVitesse;
 
 /**
  * Classe qui permet de créer et gérer la fenetre du jeu avec le mode
@@ -388,6 +391,57 @@ public class FenetreJeuScientifique extends JPanel {
 
 		panelObjetEtGraphique.add(progressBarFroce);
 
+		ZoneVitesse zoneVitesse = new ZoneVitesse();
+		zoneVitesse.setBounds(0, -33, 250, 274);
+		panelObjetEtGraphique.add(zoneVitesse);
+		
+		
+		ZoneAcceleration zoneAcceleration = new ZoneAcceleration();
+		zoneAcceleration.setBounds(250, -33, 250, 274);
+		panelObjetEtGraphique.add(zoneAcceleration);
+
+		Timer timerVitesse = new Timer(100, new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	double vitesseActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getVitesse().module();
+		    //	double vitesseActuelle1 = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture2().getVitesse().module();
+		    	double accelerationActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getAccel().module();
+		    	  if (vitesseActuelle < 0) {
+				    	vitesseActuelle = (vitesseActuelle*-1);
+				    } 
+               zoneVitesse.ajouterVitesse(vitesseActuelle);
+               
+               
+               if (accelerationActuelle < 0) {
+			    	accelerationActuelle = (accelerationActuelle*-1);
+			    } 
+          zoneAcceleration.ajouterAcceleration(accelerationActuelle);
+        
+          
+          zoneVitesse.ajouterTemps();
+			zoneAcceleration.ajouterTemps();
+		    }
+		});
+		
+//		Timer timerAccel = new Timer(100, new ActionListener() {
+//		    public void actionPerformed(ActionEvent e) {
+//		    	double accelerationActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getAccel().module();
+//		    	  if (accelerationActuelle < 0) {
+//				    	accelerationActuelle = (accelerationActuelle*-1);
+//				    } 
+//               zoneAcceleration.ajouterAcceleration(accelerationActuelle);
+//             
+//		    }
+//		});
+//		
+//		Timer timerTemps = new Timer(100, new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				 zoneVitesse.ajouterTemps();
+//				zoneAcceleration.ajouterTemps();
+//			}
+//			
+//		});
+
+		
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -395,6 +449,14 @@ public class FenetreJeuScientifique extends JPanel {
 
 				pcs.firePropertyChange("Test", null, -1);
 
+				zoneVitesse.renouvlerTemps();
+                zoneVitesse.renouvlerVitesse();
+                timerVitesse.stop();
+				//timerTemps.stop();
+				//timerAccel.stop();
+				 zoneAcceleration.renouvlerTemps();
+				 zoneAcceleration.renouvlerAcceleration();
+				
 			}
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
@@ -410,6 +472,11 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 
+				timerVitesse.start();
+				//timerTemps.start();
+				//timerAccel.start();
+
+				
 			}
 		});
 		btnStart.setBounds(10, 563, 89, 76);
@@ -423,6 +490,12 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
 				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
+				
+				zoneVitesse.renouvlerTemps();
+                zoneVitesse.renouvlerVitesse();
+                zoneAcceleration.renouvlerTemps();
+                zoneAcceleration.renouvlerAcceleration();
+
 			}
 		});
 		btnReset.setBounds(175, 563, 89, 76);
@@ -445,6 +518,11 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.arreter();
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
+				
+				timerVitesse.stop();
+			//	timerTemps.stop();
+			//	timerAccel.stop();
+
 			}
 		});
 		btnStop.setBounds(538, 563, 89, 76);

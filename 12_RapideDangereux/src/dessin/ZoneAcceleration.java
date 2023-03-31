@@ -57,16 +57,6 @@ public class ZoneAcceleration extends JPanel {
 }
 	
 	/**
-	 * methode qui ajoute la nouvelle valeur de la vitesse dans le tableaux vitesse
-	 * 
-	 * @param acc 	la vitesse actuel de la voiture
-	 */
-	public void ajouterVitesse(double acc) {
-		acceleration.add((int) acc);
-        repaint(); 
-    }
-	
-	/**
 	 * methode qui clear le tableau acceleration
 	 */
 	public void renouvlerAcceleration() {
