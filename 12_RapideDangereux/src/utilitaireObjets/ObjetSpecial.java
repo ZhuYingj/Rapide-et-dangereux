@@ -40,7 +40,7 @@ public class ObjetSpecial implements Dessinable {
 	 * @param diametre  Le diaetre de l'objet special
 	 * @param typeObjet Le type de l'objet special
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public ObjetSpecial(Vecteur2D pos, double diametre, TypeObjetSpecial typeObjet) {
 		this.positionObjet = pos;
 		this.diametreObjet = diametre;
@@ -53,7 +53,7 @@ public class ObjetSpecial implements Dessinable {
 	/**
 	 * Méthode permettant de dessiner sur la zone d'animation à l'aide du g2d
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	@Override
 	public void dessiner(Graphics2D g2d) {
 
@@ -88,25 +88,25 @@ public class ObjetSpecial implements Dessinable {
 	 * @param voiture      La voiture affectée
 	 * @param toucheActive Si la touche d'acceleration est activée
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public void fonctionColle(Voiture voiture, boolean toucheActive) {
 
 		if (toucheActive == true) {
-			if (voiture.getVitesse().module() < 5) {
+			if (voiture.getVitesse().module() < 20) {
 
-			} else if (voiture.getVitesse().module() < 15) {
-				voiture.setAccel(new Vecteur2D(-4 * Math.cos(voiture.getAngle()), -4 * Math.sin(voiture.getAngle())));
+			} else if (voiture.getVitesse().module() < 30) {
+				voiture.setAccel(new Vecteur2D(-10 * Math.cos(voiture.getAngle()), -10 * Math.sin(voiture.getAngle())));
 			} else {
-				voiture.setAccel(new Vecteur2D(-12 * Math.cos(voiture.getAngle()), -12 * Math.sin(voiture.getAngle())));
+				voiture.setAccel(new Vecteur2D(-19 * Math.cos(voiture.getAngle()), -19 * Math.sin(voiture.getAngle())));
 			}
 
 		} else {
-			if (voiture.getVitesse().module() < 5) {
+			if (voiture.getVitesse().module() < 20) {
 
-			} else if (voiture.getVitesse().module() < 15) {
-				voiture.setAccel(new Vecteur2D(-5 * Math.cos(voiture.getAngle()), -5 * Math.sin(voiture.getAngle())));
+			} else if (voiture.getVitesse().module() < 30) {
+				voiture.setAccel(new Vecteur2D(-8 * Math.cos(voiture.getAngle()), -8 * Math.sin(voiture.getAngle())));
 			} else {
-				voiture.setAccel(new Vecteur2D(-15 * Math.cos(voiture.getAngle()), -15 * Math.sin(voiture.getAngle())));
+				voiture.setAccel(new Vecteur2D(-17 * Math.cos(voiture.getAngle()), -17 * Math.sin(voiture.getAngle())));
 			}
 		}
 
@@ -119,7 +119,7 @@ public class ObjetSpecial implements Dessinable {
 	 * @param tempsTotalEcoule Le temps total écoulé
 	 * @return si la fonction est en cours
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 
 	public boolean fonctionChampignon(Voiture voiture, double tempsTotalEcoule) {
 		Champignon champignon = new Champignon(this.positionObjet, this.diametreObjet, type);
@@ -169,7 +169,7 @@ public class ObjetSpecial implements Dessinable {
 	 * 
 	 * @param deltaT intervalle de temps (pas)
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public void avancerUnPas(double deltaT) {
 		this.vitesse = MoteurPhysique.calculVitesse(deltaT, vitesse, accel);
 		this.positionObjet = MoteurPhysique.calculPosition(deltaT, positionObjet, vitesse);
@@ -185,7 +185,7 @@ public class ObjetSpecial implements Dessinable {
 	 *                                               sur la boule de neige ou le
 	 *                                               trou noir
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public void setSommeDesForces(Vecteur2D sommeForcesSurLaBouleDeNeigeOuTrouNoir) {
 		// ici changer les forces signifie recalculer l'acceleration
 		// on relegue cette tache au moteur physique.

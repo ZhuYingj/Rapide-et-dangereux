@@ -225,7 +225,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenSansScience la fenetre non scientifique
 	 */
 
-// Par Tan Tommy Rin
+// Tan Tommy Rin
 	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
 			FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
@@ -356,7 +356,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenEditeur fenêtre du mode editeur
 	 * @param fenScience la fenetre de jeu avec le mode scientifique
 	 */
-// Par Tan Tommy Rin
+//  Tan Tommy Rin
 
 	public void actionJouerDeEditeur(PropertyChangeEvent evt, FenetreEditeur fenEditeur,
 			FenetreJeuScientifique fenScience) {
