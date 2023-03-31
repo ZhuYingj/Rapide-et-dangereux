@@ -219,10 +219,12 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
 	 * à la fenetre de jeu d'options
 	 * 
-	 * @param evt           evenement
-	 * @param fenJeuScience la fenetre de jeu avec mode science activé
-	 * @param fenOptions    la fenetre de jeu d'options
+	 * @param evt            evenement
+	 * @param fenJeuScience  la fenetre de jeu avec mode science activé
+	 * @param fenOptions     la fenetre de jeu d'options
+	 * @param fenSansScience la fenetre non scientifique
 	 */
+
 // Par Tan Tommy Rin
 	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
 			FenetreJeuSansScientifique fenSansScience) {

@@ -8,7 +8,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -386,6 +385,7 @@ public class FenetreJeuScientifique extends JPanel {
 		progressBarFroce.setStringPainted(true);
 		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
 		progressBarFroce.setBounds(519, 11, 30, 157);
+
 		panelObjetEtGraphique.add(progressBarFroce);
 
 		JButton btnRetour = new JButton("Retour");
@@ -524,6 +524,14 @@ public class FenetreJeuScientifique extends JPanel {
 			lblAngleVoiture2Rad.setText(String.format("%.2f", evt.getNewValue()));
 		case "nombreToursV2":
 			lblNombreToursVoiture2.setText(String.format("%.0f", evt.getNewValue()));
+		case "ForceLance":
+
+			Double newData = new Double((double) evt.getNewValue());
+			int a = newData.intValue();
+			progressBarFroce.setMinimum(0);
+			progressBarFroce.setMaximum(100);
+			progressBarFroce.setValue(a - 50);
+
 		}
 	}
 }

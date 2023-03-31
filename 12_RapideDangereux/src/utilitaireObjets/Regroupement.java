@@ -229,7 +229,6 @@ public class Regroupement implements Dessinable, Serializable {
 							boutonAppuye2 = false;
 							firstTime2 = false;
 							objSpecial2 = null;
-							System.out.println("3 sec pass");
 
 						}
 					}

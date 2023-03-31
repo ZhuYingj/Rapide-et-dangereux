@@ -23,6 +23,7 @@ public class ObjetSpecial implements Dessinable {
 
 	/** Vecteur de l'acceleration de la voiture **/
 	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
+
 	private Vecteur2D positionObjet;
 	private double diametreObjet;
 	private TypeObjetSpecial type;
@@ -159,6 +160,14 @@ public class ObjetSpecial implements Dessinable {
 			e.printStackTrace();
 		}
 
+	}
+
+	public Vecteur2D getAccel() {
+		return accel;
+	}
+
+	public void setAccel(Vecteur2D accel) {
+		this.accel = accel;
 	}
 
 	public double getTempsTemporaire() {

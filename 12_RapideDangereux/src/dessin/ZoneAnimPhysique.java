@@ -91,8 +91,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Regroupement regroupement;
 	/** Le type de piste choisi **/
 	private TypePiste typePiste = TypePiste.CANADA;
-	/** L'objet special **/
-	private ObjetSpecial objSpecial;
 	/** Piste Canada **/
 	private PisteCanada pisteCanada;
 
@@ -101,6 +99,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Voiture voiture2;
 	/** L'angle de la voiture 2 en degré **/
 	private int angleVoitureDegre2;
+
+	private double valeur = 50;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -124,10 +124,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		regroupement = new Regroupement(voiture, 3, typePiste);
 
-//		objSpecial = new ObjetSpecial(new Vecteur2D(getWidth() / 2.0, getHeight() / 2.0), 20,
-//				TypeObjetSpecial.BOULEDENEIGE);
-
-//		objSpecial = new ObjetSpecial(new Vecteur2D(90, 40), 20, TypeObjetSpecial.BOULEDENEIGE);
 		addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -176,8 +172,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		regroupement.setPixelsParMetre(pixelsParMetre);
 		regroupement.dessiner(g2d);
-//		objSpecial.setPixelParMetre(pixelsParMetre);
-//		objSpecial.dessiner(g2d);
+
 	}
 
 	/**
@@ -435,12 +430,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 				if (regroupement.getObjSpecial() != null) {
 					regroupement.setBoutonAppuye(true);
+
 					regroupement.getObjSpecial().setVitesse(new Vecteur2D(
-							50 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
-							50 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
-					regroupement.getObjSpecial().setSommeDesForces((new Vecteur2D(
-							50 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
-							50 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()))));
+							valeur * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
+							valeur * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
+
 				}
 
 			}
@@ -451,9 +445,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					regroupement.getObjSpecial2().setVitesse(new Vecteur2D(
 							50 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()),
 							50 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle())));
-					regroupement.getObjSpecial2().setSommeDesForces((new Vecteur2D(
-							50 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()),
-							50 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()))));
+
 				}
 
 			}
@@ -622,6 +614,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("posEnYV2", 0, voiture2.getPosition().getY() / pixelsParMetre);
 		pcs.firePropertyChange("angleV2", 0, voiture2.getAngle());
 		pcs.firePropertyChange("nombreToursV2", 0, regroupement.getTour());
+		if (regroupement.getObjSpecial() != null
+				&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+			if (valeur > 150) {
+				valeur = 50;
+			} else if (valeur > 49 && valeur < 150) {
+				valeur = valeur + 0.3;
+			}
+			System.out.println(valeur);
+			pcs.firePropertyChange("ForceLance", 0, valeur);
+		}
 
 	}
 
