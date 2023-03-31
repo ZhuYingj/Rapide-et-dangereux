@@ -59,7 +59,7 @@ public class BouleDeNeige {
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dcop = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
-//		mat.scale(pixelsParMetre, pixelsParMetre);
+
 		shapeBoule = mat.createTransformedShape(boule);
 		g2dcop.setColor(Color.cyan);
 		g2dcop.fill(shapeBoule);

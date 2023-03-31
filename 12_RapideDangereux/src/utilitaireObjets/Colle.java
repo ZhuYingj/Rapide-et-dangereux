@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
@@ -22,20 +23,17 @@ public class Colle implements Dessinable {
 
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
-	/** la position en x de depart que l'objet piste vas etre creer **/
-	private int x;
-	/** la position en y de depart que l'objet piste vas etre creer **/
-	private int y;
+
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.COLLE;
 	private transient Shape shapeColle;
-	private transient Area bouleDeNeigeAire;
-	private transient Area bouleDeNeigeAireCopie;
+	private transient Area colleAire;
+	private transient Area colleAireCopie;
 	private transient Area aireVoiture;
-
+	private transient Area aireVoiture1;
 	private double pixelsParMetre;;
-
+	private boolean contactColle = false;
 	private Ellipse2D.Double colle;
-
+	private Voiture voiture;
 	private double diametre;
 	private Vecteur2D position;
 
@@ -55,33 +53,37 @@ public class Colle implements Dessinable {
 	}
 
 	/**
-	 * Méthode qui permet de dessiner sur le g2d
+	 * Méthode qui permet de dessiner sur le g2dcop
 	 * 
-	 * @param g2d Le composant graphique
+	 * @param g2dcop Le composant graphique
 	 */
 
 	@Override
 
-	public void dessiner(Graphics2D g2d) {
-		g2d.setColor(Color.ORANGE);
+	public void dessiner(Graphics2D g2dcop) {
+		Graphics2D g2dcopcop = (Graphics2D) g2dcop.create();
+		AffineTransform mat = new AffineTransform();
+//		mat.scale(pixelsParMetre, pixelsParMetre);
+		shapeColle = mat.createTransformedShape(colle);
+		g2dcopcop.setColor(Color.ORANGE);
 
-		g2d.setStroke(new BasicStroke(3f));
-		g2d.drawLine((int) this.position.getX(), (int) this.position.getY(), (int) this.position.getX() + taillePiste,
-				(int) this.position.getY());
-		g2d.drawLine((int) this.position.getX(), (int) this.position.getY() + taillePiste - 1,
+		g2dcop.setStroke(new BasicStroke(3f));
+		g2dcop.drawLine((int) this.position.getX(), (int) this.position.getY(),
+				(int) this.position.getX() + taillePiste, (int) this.position.getY());
+		g2dcop.drawLine((int) this.position.getX(), (int) this.position.getY() + taillePiste - 1,
 				(int) this.position.getX() + taillePiste, (int) this.position.getY() + taillePiste - 1);
-		g2d.drawLine((int) this.position.getX(), (int) this.position.getY(), (int) this.position.getX(),
+		g2dcop.drawLine((int) this.position.getX(), (int) this.position.getY(), (int) this.position.getX(),
 				(int) this.position.getY() + taillePiste);
-		g2d.drawLine((int) this.position.getX() + taillePiste, (int) this.position.getY(),
+		g2dcop.drawLine((int) this.position.getX() + taillePiste, (int) this.position.getY(),
 				(int) this.position.getX() + taillePiste, (int) this.position.getY() + taillePiste);
-		g2d.drawLine((int) this.position.getX(), (int) this.position.getY(), (int) this.position.getX() + taillePiste,
-				(int) this.position.getY() + taillePiste);
-		g2d.drawLine((int) this.position.getX() + (taillePiste / 2), (int) this.position.getY(),
+		g2dcop.drawLine((int) this.position.getX(), (int) this.position.getY(),
+				(int) this.position.getX() + taillePiste, (int) this.position.getY() + taillePiste);
+		g2dcop.drawLine((int) this.position.getX() + (taillePiste / 2), (int) this.position.getY(),
 				(int) this.position.getX() + taillePiste, (int) this.position.getY() + (taillePiste / 2));
-		g2d.drawLine((int) this.position.getX(), (int) this.position.getY() + (taillePiste / 2),
+		g2dcop.drawLine((int) this.position.getX(), (int) this.position.getY() + (taillePiste / 2),
 				(int) this.position.getX() + (taillePiste / 2), (int) this.position.getY() + taillePiste);
-		System.out.println(x);
-
+		colleAire = new Area(shapeColle);
+		colleAireCopie = new Area(colleAire);
 	}
 
 	public TypeObjetSpecial getTypeObjet() {
@@ -111,6 +113,32 @@ public class Colle implements Dessinable {
 	public void setPixelsParMetre(double pixelsParMetreVoulu) {
 		this.pixelsParMetre = pixelsParMetreVoulu;
 
+	}
+
+	/**
+	 * 
+	 * méthode qui détecte la collision de la voiture et la boule de neige
+	 * 
+	 * @param v ceci est la valeur de la voiture
+	 * @return la valeur de la collision en true or false
+	 */
+	// Alexis Pineda-Alvarado
+	public boolean collisionDeLaVoiture(Voiture v) {
+		this.voiture = v;
+		colleAireCopie = new Area(colle);
+		aireVoiture = new Area(voiture.getCercle());
+		aireVoiture1 = new Area(aireVoiture);
+		aireVoiture1.intersect(colleAireCopie);
+
+		if (!aireVoiture1.isEmpty()) {
+			contactColle = true;
+
+		} else {
+
+			contactColle = false;
+		}
+
+		return contactColle;
 	}
 
 	/**

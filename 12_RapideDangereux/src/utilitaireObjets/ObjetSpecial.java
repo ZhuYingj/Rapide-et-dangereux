@@ -30,6 +30,7 @@ public class ObjetSpecial implements Dessinable {
 	private double pixelParMetre = 1;
 	private double tempsTemporaire;
 	private BouleDeNeige bouleDeNeige;
+	private Colle colle;
 
 	/**
 	 * Méthode permettant de créer un objet spécial à l'aide de paramètre
@@ -43,7 +44,8 @@ public class ObjetSpecial implements Dessinable {
 		this.diametreObjet = diametre;
 		this.type = typeObjet;
 		bouleDeNeige = new BouleDeNeige(positionObjet, diametre);
-
+		colle = new Colle(positionObjet, 80);
+		;
 	}
 
 	/**
@@ -68,9 +70,42 @@ public class ObjetSpecial implements Dessinable {
 			trouNoir.dessiner(g2d);
 		}
 		if (type == TypeObjetSpecial.COLLE) {
-			Colle colle = new Colle(this.positionObjet, this.diametreObjet);
+			colle = new Colle(this.positionObjet, 80);
 			colle.dessiner(g2d);
 
+		}
+
+	}
+
+	/**
+	 * Méthode décrivant la fonction de la colle. Lorsque la voiture est en contact
+	 * avec la colle, une acceleration du sens inverse de la voiture est produite,
+	 * ce qui l'amene a ralentir. Selon si la touche d'accleration est activé ou
+	 * non, la valeur de cette accelération implanté change.
+	 * 
+	 * @param voiture      La voiture affectée
+	 * @param toucheActive Si la touche d'acceleration est activée
+	 */
+
+	public void fonctionColle(Voiture voiture, boolean toucheActive) {
+
+		if (toucheActive == true) {
+			if (voiture.getVitesse().module() < 5) {
+
+			} else if (voiture.getVitesse().module() < 15) {
+				voiture.setAccel(new Vecteur2D(-4 * Math.cos(voiture.getAngle()), -4 * Math.sin(voiture.getAngle())));
+			} else {
+				voiture.setAccel(new Vecteur2D(-12 * Math.cos(voiture.getAngle()), -12 * Math.sin(voiture.getAngle())));
+			}
+
+		} else {
+			if (voiture.getVitesse().module() < 5) {
+
+			} else if (voiture.getVitesse().module() < 15) {
+				voiture.setAccel(new Vecteur2D(-5 * Math.cos(voiture.getAngle()), -5 * Math.sin(voiture.getAngle())));
+			} else {
+				voiture.setAccel(new Vecteur2D(-15 * Math.cos(voiture.getAngle()), -15 * Math.sin(voiture.getAngle())));
+			}
 		}
 
 	}
@@ -110,14 +145,13 @@ public class ObjetSpecial implements Dessinable {
 
 		if (tempsTemporaire + 3 > tempsFinal) {
 
-			System.out.println("SLOW DOWN!!!");
 			Vecteur2D voitureSlow = new Vecteur2D();
 			voitureSlow = MoteurPhysique.calculerForceFrottement(2.50, voiture.getMasseEnKg(), voiture.getAngle());
 			voiture.setSommeDesForces(voitureSlow);
 
 			return true;
 		} else {
-			System.out.println("NORMAL SPEED!!!");
+
 			Vecteur2D voitureNormal = new Vecteur2D();
 			voitureNormal = MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), voiture.getAngle());
 			voiture.setSommeDesForces(voitureNormal);
@@ -225,6 +259,14 @@ public class ObjetSpecial implements Dessinable {
 
 	public void setBouleDeNeige(BouleDeNeige bouleDeNeige) {
 		this.bouleDeNeige = bouleDeNeige;
+	}
+
+	public Colle getColle() {
+		return colle;
+	}
+
+	public void setColle(Colle colle) {
+		this.colle = colle;
 	}
 
 }

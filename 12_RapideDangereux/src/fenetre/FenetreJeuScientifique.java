@@ -527,10 +527,10 @@ public class FenetreJeuScientifique extends JPanel {
 		case "ForceLance":
 
 			Double newData = new Double((double) evt.getNewValue());
-			int a = newData.intValue();
+			int valeur = newData.intValue();
 			progressBarFroce.setMinimum(0);
 			progressBarFroce.setMaximum(100);
-			progressBarFroce.setValue(a - 50);
+			progressBarFroce.setValue(valeur - 50);
 
 		}
 	}
