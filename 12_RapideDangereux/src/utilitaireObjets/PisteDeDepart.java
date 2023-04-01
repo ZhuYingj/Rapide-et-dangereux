@@ -48,6 +48,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	private Voiture voiture;
 
 	private Voiture voiture2;
+	private boolean enContactAvecColle = false;
 
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -205,6 +206,24 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	}
 
 	/**
+	 * Méthode qui permet de détecter s'il y a une collision de la colle avec le
+	 * morceau de piste
+	 * 
+	 * @param objetSpecial L'objet spéciale de type colle
+	 */
+	// Tan Tommy Rin
+	public void collisionColle(ObjetSpecial objetSpecial) {
+
+		if (formeAire.contains(objetSpecial.getColle().getPosition().getX(),
+				objetSpecial.getColle().getPosition().getY())) {
+			enContactAvecColle = true;
+		} else {
+			enContactAvecColle = false;
+		}
+
+	}
+
+	/**
 	 * Méthode permettant de savoir si la voiture est repassée par le point de
 	 * départ
 	 * 
@@ -235,6 +254,14 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	public boolean isEnContactAvecColle() {
+		return enContactAvecColle;
+	}
+
+	public void setEnContactAvecColle(boolean enContactAvecColle) {
+		this.enContactAvecColle = enContactAvecColle;
 	}
 
 	/**

@@ -52,7 +52,7 @@ public class ZoneAcceleration extends JPanel {
             int posX = x + (int) (tempsEnS * largeur / temps.get(temps.size() - 1));
             int posY = y + (int) (hauteur - accelerationEnMps * hauteur / 30.0);
             g.fillOval(posX - 3, posY - 3, 4, 4);
-            System.out.println("la valeur de l'acceleration est: "+ accelerationEnMps + " et la valeur du temps est: " + tempsEnS);
+           
         }
 }
 	

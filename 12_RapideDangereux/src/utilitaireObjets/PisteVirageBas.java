@@ -60,6 +60,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	private Color color = Color.black;
 	/** Aire du morceau de piste **/
 	private Rectangle2D.Double formeAire;
+	private boolean enContactAvecColle = false;
 
 	/**
 	 * Methode qui permet de construire la piste virage bas a l'aide de parametres
@@ -117,6 +118,24 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 
 	public int getTaillePiste() {
 		return taillePiste;
+	}
+
+	/**
+	 * Méthode qui permet de détecter s'il y a une collision de la colle avec le
+	 * morceau de piste
+	 * 
+	 * @param objetSpecial L'objet spéciale de type colle
+	 */
+	// Tan Tommy Rin
+	public void collisionColle(ObjetSpecial objetSpecial) {
+
+		if (formeAire.contains(objetSpecial.getColle().getPosition().getX(),
+				objetSpecial.getColle().getPosition().getY())) {
+			enContactAvecColle = true;
+		} else {
+			enContactAvecColle = false;
+		}
+
 	}
 
 	/**
@@ -215,7 +234,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	 * 
 	 * @param L'objet special de type boule de neige
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 
 	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
 
@@ -325,6 +344,14 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 
 	public void setMurBas(int murBas) {
 		this.murBas = murBas;
+	}
+
+	public boolean isEnContactAvecColle() {
+		return enContactAvecColle;
+	}
+
+	public void setEnContactAvecColle(boolean enContactAvecColle) {
+		this.enContactAvecColle = enContactAvecColle;
 	}
 
 }

@@ -28,11 +28,13 @@ public class Colle implements Dessinable {
 	private transient Shape shapeColle;
 	private transient Area colleAire;
 	private transient Area colleAireCopie;
+
 	private transient Area aireVoiture;
 	private transient Area aireVoiture1;
 	private double pixelsParMetre;;
 	private boolean contactColle = false;
 	private Ellipse2D.Double colle;
+
 	private Voiture voiture;
 	private double diametre;
 	private Vecteur2D position;
@@ -94,13 +96,21 @@ public class Colle implements Dessinable {
 		this.typeObjet = typeObjet;
 	}
 
+	public Area getColleAire() {
+		return colleAire;
+	}
+
+	public void setColleAire(Area colleAire) {
+		this.colleAire = colleAire;
+	}
+
 	/**
 	 * Méthode permetant de créer la géométrie de cet objet
 	 */
 
 	private void creerLaGeometrie() {
 
-		colle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
+		colle = new Ellipse2D.Double(position.getX(), position.getY(), taillePiste, taillePiste);
 	}
 
 	/**
@@ -149,6 +159,22 @@ public class Colle implements Dessinable {
 	// Par Alexis Pineda-Alvarado
 	public double getPixelsParMetre() {
 		return this.pixelsParMetre;
+	}
+
+	public Vecteur2D getPosition() {
+		return position;
+	}
+
+	public void setPosition(Vecteur2D position) {
+		this.position = position;
+	}
+
+	public Ellipse2D.Double getColle() {
+		return colle;
+	}
+
+	public void setColle(Ellipse2D.Double colle) {
+		this.colle = colle;
 	}
 
 }

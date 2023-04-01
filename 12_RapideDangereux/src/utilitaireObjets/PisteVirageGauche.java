@@ -63,6 +63,9 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	private Color color = Color.black;
 	/** Aire du morceau de piste **/
 	private Rectangle2D.Double formeAire;
+	private boolean enContactAvecColle = false;
+
+
 
 	/**
 	 * Methode qui permet de construire la piste virage gauche a l'aide de
@@ -222,12 +225,30 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	}
 
 	/**
+	 * Méthode qui permet de détecter s'il y a une collision de la colle avec le
+	 * morceau de piste
+	 * 
+	 * @param objetSpecial L'objet spéciale de type colle
+	 */
+	// Tan Tommy Rin
+	public void collisionColle(ObjetSpecial objetSpecial) {
+
+		if (formeAire.contains(objetSpecial.getColle().getPosition().getX(),
+				objetSpecial.getColle().getPosition().getY())) {
+			enContactAvecColle = true;
+		} else {
+			enContactAvecColle = false;
+		}
+
+	}
+
+	/**
 	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
 	 * et la boule de neige
 	 * 
 	 * @param L'objet special de type boule de neige
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
 
 		Area cercle = new Area(objetSpecial.getBouleDeNeige().getBoule());
@@ -309,6 +330,13 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 			return false;
 		}
 
+	}
+	public boolean isEnContactAvecColle() {
+		return enContactAvecColle;
+	}
+
+	public void setEnContactAvecColle(boolean enContactAvecColle) {
+		this.enContactAvecColle = enContactAvecColle;
 	}
 
 	public int getMurDroite() {

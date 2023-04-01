@@ -48,6 +48,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	private boolean collision = false;
 	private Color color = Color.black;
 	private Rectangle2D.Double formeAire;
+	private boolean enContactAvecColle = false;
 
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -138,6 +139,24 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 				}
 			}
 		}
+	}
+
+	/**
+	 * Méthode qui permet de détecter s'il y a une collision de la colle avec le
+	 * morceau de piste
+	 * 
+	 * @param objetSpecial L'objet spéciale de type colle
+	 */
+	// Tan Tommy Rin
+	public void collisionColle(ObjetSpecial objetSpecial) {
+
+		if (formeAire.contains(objetSpecial.getColle().getPosition().getX(),
+				objetSpecial.getColle().getPosition().getY())) {
+			enContactAvecColle = true;
+		} else {
+			enContactAvecColle = false;
+		}
+
 	}
 
 	/**
@@ -272,6 +291,14 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 
 	public void setMurBas(int murBas) {
 		this.murBas = murBas;
+	}
+
+	public boolean isEnContactAvecColle() {
+		return enContactAvecColle;
+	}
+
+	public void setEnContactAvecColle(boolean enContactAvecColle) {
+		this.enContactAvecColle = enContactAvecColle;
 	}
 
 }

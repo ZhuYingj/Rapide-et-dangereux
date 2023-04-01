@@ -36,7 +36,6 @@ public class FenetreJeuScientifique extends JPanel {
 	private ZoneAnimPhysique zoneAnimPhysique;
 	private AppPrincipale12 application;
 	private JProgressBar progressBarFroce;
-	private JProgressBar progressBarFroce2;
 	private JLabel lblAccEnXV1;
 	private JLabel lblTempsEcouleValeur;
 	private JLabel lblAccEnYV1;
@@ -390,12 +389,7 @@ public class FenetreJeuScientifique extends JPanel {
 		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
 		progressBarFroce.setBounds(519, 11, 30, 157);
 
-		progressBarFroce2 = new JProgressBar();
-		progressBarFroce2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		progressBarFroce2.setStringPainted(true);
-		progressBarFroce2.setOrientation(SwingConstants.VERTICAL);
-		progressBarFroce2.setBounds(470, 11, 30, 157);
-
+		panelObjetEtGraphique.add(progressBarFroce);
 
 		ZoneVitesse zoneVitesse = new ZoneVitesse();
 		zoneVitesse.setBounds(0, -33, 250, 274);
@@ -448,10 +442,6 @@ public class FenetreJeuScientifique extends JPanel {
 //		});
 
 		
-
-		panelObjetEtGraphique.add(progressBarFroce);
-		panelObjetEtGraphique.add(progressBarFroce2);
-
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -612,7 +602,7 @@ public class FenetreJeuScientifique extends JPanel {
 			lblAngleVoiture2Rad.setText(String.format("%.2f", evt.getNewValue()));
 		case "nombreToursV2":
 			lblNombreToursVoiture2.setText(String.format("%.0f", evt.getNewValue()));
-		case "ForceLance1":
+		case "ForceLance":
 
 			Double newData = new Double((double) evt.getNewValue());
 			int valeur = newData.intValue();
@@ -620,16 +610,6 @@ public class FenetreJeuScientifique extends JPanel {
 			progressBarFroce.setMaximum(100);
 			progressBarFroce.setValue(valeur - 50);
 
-			break;
-		case "ForceLance2":
-
-			Double newData2 = new Double((double) evt.getNewValue());
-			int valeur2 = newData2.intValue();
-			progressBarFroce2.setMinimum(0);
-			progressBarFroce2.setMaximum(100);
-			progressBarFroce2.setValue(valeur2 - 50);
-
-			break;
 		}
 	}
 }

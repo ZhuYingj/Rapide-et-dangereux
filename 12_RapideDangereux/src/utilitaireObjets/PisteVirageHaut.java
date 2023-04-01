@@ -64,6 +64,8 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	/** Aire du morceau de piste **/
 	private Rectangle2D.Double formeAire;
 
+	private boolean enContactAvecColle = false;
+
 	/**
 	 * Methode qui permet de construire la piste virage haut a l'aide de parametres
 	 * 
@@ -197,7 +199,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * 
 	 * @param L'objet special de type boule de neige
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
 
 		Area cercle = new Area(objetSpecial.getBouleDeNeige().getBoule());
@@ -237,6 +239,24 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
 			setCollision(true);
 
+		}
+
+	}
+
+	/**
+	 * Méthode qui permet de détecter s'il y a une collision de la colle avec le
+	 * morceau de piste
+	 * 
+	 * @param objetSpecial L'objet spéciale de type colle
+	 */
+	// Tan Tommy Rin
+	public void collisionColle(ObjetSpecial objetSpecial) {
+
+		if (formeAire.contains(objetSpecial.getColle().getPosition().getX(),
+				objetSpecial.getColle().getPosition().getY())) {
+			enContactAvecColle = true;
+		} else {
+			enContactAvecColle = false;
 		}
 
 	}
@@ -355,6 +375,14 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 
 	public void setMurHaut(int murHaut) {
 		this.murHaut = murHaut;
+	}
+
+	public boolean isEnContactAvecColle() {
+		return enContactAvecColle;
+	}
+
+	public void setEnContactAvecColle(boolean enContactAvecColle) {
+		this.enContactAvecColle = enContactAvecColle;
 	}
 
 	public int getMurBas() {
