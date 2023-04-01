@@ -122,7 +122,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		voiture2 = new Voiture(posInit2, Color.white, 50, 16, angleVoitureRad2, 60);
 
-		regroupement = new Regroupement(voiture, 1, typePiste);
+		regroupement = new Regroupement(voiture, 5, typePiste);
 
 		addKeyListener(new KeyAdapter() {
 

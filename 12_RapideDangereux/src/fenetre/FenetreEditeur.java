@@ -334,7 +334,7 @@ public class FenetreEditeur extends JPanel {
 
 		add(btnChargerPisteSauvegarde);
 
-		comboBoxPiste = new JComboBox();
+		comboBoxPiste = new JComboBox<String>();
 
 		comboBoxPiste.setBounds(592, 508, 181, 23);
 

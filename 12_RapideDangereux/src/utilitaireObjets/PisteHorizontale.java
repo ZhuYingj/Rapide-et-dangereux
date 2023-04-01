@@ -50,8 +50,6 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	private boolean collision = false;
 	private Rectangle2D.Double formeAire;
 
-
-
 	private boolean enContactAvecColle = true;
 
 	public boolean isEnContactAvecColle() {
@@ -97,7 +95,6 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 		g2dCopie.setStroke(stroke);
 		g2dCopie.drawLine(x, y, x + taillePiste, y);
 		g2dCopie.drawLine(x, y + taillePiste, x + taillePiste, y + taillePiste);
-	
 
 	}
 
@@ -162,16 +159,15 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	}
 
 	/**
-	 * Méthode qui permet de détecter s'il y a une collision de la colle avec le
+	 * Méthode qui permet de détecter s'il y a une collision de la voiture avec le
 	 * morceau de piste
 	 * 
-	 * @param objetSpecial L'objet spéciale de type colle
+	 * @param voiture La voiture en collision
 	 */
 	// Tan Tommy Rin
-	public void collisionColle(ObjetSpecial objetSpecial) {
+	public void collisionColle(Voiture voiture) {
 
-		if (formeAire.contains(objetSpecial.getColle().getPosition().getX(),
-				objetSpecial.getColle().getPosition().getY())) {
+		if (formeAire.contains(voiture.getPosition().getX(), voiture.getPosition().getY())) {
 			enContactAvecColle = true;
 		} else {
 			enContactAvecColle = false;

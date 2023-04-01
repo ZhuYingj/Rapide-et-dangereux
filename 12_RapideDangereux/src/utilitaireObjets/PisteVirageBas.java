@@ -120,17 +120,17 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 		return taillePiste;
 	}
 
+
 	/**
-	 * Méthode qui permet de détecter s'il y a une collision de la colle avec le
+	 * Méthode qui permet de détecter s'il y a une collision de la voiture avec le
 	 * morceau de piste
 	 * 
-	 * @param objetSpecial L'objet spéciale de type colle
+	 * @param voiture La voiture en collision
 	 */
 	// Tan Tommy Rin
-	public void collisionColle(ObjetSpecial objetSpecial) {
+	public void collisionColle(Voiture voiture) {
 
-		if (formeAire.contains(objetSpecial.getColle().getPosition().getX(),
-				objetSpecial.getColle().getPosition().getY())) {
+		if (formeAire.contains(voiture.getPosition().getX(), voiture.getPosition().getY())) {
 			enContactAvecColle = true;
 		} else {
 			enContactAvecColle = false;

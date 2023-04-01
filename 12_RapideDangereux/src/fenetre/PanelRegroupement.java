@@ -52,24 +52,9 @@ public class PanelRegroupement extends JPanel {
 	private PisteVirageHaut pisteVirageHaut;
 
 	private int xPrecedent, yPrecedent;
-	private double xAccelerateur;
-	private double yAccelerateur;
+
 	private double xBlocMystere;
 	private double yBlocMystere;
-	private double xPisteHorizontale;
-	private double yPisteHorizontale;
-	private double xPisteVirageBas;
-	private double yPisteVirageBas;
-	private double xPisteVirageGauche;
-	private double yPisteVirageGauche;
-	private double xPisteVerticale;
-	private double yPisteVerticale;
-	private double xPisteDeDepart;
-	private double yPisteDeDepart;
-	private double xPisteVirageDroit;
-	private double yPisteVirageDroit;
-	private double xPisteVirageHaut;
-	private double yPisteVirageHaut;
 
 	private ArrayList<Accelerateur> listeAccelerateur = new ArrayList<Accelerateur>();
 
@@ -92,7 +77,7 @@ public class PanelRegroupement extends JPanel {
 	/**
 	 * Constructeur du panel de regroupement
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	public PanelRegroupement() {
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -163,7 +148,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param g Le contexte graphique de la zone de dessin
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -232,7 +217,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void relachementSouris(MouseEvent e) {
 		objetSelectionne = false;
 		repaint();
@@ -244,18 +229,16 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteVirageDroitDrag(MouseEvent e) {
 		if (listePisteVirageDroit.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEDROIT) {
-			xPisteVirageDroit += e.getX() - xPrecedent;
-			yPisteVirageDroit += e.getY() - yPrecedent;
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageDroit.setX(collerX(e));
 			pisteVirageDroit.setY(collerY(e));
-			pisteVirageDroit.getFormeAire().setRect(xPisteVirageDroit, yPisteVirageDroit,
+			pisteVirageDroit.getFormeAire().setRect(pisteVirageDroit.getX(), pisteVirageDroit.getY(),
 					pisteVirageDroit.getTaillePiste(), pisteVirageDroit.getTaillePiste());
 			pisteVirageDroit.setMurHaut((int) collerY(e));
 			pisteVirageDroit.setMurBas((int) collerY(e) + tailleDuCarre);
@@ -270,20 +253,19 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteDeDepartDrag(MouseEvent e) {
 		if (listePisteDeDepart.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEDEDEPART) {
-			xPisteDeDepart += e.getX() - xPrecedent;
-			yPisteDeDepart += e.getY() - yPrecedent;
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteDeDepart.setX(collerX(e));
 			pisteDeDepart.setY(collerY(e));
-			pisteDeDepart.getVoiture().setPosition(new Vecteur2D(xPisteDeDepart + pisteDeDepart.getTaillePiste() / 4,
-					yPisteDeDepart + pisteDeDepart.getTaillePiste() / 4));
-			pisteDeDepart.getFormeAire().setRect(xPisteDeDepart, yPisteDeDepart, pisteDeDepart.getTaillePiste(),
-					pisteDeDepart.getTaillePiste());
+			pisteDeDepart.getVoiture()
+					.setPosition(new Vecteur2D(pisteDeDepart.getX() + pisteDeDepart.getTaillePiste() / 4,
+							pisteDeDepart.getY() + pisteDeDepart.getTaillePiste() / 4));
+			pisteDeDepart.getFormeAire().setRect(pisteDeDepart.getX(), pisteDeDepart.getY(),
+					pisteDeDepart.getTaillePiste(), pisteDeDepart.getTaillePiste());
 			pisteDeDepart.setMurHaut((int) collerY(e));
 			pisteDeDepart.setMurBas((int) collerY(e) + tailleDuCarre);
 			pisteDeDepart.setMurDroite((int) collerX(e) + tailleDuCarre);
@@ -298,18 +280,16 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteVerticaleDrag(MouseEvent e) {
 		if (listePisteVerticale.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEVERTICALE) {
-			xPisteVerticale += e.getX() - xPrecedent;
-			yPisteVerticale += e.getY() - yPrecedent;
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVerticale.setX(collerX(e));
 			pisteVerticale.setY(collerY(e));
-			pisteVerticale.getFormeAire().setRect(xPisteVerticale, yPisteVerticale, pisteVerticale.getTaillePiste(),
-					pisteVerticale.getTaillePiste());
+			pisteVerticale.getFormeAire().setRect(pisteVerticale.getX(), pisteVerticale.getY(),
+					pisteVerticale.getTaillePiste(), pisteVerticale.getTaillePiste());
 			pisteVerticale.setMurHaut((int) collerY(e));
 			pisteVerticale.setMurBas((int) collerY(e) + tailleDuCarre);
 			pisteVerticale.setMurDroite((int) collerX(e) + tailleDuCarre);
@@ -323,19 +303,17 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteVirageHautDrag(MouseEvent e) {
 		if (listePisteVirageHaut.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEHAUT) {
-			xPisteVirageHaut += e.getX() - xPrecedent;
-			yPisteVirageHaut += e.getY() - yPrecedent;
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageHaut.setX(collerX(e));
 			pisteVirageHaut.setY(collerY(e));
-			pisteVirageHaut.getFormeAire().setRect(xPisteVirageHaut, yPisteVirageHaut, pisteVirageHaut.getTaillePiste(),
-					pisteVirageHaut.getTaillePiste());
+			pisteVirageHaut.getFormeAire().setRect(pisteVirageHaut.getX(), pisteVirageHaut.getY(),
+					pisteVirageHaut.getTaillePiste(), pisteVirageHaut.getTaillePiste());
 			pisteVirageHaut.setMurHaut((int) collerY(e));
 			pisteVirageHaut.setMurBas((int) collerY(e) + tailleDuCarre);
 			pisteVirageHaut.setMurDroite((int) collerX(e) + tailleDuCarre);
@@ -349,18 +327,16 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteVirageGaucheDrag(MouseEvent e) {
 		if (listePisteVirageGauche.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEGAUCHE) {
-			xPisteVirageGauche += e.getX() - xPrecedent;
-			yPisteVirageGauche += e.getY() - yPrecedent;
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageGauche.setX(collerX(e));
 			pisteVirageGauche.setY(collerY(e));
-			pisteVirageGauche.getFormeAire().setRect(xPisteVirageGauche, yPisteVirageGauche,
+			pisteVirageGauche.getFormeAire().setRect(pisteVirageGauche.getX(), pisteVirageGauche.getY(),
 					pisteVirageGauche.getTaillePiste(), pisteVirageGauche.getTaillePiste());
 			pisteVirageGauche.setMurHaut((int) collerY(e));
 			pisteVirageGauche.setMurBas((int) collerY(e) + tailleDuCarre);
@@ -375,18 +351,16 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteVirageBasDrag(MouseEvent e) {
 		if (listePisteVirageBas.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEVIRAGEBAS) {
-			xPisteVirageBas += e.getX() - xPrecedent;
-			yPisteVirageBas += e.getY() - yPrecedent;
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageBas.setX(collerX(e));
 			pisteVirageBas.setY(collerY(e));
-			pisteVirageBas.getFormeAire().setRect(xPisteVirageBas, yPisteVirageBas, pisteVirageBas.getTaillePiste(),
-					pisteVirageBas.getTaillePiste());
+			pisteVirageBas.getFormeAire().setRect(pisteVirageBas.getX(), pisteVirageBas.getY(),
+					pisteVirageBas.getTaillePiste(), pisteVirageBas.getTaillePiste());
 			pisteVirageBas.setMurHaut((int) collerY(e));
 			pisteVirageBas.setMurBas((int) collerY(e) + tailleDuCarre);
 			pisteVirageBas.setMurDroite((int) collerX(e) + tailleDuCarre);
@@ -400,20 +374,19 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteHorizontaleDrag(MouseEvent e) {
 		if (listePisteHorizontale.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEHORIZONTALE) {
-			xPisteHorizontale += e.getX() - xPrecedent;
-			yPisteHorizontale += e.getY() - yPrecedent;
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 
 			pisteHorizontale.setX(collerX(e));
 			pisteHorizontale.setY(collerY(e));
-			pisteHorizontale.getFormeAire().setRect(xPisteHorizontale, yPisteHorizontale,
+			pisteHorizontale.getFormeAire().setRect(pisteHorizontale.getX(), pisteHorizontale.getY(),
 					pisteHorizontale.getTaillePiste(), pisteHorizontale.getTaillePiste());
+
 			pisteHorizontale.setMurHaut((int) collerY(e));
 			pisteHorizontale.setMurBas((int) collerY(e) + tailleDuCarre);
 			pisteHorizontale.setMurDroite((int) collerX(e) + tailleDuCarre);
@@ -427,7 +400,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteVirageHautPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageHaut.size(); a++) {
@@ -435,8 +408,7 @@ public class PanelRegroupement extends JPanel {
 
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
-					xPisteVirageHaut = listePisteVirageHaut.get(a).getFormeAire().getX();
-					yPisteVirageHaut = listePisteVirageHaut.get(a).getFormeAire().getY();
+
 					pisteVirageHaut = listePisteVirageHaut.get(a);
 
 					objetSelectionne = true;
@@ -457,7 +429,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteVirageDroitPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageDroit.size(); a++) {
@@ -465,8 +437,7 @@ public class PanelRegroupement extends JPanel {
 
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
-					xPisteVirageDroit = listePisteVirageDroit.get(a).getFormeAire().getX();
-					yPisteVirageDroit = listePisteVirageDroit.get(a).getFormeAire().getY();
+
 					pisteVirageDroit = listePisteVirageDroit.get(a);
 
 					objetSelectionne = true;
@@ -487,7 +458,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteDeDepartPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteDeDepart.size(); a++) {
@@ -495,8 +466,7 @@ public class PanelRegroupement extends JPanel {
 
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
-					xPisteDeDepart = listePisteDeDepart.get(a).getFormeAire().getX();
-					yPisteDeDepart = listePisteDeDepart.get(a).getFormeAire().getY();
+
 					pisteDeDepart = listePisteDeDepart.get(a);
 
 					objetSelectionne = true;
@@ -517,7 +487,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteVerticalePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVerticale.size(); a++) {
@@ -525,8 +495,7 @@ public class PanelRegroupement extends JPanel {
 
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
-					xPisteVerticale = listePisteVerticale.get(a).getFormeAire().getX();
-					yPisteVerticale = listePisteVerticale.get(a).getFormeAire().getY();
+
 					pisteVerticale = listePisteVerticale.get(a);
 
 					objetSelectionne = true;
@@ -547,7 +516,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteVirageGauchePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageGauche.size(); a++) {
@@ -555,8 +524,7 @@ public class PanelRegroupement extends JPanel {
 
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
-					xPisteVirageGauche = listePisteVirageGauche.get(a).getFormeAire().getX();
-					yPisteVirageGauche = listePisteVirageGauche.get(a).getFormeAire().getY();
+
 					pisteVirageGauche = listePisteVirageGauche.get(a);
 
 					objetSelectionne = true;
@@ -577,7 +545,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteVirageBasPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageBas.size(); a++) {
@@ -585,8 +553,7 @@ public class PanelRegroupement extends JPanel {
 
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
-					xPisteVirageBas = listePisteVirageBas.get(a).getFormeAire().getX();
-					yPisteVirageBas = listePisteVirageBas.get(a).getFormeAire().getY();
+
 					pisteVirageBas = listePisteVirageBas.get(a);
 
 					objetSelectionne = true;
@@ -607,7 +574,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void pisteHorizontalePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteHorizontale.size(); a++) {
@@ -615,8 +582,7 @@ public class PanelRegroupement extends JPanel {
 
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
-					xPisteHorizontale = listePisteHorizontale.get(a).getFormeAire().getX();
-					yPisteHorizontale = listePisteHorizontale.get(a).getFormeAire().getY();
+
 					pisteHorizontale = listePisteHorizontale.get(a);
 
 					objetSelectionne = true;
@@ -637,7 +603,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void accelerateurPressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listeAccelerateur.size(); a++) {
@@ -645,8 +611,7 @@ public class PanelRegroupement extends JPanel {
 
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
-					xAccelerateur = listeAccelerateur.get(a).getFormeAire().getX();
-					yAccelerateur = listeAccelerateur.get(a).getFormeAire().getY();
+
 					acc = listeAccelerateur.get(a);
 
 					objetSelectionne = true;
@@ -666,7 +631,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void blocMysterePressed(MouseEvent e) {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listeBlocMystere.size(); a++) {
@@ -695,19 +660,16 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void accelerateurDrag(MouseEvent e) {
 		if (listeAccelerateur.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.ACCELERATEUR) {
-
-			xAccelerateur += e.getX() - xPrecedent;
-			yAccelerateur += e.getY() - yPrecedent;
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 
 			acc.setX(collerX(e));
 			acc.setY(collerY(e));
-			acc.getFormeAire().setRect(xAccelerateur, yAccelerateur, acc.getTaillePiste(), acc.getTaillePiste());
+			acc.getFormeAire().setRect(acc.getX(), acc.getY(), acc.getTaillePiste(), acc.getTaillePiste());
 
 		}
 	}
@@ -718,7 +680,7 @@ public class PanelRegroupement extends JPanel {
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Tan Tommy Rin
+	// Tan Tommy Rin
 	private void blocMystereDrag(MouseEvent e) {
 		if (listeBlocMystere.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.BLOCMYSTERE) {
 
@@ -728,7 +690,7 @@ public class PanelRegroupement extends JPanel {
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			blocMystere.setPosition(new Vecteur2D(xBlocMystere, yBlocMystere));
-			blocMystere.setCarre(new Rectangle2D.Double(xBlocMystere, yBlocMystere, 87, 87));
+			blocMystere.setCarre(new Rectangle2D.Double(xBlocMystere, yBlocMystere, 80, 80));
 
 		}
 	}
@@ -807,22 +769,6 @@ public class PanelRegroupement extends JPanel {
 		this.yPrecedent = yPrecedent;
 	}
 
-	public double getxAccelerateur() {
-		return xAccelerateur;
-	}
-
-	public void setxAccelerateur(double xAccelerateur) {
-		this.xAccelerateur = xAccelerateur;
-	}
-
-	public double getyAccelerateur() {
-		return yAccelerateur;
-	}
-
-	public void setyAccelerateur(double yAccelerateur) {
-		this.yAccelerateur = yAccelerateur;
-	}
-
 	public double getxBlocMystere() {
 		return xBlocMystere;
 	}
@@ -837,118 +783,6 @@ public class PanelRegroupement extends JPanel {
 
 	public void setyBlocMystere(double yBlocMystere) {
 		this.yBlocMystere = yBlocMystere;
-	}
-
-	public double getxPisteHorizontale() {
-		return xPisteHorizontale;
-	}
-
-	public void setxPisteHorizontale(double xPisteHorizontale) {
-		this.xPisteHorizontale = xPisteHorizontale;
-	}
-
-	public double getyPisteHorizontale() {
-		return yPisteHorizontale;
-	}
-
-	public void setyPisteHorizontale(double yPisteHorizontale) {
-		this.yPisteHorizontale = yPisteHorizontale;
-	}
-
-	public double getxPisteVirageBas() {
-		return xPisteVirageBas;
-	}
-
-	public void setxPisteVirageBas(double xPisteVirageBas) {
-		this.xPisteVirageBas = xPisteVirageBas;
-	}
-
-	public double getyPisteVirageBas() {
-		return yPisteVirageBas;
-	}
-
-	public void setyPisteVirageBas(double yPisteVirageBas) {
-		this.yPisteVirageBas = yPisteVirageBas;
-	}
-
-	public double getxPisteVirageGauche() {
-		return xPisteVirageGauche;
-	}
-
-	public void setxPisteVirageGauche(double xPisteVirageGauche) {
-		this.xPisteVirageGauche = xPisteVirageGauche;
-	}
-
-	public double getyPisteVirageGauche() {
-		return yPisteVirageGauche;
-	}
-
-	public void setyPisteVirageGauche(double yPisteVirageGauche) {
-		this.yPisteVirageGauche = yPisteVirageGauche;
-	}
-
-	public double getxPisteVerticale() {
-		return xPisteVerticale;
-	}
-
-	public void setxPisteVerticale(double xPisteVerticale) {
-		this.xPisteVerticale = xPisteVerticale;
-	}
-
-	public double getyPisteVerticale() {
-		return yPisteVerticale;
-	}
-
-	public void setyPisteVerticale(double yPisteVerticale) {
-		this.yPisteVerticale = yPisteVerticale;
-	}
-
-	public double getxPisteDeDepart() {
-		return xPisteDeDepart;
-	}
-
-	public void setxPisteDeDepart(double xPisteDeDepart) {
-		this.xPisteDeDepart = xPisteDeDepart;
-	}
-
-	public double getyPisteDeDepart() {
-		return yPisteDeDepart;
-	}
-
-	public void setyPisteDeDepart(double yPisteDeDepart) {
-		this.yPisteDeDepart = yPisteDeDepart;
-	}
-
-	public double getxPisteVirageDroit() {
-		return xPisteVirageDroit;
-	}
-
-	public void setxPisteVirageDroit(double xPisteVirageDroit) {
-		this.xPisteVirageDroit = xPisteVirageDroit;
-	}
-
-	public double getyPisteVirageDroit() {
-		return yPisteVirageDroit;
-	}
-
-	public void setyPisteVirageDroit(double yPisteVirageDroit) {
-		this.yPisteVirageDroit = yPisteVirageDroit;
-	}
-
-	public double getxPisteVirageHaut() {
-		return xPisteVirageHaut;
-	}
-
-	public void setxPisteVirageHaut(double xPisteVirageHaut) {
-		this.xPisteVirageHaut = xPisteVirageHaut;
-	}
-
-	public double getyPisteVirageHaut() {
-		return yPisteVirageHaut;
-	}
-
-	public void setyPisteVirageHaut(double yPisteVirageHaut) {
-		this.yPisteVirageHaut = yPisteVirageHaut;
 	}
 
 	public ArrayList<Accelerateur> getListeAccelerateur() {
