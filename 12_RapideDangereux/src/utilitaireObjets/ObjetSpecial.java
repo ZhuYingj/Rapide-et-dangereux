@@ -110,6 +110,8 @@ public class ObjetSpecial implements Dessinable {
 			}
 		}
 
+		
+
 	}
 
 	/**

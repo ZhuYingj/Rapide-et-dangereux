@@ -354,7 +354,8 @@ public class FenetreEditeur extends JPanel {
 					pcs.firePropertyChange("JOUEREDITEUR", null, -1);
 					pcs.firePropertyChange("REGROUPEMENT", null, (String) comboBoxPiste.getSelectedItem());
 				} else {
-					JOptionPane.showMessageDialog(null, "COMPLETEZ LA PISTE OU ENLEVEZ LE MORCEAU VIDE POUR JOUEZ");
+					JOptionPane.showMessageDialog(null,
+							"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU VIDE POUR JOUEZ");
 				}
 
 			}

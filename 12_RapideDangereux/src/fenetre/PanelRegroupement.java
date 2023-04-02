@@ -264,6 +264,9 @@ public class PanelRegroupement extends JPanel {
 			pisteDeDepart.getVoiture()
 					.setPosition(new Vecteur2D(pisteDeDepart.getX() + pisteDeDepart.getTaillePiste() / 4,
 							pisteDeDepart.getY() + pisteDeDepart.getTaillePiste() / 4));
+			pisteDeDepart.getVoiture2()
+					.setPosition(new Vecteur2D(pisteDeDepart.getX() + pisteDeDepart.getTaillePiste() / 4,
+							pisteDeDepart.getY() + pisteDeDepart.getTaillePiste() * 3 / 4));
 			pisteDeDepart.getFormeAire().setRect(pisteDeDepart.getX(), pisteDeDepart.getY(),
 					pisteDeDepart.getTaillePiste(), pisteDeDepart.getTaillePiste());
 			pisteDeDepart.setMurHaut((int) collerY(e));

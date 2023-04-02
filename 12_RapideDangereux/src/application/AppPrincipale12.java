@@ -38,7 +38,7 @@ import interfaces.TypePiste;
  */
 
 public class AppPrincipale12 extends JFrame {
-	/** CheckBox **/
+
 	private JCheckBoxMenuItem checkBoxModeNonScientifique;
 	private JPanel contentPane;
 
