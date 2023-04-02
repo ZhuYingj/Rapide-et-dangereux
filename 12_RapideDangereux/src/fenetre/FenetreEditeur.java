@@ -457,6 +457,7 @@ public class FenetreEditeur extends JPanel {
 			if (panelRegroupement.getListePisteVirageBas().size() != 0) {
 				for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
 					if (panelRegroupement.getListePisteVirageBas().get(a).getNombrePisteColle() == 2) {
+
 						nombrePisteFerme++;
 					}
 
@@ -546,6 +547,7 @@ public class FenetreEditeur extends JPanel {
 			if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
 				for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
 					if (panelRegroupement.getListePisteVirageHaut().get(a).getNombrePisteColle() == 2) {
+
 						nombrePisteFerme++;
 					}
 
@@ -632,6 +634,7 @@ public class FenetreEditeur extends JPanel {
 			if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
 				for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
 					if (panelRegroupement.getListePisteVirageDroit().get(a).getNombrePisteColle() == 2) {
+
 						nombrePisteFerme++;
 					}
 
@@ -658,7 +661,7 @@ public class FenetreEditeur extends JPanel {
 				Rectangle2D.Double formeAireBas = new Rectangle2D.Double(piste.getX(),
 						piste.getY() + piste.getTaillePiste(), piste.getTaillePiste(), piste.getTaillePiste());
 				Rectangle2D.Double formeAireHaut = new Rectangle2D.Double(piste.getX(),
-						piste.getY() + piste.getTaillePiste(), piste.getTaillePiste(), piste.getTaillePiste());
+						piste.getY() - piste.getTaillePiste(), piste.getTaillePiste(), piste.getTaillePiste());
 
 				if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
 					for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
@@ -816,6 +819,7 @@ public class FenetreEditeur extends JPanel {
 			if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
 				for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
 					if (panelRegroupement.getListePisteVirageGauche().get(a).getNombrePisteColle() == 2) {
+
 						nombrePisteFerme++;
 					}
 
@@ -913,6 +917,7 @@ public class FenetreEditeur extends JPanel {
 			if (panelRegroupement.getListePisteHorizontale().size() != 0) {
 				for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
 					if (panelRegroupement.getListePisteHorizontale().get(a).getNombrePisteColle() == 2) {
+
 						nombrePisteFerme++;
 					}
 
@@ -940,7 +945,7 @@ public class FenetreEditeur extends JPanel {
 		Rectangle2D.Double formeAireDroit = new Rectangle2D.Double(piste.getX() + piste.getTaillePiste(), piste.getY(),
 				piste.getTaillePiste(), piste.getTaillePiste());
 
-		if (panelRegroupement.getListePisteDeDepart().size() != 0) {
+		if (panelRegroupement.getListePisteHorizontale().size() != 0) {
 
 			for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
 				PisteHorizontale pisteHorizontale = panelRegroupement.getListePisteHorizontale().get(a);
@@ -992,6 +997,7 @@ public class FenetreEditeur extends JPanel {
 		if (panelRegroupement.getListePisteDeDepart().size() != 0) {
 
 			if (compteurPisteCoteDePisteDepart == 2) {
+
 				nombrePisteFerme++;
 
 			}
@@ -1024,7 +1030,7 @@ public class FenetreEditeur extends JPanel {
 
 			pisteFerme = false;
 		}
-
+		System.out.println(nombrePisteFerme);
 		nombrePisteFerme = 0;
 	}
 
