@@ -61,6 +61,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	/** Aire du morceau de piste **/
 	private Rectangle2D.Double formeAire;
 	private boolean enContactAvecColle = false;
+	private int nombrePisteColle = 0;
 
 	/**
 	 * Methode qui permet de construire la piste virage bas a l'aide de parametres
@@ -120,6 +121,13 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 		return taillePiste;
 	}
 
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
+	}
 
 	/**
 	 * Méthode qui permet de détecter s'il y a une collision de la voiture avec le

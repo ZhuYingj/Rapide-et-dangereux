@@ -63,7 +63,8 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	private Color color = Color.black;
 	/** Aire du morceau de piste **/
 	private Rectangle2D.Double formeAire;
-
+	private int nombrePisteColle = 0;
+	
 	private boolean enContactAvecColle = false;
 
 	/**
@@ -283,6 +284,13 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 */
 	public Area getAireTriangle() {
 		return aireTriangle;
+	}
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
 	}
 
 	/**

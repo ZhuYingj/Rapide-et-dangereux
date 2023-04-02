@@ -64,6 +64,7 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 	private Rectangle2D.Double formeAire;
 
 	private boolean enContactAvecColle = false;
+	private int nombrePisteColle = 0;
 
 	/**
 	 * Methode qui permet de construire la piste virage droit a l'aide de parametres
@@ -124,6 +125,14 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 
 	public void setX(int x) {
 		this.x = x;
+	}
+
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
 	}
 
 	public int getY() {

@@ -64,8 +64,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	/** Aire du morceau de piste **/
 	private Rectangle2D.Double formeAire;
 	private boolean enContactAvecColle = false;
-
-
+	private int nombrePisteColle = 0;
 
 	/**
 	 * Methode qui permet de construire la piste virage gauche a l'aide de
@@ -127,6 +126,14 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 
 	public int getTaillePiste() {
 		return taillePiste;
+	}
+
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
 	}
 
 	public void setTaillePiste(int taillePiste) {
@@ -223,7 +230,6 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 		}
 
 	}
-
 
 	/**
 	 * Méthode qui permet de détecter s'il y a une collision de la voiture avec le
@@ -331,6 +337,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 		}
 
 	}
+
 	public boolean isEnContactAvecColle() {
 		return enContactAvecColle;
 	}
