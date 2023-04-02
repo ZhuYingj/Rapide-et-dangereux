@@ -51,16 +51,17 @@ public class Regroupement implements Dessinable, Serializable {
 	/** Type de piste **/
 	private TypePiste type;
 	/** Nombre de tour initial **/
-
 	private int tour = 0;
-
+	/** Notre premier objet special **/
 	private ObjetSpecial objSpecial;
-
+	/** Notre deuxieme objet special **/
 	private ObjetSpecial objSpecial2;
 
 	private double tours = 0;
 
+	/** Le temps temporaire pour l'effet de l'objet **/
 	private double tempsTemp;
+	/** Le temps temporaire pour l'effet de l'objet **/
 	private double tempsTemp2;
 
 	private boolean boutonAppuye = false;
@@ -89,19 +90,30 @@ public class Regroupement implements Dessinable, Serializable {
 	private boolean enContactAvecColle2 = false;
 
 	private boolean toucheWActive = false;
-
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteHorizontale = 0;
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteVerticale = 0;
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteVirageBas = 0;
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteVirageGauche = 0;
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteVirageHaut = 0;
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteVirageDroit = 0;
 
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteHorizontale2 = 0;
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteVerticale2 = 0;
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteVirageBas2 = 0;
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteVirageGauche2 = 0;
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteVirageHaut2 = 0;
+	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteVirageDroit2 = 0;
 
 	/**
@@ -149,7 +161,6 @@ public class Regroupement implements Dessinable, Serializable {
 				collePisteVirageDroit = false;
 				collePisteVirageHaut = false;
 				collePisteVirageGauche = false;
-
 				collePisteDepart = false;
 
 				break;
@@ -162,6 +173,7 @@ public class Regroupement implements Dessinable, Serializable {
 
 				tempsTemp2 = tempsTotalEcoule;
 				regroupementBoiteMystere.remove(a).getObjetSpecial();
+
 				enContactAvecColle2 = false;
 				collePisteHorizontale2 = false;
 				collePisteVerticale2 = false;
@@ -791,17 +803,13 @@ public class Regroupement implements Dessinable, Serializable {
 		tourComplet(voiture);
 	}
 
-	public void placerColleDansMorceau() {
-
-	}
-
 	/**
 	 * Méthode qui permet de savoir si le morceau de piste est en collision avec la
 	 * boule de neige
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Par Tan Tommy Rin
+//Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteDeDepart(int i) {
 		if (objSpecial != null) {
 			if (listePisteDeDepart.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
@@ -825,7 +833,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Par Tan Tommy Rin
+//Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteHorizontale(int i) {
 		if (objSpecial != null) {
 			if (listePisteHorizontale.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
@@ -850,7 +858,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Par Tan Tommy Rin
+//Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVerticale(int i) {
 		if (objSpecial != null) {
 			if (listePisteVerticale.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
@@ -874,7 +882,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Par Tan Tommy Rin
+//Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageBas(int i) {
 
 		if (objSpecial != null) {
@@ -903,7 +911,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Par Tan Tommy Rin
+//Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageDroit(int i) {
 
 		if (objSpecial != null) {
@@ -933,7 +941,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Par Tan Tommy Rin
+//Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageGauche(int i) {
 
 		if (objSpecial != null) {
@@ -963,7 +971,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Par Tan Tommy Rin
+//Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageHaut(int i) {
 		if (objSpecial != null) {
 			if (listePisteVirageHaut.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {

@@ -239,6 +239,10 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 		}
 	}
 
+	public void pisteHorizontaleAttache() {
+
+	}
+
 	public boolean isCollision() {
 		return collision;
 	}

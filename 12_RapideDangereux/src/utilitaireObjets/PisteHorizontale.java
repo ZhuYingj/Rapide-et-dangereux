@@ -49,16 +49,10 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	private Color color = Color.black;
 	private boolean collision = false;
 	private Rectangle2D.Double formeAire;
+	private int nombrePisteColle = 0;
+
 
 	private boolean enContactAvecColle = true;
-
-	public boolean isEnContactAvecColle() {
-		return enContactAvecColle;
-	}
-
-	public void setEnContactAvecColle(boolean enContactAvecColle) {
-		this.enContactAvecColle = enContactAvecColle;
-	}
 
 	/**
 	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
@@ -223,6 +217,14 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 		return collision;
 	}
 
+	public boolean isEnContactAvecColle() {
+		return enContactAvecColle;
+	}
+
+	public void setEnContactAvecColle(boolean enContactAvecColle) {
+		this.enContactAvecColle = enContactAvecColle;
+	}
+
 	public void setCollision(boolean collision) {
 		this.collision = collision;
 	}
@@ -306,4 +308,11 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 		this.murBas = murBas;
 	}
 
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
+	}
 }

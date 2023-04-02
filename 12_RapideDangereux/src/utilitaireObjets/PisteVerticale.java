@@ -49,6 +49,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	private Color color = Color.black;
 	private Rectangle2D.Double formeAire;
 	private boolean enContactAvecColle = false;
+	private int nombrePisteColle = 0;
 
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -300,4 +301,11 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 		this.enContactAvecColle = enContactAvecColle;
 	}
 
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
+	}
 }
