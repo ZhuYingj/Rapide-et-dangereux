@@ -319,6 +319,8 @@ public class FenetreEditeur extends JPanel {
 		btnSauvegarde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sauvegardeUnePiste();
+				JOptionPane.showMessageDialog(null,
+						"PISTE SAUVEGARDER SUR LE BUREAU\nNOM :" + gestionFich.getNomFichBinRegroupement());
 			}
 		});
 
@@ -330,6 +332,7 @@ public class FenetreEditeur extends JPanel {
 		btnChargerPisteSauvegarde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				chargementUnePiste();
+				JOptionPane.showMessageDialog(null, "PISTE CHARGÉ AVEC SUCCÈS !");
 
 			}
 		});
@@ -350,6 +353,8 @@ public class FenetreEditeur extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				verifierSiPisteFerme();
 				if (pisteFerme == true) {
+					sauvegardeUnePiste();
+					chargementUnePiste();
 					pcs.firePropertyChange("JOUEREDITEUR", null, -1);
 					pcs.firePropertyChange("REGROUPEMENT", null, (String) comboBoxPiste.getSelectedItem());
 				} else {
@@ -1100,10 +1105,8 @@ public class FenetreEditeur extends JPanel {
 		gestionFich.ecrireFichierBinBureauRegroupement(regroupement);
 
 		comboBoxPiste.addItem(gestionFich.getNomFichBinRegroupement());
-
+		comboBoxPiste.setSelectedIndex(comboBoxPiste.getItemCount() - 1);
 		btnJouer.setEnabled(true);
-		JOptionPane.showMessageDialog(null,
-				"PISTE SAUVEGARDER SUR LE BUREAU\nNOM :" + gestionFich.getNomFichBinRegroupement());
 
 	}
 
@@ -1187,7 +1190,6 @@ public class FenetreEditeur extends JPanel {
 		resetValeur();
 		repaint();
 
-		JOptionPane.showMessageDialog(null, "PISTE CHARGÉ AVEC SUCCÈS !");
 	}
 
 	public JComboBox getComboBoxPiste() {
