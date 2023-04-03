@@ -362,13 +362,135 @@ public class Regroupement implements Dessinable, Serializable {
 	// Tan Tommy Rin
 	public void creeBoiteDansListe() {
 		regroupementBoiteMystere = new ArrayList<BlocMystere>();
+		// Variable pour ne pas placer une boite mystere au meme exact endroit
+		int petiteDeviation = 0;
 		for (int a = 0; a < nombreBoiteMystere; a++) {
-			double diametreBoite = 15;
-			regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
-					new Vecteur2D(
-							listePisteHorizontale.get(a).getX() + +listePisteHorizontale.get(a).getTaillePiste() / 2,
-							listePisteHorizontale.get(a).getY() + listePisteHorizontale.get(a).getTaillePiste() / 2)));
 
+			double nombreRandom = Math.random();
+			double diametreBoite = 15;
+			// 10 % que ce soit dans la piste de départ
+			if (nombreRandom < 0.1) {
+
+				regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+						new Vecteur2D(
+								listePisteDeDepart.get(0).getX() + petiteDeviation
+										+ listePisteDeDepart.get(0).getTaillePiste() / 2,
+								listePisteDeDepart.get(0).getY() + petiteDeviation
+										+ listePisteDeDepart.get(0).getTaillePiste() / 2)));
+
+			}
+			// 20 % que ce soit dans une des pistes horizontales
+			else if (nombreRandom < 0.30) {
+
+				if (listePisteHorizontale.size() != 0) {
+					int nombreRandomPiste = ((int) (Math.random() * (listePisteHorizontale.size())));
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(
+									listePisteHorizontale.get(nombreRandomPiste).getX() + petiteDeviation
+											+ listePisteHorizontale.get(nombreRandomPiste).getTaillePiste() / 2,
+									listePisteHorizontale.get(nombreRandomPiste).getY() + petiteDeviation
+											+ listePisteHorizontale.get(nombreRandomPiste).getTaillePiste() / 2)));
+
+				} else {
+
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+				}
+
+			}
+			// 15 % que ce soit dans une des pistes verticales
+			else if (nombreRandom < 0.45) {
+
+				if (listePisteVerticale.size() != 0) {
+					int nombreRandomPiste = ((int) (Math.random() * (listePisteVerticale.size())));
+
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(
+									listePisteVerticale.get(nombreRandomPiste).getX() + petiteDeviation
+											+ listePisteVerticale.get(nombreRandomPiste).getTaillePiste() / 2,
+									listePisteVerticale.get(nombreRandomPiste).getY() + petiteDeviation
+											+ listePisteVerticale.get(nombreRandomPiste).getTaillePiste() / 2)));
+				} else {
+					System.out.println("ici");
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+				}
+
+			}
+			// 15 % que ce soit dans une des pistes de virage droit
+			else if (nombreRandom < 0.60) {
+
+				if (listePisteVirageDroit.size() != 0) {
+					int nombreRandomPiste = ((int) (Math.random() * (listePisteVirageDroit.size())));
+
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(
+									listePisteVirageDroit.get(nombreRandomPiste).getX() + petiteDeviation
+											+ listePisteVirageDroit.get(nombreRandomPiste).getTaillePiste() / 2,
+									listePisteVirageDroit.get(nombreRandomPiste).getY() + petiteDeviation
+											+ listePisteVirageDroit.get(nombreRandomPiste).getTaillePiste() / 2)));
+				} else {
+
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+				}
+
+			}
+			// 15 % que ce soit dans une piste de virage gauche
+			else if (nombreRandom < 0.75) {
+
+				if (listePisteVirageGauche.size() != 0) {
+					int nombreRandomPiste = ((int) (Math.random() * (listePisteVirageGauche.size())));
+
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(
+									listePisteVirageGauche.get(nombreRandomPiste).getX() + petiteDeviation
+											+ listePisteVirageGauche.get(nombreRandomPiste).getTaillePiste() / 2,
+									listePisteVirageGauche.get(nombreRandomPiste).getY() + petiteDeviation
+											+ listePisteVirageGauche.get(nombreRandomPiste).getTaillePiste() / 2)));
+				} else {
+					System.out.println("ici");
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+				}
+			}
+			// 15 % que ce soit dans une piste de virage bas
+			else if (nombreRandom < 0.9) {
+
+				if (listePisteVirageBas.size() != 0) {
+					int nombreRandomPiste = ((int) (Math.random() * (listePisteVirageBas.size())));
+
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(
+									listePisteVirageBas.get(nombreRandomPiste).getX() + petiteDeviation
+											+ listePisteVirageBas.get(nombreRandomPiste).getTaillePiste() / 2,
+									listePisteVirageBas.get(nombreRandomPiste).getY() + petiteDeviation
+											+ listePisteVirageBas.get(nombreRandomPiste).getTaillePiste() / 2)));
+				} else {
+
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+				}
+			}
+			// 10 % que ce soit dans une piste de virage haut
+			else {
+
+				if (listePisteVirageHaut.size() != 0) {
+					int nombreRandomPiste = ((int) (Math.random() * (listePisteVirageHaut.size())));
+
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(
+									listePisteVirageHaut.get(nombreRandomPiste).getX() + petiteDeviation
+											+ listePisteVirageHaut.get(nombreRandomPiste).getTaillePiste() / 2,
+									listePisteVirageHaut.get(nombreRandomPiste).getY() + petiteDeviation
+											+ listePisteVirageHaut.get(nombreRandomPiste).getTaillePiste() / 2)));
+				} else {
+
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+				}
+			}
+			petiteDeviation = petiteDeviation + 2;
 		}
 
 	}
@@ -450,7 +572,7 @@ public class Regroupement implements Dessinable, Serializable {
 
 		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
 			listePisteVirageDroit.get(i).collisionColle(voiture);
-			if (objSpecial2 != null && objSpecial.getType() == TypeObjetSpecial.COLLE && enContactAvecColle2 == false
+			if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE && enContactAvecColle2 == false
 					&& listePisteVirageDroit.get(i).isEnContactAvecColle() == true) {
 				pisteCouranteVirageDroit2 = i;
 				collePisteVirageDroit2 = true;

@@ -31,7 +31,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 	private int nombrePiste = 1;
 
 // fichiers binaires (objets)
-	private String nomFichBinRegroupement = "regroupement" + nombrePiste + ".dat";
+	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String nomFichBinComboBox = "comboBox.dat";
 
@@ -45,7 +45,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 //Tan Tommy Rin
 
 	public void ecrireFichierBinBureauRegroupement(Regroupement regroupement) {
-		nomFichBinRegroupement = "regroupement" + nombrePiste + ".dat";
+		nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 // chemin d'acces au dossier
 		File dossier = new File(System.getProperty("user.home"), "Desktop" + "\\" + sousDossierSurBureau);
