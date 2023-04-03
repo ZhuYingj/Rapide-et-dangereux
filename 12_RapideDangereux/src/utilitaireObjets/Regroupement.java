@@ -48,6 +48,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private double pixelsParMetre = 1;
 	/** Le nombre de boite mystere **/
 	private int nombreBoiteMystere = 1;
+
 	/** Type de piste **/
 	private TypePiste type;
 	/** Nombre de tour initial **/
@@ -367,6 +368,7 @@ public class Regroupement implements Dessinable, Serializable {
 	// Tan Tommy Rin
 	public void creeBoiteDansListe() {
 		regroupementBoiteMystere = new ArrayList<BlocMystere>();
+		System.out.println(nombreBoiteMystere);
 		// Variable pour ne pas placer une boite mystere au meme exact endroit
 		int petiteDeviation = 0;
 		for (int a = 0; a < nombreBoiteMystere; a++) {
@@ -1380,5 +1382,13 @@ public class Regroupement implements Dessinable, Serializable {
 
 	public void setToucheWActive(boolean toucheWActive) {
 		this.toucheWActive = toucheWActive;
+	}
+
+	public int getNombreBoiteMystere() {
+		return nombreBoiteMystere;
+	}
+
+	public void setNombreBoiteMystere(int nombreBoiteMystere) {
+		this.nombreBoiteMystere = nombreBoiteMystere;
 	}
 }

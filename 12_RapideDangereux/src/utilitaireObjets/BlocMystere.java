@@ -70,7 +70,8 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	 */
 
 	public boolean enCollisionAvecVoiture(Voiture voiture) {
-
+		AffineTransform mat = new AffineTransform();
+		shapeCarre = mat.createTransformedShape(carre);
 		Area aireCopieVoiture = new Area(voiture.getCercle());
 		Area shapeCarreCopie = new Area(shapeCarre);
 

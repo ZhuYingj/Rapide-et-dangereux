@@ -122,7 +122,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		voiture2 = new Voiture(posInit2, Color.white, 50, 16, angleVoitureRad2, 60);
 
-		regroupement = new Regroupement(voiture, 20, typePiste);
+		regroupement = new Regroupement(voiture, 10, typePiste);
 
 		addKeyListener(new KeyAdapter() {
 
@@ -911,7 +911,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					regroupement.getListePisteDeDepart().get(0).getY()));
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
+			regroupement.setNombreBoiteMystere(regroupementTempo.getRegroupementBoiteMystere().size());
 			regroupement.setRegroupementObjet(regroupementTempo.getRegroupementBoiteMystere());
+
 		}
 
 	}
