@@ -2,11 +2,11 @@ package physique;
 
 import geometrie.Vecteur2D;
 
-
 /**
- * Cette classe regroupe les calculs physiques necessaires au mouvement des objets
- * des divers objets dans la scene.
- * Utilise la methode d'integration numerique d'Euler semi-implicite. 
+ * Cette classe regroupe les calculs physiques necessaires au mouvement des
+ * objets des divers objets dans la scene. Utilise la methode d'integration
+ * numerique d'Euler semi-implicite.
+ * 
  * @author Kevin Nguyen
  */
 public class MoteurPhysique {
@@ -98,6 +98,7 @@ public class MoteurPhysique {
 
 	/**
 	 * Calcule et retourne la vitesse de la voiture apres une collision
+	 * 
 	 * @param vitesse Vitesse initiale de l'objet
 	 * @return La vitesse après collision
 	 */
@@ -108,27 +109,55 @@ public class MoteurPhysique {
 	}
 
 	/**
-	 * Calcule et retourne la vitesse de la voiture après une collision sur un virage
+	 * Calcule et retourne la vitesse de la voiture après une collision sur un
+	 * virage
+	 * 
 	 * @param vitesse Vitesse initiale de l' objet
-	 * @param angle Angle de la normale
+	 * @param angle   Angle de la normale
 	 * @return Vitesse finale de la collision
 	 * @throws Exception
 	 */
 	public static Vecteur2D calculerVitesseCollisionAngle(Vecteur2D vitesse, double angle) throws Exception {
 
-		Vecteur2D normal = new Vecteur2D(Math.cos(Math.toRadians(angle)*1),Math.sin(Math.toRadians(angle)*1));
-
+		Vecteur2D normal = new Vecteur2D(Math.cos(Math.toRadians(angle) * 1), Math.sin(Math.toRadians(angle) * 1));
 
 		double deltaVit = Vecteur2D.prodScalaire(vitesse, normal);
 
-		deltaVit = deltaVit*2;
+		deltaVit = deltaVit * 2;
 
 		Vecteur2D vitFinale = Vecteur2D.multiplie(normal, deltaVit);
 
-
 		vitFinale = Vecteur2D.soustrait(vitesse, vitFinale);
-		
 
 		return new Vecteur2D(vitFinale);
+	}
+
+	/**
+	 * Calcule et retourne l'impulsion apres la collision d'une voiture en mouvement
+	 * avec unautre voiture en mouvement.
+	 * 
+	 * @param vitesseImp1 Vitesse de la premiere en mouvement au moment de l'impact.
+	 * @param vitesseImp2 Vitesse de la deuxieme en mouvement au moment de l'impact.
+	 * @param masse1      Masse de l'objet en mouvement.
+	 * @param masse2      Masse de l'objet immobile.
+	 * @return L'impulsion.
+	 */
+	public static double calculerImpulsion(double vitesseImp1, double vitesseImp2, double masse1, double masse2) {
+		return (-(1 + COEFF_RESTITUTION_E) * (vitesseImp1 - vitesseImp2)) / (1.0 / masse1 + 1.0 / masse2);
+	}
+
+	/**
+	 * Calcule et retourne la vitesse initiale transmise a un objet immobile apres
+	 * une collision avec un objet en mouvement.
+	 * 
+	 * @param vitesseImp1 Vitesse de la premiere en mouvement au moment de l'impact.
+	 * @param vitesseImp2 Vitesse de la deuxieme en mouvement au moment de l'impact.
+	 * @param masse1      Masse de l'objet en mouvement.
+	 * @param masse2      Masse de l'objet immobile.
+	 * @return La vitesse initiale transmise a l'objet immobile.
+	 */
+	public static Vecteur2D calculerVitesseSelonImpulsion(double vitesseImp1, double vitesseImp2, double masse1,
+			double masse2, double angle) {
+		return new Vecteur2D(-Math.cos(angle)* vitesseImp1 - (calculerImpulsion(vitesseImp1, vitesseImp2, masse1, masse2) / masse1),-Math.sin(angle)* vitesseImp1 - (calculerImpulsion(vitesseImp1, vitesseImp2, masse1, masse2) / masse1));
 	}
 }

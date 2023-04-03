@@ -423,6 +423,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			regroupement.enCollisionAvec(voiture);
 			regroupement.enCollisionAvec(voiture2);
+			voiture.collisionEntreVoiture(voiture, voiture2);
 
 			if (haut == false) {
 
@@ -518,6 +519,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		regroupement.enCollisionAvec(voiture);
 		regroupement.enCollisionAvec(voiture2);
+		
+		voiture.collisionEntreVoiture(voiture, voiture2);
 		repaint();
 	}
 

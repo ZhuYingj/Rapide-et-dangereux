@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -390,6 +391,27 @@ public class Voiture implements Dessinable, Serializable {
 	// Kevin Nguyen
 	public Ellipse2D getCercle() {
 		return cercle;
+	}
+
+	public void collisionEntreVoiture(Voiture voiture1, Voiture voiture2) {
+		Area aire = new Area(voiture1.getCercle());
+		Area aire2 = new Area(voiture2.getCercle());
+
+		aire.intersect(aire2);
+		aire2.intersect(aire);
+
+		if (!aire.isEmpty()) {
+			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(), voiture2.getVitesse().module(),
+					voiture1.getMasseEnKg(), voiture2.getMasseEnKg(), voiture1.angle));
+			voiture2.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture2.getVitesse().module(), voiture1.getVitesse().module(),
+					voiture2.getMasseEnKg(), voiture1.getMasseEnKg(), voiture2.angle));
+		} else if (!aire2.isEmpty()) {
+			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(), voiture2.getVitesse().module(),
+					voiture1.getMasseEnKg(), voiture2.getMasseEnKg(), voiture1.angle));
+			voiture2.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture2.getVitesse().module(), voiture1.getVitesse().module(),
+					voiture2.getMasseEnKg(), voiture1.getMasseEnKg(), voiture2.angle));
+		}
+
 	}
 
 }
