@@ -110,12 +110,12 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 
 			System.out.println("Champignon");
 		}
-		// 30 % de chance que ce soit un trou noir
+		// 30 % de chance que ce soit une boule de enige
 		else if (nombreRandom < 0.5) {
 
-			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.TROUNOIR);
+			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.BOULEDENEIGE);
+			System.out.println("Boule de neige");
 
-			System.out.println("Trou noir");
 		}
 
 		// 30 % de chance que ce soit de la colle
@@ -124,11 +124,11 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 
 			System.out.println("Colle");
 		}
-		// 20 % de chance que ce soit une boule de neige
+		// 20 % de chance que ce soit un trou noir
 		else {
-			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.BOULEDENEIGE);
+			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.TROUNOIR);
+			System.out.println("Trou noir");
 
-			System.out.println("Boule de neige");
 		}
 
 	}

@@ -122,7 +122,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		voiture2 = new Voiture(posInit2, Color.white, 50, 16, angleVoitureRad2, 60);
 
-		regroupement = new Regroupement(voiture, 12, typePiste);
+		regroupement = new Regroupement(voiture, 20, typePiste);
 
 		addKeyListener(new KeyAdapter() {
 
@@ -142,7 +142,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 		});
-		setBackground(Color.gray);
 
 	}
 
@@ -519,7 +518,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		regroupement.enCollisionAvec(voiture);
 		regroupement.enCollisionAvec(voiture2);
-		
+
 		voiture.collisionEntreVoiture(voiture, voiture2);
 		repaint();
 	}

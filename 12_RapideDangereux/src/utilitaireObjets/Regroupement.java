@@ -186,6 +186,11 @@ public class Regroupement implements Dessinable, Serializable {
 			}
 
 		} // Fin for loop
+		if (regroupementBoiteMystere.size() == 0) {
+			regroupementBoiteMystere = null;
+
+			creeBoiteDansListe();
+		}
 		fonctionDesObjetsPossibles(tempsTotalEcoule, deltaT);
 		placerColleBonMorceauPisteVoiture1(listePisteDeDepart.get(0).getVoiture());
 		placerColleBonMorceauPisteVoiture2(listePisteDeDepart.get(0).getVoiture2());
@@ -356,8 +361,8 @@ public class Regroupement implements Dessinable, Serializable {
 	}
 
 	/**
-	 * Méthode qui crée les boites mystères et les place dans une liste avec un
-	 * diametre fixe
+	 * Méthode qui crée les boites mystères à des places au hasard et les place dans
+	 * une liste avec un diametre fixe
 	 */
 	// Tan Tommy Rin
 	public void creeBoiteDansListe() {
@@ -365,7 +370,9 @@ public class Regroupement implements Dessinable, Serializable {
 		// Variable pour ne pas placer une boite mystere au meme exact endroit
 		int petiteDeviation = 0;
 		for (int a = 0; a < nombreBoiteMystere; a++) {
-
+			if (petiteDeviation > 30) {
+				petiteDeviation = 0;
+			}
 			double nombreRandom = Math.random();
 			double diametreBoite = 15;
 			// 10 % que ce soit dans la piste de départ
@@ -374,20 +381,20 @@ public class Regroupement implements Dessinable, Serializable {
 				regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 						new Vecteur2D(
 								listePisteDeDepart.get(0).getX() + petiteDeviation
-										+ listePisteDeDepart.get(0).getTaillePiste() / 2,
+										+ listePisteDeDepart.get(0).getTaillePiste() / 4,
 								listePisteDeDepart.get(0).getY() + petiteDeviation
 										+ listePisteDeDepart.get(0).getTaillePiste() / 2)));
 
 			}
 			// 20 % que ce soit dans une des pistes horizontales
-			else if (nombreRandom < 0.30) {
+			else if (nombreRandom < 0.3) {
 
 				if (listePisteHorizontale.size() != 0) {
 					int nombreRandomPiste = ((int) (Math.random() * (listePisteHorizontale.size())));
 					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 							new Vecteur2D(
 									listePisteHorizontale.get(nombreRandomPiste).getX() + petiteDeviation
-											+ listePisteHorizontale.get(nombreRandomPiste).getTaillePiste() / 2,
+											+ listePisteHorizontale.get(nombreRandomPiste).getTaillePiste() / 4,
 									listePisteHorizontale.get(nombreRandomPiste).getY() + petiteDeviation
 											+ listePisteHorizontale.get(nombreRandomPiste).getTaillePiste() / 2)));
 
@@ -407,11 +414,11 @@ public class Regroupement implements Dessinable, Serializable {
 					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 							new Vecteur2D(
 									listePisteVerticale.get(nombreRandomPiste).getX() + petiteDeviation
-											+ listePisteVerticale.get(nombreRandomPiste).getTaillePiste() / 2,
+											+ listePisteVerticale.get(nombreRandomPiste).getTaillePiste() / 4,
 									listePisteVerticale.get(nombreRandomPiste).getY() + petiteDeviation
 											+ listePisteVerticale.get(nombreRandomPiste).getTaillePiste() / 2)));
 				} else {
-					System.out.println("ici");
+
 					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
 				}
@@ -426,9 +433,9 @@ public class Regroupement implements Dessinable, Serializable {
 					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 							new Vecteur2D(
 									listePisteVirageDroit.get(nombreRandomPiste).getX() + petiteDeviation
-											+ listePisteVirageDroit.get(nombreRandomPiste).getTaillePiste() / 2,
+											+ listePisteVirageDroit.get(nombreRandomPiste).getTaillePiste() / 4,
 									listePisteVirageDroit.get(nombreRandomPiste).getY() + petiteDeviation
-											+ listePisteVirageDroit.get(nombreRandomPiste).getTaillePiste() / 2)));
+											- listePisteVirageDroit.get(nombreRandomPiste).getTaillePiste() / 2)));
 				} else {
 
 					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
@@ -445,11 +452,11 @@ public class Regroupement implements Dessinable, Serializable {
 					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 							new Vecteur2D(
 									listePisteVirageGauche.get(nombreRandomPiste).getX() + petiteDeviation
-											+ listePisteVirageGauche.get(nombreRandomPiste).getTaillePiste() / 2,
+											+ listePisteVirageGauche.get(nombreRandomPiste).getTaillePiste() / 4,
 									listePisteVirageGauche.get(nombreRandomPiste).getY() + petiteDeviation
 											+ listePisteVirageGauche.get(nombreRandomPiste).getTaillePiste() / 2)));
 				} else {
-					System.out.println("ici");
+
 					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
 				}
@@ -463,7 +470,7 @@ public class Regroupement implements Dessinable, Serializable {
 					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 							new Vecteur2D(
 									listePisteVirageBas.get(nombreRandomPiste).getX() + petiteDeviation
-											+ listePisteVirageBas.get(nombreRandomPiste).getTaillePiste() / 2,
+											+ listePisteVirageBas.get(nombreRandomPiste).getTaillePiste() / 4,
 									listePisteVirageBas.get(nombreRandomPiste).getY() + petiteDeviation
 											+ listePisteVirageBas.get(nombreRandomPiste).getTaillePiste() / 2)));
 				} else {
@@ -481,16 +488,17 @@ public class Regroupement implements Dessinable, Serializable {
 					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 							new Vecteur2D(
 									listePisteVirageHaut.get(nombreRandomPiste).getX() + petiteDeviation
-											+ listePisteVirageHaut.get(nombreRandomPiste).getTaillePiste() / 2,
+											+ listePisteVirageHaut.get(nombreRandomPiste).getTaillePiste() / 4,
 									listePisteVirageHaut.get(nombreRandomPiste).getY() + petiteDeviation
-											+ listePisteVirageHaut.get(nombreRandomPiste).getTaillePiste() / 2)));
+											- listePisteVirageHaut.get(nombreRandomPiste).getTaillePiste() / 2)));
 				} else {
 
 					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
 				}
 			}
-			petiteDeviation = petiteDeviation + 2;
+			petiteDeviation = petiteDeviation + 15;
+
 		}
 
 	}
