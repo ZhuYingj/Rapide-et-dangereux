@@ -905,7 +905,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageHaut(regroupementTempo.getListePisteVirageHaut());
 			voiture.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
 					regroupement.getListePisteDeDepart().get(0).getY()));
-
+			voiture2.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+					regroupement.getListePisteDeDepart().get(0).getY()));
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
 			regroupement.setRegroupementObjet(regroupementTempo.getRegroupementBoiteMystere());

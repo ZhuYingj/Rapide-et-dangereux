@@ -8,10 +8,6 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -20,14 +16,15 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import fenetre.FenetreOptionMontre;
 import fenetre.FenetreEditeur;
 import fenetre.FenetreJeuSansScientifique;
 import fenetre.FenetreJeuScientifique;
 import fenetre.FenetreMenu;
+import fenetre.FenetreOptionMontre;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
 import interfaces.TypePiste;
+import utilitaireObjets.Regroupement;
 
 /**
  * Application permettant d'illustrer une simulation physique
@@ -361,7 +358,6 @@ public class AppPrincipale12 extends JFrame {
 	public void actionJouerDeEditeur(PropertyChangeEvent evt, FenetreEditeur fenEditeur,
 			FenetreJeuScientifique fenScience) {
 		switch (evt.getPropertyName()) {
-
 		case "JOUEREDITEUR":
 
 			fenScience.setVisible(true);

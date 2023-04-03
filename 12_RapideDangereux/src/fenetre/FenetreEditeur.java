@@ -993,7 +993,7 @@ public class FenetreEditeur extends JPanel {
 				PisteHorizontale pisteHorizontale = panelRegroupement.getListePisteHorizontale().get(a);
 				if (formeAireGauche.contains(pisteHorizontale.getX(), pisteHorizontale.getY())
 						|| formeAireDroit.contains(pisteHorizontale.getX(), pisteHorizontale.getY())) {
-					panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(
+					panelRegroupement.getListePisteDeDepart().get(0).setNombrePisteColle(
 							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
 				}
 
@@ -1003,7 +1003,7 @@ public class FenetreEditeur extends JPanel {
 			for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
 				PisteVirageGauche pisteVirageGauche = panelRegroupement.getListePisteVirageGauche().get(a);
 				if (formeAireDroit.contains(pisteVirageGauche.getX(), pisteVirageGauche.getY())) {
-					panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(
+					panelRegroupement.getListePisteDeDepart().get(0).setNombrePisteColle(
 							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
 				}
 
@@ -1014,7 +1014,7 @@ public class FenetreEditeur extends JPanel {
 			for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
 				PisteVirageDroit pisteVirageDroit = panelRegroupement.getListePisteVirageDroit().get(a);
 				if (formeAireDroit.contains(pisteVirageDroit.getX(), pisteVirageDroit.getY())) {
-					panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(
+					panelRegroupement.getListePisteDeDepart().get(0).setNombrePisteColle(
 							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
 				}
 			}
@@ -1024,7 +1024,7 @@ public class FenetreEditeur extends JPanel {
 			for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
 				PisteVirageHaut pisteVirageHaut = panelRegroupement.getListePisteVirageHaut().get(a);
 				if (formeAireGauche.contains(pisteVirageHaut.getX(), pisteVirageHaut.getY())) {
-					panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(
+					panelRegroupement.getListePisteDeDepart().get(0).setNombrePisteColle(
 							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
 				}
 			}
@@ -1033,7 +1033,7 @@ public class FenetreEditeur extends JPanel {
 			for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
 				PisteVirageBas pisteVirageBas = panelRegroupement.getListePisteVirageBas().get(a);
 				if (formeAireGauche.contains(pisteVirageBas.getX(), pisteVirageBas.getY())) {
-					panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(
+					panelRegroupement.getListePisteDeDepart().get(0).setNombrePisteColle(
 							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
 				}
 
@@ -1184,7 +1184,7 @@ public class FenetreEditeur extends JPanel {
 		for (int a = 0; a < regroupementSauvegarde.getRegroupementBoiteMystere().size(); a++) {
 			panelRegroupement.getListeBlocMystere().add(regroupementSauvegarde.getRegroupementBoiteMystere().get(a));
 		}
-
+		resetValeur();
 		repaint();
 
 		JOptionPane.showMessageDialog(null, "PISTE CHARGÉ AVEC SUCCÈS !");
