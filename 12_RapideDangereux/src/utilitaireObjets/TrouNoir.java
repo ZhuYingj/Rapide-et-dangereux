@@ -1,5 +1,6 @@
 package utilitaireObjets;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -8,7 +9,6 @@ import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
 import geometrie.Vecteur2D;
-import interfaces.Dessinable;
 import interfaces.TypeObjetSpecial;
 
 /**
@@ -20,17 +20,34 @@ import interfaces.TypeObjetSpecial;
 public class TrouNoir {
 
 	private transient Shape shapeTrou;
+	private transient Shape shapezone;
+
+	private double masseTrouNoir;
+
+	public double getMasseTrouNoir() {
+		return masseTrouNoir;
+	}
+
+	public void setMasseTrouNoir(int masseTrouNoir) {
+		this.masseTrouNoir = masseTrouNoir;
+	}
+
+	private int c = 30;
+	private double g = 9.8;
+
 	private transient Area bouleDeNeigeAire;
 	private transient Area bouleDeNeigeAireCopie;
 	private transient Area aireVoiture;
 
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.TROUNOIR;
 
-	private double pixelsParMetre;;
+	private double pixelsParMetre;
 
 	private Ellipse2D.Double trou;
+	private Ellipse2D.Double zone;
 
 	private double diametre;
+	private double rayon;
 	private Vecteur2D position;
 
 	/**
@@ -42,8 +59,10 @@ public class TrouNoir {
 
 	public TrouNoir(Vecteur2D pos, double diametre) {
 		this.diametre = diametre;
-		this.position = pos;
 
+		this.position = pos;
+		masseTrouNoir = 1100;
+		this.rayon = (2 * g * this.masseTrouNoir) / (c * c);
 		creerLaGeometrie();
 	}
 
@@ -56,13 +75,13 @@ public class TrouNoir {
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dcop = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
-//		mat.scale(pixelsParMetre, pixelsParMetre);
+
 		shapeTrou = mat.createTransformedShape(trou);
+		shapezone = mat.createTransformedShape(zone);
 		g2dcop.setColor(Color.MAGENTA);
 		g2dcop.fill(shapeTrou);
-
-		// bouleDeNeigeAire = new Area(shapeTrou);
-		// bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
+		g2dcop.setStroke(new BasicStroke(1));
+		g2dcop.draw(shapezone);
 
 	}
 
@@ -72,7 +91,8 @@ public class TrouNoir {
 
 	private void creerLaGeometrie() {
 
-		trou = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
+		trou = new Ellipse2D.Double(position.getX(), position.getY(), rayon, rayon);
+		zone = new Ellipse2D.Double(position.getX() - rayon * 2, position.getY() - rayon * 2, rayon * 5, rayon * 5);
 	}
 
 	/**
@@ -97,4 +117,19 @@ public class TrouNoir {
 		return this.pixelsParMetre;
 	}
 
+	public Ellipse2D.Double getZone() {
+		return zone;
+	}
+
+	public void setZone(Ellipse2D.Double zone) {
+		this.zone = zone;
+	}
+
+	public Vecteur2D getPosition() {
+		return position;
+	}
+
+	public void setPosition(Vecteur2D position) {
+		this.position = position;
+	}
 }

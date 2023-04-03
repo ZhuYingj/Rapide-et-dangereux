@@ -255,13 +255,21 @@ public class Regroupement implements Dessinable, Serializable {
 			} // Fin condition pour le type "Boule de neige"
 
 			else if (objSpecial.getType() == TypeObjetSpecial.TROUNOIR) {
+
 				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
 				// diametre et masse aux valeurs initiales.
+				objSpecial.setTempsTemporaire(tempsTemp);
 				listePisteDeDepart.get(0).getVoiture()
 						.setMasseEnKg(listePisteDeDepart.get(0).getVoiture().getMasseEnKgInitial());
 				listePisteDeDepart.get(0).getVoiture()
 						.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
 
+				// VOITURE 1 AFFECTÉ
+				objSpecial.fonctionTrouNoir1(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule);
+
+				if (objSpecial.fonctionTrouNoir1(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule) == false) {
+					objSpecial = null;
+				}
 			} else if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
 				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
 				// diametre et masse aux valeurs initiales.
@@ -809,10 +817,10 @@ public class Regroupement implements Dessinable, Serializable {
 				objSpecial.dessiner(g2dCopie);
 			}
 			if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
-
+//				objSpecial.dessiner(g2dCopie);
 			}
 			if (objSpecial.getType() == TypeObjetSpecial.TROUNOIR) {
-
+				objSpecial.dessiner(g2dCopie);
 			}
 
 		}

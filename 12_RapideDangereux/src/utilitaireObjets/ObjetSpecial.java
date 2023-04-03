@@ -32,6 +32,9 @@ public class ObjetSpecial implements Dessinable {
 	private double tempsTemporaire;
 	private BouleDeNeige bouleDeNeige;
 	private Colle colle;
+	private TrouNoir trouNoir;
+	private boolean enContactTrouNoir = false;
+	private boolean enContactTrouNoir2 = false;
 
 	/**
 	 * Constructeur permettant de créer un objet spécial
@@ -47,6 +50,7 @@ public class ObjetSpecial implements Dessinable {
 		this.type = typeObjet;
 		bouleDeNeige = new BouleDeNeige(positionObjet, diametre);
 		colle = new Colle(positionObjet, 80);
+		trouNoir = new TrouNoir(positionObjet, this.diametreObjet);
 		;
 	}
 
@@ -68,7 +72,7 @@ public class ObjetSpecial implements Dessinable {
 		}
 
 		if (type == TypeObjetSpecial.TROUNOIR) {
-			TrouNoir trouNoir = new TrouNoir(this.positionObjet, this.diametreObjet);
+			trouNoir = new TrouNoir(this.positionObjet, this.diametreObjet);
 			trouNoir.dessiner(g2d);
 		}
 		if (type == TypeObjetSpecial.COLLE) {
@@ -76,6 +80,43 @@ public class ObjetSpecial implements Dessinable {
 			colle.dessiner(g2d);
 
 		}
+
+	}
+
+	/**
+	 * Méthode qui permet le fonctionnement du trou noir sur la voiture affecté pour
+	 * 5 secondes.
+	 * 
+	 * @param voiture          Voiture affectée
+	 * @param tempsTotalEcoule le temps total écoulé
+	 * @return Si le temps est écoulé
+	 */
+
+	public boolean fonctionTrouNoir1(Voiture voiture, double tempsTotalEcoule) {
+		boolean retour = false;
+		if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
+			retour = true;
+			if (trouNoir.getZone().contains(voiture.getPosition().getX(), voiture.getPosition().getY())) {
+				double r = 25;
+
+				double fg = (trouNoir.getMasseTrouNoir() * 25) / (r * r);
+				Vecteur2D forceApplied1 = new Vecteur2D(trouNoir.getPosition());
+
+				forceApplied1 = forceApplied1.soustrait(voiture.getPosition());
+				forceApplied1 = forceApplied1.multiplie(fg);
+				voiture.setSommeDesForces(forceApplied1);
+
+				enContactTrouNoir = true;
+
+			} else {
+
+				enContactTrouNoir = false;
+			}
+		} else {
+			retour = false;
+		}
+
+		return retour;
 
 	}
 
@@ -109,8 +150,6 @@ public class ObjetSpecial implements Dessinable {
 				voiture.setAccel(new Vecteur2D(-17 * Math.cos(voiture.getAngle()), -17 * Math.sin(voiture.getAngle())));
 			}
 		}
-
-		
 
 	}
 
@@ -210,6 +249,22 @@ public class ObjetSpecial implements Dessinable {
 
 	public double getTempsTemporaire() {
 		return tempsTemporaire;
+	}
+
+	public boolean isEnContactTrouNoir2() {
+		return enContactTrouNoir2;
+	}
+
+	public void setEnContactTrouNoir2(boolean enContactTrouNoir2) {
+		this.enContactTrouNoir2 = enContactTrouNoir2;
+	}
+
+	public boolean isEnContactTrouNoir() {
+		return enContactTrouNoir;
+	}
+
+	public void setEnContactTrouNoir(boolean enContactTrouNoir) {
+		this.enContactTrouNoir = enContactTrouNoir;
 	}
 
 	public void setTempsTemporaire(double tempsTemporaire) {

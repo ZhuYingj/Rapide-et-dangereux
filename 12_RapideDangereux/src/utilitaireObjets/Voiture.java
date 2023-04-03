@@ -25,6 +25,7 @@ import physique.MoteurPhysique;
 
 public class Voiture implements Dessinable, Serializable {
 
+
 	private static final long serialVersionUID = 1L;
 	/** Diametre de la voiture puisque la voiture est un cercle **/
 	private double diametre = 1;
@@ -401,15 +402,15 @@ public class Voiture implements Dessinable, Serializable {
 		aire2.intersect(aire);
 
 		if (!aire.isEmpty()) {
-			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(), voiture2.getVitesse().module(),
-					voiture1.getMasseEnKg(), voiture2.getMasseEnKg(), voiture1.angle));
-			voiture2.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture2.getVitesse().module(), voiture1.getVitesse().module(),
-					voiture2.getMasseEnKg(), voiture1.getMasseEnKg(), voiture2.angle));
+			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(),
+					voiture2.getVitesse().module(), voiture1.getMasseEnKg(), voiture2.getMasseEnKg(), voiture1.angle));
+			voiture2.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture2.getVitesse().module(),
+					voiture1.getVitesse().module(), voiture2.getMasseEnKg(), voiture1.getMasseEnKg(), voiture2.angle));
 		} else if (!aire2.isEmpty()) {
-			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(), voiture2.getVitesse().module(),
-					voiture1.getMasseEnKg(), voiture2.getMasseEnKg(), voiture1.angle));
-			voiture2.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture2.getVitesse().module(), voiture1.getVitesse().module(),
-					voiture2.getMasseEnKg(), voiture1.getMasseEnKg(), voiture2.angle));
+			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(),
+					voiture2.getVitesse().module(), voiture1.getMasseEnKg(), voiture2.getMasseEnKg(), voiture1.angle));
+			voiture2.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture2.getVitesse().module(),
+					voiture1.getVitesse().module(), voiture2.getMasseEnKg(), voiture1.getMasseEnKg(), voiture2.angle));
 		}
 
 	}

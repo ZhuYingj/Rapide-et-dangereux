@@ -424,9 +424,17 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.enCollisionAvec(voiture2);
 			voiture.collisionEntreVoiture(voiture, voiture2);
 
+			// TOMMY TEST
 			if (haut == false) {
+				if (regroupement.getObjSpecial() != null
+						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
+						&& regroupement.getObjSpecial().isEnContactTrouNoir() == true) {
 
-				voiture.setAccel(valeurInit);
+				} else {
+					voiture.setAccel(valeurInit);
+
+				}
+
 			}
 			if (space == true) {
 
@@ -455,9 +463,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 			if (w == false) {
+				if (regroupement.getObjSpecial() != null
+						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
+						&& regroupement.getObjSpecial().isEnContactTrouNoir() == true) {
+
+				} else {
+					voiture2.setAccel(valeurInit);
+				}
 				regroupement.setToucheWActive(false);
 
-				voiture2.setAccel(valeurInit);
 			} else {
 				regroupement.setToucheWActive(true);
 			}
@@ -662,11 +676,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 		if (haut == false && regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() != 0) {
+			if (regroupement.getObjSpecial() != null
+					&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
+					&& regroupement.getObjSpecial().isEnContactTrouNoir() == true) {
 
-			regroupement.getListePisteDeDepart().get(0).getVoiture().setSommeDesForces(forceTotal);
-			if (regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() < 0.5) {
-				regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(new Vecteur2D(0, 0));
+			} else {
+				regroupement.getListePisteDeDepart().get(0).getVoiture().setSommeDesForces(forceTotal);
+				if (regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() < 0.5) {
+					regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(new Vecteur2D(0, 0));
 
+				}
 			}
 
 		}
