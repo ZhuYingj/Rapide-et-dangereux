@@ -41,7 +41,7 @@ public class AppPrincipale12 extends JFrame {
 	private JPanel contentPane;
 
 	private int nombrePiste = 1;
-	private String nomFichBinRegroupement = "regroupement" + nombrePiste + ".dat";
+	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String sousDossierSurBureau = "SauvegardePiste";
 
@@ -87,7 +87,7 @@ public class AppPrincipale12 extends JFrame {
 
 			fenEditeur.getComboBoxPiste().addItem((String) nomFichBinRegroupement);
 			nombrePiste++;
-			nomFichBinRegroupement = ("regroupement" + nombrePiste + ".dat");
+			nomFichBinRegroupement = ("Piste" + nombrePiste + ".dat");
 
 			fichierDeTravail = new File(System.getProperty("user.home"),
 					"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
