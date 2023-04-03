@@ -25,6 +25,7 @@ import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
 import interfaces.TypePiste;
 import utilitaireObjets.Regroupement;
+import java.awt.Window.Type;
 
 /**
  * Application permettant d'illustrer une simulation physique
@@ -58,6 +59,7 @@ public class AppPrincipale12 extends JFrame {
 					frame.setVisible(true);
 					frame.requestFocus();
 					frame.checkBoxModeNonScientifique.setEnabled(false);
+//					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					frame.addKeyListener(new KeyAdapter() {
 						@Override
 						public void keyPressed(KeyEvent e) {
