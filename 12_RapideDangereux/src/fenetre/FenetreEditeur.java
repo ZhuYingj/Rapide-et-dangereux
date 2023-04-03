@@ -41,7 +41,6 @@ public class FenetreEditeur extends JPanel {
 
 	private int nombrePisteFerme = 0;
 
-	private int compteurPisteCoteDePisteDepart = 0;
 	private boolean pisteFerme = false;
 	private Regroupement regroupement;
 	private PanelRegroupement panelRegroupement;
@@ -356,8 +355,10 @@ public class FenetreEditeur extends JPanel {
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU VIDE POUR JOUEZ");
+
 				}
 
+				resetValeur();
 			}
 		});
 
@@ -369,6 +370,54 @@ public class FenetreEditeur extends JPanel {
 		panelRegroupement.setBounds(132, 96, 769, 400);
 		add(panelRegroupement);
 
+	}
+
+	/**
+	 * Méthode qui permet de reinitialisé tous les valeurs du nombre de pistes
+	 * collés pour chaque morceau de piste.
+	 */
+	public void resetValeur() {
+		if (panelRegroupement.getListePisteHorizontale().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
+				panelRegroupement.getListePisteHorizontale().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteVerticale().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVerticale().size(); a++) {
+				panelRegroupement.getListePisteVerticale().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
+				panelRegroupement.getListePisteVirageGauche().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
+
+				panelRegroupement.getListePisteVirageDroit().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
+
+				panelRegroupement.getListePisteVirageHaut().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteVirageBas().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
+
+				panelRegroupement.getListePisteVirageBas().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteDeDepart().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteDeDepart().size(); a++) {
+
+				panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(0);
+			}
+		}
+
+		nombrePisteFerme = 0;
 	}
 
 	/**
@@ -457,19 +506,13 @@ public class FenetreEditeur extends JPanel {
 			if (panelRegroupement.getListePisteVirageBas().size() != 0) {
 				for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
 					if (panelRegroupement.getListePisteVirageBas().get(a).getNombrePisteColle() == 2) {
-
 						nombrePisteFerme++;
+
 					}
 
 				}
 			}
 
-			if (panelRegroupement.getListePisteVirageBas().size() != 0) {
-				for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
-
-					panelRegroupement.getListePisteVirageBas().get(a).setNombrePisteColle(0);
-				}
-			}
 		}
 	}
 
@@ -567,12 +610,6 @@ public class FenetreEditeur extends JPanel {
 				}
 			}
 
-			if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
-				for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
-
-					panelRegroupement.getListePisteVirageHaut().get(a).setNombrePisteColle(0);
-				}
-			}
 		}
 	}
 
@@ -665,12 +702,6 @@ public class FenetreEditeur extends JPanel {
 				}
 			}
 
-			if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
-				for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
-
-					panelRegroupement.getListePisteVirageDroit().get(a).setNombrePisteColle(0);
-				}
-			}
 		}
 	}
 
@@ -755,11 +786,6 @@ public class FenetreEditeur extends JPanel {
 				}
 			}
 
-			if (panelRegroupement.getListePisteVerticale().size() != 0) {
-				for (int a = 0; a < panelRegroupement.getListePisteVerticale().size(); a++) {
-					panelRegroupement.getListePisteVerticale().get(a).setNombrePisteColle(0);
-				}
-			}
 		}
 
 	}
@@ -852,11 +878,6 @@ public class FenetreEditeur extends JPanel {
 				}
 			}
 
-			if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
-				for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
-					panelRegroupement.getListePisteVirageGauche().get(a).setNombrePisteColle(0);
-				}
-			}
 		}
 	}
 
@@ -950,11 +971,6 @@ public class FenetreEditeur extends JPanel {
 				}
 			}
 
-			if (panelRegroupement.getListePisteHorizontale().size() != 0) {
-				for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
-					panelRegroupement.getListePisteHorizontale().get(a).setNombrePisteColle(0);
-				}
-			}
 		}
 
 	}
@@ -977,7 +993,8 @@ public class FenetreEditeur extends JPanel {
 				PisteHorizontale pisteHorizontale = panelRegroupement.getListePisteHorizontale().get(a);
 				if (formeAireGauche.contains(pisteHorizontale.getX(), pisteHorizontale.getY())
 						|| formeAireDroit.contains(pisteHorizontale.getX(), pisteHorizontale.getY())) {
-					compteurPisteCoteDePisteDepart++;
+					panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(
+							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
 				}
 
 			}
@@ -986,7 +1003,8 @@ public class FenetreEditeur extends JPanel {
 			for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
 				PisteVirageGauche pisteVirageGauche = panelRegroupement.getListePisteVirageGauche().get(a);
 				if (formeAireDroit.contains(pisteVirageGauche.getX(), pisteVirageGauche.getY())) {
-					compteurPisteCoteDePisteDepart++;
+					panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(
+							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
 				}
 
 			}
@@ -996,7 +1014,8 @@ public class FenetreEditeur extends JPanel {
 			for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
 				PisteVirageDroit pisteVirageDroit = panelRegroupement.getListePisteVirageDroit().get(a);
 				if (formeAireDroit.contains(pisteVirageDroit.getX(), pisteVirageDroit.getY())) {
-					compteurPisteCoteDePisteDepart++;
+					panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(
+							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
 				}
 			}
 		}
@@ -1005,7 +1024,8 @@ public class FenetreEditeur extends JPanel {
 			for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
 				PisteVirageHaut pisteVirageHaut = panelRegroupement.getListePisteVirageHaut().get(a);
 				if (formeAireGauche.contains(pisteVirageHaut.getX(), pisteVirageHaut.getY())) {
-					compteurPisteCoteDePisteDepart++;
+					panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(
+							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
 				}
 			}
 		}
@@ -1013,20 +1033,21 @@ public class FenetreEditeur extends JPanel {
 			for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
 				PisteVirageBas pisteVirageBas = panelRegroupement.getListePisteVirageBas().get(a);
 				if (formeAireGauche.contains(pisteVirageBas.getX(), pisteVirageBas.getY())) {
-					compteurPisteCoteDePisteDepart++;
+					panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(
+							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
 				}
 
 			}
 		}
 		if (panelRegroupement.getListePisteDeDepart().size() != 0) {
 
-			if (compteurPisteCoteDePisteDepart == 2) {
+			if (panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() == 2) {
 
 				nombrePisteFerme++;
 
 			}
 		}
-		compteurPisteCoteDePisteDepart = 0;
+
 	}
 
 	/**
@@ -1051,11 +1072,11 @@ public class FenetreEditeur extends JPanel {
 			pisteFerme = true;
 
 		} else {
-
+			panelRegroupement.setJouer(true);
 			pisteFerme = false;
+
 		}
-//		System.out.println(nombrePisteFerme);
-		nombrePisteFerme = 0;
+		repaint();
 	}
 
 	/**
@@ -1067,7 +1088,6 @@ public class FenetreEditeur extends JPanel {
 				panelRegroupement.getListePisteDeDepart().get(0).getY()), Color.yellow, 50, 16, 0, 60);
 		regroupement = new Regroupement(voiture, 3, TypePiste.AUTRE);
 		regroupement.setListeAccelerateur(panelRegroupement.getListeAccelerateur());
-
 		regroupement.setListePisteDeDepart(panelRegroupement.getListePisteDeDepart());
 		regroupement.setListePisteHorizontale(panelRegroupement.getListePisteHorizontale());
 		regroupement.setListePisteVerticale(panelRegroupement.getListePisteVerticale());
@@ -1096,7 +1116,7 @@ public class FenetreEditeur extends JPanel {
 		btnSauvegarde.setEnabled(true);
 		btnJouer.setEnabled(true);
 		regroupementSauvegarde = gestionFich.lireFichierBinBureauRegroupement((String) comboBoxPiste.getSelectedItem());
-
+		System.out.println("Piste en cours : " + gestionFich.getNomFichBinRegroupement());
 		panelRegroupement.getListeAccelerateur().clear();
 		panelRegroupement.getListePisteVirageBas().clear();
 		panelRegroupement.getListePisteVirageHaut().clear();

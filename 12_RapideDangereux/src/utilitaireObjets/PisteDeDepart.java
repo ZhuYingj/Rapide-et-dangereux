@@ -49,6 +49,8 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 
 	private Voiture voiture2;
 	private boolean enContactAvecColle = false;
+	private int nombrePisteColle = 0;
+	
 
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -242,7 +244,13 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void pisteHorizontaleAttache() {
 
 	}
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
 
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
+	}
 	public boolean isCollision() {
 		return collision;
 	}

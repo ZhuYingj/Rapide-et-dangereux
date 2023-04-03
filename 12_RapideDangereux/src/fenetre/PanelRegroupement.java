@@ -68,6 +68,7 @@ public class PanelRegroupement extends JPanel {
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
 
 	private boolean objetSelectionne = false;
+	private boolean jouer = false;
 
 	private TypeObjetDeplacable type;
 	private int tailleDuCarre;
@@ -153,48 +154,93 @@ public class PanelRegroupement extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
+
 		creationQuadrillage(g2dCopie);
+		g2dCopie.setColor(Color.CYAN);
+		g2dCopie.setStroke(new BasicStroke(4));
 
 		for (int a = 0; a < listePisteVirageDroit.size(); a++) {
 
 			listePisteVirageDroit.get(a).dessiner(g2d);
+			if (listePisteVirageDroit.get(a).getNombrePisteColle() != 2 && jouer == true) {
+				Rectangle2D.Double pisteIncomplete = new Rectangle2D.Double(listePisteVirageDroit.get(a).getX(),
+						listePisteVirageDroit.get(a).getY(), listePisteVirageDroit.get(a).getTaillePiste(),
+						listePisteVirageDroit.get(a).getTaillePiste());
+				g2dCopie.draw(pisteIncomplete);
 
+			}
 		}
 
 		for (int a = 0; a < listePisteDeDepart.size(); a++) {
 
 			listePisteDeDepart.get(a).dessiner(g2d);
+			if (listePisteDeDepart.get(0).getNombrePisteColle() != 2 && jouer == true) {
+				Rectangle2D.Double pisteIncomplete = new Rectangle2D.Double(listePisteDeDepart.get(a).getX(),
+						listePisteDeDepart.get(a).getY(), listePisteDeDepart.get(a).getTaillePiste(),
+						listePisteDeDepart.get(a).getTaillePiste());
+				g2dCopie.draw(pisteIncomplete);
 
+			}
 		}
 
 		for (int a = 0; a < listePisteHorizontale.size(); a++) {
 
 			listePisteHorizontale.get(a).dessiner(g2d);
+			if (listePisteHorizontale.get(a).getNombrePisteColle() != 2 && jouer == true) {
+				Rectangle2D.Double pisteIncomplete = new Rectangle2D.Double(listePisteHorizontale.get(a).getX(),
+						listePisteHorizontale.get(a).getY(), listePisteHorizontale.get(a).getTaillePiste(),
+						listePisteHorizontale.get(a).getTaillePiste());
+				g2dCopie.draw(pisteIncomplete);
 
+			}
 		}
 
 		for (int a = 0; a < listePisteVirageBas.size(); a++) {
 
 			listePisteVirageBas.get(a).dessiner(g2d);
+			if (listePisteVirageBas.get(a).getNombrePisteColle() != 2 && jouer == true) {
+				Rectangle2D.Double pisteIncomplete = new Rectangle2D.Double(listePisteVirageBas.get(a).getX(),
+						listePisteVirageBas.get(a).getY(), listePisteVirageBas.get(a).getTaillePiste(),
+						listePisteVirageBas.get(a).getTaillePiste());
+				g2dCopie.draw(pisteIncomplete);
 
+			}
 		}
 
 		for (int a = 0; a < listePisteVirageGauche.size(); a++) {
 
 			listePisteVirageGauche.get(a).dessiner(g2d);
+			if (listePisteVirageGauche.get(a).getNombrePisteColle() != 2 && jouer == true) {
+				Rectangle2D.Double pisteIncomplete = new Rectangle2D.Double(listePisteVirageGauche.get(a).getX(),
+						listePisteVirageGauche.get(a).getY(), listePisteVirageGauche.get(a).getTaillePiste(),
+						listePisteVirageGauche.get(a).getTaillePiste());
+				g2dCopie.draw(pisteIncomplete);
 
+			}
 		}
 
 		for (int a = 0; a < listePisteVerticale.size(); a++) {
 
 			listePisteVerticale.get(a).dessiner(g2d);
+			if (listePisteVerticale.get(a).getNombrePisteColle() != 2 && jouer == true) {
+				Rectangle2D.Double pisteIncomplete = new Rectangle2D.Double(listePisteVerticale.get(a).getX(),
+						listePisteVerticale.get(a).getY(), listePisteVerticale.get(a).getTaillePiste(),
+						listePisteVerticale.get(a).getTaillePiste());
+				g2dCopie.draw(pisteIncomplete);
 
+			}
 		}
 
 		for (int a = 0; a < listePisteVirageHaut.size(); a++) {
 
 			listePisteVirageHaut.get(a).dessiner(g2d);
+			if (listePisteVirageHaut.get(a).getNombrePisteColle() != 2 && jouer == true) {
+				Rectangle2D.Double pisteIncomplete = new Rectangle2D.Double(listePisteVirageHaut.get(a).getX(),
+						listePisteVirageHaut.get(a).getY(), listePisteVirageHaut.get(a).getTaillePiste(),
+						listePisteVirageHaut.get(a).getTaillePiste());
+				g2dCopie.draw(pisteIncomplete);
 
+			}
 		}
 
 		for (int a = 0; a < listeAccelerateur.size(); a++) {
@@ -208,6 +254,7 @@ public class PanelRegroupement extends JPanel {
 			listeBlocMystere.get(a).dessiner(g2d);
 
 		}
+		jouer = false;
 
 	}
 
@@ -850,6 +897,14 @@ public class PanelRegroupement extends JPanel {
 
 	public void setListePisteVirageHaut(ArrayList<PisteVirageHaut> listePisteVirageHaut) {
 		this.listePisteVirageHaut = listePisteVirageHaut;
+	}
+
+	public boolean isJouer() {
+		return jouer;
+	}
+
+	public void setJouer(boolean jouer) {
+		this.jouer = jouer;
 	}
 
 	public TypeObjetDeplacable getType() {
