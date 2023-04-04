@@ -20,24 +20,17 @@ import interfaces.TypeObjetSpecial;
 public class TrouNoir {
 
 	private transient Shape shapeTrou;
-	private transient Shape shapezone;
 
 	private double masseTrouNoir;
-
-	public double getMasseTrouNoir() {
-		return masseTrouNoir;
-	}
-
-	public void setMasseTrouNoir(int masseTrouNoir) {
-		this.masseTrouNoir = masseTrouNoir;
-	}
 
 	private int c = 30;
 	private double g = 9.8;
 
-	private transient Area bouleDeNeigeAire;
-	private transient Area bouleDeNeigeAireCopie;
+	private transient Shape shapeZone;
+	private transient Area zoneAire;
+	private transient Area zoneAireCopie;
 	private transient Area aireVoiture;
+	private transient Area aireVoiture1;
 
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.TROUNOIR;
 
@@ -45,10 +38,11 @@ public class TrouNoir {
 
 	private Ellipse2D.Double trou;
 	private Ellipse2D.Double zone;
-
+	private Voiture voiture;
 	private double diametre;
 	private double rayon;
 	private Vecteur2D position;
+	private boolean enContactAvecTrouNoir = false;
 
 	/**
 	 * Constructeur permettant de créer un trou noir
@@ -71,18 +65,26 @@ public class TrouNoir {
 	 * 
 	 * @param g2d Le composant graphique
 	 */
+	public boolean isEnContactAvecTrouNoir() {
+		return enContactAvecTrouNoir;
+	}
+
+	public void setEnContactAvecTrouNoir(boolean enContactAvecTrouNoir) {
+		this.enContactAvecTrouNoir = enContactAvecTrouNoir;
+	}
 
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dcop = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
 
 		shapeTrou = mat.createTransformedShape(trou);
-		shapezone = mat.createTransformedShape(zone);
+		shapeZone = mat.createTransformedShape(zone);
 		g2dcop.setColor(Color.MAGENTA);
 		g2dcop.fill(shapeTrou);
 		g2dcop.setStroke(new BasicStroke(1));
-		g2dcop.draw(shapezone);
-
+		g2dcop.draw(shapeZone);
+		zoneAire = new Area(shapeZone);
+		zoneAireCopie = new Area(shapeZone);
 	}
 
 	/**
@@ -93,6 +95,32 @@ public class TrouNoir {
 
 		trou = new Ellipse2D.Double(position.getX(), position.getY(), rayon, rayon);
 		zone = new Ellipse2D.Double(position.getX() - rayon * 2, position.getY() - rayon * 2, rayon * 5, rayon * 5);
+	}
+
+	/**
+	 * 
+	 * méthode qui détecte la collision de la voiture et la colle
+	 * 
+	 * @param v ceci est la valeur de la voiture
+	 * @return la valeur de la collision en true or false
+	 */
+	// Alexis Pineda-Alvarado
+	public boolean collisionDeLaVoiture(Voiture v) {
+		this.voiture = v;
+		zoneAireCopie = new Area(zone);
+		aireVoiture = new Area(voiture.getCercle());
+		aireVoiture1 = new Area(aireVoiture);
+		aireVoiture1.intersect(zoneAireCopie);
+
+		if (!aireVoiture1.isEmpty()) {
+			enContactAvecTrouNoir = true;
+
+		} else {
+
+			enContactAvecTrouNoir = false;
+		}
+
+		return enContactAvecTrouNoir;
 	}
 
 	/**
@@ -131,5 +159,13 @@ public class TrouNoir {
 
 	public void setPosition(Vecteur2D position) {
 		this.position = position;
+	}
+
+	public double getMasseTrouNoir() {
+		return masseTrouNoir;
+	}
+
+	public void setMasseTrouNoir(int masseTrouNoir) {
+		this.masseTrouNoir = masseTrouNoir;
 	}
 }

@@ -424,15 +424,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.enCollisionAvec(voiture2);
 			voiture.collisionEntreVoiture(voiture, voiture2);
 
-			// TOMMY TEST
 			if (haut == false) {
-				if (regroupement.getObjSpecial() != null
-						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
-						&& regroupement.getObjSpecial().isEnContactTrouNoir() == true) {
+				if ((regroupement.getObjSpecial() != null
+						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR)
+						|| (regroupement.getObjSpecial2() != null
+								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR)) {
 
 				} else {
 					voiture.setAccel(valeurInit);
-
 				}
 
 			}
@@ -463,9 +462,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 			if (w == false) {
-				if (regroupement.getObjSpecial() != null
-						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
-						&& regroupement.getObjSpecial().isEnContactTrouNoir() == true) {
+				if ((regroupement.getObjSpecial() != null
+						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR)
+						|| (regroupement.getObjSpecial2() != null
+								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR)) {
 
 				} else {
 					voiture2.setAccel(valeurInit);
@@ -568,7 +568,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * Méthode qui permet de réinitialiser la position de la voiture directement
 	 * dans la piste de départ
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public void restartPosPisteDepart() {
 		arreter();
 		tempsTotalEcoule = 0.000;
@@ -707,9 +707,23 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 		if (haut == false && regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() != 0) {
-			if (regroupement.getObjSpecial() != null
-					&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
-					&& regroupement.getObjSpecial().isEnContactTrouNoir() == true) {
+//			if (regroupement.getObjSpecial() != null
+//					&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
+//					&& regroupement.getObjSpecial().getTrouNoir().collisionDeLaVoiture(voiture) == true) {
+
+//			} else {
+//				regroupement.getListePisteDeDepart().get(0).getVoiture().setSommeDesForces(forceTotal);
+//				if (regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() < 0.5) {
+//					regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(new Vecteur2D(0, 0));
+//
+//				}
+//			}
+			if ((regroupement.getObjSpecial2() != null
+					&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR
+					&& regroupement.getObjSpecial2().getTrouNoir().collisionDeLaVoiture(voiture) == true)
+					|| (regroupement.getObjSpecial() != null
+							&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
+							&& regroupement.getObjSpecial().getTrouNoir().collisionDeLaVoiture(voiture) == true)) {
 
 			} else {
 				regroupement.getListePisteDeDepart().get(0).getVoiture().setSommeDesForces(forceTotal);
@@ -737,12 +751,30 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 		if (w == false && regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() != 0) {
+//			if (regroupement.getObjSpecial() != null
+//					&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
+//					&& regroupement.getObjSpecial().getTrouNoir().collisionDeLaVoiture(voiture2) == true) {
 
-			regroupement.getListePisteDeDepart().get(0).getVoiture2().setSommeDesForces(forceTotal2);
-			if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() < 0.3) {
-				regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(new Vecteur2D(0, 0));
+//			} else {
+//				regroupement.getListePisteDeDepart().get(0).getVoiture2().setSommeDesForces(forceTotal2);
+//				if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() < 0.3) {
+//					regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(new Vecteur2D(0, 0));
+//				}
+//			}
+
+			if ((regroupement.getObjSpecial2() != null
+					&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR
+					&& regroupement.getObjSpecial2().getTrouNoir().collisionDeLaVoiture(voiture2) == true)
+					|| (regroupement.getObjSpecial() != null
+							&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
+							&& regroupement.getObjSpecial().getTrouNoir().collisionDeLaVoiture(voiture2) == true)) {
+
+			} else {
+				regroupement.getListePisteDeDepart().get(0).getVoiture2().setSommeDesForces(forceTotal2);
+				if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() < 0.3) {
+					regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(new Vecteur2D(0, 0));
+				}
 			}
-
 		}
 
 		regroupement.avancerGroupe(deltaT, tempsTotalEcoule);

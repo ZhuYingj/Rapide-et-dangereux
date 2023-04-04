@@ -151,7 +151,7 @@ public class Regroupement implements Dessinable, Serializable {
 
 				objSpecial = regroupementBoiteMystere.get(a).getObjetSpecial();
 				boutonAppuye = false;
-
+				objSpecial.setTempsTemporaire(tempsTemp);
 				tempsTemp = tempsTotalEcoule;
 				regroupementBoiteMystere.remove(a).getObjetSpecial();
 
@@ -171,7 +171,7 @@ public class Regroupement implements Dessinable, Serializable {
 					.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
 				boutonAppuye2 = false;
 				objSpecial2 = regroupementBoiteMystere.get(a).getObjetSpecial();
-
+				objSpecial2.setTempsTemporaire(tempsTemp2);
 				tempsTemp2 = tempsTotalEcoule;
 				regroupementBoiteMystere.remove(a).getObjetSpecial();
 
@@ -206,6 +206,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 */
 	// Tan Tommy Rin
 	public void fonctionDesObjetsPossibles(double tempsTotalEcoule, double deltaT) {
+
 		// Pour v1
 		if (objSpecial != null) {
 			if (objSpecial.getType() == TypeObjetSpecial.CHAMPIGNON) {
@@ -258,18 +259,27 @@ public class Regroupement implements Dessinable, Serializable {
 
 				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
 				// diametre et masse aux valeurs initiales.
-				objSpecial.setTempsTemporaire(tempsTemp);
+
 				listePisteDeDepart.get(0).getVoiture()
 						.setMasseEnKg(listePisteDeDepart.get(0).getVoiture().getMasseEnKgInitial());
 				listePisteDeDepart.get(0).getVoiture()
 						.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
 
-				// VOITURE 1 AFFECTÉ
-				objSpecial.fonctionTrouNoir1(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule);
+				// VOITURE 1 ET 2 POUR OBJET1
+				if (tempsTemp + 15 > tempsTotalEcoule) {
+					if (objSpecial.getTrouNoir().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
+						objSpecial.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture());
+					}
+					if (objSpecial.getTrouNoir()
+							.collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
+						objSpecial.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture2());
 
-				if (objSpecial.fonctionTrouNoir1(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule) == false) {
+					}
+
+				} else {
 					objSpecial = null;
 				}
+
 			} else if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
 				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
 				// diametre et masse aux valeurs initiales.
@@ -293,6 +303,7 @@ public class Regroupement implements Dessinable, Serializable {
 		} // Fin pour v1
 			// Pour v2
 		if (objSpecial2 != null) {
+
 			if (objSpecial2.getType() == TypeObjetSpecial.CHAMPIGNON) {
 				objSpecial2.setTempsTemporaire(tempsTemp2);
 
@@ -339,12 +350,31 @@ public class Regroupement implements Dessinable, Serializable {
 
 			} // Fin condition pour le type "Boule de neige"
 			else if (objSpecial2.getType() == TypeObjetSpecial.TROUNOIR) {
+
 				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
 				// diametre et masse aux valeurs initiales.
+
 				listePisteDeDepart.get(0).getVoiture2()
 						.setMasseEnKg(listePisteDeDepart.get(0).getVoiture2().getMasseEnKgInitial());
 				listePisteDeDepart.get(0).getVoiture2()
 						.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
+
+				// VOITURE 1 ET 2 POUR OBJET1
+				if (tempsTemp2 + 15 > tempsTotalEcoule) {
+
+					if (objSpecial2.getTrouNoir()
+							.collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
+						objSpecial2.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture());
+					}
+					if (objSpecial2.getTrouNoir()
+							.collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
+						objSpecial2.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture2());
+
+					}
+
+				} else {
+					objSpecial2 = null;
+				}
 
 			} else if (objSpecial2.getType() == TypeObjetSpecial.COLLE) {
 				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
@@ -817,7 +847,7 @@ public class Regroupement implements Dessinable, Serializable {
 				objSpecial.dessiner(g2dCopie);
 			}
 			if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
-//				objSpecial.dessiner(g2dCopie);
+
 			}
 			if (objSpecial.getType() == TypeObjetSpecial.TROUNOIR) {
 				objSpecial.dessiner(g2dCopie);
@@ -843,7 +873,7 @@ public class Regroupement implements Dessinable, Serializable {
 
 			}
 			if (objSpecial2.getType() == TypeObjetSpecial.TROUNOIR) {
-
+				objSpecial2.dessiner(g2dCopie);
 			}
 
 		}

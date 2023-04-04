@@ -89,34 +89,18 @@ public class ObjetSpecial implements Dessinable {
 	 * 
 	 * @param voiture          Voiture affectée
 	 * @param tempsTotalEcoule le temps total écoulé
-	 * @return Si le temps est écoulé
 	 */
 
-	public boolean fonctionTrouNoir1(Voiture voiture, double tempsTotalEcoule) {
-		boolean retour = false;
-		if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
-			retour = true;
-			if (trouNoir.getZone().contains(voiture.getPosition().getX(), voiture.getPosition().getY())) {
-				double r = 25;
+	public void fonctionTrouNoir(Voiture voiture) {
 
-				double fg = (trouNoir.getMasseTrouNoir() * 25) / (r * r);
-				Vecteur2D forceApplied1 = new Vecteur2D(trouNoir.getPosition());
+		double r = 25;
 
-				forceApplied1 = forceApplied1.soustrait(voiture.getPosition());
-				forceApplied1 = forceApplied1.multiplie(fg);
-				voiture.setSommeDesForces(forceApplied1);
+		double fg = (trouNoir.getMasseTrouNoir() * 25) / (r * r);
+		Vecteur2D forceApplied = new Vecteur2D(trouNoir.getPosition());
 
-				enContactTrouNoir = true;
-
-			} else {
-
-				enContactTrouNoir = false;
-			}
-		} else {
-			retour = false;
-		}
-
-		return retour;
+		forceApplied = forceApplied.soustrait(voiture.getPosition());
+		forceApplied = forceApplied.multiplie(fg);
+		voiture.setSommeDesForces(forceApplied);
 
 	}
 
@@ -261,6 +245,14 @@ public class ObjetSpecial implements Dessinable {
 
 	public boolean isEnContactTrouNoir() {
 		return enContactTrouNoir;
+	}
+
+	public TrouNoir getTrouNoir() {
+		return trouNoir;
+	}
+
+	public void setTrouNoir(TrouNoir trouNoir) {
+		this.trouNoir = trouNoir;
 	}
 
 	public void setEnContactTrouNoir(boolean enContactTrouNoir) {
