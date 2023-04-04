@@ -707,17 +707,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 		if (haut == false && regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() != 0) {
-//			if (regroupement.getObjSpecial() != null
-//					&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
-//					&& regroupement.getObjSpecial().getTrouNoir().collisionDeLaVoiture(voiture) == true) {
 
-//			} else {
-//				regroupement.getListePisteDeDepart().get(0).getVoiture().setSommeDesForces(forceTotal);
-//				if (regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() < 0.5) {
-//					regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(new Vecteur2D(0, 0));
-//
-//				}
-//			}
 			if ((regroupement.getObjSpecial2() != null
 					&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR
 					&& regroupement.getObjSpecial2().getTrouNoir().collisionDeLaVoiture(voiture) == true)
@@ -751,16 +741,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 		if (w == false && regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() != 0) {
-//			if (regroupement.getObjSpecial() != null
-//					&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
-//					&& regroupement.getObjSpecial().getTrouNoir().collisionDeLaVoiture(voiture2) == true) {
-
-//			} else {
-//				regroupement.getListePisteDeDepart().get(0).getVoiture2().setSommeDesForces(forceTotal2);
-//				if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() < 0.3) {
-//					regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(new Vecteur2D(0, 0));
-//				}
-//			}
 
 			if ((regroupement.getObjSpecial2() != null
 					&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR
@@ -987,6 +967,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageDroit(regroupementTempo.getListePisteVirageDroit());
 			regroupement.setListePisteVirageGauche(regroupementTempo.getListePisteVirageGauche());
 			regroupement.setListePisteVirageHaut(regroupementTempo.getListePisteVirageHaut());
+			regroupement.setListeAccelerateur(regroupementTempo.getListeAccelerateur());
 			voiture.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
 					regroupement.getListePisteDeDepart().get(0).getY()));
 			voiture2.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),

@@ -12,7 +12,7 @@ import geometrie.Vecteur2D;
 import interfaces.TypeObjetSpecial;
 
 /**
- * Classe qui crée et gère tous ce qui de la boule de neige
+ * Classe qui crée et gère tout ce qui est de la boule de neige
  * 
  * @author Alexis Pineda-Alvarado
  *
@@ -69,6 +69,10 @@ public class BouleDeNeige {
 
 	}
 
+	/**
+	 * Méthode qui permet de créer la géométrie de la boule de neige
+	 */
+
 	private void creerLaGeometrie() {
 
 		boule = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
@@ -99,14 +103,6 @@ public class BouleDeNeige {
 		}
 
 		return contactBouleNeige;
-	}
-
-	/**
-	 * Méthode qui gére le déplacement de la boule de neige
-	 * 
-	 */
-	public void deplacementBoule() {
-
 	}
 
 	/**

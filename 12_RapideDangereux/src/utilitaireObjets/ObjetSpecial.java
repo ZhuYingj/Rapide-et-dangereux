@@ -84,21 +84,19 @@ public class ObjetSpecial implements Dessinable {
 	}
 
 	/**
-	 * Méthode qui permet le fonctionnement du trou noir sur la voiture affecté pour
-	 * 5 secondes.
+	 * Méthode qui permet le fonctionnement du trou noir sur la voiture affecté
 	 * 
-	 * @param voiture          Voiture affectée
-	 * @param tempsTotalEcoule le temps total écoulé
+	 * @param voiture Voiture affectée
 	 */
-
+//Tan Tommy Rin
 	public void fonctionTrouNoir(Voiture voiture) {
 
-		double r = 25;
+		Vecteur2D forceApplied = new Vecteur2D(trouNoir.getPosition());
+		forceApplied = forceApplied.soustrait(voiture.getPosition());
+		// Distance entre la voiture et le trou noir
+		double r = forceApplied.module();
 
 		double fg = (trouNoir.getMasseTrouNoir() * 25) / (r * r);
-		Vecteur2D forceApplied = new Vecteur2D(trouNoir.getPosition());
-
-		forceApplied = forceApplied.soustrait(voiture.getPosition());
 		forceApplied = forceApplied.multiplie(fg);
 		voiture.setSommeDesForces(forceApplied);
 

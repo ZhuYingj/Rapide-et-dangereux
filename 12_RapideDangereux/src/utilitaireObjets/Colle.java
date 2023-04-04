@@ -21,7 +21,7 @@ import interfaces.TypeObjetSpecial;
  */
 public class Colle implements Dessinable {
 
-	/** Taille de la piste qui est toujours constante **/
+	/** Taille du morceau de la piste **/
 	private int taillePiste = 80;
 
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.COLLE;

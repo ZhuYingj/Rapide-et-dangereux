@@ -40,7 +40,7 @@ import utilitaireObjets.Voiture;
 public class FenetreEditeur extends JPanel {
 
 	private int nombrePisteFerme = 0;
-
+	private JButton btnAjouterAccelerateur;
 	private boolean pisteFerme = false;
 	private Regroupement regroupement;
 	private PanelRegroupement panelRegroupement;
@@ -87,12 +87,12 @@ public class FenetreEditeur extends JPanel {
 		panelObjet.setLayout(null);
 		panelObjet.setEnabled(false);
 
-		JButton btnAjouterAccelerateur = new JButton("+");
+		btnAjouterAccelerateur = new JButton("+");
 		btnAjouterAccelerateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Accelerateur accelerateur = new Accelerateur(650, 50);
 				panelRegroupement.getListeAccelerateur().add(accelerateur);
-
+				btnAjouterAccelerateur.setEnabled(false);
 				repaint();
 			}
 		});
@@ -106,6 +106,7 @@ public class FenetreEditeur extends JPanel {
 					panelRegroupement.getListeAccelerateur()
 							.remove(panelRegroupement.getListeAccelerateur().size() - 1);
 					repaint();
+					btnAjouterAccelerateur.setEnabled(true);
 				}
 			}
 		});
@@ -319,6 +320,7 @@ public class FenetreEditeur extends JPanel {
 		btnSauvegarde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sauvegardeUnePiste();
+				gestionFich.setNombrePiste(gestionFich.getNombrePiste() + 1);
 				JOptionPane.showMessageDialog(null,
 						"PISTE SAUVEGARDER SUR LE BUREAU\nNOM :" + gestionFich.getNomFichBinRegroupement());
 			}
@@ -353,6 +355,7 @@ public class FenetreEditeur extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				verifierSiPisteFerme();
 				if (pisteFerme == true) {
+					gestionFich.setNombrePiste(gestionFich.getNombrePiste() - 1);
 					sauvegardeUnePiste();
 					chargementUnePiste();
 					pcs.firePropertyChange("JOUEREDITEUR", null, -1);
@@ -1103,9 +1106,25 @@ public class FenetreEditeur extends JPanel {
 		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
 
 		gestionFich.ecrireFichierBinBureauRegroupement(regroupement);
+		boolean dejaDansComboBox = false;
+		for (int a = 0; a < comboBoxPiste.getItemCount(); a++) {
+			if (gestionFich.getNomFichBinRegroupement().equalsIgnoreCase(comboBoxPiste.getItemAt(a))) {
 
-		comboBoxPiste.addItem(gestionFich.getNomFichBinRegroupement());
+				dejaDansComboBox = true;
+				break;
+			} else {
+				dejaDansComboBox = false;
+			}
+		}
+		if (dejaDansComboBox == true) {
+
+		} else {
+			comboBoxPiste.addItem(gestionFich.getNomFichBinRegroupement());
+		}
+
 		comboBoxPiste.setSelectedIndex(comboBoxPiste.getItemCount() - 1);
+		System.out.println(comboBoxPiste.getItemAt(comboBoxPiste.getItemCount() - 1) + "  a");
+		System.out.println(gestionFich.getNomFichBinRegroupement() + "  b");
 		btnJouer.setEnabled(true);
 
 	}
