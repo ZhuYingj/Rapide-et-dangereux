@@ -406,7 +406,7 @@ public class Regroupement implements Dessinable, Serializable {
 	// Tan Tommy Rin
 	public void creeBoiteDansListe() {
 		regroupementBoiteMystere = new ArrayList<BlocMystere>();
-		System.out.println(nombreBoiteMystere);
+
 		// Variable pour ne pas placer une boite mystere au meme exact endroit
 		int petiteDeviation = 0;
 		for (int a = 0; a < nombreBoiteMystere; a++) {
@@ -658,9 +658,11 @@ public class Regroupement implements Dessinable, Serializable {
 			collePisteDepart2 = true;
 		}
 		if (collePisteDepart2 == true) {
+			if (objSpecial2 != null) {
+				objSpecial2.setPositionObjet(new Vecteur2D(listePisteDeDepart.get(0).getFormeAire().getX(),
+						listePisteDeDepart.get(0).getFormeAire().getY()));
+			}
 
-			objSpecial2.setPositionObjet(new Vecteur2D(listePisteDeDepart.get(0).getFormeAire().getX(),
-					listePisteDeDepart.get(0).getFormeAire().getY()));
 		}
 	}
 
