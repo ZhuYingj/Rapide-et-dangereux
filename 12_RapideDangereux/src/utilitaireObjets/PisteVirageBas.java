@@ -109,27 +109,6 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	}
 
 	/**
-	 * Retourne l'aire du triangle
-	 * 
-	 * @return l'aire du triangle
-	 */
-	public Area getAireTriangle() {
-		return aireTriangle;
-	}
-
-	public int getTaillePiste() {
-		return taillePiste;
-	}
-
-	public int getNombrePisteColle() {
-		return nombrePisteColle;
-	}
-
-	public void setNombrePisteColle(int nombrePisteColle) {
-		this.nombrePisteColle = nombrePisteColle;
-	}
-
-	/**
 	 * Méthode qui permet de détecter s'il y a une collision de la voiture avec le
 	 * morceau de piste
 	 * 
@@ -293,6 +272,27 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 
 	public int getX() {
 		return x;
+	}
+
+	/**
+	 * Retourne l'aire du triangle
+	 * 
+	 * @return l'aire du triangle
+	 */
+	public Area getAireTriangle() {
+		return aireTriangle;
+	}
+
+	public int getTaillePiste() {
+		return taillePiste;
+	}
+
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
 	}
 
 	public void setX(int x) {

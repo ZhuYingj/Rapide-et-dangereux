@@ -43,12 +43,10 @@ public class Regroupement implements Dessinable, Serializable {
 	private ArrayList<PisteVirageDroit> listePisteVirageDroit = new ArrayList<PisteVirageDroit>();
 	/** Piste Virage Haut **/
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
-
 	/** Le nombre de pixels par metre **/
 	private double pixelsParMetre = 1;
 	/** Le nombre de boite mystere **/
 	private int nombreBoiteMystere = 1;
-
 	/** Type de piste **/
 	private TypePiste type;
 	/** Nombre de tour initial **/
@@ -90,6 +88,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private boolean enContactAvecColle = false;
 	private boolean enContactAvecColle2 = false;
 
+	/** Pour savoir si la voiture 2 accélère **/
 	private boolean toucheWActive = false;
 	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteHorizontale = 0;
@@ -142,6 +141,20 @@ public class Regroupement implements Dessinable, Serializable {
 	public void avancerGroupe(double deltaT, double tempsTotalEcoule) {
 
 		listePisteDeDepart.get(0).getVoiture().avancerUnPas(deltaT);
+		if (listeAccelerateur.size() != 0) {
+			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
+				listePisteDeDepart.get(0).getVoiture()
+						.setAccel(new Vecteur2D(200 * Math.cos(listePisteDeDepart.get(0).getVoiture().getAngle()),
+								200 * Math.sin(listePisteDeDepart.get(0).getVoiture().getAngle())));
+			}
+			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture2().getPosition().getY())) {
+				listePisteDeDepart.get(0).getVoiture2()
+						.setAccel(new Vecteur2D(200 * Math.cos(listePisteDeDepart.get(0).getVoiture2().getAngle()),
+								200 * Math.sin(listePisteDeDepart.get(0).getVoiture2().getAngle())));
+			}
+		}
 		listePisteDeDepart.get(0).getVoiture2().avancerUnPas(deltaT);
 
 		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
@@ -832,6 +845,7 @@ public class Regroupement implements Dessinable, Serializable {
 			regroupementBoiteMystere.get(a).dessiner(g2dCopie);
 
 		}
+
 		if (objSpecial != null) {
 			if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
 

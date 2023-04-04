@@ -15,16 +15,18 @@ import interfaces.TypeObjetSpecial;
  * Classe qui permet de créer et gérer un trou noir
  * 
  * @author Alexis Pineda-Alvarado
+ * @author Tan Tommy Rin
  *
  */
 public class TrouNoir {
 
 	private transient Shape shapeTrou;
-
+	/** La masse du trou noir **/
 	private double masseTrouNoir;
-
+	/** "Vitesse de la lumiere" **/
 	private int c = 30;
-	private double g = 9.8;
+	/** Constante gravitationnelle terrestre. */
+	private static final double G = 9.80665;
 
 	private transient Shape shapeZone;
 	private transient Area zoneAire;
@@ -32,16 +34,16 @@ public class TrouNoir {
 	private transient Area aireVoiture;
 	private transient Area aireVoiture1;
 
-	private TypeObjetSpecial typeObjet = TypeObjetSpecial.TROUNOIR;
-
 	private double pixelsParMetre;
 
 	private Ellipse2D.Double trou;
 	private Ellipse2D.Double zone;
 	private Voiture voiture;
 	private double diametre;
+	/** Le rayon du trou noir **/
 	private double rayon;
 	private Vecteur2D position;
+	/** Valeur true ou false de si le trou noir est en contact avec la voiture **/
 	private boolean enContactAvecTrouNoir = false;
 
 	/**
@@ -50,13 +52,13 @@ public class TrouNoir {
 	 * @param pos      Vecteur2D de la position du trou noir
 	 * @param diametre Le diametre du trou noir
 	 */
+	// Tan Tommy Rin
 
 	public TrouNoir(Vecteur2D pos, double diametre) {
 		this.diametre = diametre;
-
 		this.position = pos;
 		masseTrouNoir = 1100;
-		this.rayon = (2 * g * this.masseTrouNoir) / (c * c);
+		this.rayon = (2 * G * this.masseTrouNoir) / (c * c);
 		creerLaGeometrie();
 	}
 
@@ -65,14 +67,7 @@ public class TrouNoir {
 	 * 
 	 * @param g2d Le composant graphique
 	 */
-	public boolean isEnContactAvecTrouNoir() {
-		return enContactAvecTrouNoir;
-	}
-
-	public void setEnContactAvecTrouNoir(boolean enContactAvecTrouNoir) {
-		this.enContactAvecTrouNoir = enContactAvecTrouNoir;
-	}
-
+	// Alexis Pineda-Alvarado
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dcop = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
@@ -90,7 +85,7 @@ public class TrouNoir {
 	/**
 	 * Méthode qui permet de créer la géométrie du trou noir
 	 */
-
+//Tan Tommy Rin
 	private void creerLaGeometrie() {
 
 		trou = new Ellipse2D.Double(position.getX(), position.getY(), rayon, rayon);
@@ -99,12 +94,12 @@ public class TrouNoir {
 
 	/**
 	 * 
-	 * méthode qui détecte la collision de la voiture et la colle
+	 * méthode qui détecte la collision de la voiture et le trou noir
 	 * 
-	 * @param v ceci est la valeur de la voiture
-	 * @return la valeur de la collision en true or false
+	 * @param v La voiture affectée
+	 * @return La valeur de la collision entre la voiture et le trou noir
 	 */
-	// Alexis Pineda-Alvarado
+	// Tan Tommy Rin
 	public boolean collisionDeLaVoiture(Voiture v) {
 		this.voiture = v;
 		zoneAireCopie = new Area(zone);
@@ -167,5 +162,13 @@ public class TrouNoir {
 
 	public void setMasseTrouNoir(int masseTrouNoir) {
 		this.masseTrouNoir = masseTrouNoir;
+	}
+
+	public boolean isEnContactAvecTrouNoir() {
+		return enContactAvecTrouNoir;
+	}
+
+	public void setEnContactAvecTrouNoir(boolean enContactAvecTrouNoir) {
+		this.enContactAvecTrouNoir = enContactAvecTrouNoir;
 	}
 }

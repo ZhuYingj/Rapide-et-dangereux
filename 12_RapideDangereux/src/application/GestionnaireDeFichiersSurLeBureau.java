@@ -70,8 +70,6 @@ public class GestionnaireDeFichiersSurLeBureau {
 					"\nLes informations sur la voiture et le regroupement sont écrites avec succès. \nLe fichier "
 							+ fichierDeTravail.toString() + " est pret pour la lecture!");
 
-			nombrePiste++;
-
 		}
 
 		catch (IOException e) {
