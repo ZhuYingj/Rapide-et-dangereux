@@ -22,6 +22,8 @@ import application.AppPrincipale12;
 import dessin.ZoneAcceleration;
 import dessin.ZoneAnimPhysique;
 import dessin.ZoneVitesse;
+import utilitaireObjets.PisteDeDepart;
+import utilitaireObjets.Voiture;
 
 /**
  * Classe qui permet de créer et gérer la fenetre du jeu avec le mode
@@ -35,7 +37,9 @@ public class FenetreJeuScientifique extends JPanel {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
 	private AppPrincipale12 application;
+	private PisteDeDepart pisteDepart;
 	private JProgressBar progressBarFroce;
+	private Voiture voiture;
 	private JLabel lblAccEnXV1;
 	private JLabel lblTempsEcouleValeur;
 	private JLabel lblAccEnYV1;
@@ -486,7 +490,7 @@ public class FenetreJeuScientifique extends JPanel {
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.restartPos();
+				zoneAnimPhysique.restartPosPisteDepart();
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
 				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);

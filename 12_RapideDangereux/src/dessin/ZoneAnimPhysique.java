@@ -564,6 +564,37 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		repaint();
 	}
 
+	/**
+	 * Méthode qui permet de réinitialiser la position de la voiture directement
+	 * dans la piste de départ
+	 */
+	//Alexis Pineda-Alvarado
+	public void restartPosPisteDepart() {
+		arreter();
+		tempsTotalEcoule = 0.000;
+
+		regroupement.getListePisteDeDepart().get(0).getVoiture()
+				.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+						regroupement.getListePisteDeDepart().get(0).getY() + 10));
+		regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(valeurInit);
+		regroupement.getListePisteDeDepart().get(0).getVoiture().setAccel(valeurInit);
+		regroupement.getListePisteDeDepart().get(0).getVoiture().setAngle(0);
+
+		regroupement.getListePisteDeDepart().get(0).getVoiture2()
+				.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+						regroupement.getListePisteDeDepart().get(0).getY() + 50));
+		regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(valeurInit);
+		regroupement.getListePisteDeDepart().get(0).getVoiture2().setAccel(valeurInit);
+		regroupement.getListePisteDeDepart().get(0).getVoiture2().setAngle(0);
+
+		angleVoitureDegre = 0;
+		angleVoitureDegre2 = 0;
+		regroupement.resetTour();
+		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
+
+		repaint();
+	}
+
 	/*
 	 * Change le temps pour le sleep du thread.
 	 * 

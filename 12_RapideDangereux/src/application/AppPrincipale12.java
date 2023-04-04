@@ -339,7 +339,7 @@ public class AppPrincipale12 extends JFrame {
 			fenModeJeu.setVisible(true);
 			fenEditeur.setVisible(false);
 			setContentPane(fenModeJeu);
-			fenJeuScience.getZoneAnimPhysique().restartPos();
+			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenJeuScience.getBtnStart().setEnabled(true);
 			break;
 
@@ -431,7 +431,7 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.setVisible(false);
 			fenModeJeu.setVisible(true);
 			setContentPane(fenModeJeu);
-			fenJeuScience.getZoneAnimPhysique().restartPos();
+			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenJeuScience.getBtnStart().setEnabled(true);
 
 			break;
