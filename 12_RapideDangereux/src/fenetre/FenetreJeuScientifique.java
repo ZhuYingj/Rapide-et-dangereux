@@ -404,7 +404,7 @@ public class FenetreJeuScientifique extends JPanel {
 		zoneAcceleration.setBounds(250, -33, 250, 274);
 		panelObjetEtGraphique.add(zoneAcceleration);
 
-		Timer timerVitesse = new Timer(100, new ActionListener() {
+		Timer timerVitesse = new Timer(50, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	double vitesseActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getVitesse().module();
 		    //	double vitesseActuelle1 = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture2().getVitesse().module();

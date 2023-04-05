@@ -45,7 +45,11 @@ public class JeuOptions extends JPanel {
 	private Regroupement regroupement;
 	private TypePiste type = TypePiste.MEXIQUE;
 	private Image imageActuelle;
+	private int indexCouleur = 0;
+    private Color[] couleurs = {Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE};
 
+	
+	
 	/**
 	 * Méthode qui permet de placer un écouteur
 	 */
@@ -208,17 +212,39 @@ public class JeuOptions extends JPanel {
 		add(btnCommencer);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(970, 77, 143, 257);
+		panel_2.setBackground(Color.YELLOW);
+		panel_2.setBounds(970, 156, 143, 90);
 		add(panel_2);
 
 		JButton btnGauche = new JButton("<");
 		btnGauche.setBounds(905, 188, 55, 23);
+		btnGauche.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                indexCouleur--;
+                if (indexCouleur < 0) {
+                    indexCouleur = couleurs.length - 1;
+                }
+                panel_2.setBackground(couleurs[indexCouleur]);
+            }
+        });
 		add(btnGauche);
 
 		JButton btnDroite = new JButton(">");
 		btnDroite.setBounds(1123, 188, 55, 23);
+		  btnDroite.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                indexCouleur++;
+	                if (indexCouleur == couleurs.length) {
+	                    indexCouleur = 0;
+	                }
+	                panel_2.setBackground(couleurs[indexCouleur]);
+	            //    zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getVitesse().setSkin(couleurs[indexCouleur]);
+	            }
+	        });
 		add(btnDroite);
+		
 
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
