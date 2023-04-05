@@ -82,8 +82,8 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(0.5f);
-		g2d.setStroke(stroke);
+		//Stroke stroke = new BasicStroke(0.5f);
+		g2d.setStroke( new BasicStroke(2) );
 		g2d.drawLine(x, y + 1, x, y + taillePiste - 1);
 		g2d.drawLine(x + taillePiste, y + 1, x + taillePiste, y + taillePiste - 1);
 

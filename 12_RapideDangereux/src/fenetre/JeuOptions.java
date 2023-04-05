@@ -49,12 +49,12 @@ public class JeuOptions extends JPanel {
 	private TypePiste type = TypePiste.MEXIQUE;
 	private Image imageActuelle;
 	private int indexCouleur = 0;
+
 	private int indexCouleur2 = 0;
     private Color[] couleurs = {Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE};
     private Color[] couleurs2 = {Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE};
 
-	
-	
+
 	/**
 	 * Méthode qui permet de placer un écouteur
 	 */
@@ -116,7 +116,7 @@ public class JeuOptions extends JPanel {
 				imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
 				zoneApercupiste.setImg(imageActuelle);
 				zoneApercupiste.repaint();
-		
+
 			}
 		});
 
@@ -192,15 +192,15 @@ public class JeuOptions extends JPanel {
 		rdbtnDifficile.setBounds(165, 131, 109, 23);
 		panel_1.add(rdbtnDifficile);
 		buttonGroupDiff.add(rdbtnDifficile);
-		
+
 		JLabel lblVitesseFacile = new JLabel("60 m/s");
 		lblVitesseFacile.setBounds(280, 84, 46, 14);
 		panel_1.add(lblVitesseFacile);
-		
+
 		JLabel lblVitesseIntermediaire = new JLabel("80 m/s");
 		lblVitesseIntermediaire.setBounds(280, 109, 46, 14);
 		panel_1.add(lblVitesseIntermediaire);
-		
+
 		JLabel lblVitesseAvance = new JLabel("100 m/s");
 		lblVitesseAvance.setBounds(280, 135, 46, 14);
 		panel_1.add(lblVitesseAvance);
@@ -211,8 +211,13 @@ public class JeuOptions extends JPanel {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
 				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
 				pcs.firePropertyChange("TYPEPISTE", null, type);
+
 				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 				pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+
+
+				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);
@@ -226,6 +231,7 @@ public class JeuOptions extends JPanel {
 		JButton btnGauche = new JButton("<");
 		btnGauche.setBounds(891, 116, 55, 23);
 		btnGauche.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 indexCouleur--;
@@ -235,9 +241,11 @@ public class JeuOptions extends JPanel {
                 panel_V1.setBackground(couleurs[indexCouleur]);
             }
         });
+
 		add(btnGauche);
 
 		JButton btnDroite = new JButton(">");
+
 		btnDroite.setBounds(1123, 116, 55, 23);
 		  btnDroite.addActionListener(new ActionListener() {
 	            @Override
@@ -250,7 +258,6 @@ public class JeuOptions extends JPanel {
 	            }
 	        });
 		add(btnDroite);
-		
 
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {

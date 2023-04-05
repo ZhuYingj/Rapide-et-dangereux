@@ -25,9 +25,8 @@ import fenetre.FenetreMenu;
 import fenetre.FenetreOptionMontre;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
+import fenetre.test;
 import interfaces.TypePiste;
-import utilitaireObjets.Regroupement;
-import java.awt.Window.Type;
 
 /**
  * Application permettant d'illustrer une simulation physique
@@ -111,8 +110,10 @@ public class AppPrincipale12 extends JFrame {
 		FenetreJeuScientifique fenJeuScience = new FenetreJeuScientifique();
 		JeuOptions fenOptions = new JeuOptions();
 		FenetreOptionMontre fenOptionMontre = new FenetreOptionMontre();
+
 		ClassementParPiste fenRecord = new ClassementParPiste();
 
+		test fenTest = new test();
 		ajouterModeEditeurComboBox(fenEditeur);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -196,7 +197,8 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionChangeJeuCourse(evt, fenOptionMontre, fenJeuScience);
+				actionChangeJeuCourse(evt, fenOptionMontre, fenTest);
+				actionRetourOptionCCM(evt, fenOptionMontre, fenModeJeu);
 			}
 		});
 
@@ -258,8 +260,9 @@ public class AppPrincipale12 extends JFrame {
 		case "TYPEPISTE":
 			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
+			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
 			break;
-			
 			// Ludovic Julien
 			//permet le changement de couleur des voiture dans la zone d'annimation
 		case "SKIN":
@@ -550,15 +553,34 @@ public class AppPrincipale12 extends JFrame {
 	 *                        le mode de jeu course contre la montre
 	 */
 // Alexis Pineda-Alvarado
-	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
-			FenetreJeuScientifique fenJeuScience) {
+	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre, test fenTest) {
 		switch (evt.getPropertyName()) {
 		case "COMMENCER COURSE MONTRE":
 			fenOptionMontre.setVisible(false);
-			fenJeuScience.setVisible(true);
-			setContentPane(fenJeuScience);
+			fenTest.setVisible(true);
+			setContentPane(fenTest);
 			break;
 
+		}
+	}
+
+	/**
+	 * Méthode qui change le panel des options pour le mode course contre la montre
+	 * avec le panel de mode de jeu
+	 * 
+	 * @param evt             evenement
+	 * @param fenOptionMontre fenêtre des paramètres a choisir dans le mode course
+	 *                        contre la montre
+	 * @param fenModeJeu      fenêtre de la selection de mode de jeu
+	 */
+	public void actionRetourOptionCCM(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
+			ModeDeJeu fenModeJeu) {
+		switch (evt.getPropertyName()) {
+		case "Retour":
+			fenOptionMontre.setVisible(false);
+			fenModeJeu.setVisible(true);
+			setContentPane(fenModeJeu);
+			break;
 		}
 	}
 

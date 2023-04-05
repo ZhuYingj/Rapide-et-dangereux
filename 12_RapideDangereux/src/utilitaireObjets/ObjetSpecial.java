@@ -112,26 +112,27 @@ public class ObjetSpecial implements Dessinable {
 	 * @param toucheActive Si la touche d'acceleration est activée
 	 */
 	// Tan Tommy Rin
-	public void fonctionColle(Voiture voiture, boolean toucheActive) {
-
-		if (toucheActive == true) {
-			if (voiture.getVitesse().module() < 20) {
-
-			} else if (voiture.getVitesse().module() < 30) {
-				voiture.setAccel(new Vecteur2D(-10 * Math.cos(voiture.getAngle()), -10 * Math.sin(voiture.getAngle())));
-			} else {
-				voiture.setAccel(new Vecteur2D(-19 * Math.cos(voiture.getAngle()), -19 * Math.sin(voiture.getAngle())));
-			}
-
+	public void fonctionColle(Voiture voiture) {
+		if (voiture.getVitesse().module() < 5) {
+			System.out.println("0");
+		} else if (voiture.getVitesse().module() < 15) {
+			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
+			voiture.setAccel(new Vecteur2D(-5 * Math.cos(voiture.getAngle()), -5 * Math.sin(voiture.getAngle())));
+			System.out.println("1");
+		} else if (voiture.getVitesse().module() < 30) {
+			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
+			voiture.setAccel(new Vecteur2D(-10 * Math.cos(voiture.getAngle()), -10 * Math.sin(voiture.getAngle())));
+			System.out.println("2");
+		} else if (voiture.getVitesse().module() < 45) {
+			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
+			voiture.setAccel(new Vecteur2D(-20 * Math.cos(voiture.getAngle()), -19 * Math.sin(voiture.getAngle())));
+			System.out.println("3");
 		} else {
-			if (voiture.getVitesse().module() < 20) {
-
-			} else if (voiture.getVitesse().module() < 30) {
-				voiture.setAccel(new Vecteur2D(-8 * Math.cos(voiture.getAngle()), -8 * Math.sin(voiture.getAngle())));
-			} else {
-				voiture.setAccel(new Vecteur2D(-17 * Math.cos(voiture.getAngle()), -17 * Math.sin(voiture.getAngle())));
-			}
+			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
+			voiture.setAccel(new Vecteur2D(-30 * Math.cos(voiture.getAngle()), -22 * Math.sin(voiture.getAngle())));
+			System.out.println("4");
 		}
+	
 
 	}
 
