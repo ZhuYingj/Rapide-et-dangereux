@@ -87,7 +87,8 @@ public class Regroupement implements Dessinable, Serializable {
 
 	private boolean enContactAvecColle = false;
 	private boolean enContactAvecColle2 = false;
-
+	/** Pour savoir si la voiture 1 accélère **/
+	private boolean toucheHautActive = false;
 	/** Pour savoir si la voiture 2 accélère **/
 	private boolean toucheWActive = false;
 	/** Le morceau de piste courant de la liste **/
@@ -303,13 +304,13 @@ public class Regroupement implements Dessinable, Serializable {
 				// Affecte les 2 voitures
 				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
 
-					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture2(), toucheWActive);
+					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
 
 				}
 
 				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
-					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture(), toucheWActive);
+					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture());
 
 				}
 			}
@@ -399,13 +400,13 @@ public class Regroupement implements Dessinable, Serializable {
 				// Affecte les 2 voitures
 				if (objSpecial2.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
 
-					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture2(), toucheWActive);
+					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
 
 				}
 
 				if (objSpecial2.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
-					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture(), toucheWActive);
+					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture());
 
 				}
 			}
@@ -1324,6 +1325,14 @@ public class Regroupement implements Dessinable, Serializable {
 	public void setPixelsParMetre(double pixelsParMetre) {
 		this.pixelsParMetre = pixelsParMetre;
 
+	}
+
+	public boolean isToucheHautActive() {
+		return toucheHautActive;
+	}
+
+	public void setToucheHautActive(boolean toucheHautActive) {
+		this.toucheHautActive = toucheHautActive;
 	}
 
 	public TypePiste getType() {

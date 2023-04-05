@@ -428,10 +428,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				if ((regroupement.getObjSpecial() != null
 						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR)
 						|| (regroupement.getObjSpecial2() != null
-								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR)) {
+								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR)
+						|| (regroupement.getObjSpecial() != null && regroupement.getObjSpecial().getColle()
+								.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)
+						|| (regroupement.getObjSpecial2() != null
+								&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
+										regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)) {
 
 				} else {
 					voiture.setAccel(valeurInit);
+
 				}
 
 			}
@@ -465,15 +471,19 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				if ((regroupement.getObjSpecial() != null
 						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR)
 						|| (regroupement.getObjSpecial2() != null
-								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR)) {
+								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR)
+						|| (regroupement.getObjSpecial() != null
+								&& regroupement.getObjSpecial().getColle().collisionDeLaVoiture(
+										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
+						|| (regroupement.getObjSpecial2() != null
+								&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
+										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)) {
 
 				} else {
 					voiture2.setAccel(valeurInit);
-				}
-				regroupement.setToucheWActive(false);
 
-			} else {
-				regroupement.setToucheWActive(true);
+				}
+
 			}
 
 			repaint();
@@ -971,7 +981,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			voiture.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
 					regroupement.getListePisteDeDepart().get(0).getY()));
 			voiture2.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-					regroupement.getListePisteDeDepart().get(0).getY()));
+					regroupement.getListePisteDeDepart().get(0).getY()
+							+ regroupement.getListePisteDeDepart().get(0).getTaillePiste() / 2));
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
 			regroupement.setNombreBoiteMystere(regroupementTempo.getRegroupementBoiteMystere().size());
