@@ -17,6 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import fenetre.ClassementParPiste;
 import fenetre.FenetreEditeur;
 import fenetre.FenetreJeuSansScientifique;
 import fenetre.FenetreJeuScientifique;
@@ -110,6 +111,7 @@ public class AppPrincipale12 extends JFrame {
 		FenetreJeuScientifique fenJeuScience = new FenetreJeuScientifique();
 		JeuOptions fenOptions = new JeuOptions();
 		FenetreOptionMontre fenOptionMontre = new FenetreOptionMontre();
+		ClassementParPiste fenRecord = new ClassementParPiste();
 
 		ajouterModeEditeurComboBox(fenEditeur);
 
@@ -257,6 +259,9 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			break;
+			
+			// Ludovic Julien
+			//permet le changement de couleur des voiture dans la zone d'annimation
 		case "SKIN":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setSkin((Color) evt.getNewValue());
 			break;

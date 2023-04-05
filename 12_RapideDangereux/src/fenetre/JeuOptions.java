@@ -32,6 +32,7 @@ import javax.swing.SwingConstants;
  * Monde
  * 
  * @author Alexis Pineda-Alvarado
+ * @author Ludovic Julien
  * 
  */
 
@@ -93,7 +94,7 @@ public class JeuOptions extends JPanel {
 				zoneApercupiste.repaint();
 			}
 		});
-
+		
 		JButton btnCanada = new JButton("Canada");
 		btnCanada.setBounds(307, 77, 126, 78);
 		add(btnCanada);
@@ -304,6 +305,18 @@ public class JeuOptions extends JPanel {
             }
         });
 		add(btnDroite1);
+		
+		JButton btnRecorsPiste = new JButton("Records par piste !");
+		btnRecorsPiste.setForeground(new Color(0, 0, 0));
+		btnRecorsPiste.setBackground(Color.CYAN);
+		btnRecorsPiste.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnRecorsPiste.setBounds(643, 77, 159, 78);
+		btnRecorsPiste.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("RECORD", null, -1);
+			}
+		});
+		add(btnRecorsPiste);
 
 	}
 }
