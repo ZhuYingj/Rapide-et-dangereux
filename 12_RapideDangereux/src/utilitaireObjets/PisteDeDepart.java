@@ -83,7 +83,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);
 		g2d.setColor(Color.RED);
-		Stroke stroke1 = new BasicStroke(0.5f);
+		Stroke stroke1 = new BasicStroke(2f);
 		g2d.setStroke(stroke1);
 		g2d.drawLine(x + 1, y, x + taillePiste - 1, y);
 		g2d.drawLine(x + 1, y + taillePiste, x + taillePiste - 1, y + taillePiste);

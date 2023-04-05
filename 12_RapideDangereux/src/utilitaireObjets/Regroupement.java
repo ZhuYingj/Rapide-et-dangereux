@@ -374,7 +374,7 @@ public class Regroupement implements Dessinable, Serializable {
 						.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
 
 				// VOITURE 1 ET 2 POUR OBJET1
-				if (tempsTemp2 + 15 > tempsTotalEcoule) {
+				if (tempsTemp2 + 6 > tempsTotalEcoule) {
 
 					if (objSpecial2.getTrouNoir()
 							.collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {

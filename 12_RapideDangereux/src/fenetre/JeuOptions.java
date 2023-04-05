@@ -204,7 +204,9 @@ public class JeuOptions extends JPanel {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
 				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
 				pcs.firePropertyChange("TYPEPISTE", null, type);
+
 				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);
@@ -225,7 +227,6 @@ public class JeuOptions extends JPanel {
 					indexCouleur = couleurs.length - 1;
 				}
 				panel_2.setBackground(couleurs[indexCouleur]);
-				
 
 			}
 		});
