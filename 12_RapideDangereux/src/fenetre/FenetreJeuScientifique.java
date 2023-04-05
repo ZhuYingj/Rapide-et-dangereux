@@ -8,18 +8,22 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import application.AppPrincipale12;
+import dessin.ZoneAcceleration;
 import dessin.ZoneAnimPhysique;
+import dessin.ZoneVitesse;
+import utilitaireObjets.PisteDeDepart;
+import utilitaireObjets.Voiture;
 
 /**
  * Classe qui permet de créer et gérer la fenetre du jeu avec le mode
@@ -33,6 +37,9 @@ public class FenetreJeuScientifique extends JPanel {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
 	private AppPrincipale12 application;
+	private PisteDeDepart pisteDepart;
+	private JProgressBar progressBarFroce;
+	private Voiture voiture;
 	private JLabel lblAccEnXV1;
 	private JLabel lblTempsEcouleValeur;
 	private JLabel lblAccEnYV1;
@@ -243,7 +250,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblAccEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAccEnYV1.setBounds(194, 132, 65, 29);
 		panelDonneScientifique.add(lblAccEnYV1);
-		
+
 		lblAccEnXV2 = new JLabel("0.00");
 		lblAccEnXV2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAccEnXV2.setBounds(361, 132, 65, 29);
@@ -258,7 +265,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblAccV1Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAccV1Separator.setBounds(108, 132, 162, 29);
 		panelDonneScientifique.add(lblAccV1Separator);
-		
+
 		JLabel lblAccV2Separator = new JLabel("[               ,               ]");
 		lblAccV2Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAccV2Separator.setBounds(350, 132, 162, 29);
@@ -273,7 +280,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblVitesseEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblVitesseEnYV1.setBounds(194, 92, 65, 29);
 		panelDonneScientifique.add(lblVitesseEnYV1);
-		
+
 		lblVitesseEnXV2 = new JLabel("0.00");
 		lblVitesseEnXV2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblVitesseEnXV2.setBounds(361, 92, 65, 29);
@@ -298,12 +305,12 @@ public class FenetreJeuScientifique extends JPanel {
 		lblPositionEnXV1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPositionEnXV1.setBounds(121, 52, 65, 29);
 		panelDonneScientifique.add(lblPositionEnXV1);
-		
+
 		JLabel lblVitesseV2Separator = new JLabel("[               ,               ]");
 		lblVitesseV2Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblVitesseV2Separator.setBounds(350, 92, 162, 29);
 		panelDonneScientifique.add(lblVitesseV2Separator);
-		
+
 		lblPositionEnYV2 = new JLabel("0.00");
 		lblPositionEnYV2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPositionEnYV2.setBounds(433, 52, 65, 29);
@@ -318,7 +325,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblPositionV1Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPositionV1Separator.setBounds(108, 52, 162, 29);
 		panelDonneScientifique.add(lblPositionV1Separator);
-		
+
 		JLabel lblPositionV2Separator = new JLabel("[               ,               ]");
 		lblPositionV2Separator.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPositionV2Separator.setBounds(350, 52, 162, 29);
@@ -348,7 +355,6 @@ public class FenetreJeuScientifique extends JPanel {
 		lblRadVoiture2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblRadVoiture2.setBounds(523, 337, 38, 29);
 		panelDonneScientifique.add(lblRadVoiture2);
-		
 
 		JLabel lblNombreToursV1 = new JLabel("Nombre de tours :");
 		lblNombreToursV1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -381,13 +387,65 @@ public class FenetreJeuScientifique extends JPanel {
 		add(panelObjetEtGraphique);
 		panelObjetEtGraphique.setLayout(null);
 
-		JProgressBar progressBarFroce = new JProgressBar();
+		progressBarFroce = new JProgressBar();
 		progressBarFroce.setFont(new Font("Tahoma", Font.BOLD, 12));
 		progressBarFroce.setStringPainted(true);
 		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
 		progressBarFroce.setBounds(519, 11, 30, 157);
+
 		panelObjetEtGraphique.add(progressBarFroce);
 
+		ZoneVitesse zoneVitesse = new ZoneVitesse();
+		zoneVitesse.setBounds(0, -33, 250, 274);
+		panelObjetEtGraphique.add(zoneVitesse);
+		
+		
+		ZoneAcceleration zoneAcceleration = new ZoneAcceleration();
+		zoneAcceleration.setBounds(250, -33, 250, 274);
+		panelObjetEtGraphique.add(zoneAcceleration);
+
+		Timer timerVitesse = new Timer(100, new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	double vitesseActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getVitesse().module();
+		    //	double vitesseActuelle1 = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture2().getVitesse().module();
+		    	double accelerationActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getAccel().module();
+		    	  if (vitesseActuelle < 0) {
+				    	vitesseActuelle = (vitesseActuelle*-1);
+				    } 
+               zoneVitesse.ajouterVitesse(vitesseActuelle);
+               
+               
+               if (accelerationActuelle < 0) {
+			    	accelerationActuelle = (accelerationActuelle*-1);
+			    } 
+          zoneAcceleration.ajouterAcceleration(accelerationActuelle);
+        
+          
+          zoneVitesse.ajouterTemps();
+			zoneAcceleration.ajouterTemps();
+		    }
+		});
+		
+//		Timer timerAccel = new Timer(100, new ActionListener() {
+//		    public void actionPerformed(ActionEvent e) {
+//		    	double accelerationActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getAccel().module();
+//		    	  if (accelerationActuelle < 0) {
+//				    	accelerationActuelle = (accelerationActuelle*-1);
+//				    } 
+//               zoneAcceleration.ajouterAcceleration(accelerationActuelle);
+//             
+//		    }
+//		});
+//		
+//		Timer timerTemps = new Timer(100, new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				 zoneVitesse.ajouterTemps();
+//				zoneAcceleration.ajouterTemps();
+//			}
+//			
+//		});
+
+		
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -395,6 +453,14 @@ public class FenetreJeuScientifique extends JPanel {
 
 				pcs.firePropertyChange("Test", null, -1);
 
+				zoneVitesse.renouvlerTemps();
+                zoneVitesse.renouvlerVitesse();
+                timerVitesse.stop();
+				//timerTemps.stop();
+				//timerAccel.stop();
+				 zoneAcceleration.renouvlerTemps();
+				 zoneAcceleration.renouvlerAcceleration();
+				
 			}
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
@@ -410,6 +476,11 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 
+				timerVitesse.start();
+				//timerTemps.start();
+				//timerAccel.start();
+
+				
 			}
 		});
 		btnStart.setBounds(10, 563, 89, 76);
@@ -419,10 +490,16 @@ public class FenetreJeuScientifique extends JPanel {
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.restartPos();
+				zoneAnimPhysique.restartPosPisteDepart();
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
 				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
+				
+				zoneVitesse.renouvlerTemps();
+                zoneVitesse.renouvlerVitesse();
+                zoneAcceleration.renouvlerTemps();
+                zoneAcceleration.renouvlerAcceleration();
+
 			}
 		});
 		btnReset.setBounds(175, 563, 89, 76);
@@ -445,6 +522,11 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.arreter();
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
+				
+				timerVitesse.stop();
+			//	timerTemps.stop();
+			//	timerAccel.stop();
+
 			}
 		});
 		btnStop.setBounds(538, 563, 89, 76);
@@ -524,6 +606,14 @@ public class FenetreJeuScientifique extends JPanel {
 			lblAngleVoiture2Rad.setText(String.format("%.2f", evt.getNewValue()));
 		case "nombreToursV2":
 			lblNombreToursVoiture2.setText(String.format("%.0f", evt.getNewValue()));
+		case "ForceLance":
+
+			Double newData = new Double((double) evt.getNewValue());
+			int valeur = newData.intValue();
+			progressBarFroce.setMinimum(0);
+			progressBarFroce.setMaximum(100);
+			progressBarFroce.setValue(valeur - 50);
+
 		}
 	}
 }

@@ -19,6 +19,7 @@ import physique.MoteurPhysique;
  * 
  * @author Ludovic Julien
  * @author Kevin Nguyen
+ * @author Tan Tommy Rin
  */
 
 public class PisteVirageBas implements Dessinable, Selectionnable, Serializable {
@@ -59,6 +60,8 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	private Color color = Color.black;
 	/** Aire du morceau de piste **/
 	private Rectangle2D.Double formeAire;
+	private boolean enContactAvecColle = false;
+	private int nombrePisteColle = 0;
 
 	/**
 	 * Methode qui permet de construire la piste virage bas a l'aide de parametres
@@ -66,6 +69,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
+	// Ludovic Julien
 	public PisteVirageBas(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -75,6 +79,11 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 		this.murBas = y + taillePiste + 1;
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
+
+	/**
+	 * Méthode permettant de dessiner sur le composant graphique
+	 */
+	// Ludovic Julien
 
 	@Override
 	public void dessiner(Graphics2D g2d) {
@@ -100,16 +109,20 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	}
 
 	/**
-	 * Retourne l'aire du triangle
+	 * Méthode qui permet de détecter s'il y a une collision de la voiture avec le
+	 * morceau de piste
 	 * 
-	 * @return l'aire du triangle
+	 * @param voiture La voiture en collision
 	 */
-	public Area getAireTriangle() {
-		return aireTriangle;
-	}
+	// Tan Tommy Rin
+	public void collisionColle(Voiture voiture) {
 
-	public int getTaillePiste() {
-		return taillePiste;
+		if (formeAire.contains(voiture.getPosition().getX(), voiture.getPosition().getY())) {
+			enContactAvecColle = true;
+		} else {
+			enContactAvecColle = false;
+		}
+
 	}
 
 	/**
@@ -202,6 +215,37 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 
 	}
 
+	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
+	 * et la boule de neige
+	 * 
+	 * @param L'objet special de type boule de neige
+	 */
+	// Tan Tommy Rin
+
+	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
+
+		Area cercle = new Area(objetSpecial.getBouleDeNeige().getBoule());
+		cercle.intersect(aireTriangle);
+		// Cette variable est juste pour returner la valeur de vérité si la boule de
+		// neige est en collision avec ce morceau de piste
+		boolean enCollision = false;
+
+		if (objetSpecial.getBouleDeNeige().getBoule().getX() > murGauche
+				&& objetSpecial.getBouleDeNeige().getBoule().getX() < murDroite
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() > murHaut
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() < murBas) {
+			if (objetSpecial.getBouleDeNeige().getBoule().getX() < murGauche + 1) {
+				enCollision = true;
+			} else if (objetSpecial.getBouleDeNeige().getBoule().getY() < murHaut + 1) {
+				enCollision = true;
+			} else if (!cercle.isEmpty()) {
+				enCollision = true;
+			}
+		}
+		return enCollision;
+	}
+
 	public Rectangle2D.Double getFormeAire() {
 		return formeAire;
 	}
@@ -230,6 +274,27 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 		return x;
 	}
 
+	/**
+	 * Retourne l'aire du triangle
+	 * 
+	 * @return l'aire du triangle
+	 */
+	public Area getAireTriangle() {
+		return aireTriangle;
+	}
+
+	public int getTaillePiste() {
+		return taillePiste;
+	}
+
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
+	}
+
 	public void setX(int x) {
 		this.x = x;
 	}
@@ -241,6 +306,11 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
@@ -282,6 +352,14 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 
 	public void setMurBas(int murBas) {
 		this.murBas = murBas;
+	}
+
+	public boolean isEnContactAvecColle() {
+		return enContactAvecColle;
+	}
+
+	public void setEnContactAvecColle(boolean enContactAvecColle) {
+		this.enContactAvecColle = enContactAvecColle;
 	}
 
 }

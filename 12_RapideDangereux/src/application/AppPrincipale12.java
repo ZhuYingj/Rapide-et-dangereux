@@ -8,10 +8,6 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -20,14 +16,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import fenetre.FenetreOptionMontre;
 import fenetre.FenetreEditeur;
 import fenetre.FenetreJeuSansScientifique;
 import fenetre.FenetreJeuScientifique;
 import fenetre.FenetreMenu;
+import fenetre.FenetreOptionMontre;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
 import interfaces.TypePiste;
+import utilitaireObjets.Regroupement;
+import java.awt.Window.Type;
 
 /**
  * Application permettant d'illustrer une simulation physique
@@ -38,12 +36,12 @@ import interfaces.TypePiste;
  */
 
 public class AppPrincipale12 extends JFrame {
-	/** CheckBox **/
+
 	private JCheckBoxMenuItem checkBoxModeNonScientifique;
 	private JPanel contentPane;
 
 	private int nombrePiste = 1;
-	private String nomFichBinRegroupement = "regroupement" + nombrePiste + ".dat";
+	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String sousDossierSurBureau = "SauvegardePiste";
 
@@ -61,6 +59,7 @@ public class AppPrincipale12 extends JFrame {
 					frame.setVisible(true);
 					frame.requestFocus();
 					frame.checkBoxModeNonScientifique.setEnabled(false);
+//					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					frame.addKeyListener(new KeyAdapter() {
 						@Override
 						public void keyPressed(KeyEvent e) {
@@ -82,13 +81,13 @@ public class AppPrincipale12 extends JFrame {
 	 * 
 	 * @param fenEditeur la fenetre d'édition
 	 */
-// Par Tan Tommy Rin
+//Tan Tommy Rin
 	public void ajouterModeEditeurComboBox(FenetreEditeur fenEditeur) {
 		while (fichierDeTravail.exists()) {
 
 			fenEditeur.getComboBoxPiste().addItem((String) nomFichBinRegroupement);
 			nombrePiste++;
-			nomFichBinRegroupement = ("regroupement" + nombrePiste + ".dat");
+			nomFichBinRegroupement = ("Piste" + nombrePiste + ".dat");
 
 			fichierDeTravail = new File(System.getProperty("user.home"),
 					"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
@@ -111,7 +110,7 @@ public class AppPrincipale12 extends JFrame {
 		JeuOptions fenOptions = new JeuOptions();
 		FenetreOptionMontre fenOptionMontre = new FenetreOptionMontre();
 
-//		ajouterModeEditeurComboBox(fenEditeur);
+		ajouterModeEditeurComboBox(fenEditeur);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1350, 800);
@@ -219,11 +218,13 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
 	 * à la fenetre de jeu d'options
 	 * 
-	 * @param evt           evenement
-	 * @param fenJeuScience la fenetre de jeu avec mode science activé
-	 * @param fenOptions    la fenetre de jeu d'options
+	 * @param evt            evenement
+	 * @param fenJeuScience  la fenetre de jeu avec mode science activé
+	 * @param fenOptions     la fenetre de jeu d'options
+	 * @param fenSansScience la fenetre non scientifique
 	 */
-// Par Tan Tommy Rin
+
+// Tan Tommy Rin
 	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
 			FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
@@ -338,7 +339,7 @@ public class AppPrincipale12 extends JFrame {
 			fenModeJeu.setVisible(true);
 			fenEditeur.setVisible(false);
 			setContentPane(fenModeJeu);
-			fenJeuScience.getZoneAnimPhysique().restartPos();
+			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenJeuScience.getBtnStart().setEnabled(true);
 			break;
 
@@ -354,12 +355,11 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenEditeur fenêtre du mode editeur
 	 * @param fenScience la fenetre de jeu avec le mode scientifique
 	 */
-// Par Tan Tommy Rin
+//  Tan Tommy Rin
 
 	public void actionJouerDeEditeur(PropertyChangeEvent evt, FenetreEditeur fenEditeur,
 			FenetreJeuScientifique fenScience) {
 		switch (evt.getPropertyName()) {
-
 		case "JOUEREDITEUR":
 
 			fenScience.setVisible(true);
@@ -431,7 +431,7 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.setVisible(false);
 			fenModeJeu.setVisible(true);
 			setContentPane(fenModeJeu);
-			fenJeuScience.getZoneAnimPhysique().restartPos();
+			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenJeuScience.getBtnStart().setEnabled(true);
 
 			break;

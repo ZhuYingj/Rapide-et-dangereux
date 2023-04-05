@@ -1,18 +1,12 @@
 package fenetre;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Rectangle2D;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,7 +16,6 @@ import javax.swing.border.LineBorder;
 
 import application.GestionnaireDeFichiersSurLeBureau;
 import geometrie.Vecteur2D;
-import interfaces.TypeObjetDeplacable;
 import interfaces.TypePiste;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BlocMystere;
@@ -46,8 +39,13 @@ import utilitaireObjets.Voiture;
 
 public class FenetreEditeur extends JPanel {
 
+	private int nombrePisteFerme = 0;
+	private JButton btnAjouterAccelerateur;
+	private boolean pisteFerme = false;
+	private Regroupement regroupement;
 	private PanelRegroupement panelRegroupement;
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
+	private String pisteCourante = "Piste1.dat";
 
 	private JButton btnSauvegarde;
 	private JButton btnJouer;
@@ -57,8 +55,6 @@ public class FenetreEditeur extends JPanel {
 
 	private Regroupement regroupementSauvegarde;
 	private PanelObjet panelObjet;
-
-	private Regroupement regroupement;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -92,12 +88,12 @@ public class FenetreEditeur extends JPanel {
 		panelObjet.setLayout(null);
 		panelObjet.setEnabled(false);
 
-		JButton btnAjouterAccelerateur = new JButton("+");
+		btnAjouterAccelerateur = new JButton("+");
 		btnAjouterAccelerateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Accelerateur accelerateur = new Accelerateur(650, 50);
 				panelRegroupement.getListeAccelerateur().add(accelerateur);
-
+				btnAjouterAccelerateur.setEnabled(false);
 				repaint();
 			}
 		});
@@ -111,6 +107,7 @@ public class FenetreEditeur extends JPanel {
 					panelRegroupement.getListeAccelerateur()
 							.remove(panelRegroupement.getListeAccelerateur().size() - 1);
 					repaint();
+					btnAjouterAccelerateur.setEnabled(true);
 				}
 			}
 		});
@@ -324,28 +321,31 @@ public class FenetreEditeur extends JPanel {
 		btnSauvegarde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sauvegardeUnePiste();
+				gestionFich.setNombrePiste(comboBoxPiste.getItemCount() + 1);
+
+				pisteCourante = (String) comboBoxPiste.getSelectedItem();
+				chargementUnePiste();
+				JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU\nNOM :" + pisteCourante);
+
 			}
 		});
 
-		btnSauvegarde.setBounds(132, 508, 173, 23);
+		btnSauvegarde.setBounds(132, 508, 250, 23);
 
 		add(btnSauvegarde);
 
-		JButton btnChargerPisteSauvegarde = new JButton("CHARGER LA PISTE SAUVEGARDÉ");
-		btnChargerPisteSauvegarde.addActionListener(new ActionListener() {
+
+
+		comboBoxPiste = new JComboBox<String>();
+		comboBoxPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				pisteCourante = (String) comboBoxPiste.getSelectedItem();
 				chargementUnePiste();
 
 			}
 		});
 
-		btnChargerPisteSauvegarde.setBounds(335, 508, 214, 23);
-
-		add(btnChargerPisteSauvegarde);
-
-		comboBoxPiste = new JComboBox();
-
-		comboBoxPiste.setBounds(592, 508, 181, 23);
+		comboBoxPiste.setBounds(650, 508, 250, 23);
 
 		add(comboBoxPiste);
 
@@ -353,8 +353,22 @@ public class FenetreEditeur extends JPanel {
 		btnJouer.setEnabled(false);
 		btnJouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("JOUEREDITEUR", null, -1);
-				pcs.firePropertyChange("REGROUPEMENT", null, (String) comboBoxPiste.getSelectedItem());
+				verifierSiPisteFerme();
+				if (pisteFerme == true) {
+					sauvegardeUnePiste2();
+
+					chargementUnePiste();
+					pcs.firePropertyChange("JOUEREDITEUR", null, -1);
+
+					pcs.firePropertyChange("REGROUPEMENT", null, pisteCourante);
+
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU VIDE POUR JOUEZ");
+
+				}
+
+				resetValeur();
 			}
 		});
 
@@ -369,6 +383,755 @@ public class FenetreEditeur extends JPanel {
 	}
 
 	/**
+	 * Méthode qui permet de reinitialisé tous les valeurs du nombre de pistes
+	 * collés pour chaque morceau de piste.
+	 */
+	public void resetValeur() {
+		if (panelRegroupement.getListePisteHorizontale().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
+				panelRegroupement.getListePisteHorizontale().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteVerticale().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVerticale().size(); a++) {
+				panelRegroupement.getListePisteVerticale().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
+				panelRegroupement.getListePisteVirageGauche().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
+
+				panelRegroupement.getListePisteVirageDroit().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
+
+				panelRegroupement.getListePisteVirageHaut().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteVirageBas().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
+
+				panelRegroupement.getListePisteVirageBas().get(a).setNombrePisteColle(0);
+			}
+		}
+		if (panelRegroupement.getListePisteDeDepart().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteDeDepart().size(); a++) {
+
+				panelRegroupement.getListePisteDeDepart().get(a).setNombrePisteColle(0);
+			}
+		}
+
+		nombrePisteFerme = 0;
+	}
+
+	/**
+	 * Méthode qui permet de vérifier si chaque morceau de piste bas a les deux
+	 * cotés fermés.
+	 */
+	public void verifierNombrePisteAttacheBas() {
+		if (panelRegroupement.getListePisteVirageBas().size() != 0) {
+
+			for (int i = 0; i < panelRegroupement.getListePisteVirageBas().size(); i++) {
+				PisteVirageBas piste = panelRegroupement.getListePisteVirageBas().get(i);
+
+				Rectangle2D.Double formeAireDroite = new Rectangle2D.Double(piste.getX() + piste.getTaillePiste(),
+						piste.getY(), piste.getTaillePiste(), piste.getTaillePiste());
+				Rectangle2D.Double formeAireBas = new Rectangle2D.Double(piste.getX(),
+						piste.getY() + piste.getTaillePiste(), piste.getTaillePiste(), piste.getTaillePiste());
+
+				if (panelRegroupement.getListePisteDeDepart().size() != 0) {
+					PisteDeDepart pisteDepart = panelRegroupement.getListePisteDeDepart().get(0);
+
+					if (formeAireDroite.contains(pisteDepart.getX(), pisteDepart.getY())) {
+						panelRegroupement.getListePisteVirageBas().get(i).setNombrePisteColle(
+								panelRegroupement.getListePisteVirageBas().get(i).getNombrePisteColle() + 1);
+					}
+
+				}
+
+				if (panelRegroupement.getListePisteHorizontale().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
+						PisteHorizontale pisteHorizontale = panelRegroupement.getListePisteHorizontale().get(a);
+
+						if (formeAireDroite.contains(pisteHorizontale.getX(), pisteHorizontale.getY())) {
+							panelRegroupement.getListePisteVirageBas().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageBas().get(i).getNombrePisteColle() + 1);
+
+						}
+					}
+
+				}
+
+				if (panelRegroupement.getListePisteVerticale().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVerticale().size(); a++) {
+						PisteVerticale pisteVerticale = panelRegroupement.getListePisteVerticale().get(a);
+						if (formeAireBas.contains(pisteVerticale.getX(), pisteVerticale.getY())) {
+							panelRegroupement.getListePisteVirageBas().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageBas().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
+						PisteVirageDroit pisteVirageDroit = panelRegroupement.getListePisteVirageDroit().get(a);
+						if (formeAireBas.contains(pisteVirageDroit.getX(), pisteVirageDroit.getY())
+								|| formeAireDroite.contains(pisteVirageDroit.getX(), pisteVirageDroit.getY())) {
+							panelRegroupement.getListePisteVirageBas().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageBas().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+
+				if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
+						PisteVirageGauche pisteVirageGauche = panelRegroupement.getListePisteVirageGauche().get(a);
+						if (formeAireDroite.contains(pisteVirageGauche.getX(), pisteVirageGauche.getY())) {
+							panelRegroupement.getListePisteVirageBas().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageBas().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
+						PisteVirageHaut pisteVirageHaut = panelRegroupement.getListePisteVirageHaut().get(a);
+						if (formeAireBas.contains(pisteVirageHaut.getX(), pisteVirageHaut.getY())) {
+							panelRegroupement.getListePisteVirageBas().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageBas().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+
+			}
+
+			if (panelRegroupement.getListePisteVirageBas().size() != 0) {
+				for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
+					if (panelRegroupement.getListePisteVirageBas().get(a).getNombrePisteColle() == 2) {
+						nombrePisteFerme++;
+
+					}
+
+				}
+			}
+
+		}
+	}
+
+	/**
+	 * Méthode qui permet de vérifier si chaque morceau de piste haut a les deux
+	 * cotés fermés.
+	 */
+	public void verifierNombrePisteAttacheHaut() {
+		if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
+
+			for (int i = 0; i < panelRegroupement.getListePisteVirageHaut().size(); i++) {
+				PisteVirageHaut piste = panelRegroupement.getListePisteVirageHaut().get(i);
+
+				Rectangle2D.Double formeAireDroite = new Rectangle2D.Double(piste.getX() + piste.getTaillePiste(),
+						piste.getY(), piste.getTaillePiste(), piste.getTaillePiste());
+				Rectangle2D.Double formeAireHaut = new Rectangle2D.Double(piste.getX(),
+						piste.getY() - piste.getTaillePiste(), piste.getTaillePiste(), piste.getTaillePiste());
+
+				if (panelRegroupement.getListePisteDeDepart().size() != 0) {
+					PisteDeDepart pisteDepart = panelRegroupement.getListePisteDeDepart().get(0);
+
+					if (formeAireDroite.contains(pisteDepart.getX(), pisteDepart.getY())) {
+						panelRegroupement.getListePisteVirageHaut().get(i).setNombrePisteColle(
+								panelRegroupement.getListePisteVirageHaut().get(i).getNombrePisteColle() + 1);
+					}
+
+				}
+
+				if (panelRegroupement.getListePisteHorizontale().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
+						PisteHorizontale pisteHorizontale = panelRegroupement.getListePisteHorizontale().get(a);
+
+						if (formeAireDroite.contains(pisteHorizontale.getX(), pisteHorizontale.getY())) {
+							panelRegroupement.getListePisteVirageHaut().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageHaut().get(i).getNombrePisteColle() + 1);
+
+						}
+					}
+
+				}
+
+				if (panelRegroupement.getListePisteVerticale().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVerticale().size(); a++) {
+						PisteVerticale pisteVerticale = panelRegroupement.getListePisteVerticale().get(a);
+						if (formeAireHaut.contains(pisteVerticale.getX(), pisteVerticale.getY())) {
+							panelRegroupement.getListePisteVirageHaut().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageHaut().get(i).getNombrePisteColle() + 1);
+
+						}
+
+					}
+				}
+
+				if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
+						PisteVirageGauche pisteVirageGauche = panelRegroupement.getListePisteVirageGauche().get(a);
+						if (formeAireHaut.contains(pisteVirageGauche.getX(), pisteVirageGauche.getY())
+								|| formeAireDroite.contains(pisteVirageGauche.getX(), pisteVirageGauche.getY())) {
+							panelRegroupement.getListePisteVirageHaut().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageHaut().get(i).getNombrePisteColle() + 1);
+
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageBas().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
+						PisteVirageBas pisteVirageBas = panelRegroupement.getListePisteVirageBas().get(a);
+						if (formeAireHaut.contains(pisteVirageBas.getX(), pisteVirageBas.getY())) {
+							panelRegroupement.getListePisteVirageHaut().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageHaut().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
+						PisteVirageDroit pisteVirageDroit = panelRegroupement.getListePisteVirageDroit().get(a);
+						if (formeAireDroite.contains(pisteVirageDroit.getX(), pisteVirageDroit.getY())) {
+							panelRegroupement.getListePisteVirageHaut().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageHaut().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+
+			}
+			if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
+				for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
+					if (panelRegroupement.getListePisteVirageHaut().get(a).getNombrePisteColle() == 2) {
+
+						nombrePisteFerme++;
+					}
+
+				}
+			}
+
+		}
+	}
+
+	/**
+	 * Méthode qui permet de vérifier si chaque morceau de piste droite a les deux
+	 * cotés fermés.
+	 */
+	public void verifierNombrePisteAttacheDroite() {
+		if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
+
+			for (int i = 0; i < panelRegroupement.getListePisteVirageDroit().size(); i++) {
+				PisteVirageDroit piste = panelRegroupement.getListePisteVirageDroit().get(i);
+				Rectangle2D.Double formeAireGauche = new Rectangle2D.Double(piste.getX() - piste.getTaillePiste(),
+						piste.getY(), piste.getTaillePiste(), piste.getTaillePiste());
+				Rectangle2D.Double formeAireHaut = new Rectangle2D.Double(piste.getX(),
+						piste.getY() - piste.getTaillePiste(), piste.getTaillePiste(), piste.getTaillePiste());
+
+				if (panelRegroupement.getListePisteDeDepart().size() != 0) {
+					PisteDeDepart pisteDepart = panelRegroupement.getListePisteDeDepart().get(0);
+
+					if (formeAireGauche.contains(pisteDepart.getX(), pisteDepart.getY())) {
+						panelRegroupement.getListePisteVirageDroit().get(i).setNombrePisteColle(
+								panelRegroupement.getListePisteVirageDroit().get(i).getNombrePisteColle() + 1);
+					}
+
+				}
+
+				if (panelRegroupement.getListePisteHorizontale().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
+						PisteHorizontale pisteHorizontale = panelRegroupement.getListePisteHorizontale().get(a);
+
+						if (formeAireGauche.contains(pisteHorizontale.getX(), pisteHorizontale.getY())) {
+							panelRegroupement.getListePisteVirageDroit().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageDroit().get(i).getNombrePisteColle() + 1);
+
+						}
+					}
+
+				}
+				if (panelRegroupement.getListePisteVerticale().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVerticale().size(); a++) {
+						PisteVerticale pisteVerticale = panelRegroupement.getListePisteVerticale().get(a);
+						if (formeAireHaut.contains(pisteVerticale.getX(), pisteVerticale.getY())) {
+							panelRegroupement.getListePisteVirageDroit().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageDroit().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
+						PisteVirageGauche pisteVirageGauche = panelRegroupement.getListePisteVirageGauche().get(a);
+						if (formeAireHaut.contains(pisteVirageGauche.getX(), pisteVirageGauche.getY())) {
+							panelRegroupement.getListePisteVirageDroit().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageDroit().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageBas().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
+						PisteVirageBas pisteVirageBas = panelRegroupement.getListePisteVirageBas().get(a);
+						if (formeAireGauche.contains(pisteVirageBas.getX(), pisteVirageBas.getY())
+								|| formeAireHaut.contains(pisteVirageBas.getX(), pisteVirageBas.getY())) {
+							panelRegroupement.getListePisteVirageDroit().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageDroit().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
+						PisteVirageHaut pisteVirageHaut = panelRegroupement.getListePisteVirageHaut().get(a);
+						if (formeAireGauche.contains(pisteVirageHaut.getX(), pisteVirageHaut.getY())) {
+							panelRegroupement.getListePisteVirageDroit().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageDroit().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+
+			}
+			if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
+					if (panelRegroupement.getListePisteVirageDroit().get(a).getNombrePisteColle() == 2) {
+
+						nombrePisteFerme++;
+					}
+
+				}
+			}
+
+		}
+	}
+
+	/**
+	 * Méthode qui permet de vérifier si chaque morceau de piste verticale a les
+	 * deux cotés fermés.
+	 */
+	public void verifierNombrePisteAttacheVerticale() {
+		if (panelRegroupement.getListePisteVerticale().size() != 0) {
+
+			for (int i = 0; i < panelRegroupement.getListePisteVerticale().size(); i++) {
+				PisteVerticale piste = panelRegroupement.getListePisteVerticale().get(i);
+				Rectangle2D.Double formeAireBas = new Rectangle2D.Double(piste.getX(),
+						piste.getY() + piste.getTaillePiste(), piste.getTaillePiste(), piste.getTaillePiste());
+				Rectangle2D.Double formeAireHaut = new Rectangle2D.Double(piste.getX(),
+						piste.getY() - piste.getTaillePiste(), piste.getTaillePiste(), piste.getTaillePiste());
+
+				if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
+						PisteVirageGauche pisteVirageGauche = panelRegroupement.getListePisteVirageGauche().get(a);
+						if (formeAireHaut.contains(pisteVirageGauche.getX(), pisteVirageGauche.getY())) {
+							panelRegroupement.getListePisteVerticale().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVerticale().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
+						PisteVirageDroit pisteVirageDroit = panelRegroupement.getListePisteVirageDroit().get(a);
+						if (formeAireBas.contains(pisteVirageDroit.getX(), pisteVirageDroit.getY())) {
+							panelRegroupement.getListePisteVerticale().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVerticale().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
+						PisteVirageHaut pisteVirageHaut = panelRegroupement.getListePisteVirageHaut().get(a);
+						if (formeAireBas.contains(pisteVirageHaut.getX(), pisteVirageHaut.getY())) {
+							panelRegroupement.getListePisteVerticale().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVerticale().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageBas().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
+						PisteVirageBas pisteVirageBas = panelRegroupement.getListePisteVirageBas().get(a);
+						if (formeAireHaut.contains(pisteVirageBas.getX(), pisteVirageBas.getY())) {
+							panelRegroupement.getListePisteVerticale().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVerticale().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+
+				if (panelRegroupement.getListePisteVerticale().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVerticale().size(); a++) {
+						PisteVerticale pisteVerticale = panelRegroupement.getListePisteVerticale().get(a);
+
+						if (formeAireHaut.contains(pisteVerticale.getX(), pisteVerticale.getY())
+								|| formeAireBas.contains(pisteVerticale.getX(), pisteVerticale.getY())) {
+							panelRegroupement.getListePisteVerticale().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVerticale().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+
+				}
+
+			}
+
+			if (panelRegroupement.getListePisteVerticale().size() != 0) {
+				for (int a = 0; a < panelRegroupement.getListePisteVerticale().size(); a++) {
+					if (panelRegroupement.getListePisteVerticale().get(a).getNombrePisteColle() == 2) {
+
+						nombrePisteFerme++;
+					}
+
+				}
+			}
+
+		}
+
+	}
+
+	/**
+	 * Méthode qui permet de vérifier si chaque morceau de piste virage gauche a les
+	 * deux cotés fermés.
+	 */
+	public void verifierNombrePisteAttacheGauche() {
+		if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
+
+			for (int i = 0; i < panelRegroupement.getListePisteVirageGauche().size(); i++) {
+				PisteVirageGauche piste = panelRegroupement.getListePisteVirageGauche().get(i);
+				Rectangle2D.Double formeAireGauche = new Rectangle2D.Double(piste.getX() - piste.getTaillePiste(),
+						piste.getY(), piste.getTaillePiste(), piste.getTaillePiste());
+				Rectangle2D.Double formeAireBas = new Rectangle2D.Double(piste.getX(),
+						piste.getY() + piste.getTaillePiste(), piste.getTaillePiste(), piste.getTaillePiste());
+
+				if (panelRegroupement.getListePisteDeDepart().size() != 0) {
+					PisteDeDepart pisteDepart = panelRegroupement.getListePisteDeDepart().get(0);
+
+					if (formeAireGauche.contains(pisteDepart.getX(), pisteDepart.getY())) {
+						panelRegroupement.getListePisteVirageGauche().get(i).setNombrePisteColle(
+								panelRegroupement.getListePisteVirageGauche().get(i).getNombrePisteColle() + 1);
+					}
+
+				}
+				if (panelRegroupement.getListePisteHorizontale().size() != 0) {
+
+					for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
+						PisteHorizontale pisteHorizontale = panelRegroupement.getListePisteHorizontale().get(a);
+						if (formeAireGauche.contains(pisteHorizontale.getX(), pisteHorizontale.getY())) {
+							panelRegroupement.getListePisteVirageGauche().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageGauche().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVerticale().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVerticale().size(); a++) {
+						PisteVerticale pisteVerticale = panelRegroupement.getListePisteVerticale().get(a);
+
+						if (formeAireBas.contains(pisteVerticale.getX(), pisteVerticale.getY())) {
+							panelRegroupement.getListePisteVirageGauche().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageGauche().get(i).getNombrePisteColle() + 1);
+						}
+					}
+
+				}
+				if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
+						PisteVirageDroit pisteVirageDroit = panelRegroupement.getListePisteVirageDroit().get(a);
+						if (formeAireBas.contains(pisteVirageDroit.getX(), pisteVirageDroit.getY())) {
+							panelRegroupement.getListePisteVirageGauche().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageGauche().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
+						PisteVirageHaut pisteVirageHaut = panelRegroupement.getListePisteVirageHaut().get(a);
+						if (formeAireBas.contains(pisteVirageHaut.getX(), pisteVirageHaut.getY())
+								|| formeAireGauche.contains(pisteVirageHaut.getX(), pisteVirageHaut.getY())) {
+							panelRegroupement.getListePisteVirageGauche().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageGauche().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageBas().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
+						PisteVirageBas pisteVirageBas = panelRegroupement.getListePisteVirageBas().get(a);
+						if (formeAireGauche.contains(pisteVirageBas.getX(), pisteVirageBas.getY())) {
+							panelRegroupement.getListePisteVirageGauche().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteVirageGauche().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+
+			}
+			if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
+				for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
+					if (panelRegroupement.getListePisteVirageGauche().get(a).getNombrePisteColle() == 2) {
+
+						nombrePisteFerme++;
+					}
+
+				}
+			}
+
+		}
+	}
+
+	/**
+	 * Méthode qui permet de vérifier si chaque morceau de piste horizontale a les
+	 * deux cotés fermés.
+	 */
+	public void verifierNombrePisteAttacheHorizontale() {
+		if (panelRegroupement.getListePisteHorizontale().size() != 0) {
+
+			for (int i = 0; i < panelRegroupement.getListePisteHorizontale().size(); i++) {
+
+				PisteHorizontale piste = panelRegroupement.getListePisteHorizontale().get(i);
+				Rectangle2D.Double formeAireGauche = new Rectangle2D.Double(piste.getX() - piste.getTaillePiste(),
+						piste.getY(), piste.getTaillePiste(), piste.getTaillePiste());
+				Rectangle2D.Double formeAireDroit = new Rectangle2D.Double(piste.getX() + piste.getTaillePiste(),
+						piste.getY(), piste.getTaillePiste(), piste.getTaillePiste());
+				if (panelRegroupement.getListePisteDeDepart().size() != 0) {
+					PisteDeDepart pisteDepart = panelRegroupement.getListePisteDeDepart().get(0);
+
+					if (formeAireGauche.contains(pisteDepart.getX(), pisteDepart.getY())
+							|| formeAireDroit.contains(pisteDepart.getX(), pisteDepart.getY())) {
+						panelRegroupement.getListePisteHorizontale().get(i).setNombrePisteColle(
+								panelRegroupement.getListePisteHorizontale().get(i).getNombrePisteColle() + 1);
+					}
+
+				}
+				if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
+						PisteVirageGauche pisteVirageGauche = panelRegroupement.getListePisteVirageGauche().get(a);
+						if (formeAireDroit.contains(pisteVirageGauche.getX(), pisteVirageGauche.getY())) {
+							panelRegroupement.getListePisteHorizontale().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteHorizontale().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
+						PisteVirageDroit pisteVirageDroit = panelRegroupement.getListePisteVirageDroit().get(a);
+						if (formeAireDroit.contains(pisteVirageDroit.getX(), pisteVirageDroit.getY())) {
+							panelRegroupement.getListePisteHorizontale().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteHorizontale().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
+						PisteVirageHaut pisteVirageHaut = panelRegroupement.getListePisteVirageHaut().get(a);
+						if (formeAireGauche.contains(pisteVirageHaut.getX(), pisteVirageHaut.getY())) {
+							panelRegroupement.getListePisteHorizontale().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteHorizontale().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+				if (panelRegroupement.getListePisteVirageBas().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
+						PisteVirageBas pisteVirageBas = panelRegroupement.getListePisteVirageBas().get(a);
+						if (formeAireGauche.contains(pisteVirageBas.getX(), pisteVirageBas.getY())) {
+							panelRegroupement.getListePisteHorizontale().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteHorizontale().get(i).getNombrePisteColle() + 1);
+						}
+
+					}
+				}
+
+				if (panelRegroupement.getListePisteHorizontale().size() != 0) {
+					for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
+						PisteHorizontale pisteHorizontale = panelRegroupement.getListePisteHorizontale().get(a);
+
+						if (formeAireGauche.contains(pisteHorizontale.getX(), pisteHorizontale.getY())
+								|| formeAireDroit.contains(pisteHorizontale.getX(), pisteHorizontale.getY())) {
+							panelRegroupement.getListePisteHorizontale().get(i).setNombrePisteColle(
+									panelRegroupement.getListePisteHorizontale().get(i).getNombrePisteColle() + 1);
+
+						}
+					}
+
+				}
+
+			}
+			if (panelRegroupement.getListePisteHorizontale().size() != 0) {
+				for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
+					if (panelRegroupement.getListePisteHorizontale().get(a).getNombrePisteColle() == 2) {
+
+						nombrePisteFerme++;
+					}
+
+				}
+			}
+
+		}
+
+	}
+
+	/**
+	 * Méthode qui permet de vérifier si chaque morceau de piste de depart a les
+	 * deux cotés fermés.
+	 */
+
+	public void verifierNombrePisteAttacheDepart() {
+		PisteDeDepart piste = panelRegroupement.getListePisteDeDepart().get(0);
+		Rectangle2D.Double formeAireGauche = new Rectangle2D.Double(piste.getX() - piste.getTaillePiste(), piste.getY(),
+				piste.getTaillePiste(), piste.getTaillePiste());
+		Rectangle2D.Double formeAireDroit = new Rectangle2D.Double(piste.getX() + piste.getTaillePiste(), piste.getY(),
+				piste.getTaillePiste(), piste.getTaillePiste());
+
+		if (panelRegroupement.getListePisteHorizontale().size() != 0) {
+
+			for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
+				PisteHorizontale pisteHorizontale = panelRegroupement.getListePisteHorizontale().get(a);
+				if (formeAireGauche.contains(pisteHorizontale.getX(), pisteHorizontale.getY())
+						|| formeAireDroit.contains(pisteHorizontale.getX(), pisteHorizontale.getY())) {
+					panelRegroupement.getListePisteDeDepart().get(0).setNombrePisteColle(
+							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
+				}
+
+			}
+		}
+		if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVirageGauche().size(); a++) {
+				PisteVirageGauche pisteVirageGauche = panelRegroupement.getListePisteVirageGauche().get(a);
+				if (formeAireDroit.contains(pisteVirageGauche.getX(), pisteVirageGauche.getY())) {
+					panelRegroupement.getListePisteDeDepart().get(0).setNombrePisteColle(
+							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
+				}
+
+			}
+		}
+		if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
+
+			for (int a = 0; a < panelRegroupement.getListePisteVirageDroit().size(); a++) {
+				PisteVirageDroit pisteVirageDroit = panelRegroupement.getListePisteVirageDroit().get(a);
+				if (formeAireDroit.contains(pisteVirageDroit.getX(), pisteVirageDroit.getY())) {
+					panelRegroupement.getListePisteDeDepart().get(0).setNombrePisteColle(
+							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
+				}
+			}
+		}
+		if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
+
+			for (int a = 0; a < panelRegroupement.getListePisteVirageHaut().size(); a++) {
+				PisteVirageHaut pisteVirageHaut = panelRegroupement.getListePisteVirageHaut().get(a);
+				if (formeAireGauche.contains(pisteVirageHaut.getX(), pisteVirageHaut.getY())) {
+					panelRegroupement.getListePisteDeDepart().get(0).setNombrePisteColle(
+							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
+				}
+			}
+		}
+		if (panelRegroupement.getListePisteVirageBas().size() != 0) {
+			for (int a = 0; a < panelRegroupement.getListePisteVirageBas().size(); a++) {
+				PisteVirageBas pisteVirageBas = panelRegroupement.getListePisteVirageBas().get(a);
+				if (formeAireGauche.contains(pisteVirageBas.getX(), pisteVirageBas.getY())) {
+					panelRegroupement.getListePisteDeDepart().get(0).setNombrePisteColle(
+							panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() + 1);
+				}
+
+			}
+		}
+		if (panelRegroupement.getListePisteDeDepart().size() != 0) {
+
+			if (panelRegroupement.getListePisteDeDepart().get(0).getNombrePisteColle() == 2) {
+
+				nombrePisteFerme++;
+
+			}
+		}
+
+	}
+
+	/**
+	 * Méthode qui permet de vérifier si la piste est fermée.
+	 */
+	public void verifierSiPisteFerme() {
+		verifierNombrePisteAttacheDepart();
+		verifierNombrePisteAttacheHorizontale();
+		verifierNombrePisteAttacheVerticale();
+		verifierNombrePisteAttacheGauche();
+		verifierNombrePisteAttacheDroite();
+		verifierNombrePisteAttacheHaut();
+		verifierNombrePisteAttacheBas();
+
+		if (nombrePisteFerme == (panelRegroupement.getListePisteDeDepart().size()
+				+ panelRegroupement.getListePisteHorizontale().size()
+				+ panelRegroupement.getListePisteVerticale().size() + panelRegroupement.getListePisteVirageBas().size()
+				+ panelRegroupement.getListePisteVirageDroit().size()
+				+ panelRegroupement.getListePisteVirageGauche().size()
+				+ panelRegroupement.getListePisteVirageHaut().size())) {
+
+			pisteFerme = true;
+
+		} else {
+			panelRegroupement.setJouer(true);
+			pisteFerme = false;
+
+		}
+		repaint();
+	}
+
+	/**
+	 * Méhode qui permet de sauvegarder une piste sur le bureau en fichier binaire
+	 * mais pour le bouton jouer
+	 */
+	private void sauvegardeUnePiste2() {
+
+		Voiture voiture = new Voiture(new Vecteur2D(panelRegroupement.getListePisteDeDepart().get(0).getX(),
+				panelRegroupement.getListePisteDeDepart().get(0).getY()), Color.yellow, 50, 16, 0, 60);
+		regroupement = new Regroupement(voiture, 3, TypePiste.AUTRE);
+		regroupement.setListeAccelerateur(panelRegroupement.getListeAccelerateur());
+		regroupement.setListePisteDeDepart(panelRegroupement.getListePisteDeDepart());
+		regroupement.setListePisteHorizontale(panelRegroupement.getListePisteHorizontale());
+		regroupement.setListePisteVerticale(panelRegroupement.getListePisteVerticale());
+		regroupement.setListePisteVirageBas(panelRegroupement.getListePisteVirageBas());
+		regroupement.setListePisteVirageDroit(panelRegroupement.getListePisteVirageDroit());
+		regroupement.setListePisteVirageGauche(panelRegroupement.getListePisteVirageGauche());
+		regroupement.setListePisteVirageHaut(panelRegroupement.getListePisteVirageHaut());
+		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
+
+		gestionFich.ecrireFichierBinBureauRegroupement2(regroupement, pisteCourante);
+		boolean dejaDansComboBox = false;
+		for (int a = 0; a < comboBoxPiste.getItemCount(); a++) {
+			if (gestionFich.getNomFichBinRegroupement().equalsIgnoreCase(comboBoxPiste.getItemAt(a))) {
+
+				dejaDansComboBox = true;
+				break;
+			} else {
+				dejaDansComboBox = false;
+			}
+		}
+		if (dejaDansComboBox == true) {
+
+		} else {
+			comboBoxPiste.addItem(gestionFich.getNomFichBinRegroupement());
+		}
+
+		comboBoxPiste.setSelectedItem(pisteCourante);
+
+		btnJouer.setEnabled(true);
+
+	}
+
+	/**
 	 * Méhode qui permet de sauvegarder une piste sur le bureau en fichier binaire
 	 */
 	private void sauvegardeUnePiste() {
@@ -377,7 +1140,6 @@ public class FenetreEditeur extends JPanel {
 				panelRegroupement.getListePisteDeDepart().get(0).getY()), Color.yellow, 50, 16, 0, 60);
 		regroupement = new Regroupement(voiture, 3, TypePiste.AUTRE);
 		regroupement.setListeAccelerateur(panelRegroupement.getListeAccelerateur());
-
 		regroupement.setListePisteDeDepart(panelRegroupement.getListePisteDeDepart());
 		regroupement.setListePisteHorizontale(panelRegroupement.getListePisteHorizontale());
 		regroupement.setListePisteVerticale(panelRegroupement.getListePisteVerticale());
@@ -388,11 +1150,25 @@ public class FenetreEditeur extends JPanel {
 		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
 
 		gestionFich.ecrireFichierBinBureauRegroupement(regroupement);
+		boolean dejaDansComboBox = false;
+		for (int a = 0; a < comboBoxPiste.getItemCount(); a++) {
+			if (gestionFich.getNomFichBinRegroupement().equalsIgnoreCase(comboBoxPiste.getItemAt(a))) {
 
-		comboBoxPiste.addItem(gestionFich.getNomFichBinRegroupement());
+				dejaDansComboBox = true;
+				break;
+			} else {
+				dejaDansComboBox = false;
+			}
+		}
+		if (dejaDansComboBox == true) {
+
+		} else {
+			comboBoxPiste.addItem(gestionFich.getNomFichBinRegroupement());
+		}
+
+		comboBoxPiste.setSelectedIndex(comboBoxPiste.getItemCount() - 1);
 
 		btnJouer.setEnabled(true);
-		JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU");
 
 	}
 
@@ -404,7 +1180,8 @@ public class FenetreEditeur extends JPanel {
 
 		btnSauvegarde.setEnabled(true);
 		btnJouer.setEnabled(true);
-		regroupementSauvegarde = gestionFich.lireFichierBinBureauRegroupement((String) comboBoxPiste.getSelectedItem());
+
+		regroupementSauvegarde = gestionFich.lireFichierBinBureauRegroupement(pisteCourante);
 
 		panelRegroupement.getListeAccelerateur().clear();
 		panelRegroupement.getListePisteVirageBas().clear();
@@ -473,10 +1250,9 @@ public class FenetreEditeur extends JPanel {
 		for (int a = 0; a < regroupementSauvegarde.getRegroupementBoiteMystere().size(); a++) {
 			panelRegroupement.getListeBlocMystere().add(regroupementSauvegarde.getRegroupementBoiteMystere().get(a));
 		}
-
+		resetValeur();
 		repaint();
 
-		JOptionPane.showMessageDialog(null, "PISTE CHARGÉ AVEC SUCCÈS !");
 	}
 
 	public JComboBox getComboBoxPiste() {

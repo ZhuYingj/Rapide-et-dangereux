@@ -17,6 +17,7 @@ import physique.MoteurPhysique;
  * 
  * @author Ludovic Julien
  * @author Kevin Nguyen
+ * @author Tan Tommy Rin
  */
 
 public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
@@ -47,17 +48,17 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	private Voiture voiture;
 
 	private Voiture voiture2;
+	private boolean enContactAvecColle = false;
+	private int nombrePisteColle = 0;
 
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
 	 * 
-	 * @param x             position en x de la piste
-	 * @param y             position en y de la piste
-	 * @param ligneRougeV1X position en x du premier mure
-	 * @param ligneRougeV1Y position en y du premier mure
-	 * @param ligneRougeV2X position en x du deuxieme mure
-	 * @param ligneRougeV2Y position en y du deuxieme mure
+	 * @param x position en x de la piste
+	 * @param y position en y de la piste
+	 * 
 	 */
+	// Ludovic Julien
 	public PisteDeDepart(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -67,7 +68,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 		this.murBas = y + taillePiste;
 		voiture = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste / 4), Color.yellow, 50, 16, 0, 50);
 		voiture2 = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste * 3 / 4), Color.white, 50, 16, 0, 60);
-		
+
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
@@ -75,6 +76,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	 * Methode qui permet de dessiner la piste de d�part sur la zone d'animation a
 	 * l'aide de g2d
 	 */
+	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
@@ -162,6 +164,34 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	}
 
 	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
+	 * et la boule de neige
+	 * 
+	 * @param L'objet special de type boule de neige
+	 */
+	// Tan Tommy Rin
+
+	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
+
+		// Cette variable est juste pour returner la valeur de vérité si la boule de
+		// neige est en collision avec ce morceau de piste
+		boolean enCollision = false;
+
+		if (objetSpecial.getBouleDeNeige().getBoule().getX() > murGauche
+				&& objetSpecial.getBouleDeNeige().getBoule().getX() < murDroite
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() > murHaut
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() < murBas) {
+			if (objetSpecial.getBouleDeNeige().getBoule().getY() < murHaut + 1) {
+				enCollision = true;
+			} else if (objetSpecial.getBouleDeNeige().getBoule().getY() > murBas - objetSpecial.getDiametreObjet()) {
+				enCollision = true;
+			}
+		}
+
+		return enCollision;
+	}
+
+	/**
 	 * Méthode permettant de savoir si la voiture est passée sur la piste
 	 * 
 	 * @param voiture La voiture controllée
@@ -172,6 +202,23 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
 			setCollision(true);
 
+		}
+
+	}
+
+	/**
+	 * Méthode qui permet de détecter s'il y a une collision de la voiture avec le
+	 * morceau de piste
+	 * 
+	 * @param voiture La voiture en collision
+	 */
+	// Tan Tommy Rin
+	public void collisionColle(Voiture voiture) {
+
+		if (formeAire.contains(voiture.getPosition().getX(), voiture.getPosition().getY())) {
+			enContactAvecColle = true;
+		} else {
+			enContactAvecColle = false;
 		}
 
 	}
@@ -193,6 +240,19 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 		}
 	}
 
+
+	public void pisteHorizontaleAttache() {
+
+	}
+
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
+	}
+
 	public boolean isCollision() {
 		return collision;
 	}
@@ -208,6 +268,19 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void setColor(Color color) {
 		this.color = color;
 	}
+
+	public boolean isEnContactAvecColle() {
+		return enContactAvecColle;
+	}
+
+	public void setEnContactAvecColle(boolean enContactAvecColle) {
+		this.enContactAvecColle = enContactAvecColle;
+	}
+
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
@@ -226,7 +299,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void setVoiture(Voiture voiture) {
 		this.voiture = voiture;
 	}
-	
+
 	public Voiture getVoiture2() {
 		return voiture2;
 	}
@@ -234,7 +307,6 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void setVoiture2(Voiture voiture2) {
 		this.voiture2 = voiture2;
 	}
-	
 
 	public int getTaillePiste() {
 		return taillePiste;

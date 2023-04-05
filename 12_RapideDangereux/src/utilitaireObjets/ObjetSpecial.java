@@ -2,6 +2,7 @@ package utilitaireObjets;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 
 import geometrie.Vecteur2D;
@@ -13,37 +14,50 @@ import physique.MoteurPhysique;
  * Classe permettant de créer et gérer un objet special
  * 
  * @author Tan Tommy Rin
+ * @author Alexis Pineda-Alvarado
  *
  */
 public class ObjetSpecial implements Dessinable {
-	
+
+	/** Vecteur de la vitesse de la voiture **/
+	private Vecteur2D vitesse = new Vecteur2D(0, 0); // par defaut
+
+	/** Vecteur de l'acceleration de la voiture **/
+	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
+
 	private Vecteur2D positionObjet;
 	private double diametreObjet;
 	private TypeObjetSpecial type;
 	private double pixelParMetre = 1;
 	private double tempsTemporaire;
-	private boolean fonctionActive = false;
-	private int x;
-	private int y;
+	private BouleDeNeige bouleDeNeige;
+	private Colle colle;
+	private TrouNoir trouNoir;
+	private boolean enContactTrouNoir = false;
+	private boolean enContactTrouNoir2 = false;
 
 	/**
-	 * Méthode permettant de créer un objet spécial à l'aide de paramètre
+	 * Constructeur permettant de créer un objet spécial
 	 * 
 	 * @param pos       La position de l'objet special
 	 * @param diametre  Le diaetre de l'objet special
 	 * @param typeObjet Le type de l'objet special
 	 */
+	// Tan Tommy Rin
 	public ObjetSpecial(Vecteur2D pos, double diametre, TypeObjetSpecial typeObjet) {
 		this.positionObjet = pos;
 		this.diametreObjet = diametre;
 		this.type = typeObjet;
-
+		bouleDeNeige = new BouleDeNeige(positionObjet, diametre);
+		colle = new Colle(positionObjet, 80);
+		trouNoir = new TrouNoir(positionObjet, this.diametreObjet);
+		;
 	}
 
 	/**
 	 * Méthode permettant de dessiner sur la zone d'animation à l'aide du g2d
 	 */
-
+	// Tan Tommy Rin
 	@Override
 	public void dessiner(Graphics2D g2d) {
 
@@ -52,63 +66,71 @@ public class ObjetSpecial implements Dessinable {
 
 		}
 		if (type == TypeObjetSpecial.BOULEDENEIGE) {
-			BouleDeNeige bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet);
+			bouleDeNeige = new BouleDeNeige(this.positionObjet, this.diametreObjet);
 			bouleDeNeige.dessiner(g2d);
 
 		}
 
-
-		
-
-
-		if(type == TypeObjetSpecial.TROUNOIR) {
-			TrouNoir trouNoir = new TrouNoir(this.positionObjet, this.diametreObjet);
+		if (type == TypeObjetSpecial.TROUNOIR) {
+			trouNoir = new TrouNoir(this.positionObjet, this.diametreObjet);
 			trouNoir.dessiner(g2d);
 		}
-		if(type == TypeObjetSpecial.COLLE) {
-			Colle colle = new Colle(this.positionObjet, this.diametreObjet);
+		if (type == TypeObjetSpecial.COLLE) {
+			colle = new Colle(this.positionObjet, 80);
 			colle.dessiner(g2d);
 
 		}
 
-		}
-
-
-
-	
+	}
 
 	/**
-	 * Méthode permettant d'activer la fonction de l'objet special obtenu
+	 * Méthode qui permet le fonctionnement du trou noir sur la voiture affecté
 	 * 
-	 * @param voiture          La voiture affecté
-	 * @param tempsTotalEcoule Le temps total écoulé
+	 * @param voiture Voiture affectée
 	 */
+//Tan Tommy Rin
+	public void fonctionTrouNoir(Voiture voiture) {
 
-	public void fonctionSelonObjet(Voiture voiture, double tempsTotalEcoule) {
+		Vecteur2D forceApplied = new Vecteur2D(trouNoir.getPosition());
+		forceApplied = forceApplied.soustrait(voiture.getPosition());
+		// Distance entre la voiture et le trou noir
+		double r = forceApplied.module();
 
-		// Condition si fonction active est vrai, le temps temporaire est égale à celui
-		// du temps total écoulé et restera fixe tandis que le tempsTotalEcoule changera
-		// de valeur
-		if (fonctionActive == true) {
+		double fg = (trouNoir.getMasseTrouNoir() * 25) / (r * r);
+		forceApplied = forceApplied.multiplie(fg);
+		voiture.setSommeDesForces(forceApplied);
 
-			tempsTemporaire = tempsTotalEcoule;
-			fonctionActive = false;
+	}
 
-		}
-		// Fonction du champignon
+	/**
+	 * Méthode décrivant la fonction de la colle. Lorsque la voiture est en contact
+	 * avec la colle, une acceleration du sens inverse de la voiture est produite,
+	 * ce qui l'amene a ralentir. Selon si la touche d'accleration est activé ou
+	 * non, la valeur de cette accelération implanté change.
+	 * 
+	 * @param voiture      La voiture affectée
+	 * @param toucheActive Si la touche d'acceleration est activée
+	 */
+	// Tan Tommy Rin
+	public void fonctionColle(Voiture voiture, boolean toucheActive) {
 
-		if (type == TypeObjetSpecial.CHAMPIGNON) {
+		if (toucheActive == true) {
+			if (voiture.getVitesse().module() < 20) {
 
-			fonctionChampignon(voiture, tempsTotalEcoule);
-
-		} else if (type == TypeObjetSpecial.BOULEDENEIGE) {
-
-			fonctionBouleDeNeige(voiture, tempsTotalEcoule);
-
-		} else if (type == TypeObjetSpecial.COLLE) {
+			} else if (voiture.getVitesse().module() < 30) {
+				voiture.setAccel(new Vecteur2D(-10 * Math.cos(voiture.getAngle()), -10 * Math.sin(voiture.getAngle())));
+			} else {
+				voiture.setAccel(new Vecteur2D(-19 * Math.cos(voiture.getAngle()), -19 * Math.sin(voiture.getAngle())));
+			}
 
 		} else {
+			if (voiture.getVitesse().module() < 20) {
 
+			} else if (voiture.getVitesse().module() < 30) {
+				voiture.setAccel(new Vecteur2D(-8 * Math.cos(voiture.getAngle()), -8 * Math.sin(voiture.getAngle())));
+			} else {
+				voiture.setAccel(new Vecteur2D(-17 * Math.cos(voiture.getAngle()), -17 * Math.sin(voiture.getAngle())));
+			}
 		}
 
 	}
@@ -118,16 +140,20 @@ public class ObjetSpecial implements Dessinable {
 	 * 
 	 * @param voiture          La voiture affecté
 	 * @param tempsTotalEcoule Le temps total écoulé
+	 * @return si la fonction est en cours
 	 */
+	// Tan Tommy Rin
 
 	public boolean fonctionChampignon(Voiture voiture, double tempsTotalEcoule) {
 		Champignon champignon = new Champignon(this.positionObjet, this.diametreObjet, type);
 		if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
 			champignon.fonctionChampignonActivation(voiture);
+
 			return true;
 		} else {
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
 			voiture.setDiametre(voiture.getDiametreInitial());
+
 			return false;
 		}
 
@@ -142,33 +168,93 @@ public class ObjetSpecial implements Dessinable {
 	// Alexis Pineda-Alvarado
 	public boolean fonctionBouleDeNeige(Voiture voiture, double tempsFinal) {
 
-		if ((tempsTemporaire + 3 > tempsFinal)) {
-			System.out.println("SLOW DOWN!!!");
+		if (tempsTemporaire + 3 > tempsFinal) {
+
 			Vecteur2D voitureSlow = new Vecteur2D();
 			voitureSlow = MoteurPhysique.calculerForceFrottement(2.50, voiture.getMasseEnKg(), voiture.getAngle());
 			voiture.setSommeDesForces(voitureSlow);
-			System.out.println(voitureSlow);
+
 			return true;
 		} else {
-			System.out.println("NORMAL SPEED!!!");
+
 			Vecteur2D voitureNormal = new Vecteur2D();
 			voitureNormal = MoteurPhysique.calculerForceFrottement(0.45, voiture.getMasseEnKg(), voiture.getAngle());
 			voiture.setSommeDesForces(voitureNormal);
+
 			return false;
 		}
 
 	}
 
-	public boolean isFonctionActive() {
-		return fonctionActive;
+	/**
+	 * Calcule la nouvelle vitesse et la nouvelle position de la boule de neige ou
+	 * trou noir apres cet nouvel intervalle de temps.
+	 * 
+	 * @param deltaT intervalle de temps (pas)
+	 */
+	// Tan Tommy Rin
+	public void avancerUnPas(double deltaT) {
+		this.vitesse = MoteurPhysique.calculVitesse(deltaT, vitesse, accel);
+		this.positionObjet = MoteurPhysique.calculPosition(deltaT, positionObjet, vitesse);
+
 	}
 
-	public void setFonctionActive(boolean fonctionActive) {
-		this.fonctionActive = fonctionActive;
+	/**
+	 * Recalcule l'acceleration de la boule de neige ou le trou noir a l'aide la
+	 * nouvelle somme des forces passee en parametre Ceci aura pour consequence de
+	 * modifier l'acceleration
+	 * 
+	 * @param sommeForcesSurLaBouleDeNeigeOuTrouNoir La somme des forces exercees
+	 *                                               sur la boule de neige ou le
+	 *                                               trou noir
+	 */
+	// Tan Tommy Rin
+	public void setSommeDesForces(Vecteur2D sommeForcesSurLaBouleDeNeigeOuTrouNoir) {
+		// ici changer les forces signifie recalculer l'acceleration
+		// on relegue cette tache au moteur physique.
+		try {
+			accel = MoteurPhysique.calculAcceleration(sommeForcesSurLaBouleDeNeigeOuTrouNoir, 50);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public Vecteur2D getAccel() {
+		return accel;
+	}
+
+	public void setAccel(Vecteur2D accel) {
+		this.accel = accel;
 	}
 
 	public double getTempsTemporaire() {
 		return tempsTemporaire;
+	}
+
+	public boolean isEnContactTrouNoir2() {
+		return enContactTrouNoir2;
+	}
+
+	public void setEnContactTrouNoir2(boolean enContactTrouNoir2) {
+		this.enContactTrouNoir2 = enContactTrouNoir2;
+	}
+
+	public boolean isEnContactTrouNoir() {
+		return enContactTrouNoir;
+	}
+
+	public TrouNoir getTrouNoir() {
+		return trouNoir;
+	}
+
+	public void setTrouNoir(TrouNoir trouNoir) {
+		this.trouNoir = trouNoir;
+	}
+
+	public void setEnContactTrouNoir(boolean enContactTrouNoir) {
+		this.enContactTrouNoir = enContactTrouNoir;
 	}
 
 	public void setTempsTemporaire(double tempsTemporaire) {
@@ -206,6 +292,30 @@ public class ObjetSpecial implements Dessinable {
 
 	public void setPixelParMetre(double pixelParMetre) {
 		this.pixelParMetre = pixelParMetre;
+	}
+
+	public Vecteur2D getVitesse() {
+		return vitesse;
+	}
+
+	public void setVitesse(Vecteur2D vitesse) {
+		this.vitesse = vitesse;
+	}
+
+	public BouleDeNeige getBouleDeNeige() {
+		return bouleDeNeige;
+	}
+
+	public void setBouleDeNeige(BouleDeNeige bouleDeNeige) {
+		this.bouleDeNeige = bouleDeNeige;
+	}
+
+	public Colle getColle() {
+		return colle;
+	}
+
+	public void setColle(Colle colle) {
+		this.colle = colle;
 	}
 
 }

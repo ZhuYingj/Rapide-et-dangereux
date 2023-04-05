@@ -13,7 +13,6 @@ import utilitaireObjets.PisteVirageHaut;
 /**
  * Classe qui crée la piste Canada
  * 
- * @author Ludovic Julien
  * @author Kevin Nguyen
  *
  */
@@ -38,11 +37,10 @@ public class PisteCanada {
 	private ArrayList<PisteVirageDroit> droit = new ArrayList<PisteVirageDroit>();
 	/** Piste Virage Haut **/
 	private ArrayList<PisteVirageHaut> haut = new ArrayList<PisteVirageHaut>();
-	
+
 	/** Nombre de pixels par metre **/
 	private double pixelsParMetre;
 
-	
 	/**
 	 * Constructeur que l'on spécifie la position du coin supérieur gauche du
 	 * circuit
@@ -50,125 +48,127 @@ public class PisteCanada {
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
+
 	public PisteCanada(int x, int y) {
 		this.x = x;
 		this.y = y;
-		creerLaGeometrie();			
+		creerLaGeometrie();
 	}
 
 	/**
 	 * Méthode qui crée le circuit complet
 	 */
+
 	private void creerLaGeometrie() {
-		
+
 		bas.add(new PisteVirageBas(x, y));
 		this.x = x + taillePiste;
-		
+
 		horizontale.add(new PisteHorizontale(x, y));
 		this.x = x + taillePiste;
-		
+
 		horizontale.add(new PisteHorizontale(x, y));
 		this.x = x + taillePiste;
-		
+
 		horizontale.add(new PisteHorizontale(x, y));
 		this.x = x + taillePiste;
-		
+
 		horizontale.add(new PisteHorizontale(x, y));
 		this.x = x + taillePiste;
-		
+
 		horizontale.add(new PisteHorizontale(x, y));
 		this.x = x + taillePiste;
-		
+
 		horizontale.add(new PisteHorizontale(x, y));
 		this.x = x + taillePiste;
-		
+
 		gauche.add(new PisteVirageGauche(x, y));
 		this.y = y + taillePiste;
-		
+
 		verticale.add(new PisteVerticale(x, y));
 		this.y = y + taillePiste;
-		
+
 		verticale.add(new PisteVerticale(x, y));
 		this.y = y + taillePiste;
-		
+
 		verticale.add(new PisteVerticale(x, y));
 		this.y = y + taillePiste;
-		
+
 		droit.add(new PisteVirageDroit(x, y));
 		this.x = x - taillePiste;
-		
+
 		depart.add(new PisteDeDepart(x, y));
 		this.x = x - taillePiste;
-		
+
 		haut.add(new PisteVirageHaut(x, y));
 		this.y = y - taillePiste;
-		
+
 		bas.add(new PisteVirageBas(x, y));
 		this.x = x + taillePiste;
-		
+
 		droit.add(new PisteVirageDroit(x, y));
 		this.y = y - taillePiste;
-		
+
 		verticale.add(new PisteVerticale(x, y));
 		this.y = y - taillePiste;
-		
+
 		gauche.add(new PisteVirageGauche(x, y));
 		this.x = x - taillePiste;
-		
+
 		bas.add(new PisteVirageBas(x, y));
 		this.y = y + taillePiste;
-		
+
 		droit.add(new PisteVirageDroit(x, y));
 		this.x = x - taillePiste;
-		
+
 		haut.add(new PisteVirageHaut(x, y));
 		this.y = y - taillePiste;
-		
+
 		gauche.add(new PisteVirageGauche(x, y));
 		this.x = x - taillePiste;
-		
+
 		bas.add(new PisteVirageBas(x, y));
 		this.y = y + taillePiste;
-		
+
 		verticale.add(new PisteVerticale(x, y));
 		this.y = y + taillePiste;
-		
+
 		haut.add(new PisteVirageHaut(x, y));
 		this.x = x + taillePiste;
-		
+
 		gauche.add(new PisteVirageGauche(x, y));
 		this.y = y + taillePiste;
-		
+
 		droit.add(new PisteVirageDroit(x, y));
 		this.x = x - taillePiste;
-		
+
 		horizontale.add(new PisteHorizontale(x, y));
 		this.x = x - taillePiste;
-		
+
 		haut.add(new PisteVirageHaut(x, y));
 		this.y = y - taillePiste;
-		
+
 		verticale.add(new PisteVerticale(x, y));
 		this.y = y - taillePiste;
 
 		verticale.add(new PisteVerticale(x, y));
 		this.y = y - taillePiste;
-		
+
 		gauche.add(new PisteVirageGauche(x, y));
 		this.x = x - taillePiste;
-		
+
 		bas.add(new PisteVirageBas(x, y));
 		this.y = y + taillePiste;
-		
+
 		verticale.add(new PisteVerticale(x, y));
 		this.y = y + taillePiste;
 
 		verticale.add(new PisteVerticale(x, y));
 		this.y = y + taillePiste;
-		
+
 		droit.add(new PisteVirageDroit(x, y));
 		this.x = x - taillePiste;
-		
+
 		haut.add(new PisteVirageHaut(x, y));
 		this.y = y - taillePiste;
 
@@ -180,7 +180,7 @@ public class PisteCanada {
 
 		verticale.add(new PisteVerticale(x, y));
 		this.y = y - taillePiste;
-		
+
 	}
 
 	public int getTaillePiste() {

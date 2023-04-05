@@ -15,7 +15,6 @@ import interfaces.TypeObjetSpecial;
 /**
  * Classe permettant de gérer et créer un accélérateur
  * 
- * @author Tan Tommy Rin
  * @author Ludovic Julien
  *
  */
@@ -29,6 +28,7 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 
 	/** la position en y de depart que l'objet piste vas etre creer **/
 	private int y;
+	
 	/** Nombre de pixel par metre **/
 	private double pixelParMetre;
 	private Rectangle2D.Double formeAire;
@@ -98,6 +98,9 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 		this.y = y;
 
 	}
+	public int getY() {
+		return y;
+	}
 
 	public int getTaillePiste() {
 		return taillePiste;
@@ -114,7 +117,7 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 	public void setFormeAire(Rectangle2D.Double formeAire) {
 		this.formeAire = formeAire;
 	}
-	
+
 //	public void fonctionAccelarateur(Voiture voitureAffecte) {
 //		// augmente la vitesse 
 //		final double vitesseAccelerer = voitureAffecte.getVitesseMaxSelonNiveau() * 2;

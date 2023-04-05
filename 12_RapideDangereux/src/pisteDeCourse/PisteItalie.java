@@ -22,7 +22,7 @@ import utilitaireObjets.Voiture;
  * Classe qui crée la piste Italie
  * 
  * 
- *@auteur Ludovic Julien
+ * @author Ludovic Julien
  */
 public class PisteItalie {
 
@@ -214,7 +214,7 @@ public class PisteItalie {
 	}
 
 	// Kevin Nguyen
-	
+
 	public ArrayList<PisteDeDepart> getDepart() {
 		return depart;
 

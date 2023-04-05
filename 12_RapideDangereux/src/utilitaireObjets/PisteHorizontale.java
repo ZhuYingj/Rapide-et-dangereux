@@ -4,12 +4,14 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
+import interfaces.TypeObjetSpecial;
 import physique.MoteurPhysique;
 
 /**
@@ -17,6 +19,7 @@ import physique.MoteurPhysique;
  * 
  * @author Ludovic Julien
  * @author Kevin Nguyen
+ * @author Tan Tommy Rin
  */
 
 public class PisteHorizontale implements Dessinable, Selectionnable, Serializable {
@@ -46,17 +49,19 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	private Color color = Color.black;
 	private boolean collision = false;
 	private Rectangle2D.Double formeAire;
+	private int nombrePisteColle = 0;
+
+
+	private boolean enContactAvecColle = true;
 
 	/**
 	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
 	 * 
-	 * @param x             position en x de la piste
-	 * @param y             position en y de la piste
-	 * @param ligneRougeV1X position en x du premier mure
-	 * @param ligneRougeV1Y position en y du premier mure
-	 * @param ligneRougeV2X position en x du deuxieme mure
-	 * @param ligneRougeV2Y position en y du deuxieme mure
+	 * @param x position en x de la piste
+	 * @param y position en y de la piste
+	 * 
 	 */
+	// Ludovic Julien
 	public PisteHorizontale(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -65,13 +70,14 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 		this.murHaut = y;
 		this.murBas = y + taillePiste;
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
+
 	}
 
 	/**
 	 * Methode qui permet de dessiner la piste horizontale sur la zone d'animation a
 	 * l'aide de g2d
 	 */
-
+	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
@@ -147,6 +153,48 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	}
 
 	/**
+	 * Méthode qui permet de détecter s'il y a une collision de la voiture avec le
+	 * morceau de piste
+	 * 
+	 * @param voiture La voiture en collision
+	 */
+	// Tan Tommy Rin
+	public void collisionColle(Voiture voiture) {
+
+		if (formeAire.contains(voiture.getPosition().getX(), voiture.getPosition().getY())) {
+			enContactAvecColle = true;
+		} else {
+			enContactAvecColle = false;
+		}
+
+	}
+
+	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
+	 * et la boule de neige
+	 * 
+	 * @param L'objet special de type boule de neige
+	 */
+	// Tan Tommy Rin
+	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
+		// Cette variable est juste pour returner la valeur de vérité si la boule de
+		// neige est en collision avec ce morceau de piste
+		boolean enCollision = false;
+
+		if (objetSpecial.getBouleDeNeige().getBoule().getX() > murGauche
+				&& objetSpecial.getBouleDeNeige().getBoule().getX() < murDroite
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() > murHaut
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() < murBas) {
+			if (objetSpecial.getBouleDeNeige().getBoule().getY() < murHaut + 1) {
+				enCollision = true;
+			} else if (objetSpecial.getBouleDeNeige().getBoule().getY() > murBas - objetSpecial.getDiametreObjet()) {
+				enCollision = true;
+			}
+		}
+		return enCollision;
+	}
+
+	/**
 	 * Méthode permettant de savoir si la voiture est passée sur la piste
 	 * 
 	 * @param voiture La voiture controllée
@@ -167,6 +215,14 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 
 	public boolean isCollision() {
 		return collision;
+	}
+
+	public boolean isEnContactAvecColle() {
+		return enContactAvecColle;
+	}
+
+	public void setEnContactAvecColle(boolean enContactAvecColle) {
+		this.enContactAvecColle = enContactAvecColle;
 	}
 
 	public void setCollision(boolean collision) {
@@ -196,6 +252,11 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	public void setColor(Color color) {
 		this.color = color;
 	}
+
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
@@ -247,4 +308,11 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 		this.murBas = murBas;
 	}
 
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
+	}
 }

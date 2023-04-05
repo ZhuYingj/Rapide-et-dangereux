@@ -31,7 +31,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 	private int nombrePiste = 1;
 
 // fichiers binaires (objets)
-	private String nomFichBinRegroupement = "regroupement" + nombrePiste + ".dat";
+	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String nomFichBinComboBox = "comboBox.dat";
 
@@ -42,10 +42,10 @@ public class GestionnaireDeFichiersSurLeBureau {
 	 * 
 	 * @param regroupement Le groupe que l'on sauvegarde
 	 */
-// Par Tan Tommy Rin
+//Tan Tommy Rin
 
 	public void ecrireFichierBinBureauRegroupement(Regroupement regroupement) {
-		nomFichBinRegroupement = "regroupement" + nombrePiste + ".dat";
+		nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 // chemin d'acces au dossier
 		File dossier = new File(System.getProperty("user.home"), "Desktop" + "\\" + sousDossierSurBureau);
@@ -69,8 +69,6 @@ public class GestionnaireDeFichiersSurLeBureau {
 			System.out.println(
 					"\nLes informations sur la voiture et le regroupement sont écrites avec succès. \nLe fichier "
 							+ fichierDeTravail.toString() + " est pret pour la lecture!");
-
-			nombrePiste++;
 
 		}
 
@@ -98,7 +96,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 	 * @param nomFichierVoulu le nom du fichier voulu
 	 * @return le groupe lue
 	 */
-// Par Tan Tommy Rin
+//Tan Tommy Rin
 
 	public Regroupement lireFichierBinBureauRegroupement(String nomFichierVoulu) {
 		nomFichBinRegroupement = nomFichierVoulu;
@@ -176,6 +174,60 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 	public void setNombrePiste(int nombrePiste) {
 		this.nombrePiste = nombrePiste;
+	}
+
+	/**
+	 * crée un fichier binaire et y inscrit un objet regroupement (composé de
+	 * d'autres objets) Le place à un endroit spécifique sur le Bureau de
+	 * l'utilisateur. Ceci est pour une piste deja présente.
+	 * 
+	 * @param nomVoulu     le nom voulu à sauvegarder
+	 * @param regroupement Le groupe que l'on sauvegarde
+	 */
+//Tan Tommy Rin
+	public void ecrireFichierBinBureauRegroupement2(Regroupement regroupement, String nomVoulu) {
+		nomFichBinRegroupement = nomVoulu;
+		System.out.println("ici " + nomFichBinRegroupement);
+// chemin d'acces au dossier
+		File dossier = new File(System.getProperty("user.home"), "Desktop" + "\\" + sousDossierSurBureau);
+
+// on cree le dossier s'il n'existe pas
+		if (dossier.mkdir()) {
+			System.out.println("\nLe dossier " + dossier.toString() + " a été créé car il n'existait pas...");
+		}
+
+// chemin d'acces au fichier de travail
+		File fichierDeTravail = new File(dossier + "\\" + nomFichBinRegroupement);
+
+		ObjectOutputStream oos = null;
+
+		try {
+
+			oos = new ObjectOutputStream(new FileOutputStream(fichierDeTravail));
+
+// on �crit chacun des objets
+			oos.writeObject(regroupement);
+			System.out.println(
+					"\nLes informations sur la voiture et le regroupement sont écrites avec succès. \nLe fichier "
+							+ fichierDeTravail.toString() + " est pret pour la lecture!");
+
+		}
+
+		catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Erreur à l'écriture:");
+			e.printStackTrace();
+		}
+
+		finally {
+// on ex�cutera toujours ceci, erreur ou pas
+			try {
+				oos.close();
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, "Erreur rencontrée lors de la fermeture!");
+				e.printStackTrace();
+			}
+		} // fin finally
+
 	}
 
 }

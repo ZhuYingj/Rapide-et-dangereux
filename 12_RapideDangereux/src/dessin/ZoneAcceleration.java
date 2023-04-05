@@ -52,19 +52,9 @@ public class ZoneAcceleration extends JPanel {
             int posX = x + (int) (tempsEnS * largeur / temps.get(temps.size() - 1));
             int posY = y + (int) (hauteur - accelerationEnMps * hauteur / 30.0);
             g.fillOval(posX - 3, posY - 3, 4, 4);
-            System.out.println("la valeur de l'acceleration est: "+ accelerationEnMps + " et la valeur du temps est: " + tempsEnS);
+           
         }
 }
-	
-	/**
-	 * methode qui ajoute la nouvelle valeur de la vitesse dans le tableaux vitesse
-	 * 
-	 * @param acc 	la vitesse actuel de la voiture
-	 */
-	public void ajouterVitesse(double acc) {
-		acceleration.add((int) acc);
-        repaint(); 
-    }
 	
 	/**
 	 * methode qui clear le tableau acceleration

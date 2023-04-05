@@ -14,7 +14,7 @@ import interfaces.TypeObjetSpecial;
 /**
  * Classe qui permet de créer et gérer un champignon
  * 
- * @author TanTommyRin
+ * @author Tan Tommy Rin
  *
  */
 public class Champignon extends ObjetSpecial {
@@ -23,7 +23,7 @@ public class Champignon extends ObjetSpecial {
 	private Vecteur2D position;
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.CHAMPIGNON;
 	private double GRADUATIONPROGESSIVEMASSE = 1.0025;
-	private double GRADUATIONPROGRESSIVEDIAMETRE = 1.0009;
+	private double GRADUATIONPROGRESSIVEDIAMETRE = 1.0015;
 
 	/**
 	 * Méthode qui permet de créer un champignon à l'aide de paramètres

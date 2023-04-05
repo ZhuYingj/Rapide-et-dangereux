@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import physique.MoteurPhysique;
  */
 
 public class Voiture implements Dessinable, Serializable {
+
 
 	private static final long serialVersionUID = 1L;
 	/** Diametre de la voiture puisque la voiture est un cercle **/
@@ -53,7 +55,7 @@ public class Voiture implements Dessinable, Serializable {
 	private double vitesseMaxSelonNiveau;
 	/** Le diametre de la voiture initial **/
 	private double diametreInitial;
-	
+
 	public static ArrayList<Double> vitessesParSeconde;
 
 	/**
@@ -65,7 +67,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * @param diametre           Le diametre de la voiture
 	 * @param vitesseMaxSelonNiv La vitesse maximale selon le niveau selectionné
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public Voiture(Vecteur2D position, Color skin, double masse, double diametre, double angle,
 			double vitesseMaxSelonNiv) {
 		this.position = position;
@@ -83,7 +85,7 @@ public class Voiture implements Dessinable, Serializable {
 	/**
 	 * Constructeur défaut avec un diametre et une vitesse maximale fixé d'avance
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public Voiture() {
 		this.diametre = 16;
 		this.vitesseMaxSelonNiveau = 5.0;
@@ -133,7 +135,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @return le diametre de la voiture
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public double getDiametre() {
 		return diametre;
 	}
@@ -143,7 +145,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @param diametre le diametre voulu
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public void setDiametre(double diametre) {
 		this.diametre = diametre;
 		creerLaGeometrie();
@@ -154,7 +156,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @return la voiture en kg
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public double getMasseEnKg() {
 		return masseEnKg;
 	}
@@ -164,7 +166,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @param masseEnKg une masse voulu
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public void setMasseEnKg(double masseEnKg) {
 		this.masseEnKg = masseEnKg;
 	}
@@ -174,7 +176,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @return la couleur de la voiture
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public Color getSkin() {
 		return skin;
 	}
@@ -184,7 +186,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @param skin la couleur voulue
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public void setSkin(Color skin) {
 		this.skin = skin;
 	}
@@ -311,7 +313,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @param pixelsParMetreVoulu
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public void setPixelsParMetre(double pixelsParMetreVoulu) {
 		this.pixelsParMetre = pixelsParMetreVoulu;
 
@@ -322,7 +324,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @return nombre de pixel par metre
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public double getPixelsParMetre() {
 		return this.pixelsParMetre;
 	}
@@ -332,7 +334,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @return la vitesse maximale selon le niveau selectionné
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public double getVitesseMaxSelonNiveau() {
 		return vitesseMaxSelonNiveau;
 	}
@@ -342,7 +344,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @param vitesseMaxSelonNiveau La nouvelle vitesse maximale voulue
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public void setVitesseMaxSelonNiveau(double vitesseMaxSelonNiveau) {
 		this.vitesseMaxSelonNiveau = vitesseMaxSelonNiveau;
 	}
@@ -366,7 +368,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @param masseEnKgInitial masseInitiale voulue
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 
 	public void setMasseEnKgInitial(double masseEnKgInitial) {
 		this.masseEnKgInitial = masseEnKgInitial;
@@ -377,7 +379,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @return la valeur du diametre initiale
 	 */
-	// Par Tan Tommy Rin
+	// Tan Tommy Rin
 	public double getDiametreInitial() {
 		return diametreInitial;
 	}
@@ -392,13 +394,25 @@ public class Voiture implements Dessinable, Serializable {
 		return cercle;
 	}
 
-//	 public void ajouterVitesseParSeconde() {
-//		    double vitesseActuelle = (vitesse.getX()+vitesse.getY());
-//		    if (vitesseActuelle > 0) {
-//		    	vitesseActuelle = (vitesseActuelle*-1);
-//		    } 
-//	        vitessesParSeconde.add(vitesseActuelle);
-//	        System.out.println("Viettes de la voiture � ce moment est: " + vitesseActuelle);
-//		}
-	 
+	public void collisionEntreVoiture(Voiture voiture1, Voiture voiture2) {
+		Area aire = new Area(voiture1.getCercle());
+		Area aire2 = new Area(voiture2.getCercle());
+
+		aire.intersect(aire2);
+		aire2.intersect(aire);
+
+		if (!aire.isEmpty()) {
+			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(),
+					voiture2.getVitesse().module(), voiture1.getMasseEnKg(), voiture2.getMasseEnKg(), voiture1.angle));
+			voiture2.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture2.getVitesse().module(),
+					voiture1.getVitesse().module(), voiture2.getMasseEnKg(), voiture1.getMasseEnKg(), voiture2.angle));
+		} else if (!aire2.isEmpty()) {
+			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(),
+					voiture2.getVitesse().module(), voiture1.getMasseEnKg(), voiture2.getMasseEnKg(), voiture1.angle));
+			voiture2.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture2.getVitesse().module(),
+					voiture1.getVitesse().module(), voiture2.getMasseEnKg(), voiture1.getMasseEnKg(), voiture2.angle));
+		}
+
+	}
+
 }

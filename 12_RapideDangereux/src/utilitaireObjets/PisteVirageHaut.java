@@ -19,6 +19,7 @@ import physique.MoteurPhysique;
  * 
  * @author Ludovic Julien
  * @author Kevin Nguyen
+ * @author Tan Tommy Rin
  */
 
 public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable {
@@ -62,6 +63,9 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	private Color color = Color.black;
 	/** Aire du morceau de piste **/
 	private Rectangle2D.Double formeAire;
+	private int nombrePisteColle = 0;
+	
+	private boolean enContactAvecColle = false;
 
 	/**
 	 * Methode qui permet de construire la piste virage haut a l'aide de parametres
@@ -69,6 +73,8 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
+
+	// Ludovic Julien
 
 	public PisteVirageHaut(int x, int y) {
 		this.x = x;
@@ -84,7 +90,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * Methode qui permet de dessiner la piste virage haut sur la zone d'animation a
 	 * l'aide de g2d
 	 */
-
+	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
@@ -189,6 +195,41 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	}
 
 	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
+	 * et la boule de neige
+	 * 
+	 * @param L'objet special de type boule de neige
+	 */
+	// Tan Tommy Rin
+	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
+
+		Area cercle = new Area(objetSpecial.getBouleDeNeige().getBoule());
+		cercle.intersect(aireTriangle);
+		// Cette variable est juste pour returner la valeur de vérité si la boule de
+		// neige est en collision avec ce morceau de piste
+		boolean enCollision = false;
+
+		if (objetSpecial.getBouleDeNeige().getBoule().getX() > murGauche
+				&& objetSpecial.getBouleDeNeige().getBoule().getX() < murDroite
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() > murHaut
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() < murBas) {
+			if (objetSpecial.getBouleDeNeige().getBoule().getX() < murGauche + 1) {
+				enCollision = true;
+
+			} else if (objetSpecial.getBouleDeNeige().getBoule().getX() > murBas
+					- objetSpecial.getBouleDeNeige().getDiametre()) {
+
+				enCollision = true;
+			} else if (!cercle.isEmpty()) {
+
+				enCollision = true;
+			}
+		}
+		return enCollision;
+
+	}
+
+	/**
 	 * Méthode permettant de savoir si la voiture est passée sur la piste
 	 * 
 	 * @param voiture La voiture controllée
@@ -199,6 +240,23 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
 			setCollision(true);
 
+		}
+
+	}
+
+	/**
+	 * Méthode qui permet de détecter s'il y a une collision de la voiture avec le
+	 * morceau de piste
+	 * 
+	 * @param voiture La voiture en collision
+	 */
+	// Tan Tommy Rin
+	public void collisionColle(Voiture voiture) {
+
+		if (formeAire.contains(voiture.getPosition().getX(), voiture.getPosition().getY())) {
+			enContactAvecColle = true;
+		} else {
+			enContactAvecColle = false;
 		}
 
 	}
@@ -227,6 +285,13 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	public Area getAireTriangle() {
 		return aireTriangle;
 	}
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
+	}
 
 	/**
 	 * Méthode qui retourne le nombre de pixels par metre
@@ -247,6 +312,11 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 		this.pixelsParMetre = pixelsParMetre;
 
 	}
+
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
@@ -312,6 +382,14 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 
 	public void setMurHaut(int murHaut) {
 		this.murHaut = murHaut;
+	}
+
+	public boolean isEnContactAvecColle() {
+		return enContactAvecColle;
+	}
+
+	public void setEnContactAvecColle(boolean enContactAvecColle) {
+		this.enContactAvecColle = enContactAvecColle;
 	}
 
 	public int getMurBas() {

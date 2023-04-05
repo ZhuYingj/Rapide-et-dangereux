@@ -16,7 +16,7 @@ import interfaces.TypeObjetSpecial;
 /**
  * Classe permettant de créer et de gérer une boite mystere
  * 
- * @author TanTommyRin
+ * @author Tan Tommy Rin
  *
  */
 public class BlocMystere implements Dessinable, Selectionnable, Serializable {
@@ -34,6 +34,7 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	private ObjetSpecial objetSpecial;
 	/** Boolean pour savoir si la voiture est en contact avec la boite **/
 	private boolean enContact = false;
+
 	private transient Graphics2D gTempo;
 
 	/**
@@ -69,7 +70,8 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	 */
 
 	public boolean enCollisionAvecVoiture(Voiture voiture) {
-
+		AffineTransform mat = new AffineTransform();
+		shapeCarre = mat.createTransformedShape(carre);
 		Area aireCopieVoiture = new Area(voiture.getCercle());
 		Area shapeCarreCopie = new Area(shapeCarre);
 
@@ -77,9 +79,13 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 
 		if (!aireCopieVoiture.isEmpty() && enContact == false) {
 			objetRandomChoisi(voiture);
-			
+
 			enContact = true;
 
+		}
+
+		if (aireCopieVoiture.isEmpty()) {
+			enContact = false;
 		}
 		if (enContact == true) {
 			dessiner(gTempo);
@@ -105,26 +111,26 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 
 			System.out.println("Champignon");
 		}
-		// 30 % de chance que ce soit un trou noir
+		// 30 % de chance que ce soit une boule de enige
 		else if (nombreRandom < 0.5) {
 
-			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.TROUNOIR);
+			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.BOULEDENEIGE);
+			System.out.println("Boule de neige");
 
-			System.out.println("Trou noir");
 		}
+
 		// 30 % de chance que ce soit de la colle
 		else if (nombreRandom < 0.8) {
 			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.COLLE);
 
 			System.out.println("Colle");
 		}
-		// 20 % de chance que ce soit une boule de neige
+		// 20 % de chance que ce soit un trou noir
 		else {
-			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.BOULEDENEIGE);
+			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.TROUNOIR);
+			System.out.println("Trou noir");
 
-			System.out.println("Boule de neige");
 		}
-		objetSpecial.setFonctionActive(true);
 
 	}
 
@@ -193,6 +199,10 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 		creerLaGeometrie();
 	}
 
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+
 	@Override
 	public boolean contient(double xPix, double yPix) {
 		if (carre.contains(xPix, yPix)) {
@@ -210,6 +220,14 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	public void setgTempo(Graphics2D gTempo) {
 		this.gTempo = gTempo;
 
+	}
+
+	public boolean isEnContact() {
+		return enContact;
+	}
+
+	public void setEnContact(boolean enContact) {
+		this.enContact = enContact;
 	}
 
 }

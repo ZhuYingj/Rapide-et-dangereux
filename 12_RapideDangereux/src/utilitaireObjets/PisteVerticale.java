@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
@@ -17,6 +18,7 @@ import physique.MoteurPhysique;
  * 
  * @author Ludovic Julien
  * @author Kevin Nguyen
+ * @author Tan Tommy Rin
  */
 
 public class PisteVerticale implements Dessinable, Selectionnable, Serializable {
@@ -46,6 +48,8 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	private boolean collision = false;
 	private Color color = Color.black;
 	private Rectangle2D.Double formeAire;
+	private boolean enContactAvecColle = false;
+	private int nombrePisteColle = 0;
 
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -57,6 +61,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	 * @param ligneRougeV2X position en x du deuxieme mure
 	 * @param ligneRougeV2Y position en y du deuxieme mure
 	 */
+	// Ludovic Julien
 	public PisteVerticale(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -71,6 +76,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	 * Methode qui permet de dessiner la piste verticale sur la zone d'animation a
 	 * l'aide de g2d
 	 */
+	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
@@ -137,6 +143,51 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	}
 
 	/**
+	 * Méthode qui permet de détecter s'il y a une collision de la voiture avec le
+	 * morceau de piste
+	 * 
+	 * @param voiture La voiture en collision
+	 */
+	// Tan Tommy Rin
+	public void collisionColle(Voiture voiture) {
+
+		if (formeAire.contains(voiture.getPosition().getX(), voiture.getPosition().getY())) {
+			enContactAvecColle = true;
+		} else {
+			enContactAvecColle = false;
+		}
+
+	}
+
+	/**
+	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
+	 * et la boule de neige
+	 * 
+	 * @param L'objet special de type boule de neige
+	 */
+	// Tan Tommy Rin
+
+	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
+
+		// Cette variable est juste pour returner la valeur de vérité si la boule de
+		// neige est en collision avec ce morceau de piste
+		boolean enCollision = false;
+
+		if (objetSpecial.getBouleDeNeige().getBoule().getX() > murGauche
+				&& objetSpecial.getBouleDeNeige().getBoule().getX() < murDroite
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() > murHaut
+				&& objetSpecial.getBouleDeNeige().getBoule().getY() < murBas) {
+			if (objetSpecial.getBouleDeNeige().getBoule().getX() < murGauche + 1) {
+				enCollision = true;
+			} else if (objetSpecial.getBouleDeNeige().getBoule().getX() > murDroite - objetSpecial.getDiametreObjet()) {
+				enCollision = true;
+			}
+		}
+
+		return enCollision;
+	}
+
+	/**
 	 * Méthode permettant de savoir si la voiture est passée sur la piste
 	 * 
 	 * @param voiture La voiture controllée
@@ -158,6 +209,11 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	public void setCollision(boolean collision) {
 		this.collision = collision;
 	}
+
+	/**
+	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 */
+	// Kevin Nguyen
 
 	@Override
 	public boolean contient(double xPix, double yPix) {
@@ -237,4 +293,19 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 		this.murBas = murBas;
 	}
 
+	public boolean isEnContactAvecColle() {
+		return enContactAvecColle;
+	}
+
+	public void setEnContactAvecColle(boolean enContactAvecColle) {
+		this.enContactAvecColle = enContactAvecColle;
+	}
+
+	public int getNombrePisteColle() {
+		return nombrePisteColle;
+	}
+
+	public void setNombrePisteColle(int nombrePisteColle) {
+		this.nombrePisteColle = nombrePisteColle;
+	}
 }

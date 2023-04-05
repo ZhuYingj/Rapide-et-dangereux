@@ -12,7 +12,7 @@ import geometrie.Vecteur2D;
 import interfaces.TypeObjetSpecial;
 
 /**
- * Classe qui crée et gère tous ce qui de la boule de neige
+ * Classe qui crée et gère tout ce qui est de la boule de neige
  * 
  * @author Alexis Pineda-Alvarado
  *
@@ -21,9 +21,9 @@ import interfaces.TypeObjetSpecial;
 public class BouleDeNeige {
 	private double diametre;
 	private Ellipse2D.Double boule;
+
 	private double pixelsParMetre;
-	private Vecteur2D vitesse = new Vecteur2D(100, 0); // par defaut
-	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
+
 	private Voiture voiture;
 
 	private transient Shape shapeBoule;
@@ -33,16 +33,14 @@ public class BouleDeNeige {
 	private transient Area aireVoiture1;
 
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.BOULEDENEIGE;
-	private boolean contactBouleNeige = true;
+	private boolean contactBouleNeige = false;
 	private Vecteur2D position;
-	private boolean boutonQ;
 
 	/**
 	 * Méthode qui crée la boule de neige
 	 * 
-	 * @param pos       le positionnement de la boule de neige
-	 * @param diametre  le diametre de la boule de neige
-	 * @param typeObjet le type d'objet spéciale
+	 * @param pos      le positionnement de la boule de neige
+	 * @param diametre le diametre de la boule de neige
 	 */
 	// Alexis Pineda-Alvarado
 	public BouleDeNeige(Vecteur2D pos, double diametre) {
@@ -51,7 +49,7 @@ public class BouleDeNeige {
 		this.position = pos;
 
 		creerLaGeometrie();
-		
+
 	}
 
 	/**
@@ -61,7 +59,7 @@ public class BouleDeNeige {
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dcop = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
-//		mat.scale(pixelsParMetre, pixelsParMetre);
+
 		shapeBoule = mat.createTransformedShape(boule);
 		g2dcop.setColor(Color.cyan);
 		g2dcop.fill(shapeBoule);
@@ -70,6 +68,10 @@ public class BouleDeNeige {
 		bouleDeNeigeAireCopie = new Area(bouleDeNeigeAire);
 
 	}
+
+	/**
+	 * Méthode qui permet de créer la géométrie de la boule de neige
+	 */
 
 	private void creerLaGeometrie() {
 
@@ -84,29 +86,24 @@ public class BouleDeNeige {
 	 * @return la valeur de la collision en true or false
 	 */
 	// Alexis Pineda-Alvarado
-	public boolean collisionDeLaBalle(Voiture v) {
-		this.voiture = v;
+	public boolean collisionDeLaVoiture(Voiture v) {
 
+		this.voiture = v;
+		bouleDeNeigeAireCopie = new Area(boule);
 		aireVoiture = new Area(voiture.getCercle());
 		aireVoiture1 = new Area(aireVoiture);
 		aireVoiture1.intersect(bouleDeNeigeAireCopie);
-
-		if (contactBouleNeige)
+		if (contactBouleNeige == false) {
 			if (!aireVoiture1.isEmpty()) {
+				contactBouleNeige = true;
+
+			} else {
 				contactBouleNeige = false;
 			}
+		}
 
 		return contactBouleNeige;
 	}
-
-	/**
-	 * Méthode qui gére le déplacement de la boule de neige
-	 * 
-	 */
-	public void deplacementBoule() {
-
-	}
-
 
 	/**
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
@@ -138,22 +135,6 @@ public class BouleDeNeige {
 		this.diametre = diametre;
 	}
 
-	public Vecteur2D getVitesse() {
-		return vitesse;
-	}
-
-	public void setVitesse(Vecteur2D vitesse) {
-		this.vitesse = vitesse;
-	}
-
-	public Vecteur2D getAccel() {
-		return accel;
-	}
-
-	public void setAccel(Vecteur2D accel) {
-		this.accel = accel;
-	}
-
 	public Shape getShapeBoule() {
 		return shapeBoule;
 	}
@@ -168,6 +149,14 @@ public class BouleDeNeige {
 
 	public void setTypeObjet(TypeObjetSpecial typeObjet) {
 		this.typeObjet = typeObjet;
+	}
+
+	public Ellipse2D.Double getBoule() {
+		return boule;
+	}
+
+	public void setBoule(Ellipse2D.Double boule) {
+		this.boule = boule;
 	}
 
 }
