@@ -591,6 +591,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		angleVoitureDegre2 = 0;
 		regroupement.resetTour();
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
+		regroupement.creeBoiteDansListe();
 
 		repaint();
 	}

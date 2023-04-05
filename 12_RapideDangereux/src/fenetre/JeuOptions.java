@@ -206,6 +206,7 @@ public class JeuOptions extends JPanel {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
 				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
 				pcs.firePropertyChange("TYPEPISTE", null, type);
+
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);
