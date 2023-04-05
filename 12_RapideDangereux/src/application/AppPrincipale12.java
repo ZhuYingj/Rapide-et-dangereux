@@ -256,6 +256,7 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
+			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
 			break;
 		}
 	}
