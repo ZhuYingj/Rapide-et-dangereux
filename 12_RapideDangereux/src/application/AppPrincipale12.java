@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -255,6 +256,12 @@ public class AppPrincipale12 extends JFrame {
 		case "TYPEPISTE":
 			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
+			break;
+		case "SKIN":
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setSkin((Color) evt.getNewValue());
+			break;
+		case "SKIN2":
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setSkin((Color) evt.getNewValue());
 			break;
 		}
 	}
@@ -566,7 +573,7 @@ public class AppPrincipale12 extends JFrame {
 					JOptionPane.showMessageDialog(null,
 							"Bonjour dans RAPIDE ET DANGEREUX! \nle but de ce jeux et de battre votre combattant"
 									+ " \nles contrôles du jeu sont :  \n↑ : pour avancer la voiture"
-									+ " \n← et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture"
+									+ " \n� et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture"
 									+ "\nLes boîtes jaunes choisisent un effet mis sur la voiture au hasard lorsque vous la toucher");
 				}
 			}
