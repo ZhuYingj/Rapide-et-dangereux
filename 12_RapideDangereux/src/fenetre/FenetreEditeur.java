@@ -45,6 +45,7 @@ public class FenetreEditeur extends JPanel {
 	private Regroupement regroupement;
 	private PanelRegroupement panelRegroupement;
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
+	private String pisteCourante = "Piste1.dat";
 
 	private JButton btnSauvegarde;
 	private JButton btnJouer;
@@ -320,32 +321,31 @@ public class FenetreEditeur extends JPanel {
 		btnSauvegarde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sauvegardeUnePiste();
-				gestionFich.setNombrePiste(gestionFich.getNombrePiste() + 1);
-				JOptionPane.showMessageDialog(null,
-						"PISTE SAUVEGARDER SUR LE BUREAU\nNOM :" + gestionFich.getNomFichBinRegroupement());
+				gestionFich.setNombrePiste(comboBoxPiste.getItemCount() + 1);
+
+				pisteCourante = (String) comboBoxPiste.getSelectedItem();
+				chargementUnePiste();
+				JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU\nNOM :" + pisteCourante);
+
 			}
 		});
 
-		btnSauvegarde.setBounds(132, 508, 173, 23);
+		btnSauvegarde.setBounds(132, 508, 250, 23);
 
 		add(btnSauvegarde);
 
-		JButton btnChargerPisteSauvegarde = new JButton("CHARGER LA PISTE SAUVEGARDÉ");
-		btnChargerPisteSauvegarde.addActionListener(new ActionListener() {
+
+
+		comboBoxPiste = new JComboBox<String>();
+		comboBoxPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				pisteCourante = (String) comboBoxPiste.getSelectedItem();
 				chargementUnePiste();
-				JOptionPane.showMessageDialog(null, "PISTE CHARGÉ AVEC SUCCÈS !");
 
 			}
 		});
 
-		btnChargerPisteSauvegarde.setBounds(335, 508, 214, 23);
-
-		add(btnChargerPisteSauvegarde);
-
-		comboBoxPiste = new JComboBox<String>();
-
-		comboBoxPiste.setBounds(592, 508, 181, 23);
+		comboBoxPiste.setBounds(650, 508, 250, 23);
 
 		add(comboBoxPiste);
 
@@ -355,11 +355,13 @@ public class FenetreEditeur extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				verifierSiPisteFerme();
 				if (pisteFerme == true) {
-					gestionFich.setNombrePiste(gestionFich.getNombrePiste() - 1);
-					sauvegardeUnePiste();
+					sauvegardeUnePiste2();
+
 					chargementUnePiste();
 					pcs.firePropertyChange("JOUEREDITEUR", null, -1);
-					pcs.firePropertyChange("REGROUPEMENT", null, (String) comboBoxPiste.getSelectedItem());
+
+					pcs.firePropertyChange("REGROUPEMENT", null, pisteCourante);
+
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU VIDE POUR JOUEZ");
@@ -1089,6 +1091,48 @@ public class FenetreEditeur extends JPanel {
 
 	/**
 	 * Méhode qui permet de sauvegarder une piste sur le bureau en fichier binaire
+	 * mais pour le bouton jouer
+	 */
+	private void sauvegardeUnePiste2() {
+
+		Voiture voiture = new Voiture(new Vecteur2D(panelRegroupement.getListePisteDeDepart().get(0).getX(),
+				panelRegroupement.getListePisteDeDepart().get(0).getY()), Color.yellow, 50, 16, 0, 60);
+		regroupement = new Regroupement(voiture, 3, TypePiste.AUTRE);
+		regroupement.setListeAccelerateur(panelRegroupement.getListeAccelerateur());
+		regroupement.setListePisteDeDepart(panelRegroupement.getListePisteDeDepart());
+		regroupement.setListePisteHorizontale(panelRegroupement.getListePisteHorizontale());
+		regroupement.setListePisteVerticale(panelRegroupement.getListePisteVerticale());
+		regroupement.setListePisteVirageBas(panelRegroupement.getListePisteVirageBas());
+		regroupement.setListePisteVirageDroit(panelRegroupement.getListePisteVirageDroit());
+		regroupement.setListePisteVirageGauche(panelRegroupement.getListePisteVirageGauche());
+		regroupement.setListePisteVirageHaut(panelRegroupement.getListePisteVirageHaut());
+		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
+
+		gestionFich.ecrireFichierBinBureauRegroupement2(regroupement, pisteCourante);
+		boolean dejaDansComboBox = false;
+		for (int a = 0; a < comboBoxPiste.getItemCount(); a++) {
+			if (gestionFich.getNomFichBinRegroupement().equalsIgnoreCase(comboBoxPiste.getItemAt(a))) {
+
+				dejaDansComboBox = true;
+				break;
+			} else {
+				dejaDansComboBox = false;
+			}
+		}
+		if (dejaDansComboBox == true) {
+
+		} else {
+			comboBoxPiste.addItem(gestionFich.getNomFichBinRegroupement());
+		}
+
+		comboBoxPiste.setSelectedItem(pisteCourante);
+
+		btnJouer.setEnabled(true);
+
+	}
+
+	/**
+	 * Méhode qui permet de sauvegarder une piste sur le bureau en fichier binaire
 	 */
 	private void sauvegardeUnePiste() {
 
@@ -1123,8 +1167,7 @@ public class FenetreEditeur extends JPanel {
 		}
 
 		comboBoxPiste.setSelectedIndex(comboBoxPiste.getItemCount() - 1);
-		System.out.println(comboBoxPiste.getItemAt(comboBoxPiste.getItemCount() - 1) + "  a");
-		System.out.println(gestionFich.getNomFichBinRegroupement() + "  b");
+
 		btnJouer.setEnabled(true);
 
 	}
@@ -1137,8 +1180,9 @@ public class FenetreEditeur extends JPanel {
 
 		btnSauvegarde.setEnabled(true);
 		btnJouer.setEnabled(true);
-		regroupementSauvegarde = gestionFich.lireFichierBinBureauRegroupement((String) comboBoxPiste.getSelectedItem());
-		System.out.println("Piste en cours : " + gestionFich.getNomFichBinRegroupement());
+
+		regroupementSauvegarde = gestionFich.lireFichierBinBureauRegroupement(pisteCourante);
+
 		panelRegroupement.getListeAccelerateur().clear();
 		panelRegroupement.getListePisteVirageBas().clear();
 		panelRegroupement.getListePisteVirageHaut().clear();

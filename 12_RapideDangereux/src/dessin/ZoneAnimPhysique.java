@@ -987,6 +987,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	public void setNomFichierRegroupement(String nomFichierRegroupement) {
 		this.nomFichierRegroupement = nomFichierRegroupement;
+
 	}
 
 }
