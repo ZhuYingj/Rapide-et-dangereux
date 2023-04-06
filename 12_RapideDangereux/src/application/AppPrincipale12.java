@@ -235,6 +235,7 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenJeuScience);
 			checkBoxModeNonScientifique.setEnabled(true);
 			pushingP(fenJeuScience);
+			
 			break;
 		case "MASSE":
 			fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
