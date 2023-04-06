@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import fenetre.ClassementParPiste;
 import fenetre.FenetreEditeur;
 import fenetre.FenetreJeuSansScientifique;
 import fenetre.FenetreJeuScientifique;
@@ -23,9 +25,8 @@ import fenetre.FenetreMenu;
 import fenetre.FenetreOptionMontre;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
+import fenetre.test;
 import interfaces.TypePiste;
-import utilitaireObjets.Regroupement;
-import java.awt.Window.Type;
 
 /**
  * Application permettant d'illustrer une simulation physique
@@ -110,6 +111,9 @@ public class AppPrincipale12 extends JFrame {
 		JeuOptions fenOptions = new JeuOptions();
 		FenetreOptionMontre fenOptionMontre = new FenetreOptionMontre();
 
+		ClassementParPiste fenRecord = new ClassementParPiste();
+
+		test fenTest = new test();
 		ajouterModeEditeurComboBox(fenEditeur);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -193,7 +197,8 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionChangeJeuCourse(evt, fenOptionMontre, fenJeuScience);
+				actionChangeJeuCourse(evt, fenOptionMontre, fenTest);
+				actionRetourOptionCCM(evt, fenOptionMontre, fenModeJeu);
 			}
 		});
 
@@ -255,6 +260,16 @@ public class AppPrincipale12 extends JFrame {
 		case "TYPEPISTE":
 			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
+			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
+			break;
+			// Ludovic Julien
+			//permet le changement de couleur des voiture dans la zone d'annimation
+		case "SKIN":
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setSkin((Color) evt.getNewValue());
+			break;
+		case "SKIN2":
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setSkin((Color) evt.getNewValue());
 			break;
 		}
 	}
@@ -538,15 +553,34 @@ public class AppPrincipale12 extends JFrame {
 	 *                        le mode de jeu course contre la montre
 	 */
 // Alexis Pineda-Alvarado
-	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
-			FenetreJeuScientifique fenJeuScience) {
+	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre, test fenTest) {
 		switch (evt.getPropertyName()) {
 		case "COMMENCER COURSE MONTRE":
 			fenOptionMontre.setVisible(false);
-			fenJeuScience.setVisible(true);
-			setContentPane(fenJeuScience);
+			fenTest.setVisible(true);
+			setContentPane(fenTest);
 			break;
 
+		}
+	}
+
+	/**
+	 * Méthode qui change le panel des options pour le mode course contre la montre
+	 * avec le panel de mode de jeu
+	 * 
+	 * @param evt             evenement
+	 * @param fenOptionMontre fenêtre des paramètres a choisir dans le mode course
+	 *                        contre la montre
+	 * @param fenModeJeu      fenêtre de la selection de mode de jeu
+	 */
+	public void actionRetourOptionCCM(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
+			ModeDeJeu fenModeJeu) {
+		switch (evt.getPropertyName()) {
+		case "Retour":
+			fenOptionMontre.setVisible(false);
+			fenModeJeu.setVisible(true);
+			setContentPane(fenModeJeu);
+			break;
 		}
 	}
 
@@ -566,7 +600,7 @@ public class AppPrincipale12 extends JFrame {
 					JOptionPane.showMessageDialog(null,
 							"Bonjour dans RAPIDE ET DANGEREUX! \nle but de ce jeux et de battre votre combattant"
 									+ " \nles contrôles du jeu sont :  \n↑ : pour avancer la voiture"
-									+ " \n← et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture"
+									+ " \n� et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture"
 									+ "\nLes boîtes jaunes choisisent un effet mis sur la voiture au hasard lorsque vous la toucher");
 				}
 			}

@@ -85,7 +85,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 		g2dCopie.fillRect(x, y, taillePiste, taillePiste);
 		g2dCopie.setColor(Color.RED);
 		g2dCopie.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(0.5f);
+		Stroke stroke = new BasicStroke(2f);
 		g2dCopie.setStroke(stroke);
 		g2dCopie.drawLine(x, y, x + taillePiste, y);
 		g2dCopie.drawLine(x, y + taillePiste, x + taillePiste, y + taillePiste);

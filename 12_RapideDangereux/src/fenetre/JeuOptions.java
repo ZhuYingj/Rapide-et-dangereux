@@ -20,16 +20,19 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import dessin.OutilsImage;
+import dessin.ZoneAnimPhysique;
 import dessin.ZoneApercupiste;
 import interfaces.TypePiste;
 import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
+import javax.swing.SwingConstants;
 
 /**
  * Classe qui crée la fenêtre pour choisir les paramètres pour le mode de jeu
  * Monde
  * 
  * @author Alexis Pineda-Alvarado
+ * @author Ludovic Julien
  * 
  */
 
@@ -45,6 +48,12 @@ public class JeuOptions extends JPanel {
 	private Regroupement regroupement;
 	private TypePiste type = TypePiste.MEXIQUE;
 	private Image imageActuelle;
+	private int indexCouleur = 0;
+
+	private int indexCouleur2 = 0;
+    private Color[] couleurs = {Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE};
+    private Color[] couleurs2 = {Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE};
+
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -85,7 +94,7 @@ public class JeuOptions extends JPanel {
 				zoneApercupiste.repaint();
 			}
 		});
-
+		
 		JButton btnCanada = new JButton("Canada");
 		btnCanada.setBounds(307, 77, 126, 78);
 		add(btnCanada);
@@ -107,7 +116,7 @@ public class JeuOptions extends JPanel {
 				imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
 				zoneApercupiste.setImg(imageActuelle);
 				zoneApercupiste.repaint();
-		
+
 			}
 		});
 
@@ -183,15 +192,15 @@ public class JeuOptions extends JPanel {
 		rdbtnDifficile.setBounds(165, 131, 109, 23);
 		panel_1.add(rdbtnDifficile);
 		buttonGroupDiff.add(rdbtnDifficile);
-		
+
 		JLabel lblVitesseFacile = new JLabel("60 m/s");
 		lblVitesseFacile.setBounds(280, 84, 46, 14);
 		panel_1.add(lblVitesseFacile);
-		
+
 		JLabel lblVitesseIntermediaire = new JLabel("80 m/s");
 		lblVitesseIntermediaire.setBounds(280, 109, 46, 14);
 		panel_1.add(lblVitesseIntermediaire);
-		
+
 		JLabel lblVitesseAvance = new JLabel("100 m/s");
 		lblVitesseAvance.setBounds(280, 135, 46, 14);
 		panel_1.add(lblVitesseAvance);
@@ -202,22 +211,52 @@ public class JeuOptions extends JPanel {
 				pcs.firePropertyChange("COMMENCER!", null, -1);
 				pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
 				pcs.firePropertyChange("TYPEPISTE", null, type);
+
+				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+				pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+
+
+				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);
 		add(btnCommencer);
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(970, 77, 143, 257);
-		add(panel_2);
+		JPanel panel_V1 = new JPanel();
+		panel_V1.setBackground(Color.YELLOW);
+		panel_V1.setBounds(967, 77, 143, 90);
+		add(panel_V1);
 
 		JButton btnGauche = new JButton("<");
-		btnGauche.setBounds(905, 188, 55, 23);
+		btnGauche.setBounds(891, 116, 55, 23);
+		btnGauche.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                indexCouleur--;
+                if (indexCouleur < 0) {
+                    indexCouleur = couleurs.length - 1;
+                }
+                panel_V1.setBackground(couleurs[indexCouleur]);
+            }
+        });
+
 		add(btnGauche);
 
 		JButton btnDroite = new JButton(">");
-		btnDroite.setBounds(1123, 188, 55, 23);
+
+		btnDroite.setBounds(1123, 116, 55, 23);
+		  btnDroite.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                indexCouleur++;
+	                if (indexCouleur == couleurs.length) {
+	                    indexCouleur = 0;
+	                }
+	                panel_V1.setBackground(couleurs[indexCouleur]);
+	            }
+	        });
 		add(btnDroite);
 
 		JButton btnRetour = new JButton("Retour");
@@ -228,6 +267,63 @@ public class JeuOptions extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
+		
+		JPanel PanelV2 = new JPanel();
+		PanelV2.setBounds(967, 229, 143, 90);
+		PanelV2.setBackground(Color.WHITE);
+		add(PanelV2);
+		
+		JLabel lblNewLabel = new JLabel("Couleur voiture #1");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(967, 42, 134, 13);
+		add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Couleur Voiture #2");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(967, 200, 143, 13);
+		add(lblNewLabel_1);
+		
+		JButton btnGauche1 = new JButton("<");
+		btnGauche1.setBounds(902, 264, 55, 23);
+		btnGauche1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                indexCouleur2--;
+                if (indexCouleur2 < 0) {
+                    indexCouleur2 = couleurs2.length - 1;
+                }
+                PanelV2.setBackground(couleurs2[indexCouleur2]);
+            }
+        });
+		add(btnGauche1);
+		
+		JButton btnDroite1 = new JButton(">");
+		btnDroite1.setBounds(1123, 264, 55, 23);
+		btnDroite1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                indexCouleur2++;
+                if (indexCouleur2 == couleurs2.length) {
+                    indexCouleur2 = 0;
+                }
+                PanelV2.setBackground(couleurs2[indexCouleur2]);
+            }
+        });
+		add(btnDroite1);
+		
+		JButton btnRecorsPiste = new JButton("Records par piste !");
+		btnRecorsPiste.setForeground(new Color(0, 0, 0));
+		btnRecorsPiste.setBackground(Color.CYAN);
+		btnRecorsPiste.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnRecorsPiste.setBounds(643, 77, 159, 78);
+		btnRecorsPiste.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("RECORD", null, -1);
+			}
+		});
+		add(btnRecorsPiste);
 
 	}
 }
