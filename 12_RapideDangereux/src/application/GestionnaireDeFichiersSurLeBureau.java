@@ -187,7 +187,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 //Tan Tommy Rin
 	public void ecrireFichierBinBureauRegroupement2(Regroupement regroupement, String nomVoulu) {
 		nomFichBinRegroupement = nomVoulu;
-		System.out.println("ici " + nomFichBinRegroupement);
+
 // chemin d'acces au dossier
 		File dossier = new File(System.getProperty("user.home"), "Desktop" + "\\" + sousDossierSurBureau);
 

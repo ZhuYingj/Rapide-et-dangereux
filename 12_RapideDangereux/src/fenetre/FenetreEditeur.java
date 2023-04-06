@@ -334,8 +334,6 @@ public class FenetreEditeur extends JPanel {
 
 		add(btnSauvegarde);
 
-
-
 		comboBoxPiste = new JComboBox<String>();
 		comboBoxPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
