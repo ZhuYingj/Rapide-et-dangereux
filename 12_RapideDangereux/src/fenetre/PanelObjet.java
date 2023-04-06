@@ -31,8 +31,8 @@ import java.awt.event.MouseAdapter;
 
 public class PanelObjet extends JPanel {
 
-	private int xObjet = 75;
-	private int yObjet = 20;
+	private final int X_OBJET = 75;
+	private final int Y_OBJET = 20;
 	private BlocMystere blocMystere;
 	private PisteDeDepart pisteDeDepart;
 	private PisteHorizontale pisteHorizontale;
@@ -50,15 +50,15 @@ public class PanelObjet extends JPanel {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 
-		blocMystere = new BlocMystere(75, new Vecteur2D(xObjet, yObjet));
-		pisteDeDepart = new PisteDeDepart(xObjet * 3, yObjet);
-		pisteHorizontale = new PisteHorizontale(xObjet, yObjet * 7);
-		pisteVerticale = new PisteVerticale(xObjet * 3, yObjet * 7);
-		pisteVirageBas = new PisteVirageBas(xObjet, yObjet * 14);
-		pisteVirageDroit = new PisteVirageDroit(xObjet * 3, yObjet * 21);
-		pisteVirageGauche = new PisteVirageGauche(xObjet * 3, yObjet * 14);
-		pisteVirageHaut = new PisteVirageHaut(xObjet, yObjet * 21);
-		accelerateur = new Accelerateur(xObjet, yObjet * 28);
+		blocMystere = new BlocMystere(75, new Vecteur2D(X_OBJET, Y_OBJET));
+		pisteDeDepart = new PisteDeDepart(X_OBJET * 3, Y_OBJET);
+		pisteHorizontale = new PisteHorizontale(X_OBJET, Y_OBJET * 7);
+		pisteVerticale = new PisteVerticale(X_OBJET * 3, Y_OBJET * 7);
+		pisteVirageBas = new PisteVirageBas(X_OBJET, Y_OBJET * 14);
+		pisteVirageDroit = new PisteVirageDroit(X_OBJET * 3, Y_OBJET * 21);
+		pisteVirageGauche = new PisteVirageGauche(X_OBJET * 3, Y_OBJET * 14);
+		pisteVirageHaut = new PisteVirageHaut(X_OBJET, Y_OBJET * 21);
+		accelerateur = new Accelerateur(X_OBJET, Y_OBJET * 28);
 
 		pisteDeDepart.dessiner(g2d);
 		blocMystere.dessiner(g2d);

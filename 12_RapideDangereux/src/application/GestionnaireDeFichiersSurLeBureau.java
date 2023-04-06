@@ -70,8 +70,6 @@ public class GestionnaireDeFichiersSurLeBureau {
 					"\nLes informations sur la voiture et le regroupement sont écrites avec succès. \nLe fichier "
 							+ fichierDeTravail.toString() + " est pret pour la lecture!");
 
-			nombrePiste++;
-
 		}
 
 		catch (IOException e) {
@@ -176,6 +174,60 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 	public void setNombrePiste(int nombrePiste) {
 		this.nombrePiste = nombrePiste;
+	}
+
+	/**
+	 * crée un fichier binaire et y inscrit un objet regroupement (composé de
+	 * d'autres objets) Le place à un endroit spécifique sur le Bureau de
+	 * l'utilisateur. Ceci est pour une piste deja présente.
+	 * 
+	 * @param nomVoulu     le nom voulu à sauvegarder
+	 * @param regroupement Le groupe que l'on sauvegarde
+	 */
+//Tan Tommy Rin
+	public void ecrireFichierBinBureauRegroupement2(Regroupement regroupement, String nomVoulu) {
+		nomFichBinRegroupement = nomVoulu;
+		System.out.println("ici " + nomFichBinRegroupement);
+// chemin d'acces au dossier
+		File dossier = new File(System.getProperty("user.home"), "Desktop" + "\\" + sousDossierSurBureau);
+
+// on cree le dossier s'il n'existe pas
+		if (dossier.mkdir()) {
+			System.out.println("\nLe dossier " + dossier.toString() + " a été créé car il n'existait pas...");
+		}
+
+// chemin d'acces au fichier de travail
+		File fichierDeTravail = new File(dossier + "\\" + nomFichBinRegroupement);
+
+		ObjectOutputStream oos = null;
+
+		try {
+
+			oos = new ObjectOutputStream(new FileOutputStream(fichierDeTravail));
+
+// on �crit chacun des objets
+			oos.writeObject(regroupement);
+			System.out.println(
+					"\nLes informations sur la voiture et le regroupement sont écrites avec succès. \nLe fichier "
+							+ fichierDeTravail.toString() + " est pret pour la lecture!");
+
+		}
+
+		catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Erreur à l'écriture:");
+			e.printStackTrace();
+		}
+
+		finally {
+// on ex�cutera toujours ceci, erreur ou pas
+			try {
+				oos.close();
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, "Erreur rencontrée lors de la fermeture!");
+				e.printStackTrace();
+			}
+		} // fin finally
+
 	}
 
 }

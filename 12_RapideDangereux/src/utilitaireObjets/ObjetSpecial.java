@@ -84,39 +84,21 @@ public class ObjetSpecial implements Dessinable {
 	}
 
 	/**
-	 * Méthode qui permet le fonctionnement du trou noir sur la voiture affecté pour
-	 * 5 secondes.
+	 * Méthode qui permet le fonctionnement du trou noir sur la voiture affecté
 	 * 
-	 * @param voiture          Voiture affectée
-	 * @param tempsTotalEcoule le temps total écoulé
-	 * @return Si le temps est écoulé
+	 * @param voiture Voiture affectée
 	 */
+//Tan Tommy Rin
+	public void fonctionTrouNoir(Voiture voiture) {
 
-	public boolean fonctionTrouNoir1(Voiture voiture, double tempsTotalEcoule) {
-		boolean retour = false;
-		if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
-			retour = true;
-			if (trouNoir.getZone().contains(voiture.getPosition().getX(), voiture.getPosition().getY())) {
-				double r = 25;
+		Vecteur2D forceApplied = new Vecteur2D(trouNoir.getPosition());
+		forceApplied = forceApplied.soustrait(voiture.getPosition());
+		// Distance entre la voiture et le trou noir
+		double r = forceApplied.module();
 
-				double fg = (trouNoir.getMasseTrouNoir() * 25) / (r * r);
-				Vecteur2D forceApplied1 = new Vecteur2D(trouNoir.getPosition());
-
-				forceApplied1 = forceApplied1.soustrait(voiture.getPosition());
-				forceApplied1 = forceApplied1.multiplie(fg);
-				voiture.setSommeDesForces(forceApplied1);
-
-				enContactTrouNoir = true;
-
-			} else {
-
-				enContactTrouNoir = false;
-			}
-		} else {
-			retour = false;
-		}
-
-		return retour;
+		double fg = (trouNoir.getMasseTrouNoir() * 25) / (r * r);
+		forceApplied = forceApplied.multiplie(fg);
+		voiture.setSommeDesForces(forceApplied);
 
 	}
 
@@ -130,26 +112,27 @@ public class ObjetSpecial implements Dessinable {
 	 * @param toucheActive Si la touche d'acceleration est activée
 	 */
 	// Tan Tommy Rin
-	public void fonctionColle(Voiture voiture, boolean toucheActive) {
-
-		if (toucheActive == true) {
-			if (voiture.getVitesse().module() < 20) {
-
-			} else if (voiture.getVitesse().module() < 30) {
-				voiture.setAccel(new Vecteur2D(-10 * Math.cos(voiture.getAngle()), -10 * Math.sin(voiture.getAngle())));
-			} else {
-				voiture.setAccel(new Vecteur2D(-19 * Math.cos(voiture.getAngle()), -19 * Math.sin(voiture.getAngle())));
-			}
-
+	public void fonctionColle(Voiture voiture) {
+		if (voiture.getVitesse().module() < 5) {
+			System.out.println("0");
+		} else if (voiture.getVitesse().module() < 15) {
+			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
+			voiture.setAccel(new Vecteur2D(-5 * Math.cos(voiture.getAngle()), -5 * Math.sin(voiture.getAngle())));
+			System.out.println("1");
+		} else if (voiture.getVitesse().module() < 30) {
+			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
+			voiture.setAccel(new Vecteur2D(-10 * Math.cos(voiture.getAngle()), -10 * Math.sin(voiture.getAngle())));
+			System.out.println("2");
+		} else if (voiture.getVitesse().module() < 45) {
+			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
+			voiture.setAccel(new Vecteur2D(-20 * Math.cos(voiture.getAngle()), -19 * Math.sin(voiture.getAngle())));
+			System.out.println("3");
 		} else {
-			if (voiture.getVitesse().module() < 20) {
-
-			} else if (voiture.getVitesse().module() < 30) {
-				voiture.setAccel(new Vecteur2D(-8 * Math.cos(voiture.getAngle()), -8 * Math.sin(voiture.getAngle())));
-			} else {
-				voiture.setAccel(new Vecteur2D(-17 * Math.cos(voiture.getAngle()), -17 * Math.sin(voiture.getAngle())));
-			}
+			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
+			voiture.setAccel(new Vecteur2D(-30 * Math.cos(voiture.getAngle()), -22 * Math.sin(voiture.getAngle())));
+			System.out.println("4");
 		}
+	
 
 	}
 
@@ -261,6 +244,14 @@ public class ObjetSpecial implements Dessinable {
 
 	public boolean isEnContactTrouNoir() {
 		return enContactTrouNoir;
+	}
+
+	public TrouNoir getTrouNoir() {
+		return trouNoir;
+	}
+
+	public void setTrouNoir(TrouNoir trouNoir) {
+		this.trouNoir = trouNoir;
 	}
 
 	public void setEnContactTrouNoir(boolean enContactTrouNoir) {
