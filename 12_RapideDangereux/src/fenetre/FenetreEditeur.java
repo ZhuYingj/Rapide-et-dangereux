@@ -30,8 +30,7 @@ import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
 
 /**
- * Classe qui permet de créer et gérer la fenetre éditeur. La sauvegarde d'un
- * circuit(Classe regroupement) est possible.
+ * Classe qui permet de créer et gérer la fenetre éditeur.
  * 
  * @author Tan Tommy Rin
  *
@@ -58,6 +57,10 @@ public class FenetreEditeur extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
+	/**
+	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 */
+	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -65,7 +68,7 @@ public class FenetreEditeur extends JPanel {
 	/**
 	 * Creation de la fenetre.
 	 */
-
+	// Tan Tommy Rin
 	public FenetreEditeur() {
 		gestionFich = new GestionnaireDeFichiersSurLeBureau();
 		setLayout(null);
@@ -91,10 +94,7 @@ public class FenetreEditeur extends JPanel {
 		btnAjouterAccelerateur = new JButton("+");
 		btnAjouterAccelerateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Accelerateur accelerateur = new Accelerateur(650, 50);
-				panelRegroupement.getListeAccelerateur().add(accelerateur);
-				btnAjouterAccelerateur.setEnabled(false);
-				repaint();
+				ajoutAccelerateur();
 			}
 		});
 		btnAjouterAccelerateur.setBounds(64, 652, 41, 23);
@@ -103,12 +103,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnSupprimerAccelerateur = new JButton("-");
 		btnSupprimerAccelerateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelRegroupement.getListeAccelerateur().size() != 0) {
-					panelRegroupement.getListeAccelerateur()
-							.remove(panelRegroupement.getListeAccelerateur().size() - 1);
-					repaint();
-					btnAjouterAccelerateur.setEnabled(true);
-				}
+				supprimerAccelerateur();
 			}
 		});
 		btnSupprimerAccelerateur.setBounds(126, 652, 41, 23);
@@ -117,11 +112,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterBlocMystere = new JButton("+");
 		btnAjouterBlocMystere.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BlocMystere blocMystere = new BlocMystere(15, new Vecteur2D(650, 170));
-
-				panelRegroupement.getListeBlocMystere().add(blocMystere);
-				repaint();
-
+				ajouterBlocMystere();
 			}
 		});
 		btnAjouterBlocMystere.setBounds(64, 107, 41, 23);
@@ -130,10 +121,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnSupprimerBlocMystere = new JButton("-");
 		btnSupprimerBlocMystere.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelRegroupement.getListeBlocMystere().size() != 0) {
-					panelRegroupement.getListeBlocMystere().remove(panelRegroupement.getListeBlocMystere().size() - 1);
-					repaint();
-				}
+				supprimerBlocMystere();
 			}
 		});
 		btnSupprimerBlocMystere.setBounds(114, 107, 41, 23);
@@ -142,9 +130,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteHorizontale = new JButton("+");
 		btnAjouterPisteHorizontale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteHorizontale pisteHorizontale = new PisteHorizontale(650, 190);
-				panelRegroupement.getListePisteHorizontale().add(pisteHorizontale);
-				repaint();
+				ajouterPisteHorizontale();
 			}
 		});
 		btnAjouterPisteHorizontale.setBounds(64, 231, 41, 23);
@@ -153,9 +139,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageBas = new JButton("+");
 		btnAjouterPisteVirageBas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageBas pisteVirageBas = new PisteVirageBas(650, 70);
-				panelRegroupement.getListePisteVirageBas().add(pisteVirageBas);
-				repaint();
+				ajouterVirageBas();
 			}
 		});
 
@@ -165,9 +149,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageGauche = new JButton("+");
 		btnAjouterPisteVirageGauche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageGauche pisteVirageGauche = new PisteVirageGauche(650, 90);
-				panelRegroupement.getListePisteVirageGauche().add(pisteVirageGauche);
-				repaint();
+				ajouterPisteGauche();
 			}
 		});
 		btnAjouterPisteVirageGauche.setBounds(217, 378, 41, 23);
@@ -176,11 +158,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnSupprimerPisteHorizontale = new JButton("-");
 		btnSupprimerPisteHorizontale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelRegroupement.getListePisteHorizontale().size() != 0) {
-					panelRegroupement.getListePisteHorizontale()
-							.remove(panelRegroupement.getListePisteHorizontale().size() - 1);
-					repaint();
-				}
+				supprimerHorizontale();
 			}
 		});
 		btnSupprimerPisteHorizontale.setBounds(114, 231, 41, 23);
@@ -189,11 +167,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnSupprimerPisteVirageBas = new JButton("-");
 		btnSupprimerPisteVirageBas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelRegroupement.getListePisteVirageBas().size() != 0) {
-					panelRegroupement.getListePisteVirageBas()
-							.remove(panelRegroupement.getListePisteVirageBas().size() - 1);
-					repaint();
-				}
+				supprimerVirageBas();
 			}
 		});
 		btnSupprimerPisteVirageBas.setBounds(114, 378, 41, 23);
@@ -202,11 +176,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnSupprimerPisteVirageGauche = new JButton("-");
 		btnSupprimerPisteVirageGauche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
-					panelRegroupement.getListePisteVirageGauche()
-							.remove(panelRegroupement.getListePisteVirageGauche().size() - 1);
-					repaint();
-				}
+				supprimerVirageGauche();
 			}
 		});
 		btnSupprimerPisteVirageGauche.setBounds(268, 378, 41, 23);
@@ -215,15 +185,7 @@ public class FenetreEditeur extends JPanel {
 		btnAjouterPisteDeDepart = new JButton("+");
 		btnAjouterPisteDeDepart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelRegroupement.getListePisteDeDepart().size() == 0) {
-					PisteDeDepart pisteDeDepart = new PisteDeDepart(650, 150);
-					panelRegroupement.getListePisteDeDepart().add(pisteDeDepart);
-					btnAjouterPisteDeDepart.setEnabled(false);
-					btnSauvegarde.setEnabled(true);
-				} else {
-					btnSauvegarde.setEnabled(false);
-				}
-				repaint();
+				ajouterPisteDepart();
 			}
 		});
 		btnAjouterPisteDeDepart.setBounds(217, 107, 41, 23);
@@ -232,9 +194,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVerticale = new JButton("+");
 		btnAjouterPisteVerticale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVerticale pisteVerticale = new PisteVerticale(650, 50);
-				panelRegroupement.getListePisteVerticale().add(pisteVerticale);
-				repaint();
+				ajouterPisteVerticale();
 			}
 		});
 		btnAjouterPisteVerticale.setBounds(217, 231, 41, 23);
@@ -243,11 +203,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnSupprimerPisteVerticale = new JButton("-");
 		btnSupprimerPisteVerticale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelRegroupement.getListePisteVerticale().size() != 0) {
-					panelRegroupement.getListePisteVerticale()
-							.remove(panelRegroupement.getListePisteVerticale().size() - 1);
-					repaint();
-				}
+				supprimerPisteVerticale();
 			}
 		});
 		btnSupprimerPisteVerticale.setBounds(267, 231, 41, 23);
@@ -256,13 +212,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnSupprimerPisteDeDepart = new JButton("-");
 		btnSupprimerPisteDeDepart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelRegroupement.getListePisteDeDepart().size() != 0) {
-					panelRegroupement.getListePisteDeDepart()
-							.remove(panelRegroupement.getListePisteDeDepart().size() - 1);
-					btnAjouterPisteDeDepart.setEnabled(true);
-					btnSauvegarde.setEnabled(false);
-					repaint();
-				}
+				supprimerPisteDepart();
 			}
 		});
 		btnSupprimerPisteDeDepart.setBounds(267, 107, 41, 23);
@@ -271,9 +221,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageDroite = new JButton("+");
 		btnAjouterPisteVirageDroite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageDroit pisteVirageDroit = new PisteVirageDroit(650, 110);
-				panelRegroupement.getListePisteVirageDroit().add(pisteVirageDroit);
-				repaint();
+				ajouterPisteDroit();
 			}
 		});
 		btnAjouterPisteVirageDroite.setBounds(217, 517, 41, 23);
@@ -282,11 +230,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnSupprimerPisteVirageDroite = new JButton("-");
 		btnSupprimerPisteVirageDroite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
-					panelRegroupement.getListePisteVirageDroit()
-							.remove(panelRegroupement.getListePisteVirageDroit().size() - 1);
-					repaint();
-				}
+				supprimerPisteDroite();
 			}
 		});
 		btnSupprimerPisteVirageDroite.setBounds(268, 517, 41, 23);
@@ -295,9 +239,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnAjouterPisteVirageHaut = new JButton("+");
 		btnAjouterPisteVirageHaut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PisteVirageHaut pisteVirageHaut = new PisteVirageHaut(650, 210);
-				panelRegroupement.getListePisteVirageHaut().add(pisteVirageHaut);
-				repaint();
+				ajouterPisteVirageHaut();
 			}
 		});
 		btnAjouterPisteVirageHaut.setBounds(64, 517, 41, 23);
@@ -306,11 +248,7 @@ public class FenetreEditeur extends JPanel {
 		JButton btnSupprimerPisteVirageHaut = new JButton("-");
 		btnSupprimerPisteVirageHaut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
-					panelRegroupement.getListePisteVirageHaut()
-							.remove(panelRegroupement.getListePisteVirageHaut().size() - 1);
-					repaint();
-				}
+				supprimerPisteVirageHaut();
 			}
 		});
 		btnSupprimerPisteVirageHaut.setBounds(114, 517, 41, 23);
@@ -320,13 +258,7 @@ public class FenetreEditeur extends JPanel {
 		btnSauvegarde.setEnabled(false);
 		btnSauvegarde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sauvegardeUnePiste();
-				gestionFich.setNombrePiste(comboBoxPiste.getItemCount() + 1);
-
-				pisteCourante = (String) comboBoxPiste.getSelectedItem();
-				chargementUnePiste();
-				JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU\nNOM :" + pisteCourante);
-
+				sauvegarde();
 			}
 		});
 
@@ -351,22 +283,7 @@ public class FenetreEditeur extends JPanel {
 		btnJouer.setEnabled(false);
 		btnJouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				verifierSiPisteFerme();
-				if (pisteFerme == true) {
-					sauvegardeUnePiste2();
-
-					chargementUnePiste();
-					pcs.firePropertyChange("JOUEREDITEUR", null, -1);
-
-					pcs.firePropertyChange("REGROUPEMENT", null, pisteCourante);
-
-				} else {
-					JOptionPane.showMessageDialog(null,
-							"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU VIDE POUR JOUEZ");
-
-				}
-
-				resetValeur();
+				jouer();
 			}
 		});
 
@@ -381,9 +298,250 @@ public class FenetreEditeur extends JPanel {
 	}
 
 	/**
+	 * Méthode qui permet de supprimer un accelerateur
+	 */
+	// Tan Tommy Rin
+	public void supprimerAccelerateur() {
+		if (panelRegroupement.getListeAccelerateur().size() != 0) {
+			panelRegroupement.getListeAccelerateur().remove(panelRegroupement.getListeAccelerateur().size() - 1);
+			repaint();
+			btnAjouterAccelerateur.setEnabled(true);
+		}
+	}
+
+	/**
+	 * Méthode qui permet d'ajouter un bloc mystere
+	 */
+	// Tan Tommy Rin
+	public void ajouterBlocMystere() {
+		BlocMystere blocMystere = new BlocMystere(15, new Vecteur2D(650, 170));
+
+		panelRegroupement.getListeBlocMystere().add(blocMystere);
+		repaint();
+	}
+
+	/**
+	 * Méthode qui permet de supprimer un bloc mystere
+	 */
+	// Tan Tommy Rin
+	public void supprimerBlocMystere() {
+		if (panelRegroupement.getListeBlocMystere().size() != 0) {
+			panelRegroupement.getListeBlocMystere().remove(panelRegroupement.getListeBlocMystere().size() - 1);
+			repaint();
+		}
+	}
+
+	/**
+	 * Méthode qui permet d'ajouter une piste de horizontale
+	 */
+	// Tan Tommy Rin
+	public void ajouterPisteHorizontale() {
+		PisteHorizontale pisteHorizontale = new PisteHorizontale(650, 190);
+		panelRegroupement.getListePisteHorizontale().add(pisteHorizontale);
+		repaint();
+	}
+
+	/**
+	 * Méthode qui permet d'ajouter une piste de virage bas
+	 */
+	// Tan Tommy Rin
+	public void ajouterVirageBas() {
+		PisteVirageBas pisteVirageBas = new PisteVirageBas(650, 70);
+		panelRegroupement.getListePisteVirageBas().add(pisteVirageBas);
+		repaint();
+	}
+
+	/**
+	 * Méthode qui permet d'ajouter une piste de virage gauche
+	 */
+	// Tan Tommy Rin
+	public void ajouterPisteGauche() {
+		PisteVirageGauche pisteVirageGauche = new PisteVirageGauche(650, 90);
+		panelRegroupement.getListePisteVirageGauche().add(pisteVirageGauche);
+		repaint();
+	}
+
+	/**
+	 * Méthode qui permet de supprimer une piste horizontale
+	 */
+	// Tan Tommy Rin
+	public void supprimerHorizontale() {
+		if (panelRegroupement.getListePisteHorizontale().size() != 0) {
+			panelRegroupement.getListePisteHorizontale()
+					.remove(panelRegroupement.getListePisteHorizontale().size() - 1);
+			repaint();
+		}
+	}
+
+	/**
+	 * Méthode qui permet de supprimer une piste de virage bas
+	 */
+	// Tan Tommy Rin
+	public void supprimerVirageBas() {
+		if (panelRegroupement.getListePisteVirageBas().size() != 0) {
+			panelRegroupement.getListePisteVirageBas().remove(panelRegroupement.getListePisteVirageBas().size() - 1);
+			repaint();
+		}
+	}
+
+	/**
+	 * Méthode qui permet de supprimer une piste de virage gauche
+	 */
+	// Tan Tommy Rin
+	public void supprimerVirageGauche() {
+		if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
+			panelRegroupement.getListePisteVirageGauche()
+					.remove(panelRegroupement.getListePisteVirageGauche().size() - 1);
+			repaint();
+		}
+	}
+
+	/**
+	 * Méthode qui permet d'ajouter une piste de depart
+	 */
+	// Tan Tommy Rin
+	public void ajouterPisteDepart() {
+		if (panelRegroupement.getListePisteDeDepart().size() == 0) {
+			PisteDeDepart pisteDeDepart = new PisteDeDepart(650, 150);
+			panelRegroupement.getListePisteDeDepart().add(pisteDeDepart);
+			btnAjouterPisteDeDepart.setEnabled(false);
+			btnSauvegarde.setEnabled(true);
+		} else {
+			btnSauvegarde.setEnabled(false);
+		}
+		repaint();
+	}
+
+	/**
+	 * Méthode qui permet d'ajouter une piste verticale
+	 */
+	// Tan Tommy Rin
+	public void ajouterPisteVerticale() {
+		PisteVerticale pisteVerticale = new PisteVerticale(650, 50);
+		panelRegroupement.getListePisteVerticale().add(pisteVerticale);
+		repaint();
+	}
+
+	/**
+	 * Méthode qui permet de supprimer une piste verticale
+	 */
+	// Tan Tommy Rin
+	public void supprimerPisteVerticale() {
+		if (panelRegroupement.getListePisteVerticale().size() != 0) {
+			panelRegroupement.getListePisteVerticale().remove(panelRegroupement.getListePisteVerticale().size() - 1);
+			repaint();
+		}
+	}
+
+	/**
+	 * Méthode qui permet de supprimer une piste de depart
+	 */
+	// Tan Tommy Rin
+	public void supprimerPisteDepart() {
+		if (panelRegroupement.getListePisteDeDepart().size() != 0) {
+			panelRegroupement.getListePisteDeDepart().remove(panelRegroupement.getListePisteDeDepart().size() - 1);
+			btnAjouterPisteDeDepart.setEnabled(true);
+			btnSauvegarde.setEnabled(false);
+			repaint();
+		}
+	}
+
+	/**
+	 * Méthode qui permet d'ajouter une piste de virage droit
+	 */
+	// Tan Tommy Rin
+	public void ajouterPisteDroit() {
+		PisteVirageDroit pisteVirageDroit = new PisteVirageDroit(650, 110);
+		panelRegroupement.getListePisteVirageDroit().add(pisteVirageDroit);
+		repaint();
+	}
+
+	/**
+	 * Méthode qui permet de supprimer une piste de virage droit
+	 */
+	// Tan Tommy Rin
+	public void supprimerPisteDroite() {
+		if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
+			panelRegroupement.getListePisteVirageDroit()
+					.remove(panelRegroupement.getListePisteVirageDroit().size() - 1);
+			repaint();
+		}
+	}
+
+	/**
+	 * Méthode qui permet d'ajouter une piste de virage haut
+	 */
+	// Tan Tommy Rin
+	public void ajouterPisteVirageHaut() {
+		PisteVirageHaut pisteVirageHaut = new PisteVirageHaut(650, 210);
+		panelRegroupement.getListePisteVirageHaut().add(pisteVirageHaut);
+		repaint();
+	}
+
+	/**
+	 * Méthode permettant de supprimer une piste de virage haut
+	 */
+	// Tan Tommy Rin
+	public void supprimerPisteVirageHaut() {
+		if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
+			panelRegroupement.getListePisteVirageHaut().remove(panelRegroupement.getListePisteVirageHaut().size() - 1);
+			repaint();
+		}
+	}
+
+	/**
+	 * Méthode qui permet la sauvegarde d'une piste lié au bouton de sauvegarde.
+	 */
+	// Tan Tommy Rin
+	public void sauvegarde() {
+		sauvegardeUnePiste();
+		gestionFich.setNombrePiste(comboBoxPiste.getItemCount() + 1);
+
+		pisteCourante = (String) comboBoxPiste.getSelectedItem();
+		chargementUnePiste();
+		JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU\nNOM :" + pisteCourante);
+	}
+
+	/**
+	 * Méthode qui permet de faire fonctionner le bouton jouer. Tout dependra de si
+	 * la piste est fermé ou non.
+	 */
+	// Tan Tommy Rin
+	public void jouer() {
+		verifierSiPisteFerme();
+		if (pisteFerme == true) {
+			sauvegardeUnePiste2();
+
+			chargementUnePiste();
+			pcs.firePropertyChange("JOUEREDITEUR", null, -1);
+
+			pcs.firePropertyChange("REGROUPEMENT", null, pisteCourante);
+
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU VIDE POUR JOUEZ");
+
+		}
+
+		resetValeur();
+	}
+
+	/**
+	 * Méthode qui permet d'ajouter un accelerateur
+	 */
+	// Tan Tommy Rin
+	public void ajoutAccelerateur() {
+		Accelerateur accelerateur = new Accelerateur(650, 50);
+		panelRegroupement.getListeAccelerateur().add(accelerateur);
+		btnAjouterAccelerateur.setEnabled(false);
+		repaint();
+	}
+
+	/**
 	 * Méthode qui permet de reinitialisé tous les valeurs du nombre de pistes
 	 * collés pour chaque morceau de piste.
 	 */
+	// Tan Tommy Rin
 	public void resetValeur() {
 		if (panelRegroupement.getListePisteHorizontale().size() != 0) {
 			for (int a = 0; a < panelRegroupement.getListePisteHorizontale().size(); a++) {
@@ -432,6 +590,7 @@ public class FenetreEditeur extends JPanel {
 	 * Méthode qui permet de vérifier si chaque morceau de piste bas a les deux
 	 * cotés fermés.
 	 */
+	// Tan Tommy Rin
 	public void verifierNombrePisteAttacheBas() {
 		if (panelRegroupement.getListePisteVirageBas().size() != 0) {
 
@@ -528,6 +687,7 @@ public class FenetreEditeur extends JPanel {
 	 * Méthode qui permet de vérifier si chaque morceau de piste haut a les deux
 	 * cotés fermés.
 	 */
+	// Tan Tommy Rin
 	public void verifierNombrePisteAttacheHaut() {
 		if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
 
@@ -625,6 +785,7 @@ public class FenetreEditeur extends JPanel {
 	 * Méthode qui permet de vérifier si chaque morceau de piste droite a les deux
 	 * cotés fermés.
 	 */
+	// Tan Tommy Rin
 	public void verifierNombrePisteAttacheDroite() {
 		if (panelRegroupement.getListePisteVirageDroit().size() != 0) {
 
@@ -717,6 +878,7 @@ public class FenetreEditeur extends JPanel {
 	 * Méthode qui permet de vérifier si chaque morceau de piste verticale a les
 	 * deux cotés fermés.
 	 */
+	// Tan Tommy Rin
 	public void verifierNombrePisteAttacheVerticale() {
 		if (panelRegroupement.getListePisteVerticale().size() != 0) {
 
@@ -802,6 +964,7 @@ public class FenetreEditeur extends JPanel {
 	 * Méthode qui permet de vérifier si chaque morceau de piste virage gauche a les
 	 * deux cotés fermés.
 	 */
+	// Tan Tommy Rin
 	public void verifierNombrePisteAttacheGauche() {
 		if (panelRegroupement.getListePisteVirageGauche().size() != 0) {
 
@@ -893,6 +1056,7 @@ public class FenetreEditeur extends JPanel {
 	 * Méthode qui permet de vérifier si chaque morceau de piste horizontale a les
 	 * deux cotés fermés.
 	 */
+	// Tan Tommy Rin
 	public void verifierNombrePisteAttacheHorizontale() {
 		if (panelRegroupement.getListePisteHorizontale().size() != 0) {
 
@@ -987,7 +1151,7 @@ public class FenetreEditeur extends JPanel {
 	 * Méthode qui permet de vérifier si chaque morceau de piste de depart a les
 	 * deux cotés fermés.
 	 */
-
+	// Tan Tommy Rin
 	public void verifierNombrePisteAttacheDepart() {
 		PisteDeDepart piste = panelRegroupement.getListePisteDeDepart().get(0);
 		Rectangle2D.Double formeAireGauche = new Rectangle2D.Double(piste.getX() - piste.getTaillePiste(), piste.getY(),
@@ -1061,6 +1225,7 @@ public class FenetreEditeur extends JPanel {
 	/**
 	 * Méthode qui permet de vérifier si la piste est fermée.
 	 */
+	// Tan Tommy Rin
 	public void verifierSiPisteFerme() {
 		verifierNombrePisteAttacheDepart();
 		verifierNombrePisteAttacheHorizontale();
@@ -1091,6 +1256,7 @@ public class FenetreEditeur extends JPanel {
 	 * Méhode qui permet de sauvegarder une piste sur le bureau en fichier binaire
 	 * mais pour le bouton jouer
 	 */
+	// Tan Tommy Rin
 	private void sauvegardeUnePiste2() {
 
 		Voiture voiture = new Voiture(new Vecteur2D(panelRegroupement.getListePisteDeDepart().get(0).getX(),
@@ -1132,6 +1298,7 @@ public class FenetreEditeur extends JPanel {
 	/**
 	 * Méhode qui permet de sauvegarder une piste sur le bureau en fichier binaire
 	 */
+	// Tan Tommy Rin
 	private void sauvegardeUnePiste() {
 
 		Voiture voiture = new Voiture(new Vecteur2D(panelRegroupement.getListePisteDeDepart().get(0).getX(),
@@ -1173,7 +1340,7 @@ public class FenetreEditeur extends JPanel {
 	/**
 	 * Méthode qui permet de charger une piste qui est sur le bureau
 	 */
-
+	// Tan Tommy Rin
 	private void chargementUnePiste() {
 
 		btnSauvegarde.setEnabled(true);

@@ -302,11 +302,11 @@ public class Regroupement implements Dessinable, Serializable {
 				listePisteDeDepart.get(0).getVoiture()
 						.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
 				// Affecte les 2 voitures
-				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
-
-					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
-
-				}
+//				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
+//
+//					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
+//
+//				}
 
 				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
@@ -400,13 +400,13 @@ public class Regroupement implements Dessinable, Serializable {
 				// Affecte les 2 voitures
 				if (objSpecial2.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
 
-					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
+//					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
 
 				}
 
 				if (objSpecial2.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
-					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture());
+//					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture());
 
 				}
 			}

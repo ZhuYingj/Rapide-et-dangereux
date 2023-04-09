@@ -27,8 +27,12 @@ import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
 
 /**
- * Cree une piste qui contient un/des voiture(s), un/des obstacle(s) et une
- * piste
+ * * Composant illustrant la simulation : c'est le regroupement physique ou on
+ * dessine et anime les objets. C'est ce composant qui doit connaitre/determiner
+ * les parametres physiques : largeur du composant en metres, valeur du pas de
+ * simulation deltaT, positions et vitesses initiales des objets etc. etc.
+ * L'animation d'un regroupement qui contient deux voitures, des morceaux de
+ * pistes et des boites mystères contenant des obstacles.
  * 
  * @author Kevin Nguyen
  * @author Tan Tommy Rin
@@ -105,6 +109,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
 	 */
+	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		this.pcs.addPropertyChangeListener(listener);
 	}
@@ -122,7 +127,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		voiture2 = new Voiture(posInit2, Color.white, 50, 16, angleVoitureRad2, 60);
 
-		regroupement = new Regroupement(voiture, 10, typePiste);
+		regroupement = new Regroupement(voiture, 2, typePiste);
 
 		addKeyListener(new KeyAdapter() {
 
@@ -146,7 +151,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	/**
-	 * Permet de dessiner une scene qui inclut ici une simple balle en mouvement
+	 * Permet de dessiner un regroupement qui inclut ici deux voitures et des boites
+	 * mysteres contenant des obstacles.
 	 * 
 	 * @param g Contexte graphique
 	 */
@@ -428,18 +434,20 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				if ((regroupement.getObjSpecial() != null
 						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR)
 						|| (regroupement.getObjSpecial2() != null
-								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR)
-						|| (regroupement.getObjSpecial() != null && regroupement.getObjSpecial().getColle()
-								.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)
+								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR)) {
+
+				} else if ((regroupement.getObjSpecial() != null && regroupement.getObjSpecial().getColle()
+						.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)
 						|| (regroupement.getObjSpecial2() != null
 								&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
 										regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)) {
 
 				} else {
 					voiture.setAccel(valeurInit);
-
 				}
-
+				regroupement.setToucheHautActive(false);
+			} else {
+				regroupement.setToucheHautActive(true);
 			}
 			if (space == true) {
 
@@ -659,7 +667,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	/**
-	 * Méthode qui permet de détecter les levés d'évènement et changer le texte
+	 * Méthode qui permet de détecter les levés d'évènement et d'envoyer la nouvelle
+	 * donnée
 	 */
 
 	// Tan Tommy Rin
@@ -731,6 +740,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			} else {
 				regroupement.getListePisteDeDepart().get(0).getVoiture().setSommeDesForces(forceTotal);
 				if (regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() < 0.5) {
+
 					regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(new Vecteur2D(0, 0));
 
 				}
@@ -982,7 +992,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageHaut(regroupementTempo.getListePisteVirageHaut());
 			regroupement.setListeAccelerateur(regroupementTempo.getListeAccelerateur());
 			voiture.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-					regroupement.getListePisteDeDepart().get(0).getY() + regroupement.getListePisteDeDepart().get(0).getTaillePiste() / 3));
+					regroupement.getListePisteDeDepart().get(0).getY()
+							+ regroupement.getListePisteDeDepart().get(0).getTaillePiste() / 3));
 			voiture2.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
 					regroupement.getListePisteDeDepart().get(0).getY()
 							+ regroupement.getListePisteDeDepart().get(0).getTaillePiste() / 2));

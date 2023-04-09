@@ -16,7 +16,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 /**
- * Classe qui crée la premiere fenêtre
+ * Classe qui crée la premiere fenêtre "Menu"
  * 
  * @author Ludovic Julien
  *
@@ -31,7 +31,7 @@ public class FenetreMenu extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-
+//Ludovic Julien
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -39,6 +39,7 @@ public class FenetreMenu extends JPanel {
 	/**
 	 * Méthode qui permet la création du panel
 	 */
+	// Ludovic Julien
 	public FenetreMenu() {
 		addKeyListener(new KeyAdapter() {
 			@Override

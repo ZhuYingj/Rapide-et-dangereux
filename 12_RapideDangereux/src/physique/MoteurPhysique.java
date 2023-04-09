@@ -115,7 +115,7 @@ public class MoteurPhysique {
 	 * @param vitesse Vitesse initiale de l' objet
 	 * @param angle   Angle de la normale
 	 * @return Vitesse finale de la collision
-	 * @throws Exception
+	 * @throws Exception L'exception trouvé
 	 */
 	public static Vecteur2D calculerVitesseCollisionAngle(Vecteur2D vitesse, double angle) throws Exception {
 
@@ -154,10 +154,14 @@ public class MoteurPhysique {
 	 * @param vitesseImp2 Vitesse de la deuxieme en mouvement au moment de l'impact.
 	 * @param masse1      Masse de l'objet en mouvement.
 	 * @param masse2      Masse de l'objet immobile.
+	 * @param angle       L'angle en rad
 	 * @return La vitesse initiale transmise a l'objet immobile.
 	 */
 	public static Vecteur2D calculerVitesseSelonImpulsion(double vitesseImp1, double vitesseImp2, double masse1,
 			double masse2, double angle) {
-		return new Vecteur2D(-Math.cos(angle)* vitesseImp1 - (calculerImpulsion(vitesseImp1, vitesseImp2, masse1, masse2) / masse1),-Math.sin(angle)* vitesseImp1 - (calculerImpulsion(vitesseImp1, vitesseImp2, masse1, masse2) / masse1));
+		return new Vecteur2D(
+				-Math.cos(angle) * vitesseImp1 - (calculerImpulsion(vitesseImp1, vitesseImp2, masse1, masse2) / masse1),
+				-Math.sin(angle) * vitesseImp1
+						- (calculerImpulsion(vitesseImp1, vitesseImp2, masse1, masse2) / masse1));
 	}
 }

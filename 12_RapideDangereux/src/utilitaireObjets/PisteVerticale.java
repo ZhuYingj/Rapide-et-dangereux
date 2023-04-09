@@ -56,10 +56,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	 * 
 	 * @param x             position en x de la piste
 	 * @param y             position en y de la piste
-	 * @param ligneRougeV1X position en x du premier mure
-	 * @param ligneRougeV1Y position en y du premier mure
-	 * @param ligneRougeV2X position en x du deuxieme mure
-	 * @param ligneRougeV2Y position en y du deuxieme mure
+	 * 
 	 */
 	// Ludovic Julien
 	public PisteVerticale(int x, int y) {
@@ -163,7 +160,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
 	 * et la boule de neige
 	 * 
-	 * @param L'objet special de type boule de neige
+	 * @param objetSpecial L'objet special de type boule de neige
 	 */
 	// Tan Tommy Rin
 

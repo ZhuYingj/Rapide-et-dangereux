@@ -27,6 +27,7 @@ public class ZoneApercupiste extends JPanel {
 	 * 
 	 * @param img
 	 */
+	//Ludovic Julien
 	public void setImg(Image img) {
 		this.img = img;
 	}
@@ -35,6 +36,7 @@ public class ZoneApercupiste extends JPanel {
 	 * permet de dessiner les apercu des piste
 	 * 
 	 */
+	//Ludovic Julien
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;

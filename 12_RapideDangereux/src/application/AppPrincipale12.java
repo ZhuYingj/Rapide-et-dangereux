@@ -51,7 +51,11 @@ public class AppPrincipale12 extends JFrame {
 
 	/**
 	 * Lancement de l'application.
+	 * 
+	 * @param args Liste de String
 	 */
+	// Alexis Pineda-Alvarado
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -205,18 +209,28 @@ public class AppPrincipale12 extends JFrame {
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				if (checkBoxModeNonScientifique.isSelected()) {
-					actionChangeDesTypeJeu(fenSansScience, fenJeuScience);
-
-				} else {
-					actionRetourDesTypeJeu(fenSansScience, fenJeuScience);
-
-				}
+				actionCheckBox(fenSansScience, fenJeuScience);
 			}
 		});
 		mnNewMenu.add(checkBoxModeNonScientifique);
 
+	}
+
+	/**
+	 * Méthode qui permet de changer de fenetre selon le check box
+	 * 
+	 * @param jeuSansScience La fenetre de jeu non scientifique
+	 * @param fenJeuScience  La fenetre de jeu scientifique
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionCheckBox(FenetreJeuSansScientifique jeuSansScience, FenetreJeuScientifique fenJeuScience) {
+		if (checkBoxModeNonScientifique.isSelected()) {
+			actionChangeDesTypeJeu(jeuSansScience, fenJeuScience);
+
+		} else {
+			actionRetourDesTypeJeu(jeuSansScience, fenJeuScience);
+
+		}
 	}
 
 	/**
@@ -263,13 +277,15 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
 			break;
-			// Ludovic Julien
-			//permet le changement de couleur des voiture dans la zone d'annimation
+		// Ludovic Julien
+		// permet le changement de couleur des voiture dans la zone d'annimation
 		case "SKIN":
-			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setSkin((Color) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setSkin((Color) evt.getNewValue());
 			break;
 		case "SKIN2":
-			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setSkin((Color) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setSkin((Color) evt.getNewValue());
 			break;
 		}
 	}
@@ -343,6 +359,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param evt        evenement
 	 * @param fenModeJeu la fenêtre du mode de jeu a choisir qui est activé
 	 * @param fenEditeur fenêtre du mode editeur
+	 * @param fenJeuScience la fenêtre du jeu scientifique
 	 */
 // Alexis Pineda-Alvarado
 	public void actionRetourModeJeu1(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur,
@@ -435,7 +452,7 @@ public class AppPrincipale12 extends JFrame {
 	 * 
 	 * @param evt           evenement
 	 * @param fenJeuScience fenêtre du jeu avec les paramètres scientifiques
-	 * @param fenOptions    fenêtre des options du jeu qui va être activé
+	 * @param fenModeJeu    la fenêtre du mode de jeu a choisir qui va être acrivé 
 	 */
 // Alexis Pineda-Alvarado
 	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience,
@@ -467,7 +484,7 @@ public class AppPrincipale12 extends JFrame {
 	 * 
 	 * @param evt               evenement
 	 * @param fenSansScience    fenêtre du jeu sans les paramètres scientifiques
-	 * @param fenOptionsfenêtre des options du jeu qui va être activé
+	 * @param fenOptions        la fenetre des options du jeu qui va être activé
 	 */
 // Alexis Pineda-Alvarado
 	public void actionRetourOptions2(PropertyChangeEvent evt, FenetreJeuSansScientifique fenSansScience,
@@ -549,8 +566,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param evt             evenement
 	 * @param fenOptionMontre fenêtre des paramètres a choisir dans le mode course
 	 *                        contre la montre
-	 * @param fenJeuMontre    fenêtre du jeu avec les paramètres scientifiques pour
-	 *                        le mode de jeu course contre la montre
+	 * @param fenTest         fenetre permet de tester si ça change de fenetre
 	 */
 // Alexis Pineda-Alvarado
 	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre, test fenTest) {
@@ -573,6 +589,7 @@ public class AppPrincipale12 extends JFrame {
 	 *                        contre la montre
 	 * @param fenModeJeu      fenêtre de la selection de mode de jeu
 	 */
+	// Alexis Pineda-Alvarado
 	public void actionRetourOptionCCM(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
 			ModeDeJeu fenModeJeu) {
 		switch (evt.getPropertyName()) {
@@ -600,7 +617,7 @@ public class AppPrincipale12 extends JFrame {
 					JOptionPane.showMessageDialog(null,
 							"Bonjour dans RAPIDE ET DANGEREUX! \nle but de ce jeux et de battre votre combattant"
 									+ " \nles contrôles du jeu sont :  \n↑ : pour avancer la voiture"
-									+ " \n� et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture"
+									+ " \n� et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture"
 									+ "\nLes boîtes jaunes choisisent un effet mis sur la voiture au hasard lorsque vous la toucher");
 				}
 			}

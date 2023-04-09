@@ -87,8 +87,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	/**
 	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
 	 * 
-	 * @param x position en x de la piste
-	 * @param y position en y de la piste
+	 * @param g2d Composant graphique
 	 */
 	// Ludovic Julien
 	@Override
@@ -252,7 +251,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
 	 * et la boule de neige
 	 * 
-	 * @param L'objet special de type boule de neige
+	 * @param objetSpecial L'objet special de type boule de neige
 	 */
 	// Tan Tommy Rin
 	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {

@@ -28,7 +28,7 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 
 	/** la position en y de depart que l'objet piste vas etre creer **/
 	private int y;
-	
+
 	/** Nombre de pixel par metre **/
 	private double pixelParMetre;
 	private Rectangle2D.Double formeAire;
@@ -39,6 +39,7 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
+	// Ludovic Julien
 	public Accelerateur(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -49,6 +50,7 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 	 * Methode qui permet de dessiner l'accelerateur sur la zone d'animation a
 	 * l'aide de g2d
 	 */
+	// Ludovic Julien
 	public void dessiner(Graphics2D g2d) {
 
 		g2d.setColor(Color.GREEN);
@@ -75,6 +77,12 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 
 	}
 
+	/**
+	 * Méthode qui permet de détecter si l'accelerateur est ocntenue au clic de la
+	 * souris
+	 **/
+	// Ludovic Julien
+
 	@Override
 	public boolean contient(double xPix, double yPix) {
 		if (formeAire.contains(xPix, yPix)) {
@@ -98,6 +106,7 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 		this.y = y;
 
 	}
+
 	public int getY() {
 		return y;
 	}

@@ -48,7 +48,7 @@ public class PisteCanada {
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
-
+//Kevin Nguyen
 	public PisteCanada(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -58,7 +58,7 @@ public class PisteCanada {
 	/**
 	 * Méthode qui crée le circuit complet
 	 */
-
+	// Kevin Nguyen
 	private void creerLaGeometrie() {
 
 		bas.add(new PisteVirageBas(x, y));

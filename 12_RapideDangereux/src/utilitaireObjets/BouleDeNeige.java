@@ -54,6 +54,7 @@ public class BouleDeNeige {
 
 	/**
 	 * Méthode qui dessine la boule de neige
+	 * 
 	 */
 	// Alexis Pineda-Alvarado
 	public void dessiner(Graphics2D g2d) {
@@ -72,7 +73,7 @@ public class BouleDeNeige {
 	/**
 	 * Méthode qui permet de créer la géométrie de la boule de neige
 	 */
-
+	// Alexis Pineda-Alvarado
 	private void creerLaGeometrie() {
 
 		boule = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
@@ -109,7 +110,7 @@ public class BouleDeNeige {
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
 	 * voulu
 	 * 
-	 * @param pixelsParMetreVoulu
+	 * @param pixelsParMetreVoulu le nombre de pixel par metre voulu
 	 */
 	// Par Alexis Pineda-Alvarado
 	public void setPixelsParMetre(double pixelsParMetreVoulu) {

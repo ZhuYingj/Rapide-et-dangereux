@@ -167,7 +167,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
 	 * et la boule de neige
 	 * 
-	 * @param L'objet special de type boule de neige
+	 * @param objetSpecial L'objet special de type boule de neige
 	 */
 	// Tan Tommy Rin
 
@@ -241,9 +241,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	}
 
 
-	public void pisteHorizontaleAttache() {
 
-	}
 
 	public int getNombrePisteColle() {
 		return nombrePisteColle;

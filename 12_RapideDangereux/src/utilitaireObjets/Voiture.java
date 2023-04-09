@@ -277,7 +277,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * Recalcule l'acceleration de la voiture a l'aide la nouvelle somme des forces
 	 * passee en parametre Ceci aura pour consequence de modifier l'acceleration
 	 * 
-	 * @param sommeForcesSurLaBalle La somme des forces exercees sur la voiture
+	 * @param sommeForcesSurLaVoiture La somme des forces exercees sur la voiture
 	 */
 	// Kevin Nguyen
 	public void setSommeDesForces(Vecteur2D sommeForcesSurLaVoiture) {

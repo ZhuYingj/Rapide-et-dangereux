@@ -27,13 +27,14 @@ public class ModeDeJeu extends JPanel {
 	private JLabel lblTitre;
 	private JButton btnRetour;
 
-	// ajouter le support pour lancer des evenements de type PropertyChange
+	/** ajouter le support pour lancer des evenements de type PropertyChange **/
+//	Alexis Pineda-Alvarado
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	/**
 	 * Create the panel.
 	 */
-
+//	Alexis Pineda-Alvarado
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -41,7 +42,7 @@ public class ModeDeJeu extends JPanel {
 	/**
 	 * Méthode qui permet la création de la fenetre mode de jeu
 	 */
-
+//	Alexis Pineda-Alvarado
 	public ModeDeJeu() {
 		setLayout(null);
 		btnMonde = new JButton("MONDE");

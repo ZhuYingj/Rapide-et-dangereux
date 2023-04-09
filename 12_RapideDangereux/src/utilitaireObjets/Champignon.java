@@ -32,6 +32,7 @@ public class Champignon extends ObjetSpecial {
 	 * @param diametre  Diametre du champignon
 	 * @param typeObjet Le type d'objetSpecial
 	 */
+	// Tan Tommy Rin
 	public Champignon(Vecteur2D pos, double diametre, TypeObjetSpecial typeObjet) {
 		super(pos, diametre, typeObjet);
 		this.position = super.getPositionObjet();
@@ -44,7 +45,7 @@ public class Champignon extends ObjetSpecial {
 	 * 
 	 * @param voitureAffecte La voiture affectée
 	 */
-
+	// Tan Tommy Rin
 	public void fonctionChampignonActivation(Voiture voitureAffecte) {
 
 		// Masse augmente pendant une durée voulue

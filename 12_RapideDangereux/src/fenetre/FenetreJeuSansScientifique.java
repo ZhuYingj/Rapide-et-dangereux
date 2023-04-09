@@ -34,9 +34,9 @@ public class FenetreJeuSansScientifique extends JPanel {
 	private JButton btnNextImg;
 
 	/**
-	 * Creation de la fenetre.
+	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
 	 */
-
+	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -44,7 +44,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 	/**
 	 * Méthode qui permet de crée la fenetre
 	 */
-
+	// Tan Tommy Rin
 	public FenetreJeuSansScientifique() {
 		setLayout(null);
 		setBounds(100, 100, 1300, 700);

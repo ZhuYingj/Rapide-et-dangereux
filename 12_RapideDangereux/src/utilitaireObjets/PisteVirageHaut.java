@@ -198,7 +198,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
 	 * et la boule de neige
 	 * 
-	 * @param L'objet special de type boule de neige
+	 * @param objetSpecial L'objet special de type boule de neige
 	 */
 	// Tan Tommy Rin
 	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
@@ -306,7 +306,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
 	 * voulu
 	 * 
-	 * @param pixelsParMetreVoulu
+	 * @param pixelsParMetreVoulu le nombre de pixel par metre voulu
 	 */
 	public void setPixelsParMetre(double pixelsParMetre) {
 		this.pixelsParMetre = pixelsParMetre;
