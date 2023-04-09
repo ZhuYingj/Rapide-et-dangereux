@@ -75,7 +75,7 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 		setLayout(null);
-		setBounds(100, 100, 1300, 700);
+		setBounds(100, 100, 1321, 836);
 
 		JLabel lblTitreModeScientifique = new JLabel("Mode scientifique activé");
 		lblTitreModeScientifique.setFont(new Font("Tahoma", Font.BOLD, 18));

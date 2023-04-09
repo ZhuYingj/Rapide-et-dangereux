@@ -28,6 +28,8 @@ import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 /**
  * Classe qui permet de créer et gérer la fenetre éditeur.
@@ -287,13 +289,41 @@ public class FenetreEditeur extends JPanel {
 			}
 		});
 
-		btnJouer.setBounds(335, 553, 214, 63);
+		btnJouer.setBounds(408, 546, 214, 63);
 		add(btnJouer);
 
 		panelRegroupement = new PanelRegroupement();
 		panelRegroupement.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelRegroupement.setBounds(132, 96, 769, 400);
 		add(panelRegroupement);
+
+		JLabel lblNbM = new JLabel("80 m");
+		lblNbM.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNbM.setBounds(148, 59, 46, 14);
+		add(lblNbM);
+
+		JLabel lblFleche = new JLabel("<----->");
+		lblFleche.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblFleche.setBounds(132, 75, 82, 14);
+		add(lblFleche);
+
+		JButton btnClear = new JButton("CLEAR");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelRegroupement.getListeAccelerateur().clear();
+				panelRegroupement.getListePisteVirageBas().clear();
+				panelRegroupement.getListePisteVirageHaut().clear();
+				panelRegroupement.getListePisteVirageDroit().clear();
+				panelRegroupement.getListePisteVirageGauche().clear();
+				panelRegroupement.getListePisteVerticale().clear();
+				panelRegroupement.getListePisteHorizontale().clear();
+				panelRegroupement.getListeBlocMystere().clear();
+				repaint();
+
+			}
+		});
+		btnClear.setBounds(408, 508, 214, 23);
+		add(btnClear);
 
 	}
 
@@ -1301,6 +1331,7 @@ public class FenetreEditeur extends JPanel {
 	// Tan Tommy Rin
 	private void sauvegardeUnePiste() {
 
+		
 		Voiture voiture = new Voiture(new Vecteur2D(panelRegroupement.getListePisteDeDepart().get(0).getX(),
 				panelRegroupement.getListePisteDeDepart().get(0).getY()), Color.yellow, 50, 16, 0, 60);
 		regroupement = new Regroupement(voiture, 3, TypePiste.AUTRE);
@@ -1435,5 +1466,4 @@ public class FenetreEditeur extends JPanel {
 	public void setGestionFich(GestionnaireDeFichiersSurLeBureau gestionFich) {
 		this.gestionFich = gestionFich;
 	}
-
 }

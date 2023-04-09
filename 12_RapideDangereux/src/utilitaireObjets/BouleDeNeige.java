@@ -118,7 +118,7 @@ public class BouleDeNeige {
 	 * 
 	 * @param pixelsParMetreVoulu le nombre de pixel par metre voulu
 	 */
-	// Par Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public void setPixelsParMetre(double pixelsParMetreVoulu) {
 		this.pixelsParMetre = pixelsParMetreVoulu;
 
@@ -129,7 +129,7 @@ public class BouleDeNeige {
 	 * 
 	 * @return nombre de pixel par metre
 	 */
-	// Par Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public double getPixelsParMetre() {
 		return this.pixelsParMetre;
 	}

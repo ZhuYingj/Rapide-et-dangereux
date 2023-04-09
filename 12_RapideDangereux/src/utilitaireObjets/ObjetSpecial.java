@@ -96,7 +96,7 @@ public class ObjetSpecial implements Dessinable {
 		// Distance entre la voiture et le trou noir
 		double r = forceApplied.module();
 
-		double fg = (trouNoir.getMasseTrouNoir() * 25) / (r * r);
+		double fg = (trouNoir.getMasseTrouNoir() * 35) / (r * r);
 		forceApplied = forceApplied.multiplie(fg);
 		voiture.setSommeDesForces(forceApplied);
 

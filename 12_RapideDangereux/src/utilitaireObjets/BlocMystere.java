@@ -139,6 +139,8 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 
 	/**
 	 * Méthode qui permet de dessiner sur la zone d'animation à l'aide du g2d
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Tan Tommy Rin
 	@Override

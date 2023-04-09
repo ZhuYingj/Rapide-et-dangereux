@@ -90,7 +90,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(0.5f);
+		Stroke stroke = new BasicStroke(2f);
 		g2d.setStroke(stroke);
 		g2d.drawLine(x + ((taillePiste / 3) * 2), y, x + taillePiste - 1, y);
 		g2d.drawLine(x + ((taillePiste / 3)), y + ((taillePiste / 3)), x + ((taillePiste / 3) * 2), y);

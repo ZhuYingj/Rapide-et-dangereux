@@ -39,7 +39,6 @@ import interfaces.TypePiste;
 public class AppPrincipale12 extends JFrame {
 
 	private JCheckBoxMenuItem checkBoxModeNonScientifique;
-	private JPanel contentPane;
 
 	private int nombrePiste = 1;
 	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
@@ -127,8 +126,8 @@ public class AppPrincipale12 extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu mnNewMenu = new JMenu("New menu");
-		menuBar.add(mnNewMenu);
+		JMenu mnMenu = new JMenu("Menu");
+		menuBar.add(mnMenu);
 
 		setContentPane(fenMenu);
 
@@ -212,7 +211,7 @@ public class AppPrincipale12 extends JFrame {
 				actionCheckBox(fenSansScience, fenJeuScience);
 			}
 		});
-		mnNewMenu.add(checkBoxModeNonScientifique);
+		mnMenu.add(checkBoxModeNonScientifique);
 
 	}
 
@@ -254,11 +253,15 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenJeuScience);
 			checkBoxModeNonScientifique.setEnabled(true);
 			pushingP(fenJeuScience);
-			
+
 			break;
-		case "MASSE":
+		case "MASSE1":
 			fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
+			break;
+		case "MASSE2":
+			fenJeuScience.getZoneAnimPhysique().setVoitureMasse2((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setVoitureMasse2((double) evt.getNewValue());
 			break;
 		case "VITESSEMAXFACILE":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
@@ -283,10 +286,21 @@ public class AppPrincipale12 extends JFrame {
 		case "SKIN":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
 					.setSkin((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setSkin((Color) evt.getNewValue());
 			break;
 		case "SKIN2":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
 					.setSkin((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setSkin((Color) evt.getNewValue());
+			break;
+		case "NBBOITE":
+			Double newData = new Double((double) evt.getNewValue());
+			int valeur = newData.intValue();
+
+			fenJeuScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
+			fenSansScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
 			break;
 		}
 	}
@@ -357,9 +371,9 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui permet de retourner au panel précédent selon des levés
 	 * d'évènements liés entre la fenetre du mod de jeu et celui du mode éditeur
 	 * 
-	 * @param evt        evenement
-	 * @param fenModeJeu la fenêtre du mode de jeu a choisir qui est activé
-	 * @param fenEditeur fenêtre du mode editeur
+	 * @param evt           evenement
+	 * @param fenModeJeu    la fenêtre du mode de jeu a choisir qui est activé
+	 * @param fenEditeur    fenêtre du mode editeur
 	 * @param fenJeuScience la fenêtre du jeu scientifique
 	 */
 // Alexis Pineda-Alvarado
@@ -453,7 +467,7 @@ public class AppPrincipale12 extends JFrame {
 	 * 
 	 * @param evt           evenement
 	 * @param fenJeuScience fenêtre du jeu avec les paramètres scientifiques
-	 * @param fenModeJeu    la fenêtre du mode de jeu a choisir qui va être acrivé 
+	 * @param fenModeJeu    la fenêtre du mode de jeu a choisir qui va être acrivé
 	 */
 // Alexis Pineda-Alvarado
 	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience,
@@ -483,9 +497,9 @@ public class AppPrincipale12 extends JFrame {
 	 * d'évènements liés entre la fenetre du jeu sans les parametres scientifique et
 	 * celui de la fenetre des options
 	 * 
-	 * @param evt               evenement
-	 * @param fenSansScience    fenêtre du jeu sans les paramètres scientifiques
-	 * @param fenOptions        la fenetre des options du jeu qui va être activé
+	 * @param evt            evenement
+	 * @param fenSansScience fenêtre du jeu sans les paramètres scientifiques
+	 * @param fenOptions     la fenetre des options du jeu qui va être activé
 	 */
 // Alexis Pineda-Alvarado
 	public void actionRetourOptions2(PropertyChangeEvent evt, FenetreJeuSansScientifique fenSansScience,

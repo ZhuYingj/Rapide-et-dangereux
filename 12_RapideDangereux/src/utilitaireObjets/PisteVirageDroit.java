@@ -94,7 +94,7 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(0.5f);
+		Stroke stroke = new BasicStroke(2f);
 		g2d.setStroke(stroke);
 		g2d.drawLine(x, y + taillePiste, x + (taillePiste / 3), y + taillePiste);
 		g2d.drawLine(x + (taillePiste / 3), y + taillePiste, x + taillePiste, y + (taillePiste / 3));

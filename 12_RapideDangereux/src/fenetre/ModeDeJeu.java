@@ -32,7 +32,7 @@ public class ModeDeJeu extends JPanel {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	/**
-	 * Create the panel.
+	 * Création de la fenetre
 	 */
 //	Alexis Pineda-Alvarado
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -53,7 +53,7 @@ public class ModeDeJeu extends JPanel {
 		});
 
 		btnMonde.setForeground(Color.BLACK);
-		btnMonde.setBounds(411, 245, 100, 49);
+		btnMonde.setBounds(650 - 100, 245, 100, 49);
 		add(btnMonde);
 
 		btnCourseMontre = new JButton("COURSE CONTRE LA MONTRE");
@@ -63,7 +63,7 @@ public class ModeDeJeu extends JPanel {
 			}
 		});
 		btnCourseMontre.setForeground(Color.BLACK);
-		btnCourseMontre.setBounds(346, 319, 227, 49);
+		btnCourseMontre.setBounds(489, 324, 227, 49);
 		add(btnCourseMontre);
 
 		btnEditeur = new JButton("EDITEUR");
@@ -73,13 +73,13 @@ public class ModeDeJeu extends JPanel {
 			}
 		});
 		btnEditeur.setForeground(Color.BLACK);
-		btnEditeur.setBounds(411, 402, 100, 49);
+		btnEditeur.setBounds(650 - 100, 402, 100, 49);
 		add(btnEditeur);
 
 		lblTitre = new JLabel("Mode de jeu");
 		lblTitre.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 30));
 		lblTitre.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitre.setBounds(293, 146, 349, 75);
+		lblTitre.setBounds(418, 144, 349, 75);
 		add(lblTitre);
 
 		btnRetour = new JButton("Retour");

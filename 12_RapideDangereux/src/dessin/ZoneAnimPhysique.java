@@ -41,6 +41,8 @@ import utilitaireObjets.Voiture;
 
 public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
+	private int nombreBlocMystere = 5;
+	
 
 	/** Largeur du composant en metres. */
 	private double largeurDuComposantEnMetres = 640;
@@ -127,7 +129,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		voiture2 = new Voiture(posInit2, Color.white, 50, 16, angleVoitureRad2, 60);
 
-		regroupement = new Regroupement(voiture, 2, typePiste);
+		regroupement = new Regroupement(voiture, nombreBlocMystere, typePiste);
 
 		addKeyListener(new KeyAdapter() {
 
@@ -171,6 +173,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).getVoiture2()
 					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
 							regroupement.getListePisteDeDepart().get(0).getY() + 50));
+			
 		}
 
 		Graphics2D g2d = (Graphics2D) g;
@@ -432,9 +435,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			if (haut == false) {
 				if ((regroupement.getObjSpecial() != null
-						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR)
+						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
+						&& regroupement.getObjSpecial().getTrouNoir()
+								.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)
 						|| (regroupement.getObjSpecial2() != null
-								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR)) {
+								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR
+								&& regroupement.getObjSpecial2().getTrouNoir().collisionDeLaVoiture(
+										regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)) {
 
 				} else if ((regroupement.getObjSpecial() != null && regroupement.getObjSpecial().getColle()
 						.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)
@@ -443,11 +450,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 										regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)) {
 
 				} else {
+
 					voiture.setAccel(valeurInit);
 				}
-				regroupement.setToucheHautActive(false);
-			} else {
-				regroupement.setToucheHautActive(true);
+
 			}
 			if (space == true) {
 
@@ -477,9 +483,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			if (w == false) {
 				if ((regroupement.getObjSpecial() != null
-						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR)
+						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
+						&& regroupement.getObjSpecial().getTrouNoir().collisionDeLaVoiture(
+								regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
 						|| (regroupement.getObjSpecial2() != null
-								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR)
+								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR
+								&& regroupement.getObjSpecial2().getTrouNoir().collisionDeLaVoiture(
+										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
 						|| (regroupement.getObjSpecial() != null
 								&& regroupement.getObjSpecial().getColle().collisionDeLaVoiture(
 										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
@@ -1012,6 +1022,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	public void setNomFichierRegroupement(String nomFichierRegroupement) {
 		this.nomFichierRegroupement = nomFichierRegroupement;
+
+	}
+	public int getNombreBlocMystere() {
+		return nombreBlocMystere;
+	}
+
+	public void setNombreBlocMystere(int nombreBlocMystere) {
+		this.nombreBlocMystere = nombreBlocMystere;
+		regroupement.setNombreBoiteMystere(nombreBlocMystere);
+		regroupement.creeBoiteDansListe();
 
 	}
 

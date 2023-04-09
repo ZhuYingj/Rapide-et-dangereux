@@ -37,7 +37,6 @@ public class PisteCanada {
 	private ArrayList<PisteVirageDroit> droit = new ArrayList<PisteVirageDroit>();
 	/** Piste Virage Haut **/
 	private ArrayList<PisteVirageHaut> haut = new ArrayList<PisteVirageHaut>();
-
 	/** Nombre de pixels par metre **/
 	private double pixelsParMetre;
 
