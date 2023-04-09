@@ -19,21 +19,26 @@ import interfaces.TypeObjetSpecial;
  */
 
 public class BouleDeNeige {
+	
 	private double diametre;
 	private Ellipse2D.Double boule;
-
 	private double pixelsParMetre;
-
 	private Voiture voiture;
 
+	/**creer la forme de la boule**/
 	private transient Shape shapeBoule;
+	/**creer l'aire de la boule de neige**/
 	private transient Area bouleDeNeigeAire;
+	/**creer une copie de l'aire de la boule de neige**/
 	private transient Area bouleDeNeigeAireCopie;
+	/**creer l'aire de la voiture**/
 	private transient Area aireVoiture;
+	/**creer une copie de l'aire de la voiture**/
 	private transient Area aireVoiture1;
 
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.BOULEDENEIGE;
 	private boolean contactBouleNeige = false;
+	/**prend la position de la boule de neige**/
 	private Vecteur2D position;
 
 	/**
@@ -54,6 +59,8 @@ public class BouleDeNeige {
 
 	/**
 	 * Méthode qui dessine la boule de neige
+	 * 
+	 * @param g2d parametre qui permet de dessiner les objets voulu a l'aide du g2d
 	 */
 	// Alexis Pineda-Alvarado
 	public void dessiner(Graphics2D g2d) {
@@ -72,7 +79,7 @@ public class BouleDeNeige {
 	/**
 	 * Méthode qui permet de créer la géométrie de la boule de neige
 	 */
-
+	// Alexis Pineda-Alvarado
 	private void creerLaGeometrie() {
 
 		boule = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
@@ -109,7 +116,8 @@ public class BouleDeNeige {
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
 	 * voulu
 	 * 
-	 * @param pixelsParMetreVoulu
+	 * @param pixelsParMetreVoulu parametre qui permet de changer les pixels en
+	 *                            metre
 	 */
 	// Par Alexis Pineda-Alvarado
 	public void setPixelsParMetre(double pixelsParMetreVoulu) {
