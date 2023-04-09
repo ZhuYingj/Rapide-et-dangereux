@@ -40,6 +40,7 @@ public class JeuOptions extends JPanel {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private final ButtonGroup buttonGroupDiff = new ButtonGroup();
+	private ZoneAnimPhysique zoneAnimPhys;
 	private JRadioButton rdbtnFacile;
 	private JRadioButton rdbtnMedium;
 	private JRadioButton rdbtnDifficile;
@@ -104,6 +105,7 @@ public class JeuOptions extends JPanel {
 				imageActuelle = OutilsImage.lireImage("PisteCanada.png");
 				zoneApercupiste.setImg(imageActuelle);
 				zoneApercupiste.repaint();
+				
 			}
 		});
 

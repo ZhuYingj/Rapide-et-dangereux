@@ -19,25 +19,30 @@ import interfaces.TypeObjetSpecial;
  */
 
 public class BouleDeNeige {
+	
 	private double diametre;
 	private Ellipse2D.Double boule;
-
 	private double pixelsParMetre;
-
 	private Voiture voiture;
 
+	/**creer la forme de la boule**/
 	private transient Shape shapeBoule;
+	/**creer l'aire de la boule de neige**/
 	private transient Area bouleDeNeigeAire;
+	/**creer une copie de l'aire de la boule de neige**/
 	private transient Area bouleDeNeigeAireCopie;
+	/**creer l'aire de la voiture**/
 	private transient Area aireVoiture;
+	/**creer une copie de l'aire de la voiture**/
 	private transient Area aireVoiture1;
 
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.BOULEDENEIGE;
 	private boolean contactBouleNeige = false;
+	/**la position de la boule de neige**/
 	private Vecteur2D position;
 
 	/**
-	 * Méthode qui crée la boule de neige
+	 * Constructeur de la boule de neige
 	 * 
 	 * @param pos      le positionnement de la boule de neige
 	 * @param diametre le diametre de la boule de neige
@@ -55,6 +60,7 @@ public class BouleDeNeige {
 	/**
 	 * Méthode qui dessine la boule de neige
 	 * 
+	 * @param g2d parametre qui permet de dessiner les objets voulu a l'aide du g2d
 	 */
 	// Alexis Pineda-Alvarado
 	public void dessiner(Graphics2D g2d) {
@@ -83,7 +89,7 @@ public class BouleDeNeige {
 	 * 
 	 * méthode qui détecte la collision de la voiture et la boule de neige
 	 * 
-	 * @param v ceci est la valeur de la voiture
+	 * @param v La voiture affectée
 	 * @return la valeur de la collision en true or false
 	 */
 	// Alexis Pineda-Alvarado
