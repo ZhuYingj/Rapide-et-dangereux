@@ -306,7 +306,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
 	 * voulu
 	 * 
-	 * @param pixelsParMetreVoulu le nombre de pixel par metre voulu
+	 * @param pixelsParMetre le nombre de pixel par metre voulu
 	 */
 	public void setPixelsParMetre(double pixelsParMetre) {
 		this.pixelsParMetre = pixelsParMetre;

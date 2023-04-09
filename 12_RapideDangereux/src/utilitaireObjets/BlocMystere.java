@@ -101,7 +101,7 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	 * Méthode qui permet de choisir quel objet sera dans la boite mystere à l'aide
 	 * de probabilité
 	 * 
-	 * @param La voiture qui prend le bloc mystere
+	 * @param voiture La voiture qui prend le bloc mystere
 	 */
 	// Tan Tommy Rin
 	public void objetRandomChoisi(Voiture voiture) {

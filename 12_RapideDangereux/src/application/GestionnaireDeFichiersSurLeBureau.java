@@ -36,6 +36,13 @@ public class GestionnaireDeFichiersSurLeBureau {
 	private String nomFichBinComboBox = "comboBox.dat";
 
 	/**
+	 * Constructeur par défault
+	 */
+	public GestionnaireDeFichiersSurLeBureau() {
+
+	}
+
+	/**
 	 * crée un fichier binaire et y inscrit un objet regroupement (composé de
 	 * d'autres objets) Le place à un endroit spécifique sur le Bureau de
 	 * l'utilisateur
