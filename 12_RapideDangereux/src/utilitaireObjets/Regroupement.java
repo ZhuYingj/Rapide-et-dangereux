@@ -1,7 +1,10 @@
 package utilitaireObjets;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -223,12 +226,15 @@ public class Regroupement implements Dessinable, Serializable {
 
 		// Pour v1
 		if (objSpecial != null) {
+
 			if (objSpecial.getType() == TypeObjetSpecial.CHAMPIGNON) {
+
 				objSpecial.setTempsTemporaire(tempsTemp);
 
 				objSpecial.fonctionChampignon(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule);
 
 			} else if (objSpecial.getType() == TypeObjetSpecial.BOULEDENEIGE) {
+
 				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
 				// diametre et masse aux valeurs initiales.
 				listePisteDeDepart.get(0).getVoiture()
@@ -435,7 +441,7 @@ public class Regroupement implements Dessinable, Serializable {
 				regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 						new Vecteur2D(
 								listePisteDeDepart.get(0).getX() + petiteDeviation
-										+ listePisteDeDepart.get(0).getTaillePiste() / 4,
+										+ listePisteDeDepart.get(0).getTaillePiste(),
 								listePisteDeDepart.get(0).getY() + petiteDeviation
 										+ listePisteDeDepart.get(0).getTaillePiste() / 2)));
 
@@ -454,8 +460,9 @@ public class Regroupement implements Dessinable, Serializable {
 
 				} else {
 
-					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
-							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+					regroupementBoiteMystere
+							.add(new BlocMystere(diametreBoite, new Vecteur2D(listePisteDeDepart.get(0).getX() / 2 + 40,
+									listePisteDeDepart.get(0).getY() / 2 + 40)));
 				}
 
 			}
@@ -473,8 +480,9 @@ public class Regroupement implements Dessinable, Serializable {
 											+ listePisteVerticale.get(nombreRandomPiste).getTaillePiste() / 2)));
 				} else {
 
-					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
-							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+					regroupementBoiteMystere
+							.add(new BlocMystere(diametreBoite, new Vecteur2D(listePisteDeDepart.get(0).getX() / 2 - 30,
+									listePisteDeDepart.get(0).getY() / 2 - 30)));
 				}
 
 			}
@@ -842,11 +850,12 @@ public class Regroupement implements Dessinable, Serializable {
 		for (int i = 0; i < listeAccelerateur.size(); i++) {
 			listeAccelerateur.get(i).dessiner(g2dCopie);
 		}
+		if (regroupementBoiteMystere.size() != 0) {
+			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
 
-		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
+				regroupementBoiteMystere.get(a).dessiner(g2dCopie);
 
-			regroupementBoiteMystere.get(a).dessiner(g2dCopie);
-
+			}
 		}
 
 		if (objSpecial != null) {
@@ -894,6 +903,17 @@ public class Regroupement implements Dessinable, Serializable {
 			}
 
 		}
+		g2dCopie.setStroke(new BasicStroke(5));
+
+		g2dCopie.setColor(Color.WHITE);
+		g2dCopie.drawString("Voiture1",
+				(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getX()
+						- listePisteDeDepart.get(0).getVoiture().getDiametre() / 2),
+				(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getY()));
+		g2dCopie.drawString("Voiture2",
+				(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getX()
+						- listePisteDeDepart.get(0).getVoiture2().getDiametre() / 2),
+				(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
 	}
 
 	/**

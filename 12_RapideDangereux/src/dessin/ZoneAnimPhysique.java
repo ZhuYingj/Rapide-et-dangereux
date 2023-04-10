@@ -1,5 +1,6 @@
 package dessin;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -19,10 +20,6 @@ import physique.MoteurPhysique;
 import pisteDeCourse.PisteCanada;
 import pisteDeCourse.PisteItalie;
 import pisteDeCourse.PisteMexique;
-import utilitaireObjets.Accelerateur;
-import utilitaireObjets.BouleDeNeige;
-import utilitaireObjets.Champignon;
-import utilitaireObjets.ObjetSpecial;
 import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
 
@@ -42,7 +39,6 @@ import utilitaireObjets.Voiture;
 public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
 	private int nombreBlocMystere = 5;
-	
 
 	/** Largeur du composant en metres. */
 	private double largeurDuComposantEnMetres = 640;
@@ -173,14 +169,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).getVoiture2()
 					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
 							regroupement.getListePisteDeDepart().get(0).getY() + 50));
-			
+
 		}
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
 		regroupement.setPixelsParMetre(pixelsParMetre);
 		regroupement.dessiner(g2d);
-
+		
 	}
 
 	/**
@@ -1024,6 +1021,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		this.nomFichierRegroupement = nomFichierRegroupement;
 
 	}
+
 	public int getNombreBlocMystere() {
 		return nombreBlocMystere;
 	}

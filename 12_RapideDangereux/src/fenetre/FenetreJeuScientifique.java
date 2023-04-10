@@ -10,6 +10,7 @@ import java.beans.PropertyChangeSupport;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
@@ -18,12 +19,10 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import application.AppPrincipale12;
 import dessin.ZoneAcceleration;
 import dessin.ZoneAnimPhysique;
 import dessin.ZoneVitesse;
-import utilitaireObjets.PisteDeDepart;
-import utilitaireObjets.Voiture;
+import interfaces.TypeObjetSpecial;
 
 /**
  * Classe qui permet de créer et gérer la fenetre du jeu avec le mode
@@ -60,6 +59,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblPositionEnXV2;
 	private JLabel lblPositionEnYV2;
 	private JLabel lblNombreToursVoiture2;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -76,6 +76,10 @@ public class FenetreJeuScientifique extends JPanel {
 	public FenetreJeuScientifique() {
 		setLayout(null);
 		setBounds(100, 100, 1321, 836);
+
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(317, 33, 700, 500);
+		add(lblNewLabel);
 
 		JLabel lblTitreModeScientifique = new JLabel("Mode scientifique activé");
 		lblTitreModeScientifique.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -547,6 +551,7 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public void changementDeTextePendantLAnimation(PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
+
 		case "tempsEcoule":
 			lblTempsEcouleValeur.setText(String.format("%.2f", evt.getNewValue()));
 		case "accEnXV1":
@@ -581,6 +586,7 @@ public class FenetreJeuScientifique extends JPanel {
 			lblAngleVoiture2Rad.setText(String.format("%.2f", evt.getNewValue()));
 		case "nombreToursV2":
 			lblNombreToursVoiture2.setText(String.format("%.0f", evt.getNewValue()));
+
 		case "ForceLance":
 
 			Double newData = new Double((double) evt.getNewValue());

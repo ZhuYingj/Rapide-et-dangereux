@@ -7,12 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.net.URL;
 
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
@@ -22,8 +24,6 @@ import javax.swing.border.LineBorder;
 import dessin.OutilsImage;
 import dessin.ZoneApercupiste;
 import interfaces.TypePiste;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 
 /**
  * Classe qui crée la fenêtre pour choisir les paramètres pour le mode de jeu
@@ -209,19 +209,19 @@ public class JeuOptions extends JPanel {
 		JLabel lblMasse2 = new JLabel("Masse de la voiture 2 en kg : ");
 		lblMasse2.setBounds(10, 86, 177, 20);
 		panel_1.add(lblMasse2);
-		
+
 		JLabel lblNombreBoiteMystere = new JLabel("Nombre de boite mystere : ");
 		lblNombreBoiteMystere.setBounds(10, 135, 159, 14);
 		panel_1.add(lblNombreBoiteMystere);
-		
+
 		JSlider sliderNbBoites = new JSlider();
-		
+
 		sliderNbBoites.setSnapToTicks(true);
 		sliderNbBoites.setPaintTicks(true);
 		sliderNbBoites.setPaintLabels(true);
 		sliderNbBoites.setValue(3);
 		sliderNbBoites.setMinorTickSpacing(1);
-		sliderNbBoites.setMaximum(15);
+		sliderNbBoites.setMaximum(12);
 		sliderNbBoites.setMinimum(3);
 		sliderNbBoites.setMajorTickSpacing(1);
 		sliderNbBoites.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -237,7 +237,7 @@ public class JeuOptions extends JPanel {
 				pcs.firePropertyChange("TYPEPISTE", null, type);
 				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 				pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
-				pcs.firePropertyChange("NBBOITE", null,(double)  sliderNbBoites.getValue());
+				pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);
@@ -249,7 +249,7 @@ public class JeuOptions extends JPanel {
 		add(panel_V1);
 
 		JButton btnGauche = new JButton("<");
-		btnGauche.setBounds(891, 116, 55, 23);
+		btnGauche.setBounds(891, 116, 55, 55);
 		btnGauche.addActionListener(new ActionListener() {
 
 			@Override
@@ -355,6 +355,12 @@ public class JeuOptions extends JPanel {
 		lblLongueurPiste.setFont(new Font("Tahoma", Font.BOLD, 26));
 		lblLongueurPiste.setBounds(325, 665, 89, 36);
 		add(lblLongueurPiste);
+		
+		JLabel lblGif = new JLabel("");
+		lblGif.setBounds(0, 0, 1300, 700);
+		add(lblGif);
+		
+		
 
 	}
 }
