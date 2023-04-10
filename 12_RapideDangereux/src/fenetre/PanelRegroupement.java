@@ -275,21 +275,29 @@ public class PanelRegroupement extends JPanel {
 	private void relachementSouris(MouseEvent e) {
 
 		objetSelectionne = false;
-		if (type == TypeObjetDeplacable.BLOCMYSTERE && objetSelectionne == false) {
+		if (type == TypeObjetDeplacable.BLOCMYSTERE && objetSelectionne == false
+				&& poubelle.contains(listeBlocMystere.get(indexObjetPris).getCarre())) {
 			listeBlocMystere.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEHORIZONTALE && objetSelectionne == false) {
+		} else if (type == TypeObjetDeplacable.PISTEHORIZONTALE && objetSelectionne == false
+				&& poubelle.contains(listePisteHorizontale.get(indexObjetPris).getFormeAire())) {
 			listePisteHorizontale.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEVERTICALE && objetSelectionne == false) {
+		} else if (type == TypeObjetDeplacable.PISTEVERTICALE && objetSelectionne == false
+				&& poubelle.contains(listePisteVerticale.get(indexObjetPris).getFormeAire())) {
 			listePisteVerticale.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.ACCELERATEUR && objetSelectionne == false) {
+		} else if (type == TypeObjetDeplacable.ACCELERATEUR && objetSelectionne == false
+				&& poubelle.contains(listeAccelerateur.get(indexObjetPris).getFormeAire())) {
 			listeAccelerateur.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEVIRAGEBAS && objetSelectionne == false) {
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEBAS && objetSelectionne == false
+				&& poubelle.contains(listePisteVirageBas.get(indexObjetPris).getFormeAire())) {
 			listePisteVirageBas.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEVIRAGEDROIT && objetSelectionne == false) {
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEDROIT && objetSelectionne == false
+				&& poubelle.contains(listePisteVirageDroit.get(indexObjetPris).getFormeAire())) {
 			listePisteVirageDroit.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEVIRAGEGAUCHE && objetSelectionne == false) {
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEGAUCHE && objetSelectionne == false
+				&& poubelle.contains(listePisteVirageGauche.get(indexObjetPris).getFormeAire())) {
 			listePisteVirageGauche.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEVIRAGEHAUT && objetSelectionne == false) {
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEHAUT && objetSelectionne == false
+				&& poubelle.contains(listePisteVirageHaut.get(indexObjetPris).getFormeAire())) {
 			listePisteVirageHaut.remove(indexObjetPris);
 		}
 
