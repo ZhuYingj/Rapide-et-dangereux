@@ -25,7 +25,6 @@ import fenetre.FenetreMenu;
 import fenetre.FenetreOptionMontre;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
-import fenetre.test;
 import interfaces.TypePiste;
 
 /**
@@ -116,7 +115,6 @@ public class AppPrincipale12 extends JFrame {
 
 		ClassementParPiste fenRecord = new ClassementParPiste();
 
-		test fenTest = new test();
 		ajouterModeEditeurComboBox(fenEditeur);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -200,7 +198,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionChangeJeuCourse(evt, fenOptionMontre, fenTest);
+				actionChangeJeuCourse(evt, fenOptionMontre, fenJeuScience, fenSansScience);
 				actionRetourOptionCCM(evt, fenOptionMontre, fenModeJeu);
 			}
 		});
@@ -437,6 +435,7 @@ public class AppPrincipale12 extends JFrame {
 			fenOptions.setVisible(true);
 			setContentPane(fenOptions);
 			break;
+
 		}
 	}
 
@@ -568,6 +567,7 @@ public class AppPrincipale12 extends JFrame {
 		switch (evt.getPropertyName()) {
 		case "COURSE CONTRE LA MONTRE":
 			fenOptionMontre.setVisible(true);
+
 			fenModeJeu.setVisible(false);
 			setContentPane(fenOptionMontre);
 			break;
@@ -581,16 +581,22 @@ public class AppPrincipale12 extends JFrame {
 	 * @param evt             evenement
 	 * @param fenOptionMontre fenêtre des paramètres a choisir dans le mode course
 	 *                        contre la montre
-	 * @param fenTest         fenetre permet de tester si ça change de fenetre
+	 * @param fenScience      fenetre avec le mode scientifique
 	 */
 // Alexis Pineda-Alvarado
-	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre, test fenTest) {
+	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
+			FenetreJeuScientifique fenScience, FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
 		case "COMMENCER COURSE MONTRE":
 			fenOptionMontre.setVisible(false);
-			fenTest.setVisible(true);
-			setContentPane(fenTest);
+			fenScience.setVisible(true);
+			setContentPane(fenScience);
 			break;
+		case "TYPEPISTE":
+			fenScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
+			fenScience.getZoneAnimPhysique().restartPosPisteDepart();
+			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
 
 		}
 	}

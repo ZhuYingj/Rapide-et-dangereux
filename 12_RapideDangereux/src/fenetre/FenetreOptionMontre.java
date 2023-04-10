@@ -67,7 +67,7 @@ public class FenetreOptionMontre extends JPanel {
 		btnCanada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				type = TypePiste.CANADA;
-				imageActuelle = OutilsImage.lireImage("Construction.gif");
+				imageActuelle = OutilsImage.lireImage("PisteCanada.png");
 				zoneApercupiste.setImg(imageActuelle);
 				zoneApercupiste.repaint();
 			}
@@ -120,8 +120,7 @@ public class FenetreOptionMontre extends JPanel {
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("COMMENCER!", null, -1);
-				// pcs.firePropertyChange("MASSE", null, (double) slider.getValue());
+				pcs.firePropertyChange("COMMENCER COURSE MONTRE", null, -1);
 				pcs.firePropertyChange("TYPEPISTE", null, type);
 			}
 		});
