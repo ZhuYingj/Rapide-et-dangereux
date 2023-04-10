@@ -138,17 +138,21 @@ public class ObjetSpecial implements Dessinable {
 
 	public boolean fonctionChampignon(Voiture voiture, double tempsTotalEcoule) {
 		Champignon champignon = new Champignon(this.positionObjet, this.diametreObjet, type);
-		if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
-			champignon.fonctionChampignonActivation(voiture);
+		boolean fonctionActive = false;
+		if (voiture.getDiametre() < 75) {
+			if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
+				champignon.fonctionChampignonActivation(voiture);
 
-			return true;
-		} else {
-			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
-			voiture.setDiametre(voiture.getDiametreInitial());
+				fonctionActive = true;
+			} else {
+				voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
+				voiture.setDiametre(voiture.getDiametreInitial());
 
-			return false;
+				fonctionActive = false;
+			}
 		}
 
+		return fonctionActive;
 	}
 
 	/**

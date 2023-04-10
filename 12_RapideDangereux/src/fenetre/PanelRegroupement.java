@@ -4,9 +4,12 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Rectangle2D;
-
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -23,10 +26,6 @@ import utilitaireObjets.PisteVirageDroit;
 import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-
 /**
  * Classe permettant de créer et gérer une fenetre de regroupement. Le
  * regroupement contient des morceaux de pistes, des blocs mysteres et une
@@ -41,6 +40,8 @@ import java.awt.event.MouseMotionAdapter;
 public class PanelRegroupement extends JPanel {
 
 	private static final long serialVersionUID = -3942442779188948737L;
+
+	private Rectangle2D.Double poubelle = new Rectangle2D.Double(640, 320, 80, 80);
 	private BlocMystere blocMystere;
 	private Accelerateur acc;
 	private PisteDeDepart pisteDeDepart;
@@ -74,12 +75,14 @@ public class PanelRegroupement extends JPanel {
 	private int tailleDuCarre;
 	private int longueur;
 	private int hauteur;
+	private int indexObjetPris;
 
 	/**
 	 * Constructeur du panel de regroupement
 	 */
 	// Tan Tommy Rin
 	public PanelRegroupement() {
+
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
@@ -116,6 +119,7 @@ public class PanelRegroupement extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+
 				// Condition pour les accélérateurs
 				accelerateurPressed(e);
 				// Condition pour les blocs mysteres
@@ -134,6 +138,7 @@ public class PanelRegroupement extends JPanel {
 				pisteVirageDroitPressed(e);
 				// Condition pour piste virage haut
 				pisteVirageHautPressed(e);
+
 			}
 
 			@Override
@@ -158,7 +163,9 @@ public class PanelRegroupement extends JPanel {
 		creationQuadrillage(g2dCopie);
 		g2dCopie.setColor(Color.CYAN);
 		g2dCopie.setStroke(new BasicStroke(4));
-
+		g2dCopie.drawString("POUBELLE", (int) (poubelle.getX() + poubelle.getWidth() / 8),
+				(int) (poubelle.getY() + poubelle.getWidth() / 2));
+		g2dCopie.draw(poubelle);
 		for (int a = 0; a < listePisteVirageDroit.size(); a++) {
 
 			listePisteVirageDroit.get(a).dessiner(g2d);
@@ -260,13 +267,32 @@ public class PanelRegroupement extends JPanel {
 
 	/**
 	 * Méthode qui permet de détecter lorsque la souris n'est plus enfoncé et
-	 * redessine
+	 * redessine. Si l'objet est relaché sur la poubelle, elle s'efface.
 	 * 
 	 * @param e Évenement de souris
 	 */
 	// Tan Tommy Rin
 	private void relachementSouris(MouseEvent e) {
+
 		objetSelectionne = false;
+		if (type == TypeObjetDeplacable.BLOCMYSTERE && objetSelectionne == false) {
+			listeBlocMystere.remove(indexObjetPris);
+		} else if (type == TypeObjetDeplacable.PISTEHORIZONTALE && objetSelectionne == false) {
+			listePisteHorizontale.remove(indexObjetPris);
+		} else if (type == TypeObjetDeplacable.PISTEVERTICALE && objetSelectionne == false) {
+			listePisteVerticale.remove(indexObjetPris);
+		} else if (type == TypeObjetDeplacable.ACCELERATEUR && objetSelectionne == false) {
+			listeAccelerateur.remove(indexObjetPris);
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEBAS && objetSelectionne == false) {
+			listePisteVirageBas.remove(indexObjetPris);
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEDROIT && objetSelectionne == false) {
+			listePisteVirageDroit.remove(indexObjetPris);
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEGAUCHE && objetSelectionne == false) {
+			listePisteVirageGauche.remove(indexObjetPris);
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEHAUT && objetSelectionne == false) {
+			listePisteVirageHaut.remove(indexObjetPris);
+		}
+
 		repaint();
 	}
 
@@ -455,7 +481,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageHaut.size(); a++) {
 				if (listePisteVirageHaut.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -484,7 +510,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageDroit.size(); a++) {
 				if (listePisteVirageDroit.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -513,7 +539,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteDeDepart.size(); a++) {
 				if (listePisteDeDepart.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -542,7 +568,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVerticale.size(); a++) {
 				if (listePisteVerticale.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -571,7 +597,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageGauche.size(); a++) {
 				if (listePisteVirageGauche.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -600,7 +626,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageBas.size(); a++) {
 				if (listePisteVirageBas.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -629,7 +655,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteHorizontale.size(); a++) {
 				if (listePisteHorizontale.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -658,7 +684,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listeAccelerateur.size(); a++) {
 				if (listeAccelerateur.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -686,7 +712,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listeBlocMystere.size(); a++) {
 				if (listeBlocMystere.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 					xBlocMystere = listeBlocMystere.get(a).getCarre().getX();
@@ -776,8 +802,12 @@ public class PanelRegroupement extends JPanel {
 	// Kevin Nguyen
 	private int collerX(MouseEvent e) {
 		xPrecedent = e.getX();
+		if (type == TypeObjetDeplacable.PISTEDEDEPART) {
+			longueur = (int) (xPrecedent / tailleDuCarre) % 8 * tailleDuCarre;
+		} else {
+			longueur = (int) (xPrecedent / tailleDuCarre) % 9 * tailleDuCarre;
+		}
 
-		longueur = (int) (xPrecedent / tailleDuCarre) % 8 * tailleDuCarre;
 		return longueur;
 	}
 

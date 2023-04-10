@@ -160,50 +160,52 @@ public class Regroupement implements Dessinable, Serializable {
 			}
 		}
 		listePisteDeDepart.get(0).getVoiture2().avancerUnPas(deltaT);
+		if (regroupementBoiteMystere.size() != 0) {
+			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
 
-		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
+				if (regroupementBoiteMystere.get(a)
+						.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
-			if (regroupementBoiteMystere.get(a)
-					.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
+					objSpecial = regroupementBoiteMystere.get(a).getObjetSpecial();
+					boutonAppuye = false;
+					objSpecial.setTempsTemporaire(tempsTemp);
+					tempsTemp = tempsTotalEcoule;
+					regroupementBoiteMystere.remove(a).getObjetSpecial();
 
-				objSpecial = regroupementBoiteMystere.get(a).getObjetSpecial();
-				boutonAppuye = false;
-				objSpecial.setTempsTemporaire(tempsTemp);
-				tempsTemp = tempsTotalEcoule;
-				regroupementBoiteMystere.remove(a).getObjetSpecial();
+					enContactAvecColle = false;
+					collePisteHorizontale = false;
+					collePisteVerticale = false;
+					collePisteVirageBas = false;
+					collePisteVirageDroit = false;
+					collePisteVirageHaut = false;
+					collePisteVirageGauche = false;
+					collePisteDepart = false;
 
-				enContactAvecColle = false;
-				collePisteHorizontale = false;
-				collePisteVerticale = false;
-				collePisteVirageBas = false;
-				collePisteVirageDroit = false;
-				collePisteVirageHaut = false;
-				collePisteVirageGauche = false;
-				collePisteDepart = false;
+					break;
+				}
 
-				break;
-			}
+				if (regroupementBoiteMystere.get(a)
+						.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
+					boutonAppuye2 = false;
+					objSpecial2 = regroupementBoiteMystere.get(a).getObjetSpecial();
+					objSpecial2.setTempsTemporaire(tempsTemp2);
+					tempsTemp2 = tempsTotalEcoule;
+					regroupementBoiteMystere.remove(a).getObjetSpecial();
 
-			if (regroupementBoiteMystere.get(a)
-					.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
-				boutonAppuye2 = false;
-				objSpecial2 = regroupementBoiteMystere.get(a).getObjetSpecial();
-				objSpecial2.setTempsTemporaire(tempsTemp2);
-				tempsTemp2 = tempsTotalEcoule;
-				regroupementBoiteMystere.remove(a).getObjetSpecial();
+					enContactAvecColle2 = false;
+					collePisteHorizontale2 = false;
+					collePisteVerticale2 = false;
+					collePisteVirageBas2 = false;
+					collePisteVirageDroit2 = false;
+					collePisteVirageHaut2 = false;
+					collePisteVirageGauche2 = false;
+					collePisteDepart2 = false;
+					break;
+				}
 
-				enContactAvecColle2 = false;
-				collePisteHorizontale2 = false;
-				collePisteVerticale2 = false;
-				collePisteVirageBas2 = false;
-				collePisteVirageDroit2 = false;
-				collePisteVirageHaut2 = false;
-				collePisteVirageGauche2 = false;
-				collePisteDepart2 = false;
-				break;
-			}
+			} // Fin for loop
+		}
 
-		} // Fin for loop
 		if (regroupementBoiteMystere.size() == 0) {
 			regroupementBoiteMystere = null;
 

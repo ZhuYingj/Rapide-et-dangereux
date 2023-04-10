@@ -30,6 +30,8 @@ import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * Classe qui permet de créer et gérer la fenetre éditeur.
@@ -55,6 +57,7 @@ public class FenetreEditeur extends JPanel {
 	private JComboBox<String> comboBoxPiste;
 
 	private Regroupement regroupementSauvegarde;
+
 	private PanelObjet panelObjet;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
@@ -293,6 +296,7 @@ public class FenetreEditeur extends JPanel {
 		add(btnJouer);
 
 		panelRegroupement = new PanelRegroupement();
+
 		panelRegroupement.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelRegroupement.setBounds(132, 96, 769, 400);
 		add(panelRegroupement);
@@ -306,24 +310,6 @@ public class FenetreEditeur extends JPanel {
 		lblFleche.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblFleche.setBounds(132, 75, 82, 14);
 		add(lblFleche);
-
-		JButton btnClear = new JButton("CLEAR");
-		btnClear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelRegroupement.getListeAccelerateur().clear();
-				panelRegroupement.getListePisteVirageBas().clear();
-				panelRegroupement.getListePisteVirageHaut().clear();
-				panelRegroupement.getListePisteVirageDroit().clear();
-				panelRegroupement.getListePisteVirageGauche().clear();
-				panelRegroupement.getListePisteVerticale().clear();
-				panelRegroupement.getListePisteHorizontale().clear();
-				panelRegroupement.getListeBlocMystere().clear();
-				repaint();
-
-			}
-		});
-		btnClear.setBounds(408, 508, 214, 23);
-		add(btnClear);
 
 	}
 
@@ -1331,7 +1317,6 @@ public class FenetreEditeur extends JPanel {
 	// Tan Tommy Rin
 	private void sauvegardeUnePiste() {
 
-		
 		Voiture voiture = new Voiture(new Vecteur2D(panelRegroupement.getListePisteDeDepart().get(0).getX(),
 				panelRegroupement.getListePisteDeDepart().get(0).getY()), Color.yellow, 50, 16, 0, 60);
 		regroupement = new Regroupement(voiture, 3, TypePiste.AUTRE);
@@ -1466,4 +1451,13 @@ public class FenetreEditeur extends JPanel {
 	public void setGestionFich(GestionnaireDeFichiersSurLeBureau gestionFich) {
 		this.gestionFich = gestionFich;
 	}
+
+	public PanelRegroupement getPanelRegroupement() {
+		return panelRegroupement;
+	}
+
+	public void setPanelRegroupement(PanelRegroupement panelRegroupement) {
+		this.panelRegroupement = panelRegroupement;
+	}
+
 }
