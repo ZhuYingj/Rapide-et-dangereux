@@ -15,10 +15,10 @@ import javax.swing.JPanel;
  * @author Ludovic Julien
  *
  */
-public class ZoneApercupiste extends JPanel {
+public class ZoneApercuPiste extends JPanel {
 	private Image img = null;
 
-	public ZoneApercupiste() {
+	public ZoneApercuPiste() {
 		img = OutilsImage.lireImage("PisteMexique.png");
 	}
 

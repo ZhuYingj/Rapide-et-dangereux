@@ -22,7 +22,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import dessin.OutilsImage;
-import dessin.ZoneApercupiste;
+import dessin.ZoneApercuPiste;
 import interfaces.TypePiste;
 
 /**
@@ -35,7 +35,7 @@ import interfaces.TypePiste;
  */
 
 public class JeuOptions extends JPanel {
-	private ZoneApercupiste zoneApercupiste;
+	private ZoneApercuPiste zoneApercuPiste;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private final ButtonGroup buttonGroupDiff = new ButtonGroup();
 	private JRadioButton rdbtnFacile;
@@ -71,9 +71,9 @@ public class JeuOptions extends JPanel {
 		add(PanelApercu);
 		PanelApercu.setLayout(null);
 
-		zoneApercupiste = new ZoneApercupiste();
-		zoneApercupiste.setBounds(0, 0, 700, 439);
-		PanelApercu.add(zoneApercupiste);
+		zoneApercuPiste = new ZoneApercuPiste();
+		zoneApercuPiste.setBounds(0, 0, 700, 439);
+		PanelApercu.add(zoneApercuPiste);
 
 		JButton btnMexique = new JButton("Mexique");
 
@@ -83,8 +83,8 @@ public class JeuOptions extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				type = TypePiste.MEXIQUE;
 				imageActuelle = OutilsImage.lireImage("PisteMexique.png");
-				zoneApercupiste.setImg(imageActuelle);
-				zoneApercupiste.repaint();
+				zoneApercuPiste.setImg(imageActuelle);
+				zoneApercuPiste.repaint();
 			}
 		});
 
@@ -95,8 +95,8 @@ public class JeuOptions extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				type = TypePiste.CANADA;
 				imageActuelle = OutilsImage.lireImage("PisteCanada.png");
-				zoneApercupiste.setImg(imageActuelle);
-				zoneApercupiste.repaint();
+				zoneApercuPiste.setImg(imageActuelle);
+				zoneApercuPiste.repaint();
 
 			}
 		});
@@ -108,8 +108,8 @@ public class JeuOptions extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				type = TypePiste.ITALIE;
 				imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
-				zoneApercupiste.setImg(imageActuelle);
-				zoneApercupiste.repaint();
+				zoneApercuPiste.setImg(imageActuelle);
+				zoneApercuPiste.repaint();
 
 			}
 		});
@@ -355,12 +355,10 @@ public class JeuOptions extends JPanel {
 		lblLongueurPiste.setFont(new Font("Tahoma", Font.BOLD, 26));
 		lblLongueurPiste.setBounds(325, 665, 89, 36);
 		add(lblLongueurPiste);
-		
+
 		JLabel lblGif = new JLabel("");
 		lblGif.setBounds(0, 0, 1300, 700);
 		add(lblGif);
-		
-		
 
 	}
 }

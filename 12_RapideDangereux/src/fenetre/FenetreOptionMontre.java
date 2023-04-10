@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import dessin.OutilsImage;
-import dessin.ZoneApercupiste;
+import dessin.ZoneApercuPiste;
 import interfaces.TypePiste;
 import utilitaireObjets.Regroupement;
 
@@ -29,7 +29,7 @@ public class FenetreOptionMontre extends JPanel {
 	private TypePiste type = TypePiste.MEXIQUE;
 	private Image imageActuelle;
 	private Regroupement regroupement;
-
+	private ZoneApercuPiste zoneApercuPiste;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -56,10 +56,9 @@ public class FenetreOptionMontre extends JPanel {
 		PanelApercu.setBounds(10, 203, 700, 439);
 		add(PanelApercu);
 		PanelApercu.setLayout(null);
-
-		ZoneApercupiste zoneApercupiste = new ZoneApercupiste();
-		zoneApercupiste.setBounds(345, 5, 10, 10);
-		PanelApercu.add(zoneApercupiste);
+		zoneApercuPiste = new ZoneApercuPiste();
+		zoneApercuPiste.setBounds(0, 0, 700, 439);
+		PanelApercu.add(zoneApercuPiste);
 
 		JButton btnCanada = new JButton("Canada");
 		btnCanada.setBounds(307, 77, 126, 78);
@@ -68,8 +67,9 @@ public class FenetreOptionMontre extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				type = TypePiste.CANADA;
 				imageActuelle = OutilsImage.lireImage("PisteCanada.png");
-				zoneApercupiste.setImg(imageActuelle);
-				zoneApercupiste.repaint();
+				zoneApercuPiste.setImg(imageActuelle);
+				zoneApercuPiste.repaint();
+
 			}
 		});
 
@@ -80,8 +80,8 @@ public class FenetreOptionMontre extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				type = TypePiste.ITALIE;
 				imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
-				zoneApercupiste.setImg(imageActuelle);
-				zoneApercupiste.repaint();
+				zoneApercuPiste.setImg(imageActuelle);
+				zoneApercuPiste.repaint();
 
 			}
 		});
@@ -93,8 +93,8 @@ public class FenetreOptionMontre extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				type = TypePiste.MEXIQUE;
 				imageActuelle = OutilsImage.lireImage("PisteMexique.png");
-				zoneApercupiste.setImg(imageActuelle);
-				zoneApercupiste.repaint();
+				zoneApercuPiste.setImg(imageActuelle);
+				zoneApercuPiste.repaint();
 			}
 		});
 
