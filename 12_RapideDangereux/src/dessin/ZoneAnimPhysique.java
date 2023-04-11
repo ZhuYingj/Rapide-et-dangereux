@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import application.GestionnaireDeFichiersSurLeBureau;
@@ -805,11 +806,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void arretQuandFini() {
 		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
 				.getNombreToursFaits()) {
-			System.out.println("VOITURE 1 GAGNANT");
+			JOptionPane.showMessageDialog(null, "LA VOITURE 1 A GAGNÉE!!!");
 			arreter();
 		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 				.getNombreToursFaits()) {
-			System.out.println("VOITURE 2 GAGNANT");
+			JOptionPane.showMessageDialog(null, "LA VOITURE 2 A GAGNÉE!!!");
 			arreter();
 		}
 
