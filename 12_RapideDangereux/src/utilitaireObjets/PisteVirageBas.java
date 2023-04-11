@@ -32,6 +32,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 
+	
 	/** la position en x de depart que l'objet piste qui vas etre creer **/
 	private int x;
 
@@ -348,6 +349,9 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 
 	public int getMurBas() {
 		return murBas;
+	}
+	public void setTaillePiste(int taillePiste) {
+		this.taillePiste = taillePiste;
 	}
 
 	public void setMurBas(int murBas) {

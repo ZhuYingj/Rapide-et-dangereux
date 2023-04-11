@@ -275,28 +275,28 @@ public class PanelRegroupement extends JPanel {
 	private void relachementSouris(MouseEvent e) {
 
 		objetSelectionne = false;
-		if (type == TypeObjetDeplacable.BLOCMYSTERE && objetSelectionne == false
+		if (type == TypeObjetDeplacable.BLOCMYSTERE
 				&& poubelle.contains(listeBlocMystere.get(indexObjetPris).getCarre())) {
 			listeBlocMystere.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEHORIZONTALE && objetSelectionne == false
+		} else if (type == TypeObjetDeplacable.PISTEHORIZONTALE
 				&& poubelle.contains(listePisteHorizontale.get(indexObjetPris).getFormeAire())) {
 			listePisteHorizontale.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEVERTICALE && objetSelectionne == false
+		} else if (type == TypeObjetDeplacable.PISTEVERTICALE
 				&& poubelle.contains(listePisteVerticale.get(indexObjetPris).getFormeAire())) {
 			listePisteVerticale.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.ACCELERATEUR && objetSelectionne == false
+		} else if (type == TypeObjetDeplacable.ACCELERATEUR
 				&& poubelle.contains(listeAccelerateur.get(indexObjetPris).getFormeAire())) {
 			listeAccelerateur.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEVIRAGEBAS && objetSelectionne == false
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEBAS
 				&& poubelle.contains(listePisteVirageBas.get(indexObjetPris).getFormeAire())) {
 			listePisteVirageBas.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEVIRAGEDROIT && objetSelectionne == false
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEDROIT
 				&& poubelle.contains(listePisteVirageDroit.get(indexObjetPris).getFormeAire())) {
 			listePisteVirageDroit.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEVIRAGEGAUCHE && objetSelectionne == false
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEGAUCHE
 				&& poubelle.contains(listePisteVirageGauche.get(indexObjetPris).getFormeAire())) {
 			listePisteVirageGauche.remove(indexObjetPris);
-		} else if (type == TypeObjetDeplacable.PISTEVIRAGEHAUT && objetSelectionne == false
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEHAUT
 				&& poubelle.contains(listePisteVirageHaut.get(indexObjetPris).getFormeAire())) {
 			listePisteVirageHaut.remove(indexObjetPris);
 		}
@@ -314,7 +314,11 @@ public class PanelRegroupement extends JPanel {
 	private void pisteVirageDroitDrag(MouseEvent e) {
 		if (listePisteVirageDroit.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEDROIT) {
-
+			if(poubelle.contains(pisteVirageDroit.getFormeAire())) {
+				pisteVirageDroit.setTaillePiste(30);
+			} else {
+				pisteVirageDroit.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageDroit.setX(collerX(e));
@@ -367,7 +371,11 @@ public class PanelRegroupement extends JPanel {
 	// Tan Tommy Rin
 	private void pisteVerticaleDrag(MouseEvent e) {
 		if (listePisteVerticale.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEVERTICALE) {
-
+			if(poubelle.contains(pisteVerticale.getFormeAire())) {
+				pisteVerticale.setTaillePiste(30);
+			} else {
+				pisteVerticale.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVerticale.setX(collerX(e));
@@ -391,7 +399,11 @@ public class PanelRegroupement extends JPanel {
 	private void pisteVirageHautDrag(MouseEvent e) {
 		if (listePisteVirageHaut.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEHAUT) {
-
+			if(poubelle.contains(pisteVirageHaut.getFormeAire())) {
+				pisteVirageHaut.setTaillePiste(30);
+			} else {
+				pisteVirageHaut.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageHaut.setX(collerX(e));
@@ -415,7 +427,11 @@ public class PanelRegroupement extends JPanel {
 	private void pisteVirageGaucheDrag(MouseEvent e) {
 		if (listePisteVirageGauche.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEGAUCHE) {
-
+			if(poubelle.contains(pisteVirageGauche.getFormeAire())) {
+				pisteVirageGauche.setTaillePiste(30);
+			} else {
+				pisteVirageGauche.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageGauche.setX(collerX(e));
@@ -438,7 +454,11 @@ public class PanelRegroupement extends JPanel {
 	// Tan Tommy Rin
 	private void pisteVirageBasDrag(MouseEvent e) {
 		if (listePisteVirageBas.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEVIRAGEBAS) {
-
+			if(poubelle.contains(pisteVirageBas.getFormeAire())) {
+				pisteVirageBas.setTaillePiste(30);
+			} else {
+				pisteVirageBas.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageBas.setX(collerX(e));
@@ -462,6 +482,11 @@ public class PanelRegroupement extends JPanel {
 	private void pisteHorizontaleDrag(MouseEvent e) {
 		if (listePisteHorizontale.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEHORIZONTALE) {
+			if(poubelle.contains(pisteHorizontale.getFormeAire())) {
+				pisteHorizontale.setTaillePiste(30);
+			} else {
+				pisteHorizontale.setTaillePiste(80);
+			}
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
