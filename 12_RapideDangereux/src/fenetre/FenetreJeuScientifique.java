@@ -7,7 +7,13 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.File;
+import java.net.URL;
 
+import javax.print.attribute.standard.Media;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -61,6 +67,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblPositionEnXV2;
 	private JLabel lblPositionEnYV2;
 	private JLabel lblNombreToursVoiture2;
+	private Clip clip;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -429,6 +436,18 @@ public class FenetreJeuScientifique extends JPanel {
 			zoneAcceleration.ajouterTemps();
 		    }
 		});
+		
+		try {
+		    clip = AudioSystem.getClip();
+		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+		    clip.open(inputStream);
+		   
+		} catch (Exception ex) {
+		    ex.printStackTrace();
+		}
+		
+		
 	
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
@@ -442,12 +461,19 @@ public class FenetreJeuScientifique extends JPanel {
                 timerVitesse.stop();
 				 zoneAcceleration.renouvlerTemps();
 				 zoneAcceleration.renouvlerAcceleration();
+				 
+				 if (clip != null) {
+	                    clip.stop();
+	                    clip.setMicrosecondPosition(0);
+	                }
 				
 			}
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
+	
+		
 		btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -457,9 +483,12 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(false);
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
-
 				timerVitesse.start();
 
+				
+				    clip.start();
+				
+				
 				
 			}
 		});
@@ -479,6 +508,11 @@ public class FenetreJeuScientifique extends JPanel {
                 zoneVitesse.renouvlerVitesse();
                 zoneAcceleration.renouvlerTemps();
                 zoneAcceleration.renouvlerAcceleration();
+                
+                if (clip != null) {
+                    clip.stop();
+                    clip.setMicrosecondPosition(0);
+                }
 
 			}
 		});
@@ -504,6 +538,10 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(true);
 				
 				timerVitesse.stop();
+				
+				if (clip != null) {
+				    clip.stop();
+				}
 			}
 		});
 		btnStop.setBounds(538, 563, 89, 76);
