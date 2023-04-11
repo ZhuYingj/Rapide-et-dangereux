@@ -55,6 +55,7 @@ public class Voiture implements Dessinable, Serializable {
 	/** Le diametre de la voiture initial **/
 	private double diametreInitial;
 	private double nombreToursFaits = 0;
+	private double tempsCourse = 0;
 
 	public static ArrayList<Double> vitessesParSeconde;
 
@@ -420,6 +421,14 @@ public class Voiture implements Dessinable, Serializable {
 
 	public double getNombreToursFaits() {
 		return nombreToursFaits;
+	}
+
+	public double getTempsCourse() {
+		return tempsCourse;
+	}
+
+	public void setTempsCourse(double tempsCourse) {
+		this.tempsCourse = tempsCourse;
 	}
 
 	public void setNombreToursFaits(double nombreToursFaits) {
