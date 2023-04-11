@@ -25,7 +25,6 @@ import physique.MoteurPhysique;
 
 public class Voiture implements Dessinable, Serializable {
 
-
 	private static final long serialVersionUID = 1L;
 	/** Diametre de la voiture puisque la voiture est un cercle **/
 	private double diametre = 1;
@@ -55,6 +54,7 @@ public class Voiture implements Dessinable, Serializable {
 	private double vitesseMaxSelonNiveau;
 	/** Le diametre de la voiture initial **/
 	private double diametreInitial;
+	private double nombreToursFaits = 0;
 
 	public static ArrayList<Double> vitessesParSeconde;
 
@@ -394,18 +394,19 @@ public class Voiture implements Dessinable, Serializable {
 		return cercle;
 	}
 
-	
 	/**
 	 * 
 	 * @param voiture1 La voiture du joueur 1
 	 * @param voiture2 La voiture du joueur 2
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	public void collisionEntreVoiture(Voiture voiture1, Voiture voiture2) {
 
-		double distanceRayons = voiture1.getDiametre()/2 + voiture1.getDiametre()/2;
-		double distanceVoitureX = (voiture1.getPosition().getX() - voiture2.getPosition().getX()) * (voiture1.getPosition().getX() - voiture2.getPosition().getX());
-		double distanceVoitureY = (voiture1.getPosition().getY() - voiture2.getPosition().getY()) * (voiture1.getPosition().getY() - voiture2.getPosition().getY());
+		double distanceRayons = voiture1.getDiametre() / 2 + voiture1.getDiametre() / 2;
+		double distanceVoitureX = (voiture1.getPosition().getX() - voiture2.getPosition().getX())
+				* (voiture1.getPosition().getX() - voiture2.getPosition().getX());
+		double distanceVoitureY = (voiture1.getPosition().getY() - voiture2.getPosition().getY())
+				* (voiture1.getPosition().getY() - voiture2.getPosition().getY());
 		double distanceVoiture = Math.sqrt(distanceVoitureX + distanceVoitureY);
 		if (distanceRayons >= distanceVoiture) {
 			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(),
@@ -417,4 +418,11 @@ public class Voiture implements Dessinable, Serializable {
 		}
 	}
 
+	public double getNombreToursFaits() {
+		return nombreToursFaits;
+	}
+
+	public void setNombreToursFaits(double nombreToursFaits) {
+		this.nombreToursFaits = nombreToursFaits;
+	}
 }
