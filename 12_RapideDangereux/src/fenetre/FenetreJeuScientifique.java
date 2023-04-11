@@ -165,7 +165,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 				timerVitesse.start();
 
-				 clip.start();
+				 //clip.start();
 				
 			}
 		});
