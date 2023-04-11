@@ -34,6 +34,7 @@ import interfaces.TypeObjetSpecial;
  * scientifique activé
  * 
  * @author Tan Tommy Rin
+ * @author Ludovic Julien
  *
  */
 public class FenetreJeuScientifique extends JPanel {
@@ -81,45 +82,55 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 
-
-//		try {
-//		    clip = AudioSystem.getClip();
-//		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
-//		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
-//		    clip.open(inputStream);
-//		   
-//		} catch (Exception ex) {
-//		    ex.printStackTrace();
-//		}
+		/**
+		 * lit le fichier audio 
+		 */
+		//Ludovic Julien
+		try {
+		    clip = AudioSystem.getClip();
+		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+		    clip.open(inputStream);
+		   
+		} catch (Exception ex) {
+		    ex.printStackTrace();
+		}
 
 
 		JPanel panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
 		add(panelObjetEtGraphique);
 		panelObjetEtGraphique.setLayout(null);
+		
+		
 		ZoneVitesse zoneVitesse2 = new ZoneVitesse();
 		zoneVitesse2.setBounds(254, 0, 250, 274);
 		panelObjetEtGraphique.add(zoneVitesse2);
 
+		
+		
 		ZoneVitesse zoneVitesse = new ZoneVitesse();
 		zoneVitesse.setBounds(-41, 0, 250, 274);
 		panelObjetEtGraphique.add(zoneVitesse);
+		
+		/**
+		 * Timer qui permet de prendre les donner de la vitesse des deux voiture 
+		 */
+		//Ludovic Julien
 		Timer timerVitesse = new Timer(50, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				double vitesseActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture()
-						.getVitesse().module();
-				double accelerationActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0)
-						.getVoiture().getAccel().module();
-				if (vitesseActuelle < 0) {
-					vitesseActuelle = (vitesseActuelle * -1);
+				double vitesseActuelle1 = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().getVitesse().module();
+				double vitesseActuelle2 = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture2().getVitesse().module();
+				if (vitesseActuelle1 < 0) {
+					vitesseActuelle1 = (vitesseActuelle1 * -1);
 				}
-				zoneVitesse2.ajouterVitesse(vitesseActuelle);
-
-				if (accelerationActuelle < 0) {
-					accelerationActuelle = (accelerationActuelle * -1);
+				if (vitesseActuelle2 < 0) {
+					vitesseActuelle2 = (vitesseActuelle2 * -1);
 				}
-
+				zoneVitesse2.ajouterVitesse(vitesseActuelle2);
+				zoneVitesse.ajouterVitesse(vitesseActuelle1);
 				zoneVitesse2.ajouterTemps();
+				zoneVitesse.ajouterTemps();
 
 			}
 		});
@@ -130,6 +141,8 @@ public class FenetreJeuScientifique extends JPanel {
 
 				pcs.firePropertyChange("Test", null, -1);
 
+				zoneVitesse.renouvlerTemps();
+				zoneVitesse.renouvlerVitesse();
 				zoneVitesse2.renouvlerTemps();
 				zoneVitesse2.renouvlerVitesse();
 				timerVitesse.stop();
@@ -192,6 +205,8 @@ public class FenetreJeuScientifique extends JPanel {
 
 				zoneVitesse2.renouvlerTemps();
 				zoneVitesse2.renouvlerVitesse();
+				zoneVitesse.renouvlerTemps();
+				zoneVitesse.renouvlerVitesse();
 
 				if (clip != null) {
 					clip.stop();
