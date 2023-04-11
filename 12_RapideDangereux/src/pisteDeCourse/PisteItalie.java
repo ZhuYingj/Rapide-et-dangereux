@@ -215,7 +215,7 @@ public class PisteItalie {
 
 	}
 
-	// Kevin Nguyen
+	
 
 	public ArrayList<PisteDeDepart> getDepart() {
 		return depart;

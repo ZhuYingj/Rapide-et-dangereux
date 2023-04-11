@@ -394,25 +394,27 @@ public class Voiture implements Dessinable, Serializable {
 		return cercle;
 	}
 
+	
+	/**
+	 * 
+	 * @param voiture1 La voiture du joueur 1
+	 * @param voiture2 La voiture du joueur 2
+	 */
+	//Kevin Nguyen
 	public void collisionEntreVoiture(Voiture voiture1, Voiture voiture2) {
-		Area aire = new Area(voiture1.getCercle());
-		Area aire2 = new Area(voiture2.getCercle());
 
-		aire.intersect(aire2);
-		aire2.intersect(aire);
-
-		if (!aire.isEmpty()) {
+		double distanceRayons = voiture1.getDiametre()/2 + voiture1.getDiametre()/2;
+		double distanceVoitureX = (voiture1.getPosition().getX() - voiture2.getPosition().getX()) * (voiture1.getPosition().getX() - voiture2.getPosition().getX());
+		double distanceVoitureY = (voiture1.getPosition().getY() - voiture2.getPosition().getY()) * (voiture1.getPosition().getY() - voiture2.getPosition().getY());
+		double distanceVoiture = Math.sqrt(distanceVoitureX + distanceVoitureY);
+		if (distanceRayons >= distanceVoiture) {
 			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(),
-					voiture2.getVitesse().module(), voiture1.getMasseEnKg(), voiture2.getMasseEnKg(), voiture1.angle));
+					voiture2.getVitesse().module(), voiture1.getMasseEnKg(), voiture2.getMasseEnKg()));
 			voiture2.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture2.getVitesse().module(),
-					voiture1.getVitesse().module(), voiture2.getMasseEnKg(), voiture1.getMasseEnKg(), voiture2.angle));
-		} else if (!aire2.isEmpty()) {
-			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(),
-					voiture2.getVitesse().module(), voiture1.getMasseEnKg(), voiture2.getMasseEnKg(), voiture1.angle));
-			voiture2.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture2.getVitesse().module(),
-					voiture1.getVitesse().module(), voiture2.getMasseEnKg(), voiture1.getMasseEnKg(), voiture2.angle));
+					voiture1.getVitesse().module(), voiture2.getMasseEnKg(), voiture1.getMasseEnKg()));
+//			voiture1.setAngle(Math.toRadians(Math.atan(voiture1.getVitesse().getY() / voiture1.getVitesse().getX())));
+//			voiture2.setAngle(Math.toRadians(Math.atan(voiture2.getVitesse().getY() / voiture2.getVitesse().getX())));
 		}
-
 	}
 
 }
