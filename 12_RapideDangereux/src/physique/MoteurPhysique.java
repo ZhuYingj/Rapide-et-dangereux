@@ -143,7 +143,7 @@ public class MoteurPhysique {
 	 * @return L'impulsion.
 	 */
 	public static double calculerImpulsion(double vitesseImp1, double vitesseImp2, double masse1, double masse2) {
-		return (-(1 + COEFF_RESTITUTION_E) * (vitesseImp2 - vitesseImp1)) / (1.0 / masse1 + 1.0 / masse2);
+		return (-(1 + COEFF_RESTITUTION_E) * (vitesseImp1 - vitesseImp2)) / (1.0 / masse1 + 1.0 / masse2);
 	}
 
 	/**
@@ -157,11 +157,30 @@ public class MoteurPhysique {
 	 * @param angle       L'angle en rad
 	 * @return La vitesse initiale transmise a l'objet immobile.
 	 */
-	public static Vecteur2D calculerVitesseSelonImpulsion(double vitesseImp1, double vitesseImp2, double masse1,
+	public static Vecteur2D calculerVitesseSelonImpulsionA(double vitesseImp1, double vitesseImp2, double masse1,
 			double masse2) {
 		return new Vecteur2D(
 				 vitesseImp1 + (calculerImpulsion(vitesseImp1, vitesseImp2, masse1, masse2) / masse1),
 				 vitesseImp1
 						+ (calculerImpulsion(vitesseImp1, vitesseImp2, masse1, masse2) / masse1));
+	}
+	
+	/**
+	 * Calcule et retourne la vitesse initiale transmise a un objet immobile apres
+	 * une collision avec un objet en mouvement.
+	 * 
+	 * @param vitesseImp1 Vitesse de la premiere en mouvement au moment de l'impact.
+	 * @param vitesseImp2 Vitesse de la deuxieme en mouvement au moment de l'impact.
+	 * @param masse1      Masse de l'objet en mouvement.
+	 * @param masse2      Masse de l'objet immobile.
+	 * @param angle       L'angle en rad
+	 * @return La vitesse initiale transmise a l'objet immobile.
+	 */
+	public static Vecteur2D calculerVitesseSelonImpulsionB(double vitesseImp1, double vitesseImp2, double masse1,
+			double masse2) {
+		return new Vecteur2D(
+				 vitesseImp2 - (calculerImpulsion(vitesseImp1, vitesseImp2, masse1, masse2) / masse2),
+				 vitesseImp2
+						- (calculerImpulsion(vitesseImp1, vitesseImp2, masse1, masse2) / masse2));
 	}
 }
