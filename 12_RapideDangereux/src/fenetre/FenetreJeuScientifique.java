@@ -212,7 +212,7 @@ public class FenetreJeuScientifique extends JPanel {
 			}
 		});
 
-		zoneAnimPhysique.setBounds(10, 47, 958, 694);
+		zoneAnimPhysique.setBounds(10, 47, 937, 597);
 		add(zoneAnimPhysique);
 
 		JPanel panelDonneScientifique = new JPanel();
