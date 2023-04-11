@@ -73,8 +73,131 @@ public class FenetreJeuScientifique extends JPanel {
 	 */
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
+		JPanel panelObjetEtGraphique = new JPanel();
+		panelObjetEtGraphique.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
+		add(panelObjetEtGraphique);
+		panelObjetEtGraphique.setLayout(null);
+		ZoneVitesse zoneVitesse = new ZoneVitesse();
+		zoneVitesse.setBounds(700, -33, 250, 274);
+		panelObjetEtGraphique.add(zoneVitesse);
+
+		ZoneAcceleration zoneAcceleration = new ZoneAcceleration();
+		zoneAcceleration.setBounds(350, -33, 250, 274);
+		panelObjetEtGraphique.add(zoneAcceleration);
+
+		ZoneVitesse zoneVitesse2 = new ZoneVitesse();
+		zoneVitesse2.setBounds(100, -33, 250, 274);
+		panelObjetEtGraphique.add(zoneVitesse2);
+		Timer timerVitesse = new Timer(50, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double vitesseActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+						.getVitesse().module();
+				double accelerationActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0)
+						.getVoiture().getAccel().module();
+				if (vitesseActuelle < 0) {
+					vitesseActuelle = (vitesseActuelle * -1);
+				}
+				zoneVitesse.ajouterVitesse(vitesseActuelle);
+
+				if (accelerationActuelle < 0) {
+					accelerationActuelle = (accelerationActuelle * -1);
+				}
+				zoneAcceleration.ajouterAcceleration(accelerationActuelle);
+
+				zoneVitesse.ajouterTemps();
+				zoneAcceleration.ajouterTemps();
+			}
+		});
+		JButton btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("RetourDuJeuScience", null, -1);
+
+				pcs.firePropertyChange("Test", null, -1);
+
+				zoneVitesse.renouvlerTemps();
+				zoneVitesse.renouvlerVitesse();
+				timerVitesse.stop();
+				zoneAcceleration.renouvlerTemps();
+				zoneAcceleration.renouvlerAcceleration();
+
+			}
+		});
+
+		btnStart = new JButton("Start");
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.setEnCoursDAnimation(false);
+				zoneAnimPhysique.demarrer();
+				btnNextImg.setEnabled(false);
+				btnStart.setEnabled(false);
+				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+
+				timerVitesse.start();
+
+			}
+		});
+		btnStart.setBounds(10, 650, 89, 76);
+		add(btnStart);
+		btnRetour.setBounds(10, 11, 89, 23);
+		add(btnRetour);
+
+		btnStop = new JButton("Stop");
+		btnStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.arreter();
+				btnNextImg.setEnabled(true);
+				btnStart.setEnabled(true);
+
+				timerVitesse.stop();
+			}
+		});
+		btnStop.setBounds(621, 650, 89, 76);
+		add(btnStop);
+
+		btnReset = new JButton("Reset");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.restartPosPisteDepart();
+				btnNextImg.setEnabled(true);
+				btnStart.setEnabled(true);
+				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
+
+				zoneVitesse.renouvlerTemps();
+				zoneVitesse.renouvlerVitesse();
+				zoneAcceleration.renouvlerTemps();
+				zoneAcceleration.renouvlerAcceleration();
+
+			}
+		});
+		btnReset.setBounds(197, 650, 89, 76);
+		add(btnReset);
+
+		btnNextImg = new JButton("Next Img");
+		btnNextImg.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.avancerUnPas();
+			}
+		});
+		btnNextImg.setBounds(404, 650, 89, 76);
+		add(btnNextImg);
+
 		setLayout(null);
-		setBounds(100, 100, 1321, 836);
+		setBounds(100, 100, 1343, 836);
+	
+
+		progressBarFroce = new JProgressBar();
+		progressBarFroce.setFont(new Font("Tahoma", Font.BOLD, 12));
+		progressBarFroce.setStringPainted(true);
+		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
+		progressBarFroce.setBounds(519, 11, 30, 157);
+
+		panelObjetEtGraphique.add(progressBarFroce);
 
 		JLabel lblTitreModeScientifique = new JLabel("Mode scientifique activé");
 		lblTitreModeScientifique.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -89,7 +212,7 @@ public class FenetreJeuScientifique extends JPanel {
 			}
 		});
 
-		zoneAnimPhysique.setBounds(10, 47, 700, 439);
+		zoneAnimPhysique.setBounds(10, 47, 958, 694);
 		add(zoneAnimPhysique);
 
 		JPanel panelDonneScientifique = new JPanel();
@@ -97,7 +220,7 @@ public class FenetreJeuScientifique extends JPanel {
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"DONN\u00C9ES SCIENTIFIQUES", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelDonneScientifique.setBackground(Color.GRAY);
-		panelDonneScientifique.setBounds(720, 33, 570, 466);
+		panelDonneScientifique.setBounds(978, 47, 570, 466);
 		add(panelDonneScientifique);
 		panelDonneScientifique.setLayout(null);
 
@@ -380,131 +503,6 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNombreTourV2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNombreTourV2.setBounds(523, 382, 56, 29);
 		panelDonneScientifique.add(lblNombreTourV2);
-
-		JPanel panelObjetEtGraphique = new JPanel();
-		panelObjetEtGraphique.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelObjetEtGraphique.setBounds(720, 510, 570, 179);
-		add(panelObjetEtGraphique);
-		panelObjetEtGraphique.setLayout(null);
-
-		progressBarFroce = new JProgressBar();
-		progressBarFroce.setFont(new Font("Tahoma", Font.BOLD, 12));
-		progressBarFroce.setStringPainted(true);
-		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
-		progressBarFroce.setBounds(519, 11, 30, 157);
-
-		panelObjetEtGraphique.add(progressBarFroce);
-
-		ZoneVitesse zoneVitesse = new ZoneVitesse();
-		zoneVitesse.setBounds(500, -33, 250, 274);
-		panelObjetEtGraphique.add(zoneVitesse);
-
-		ZoneAcceleration zoneAcceleration = new ZoneAcceleration();
-		zoneAcceleration.setBounds(250, -33, 250, 274);
-		panelObjetEtGraphique.add(zoneAcceleration);
-
-		ZoneVitesse zoneVitesse2 = new ZoneVitesse();
-		zoneVitesse2.setBounds(0, -33, 250, 274);
-		panelObjetEtGraphique.add(zoneVitesse2);
-
-		Timer timerVitesse = new Timer(50, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				double vitesseActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture()
-						.getVitesse().module();
-				double accelerationActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0)
-						.getVoiture().getAccel().module();
-				if (vitesseActuelle < 0) {
-					vitesseActuelle = (vitesseActuelle * -1);
-				}
-				zoneVitesse.ajouterVitesse(vitesseActuelle);
-
-				if (accelerationActuelle < 0) {
-					accelerationActuelle = (accelerationActuelle * -1);
-				}
-				zoneAcceleration.ajouterAcceleration(accelerationActuelle);
-
-				zoneVitesse.ajouterTemps();
-				zoneAcceleration.ajouterTemps();
-			}
-		});
-
-		JButton btnRetour = new JButton("Retour");
-		btnRetour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("RetourDuJeuScience", null, -1);
-
-				pcs.firePropertyChange("Test", null, -1);
-
-				zoneVitesse.renouvlerTemps();
-				zoneVitesse.renouvlerVitesse();
-				timerVitesse.stop();
-				zoneAcceleration.renouvlerTemps();
-				zoneAcceleration.renouvlerAcceleration();
-
-			}
-		});
-		btnRetour.setBounds(10, 11, 89, 23);
-		add(btnRetour);
-
-		btnStart = new JButton("Start");
-		btnStart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.setEnCoursDAnimation(false);
-				zoneAnimPhysique.demarrer();
-				btnNextImg.setEnabled(false);
-				btnStart.setEnabled(false);
-				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
-
-				timerVitesse.start();
-
-			}
-		});
-		btnStart.setBounds(10, 563, 89, 76);
-		add(btnStart);
-
-		btnReset = new JButton("Reset");
-		btnReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.restartPosPisteDepart();
-				btnNextImg.setEnabled(true);
-				btnStart.setEnabled(true);
-				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
-
-				zoneVitesse.renouvlerTemps();
-				zoneVitesse.renouvlerVitesse();
-				zoneAcceleration.renouvlerTemps();
-				zoneAcceleration.renouvlerAcceleration();
-
-			}
-		});
-		btnReset.setBounds(175, 563, 89, 76);
-		add(btnReset);
-
-		btnNextImg = new JButton("Next Img");
-		btnNextImg.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.avancerUnPas();
-			}
-		});
-		btnNextImg.setBounds(355, 563, 89, 76);
-		add(btnNextImg);
-
-		btnStop = new JButton("Stop");
-		btnStop.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.arreter();
-				btnNextImg.setEnabled(true);
-				btnStart.setEnabled(true);
-
-				timerVitesse.stop();
-			}
-		});
-		btnStop.setBounds(538, 563, 89, 76);
-		add(btnStop);
 
 	}
 

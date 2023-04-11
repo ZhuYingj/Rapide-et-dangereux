@@ -52,7 +52,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 
 		zoneAnimPhysique = new ZoneAnimPhysique();
 		zoneAnimPhysique.setBorder(null);
-		zoneAnimPhysique.setBounds(195, 40, 910, 571);
+		zoneAnimPhysique.setBounds(165, 27, 1048, 673);
 		add(zoneAnimPhysique);
 		zoneAnimPhysique.setLayout(null);
 		JLabel lblTitreModeScientifique = new JLabel("Jeu");
@@ -79,7 +79,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
 			}
 		});
-		btnReset.setBounds(887, 631, 97, 58);
+		btnReset.setBounds(30, 345, 97, 58);
 		add(btnReset);
 
 		JButton btnStop = new JButton("Stop");
@@ -91,15 +91,15 @@ public class FenetreJeuSansScientifique extends JPanel {
 				btnStart.setEnabled(true);
 			}
 		});
-		btnStop.setBounds(1036, 631, 97, 58);
+		btnStop.setBounds(30, 441, 97, 58);
 		add(btnStop);
 
 		btnNextImg = new JButton("Next Img");
-		btnNextImg.setBounds(739, 631, 97, 58);
+		btnNextImg.setBounds(30, 260, 97, 58);
 		add(btnNextImg);
 
 		btnStart = new JButton("Start");
-		btnStart.setBounds(564, 631, 97, 58);
+		btnStart.setBounds(30, 177, 97, 58);
 		add(btnStart);
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

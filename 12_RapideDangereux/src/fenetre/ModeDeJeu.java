@@ -105,7 +105,7 @@ public class ModeDeJeu extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (btnEditeur.contains(e.getX(), e.getY())) {
-					URL urlPlanete = getClass().getClassLoader().getResource("bob-the-builder-fix-it.gif");
+					URL urlPlanete = getClass().getClassLoader().getResource("editeur.gif");
 					ImageIcon planete = new ImageIcon(urlPlanete);
 					lblNewLabel.setIcon(planete);
 				}

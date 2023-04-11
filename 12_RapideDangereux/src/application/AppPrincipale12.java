@@ -120,7 +120,7 @@ public class AppPrincipale12 extends JFrame {
 		ajouterModeEditeurComboBox(fenEditeur);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1350, 800);
+		setBounds(100, 100, 1600, 800);
 		setTitle("Rapide et Dangereux");
 
 		JMenuBar menuBar = new JMenuBar();
@@ -292,7 +292,7 @@ public class AppPrincipale12 extends JFrame {
 		case "SKIN2":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
 					.setSkin((Color) evt.getNewValue());
-			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
 					.setSkin((Color) evt.getNewValue());
 			break;
 		case "NBBOITE":

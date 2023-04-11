@@ -48,7 +48,7 @@ public class JeuOptions extends JPanel {
 	private int indexCouleur = 0;
 	private int indexCouleur2 = 0;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
-	private Color[] couleurs2 = { Color.cyan, Color.GRAY, Color.magenta, Color.PINK, Color.WHITE };
+	private Color[] couleurs2 = { Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.cyan };
 
 	/**
 	 * Méthode qui permet de placer un écouteur
