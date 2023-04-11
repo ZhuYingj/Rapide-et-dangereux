@@ -1,20 +1,19 @@
 package fenetre;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import application.Identifiants;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
+import application.OutilsImage;
 
 /**
  * Classe qui crée la premiere fenêtre "Menu"
@@ -60,7 +59,6 @@ public class FenetreMenu extends JPanel {
 		});
 		btnJouer.setBounds(this.getWidth() / 2 - 100, 245, 100, 49);
 		add(btnJouer);
-	
 
 		btnAide = new JButton("AIDE");
 		btnAide.setBounds(this.getWidth() / 2 - 100, 321, 100, 49);
@@ -75,6 +73,15 @@ public class FenetreMenu extends JPanel {
 		btnQuitter.setBounds(this.getWidth() / 2 - 100, 402, 100, 49);
 		add(btnQuitter);
 
-	}
+		JLabel lblPhoto = new JLabel("");
+		lblPhoto.setBounds(0, 0, 1300, 700);
+		add(lblPhoto);
+		
+		Image deuxVoiture = OutilsImage.lireImageEtRedimensionner("DeuxVoiture.jpg", 1300, 700);
+		if (deuxVoiture != null) {
+			lblPhoto.setIcon(new ImageIcon(deuxVoiture));
+			deuxVoiture.flush();
+		}
 
+	}
 }
