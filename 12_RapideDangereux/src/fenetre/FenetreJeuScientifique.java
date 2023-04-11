@@ -82,6 +82,7 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 
+
 		/**
 		 * lit le fichier audio 
 		 */
@@ -95,6 +96,17 @@ public class FenetreJeuScientifique extends JPanel {
 		} catch (Exception ex) {
 		    ex.printStackTrace();
 		}
+
+
+//		try {
+//		    clip = AudioSystem.getClip();
+//		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+//		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+//		    clip.open(inputStream);
+//		   
+//		} catch (Exception ex) {
+//		    ex.printStackTrace();
+//		}
 
 
 		JPanel panelObjetEtGraphique = new JPanel();
@@ -164,11 +176,8 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(false);
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
-
 				timerVitesse.start();
-
-				clip.start();
-
+				 //clip.start();
 			}
 		});
 		btnStart.setBounds(10, 650, 89, 76);
@@ -259,7 +268,7 @@ public class FenetreJeuScientifique extends JPanel {
 		panelDonneScientifique.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"DONN\u00C9ES SCIENTIFIQUES", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelDonneScientifique.setBackground(Color.GRAY);
+		panelDonneScientifique.setBackground(Color.WHITE);
 		panelDonneScientifique.setBounds(978, 47, 570, 466);
 		add(panelDonneScientifique);
 		panelDonneScientifique.setLayout(null);
@@ -311,7 +320,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblMetreV1 = new JLabel("m");
 		lblMetreV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblMetreV1.setBounds(244, 52, 24, 29);
+		lblMetreV1.setBounds(258, 52, 24, 29);
 		panelDonneScientifique.add(lblMetreV1);
 
 		JLabel lblMetreV2 = new JLabel("m");
@@ -321,7 +330,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblKmParHeureV1 = new JLabel("m/s");
 		lblKmParHeureV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblKmParHeureV1.setBounds(244, 92, 38, 29);
+		lblKmParHeureV1.setBounds(258, 92, 38, 29);
 		panelDonneScientifique.add(lblKmParHeureV1);
 
 		JLabel lblKmParHeureV2 = new JLabel("m/s");
@@ -331,12 +340,12 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblMCarreV1 = new JLabel("m/s");
 		lblMCarreV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblMCarreV1.setBounds(244, 132, 56, 29);
+		lblMCarreV1.setBounds(258, 132, 34, 29);
 		panelDonneScientifique.add(lblMCarreV1);
 
 		JLabel lblNV1 = new JLabel("N");
 		lblNV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNV1.setBounds(244, 172, 38, 29);
+		lblNV1.setBounds(258, 172, 34, 29);
 		panelDonneScientifique.add(lblNV1);
 
 		JLabel lblNV1_1 = new JLabel("N");
@@ -346,7 +355,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblNGraviteV1 = new JLabel("N");
 		lblNGraviteV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNGraviteV1.setBounds(244, 215, 38, 29);
+		lblNGraviteV1.setBounds(258, 215, 34, 29);
 		panelDonneScientifique.add(lblNGraviteV1);
 
 		JLabel lblNGraviteV2 = new JLabel("N");
@@ -356,12 +365,12 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblNFreinageV1 = new JLabel("N");
 		lblNFreinageV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNFreinageV1.setBounds(244, 257, 38, 29);
+		lblNFreinageV1.setBounds(258, 257, 34, 29);
 		panelDonneScientifique.add(lblNFreinageV1);
 
 		JLabel lblNAttractionV1 = new JLabel("N");
 		lblNAttractionV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNAttractionV1.setBounds(244, 297, 38, 29);
+		lblNAttractionV1.setBounds(258, 297, 34, 29);
 		panelDonneScientifique.add(lblNAttractionV1);
 
 		JLabel lblNFreinageV2 = new JLabel("N");
@@ -376,7 +385,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblNum2 = new JLabel("2");
 		lblNum2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNum2.setBounds(270, 132, 30, 14);
+		lblNum2.setBounds(287, 132, 30, 14);
 		panelDonneScientifique.add(lblNum2);
 
 		JLabel lblMCarreV1_1 = new JLabel("m/s");
@@ -396,7 +405,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblSeconde = new JLabel("S");
 		lblSeconde.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblSeconde.setBounds(244, 422, 38, 44);
+		lblSeconde.setBounds(258, 422, 34, 44);
 		panelDonneScientifique.add(lblSeconde);
 
 		lblTempsEcouleValeur = new JLabel("0.00");
@@ -506,7 +515,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblRadVoiture1 = new JLabel("Rad");
 		lblRadVoiture1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblRadVoiture1.setBounds(244, 342, 38, 29);
+		lblRadVoiture1.setBounds(258, 342, 34, 29);
 		panelDonneScientifique.add(lblRadVoiture1);
 
 		lblAngleVoiture2Rad = new JLabel("0.00");
@@ -531,7 +540,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblNombreTourV1 = new JLabel("Tours");
 		lblNombreTourV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNombreTourV1.setBounds(244, 382, 56, 29);
+		lblNombreTourV1.setBounds(258, 382, 59, 29);
 		panelDonneScientifique.add(lblNombreTourV1);
 
 		lblNombreToursVoiture2 = new JLabel("0.00");

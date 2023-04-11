@@ -429,7 +429,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			regroupement.enCollisionAvec(voiture);
 			regroupement.enCollisionAvec(voiture2);
-			voiture.collisionEntreVoiture(voiture, voiture2);
+			try {
+				voiture.collisionEntreVoiture(voiture2);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 			if (haut == false) {
 				if ((regroupement.getObjSpecial() != null
@@ -559,7 +564,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.enCollisionAvec(voiture);
 		regroupement.enCollisionAvec(voiture2);
 
-		voiture.collisionEntreVoiture(voiture, voiture2);
+		try {
+			voiture.collisionEntreVoiture(voiture2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		repaint();
 	}
 
@@ -810,10 +820,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				.getNombreToursFaits()) {
 			JOptionPane.showMessageDialog(null, "LA VOITURE 1 A GAGNÉE!!!");
 			arreter();
+
 		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 				.getNombreToursFaits()) {
 			JOptionPane.showMessageDialog(null, "LA VOITURE 2 A GAGNÉE!!!");
-			arreter();
+			
 		}
 
 	}

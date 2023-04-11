@@ -55,6 +55,7 @@ public class Voiture implements Dessinable, Serializable {
 	/** Le diametre de la voiture initial **/
 	private double diametreInitial;
 	private double nombreToursFaits = 0;
+	private double tempsCourse = 0;
 
 	public static ArrayList<Double> vitessesParSeconde;
 
@@ -116,7 +117,7 @@ public class Voiture implements Dessinable, Serializable {
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D gCopie = (Graphics2D) g2d.create();
 		AffineTransform mat = new AffineTransform();
-//		gCopie.scale(pixelsParMetre, pixelsParMetre);
+		// gCopie.scale(pixelsParMetre, pixelsParMetre);
 		gCopie.rotate(angle, position.getX() + diametre / 2, position.getY() + diametre / 2);
 
 		gCopie.setColor(skin);
@@ -398,28 +399,69 @@ public class Voiture implements Dessinable, Serializable {
 	 * 
 	 * @param voiture1 La voiture du joueur 1
 	 * @param voiture2 La voiture du joueur 2
+	 * @throws Exception
 	 */
 	// Kevin Nguyen
-	public void collisionEntreVoiture(Voiture voiture1, Voiture voiture2) {
 
-		double distanceRayons = voiture1.getDiametre() / 2 + voiture1.getDiametre() / 2;
-		double distanceVoitureX = (voiture1.getPosition().getX() - voiture2.getPosition().getX())
-				* (voiture1.getPosition().getX() - voiture2.getPosition().getX());
-		double distanceVoitureY = (voiture1.getPosition().getY() - voiture2.getPosition().getY())
-				* (voiture1.getPosition().getY() - voiture2.getPosition().getY());
+	public void collisionEntreVoiture(Voiture voiture1) throws Exception {
+
+	
+
+		double distanceRayons = getDiametre() / 2 + voiture1.getDiametre() / 2;
+		double distanceVoitureX = (getPosition().getX() - voiture1.getPosition().getX())
+				* (voiture1.getPosition().getX() - voiture1.getPosition().getX());
+		double distanceVoitureY = (voiture1.getPosition().getY() - voiture1.getPosition().getY())
+				* (voiture1.getPosition().getY() - voiture1.getPosition().getY());
 		double distanceVoiture = Math.sqrt(distanceVoitureX + distanceVoitureY);
 		if (distanceRayons >= distanceVoiture) {
-			voiture1.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture1.getVitesse().module(),
-					voiture2.getVitesse().module(), voiture1.getMasseEnKg(), voiture2.getMasseEnKg()));
-			voiture2.setVitesse(MoteurPhysique.calculerVitesseSelonImpulsion(voiture2.getVitesse().module(),
-					voiture1.getVitesse().module(), voiture2.getMasseEnKg(), voiture1.getMasseEnKg()));
-//			voiture1.setAngle(Math.toRadians(Math.atan(voiture1.getVitesse().getY() / voiture1.getVitesse().getX())));
-//			voiture2.setAngle(Math.toRadians(Math.atan(voiture2.getVitesse().getY() / voiture2.getVitesse().getX())));
+			Vecteur2D delta = getPosition().soustrait(voiture1.getPosition());
+			double dist2 = delta.prodScalaire(delta);
+
+			if (dist2 > distanceRayons * distanceRayons)
+				return;
+
+			double d = delta.module();
+
+			Vecteur2D mtd;
+			if (d != 0) {
+				mtd = delta.multiplie((distanceRayons - d) / d);
+			} else {
+				d = distanceRayons - 1;
+				delta = new Vecteur2D(distanceRayons, 0);
+				mtd = delta.multiplie((distanceRayons - d) / d);
+			}
+
+			double masse1 = 1 / getMasseEnKg();
+			double masse2 = 1 / voiture1.getMasseEnKg();
+
+			setPosition(getPosition().additionne(mtd.multiplie(masse1 / (masse1 + masse2))));
+			voiture1.setPosition(voiture1.getPosition().soustrait(mtd.multiplie(masse2 / (masse1 + masse2))));
+
+			Vecteur2D v = getVitesse().soustrait(voiture1.getVitesse());
+			double vn = v.prodScalaire(mtd.normalise());
+
+			if (vn > 0)
+				return;
+
+			double i = (-(1 + 0.8) * vn) / (masse1 + masse2);
+			Vecteur2D impulsion = mtd.normalise().multiplie(i);
+
+			setVitesse(getVitesse().additionne(impulsion.multiplie(masse1)));
+			voiture1.setVitesse(voiture1.getVitesse().soustrait(impulsion.multiplie(masse2)));
+
 		}
 	}
 
 	public double getNombreToursFaits() {
 		return nombreToursFaits;
+	}
+
+	public double getTempsCourse() {
+		return tempsCourse;
+	}
+
+	public void setTempsCourse(double tempsCourse) {
+		this.tempsCourse = tempsCourse;
 	}
 
 	public void setNombreToursFaits(double nombreToursFaits) {

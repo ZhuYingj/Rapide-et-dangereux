@@ -39,6 +39,7 @@ public class FenetreOptionMontre extends JPanel {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private JSlider slider;
 	private JSlider slider2;
+	private JSlider sliderNbrTour;
 	private JRadioButton rdbtnFacile;
 	private JRadioButton rdbtnMedium;
 	private JRadioButton rdbtnDifficile;
@@ -119,37 +120,37 @@ public class FenetreOptionMontre extends JPanel {
 
 		rdbtnFacile = new JRadioButton("Facile");
 		rdbtnFacile.setSelected(true);
-//		rdbtnFacile.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//
-//				pcs.firePropertyChange("MASSE", null, 60.0);
-//
-//			}
-//		});
+		rdbtnFacile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				pcs.firePropertyChange("VITESSEMAXFACILE2", null, 60.0);
+
+			}
+		});
 		rdbtnFacile.setBounds(165, 182, 109, 23);
 		panel_1.add(rdbtnFacile);
 		buttonGroupDiff.add(rdbtnFacile);
 
 		rdbtnMedium = new JRadioButton("Intermédiaire");
-//		rdbtnMedium.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//
-//				pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 80.0);
-//
-//			}
-//		});
+		rdbtnMedium.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE2", null, 80.0);
+
+			}
+		});
 		rdbtnMedium.setBounds(165, 207, 109, 23);
 		panel_1.add(rdbtnMedium);
 		buttonGroupDiff.add(rdbtnMedium);
 
 		rdbtnDifficile = new JRadioButton("Avancé");
-//		rdbtnDifficile.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//
-//				pcs.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
-//
-//			}
-//		});
+		rdbtnDifficile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				pcs.firePropertyChange("VITESSEMAXAVANCE2", null, 100.0);
+
+			}
+		});
 		rdbtnDifficile.setBounds(165, 233, 109, 23);
 		panel_1.add(rdbtnDifficile);
 		buttonGroupDiff.add(rdbtnDifficile);
@@ -183,7 +184,7 @@ public class FenetreOptionMontre extends JPanel {
 		slider2.setBounds(165, 84, 343, 40);
 		panel_1.add(slider2);
 
-		JSlider sliderNbrTour = new JSlider();
+		sliderNbrTour = new JSlider();
 		sliderNbrTour.setValue(1);
 		sliderNbrTour.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		sliderNbrTour.setMinorTickSpacing(1);
@@ -238,6 +239,9 @@ public class FenetreOptionMontre extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("COMMENCER COURSE MONTRE", null, -1);
 				pcs.firePropertyChange("TYPEPISTE", null, type);
+				pcs.firePropertyChange("MASSEMONTRE1", null, (double) slider.getValue());
+				pcs.firePropertyChange("MASSEMONTRE2", null, (double) slider2.getValue());
+				pcs.firePropertyChange("NBRDETOUR", null, (double) sliderNbrTour.getValue());
 			}
 		});
 		btnCommencer.setBounds(984, 653, 143, 36);

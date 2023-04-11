@@ -1295,7 +1295,7 @@ public class Regroupement implements Dessinable, Serializable {
 			listePisteVirageBas.get(i).setCollision(false);
 			listePisteVirageBas.get(i).setColor(Color.black);
 		}
-		tour++;
+
 	}
 
 	public double getTour() {
