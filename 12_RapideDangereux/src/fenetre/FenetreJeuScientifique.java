@@ -81,6 +81,7 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 
+
 //		try {
 //		    clip = AudioSystem.getClip();
 //		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
@@ -90,6 +91,7 @@ public class FenetreJeuScientifique extends JPanel {
 //		} catch (Exception ex) {
 //		    ex.printStackTrace();
 //		}
+
 
 		JPanel panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
