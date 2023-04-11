@@ -77,7 +77,7 @@ public class ModeDeJeu extends JPanel {
 		});
 
 		btnMonde.setForeground(Color.BLACK);
-		btnMonde.setBounds(650 - 100, 245, 100, 49);
+		btnMonde.setBounds(700, 245, 100, 49);
 		add(btnMonde);
 
 		btnCourseMontre = new JButton("COURSE CONTRE LA MONTRE");
@@ -97,7 +97,7 @@ public class ModeDeJeu extends JPanel {
 			}
 		});
 		btnCourseMontre.setForeground(Color.BLACK);
-		btnCourseMontre.setBounds(489, 324, 227, 49);
+		btnCourseMontre.setBounds(643, 323, 227, 49);
 		add(btnCourseMontre);
 
 		btnEditeur = new JButton("EDITEUR");
@@ -117,14 +117,14 @@ public class ModeDeJeu extends JPanel {
 			}
 		});
 		btnEditeur.setForeground(Color.BLACK);
-		btnEditeur.setBounds(650 - 100, 402, 100, 49);
+		btnEditeur.setBounds(700, 402, 100, 49);
 		add(btnEditeur);
 
 		lblTitre = new JLabel("Mode de jeu");
 		lblTitre.setForeground(Color.WHITE);
-		lblTitre.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 30));
+		lblTitre.setFont(new Font("Arial Black", Font.PLAIN, 30));
 		lblTitre.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitre.setBounds(418, 144, 349, 75);
+		lblTitre.setBounds(568, 144, 349, 75);
 		add(lblTitre);
 
 		btnRetour = new JButton("Retour");
@@ -138,12 +138,7 @@ public class ModeDeJeu extends JPanel {
 
 		lblNewLabel = new JLabel("");
 
-		URL urlBleu = getClass().getClassLoader().getResource("background.gif");
-
-		ImageIcon bleuFond = new ImageIcon(urlBleu);
-		lblNewLabel.setIcon(bleuFond);
-
-		lblNewLabel.setBounds(0, 0, 1350, 800);
+		lblNewLabel.setBounds(0, 0, 1600, 800);
 		add(lblNewLabel);
 
 	}

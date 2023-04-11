@@ -51,7 +51,7 @@ public class FenetreMenu extends JPanel {
 		lblNewLabel.setForeground(Color.DARK_GRAY);
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 25));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(452, 146, 297, 75);
+		lblNewLabel.setBounds(602, 146, 297, 75);
 		add(lblNewLabel);
 
 		btnJouer = new JButton("JOUER");
@@ -60,11 +60,11 @@ public class FenetreMenu extends JPanel {
 				pcs.firePropertyChange("JOUER", 0, -1);
 			}
 		});
-		btnJouer.setBounds(this.getWidth() / 2 - 100, 245, 100, 49);
+		btnJouer.setBounds(700, 245, 100, 49);
 		add(btnJouer);
 
 		btnAide = new JButton("AIDE");
-		btnAide.setBounds(this.getWidth() / 2 - 100, 321, 100, 49);
+		btnAide.setBounds(700, 321, 100, 49);
 		add(btnAide);
 
 		btnQuitter = new JButton("QUITTER");
@@ -73,14 +73,14 @@ public class FenetreMenu extends JPanel {
 				System.exit(0);
 			}
 		});
-		btnQuitter.setBounds(this.getWidth() / 2 - 100, 402, 100, 49);
+		btnQuitter.setBounds(700, 402, 100, 49);
 		add(btnQuitter);
 
 		JLabel lblPhoto = new JLabel("");
-		lblPhoto.setBounds(0, 0, 1350, 800);
+		lblPhoto.setBounds(0, 0, 1600, 800);
 		add(lblPhoto);
 		
-		Image deuxVoiture = OutilsImage.lireImageEtRedimensionner("DeuxVoiture.jpg", 1350, 800);
+		Image deuxVoiture = OutilsImage.lireImageEtRedimensionner("DeuxVoiture.jpg", 1600, 800);
 		if (deuxVoiture != null) {
 			lblPhoto.setIcon(new ImageIcon(deuxVoiture));
 			deuxVoiture.flush();
