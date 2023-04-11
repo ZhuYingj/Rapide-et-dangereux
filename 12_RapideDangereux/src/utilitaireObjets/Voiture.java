@@ -396,6 +396,8 @@ public class Voiture implements Dessinable, Serializable {
 	}
 
 	/**
+	 * Méthode permettant de gérer les collisions entre voiture et établi la
+	 * nouvelle vitesse d'impulsion de chacune des voitures
 	 * 
 	 * @param voiture1 La voiture du joueur 1
 	 * @param voiture2 La voiture du joueur 2
@@ -404,8 +406,6 @@ public class Voiture implements Dessinable, Serializable {
 	// Kevin Nguyen
 
 	public void collisionEntreVoiture(Voiture voiture1) throws Exception {
-
-	
 
 		double distanceRayons = getDiametre() / 2 + voiture1.getDiametre() / 2;
 		double distanceVoitureX = (getPosition().getX() - voiture1.getPosition().getX())
