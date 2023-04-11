@@ -2,16 +2,22 @@ package fenetre;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import application.OutilsImage;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import dessin.ZoneAnimPhysique;
+import javax.swing.ImageIcon;
 
 /**
  * Classe qui crée la fenêtre pour choisir les modes de jeux
@@ -30,6 +36,7 @@ public class ModeDeJeu extends JPanel {
 	/** ajouter le support pour lancer des evenements de type PropertyChange **/
 //	Alexis Pineda-Alvarado
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private JLabel lblNewLabel;
 
 	/**
 	 * Création de la fenetre
@@ -77,6 +84,7 @@ public class ModeDeJeu extends JPanel {
 		add(btnEditeur);
 
 		lblTitre = new JLabel("Mode de jeu");
+		lblTitre.setForeground(Color.WHITE);
 		lblTitre.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 30));
 		lblTitre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitre.setBounds(418, 144, 349, 75);
@@ -90,5 +98,14 @@ public class ModeDeJeu extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
+		
+		lblNewLabel = new JLabel("");
+		URL urlBleu = getClass().getClassLoader().getResource("blueBackground.gif");
+		ImageIcon bleuFond = new ImageIcon(urlBleu);
+		lblNewLabel.setIcon(bleuFond);
+	
+		lblNewLabel.setBounds(0, 0, 1350, 800);
+		add(lblNewLabel);
+		
 	}
 }
