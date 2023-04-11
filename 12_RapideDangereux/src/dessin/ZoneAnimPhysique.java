@@ -692,7 +692,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("posEnXV1", 0, voiture.getPosition().getX());
 		pcs.firePropertyChange("posEnYV1", 0, voiture.getPosition().getY());
 		pcs.firePropertyChange("angleV1", 0, voiture.getAngle());
-		pcs.firePropertyChange("nombreToursV1", 0, regroupement.getTour());
+		pcs.firePropertyChange("nombreToursV1", 0,
+				regroupement.getListePisteDeDepart().get(0).getVoiture().getNombreToursFaits());
 
 		pcs.firePropertyChange("accEnXV2", 0, voiture2.getAccel().getX());
 		pcs.firePropertyChange("accEnYV2", 0, voiture2.getAccel().getY());
@@ -701,7 +702,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("posEnXV2", 0, voiture2.getPosition().getX());
 		pcs.firePropertyChange("posEnYV2", 0, voiture2.getPosition().getY());
 		pcs.firePropertyChange("angleV2", 0, voiture2.getAngle());
-		pcs.firePropertyChange("nombreToursV2", 0, regroupement.getTour());
+		pcs.firePropertyChange("nombreToursV2", 0,
+				regroupement.getListePisteDeDepart().get(0).getVoiture2().getNombreToursFaits());
 		if (regroupement.getObjSpecial() != null
 				&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
 			if (forceDeLancement > 150) {
@@ -792,6 +794,24 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 
 		regroupement.avancerGroupe(deltaT, tempsTotalEcoule);
+		arretQuandFini();
+	}
+
+	/**
+	 * Méthode qui permet d'arreter l'animation losrque le nombre de tours a faire
+	 * est accomplie par une voiture
+	 */
+	// Tan Tommy Rin
+	public void arretQuandFini() {
+		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
+				.getNombreToursFaits()) {
+			System.out.println("VOITURE 1 GAGNANT");
+			arreter();
+		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+				.getNombreToursFaits()) {
+			System.out.println("VOITURE 2 GAGNANT");
+			arreter();
+		}
 
 	}
 
@@ -964,6 +984,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageHaut(pisteMexique.getHaut());
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
+
 			regroupement.creeBoiteDansListe();
 
 		}
