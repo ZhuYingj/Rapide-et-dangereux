@@ -8,6 +8,8 @@ import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import javax.imageio.ImageIO;
+
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
@@ -146,6 +148,7 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		gTempo = (Graphics2D) g2d.create();
+
 		AffineTransform mat = new AffineTransform();
 		gTempo.scale(pixelParMetre, pixelParMetre);
 		shapeCarre = mat.createTransformedShape(carre);
