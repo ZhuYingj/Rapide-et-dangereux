@@ -18,6 +18,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import dessin.ZoneAnimPhysique;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Classe qui crée la fenêtre pour choisir les modes de jeux
@@ -51,8 +53,24 @@ public class ModeDeJeu extends JPanel {
 	 */
 //	Alexis Pineda-Alvarado
 	public ModeDeJeu() {
+
 		setLayout(null);
 		btnMonde = new JButton("MONDE");
+		btnMonde.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				if (btnMonde.contains(e.getX(), e.getY())) {
+					System.out.println("ky");
+					URL urlPlanete = getClass().getClassLoader().getResource("earth.gif");
+					ImageIcon planete = new ImageIcon(urlPlanete);
+					lblNewLabel.setIcon(planete);
+
+				}
+				repaint();
+			}
+
+		});
 		btnMonde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("MONDE", 0, -1);
@@ -98,14 +116,14 @@ public class ModeDeJeu extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
-		
+
 		lblNewLabel = new JLabel("");
-		URL urlBleu = getClass().getClassLoader().getResource("blueBackground.gif");
+		URL urlBleu = getClass().getClassLoader().getResource("background.gif");
 		ImageIcon bleuFond = new ImageIcon(urlBleu);
 		lblNewLabel.setIcon(bleuFond);
-	
+
 		lblNewLabel.setBounds(0, 0, 1350, 800);
 		add(lblNewLabel);
-		
+
 	}
 }
