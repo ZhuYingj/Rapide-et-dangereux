@@ -7,7 +7,13 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.File;
+import java.net.URL;
 
+import javax.print.attribute.standard.Media;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -59,6 +65,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblPositionEnXV2;
 	private JLabel lblPositionEnYV2;
 	private JLabel lblNombreToursVoiture2;
+	private Clip clip;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -73,6 +80,22 @@ public class FenetreJeuScientifique extends JPanel {
 	 */
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
+		
+		
+		try {
+		    clip = AudioSystem.getClip();
+		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+		    clip.open(inputStream);
+		   
+		} catch (Exception ex) {
+		    ex.printStackTrace();
+		}
+		
+		
+		
+		
+		
 		JPanel panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
@@ -121,6 +144,11 @@ public class FenetreJeuScientifique extends JPanel {
 				timerVitesse.stop();
 				zoneAcceleration.renouvlerTemps();
 				zoneAcceleration.renouvlerAcceleration();
+				
+				if (clip != null) {
+                    clip.stop();
+                    clip.setMicrosecondPosition(0);
+                }
 
 			}
 		});
@@ -137,6 +165,8 @@ public class FenetreJeuScientifique extends JPanel {
 
 				timerVitesse.start();
 
+				 clip.start();
+				
 			}
 		});
 		btnStart.setBounds(10, 650, 89, 76);
@@ -153,6 +183,10 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(true);
 
 				timerVitesse.stop();
+				
+				if (clip != null) {
+			    clip.stop();
+			}
 			}
 		});
 		btnStop.setBounds(621, 650, 89, 76);
@@ -171,6 +205,12 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneVitesse.renouvlerVitesse();
 				zoneAcceleration.renouvlerTemps();
 				zoneAcceleration.renouvlerAcceleration();
+				
+				if (clip != null) {
+                  clip.stop();
+                  clip.setMicrosecondPosition(0);
+              }
+				
 
 			}
 		});
@@ -494,6 +534,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNombreTourV1.setBounds(244, 382, 56, 29);
 		panelDonneScientifique.add(lblNombreTourV1);
 
+
 		lblNombreToursVoiture2 = new JLabel("0.00");
 		lblNombreToursVoiture2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNombreToursVoiture2.setBounds(404, 382, 65, 29);
@@ -503,9 +544,17 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNombreTourV2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNombreTourV2.setBounds(523, 382, 56, 29);
 		panelDonneScientifique.add(lblNombreTourV2);
+		
+
+		progressBarFroce = new JProgressBar();
+		progressBarFroce.setFont(new Font("Tahoma", Font.BOLD, 12));
+		progressBarFroce.setStringPainted(true);
+		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
+		progressBarFroce.setBounds(519, 11, 30, 157);
+
+		panelObjetEtGraphique.add(progressBarFroce);
 
 	}
-
 	public JButton getBtnStart() {
 		return btnStart;
 	}

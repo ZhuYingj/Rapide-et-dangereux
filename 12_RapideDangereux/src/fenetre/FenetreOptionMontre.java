@@ -1,19 +1,25 @@
 package fenetre;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 import dessin.OutilsImage;
 import dessin.ZoneApercuPiste;
 import interfaces.TypePiste;
 import utilitaireObjets.Regroupement;
+import javax.swing.JSlider;
+import javax.swing.border.LineBorder;
 
 /**
  * 
@@ -31,6 +37,13 @@ public class FenetreOptionMontre extends JPanel {
 	private Regroupement regroupement;
 	private ZoneApercuPiste zoneApercuPiste;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private JSlider slider;
+	private JSlider slider2;
+	private JRadioButton rdbtnFacile;
+	private JRadioButton rdbtnMedium;
+	private JRadioButton rdbtnDifficile;
+	private final ButtonGroup buttonGroupDiff = new ButtonGroup();
+	private JLabel lblVitesseDifficile;
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
@@ -99,10 +112,113 @@ public class FenetreOptionMontre extends JPanel {
 		});
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
+		panel_1.setBorder(new LineBorder(new Color(255, 0, 0), 2));
 		panel_1.setBounds(760, 345, 549, 297);
 		add(panel_1);
 		panel_1.setLayout(null);
+
+		rdbtnFacile = new JRadioButton("Facile");
+		rdbtnFacile.setSelected(true);
+//		rdbtnFacile.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//
+//				pcs.firePropertyChange("MASSE", null, 60.0);
+//
+//			}
+//		});
+		rdbtnFacile.setBounds(165, 182, 109, 23);
+		panel_1.add(rdbtnFacile);
+		buttonGroupDiff.add(rdbtnFacile);
+
+		rdbtnMedium = new JRadioButton("Intermédiaire");
+//		rdbtnMedium.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//
+//				pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 80.0);
+//
+//			}
+//		});
+		rdbtnMedium.setBounds(165, 207, 109, 23);
+		panel_1.add(rdbtnMedium);
+		buttonGroupDiff.add(rdbtnMedium);
+
+		rdbtnDifficile = new JRadioButton("Avancé");
+//		rdbtnDifficile.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//
+//				pcs.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
+//
+//			}
+//		});
+		rdbtnDifficile.setBounds(165, 233, 109, 23);
+		panel_1.add(rdbtnDifficile);
+		buttonGroupDiff.add(rdbtnDifficile);
+
+		
+		JLabel lblDifficulte = new JLabel("Difficulté du jeu : ");
+		lblDifficulte.setBounds(10, 182, 110, 14);
+		panel_1.add(lblDifficulte);
+		
+		
+		slider = new JSlider();
+
+		slider.setMajorTickSpacing(10);
+		slider.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		slider.setPaintLabels(true);
+		slider.setSnapToTicks(true);
+		slider.setPaintTicks(true);
+		slider.setMinorTickSpacing(10);
+		slider.setMinimum(50);
+		slider.setBounds(165, 33, 343, 40);
+		panel_1.add(slider);
+
+		slider2 = new JSlider();
+		slider2.setSnapToTicks(true);
+		slider2.setPaintTicks(true);
+		slider2.setPaintLabels(true);
+		slider2.setMinorTickSpacing(10);
+		slider2.setMinimum(50);
+		slider2.setMajorTickSpacing(10);
+		slider2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		slider2.setBounds(165, 84, 343, 40);
+		panel_1.add(slider2);
+
+		JSlider sliderNbrTour = new JSlider();
+		sliderNbrTour.setValue(1);
+		sliderNbrTour.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		sliderNbrTour.setMinorTickSpacing(1);
+		sliderNbrTour.setMajorTickSpacing(1);
+		sliderNbrTour.setSnapToTicks(true);
+		sliderNbrTour.setPaintTicks(true);
+		sliderNbrTour.setPaintLabels(true);
+		sliderNbrTour.setMinimum(1);
+		sliderNbrTour.setMaximum(5);
+		sliderNbrTour.setBounds(165, 135, 343, 40);
+		panel_1.add(sliderNbrTour);
+
+		JLabel lblMasse = new JLabel("Masse de la voiture 1 en kg : ");
+		lblMasse.setBounds(10, 39, 191, 20);
+		panel_1.add(lblMasse);
+
+		JLabel lblMasse2 = new JLabel("Masse de la voiture 2 en kg : ");
+		lblMasse2.setBounds(10, 86, 177, 20);
+		panel_1.add(lblMasse2);
+
+		JLabel lblNbrTour = new JLabel("Nombre de tour : \r\n");
+		lblNbrTour.setBounds(10, 135, 177, 14);
+		panel_1.add(lblNbrTour);
+		
+		JLabel lblVitesseFacile = new JLabel("60 m/s");
+		lblVitesseFacile.setBounds(280, 186, 46, 14);
+		panel_1.add(lblVitesseFacile);
+		
+		JLabel lblVitesseMedium = new JLabel("80 m/s");
+		lblVitesseMedium.setBounds(280, 211, 65, 14);
+		panel_1.add(lblVitesseMedium);
+		
+		lblVitesseDifficile = new JLabel("100 m/s");
+		lblVitesseDifficile.setBounds(280, 237, 65, 14);
+		panel_1.add(lblVitesseDifficile);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
