@@ -1,7 +1,7 @@
 package fenetre;
 
 import java.awt.Color;
-import java.awt.Rectangle;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
@@ -10,6 +10,7 @@ import java.beans.PropertyChangeSupport;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -28,10 +29,6 @@ import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
 import utilitaireObjets.Regroupement;
 import utilitaireObjets.Voiture;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  * Classe qui permet de créer et gérer la fenetre éditeur.
@@ -49,6 +46,7 @@ public class FenetreEditeur extends JPanel {
 	private PanelRegroupement panelRegroupement;
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
 	private String pisteCourante = "Piste1.dat";
+
 
 	private JButton btnSauvegarde;
 	private JButton btnJouer;
@@ -75,6 +73,7 @@ public class FenetreEditeur extends JPanel {
 	 */
 	// Tan Tommy Rin
 	public FenetreEditeur() {
+		setForeground(new Color(255, 255, 255));
 		gestionFich = new GestionnaireDeFichiersSurLeBureau();
 		setLayout(null);
 
@@ -300,6 +299,9 @@ public class FenetreEditeur extends JPanel {
 		panelRegroupement.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelRegroupement.setBounds(132, 96, 769, 400);
 		add(panelRegroupement);
+		panelRegroupement.setLayout(null);
+
+	
 
 		JLabel lblNbM = new JLabel("80 m");
 		lblNbM.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -1464,5 +1466,4 @@ public class FenetreEditeur extends JPanel {
 	public void setPanelRegroupement(PanelRegroupement panelRegroupement) {
 		this.panelRegroupement = panelRegroupement;
 	}
-
 }
