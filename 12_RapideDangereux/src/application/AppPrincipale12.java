@@ -336,7 +336,7 @@ public class AppPrincipale12 extends JFrame {
 	public void actionfenRecord(PropertyChangeEvent evt, JeuOptions fenOptions, ClassementParPiste fenRecord) {
 		switch (evt.getPropertyName()) {
 		case "QUITTER":
-			System.out.println("s");
+			
 			fenOptions.setVisible(true);
 			fenRecord.setVisible(false);
 			setContentPane(fenOptions);
