@@ -4,9 +4,15 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Rectangle2D;
-
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -23,9 +29,8 @@ import utilitaireObjets.PisteVirageDroit;
 import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  * Classe permettant de créer et gérer une fenetre de regroupement. Le
@@ -41,6 +46,8 @@ import java.awt.event.MouseMotionAdapter;
 public class PanelRegroupement extends JPanel {
 
 	private static final long serialVersionUID = -3942442779188948737L;
+
+	private Rectangle2D.Double poubelle = new Rectangle2D.Double(640, 320, 80, 80);
 	private BlocMystere blocMystere;
 	private Accelerateur acc;
 	private PisteDeDepart pisteDeDepart;
@@ -55,6 +62,7 @@ public class PanelRegroupement extends JPanel {
 
 	private double xBlocMystere;
 	private double yBlocMystere;
+	private boolean poubelleVide = true;
 
 	private ArrayList<Accelerateur> listeAccelerateur = new ArrayList<Accelerateur>();
 
@@ -74,12 +82,26 @@ public class PanelRegroupement extends JPanel {
 	private int tailleDuCarre;
 	private int longueur;
 	private int hauteur;
+	private int indexObjetPris;
+	/** L'image de la poubelle **/
+	private JLabel lblPoubelle;
 
 	/**
 	 * Constructeur du panel de regroupement
 	 */
 	// Tan Tommy Rin
 	public PanelRegroupement() {
+		setLayout(null);
+
+		lblPoubelle = new JLabel("");
+		lblPoubelle.setBounds(640, 320, 80, 80);
+
+		URL urlPoubelle = getClass().getClassLoader().getResource("poubelleVide.png");
+		ImageIcon poubelleVide = new ImageIcon(urlPoubelle);
+		lblPoubelle.setIcon(poubelleVide);
+
+		add(lblPoubelle);
+
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
@@ -116,6 +138,7 @@ public class PanelRegroupement extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+
 				// Condition pour les accélérateurs
 				accelerateurPressed(e);
 				// Condition pour les blocs mysteres
@@ -134,6 +157,7 @@ public class PanelRegroupement extends JPanel {
 				pisteVirageDroitPressed(e);
 				// Condition pour piste virage haut
 				pisteVirageHautPressed(e);
+
 			}
 
 			@Override
@@ -255,18 +279,58 @@ public class PanelRegroupement extends JPanel {
 
 		}
 		jouer = false;
+		if (poubelleVide == false) {
+			URL urlPoubelle = getClass().getClassLoader().getResource("poubelleRemplie.png");
+			ImageIcon poubelleRemplie = new ImageIcon(urlPoubelle);
+			lblPoubelle.setIcon(poubelleRemplie);
+		}
 
 	}
 
 	/**
 	 * Méthode qui permet de détecter lorsque la souris n'est plus enfoncé et
-	 * redessine
+	 * redessine. Si l'objet est relaché sur la poubelle, elle s'efface.
 	 * 
 	 * @param e Évenement de souris
 	 */
 	// Tan Tommy Rin
 	private void relachementSouris(MouseEvent e) {
+
 		objetSelectionne = false;
+		if (type == TypeObjetDeplacable.BLOCMYSTERE
+				&& poubelle.contains(listeBlocMystere.get(indexObjetPris).getCarre())) {
+			listeBlocMystere.remove(indexObjetPris);
+			poubelleVide = false;
+		} else if (type == TypeObjetDeplacable.PISTEHORIZONTALE
+				&& poubelle.contains(listePisteHorizontale.get(indexObjetPris).getFormeAire())) {
+			listePisteHorizontale.remove(indexObjetPris);
+			poubelleVide = false;
+		} else if (type == TypeObjetDeplacable.PISTEVERTICALE
+				&& poubelle.contains(listePisteVerticale.get(indexObjetPris).getFormeAire())) {
+			listePisteVerticale.remove(indexObjetPris);
+			poubelleVide = false;
+		} else if (type == TypeObjetDeplacable.ACCELERATEUR
+				&& poubelle.contains(listeAccelerateur.get(indexObjetPris).getFormeAire())) {
+			listeAccelerateur.remove(indexObjetPris);
+			poubelleVide = false;
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEBAS
+				&& poubelle.contains(listePisteVirageBas.get(indexObjetPris).getFormeAire())) {
+			listePisteVirageBas.remove(indexObjetPris);
+			poubelleVide = false;
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEDROIT
+				&& poubelle.contains(listePisteVirageDroit.get(indexObjetPris).getFormeAire())) {
+			listePisteVirageDroit.remove(indexObjetPris);
+			poubelleVide = false;
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEGAUCHE
+				&& poubelle.contains(listePisteVirageGauche.get(indexObjetPris).getFormeAire())) {
+			listePisteVirageGauche.remove(indexObjetPris);
+			poubelleVide = false;
+		} else if (type == TypeObjetDeplacable.PISTEVIRAGEHAUT
+				&& poubelle.contains(listePisteVirageHaut.get(indexObjetPris).getFormeAire())) {
+			listePisteVirageHaut.remove(indexObjetPris);
+			poubelleVide = false;
+		}
+
 		repaint();
 	}
 
@@ -280,7 +344,11 @@ public class PanelRegroupement extends JPanel {
 	private void pisteVirageDroitDrag(MouseEvent e) {
 		if (listePisteVirageDroit.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEDROIT) {
-
+			if (poubelle.contains(pisteVirageDroit.getFormeAire())) {
+				pisteVirageDroit.setTaillePiste(30);
+			} else {
+				pisteVirageDroit.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageDroit.setX(collerX(e));
@@ -333,7 +401,11 @@ public class PanelRegroupement extends JPanel {
 	// Tan Tommy Rin
 	private void pisteVerticaleDrag(MouseEvent e) {
 		if (listePisteVerticale.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEVERTICALE) {
-
+			if (poubelle.contains(pisteVerticale.getFormeAire())) {
+				pisteVerticale.setTaillePiste(30);
+			} else {
+				pisteVerticale.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVerticale.setX(collerX(e));
@@ -357,7 +429,11 @@ public class PanelRegroupement extends JPanel {
 	private void pisteVirageHautDrag(MouseEvent e) {
 		if (listePisteVirageHaut.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEHAUT) {
-
+			if (poubelle.contains(pisteVirageHaut.getFormeAire())) {
+				pisteVirageHaut.setTaillePiste(30);
+			} else {
+				pisteVirageHaut.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageHaut.setX(collerX(e));
@@ -381,7 +457,11 @@ public class PanelRegroupement extends JPanel {
 	private void pisteVirageGaucheDrag(MouseEvent e) {
 		if (listePisteVirageGauche.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEVIRAGEGAUCHE) {
-
+			if (poubelle.contains(pisteVirageGauche.getFormeAire())) {
+				pisteVirageGauche.setTaillePiste(30);
+			} else {
+				pisteVirageGauche.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageGauche.setX(collerX(e));
@@ -404,7 +484,11 @@ public class PanelRegroupement extends JPanel {
 	// Tan Tommy Rin
 	private void pisteVirageBasDrag(MouseEvent e) {
 		if (listePisteVirageBas.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.PISTEVIRAGEBAS) {
-
+			if (poubelle.contains(pisteVirageBas.getFormeAire())) {
+				pisteVirageBas.setTaillePiste(30);
+			} else {
+				pisteVirageBas.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 			pisteVirageBas.setX(collerX(e));
@@ -428,6 +512,11 @@ public class PanelRegroupement extends JPanel {
 	private void pisteHorizontaleDrag(MouseEvent e) {
 		if (listePisteHorizontale.size() != 0 && objetSelectionne == true
 				&& type == TypeObjetDeplacable.PISTEHORIZONTALE) {
+			if (poubelle.contains(pisteHorizontale.getFormeAire())) {
+				pisteHorizontale.setTaillePiste(30);
+			} else {
+				pisteHorizontale.setTaillePiste(80);
+			}
 
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
@@ -455,7 +544,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageHaut.size(); a++) {
 				if (listePisteVirageHaut.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -484,7 +573,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageDroit.size(); a++) {
 				if (listePisteVirageDroit.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -513,7 +602,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteDeDepart.size(); a++) {
 				if (listePisteDeDepart.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -542,7 +631,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVerticale.size(); a++) {
 				if (listePisteVerticale.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -571,7 +660,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageGauche.size(); a++) {
 				if (listePisteVirageGauche.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -600,7 +689,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteVirageBas.size(); a++) {
 				if (listePisteVirageBas.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -629,7 +718,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listePisteHorizontale.size(); a++) {
 				if (listePisteHorizontale.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -658,7 +747,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listeAccelerateur.size(); a++) {
 				if (listeAccelerateur.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 
@@ -686,7 +775,7 @@ public class PanelRegroupement extends JPanel {
 		if (objetSelectionne == false) {
 			for (int a = 0; a < listeBlocMystere.size(); a++) {
 				if (listeBlocMystere.get(a).contient(e.getX(), e.getY())) {
-
+					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
 					xBlocMystere = listeBlocMystere.get(a).getCarre().getX();
@@ -776,8 +865,12 @@ public class PanelRegroupement extends JPanel {
 	// Kevin Nguyen
 	private int collerX(MouseEvent e) {
 		xPrecedent = e.getX();
+		if (type == TypeObjetDeplacable.PISTEDEDEPART) {
+			longueur = (int) (xPrecedent / tailleDuCarre) % 8 * tailleDuCarre;
+		} else {
+			longueur = (int) (xPrecedent / tailleDuCarre) % 9 * tailleDuCarre;
+		}
 
-		longueur = (int) (xPrecedent / tailleDuCarre) % 8 * tailleDuCarre;
 		return longueur;
 	}
 
@@ -913,6 +1006,14 @@ public class PanelRegroupement extends JPanel {
 
 	public void setType(TypeObjetDeplacable type) {
 		this.type = type;
+	}
+
+	public boolean isPoubelleVide() {
+		return poubelleVide;
+	}
+
+	public void setPoubelleVide(boolean poubelleVide) {
+		this.poubelleVide = poubelleVide;
 	}
 
 }

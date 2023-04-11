@@ -96,7 +96,7 @@ public class ObjetSpecial implements Dessinable {
 		// Distance entre la voiture et le trou noir
 		double r = forceApplied.module();
 
-		double fg = (trouNoir.getMasseTrouNoir() * 25) / (r * r);
+		double fg = (trouNoir.getMasseTrouNoir() * 35) / (r * r);
 		forceApplied = forceApplied.multiplie(fg);
 		voiture.setSommeDesForces(forceApplied);
 
@@ -108,32 +108,23 @@ public class ObjetSpecial implements Dessinable {
 	 * ce qui l'amene a ralentir. Selon si la touche d'accleration est activé ou
 	 * non, la valeur de cette accelération implanté change.
 	 * 
-	 * @param voiture      La voiture affectée
-	 * @param toucheActive Si la touche d'acceleration est activée
+	 * @param voiture La voiture affectée
 	 */
 	// Tan Tommy Rin
 	public void fonctionColle(Voiture voiture) {
-		if (voiture.getVitesse().module() < 5) {
-			System.out.println("0");
-		} else if (voiture.getVitesse().module() < 15) {
-			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
-			voiture.setAccel(new Vecteur2D(-5 * Math.cos(voiture.getAngle()), -5 * Math.sin(voiture.getAngle())));
-			System.out.println("1");
-		} else if (voiture.getVitesse().module() < 30) {
-			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
-			voiture.setAccel(new Vecteur2D(-10 * Math.cos(voiture.getAngle()), -10 * Math.sin(voiture.getAngle())));
-			System.out.println("2");
-		} else if (voiture.getVitesse().module() < 45) {
-			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
-			voiture.setAccel(new Vecteur2D(-20 * Math.cos(voiture.getAngle()), -19 * Math.sin(voiture.getAngle())));
-			System.out.println("3");
-		} else {
-			voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
-			voiture.setAccel(new Vecteur2D(-30 * Math.cos(voiture.getAngle()), -22 * Math.sin(voiture.getAngle())));
-			System.out.println("4");
-		}
-	
 
+		Vecteur2D forceFrottement = new Vecteur2D();
+		forceFrottement = MoteurPhysique.calculerForceFrottement(2.75, voiture.getMasseEnKg(), voiture.getAngle());
+		voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
+		if (voiture.getVitesse().module() < 0.3) {
+
+			voiture.setVitesse(new Vecteur2D(0.1, 0.1));
+
+		} else if (voiture.getVitesse().module() < 5) {
+			voiture.setSommeDesForces(new Vecteur2D(0, 0));
+		} else {
+			voiture.setSommeDesForces(forceFrottement);
+		}
 	}
 
 	/**
@@ -147,20 +138,26 @@ public class ObjetSpecial implements Dessinable {
 
 	public boolean fonctionChampignon(Voiture voiture, double tempsTotalEcoule) {
 		Champignon champignon = new Champignon(this.positionObjet, this.diametreObjet, type);
-		if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
-			champignon.fonctionChampignonActivation(voiture);
+		boolean fonctionActive = false;
+		if (voiture.getDiametre() < 75) {
+			if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
+				champignon.fonctionChampignonActivation(voiture);
 
-			return true;
-		} else {
-			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
-			voiture.setDiametre(voiture.getDiametreInitial());
+				fonctionActive = true;
+			} else {
+				voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
+				voiture.setDiametre(voiture.getDiametreInitial());
 
-			return false;
+				fonctionActive = false;
+			}
 		}
 
+		return fonctionActive;
 	}
 
 	/**
+	 * Méthode qui permet d'activer la fonction de la boule de neige sur la voiture
+	 * affecté pendant un certain temps.
 	 * 
 	 * @param voiture    la valeur de la voiture qui va être affecté
 	 * @param tempsFinal le temps total finaux qui va être écoulé

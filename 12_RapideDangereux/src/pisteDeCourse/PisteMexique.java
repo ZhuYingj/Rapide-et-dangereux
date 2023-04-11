@@ -65,12 +65,17 @@ public class PisteMexique {
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
+	// Ludovic Julien
 	public PisteMexique(int x, int y) {
 		this.x = x;
 		this.y = y;
 		creerLaGeometrie();
 	}
 
+	/**
+	 * Méthode qui permet de créer la géometrie de la piste mexique
+	 */
+	//Ludovic Julien
 	public void creerLaGeometrie() {
 		bas.add(new PisteVirageBas(x, y));
 		this.x = x + TAILLE_PISTE;

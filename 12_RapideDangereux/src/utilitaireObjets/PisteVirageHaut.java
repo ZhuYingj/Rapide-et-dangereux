@@ -96,7 +96,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(0.5f);
+		Stroke stroke = new BasicStroke(2f);
 		g2d.setStroke(stroke);
 		g2d.drawLine(x, y, x, y + (taillePiste / 3));
 		g2d.drawLine(x, y + (taillePiste / 3), x + (taillePiste / 3), y + ((taillePiste / 3) * 2));
@@ -198,7 +198,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
 	 * et la boule de neige
 	 * 
-	 * @param L'objet special de type boule de neige
+	 * @param objetSpecial L'objet special de type boule de neige
 	 */
 	// Tan Tommy Rin
 	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
@@ -306,7 +306,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
 	 * voulu
 	 * 
-	 * @param pixelsParMetreVoulu
+	 * @param pixelsParMetre le nombre de pixel par metre voulu
 	 */
 	public void setPixelsParMetre(double pixelsParMetre) {
 		this.pixelsParMetre = pixelsParMetre;

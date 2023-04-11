@@ -36,6 +36,13 @@ public class GestionnaireDeFichiersSurLeBureau {
 	private String nomFichBinComboBox = "comboBox.dat";
 
 	/**
+	 * Constructeur par défault
+	 */
+	public GestionnaireDeFichiersSurLeBureau() {
+
+	}
+
+	/**
 	 * crée un fichier binaire et y inscrit un objet regroupement (composé de
 	 * d'autres objets) Le place à un endroit spécifique sur le Bureau de
 	 * l'utilisateur
@@ -187,7 +194,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 //Tan Tommy Rin
 	public void ecrireFichierBinBureauRegroupement2(Regroupement regroupement, String nomVoulu) {
 		nomFichBinRegroupement = nomVoulu;
-		System.out.println("ici " + nomFichBinRegroupement);
+
 // chemin d'acces au dossier
 		File dossier = new File(System.getProperty("user.home"), "Desktop" + "\\" + sousDossierSurBureau);
 

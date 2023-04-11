@@ -17,7 +17,9 @@ public interface Selectionnable {
 	 * 
 	 * @param xPix Coordonn�e en x du point (exprim� en pixels)
 	 * @param yPix Coordonn�e en y du point (exprim� en pixels)
+	 * @return si le clic contient la forme
 	 */
+
 	public boolean contient(double xPix, double yPix);
 
 }

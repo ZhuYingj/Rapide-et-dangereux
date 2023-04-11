@@ -1,26 +1,28 @@
 package fenetre;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import application.Identifiants;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import application.OutilsImage;
+import java.awt.Color;
 
 /**
- * Classe qui crée la premiere fenêtre
+ * Classe qui crée la premiere fenêtre "Menu"
  * 
  * @author Ludovic Julien
  *
  */
+
 public class FenetreMenu extends JPanel {
 	private JLabel lblInfoRecue;
 	private JButton btnJouer;
@@ -29,9 +31,9 @@ public class FenetreMenu extends JPanel {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	/**
-	 * Create the panel.
+	 * Création de la fenetre.
 	 */
-
+//Ludovic Julien
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -39,19 +41,17 @@ public class FenetreMenu extends JPanel {
 	/**
 	 * Méthode qui permet la création du panel
 	 */
+	// Ludovic Julien
 	public FenetreMenu() {
-		addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-			}
-		});
+
 		setLayout(null);
 		setBounds(100, 100, 1300, 700);
 
 		JLabel lblNewLabel = new JLabel("Rapide et Dangereux");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblNewLabel.setForeground(Color.DARK_GRAY);
+		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 25));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(293, 146, 349, 75);
+		lblNewLabel.setBounds(602, 146, 297, 75);
 		add(lblNewLabel);
 
 		btnJouer = new JButton("JOUER");
@@ -60,11 +60,11 @@ public class FenetreMenu extends JPanel {
 				pcs.firePropertyChange("JOUER", 0, -1);
 			}
 		});
-		btnJouer.setBounds(411, 245, 100, 49);
+		btnJouer.setBounds(700, 245, 100, 49);
 		add(btnJouer);
 
 		btnAide = new JButton("AIDE");
-		btnAide.setBounds(411, 321, 100, 49);
+		btnAide.setBounds(700, 321, 100, 49);
 		add(btnAide);
 
 		btnQuitter = new JButton("QUITTER");
@@ -73,9 +73,18 @@ public class FenetreMenu extends JPanel {
 				System.exit(0);
 			}
 		});
-		btnQuitter.setBounds(411, 402, 100, 49);
+		btnQuitter.setBounds(700, 402, 100, 49);
 		add(btnQuitter);
 
-	}
+		JLabel lblPhoto = new JLabel("");
+		lblPhoto.setBounds(0, 0, 1600, 800);
+		add(lblPhoto);
+		
+		Image deuxVoiture = OutilsImage.lireImageEtRedimensionner("DeuxVoiture.jpg", 1600, 800);
+		if (deuxVoiture != null) {
+			lblPhoto.setIcon(new ImageIcon(deuxVoiture));
+			deuxVoiture.flush();
+		}
 
+	}
 }

@@ -9,7 +9,9 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -25,7 +27,6 @@ import fenetre.FenetreMenu;
 import fenetre.FenetreOptionMontre;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
-import fenetre.test;
 import interfaces.TypePiste;
 
 /**
@@ -39,7 +40,6 @@ import interfaces.TypePiste;
 public class AppPrincipale12 extends JFrame {
 
 	private JCheckBoxMenuItem checkBoxModeNonScientifique;
-	private JPanel contentPane;
 
 	private int nombrePiste = 1;
 	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
@@ -51,7 +51,11 @@ public class AppPrincipale12 extends JFrame {
 
 	/**
 	 * Lancement de l'application.
+	 * 
+	 * @param args Liste de String
 	 */
+	// Alexis Pineda-Alvarado
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -113,18 +117,17 @@ public class AppPrincipale12 extends JFrame {
 
 		ClassementParPiste fenRecord = new ClassementParPiste();
 
-		test fenTest = new test();
 		ajouterModeEditeurComboBox(fenEditeur);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1350, 800);
+		setBounds(100, 100, 1600, 800);
 		setTitle("Rapide et Dangereux");
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu mnNewMenu = new JMenu("New menu");
-		menuBar.add(mnNewMenu);
+		JMenu mnMenu = new JMenu("Menu");
+		menuBar.add(mnMenu);
 
 		setContentPane(fenMenu);
 
@@ -203,7 +206,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionChangeJeuCourse(evt, fenOptionMontre, fenTest);
+				actionChangeJeuCourse(evt, fenOptionMontre, fenJeuScience, fenSansScience);
 				actionRetourOptionCCM(evt, fenOptionMontre, fenModeJeu);
 			}
 		});
@@ -212,18 +215,28 @@ public class AppPrincipale12 extends JFrame {
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				if (checkBoxModeNonScientifique.isSelected()) {
-					actionChangeDesTypeJeu(fenSansScience, fenJeuScience);
-
-				} else {
-					actionRetourDesTypeJeu(fenSansScience, fenJeuScience);
-
-				}
+				actionCheckBox(fenSansScience, fenJeuScience);
 			}
 		});
-		mnNewMenu.add(checkBoxModeNonScientifique);
+		mnMenu.add(checkBoxModeNonScientifique);
 
+	}
+
+	/**
+	 * Méthode qui permet de changer de fenetre selon le check box
+	 * 
+	 * @param jeuSansScience La fenetre de jeu non scientifique
+	 * @param fenJeuScience  La fenetre de jeu scientifique
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionCheckBox(FenetreJeuSansScientifique jeuSansScience, FenetreJeuScientifique fenJeuScience) {
+		if (checkBoxModeNonScientifique.isSelected()) {
+			actionChangeDesTypeJeu(jeuSansScience, fenJeuScience);
+
+		} else {
+			actionRetourDesTypeJeu(jeuSansScience, fenJeuScience);
+
+		}
 	}
 
 	/**
@@ -247,10 +260,15 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenJeuScience);
 			checkBoxModeNonScientifique.setEnabled(true);
 			pushingP(fenJeuScience);
+
 			break;
-		case "MASSE":
+		case "MASSE1":
 			fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
+			break;
+		case "MASSE2":
+			fenJeuScience.getZoneAnimPhysique().setVoitureMasse2((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setVoitureMasse2((double) evt.getNewValue());
 			break;
 		case "VITESSEMAXFACILE":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
@@ -270,13 +288,26 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
 			break;
-			// Ludovic Julien
-			//permet le changement de couleur des voiture dans la zone d'annimation
+		// Ludovic Julien
+		// permet le changement de couleur des voiture dans la zone d'annimation
 		case "SKIN":
-			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setSkin((Color) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setSkin((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setSkin((Color) evt.getNewValue());
 			break;
 		case "SKIN2":
-			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setSkin((Color) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setSkin((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setSkin((Color) evt.getNewValue());
+			break;
+		case "NBBOITE":
+			Double newData = new Double((double) evt.getNewValue());
+			int valeur = newData.intValue();
+
+			fenJeuScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
+			fenSansScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
 			break;
 		case "RECORD":
 			fenRecord.setVisible(true);
@@ -364,9 +395,10 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui permet de retourner au panel précédent selon des levés
 	 * d'évènements liés entre la fenetre du mod de jeu et celui du mode éditeur
 	 * 
-	 * @param evt        evenement
-	 * @param fenModeJeu la fenêtre du mode de jeu a choisir qui est activé
-	 * @param fenEditeur fenêtre du mode editeur
+	 * @param evt           evenement
+	 * @param fenModeJeu    la fenêtre du mode de jeu a choisir qui est activé
+	 * @param fenEditeur    fenêtre du mode editeur
+	 * @param fenJeuScience la fenêtre du jeu scientifique
 	 */
 // Alexis Pineda-Alvarado
 	public void actionRetourModeJeu1(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreEditeur fenEditeur,
@@ -429,6 +461,7 @@ public class AppPrincipale12 extends JFrame {
 			fenOptions.setVisible(true);
 			setContentPane(fenOptions);
 			break;
+
 		}
 	}
 
@@ -459,7 +492,7 @@ public class AppPrincipale12 extends JFrame {
 	 * 
 	 * @param evt           evenement
 	 * @param fenJeuScience fenêtre du jeu avec les paramètres scientifiques
-	 * @param fenOptions    fenêtre des options du jeu qui va être activé
+	 * @param fenModeJeu    la fenêtre du mode de jeu a choisir qui va être acrivé
 	 */
 // Alexis Pineda-Alvarado
 	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience,
@@ -489,9 +522,9 @@ public class AppPrincipale12 extends JFrame {
 	 * d'évènements liés entre la fenetre du jeu sans les parametres scientifique et
 	 * celui de la fenetre des options
 	 * 
-	 * @param evt               evenement
-	 * @param fenSansScience    fenêtre du jeu sans les paramètres scientifiques
-	 * @param fenOptionsfenêtre des options du jeu qui va être activé
+	 * @param evt            evenement
+	 * @param fenSansScience fenêtre du jeu sans les paramètres scientifiques
+	 * @param fenOptions     la fenetre des options du jeu qui va être activé
 	 */
 // Alexis Pineda-Alvarado
 	public void actionRetourOptions2(PropertyChangeEvent evt, FenetreJeuSansScientifique fenSansScience,
@@ -560,6 +593,7 @@ public class AppPrincipale12 extends JFrame {
 		switch (evt.getPropertyName()) {
 		case "COURSE CONTRE LA MONTRE":
 			fenOptionMontre.setVisible(true);
+
 			fenModeJeu.setVisible(false);
 			setContentPane(fenOptionMontre);
 			break;
@@ -573,17 +607,22 @@ public class AppPrincipale12 extends JFrame {
 	 * @param evt             evenement
 	 * @param fenOptionMontre fenêtre des paramètres a choisir dans le mode course
 	 *                        contre la montre
-	 * @param fenJeuMontre    fenêtre du jeu avec les paramètres scientifiques pour
-	 *                        le mode de jeu course contre la montre
+	 * @param fenScience      fenetre avec le mode scientifique
 	 */
 // Alexis Pineda-Alvarado
-	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre, test fenTest) {
+	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
+			FenetreJeuScientifique fenScience, FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
 		case "COMMENCER COURSE MONTRE":
 			fenOptionMontre.setVisible(false);
-			fenTest.setVisible(true);
-			setContentPane(fenTest);
+			fenScience.setVisible(true);
+			setContentPane(fenScience);
 			break;
+		case "TYPEPISTE":
+			fenScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
+			fenScience.getZoneAnimPhysique().restartPosPisteDepart();
+			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
 
 		}
 	}
@@ -597,6 +636,7 @@ public class AppPrincipale12 extends JFrame {
 	 *                        contre la montre
 	 * @param fenModeJeu      fenêtre de la selection de mode de jeu
 	 */
+	// Alexis Pineda-Alvarado
 	public void actionRetourOptionCCM(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
 			ModeDeJeu fenModeJeu) {
 		switch (evt.getPropertyName()) {
@@ -624,7 +664,7 @@ public class AppPrincipale12 extends JFrame {
 					JOptionPane.showMessageDialog(null,
 							"Bonjour dans RAPIDE ET DANGEREUX! \nle but de ce jeux et de battre votre combattant"
 									+ " \nles contrôles du jeu sont :  \n↑ : pour avancer la voiture"
-									+ " \n� et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture"
+									+ " \n� et → : pour tourner a gauche et a droite \n↓ : pour ralentir la voiture"
 									+ "\nLes boîtes jaunes choisisent un effet mis sur la voiture au hasard lorsque vous la toucher");
 				}
 			}

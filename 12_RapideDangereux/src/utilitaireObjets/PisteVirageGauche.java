@@ -87,8 +87,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	/**
 	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
 	 * 
-	 * @param x position en x de la piste
-	 * @param y position en y de la piste
+	 * @param g2d Composant graphique
 	 */
 	// Ludovic Julien
 	@Override
@@ -97,7 +96,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(0.5f);
+		Stroke stroke = new BasicStroke(2f);
 		g2d.setStroke(stroke);
 		g2d.drawLine(x + 1, y, x + (taillePiste / 3), y);
 		g2d.drawLine(x + (taillePiste / 3), y, x + ((taillePiste / 3) * 2), y + (taillePiste / 3));
@@ -252,7 +251,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
 	 * et la boule de neige
 	 * 
-	 * @param L'objet special de type boule de neige
+	 * @param objetSpecial L'objet special de type boule de neige
 	 */
 	// Tan Tommy Rin
 	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {

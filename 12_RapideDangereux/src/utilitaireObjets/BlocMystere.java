@@ -43,6 +43,7 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	 * @param diametre diametre de la voiture
 	 * @param pos      position de la voiture
 	 */
+	// Tan Tommy Rin
 	public BlocMystere(double diametre, Vecteur2D pos) {
 		this.diametre = diametre;
 		this.position = pos;
@@ -52,7 +53,7 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	/**
 	 * Création de la forme de la boite mystere à l'aide d'un carré
 	 */
-
+	// Tan Tommy Rin
 	private void creerLaGeometrie() {
 		carre = new Rectangle2D.Double(position.getX(), position.getY(), diametre, diametre);
 
@@ -68,7 +69,7 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	 * @return true ou false dependant de la collision de la voiture avec la boite
 	 *         mystere
 	 */
-
+	// Tan Tommy Rin
 	public boolean enCollisionAvecVoiture(Voiture voiture) {
 		AffineTransform mat = new AffineTransform();
 		shapeCarre = mat.createTransformedShape(carre);
@@ -99,12 +100,14 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	/**
 	 * Méthode qui permet de choisir quel objet sera dans la boite mystere à l'aide
 	 * de probabilité
+	 * 
+	 * @param voiture La voiture qui prend le bloc mystere
 	 */
-
+	// Tan Tommy Rin
 	public void objetRandomChoisi(Voiture voiture) {
 
 		// Crée nombre au hasard de 0 - 1
-		double nombreRandom = 0.7;
+		double nombreRandom = 0.1;
 		// 20 % de chance que ce soit un champignon
 		if (nombreRandom < 0.2) {
 			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.CHAMPIGNON);
@@ -136,8 +139,10 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 
 	/**
 	 * Méthode qui permet de dessiner sur la zone d'animation à l'aide du g2d
+	 * 
+	 * @param g2d Le composant graphique
 	 */
-
+	// Tan Tommy Rin
 	@Override
 	public void dessiner(Graphics2D g2d) {
 		gTempo = (Graphics2D) g2d.create();
@@ -202,7 +207,7 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	/**
 	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
 	 */
-
+	// Tan Tommy Rin
 	@Override
 	public boolean contient(double xPix, double yPix) {
 		if (carre.contains(xPix, yPix)) {

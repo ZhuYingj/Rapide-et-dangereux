@@ -46,7 +46,7 @@ public class PanelObjet extends JPanel {
 	/**
 	 * Méthode permettant de dessiner sur la fenetre
 	 */
-
+//Tan Tommy Rin
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 

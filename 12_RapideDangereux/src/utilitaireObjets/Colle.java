@@ -45,7 +45,7 @@ public class Colle implements Dessinable {
 	 * @param pos      La position en vecteur2D
 	 * @param diametre Le diametre de la colle
 	 */
-
+	// Par Alexis Pineda-Alvarado
 	public Colle(Vecteur2D pos, double diametre) {
 		this.diametre = diametre;
 		this.position = pos;
@@ -59,7 +59,7 @@ public class Colle implements Dessinable {
 	 * 
 	 * @param g2dcop Le composant graphique
 	 */
-
+	// Alexis Pineda-Alvarado
 	@Override
 
 	public void dessiner(Graphics2D g2dcop) {
@@ -107,7 +107,7 @@ public class Colle implements Dessinable {
 	/**
 	 * Méthode permetant de créer la géométrie de cet objet
 	 */
-
+	// Alexis Pineda-Alvarado
 	private void creerLaGeometrie() {
 
 		colle = new Ellipse2D.Double(position.getX(), position.getY(), taillePiste, taillePiste);
@@ -117,9 +117,9 @@ public class Colle implements Dessinable {
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
 	 * voulu
 	 * 
-	 * @param pixelsParMetreVoulu
+	 * @param pixelsParMetreVoulu le nombre de pixel par metre voulu
 	 */
-	// Par Alexis Pineda-Alvarado
+	//  Alexis Pineda-Alvarado
 	public void setPixelsParMetre(double pixelsParMetreVoulu) {
 		this.pixelsParMetre = pixelsParMetreVoulu;
 

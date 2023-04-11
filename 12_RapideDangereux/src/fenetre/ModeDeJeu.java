@@ -2,16 +2,24 @@ package fenetre;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import application.OutilsImage;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import dessin.ZoneAnimPhysique;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Classe qui crée la fenêtre pour choisir les modes de jeux
@@ -27,13 +35,15 @@ public class ModeDeJeu extends JPanel {
 	private JLabel lblTitre;
 	private JButton btnRetour;
 
-	// ajouter le support pour lancer des evenements de type PropertyChange
+	/** ajouter le support pour lancer des evenements de type PropertyChange **/
+//	Alexis Pineda-Alvarado
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private JLabel lblNewLabel;
 
 	/**
-	 * Create the panel.
+	 * Création de la fenetre
 	 */
-
+//	Alexis Pineda-Alvarado
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -41,10 +51,25 @@ public class ModeDeJeu extends JPanel {
 	/**
 	 * Méthode qui permet la création de la fenetre mode de jeu
 	 */
-
+//	Alexis Pineda-Alvarado
 	public ModeDeJeu() {
+		setBackground(Color.BLACK);
+
 		setLayout(null);
 		btnMonde = new JButton("MONDE");
+		btnMonde.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				if (btnMonde.contains(e.getX(), e.getY())) {
+					URL urlPlanete = getClass().getClassLoader().getResource("earth.gif");
+					ImageIcon planete = new ImageIcon(urlPlanete);
+					lblNewLabel.setIcon(planete);
+				}
+				repaint();
+			}
+
+		});
 		btnMonde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("MONDE", 0, -1);
@@ -52,33 +77,54 @@ public class ModeDeJeu extends JPanel {
 		});
 
 		btnMonde.setForeground(Color.BLACK);
-		btnMonde.setBounds(411, 245, 100, 49);
+		btnMonde.setBounds(700, 245, 100, 49);
 		add(btnMonde);
 
 		btnCourseMontre = new JButton("COURSE CONTRE LA MONTRE");
+		btnCourseMontre.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (btnCourseMontre.contains(e.getX(), e.getY())) {
+					URL urlPlanete = getClass().getClassLoader().getResource("clock.gif");
+					ImageIcon planete = new ImageIcon(urlPlanete);
+					lblNewLabel.setIcon(planete);
+				}
+			}
+		});
 		btnCourseMontre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("COURSE CONTRE LA MONTRE", 0, -1);
 			}
 		});
 		btnCourseMontre.setForeground(Color.BLACK);
-		btnCourseMontre.setBounds(346, 319, 227, 49);
+		btnCourseMontre.setBounds(643, 323, 227, 49);
 		add(btnCourseMontre);
 
 		btnEditeur = new JButton("EDITEUR");
+		btnEditeur.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (btnEditeur.contains(e.getX(), e.getY())) {
+					URL urlPlanete = getClass().getClassLoader().getResource("editeur.gif");
+					ImageIcon planete = new ImageIcon(urlPlanete);
+					lblNewLabel.setIcon(planete);
+				}
+			}
+		});
 		btnEditeur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("EDITEUR", 0, -1);
 			}
 		});
 		btnEditeur.setForeground(Color.BLACK);
-		btnEditeur.setBounds(411, 402, 100, 49);
+		btnEditeur.setBounds(700, 402, 100, 49);
 		add(btnEditeur);
 
 		lblTitre = new JLabel("Mode de jeu");
-		lblTitre.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 30));
+		lblTitre.setForeground(Color.WHITE);
+		lblTitre.setFont(new Font("Arial Black", Font.PLAIN, 30));
 		lblTitre.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitre.setBounds(293, 146, 349, 75);
+		lblTitre.setBounds(568, 144, 349, 75);
 		add(lblTitre);
 
 		btnRetour = new JButton("Retour");
@@ -89,5 +135,11 @@ public class ModeDeJeu extends JPanel {
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
+
+		lblNewLabel = new JLabel("");
+
+		lblNewLabel.setBounds(0, 0, 1600, 800);
+		add(lblNewLabel);
+
 	}
 }

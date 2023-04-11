@@ -29,6 +29,8 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 
+	
+
 	/** La position en x du mure de haut **/
 	private int murGauche;
 
@@ -173,7 +175,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
 	 * et la boule de neige
 	 * 
-	 * @param L'objet special de type boule de neige
+	 * @param objetSpecial L'objet special de type boule de neige
 	 */
 	// Tan Tommy Rin
 	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
@@ -220,7 +222,9 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	public boolean isEnContactAvecColle() {
 		return enContactAvecColle;
 	}
-
+	public void setTaillePiste(int taillePiste) {
+		this.taillePiste = taillePiste;
+	}
 	public void setEnContactAvecColle(boolean enContactAvecColle) {
 		this.enContactAvecColle = enContactAvecColle;
 	}

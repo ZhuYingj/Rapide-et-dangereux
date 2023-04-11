@@ -1,7 +1,10 @@
 package utilitaireObjets;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -157,50 +160,63 @@ public class Regroupement implements Dessinable, Serializable {
 			}
 		}
 		listePisteDeDepart.get(0).getVoiture2().avancerUnPas(deltaT);
+		if (regroupementBoiteMystere.size() != 0) {
+			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
 
-		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
+				if (regroupementBoiteMystere.get(a)
+						.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
+					// Si le champignon etait en fonction et un autre objet a été pris, on remet le
+					// diametre et masse aux valeurs initiales.
+					listePisteDeDepart.get(0).getVoiture()
+							.setMasseEnKg(listePisteDeDepart.get(0).getVoiture().getMasseEnKgInitial());
+					listePisteDeDepart.get(0).getVoiture()
+							.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
+					objSpecial = regroupementBoiteMystere.get(a).getObjetSpecial();
+					boutonAppuye = false;
+					objSpecial.setTempsTemporaire(tempsTemp);
+					tempsTemp = tempsTotalEcoule;
+					regroupementBoiteMystere.remove(a).getObjetSpecial();
 
-			if (regroupementBoiteMystere.get(a)
-					.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
+					enContactAvecColle = false;
+					collePisteHorizontale = false;
+					collePisteVerticale = false;
+					collePisteVirageBas = false;
+					collePisteVirageDroit = false;
+					collePisteVirageHaut = false;
+					collePisteVirageGauche = false;
+					collePisteDepart = false;
 
-				objSpecial = regroupementBoiteMystere.get(a).getObjetSpecial();
-				boutonAppuye = false;
-				objSpecial.setTempsTemporaire(tempsTemp);
-				tempsTemp = tempsTotalEcoule;
-				regroupementBoiteMystere.remove(a).getObjetSpecial();
+					break;
+				}
 
-				enContactAvecColle = false;
-				collePisteHorizontale = false;
-				collePisteVerticale = false;
-				collePisteVirageBas = false;
-				collePisteVirageDroit = false;
-				collePisteVirageHaut = false;
-				collePisteVirageGauche = false;
-				collePisteDepart = false;
+				if (regroupementBoiteMystere.get(a)
+						.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
+					// Si le champignon etait en fonction et un autre objet a été pris, on remet le
+					// diametre et masse aux valeurs initiales.
+					listePisteDeDepart.get(0).getVoiture()
+							.setMasseEnKg(listePisteDeDepart.get(0).getVoiture2().getMasseEnKgInitial());
+					listePisteDeDepart.get(0).getVoiture()
+							.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
+					boutonAppuye2 = false;
+					objSpecial2 = regroupementBoiteMystere.get(a).getObjetSpecial();
+					objSpecial2.setTempsTemporaire(tempsTemp2);
+					tempsTemp2 = tempsTotalEcoule;
+					regroupementBoiteMystere.remove(a).getObjetSpecial();
 
-				break;
-			}
+					enContactAvecColle2 = false;
+					collePisteHorizontale2 = false;
+					collePisteVerticale2 = false;
+					collePisteVirageBas2 = false;
+					collePisteVirageDroit2 = false;
+					collePisteVirageHaut2 = false;
+					collePisteVirageGauche2 = false;
+					collePisteDepart2 = false;
+					break;
+				}
 
-			if (regroupementBoiteMystere.get(a)
-					.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
-				boutonAppuye2 = false;
-				objSpecial2 = regroupementBoiteMystere.get(a).getObjetSpecial();
-				objSpecial2.setTempsTemporaire(tempsTemp2);
-				tempsTemp2 = tempsTotalEcoule;
-				regroupementBoiteMystere.remove(a).getObjetSpecial();
+			} // Fin for loop
+		}
 
-				enContactAvecColle2 = false;
-				collePisteHorizontale2 = false;
-				collePisteVerticale2 = false;
-				collePisteVirageBas2 = false;
-				collePisteVirageDroit2 = false;
-				collePisteVirageHaut2 = false;
-				collePisteVirageGauche2 = false;
-				collePisteDepart2 = false;
-				break;
-			}
-
-		} // Fin for loop
 		if (regroupementBoiteMystere.size() == 0) {
 			regroupementBoiteMystere = null;
 
@@ -223,18 +239,14 @@ public class Regroupement implements Dessinable, Serializable {
 
 		// Pour v1
 		if (objSpecial != null) {
+
 			if (objSpecial.getType() == TypeObjetSpecial.CHAMPIGNON) {
+
 				objSpecial.setTempsTemporaire(tempsTemp);
 
 				objSpecial.fonctionChampignon(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule);
 
 			} else if (objSpecial.getType() == TypeObjetSpecial.BOULEDENEIGE) {
-				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
-				// diametre et masse aux valeurs initiales.
-				listePisteDeDepart.get(0).getVoiture()
-						.setMasseEnKg(listePisteDeDepart.get(0).getVoiture().getMasseEnKgInitial());
-				listePisteDeDepart.get(0).getVoiture()
-						.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
 
 				// Si la boule de neige est lancé on avance d'un pas.
 
@@ -271,14 +283,6 @@ public class Regroupement implements Dessinable, Serializable {
 
 			else if (objSpecial.getType() == TypeObjetSpecial.TROUNOIR) {
 
-				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
-				// diametre et masse aux valeurs initiales.
-
-				listePisteDeDepart.get(0).getVoiture()
-						.setMasseEnKg(listePisteDeDepart.get(0).getVoiture().getMasseEnKgInitial());
-				listePisteDeDepart.get(0).getVoiture()
-						.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
-
 				// VOITURE 1 ET 2 POUR OBJET1
 				if (tempsTemp + 15 > tempsTotalEcoule) {
 					if (objSpecial.getTrouNoir().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
@@ -295,18 +299,13 @@ public class Regroupement implements Dessinable, Serializable {
 				}
 
 			} else if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
-				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
-				// diametre et masse aux valeurs initiales.
-				listePisteDeDepart.get(0).getVoiture()
-						.setMasseEnKg(listePisteDeDepart.get(0).getVoiture().getMasseEnKgInitial());
-				listePisteDeDepart.get(0).getVoiture()
-						.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
+
 				// Affecte les 2 voitures
-				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
-
-					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
-
-				}
+//				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
+//
+//					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
+//
+//				}
 
 				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
@@ -324,12 +323,6 @@ public class Regroupement implements Dessinable, Serializable {
 				objSpecial2.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule);
 
 			} else if (objSpecial2.getType() == TypeObjetSpecial.BOULEDENEIGE) {
-				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
-				// diametre et masse aux valeurs initiales.
-				listePisteDeDepart.get(0).getVoiture2()
-						.setMasseEnKg(listePisteDeDepart.get(0).getVoiture2().getMasseEnKgInitial());
-				listePisteDeDepart.get(0).getVoiture2()
-						.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
 
 				// Si la boule de neige est lancé on avance d'un pas.
 
@@ -365,14 +358,6 @@ public class Regroupement implements Dessinable, Serializable {
 			} // Fin condition pour le type "Boule de neige"
 			else if (objSpecial2.getType() == TypeObjetSpecial.TROUNOIR) {
 
-				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
-				// diametre et masse aux valeurs initiales.
-
-				listePisteDeDepart.get(0).getVoiture2()
-						.setMasseEnKg(listePisteDeDepart.get(0).getVoiture2().getMasseEnKgInitial());
-				listePisteDeDepart.get(0).getVoiture2()
-						.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
-
 				// VOITURE 1 ET 2 POUR OBJET1
 				if (tempsTemp2 + 6 > tempsTotalEcoule) {
 
@@ -391,22 +376,17 @@ public class Regroupement implements Dessinable, Serializable {
 				}
 
 			} else if (objSpecial2.getType() == TypeObjetSpecial.COLLE) {
-				// Si le champignon etait en fonction et un autre objet a été pris, on remet le
-				// diametre et masse aux valeurs initiales.
-				listePisteDeDepart.get(0).getVoiture2()
-						.setMasseEnKg(listePisteDeDepart.get(0).getVoiture2().getMasseEnKgInitial());
-				listePisteDeDepart.get(0).getVoiture2()
-						.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
+
 				// Affecte les 2 voitures
 				if (objSpecial2.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
 
-					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
+//					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
 
 				}
 
 				if (objSpecial2.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
-					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture());
+//					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture());
 
 				}
 			}
@@ -435,7 +415,7 @@ public class Regroupement implements Dessinable, Serializable {
 				regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 						new Vecteur2D(
 								listePisteDeDepart.get(0).getX() + petiteDeviation
-										+ listePisteDeDepart.get(0).getTaillePiste() / 4,
+										+ listePisteDeDepart.get(0).getTaillePiste(),
 								listePisteDeDepart.get(0).getY() + petiteDeviation
 										+ listePisteDeDepart.get(0).getTaillePiste() / 2)));
 
@@ -454,8 +434,9 @@ public class Regroupement implements Dessinable, Serializable {
 
 				} else {
 
-					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
-							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+					regroupementBoiteMystere
+							.add(new BlocMystere(diametreBoite, new Vecteur2D(listePisteDeDepart.get(0).getX() / 2 + 40,
+									listePisteDeDepart.get(0).getY() / 2 + 40)));
 				}
 
 			}
@@ -473,8 +454,9 @@ public class Regroupement implements Dessinable, Serializable {
 											+ listePisteVerticale.get(nombreRandomPiste).getTaillePiste() / 2)));
 				} else {
 
-					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
-							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+					regroupementBoiteMystere
+							.add(new BlocMystere(diametreBoite, new Vecteur2D(listePisteDeDepart.get(0).getX() / 2 - 30,
+									listePisteDeDepart.get(0).getY() / 2 - 30)));
 				}
 
 			}
@@ -842,11 +824,12 @@ public class Regroupement implements Dessinable, Serializable {
 		for (int i = 0; i < listeAccelerateur.size(); i++) {
 			listeAccelerateur.get(i).dessiner(g2dCopie);
 		}
+		if (regroupementBoiteMystere.size() != 0) {
+			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
 
-		for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
+				regroupementBoiteMystere.get(a).dessiner(g2dCopie);
 
-			regroupementBoiteMystere.get(a).dessiner(g2dCopie);
-
+			}
 		}
 
 		if (objSpecial != null) {
@@ -894,6 +877,17 @@ public class Regroupement implements Dessinable, Serializable {
 			}
 
 		}
+		g2dCopie.setStroke(new BasicStroke(5));
+
+		g2dCopie.setColor(Color.WHITE);
+		g2dCopie.drawString("Voiture1",
+				(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getX()
+						- listePisteDeDepart.get(0).getVoiture().getDiametre() / 2),
+				(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getY()));
+		g2dCopie.drawString("Voiture2",
+				(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getX()
+						- listePisteDeDepart.get(0).getVoiture2().getDiametre() / 2),
+				(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
 	}
 
 	/**

@@ -32,6 +32,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 
+	
 	/** la position en x de depart que l'objet piste qui vas etre creer **/
 	private int x;
 
@@ -90,7 +91,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);
-		Stroke stroke = new BasicStroke(0.5f);
+		Stroke stroke = new BasicStroke(2f);
 		g2d.setStroke(stroke);
 		g2d.drawLine(x + ((taillePiste / 3) * 2), y, x + taillePiste - 1, y);
 		g2d.drawLine(x + ((taillePiste / 3)), y + ((taillePiste / 3)), x + ((taillePiste / 3) * 2), y);
@@ -219,7 +220,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	 * Méthode permettant de calculer la collision avec les murs du morceau de piste
 	 * et la boule de neige
 	 * 
-	 * @param L'objet special de type boule de neige
+	 * @param objetSpecial L'objet special de type boule de neige
 	 */
 	// Tan Tommy Rin
 
@@ -348,6 +349,9 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 
 	public int getMurBas() {
 		return murBas;
+	}
+	public void setTaillePiste(int taillePiste) {
+		this.taillePiste = taillePiste;
 	}
 
 	public void setMurBas(int murBas) {

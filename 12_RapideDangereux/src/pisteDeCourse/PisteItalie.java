@@ -57,6 +57,7 @@ public class PisteItalie {
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
+	// Ludovic Julien
 	public PisteItalie(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -66,6 +67,7 @@ public class PisteItalie {
 	/**
 	 * Méthode qui crée le circuit complet
 	 */
+	// Ludovic Julien
 	public void creerLaGeometrie() {
 		bas.add(new PisteVirageBas(x, y));
 		this.x = x + taillePiste;
@@ -213,7 +215,7 @@ public class PisteItalie {
 
 	}
 
-	// Kevin Nguyen
+	
 
 	public ArrayList<PisteDeDepart> getDepart() {
 		return depart;
