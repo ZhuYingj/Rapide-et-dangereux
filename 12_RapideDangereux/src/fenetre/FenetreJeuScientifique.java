@@ -397,7 +397,7 @@ public class FenetreJeuScientifique extends JPanel {
 		panelObjetEtGraphique.add(progressBarFroce);
 
 		ZoneVitesse zoneVitesse = new ZoneVitesse();
-		zoneVitesse.setBounds(500, -33, 250, 274);
+		zoneVitesse.setBounds(0, -33, 250, 274);
 		panelObjetEtGraphique.add(zoneVitesse);
 		
 		ZoneAcceleration zoneAcceleration = new ZoneAcceleration();
@@ -405,9 +405,9 @@ public class FenetreJeuScientifique extends JPanel {
 		panelObjetEtGraphique.add(zoneAcceleration);
 		
 
-		ZoneVitesse zoneVitesse2 = new ZoneVitesse();
-		zoneVitesse2.setBounds(0, -33, 250, 274);
-		panelObjetEtGraphique.add(zoneVitesse2);
+//		ZoneVitesse zoneVitesse2 = new ZoneVitesse();
+//		zoneVitesse2.setBounds(500, -33, 250, 274);
+//		panelObjetEtGraphique.add(zoneVitesse2);
 
 		Timer timerVitesse = new Timer(50, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {

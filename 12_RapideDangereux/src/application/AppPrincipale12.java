@@ -173,10 +173,16 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience);
+				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience, fenRecord);
 			}
 		});
 
+		fenRecord.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				actionfenRecord(evt, fenOptions, fenRecord);
+			}
+		});
+		
 		fenJeuScience.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionRetourOptions(evt, fenJeuScience, fenModeJeu);
@@ -201,6 +207,7 @@ public class AppPrincipale12 extends JFrame {
 				actionRetourOptionCCM(evt, fenOptionMontre, fenModeJeu);
 			}
 		});
+		
 
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
@@ -231,7 +238,7 @@ public class AppPrincipale12 extends JFrame {
 
 // Tan Tommy Rin
 	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
-			FenetreJeuSansScientifique fenSansScience) {
+			FenetreJeuSansScientifique fenSansScience, ClassementParPiste fenRecord) {
 		switch (evt.getPropertyName()) {
 
 		case "COMMENCER!":
@@ -271,8 +278,25 @@ public class AppPrincipale12 extends JFrame {
 		case "SKIN2":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setSkin((Color) evt.getNewValue());
 			break;
+		case "RECORD":
+			fenRecord.setVisible(true);
+		fenOptions.setVisible(false);
+		setContentPane(fenRecord);
+			break;
 		}
 	}
+	
+	private void actionfenRecord(PropertyChangeEvent evt, JeuOptions fenOptions, ClassementParPiste fenRecord) {
+		switch (evt.getPropertyName()) {
+		case "QUITTER":
+			fenOptions.setVisible(true);
+			fenRecord.setVisible(false);
+			setContentPane(fenOptions);
+			break;
+		}
+		
+	}
+	
 
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés

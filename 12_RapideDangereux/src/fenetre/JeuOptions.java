@@ -51,8 +51,8 @@ public class JeuOptions extends JPanel {
 	private int indexCouleur = 0;
 
 	private int indexCouleur2 = 0;
-    private Color[] couleurs = {Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE};
-    private Color[] couleurs2 = {Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE};
+    private Color[] couleurs = {Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.WHITE};
+    private Color[] couleurs2 = {Color.WHITE, Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE};
 
 
 	/**
@@ -80,6 +80,9 @@ public class JeuOptions extends JPanel {
 		zoneApercupiste.setBounds(0, 0, 700, 439);
 		PanelApercu.add(zoneApercupiste);
 
+		
+		//Ludovic Julien
+		//permet de changer l'image de la piste appercu
 		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");
 		// Icon icone = new ImageIcon(drapeuxMexique);
 		JButton btnMexique = new JButton("Mexique");
@@ -95,6 +98,8 @@ public class JeuOptions extends JPanel {
 			}
 		});
 		
+		//Ludovic Julien
+		//permet de changer l'image de la piste appercu
 		JButton btnCanada = new JButton("Canada");
 		btnCanada.setBounds(307, 77, 126, 78);
 		add(btnCanada);
@@ -107,6 +112,8 @@ public class JeuOptions extends JPanel {
 			}
 		});
 
+		//Ludovic Julien
+		//permet de changer l'image de la piste appercu
 		JButton btnItalie = new JButton("Italie");
 		btnItalie.setBounds(474, 77, 126, 78);
 		add(btnItalie);
@@ -215,7 +222,7 @@ public class JeuOptions extends JPanel {
 				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 				pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
 
-
+				
 				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 
 			}
@@ -228,6 +235,8 @@ public class JeuOptions extends JPanel {
 		panel_V1.setBounds(967, 77, 143, 90);
 		add(panel_V1);
 
+		//Ludovic Julien
+		//permet de changer la couleur du panel et de la voiture
 		JButton btnGauche = new JButton("<");
 		btnGauche.setBounds(891, 116, 55, 23);
 		btnGauche.addActionListener(new ActionListener() {
@@ -241,11 +250,11 @@ public class JeuOptions extends JPanel {
                 panel_V1.setBackground(couleurs[indexCouleur]);
             }
         });
-
 		add(btnGauche);
-
+		
+		//Ludovic Julien
+		//permet de changer la couleur du panel et de la voiture
 		JButton btnDroite = new JButton(">");
-
 		btnDroite.setBounds(1123, 116, 55, 23);
 		  btnDroite.addActionListener(new ActionListener() {
 	            @Override
@@ -285,6 +294,9 @@ public class JeuOptions extends JPanel {
 		lblNewLabel_1.setBounds(967, 200, 143, 13);
 		add(lblNewLabel_1);
 		
+		
+		//Ludovic Julien
+		//permet de changer la couleur du panel et de la voiture
 		JButton btnGauche1 = new JButton("<");
 		btnGauche1.setBounds(902, 264, 55, 23);
 		btnGauche1.addActionListener(new ActionListener() {
@@ -299,6 +311,8 @@ public class JeuOptions extends JPanel {
         });
 		add(btnGauche1);
 		
+		//Ludovic Julien
+		//permet de changer la couleur du panel et de la voiture
 		JButton btnDroite1 = new JButton(">");
 		btnDroite1.setBounds(1123, 264, 55, 23);
 		btnDroite1.addActionListener(new ActionListener() {
@@ -313,6 +327,8 @@ public class JeuOptions extends JPanel {
         });
 		add(btnDroite1);
 		
+		//Ludovic Julien
+		//permet d'afficher le classement par piste
 		JButton btnRecorsPiste = new JButton("Records par piste !");
 		btnRecorsPiste.setForeground(new Color(0, 0, 0));
 		btnRecorsPiste.setBackground(Color.CYAN);
