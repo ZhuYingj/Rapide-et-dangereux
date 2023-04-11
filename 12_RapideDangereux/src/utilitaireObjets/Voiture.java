@@ -54,6 +54,7 @@ public class Voiture implements Dessinable, Serializable {
 	private double vitesseMaxSelonNiveau;
 	/** Le diametre de la voiture initial **/
 	private double diametreInitial;
+	private double nombreToursFaits = 0;
 
 	public static ArrayList<Double> vitessesParSeconde;
 
@@ -400,7 +401,10 @@ public class Voiture implements Dessinable, Serializable {
 	 * @throws Exception
 	 */
 	// Kevin Nguyen
+
 	public void collisionEntreVoiture(Voiture voiture1) throws Exception {
+
+	
 
 		double distanceRayons = getDiametre() / 2 + voiture1.getDiametre() / 2;
 		double distanceVoitureX = (getPosition().getX() - voiture1.getPosition().getX())
@@ -447,4 +451,11 @@ public class Voiture implements Dessinable, Serializable {
 		}
 	}
 
+	public double getNombreToursFaits() {
+		return nombreToursFaits;
+	}
+
+	public void setNombreToursFaits(double nombreToursFaits) {
+		this.nombreToursFaits = nombreToursFaits;
+	}
 }

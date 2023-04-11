@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="12_RapideDangereux/src"/>
-	<classpathentry kind="src" path="ressources"/>
+	<classpathentry kind="src" path="Image"/>
+	<classpathentry kind="src" path="ImagePanel"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

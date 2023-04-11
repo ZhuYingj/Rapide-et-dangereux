@@ -176,7 +176,13 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience);
+				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience, fenRecord);
+			}
+		});
+
+		fenRecord.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				actionfenRecord(evt, fenOptions, fenRecord);
 			}
 		});
 
@@ -202,6 +208,12 @@ public class AppPrincipale12 extends JFrame {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionChangeJeuCourse(evt, fenOptionMontre, fenJeuScience, fenSansScience);
 				actionRetourOptionCCM(evt, fenOptionMontre, fenModeJeu);
+			}
+		});
+
+		fenRecord.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				actionfenRecord(evt, fenOptions, fenRecord);
 			}
 		});
 
@@ -244,7 +256,7 @@ public class AppPrincipale12 extends JFrame {
 
 // Tan Tommy Rin
 	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
-			FenetreJeuSansScientifique fenSansScience) {
+			FenetreJeuSansScientifique fenSansScience, ClassementParPiste fenRecord) {
 		switch (evt.getPropertyName()) {
 
 		case "COMMENCER!":
@@ -280,9 +292,12 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setNombreToursFaits(0);
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setNombreToursFaits(0);
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
 			break;
-		// Ludovic Julien
-		// permet le changement de couleur des voiture dans la zone d'annimation
+
 		case "SKIN":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
 					.setSkin((Color) evt.getNewValue());
@@ -302,7 +317,32 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
 			fenSansScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
 			break;
+		case "RECORD":
+			fenRecord.setVisible(true);
+			fenOptions.setVisible(false);
+			setContentPane(fenRecord);
+			break;
 		}
+	}
+
+	/**
+	 * Méthode ...
+	 * 
+	 * @param evt
+	 * @param fenOptions
+	 * @param fenRecord
+	 */
+	// TON NOM
+	public void actionfenRecord(PropertyChangeEvent evt, JeuOptions fenOptions, ClassementParPiste fenRecord) {
+		switch (evt.getPropertyName()) {
+		case "QUITTER":
+			System.out.println("s");
+			fenOptions.setVisible(true);
+			fenRecord.setVisible(false);
+			setContentPane(fenOptions);
+			break;
+		}
+
 	}
 
 	/**
@@ -587,19 +627,45 @@ public class AppPrincipale12 extends JFrame {
 	 */
 // Alexis Pineda-Alvarado
 	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
-			FenetreJeuScientifique fenScience, FenetreJeuSansScientifique fenSansScience) {
+			FenetreJeuScientifique fenJeuScience, FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
 		case "COMMENCER COURSE MONTRE":
 			fenOptionMontre.setVisible(false);
-			fenScience.setVisible(true);
-			setContentPane(fenScience);
+			fenJeuScience.setVisible(true);
+			setContentPane(fenJeuScience);
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreBoiteMystere(0);
+			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreBoiteMystere(0);
 			break;
 		case "TYPEPISTE":
-			fenScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
-			fenScience.getZoneAnimPhysique().restartPosPisteDepart();
+			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
-
+			break;
+		case "MASSEMONTRE1":
+			fenJeuScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setVoitureMasse((double) evt.getNewValue());
+			break;
+		case "MASSEMONTRE2":
+			fenJeuScience.getZoneAnimPhysique().setVoitureMasse2((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setVoitureMasse2((double) evt.getNewValue());
+			break;
+		case "VITESSEMAXFACILE2":
+			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			break;
+		case "VITESSEMAXINTERMEDIAIRE2"	:
+			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			break;
+		case "VITESSEMAXAVANCE2" : 
+			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			break;
+		case "NBRDETOUR" :
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
+			break;
 		}
 	}
 

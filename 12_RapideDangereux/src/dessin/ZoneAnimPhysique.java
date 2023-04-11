@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import application.GestionnaireDeFichiersSurLeBureau;
@@ -615,6 +616,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).getVoiture().setAccel(valeurInit);
 			regroupement.getListePisteDeDepart().get(0).getVoiture().setAngle(0);
 			regroupement.getListePisteDeDepart().get(0).getVoiture().setDiametre(16);
+			regroupement.getListePisteDeDepart().get(0).getVoiture().setNombreToursFaits(0);
 			regroupement.setObjSpecial(null);
 
 			regroupement.getListePisteDeDepart().get(0).getVoiture2()
@@ -624,6 +626,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).getVoiture2().setAccel(valeurInit);
 			regroupement.getListePisteDeDepart().get(0).getVoiture2().setAngle(0);
 			regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametre(16);
+			regroupement.getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
 			regroupement.setObjSpecial2(null);
 
 			angleVoitureDegre = 0;
@@ -702,7 +705,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("posEnXV1", 0, voiture.getPosition().getX());
 		pcs.firePropertyChange("posEnYV1", 0, voiture.getPosition().getY());
 		pcs.firePropertyChange("angleV1", 0, voiture.getAngle());
-		pcs.firePropertyChange("nombreToursV1", 0, regroupement.getTour());
+		pcs.firePropertyChange("nombreToursV1", 0,
+				regroupement.getListePisteDeDepart().get(0).getVoiture().getNombreToursFaits());
 
 		pcs.firePropertyChange("accEnXV2", 0, voiture2.getAccel().getX());
 		pcs.firePropertyChange("accEnYV2", 0, voiture2.getAccel().getY());
@@ -711,7 +715,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("posEnXV2", 0, voiture2.getPosition().getX());
 		pcs.firePropertyChange("posEnYV2", 0, voiture2.getPosition().getY());
 		pcs.firePropertyChange("angleV2", 0, voiture2.getAngle());
-		pcs.firePropertyChange("nombreToursV2", 0, regroupement.getTour());
+		pcs.firePropertyChange("nombreToursV2", 0,
+				regroupement.getListePisteDeDepart().get(0).getVoiture2().getNombreToursFaits());
 		if (regroupement.getObjSpecial() != null
 				&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
 			if (forceDeLancement > 150) {
@@ -802,6 +807,24 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 
 		regroupement.avancerGroupe(deltaT, tempsTotalEcoule);
+		arretQuandFini();
+	}
+
+	/**
+	 * Méthode qui permet d'arreter l'animation losrque le nombre de tours a faire
+	 * est accomplie par une voiture
+	 */
+	// Tan Tommy Rin
+	public void arretQuandFini() {
+		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
+				.getNombreToursFaits()) {
+			JOptionPane.showMessageDialog(null, "LA VOITURE 1 A GAGNÉE!!!");
+			arreter();
+		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+				.getNombreToursFaits()) {
+			JOptionPane.showMessageDialog(null, "LA VOITURE 2 A GAGNÉE!!!");
+			arreter();
+		}
 
 	}
 
@@ -974,6 +997,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageHaut(pisteMexique.getHaut());
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
+
 			regroupement.creeBoiteDansListe();
 
 		}

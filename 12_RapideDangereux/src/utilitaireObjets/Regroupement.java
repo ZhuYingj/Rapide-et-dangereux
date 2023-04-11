@@ -58,6 +58,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private ObjetSpecial objSpecial;
 	/** Notre deuxieme objet special **/
 	private ObjetSpecial objSpecial2;
+	private double nombreToursAFaire = 1;
 
 	private double tours = 0;
 
@@ -1246,6 +1247,7 @@ public class Regroupement implements Dessinable, Serializable {
 				+ listePisteDeDepart.size()) {
 
 			if (listePisteDeDepart.get(0).resetTout(voiture)) {
+				voiture.setNombreToursFaits(voiture.getNombreToursFaits() + 1);
 				resetTour();
 
 			}
@@ -1423,6 +1425,14 @@ public class Regroupement implements Dessinable, Serializable {
 
 	public void setBoutonAppuye(boolean boutonAppuye) {
 		this.boutonAppuye = boutonAppuye;
+	}
+
+	public double getNombreToursAFaire() {
+		return nombreToursAFaire;
+	}
+
+	public void setNombreToursAFaire(double nombreToursAFaire) {
+		this.nombreToursAFaire = nombreToursAFaire;
 	}
 
 	public boolean isBoutonAppuye2() {
