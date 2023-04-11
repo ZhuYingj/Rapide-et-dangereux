@@ -149,11 +149,8 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(false);
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
-
 				timerVitesse.start();
-
-				clip.start();
-
+				 //clip.start();
 			}
 		});
 		btnStart.setBounds(10, 650, 89, 76);
