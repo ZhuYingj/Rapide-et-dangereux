@@ -59,7 +59,6 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblPositionEnXV2;
 	private JLabel lblPositionEnYV2;
 	private JLabel lblNombreToursVoiture2;
-	private JLabel lblNewLabel;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -76,10 +75,6 @@ public class FenetreJeuScientifique extends JPanel {
 	public FenetreJeuScientifique() {
 		setLayout(null);
 		setBounds(100, 100, 1321, 836);
-
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(317, 33, 700, 500);
-		add(lblNewLabel);
 
 		JLabel lblTitreModeScientifique = new JLabel("Mode scientifique activé");
 		lblTitreModeScientifique.setFont(new Font("Tahoma", Font.BOLD, 18));
