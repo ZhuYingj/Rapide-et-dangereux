@@ -74,10 +74,10 @@ public class FenetreMenu extends JPanel {
 		add(btnQuitter);
 
 		JLabel lblPhoto = new JLabel("");
-		lblPhoto.setBounds(0, 0, 1300, 700);
+		lblPhoto.setBounds(0, 0, 1350, 800);
 		add(lblPhoto);
 		
-		Image deuxVoiture = OutilsImage.lireImageEtRedimensionner("DeuxVoiture.jpg", 1300, 700);
+		Image deuxVoiture = OutilsImage.lireImageEtRedimensionner("DeuxVoiture.jpg", 1350, 800);
 		if (deuxVoiture != null) {
 			lblPhoto.setIcon(new ImageIcon(deuxVoiture));
 			deuxVoiture.flush();
