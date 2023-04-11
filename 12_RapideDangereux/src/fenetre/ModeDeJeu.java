@@ -18,6 +18,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import dessin.ZoneAnimPhysique;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Classe qui crée la fenêtre pour choisir les modes de jeux
@@ -53,6 +55,12 @@ public class ModeDeJeu extends JPanel {
 	public ModeDeJeu() {
 		setLayout(null);
 		btnMonde = new JButton("MONDE");
+		btnMonde.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				System.out.println("iaa");
+			}
+		});
 		btnMonde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("MONDE", 0, -1);
@@ -100,6 +108,12 @@ public class ModeDeJeu extends JPanel {
 		add(btnRetour);
 		
 		lblNewLabel = new JLabel("");
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.out.println("i");
+			}
+		});
 		URL urlBleu = getClass().getClassLoader().getResource("blueBackground.gif");
 		ImageIcon bleuFond = new ImageIcon(urlBleu);
 		lblNewLabel.setIcon(bleuFond);

@@ -174,10 +174,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		
+
 		regroupement.setPixelsParMetre(pixelsParMetre);
 		regroupement.dessiner(g2d);
-		
+
 	}
 
 	/**
@@ -685,8 +685,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("accEnYV1", 0, voiture.getAccel().getY());
 		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getX());
 		pcs.firePropertyChange("vitEnYV1", 0, voiture.getVitesse().getY());
-		pcs.firePropertyChange("posEnXV1", 0, voiture.getPosition().getX() / pixelsParMetre);
-		pcs.firePropertyChange("posEnYV1", 0, voiture.getPosition().getY() / pixelsParMetre);
+		pcs.firePropertyChange("posEnXV1", 0, voiture.getPosition().getX());
+		pcs.firePropertyChange("posEnYV1", 0, voiture.getPosition().getY());
 		pcs.firePropertyChange("angleV1", 0, voiture.getAngle());
 		pcs.firePropertyChange("nombreToursV1", 0, regroupement.getTour());
 
@@ -694,8 +694,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("accEnYV2", 0, voiture2.getAccel().getY());
 		pcs.firePropertyChange("vitEnXV2", 0, voiture2.getVitesse().getX());
 		pcs.firePropertyChange("vitEnYV2", 0, voiture2.getVitesse().getY());
-		pcs.firePropertyChange("posEnXV2", 0, voiture2.getPosition().getX() / pixelsParMetre);
-		pcs.firePropertyChange("posEnYV2", 0, voiture2.getPosition().getY() / pixelsParMetre);
+		pcs.firePropertyChange("posEnXV2", 0, voiture2.getPosition().getX());
+		pcs.firePropertyChange("posEnYV2", 0, voiture2.getPosition().getY());
 		pcs.firePropertyChange("angleV2", 0, voiture2.getAngle());
 		pcs.firePropertyChange("nombreToursV2", 0, regroupement.getTour());
 		if (regroupement.getObjSpecial() != null

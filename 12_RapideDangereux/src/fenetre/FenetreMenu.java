@@ -30,7 +30,7 @@ public class FenetreMenu extends JPanel {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	/**
-	 * Create the panel.
+	 * Création de la fenetre.
 	 */
 //Ludovic Julien
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
