@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import application.GestionnaireDeFichiersSurLeBureau;
@@ -155,30 +156,30 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * @param g Contexte graphique
 	 */
 	// Kevin Nguyen
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		if (premiereFois) {
-			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
-			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
-			enCoursDAnimation = true;
-			premiereFois = false;
-			regroupement.getListePisteDeDepart().get(0).getVoiture()
-					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-							regroupement.getListePisteDeDepart().get(0).getY() + 10));
-
-			regroupement.getListePisteDeDepart().get(0).getVoiture2()
-					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-							regroupement.getListePisteDeDepart().get(0).getY() + 50));
-
-		}
-
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-		regroupement.setPixelsParMetre(pixelsParMetre);
-		regroupement.dessiner(g2d);
-
-	}
+//	public void paintComponent(Graphics g) {
+//		super.paintComponent(g);
+//		if (premiereFois) {
+//			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
+//			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
+//			enCoursDAnimation = true;
+//			premiereFois = false;
+//			regroupement.getListePisteDeDepart().get(0).getVoiture()
+//					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+//							regroupement.getListePisteDeDepart().get(0).getY() + 10));
+//
+//			regroupement.getListePisteDeDepart().get(0).getVoiture2()
+//					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+//							regroupement.getListePisteDeDepart().get(0).getY() + 50));
+//
+//		}
+//
+//		Graphics2D g2d = (Graphics2D) g;
+//		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//
+//		regroupement.setPixelsParMetre(pixelsParMetre);
+//		regroupement.dessiner(g2d);
+//
+//	}
 
 	/**
 	 * Méthode qui détecte quand plusieurs touches sont appuyés en même temps
@@ -807,11 +808,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void arretQuandFini() {
 		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
 				.getNombreToursFaits()) {
-			System.out.println("VOITURE 1 GAGNANT");
+			JOptionPane.showMessageDialog(null, "LA VOITURE 1 A GAGNÉE!!!");
 			arreter();
 		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 				.getNombreToursFaits()) {
-			System.out.println("VOITURE 2 GAGNANT");
+			JOptionPane.showMessageDialog(null, "LA VOITURE 2 A GAGNÉE!!!");
 			arreter();
 		}
 

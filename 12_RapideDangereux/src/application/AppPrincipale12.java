@@ -185,7 +185,7 @@ public class AppPrincipale12 extends JFrame {
 				actionfenRecord(evt, fenOptions, fenRecord);
 			}
 		});
-		
+
 		fenJeuScience.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionRetourOptions(evt, fenJeuScience, fenModeJeu);
@@ -210,7 +210,12 @@ public class AppPrincipale12 extends JFrame {
 				actionRetourOptionCCM(evt, fenOptionMontre, fenModeJeu);
 			}
 		});
-		
+
+		fenRecord.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				actionfenRecord(evt, fenOptions, fenRecord);
+			}
+		});
 
 		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Mode Non-Scientifique");
 		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
@@ -292,8 +297,7 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setNombreToursFaits(0);
 			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
 			break;
-		// Ludovic Julien
-		// permet le changement de couleur des voiture dans la zone d'annimation
+
 		case "SKIN":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
 					.setSkin((Color) evt.getNewValue());
@@ -315,23 +319,31 @@ public class AppPrincipale12 extends JFrame {
 			break;
 		case "RECORD":
 			fenRecord.setVisible(true);
-		fenOptions.setVisible(false);
-		setContentPane(fenRecord);
+			fenOptions.setVisible(false);
+			setContentPane(fenRecord);
 			break;
 		}
 	}
-	
-	private void actionfenRecord(PropertyChangeEvent evt, JeuOptions fenOptions, ClassementParPiste fenRecord) {
+
+	/**
+	 * Méthode ...
+	 * 
+	 * @param evt
+	 * @param fenOptions
+	 * @param fenRecord
+	 */
+	// TON NOM
+	public void actionfenRecord(PropertyChangeEvent evt, JeuOptions fenOptions, ClassementParPiste fenRecord) {
 		switch (evt.getPropertyName()) {
 		case "QUITTER":
+			System.out.println("s");
 			fenOptions.setVisible(true);
 			fenRecord.setVisible(false);
 			setContentPane(fenOptions);
 			break;
 		}
-		
+
 	}
-	
 
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés

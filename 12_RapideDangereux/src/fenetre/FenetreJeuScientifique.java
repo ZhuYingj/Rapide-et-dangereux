@@ -25,7 +25,6 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import dessin.ZoneAcceleration;
 import dessin.ZoneAnimPhysique;
 import dessin.ZoneVitesse;
 import interfaces.TypeObjetSpecial;
@@ -43,6 +42,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private ZoneAnimPhysique zoneAnimPhysique;
 
 	private JProgressBar progressBarFroce;
+	private JProgressBar progressBarFroce2;
 
 	private JLabel lblAccEnXV1;
 	private JLabel lblTempsEcouleValeur;
@@ -80,8 +80,8 @@ public class FenetreJeuScientifique extends JPanel {
 	 */
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
-		
-		
+
+
 //		try {
 //		    clip = AudioSystem.getClip();
 //		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
@@ -91,27 +91,19 @@ public class FenetreJeuScientifique extends JPanel {
 //		} catch (Exception ex) {
 //		    ex.printStackTrace();
 //		}
-		
-		
-		
-		
-		
+
+
 		JPanel panelObjetEtGraphique = new JPanel();
-		panelObjetEtGraphique.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
 		add(panelObjetEtGraphique);
 		panelObjetEtGraphique.setLayout(null);
-		ZoneVitesse zoneVitesse = new ZoneVitesse();
-		zoneVitesse.setBounds(700, -33, 250, 274);
-		panelObjetEtGraphique.add(zoneVitesse);
-
-		ZoneAcceleration zoneAcceleration = new ZoneAcceleration();
-		zoneAcceleration.setBounds(350, -33, 250, 274);
-		panelObjetEtGraphique.add(zoneAcceleration);
-
 		ZoneVitesse zoneVitesse2 = new ZoneVitesse();
-		zoneVitesse2.setBounds(100, -33, 250, 274);
+		zoneVitesse2.setBounds(254, 0, 250, 274);
 		panelObjetEtGraphique.add(zoneVitesse2);
+
+		ZoneVitesse zoneVitesse = new ZoneVitesse();
+		zoneVitesse.setBounds(-41, 0, 250, 274);
+		panelObjetEtGraphique.add(zoneVitesse);
 		Timer timerVitesse = new Timer(50, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double vitesseActuelle = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture()
@@ -121,15 +113,14 @@ public class FenetreJeuScientifique extends JPanel {
 				if (vitesseActuelle < 0) {
 					vitesseActuelle = (vitesseActuelle * -1);
 				}
-				zoneVitesse.ajouterVitesse(vitesseActuelle);
+				zoneVitesse2.ajouterVitesse(vitesseActuelle);
 
 				if (accelerationActuelle < 0) {
 					accelerationActuelle = (accelerationActuelle * -1);
 				}
-				zoneAcceleration.ajouterAcceleration(accelerationActuelle);
 
-				zoneVitesse.ajouterTemps();
-				zoneAcceleration.ajouterTemps();
+				zoneVitesse2.ajouterTemps();
+
 			}
 		});
 		JButton btnRetour = new JButton("Retour");
@@ -139,16 +130,14 @@ public class FenetreJeuScientifique extends JPanel {
 
 				pcs.firePropertyChange("Test", null, -1);
 
-				zoneVitesse.renouvlerTemps();
-				zoneVitesse.renouvlerVitesse();
+				zoneVitesse2.renouvlerTemps();
+				zoneVitesse2.renouvlerVitesse();
 				timerVitesse.stop();
-				zoneAcceleration.renouvlerTemps();
-				zoneAcceleration.renouvlerAcceleration();
-				
+
 				if (clip != null) {
-                    clip.stop();
-                    clip.setMicrosecondPosition(0);
-                }
+					clip.stop();
+					clip.setMicrosecondPosition(0);
+				}
 
 			}
 		});
@@ -162,11 +151,8 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(false);
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
-
 				timerVitesse.start();
-
 				 //clip.start();
-				
 			}
 		});
 		btnStart.setBounds(10, 650, 89, 76);
@@ -183,10 +169,10 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(true);
 
 				timerVitesse.stop();
-				
+
 				if (clip != null) {
-			    clip.stop();
-			}
+					clip.stop();
+				}
 			}
 		});
 		btnStop.setBounds(621, 650, 89, 76);
@@ -201,16 +187,13 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(true);
 				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
 
-				zoneVitesse.renouvlerTemps();
-				zoneVitesse.renouvlerVitesse();
-				zoneAcceleration.renouvlerTemps();
-				zoneAcceleration.renouvlerAcceleration();
-				
+				zoneVitesse2.renouvlerTemps();
+				zoneVitesse2.renouvlerVitesse();
+
 				if (clip != null) {
-                  clip.stop();
-                  clip.setMicrosecondPosition(0);
-              }
-				
+					clip.stop();
+					clip.setMicrosecondPosition(0);
+				}
 
 			}
 		});
@@ -229,13 +212,12 @@ public class FenetreJeuScientifique extends JPanel {
 
 		setLayout(null);
 		setBounds(100, 100, 1343, 836);
-	
 
 		progressBarFroce = new JProgressBar();
 		progressBarFroce.setFont(new Font("Tahoma", Font.BOLD, 12));
 		progressBarFroce.setStringPainted(true);
 		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
-		progressBarFroce.setBounds(519, 11, 30, 157);
+		progressBarFroce.setBounds(219, 11, 30, 200);
 
 		panelObjetEtGraphique.add(progressBarFroce);
 
@@ -534,7 +516,6 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNombreTourV1.setBounds(244, 382, 56, 29);
 		panelDonneScientifique.add(lblNombreTourV1);
 
-
 		lblNombreToursVoiture2 = new JLabel("0.00");
 		lblNombreToursVoiture2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNombreToursVoiture2.setBounds(404, 382, 65, 29);
@@ -544,17 +525,17 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNombreTourV2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNombreTourV2.setBounds(523, 382, 56, 29);
 		panelDonneScientifique.add(lblNombreTourV2);
-		
 
-		progressBarFroce = new JProgressBar();
-		progressBarFroce.setFont(new Font("Tahoma", Font.BOLD, 12));
-		progressBarFroce.setStringPainted(true);
-		progressBarFroce.setOrientation(SwingConstants.VERTICAL);
-		progressBarFroce.setBounds(519, 11, 30, 157);
+		progressBarFroce2 = new JProgressBar();
+		progressBarFroce2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		progressBarFroce2.setStringPainted(true);
+		progressBarFroce2.setOrientation(SwingConstants.VERTICAL);
+		progressBarFroce2.setBounds(525, 11, 30, 200);
 
-		panelObjetEtGraphique.add(progressBarFroce);
+		panelObjetEtGraphique.add(progressBarFroce2);
 
 	}
+
 	public JButton getBtnStart() {
 		return btnStart;
 	}
@@ -633,9 +614,9 @@ public class FenetreJeuScientifique extends JPanel {
 
 			Double newData = new Double((double) evt.getNewValue());
 			int valeur = newData.intValue();
-			progressBarFroce.setMinimum(0);
-			progressBarFroce.setMaximum(100);
-			progressBarFroce.setValue(valeur - 50);
+			progressBarFroce2.setMinimum(0);
+			progressBarFroce2.setMaximum(100);
+			progressBarFroce2.setValue(valeur - 50);
 
 		}
 	}
