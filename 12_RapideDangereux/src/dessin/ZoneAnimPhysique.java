@@ -604,6 +604,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(valeurInit);
 			regroupement.getListePisteDeDepart().get(0).getVoiture().setAccel(valeurInit);
 			regroupement.getListePisteDeDepart().get(0).getVoiture().setAngle(0);
+			regroupement.getListePisteDeDepart().get(0).getVoiture().setDiametre(16);
+			regroupement.setObjSpecial(null);
 
 			regroupement.getListePisteDeDepart().get(0).getVoiture2()
 					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
@@ -611,6 +613,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(valeurInit);
 			regroupement.getListePisteDeDepart().get(0).getVoiture2().setAccel(valeurInit);
 			regroupement.getListePisteDeDepart().get(0).getVoiture2().setAngle(0);
+			regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametre(16);
+			regroupement.setObjSpecial2(null);
 
 			angleVoitureDegre = 0;
 			angleVoitureDegre2 = 0;

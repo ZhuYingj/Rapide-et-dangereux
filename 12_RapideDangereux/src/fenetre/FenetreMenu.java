@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import application.OutilsImage;
+import java.awt.Color;
 
 /**
  * Classe qui crée la premiere fenêtre "Menu"
@@ -47,9 +48,10 @@ public class FenetreMenu extends JPanel {
 		setBounds(100, 100, 1300, 700);
 
 		JLabel lblNewLabel = new JLabel("Rapide et Dangereux");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblNewLabel.setForeground(Color.DARK_GRAY);
+		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 25));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(471, 145, 255, 75);
+		lblNewLabel.setBounds(452, 146, 297, 75);
 		add(lblNewLabel);
 
 		btnJouer = new JButton("JOUER");
