@@ -301,7 +301,7 @@ public class FenetreEditeur extends JPanel {
 
 		panelRegroupement = new PanelRegroupement();
 
-		panelRegroupement.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelRegroupement.setBorder(new LineBorder(new Color(255, 255, 255), 3));
 		panelRegroupement.setBounds(224, 97, 769, 400);
 		add(panelRegroupement);
 		panelRegroupement.setLayout(null);

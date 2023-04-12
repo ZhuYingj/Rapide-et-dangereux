@@ -127,7 +127,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else if (voiture.getPosition().getY() > murBas ) {
+			} else if (voiture.getPosition().getY() > murBas - voiture.getDiametre() ) {
 				try {
 					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(),
 							angleNormaleMurBas);

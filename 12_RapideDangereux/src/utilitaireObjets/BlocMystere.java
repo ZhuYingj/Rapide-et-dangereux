@@ -2,6 +2,7 @@ package utilitaireObjets;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
@@ -9,7 +10,9 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
+import application.OutilsImage;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
@@ -160,6 +163,7 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 		if (enContact == true) {
 			objetSpecial.dessiner(g2d);
 		}
+		
 
 	}
 
