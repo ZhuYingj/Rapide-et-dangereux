@@ -11,6 +11,9 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.net.URL;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -46,6 +49,8 @@ public class AppPrincipale12 extends JFrame {
 	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String sousDossierSurBureau = "SauvegardePiste";
+	
+	private Clip clip;
 
 	File fichierDeTravail = new File(System.getProperty("user.home"),
 			"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
@@ -226,8 +231,41 @@ public class AppPrincipale12 extends JFrame {
 		});
 		mnMenu.add(checkBoxModeNonScientifique);
 
+		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Effet Sonnor");
+		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				actionCheckBox2();
+			}
+		});
+		mnMenu.add(checkBoxModeNonScientifique);
+
+		
+		
 	}
 
+//	public void actionCheckBox2()  {
+//		try {
+//		    clip = AudioSystem.getClip();
+//		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+//		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+//		    clip.open(inputStream);
+//		   
+//		} catch (Exception ex) {
+//		    ex.printStackTrace();
+//		}
+//		if (checkBoxModeNonScientifique.isSelected()) {
+//			
+//		}else {
+//			clip = null;
+//		}
+//		
+//	}
+	
+	public Clip getClip() {
+		return clip;
+	}
+	
+	
 	/**
 	 * Méthode qui permet de changer de fenetre selon le check box
 	 * 
@@ -257,7 +295,7 @@ public class AppPrincipale12 extends JFrame {
 
 // Tan Tommy Rin
 	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
-			FenetreJeuSansScientifique fenSansScience, ClassementParPiste fenRecord) {
+			FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
 
 		case "COMMENCER!":
@@ -298,7 +336,31 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setNombreToursFaits(0);
 			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
 			break;
+		case "NBBOITE":
+			Double newData = new Double((double) evt.getNewValue());
+			int valeur = newData.intValue();
 
+			fenJeuScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
+			fenSansScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
+			break;
+		}
+	}
+	
+	
+	/**
+	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
+	 * à la fenetre de jeu d'options
+	 * 
+	 * @param evt				evenement
+	 * @param fenJeuScience		la fenetre de jeu avec mode science activé
+	 * @param fenOptions		la fenetre de jeu d'options
+	 * @param fenSansScience	la fenetre non scientifique
+	 * @param fenRecord			la fenetre avec le classement par piste
+	 */
+	//Ludovic Julien
+	public void actionFenOptions2(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
+			FenetreJeuSansScientifique fenSansScience, ClassementParPiste fenRecord) {
+		switch (evt.getPropertyName()) {
 		case "SKIN":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
 					.setSkin((Color) evt.getNewValue());
@@ -311,13 +373,6 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
 					.setSkin((Color) evt.getNewValue());
 			break;
-		case "NBBOITE":
-			Double newData = new Double((double) evt.getNewValue());
-			int valeur = newData.intValue();
-
-			fenJeuScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
-			fenSansScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
-			break;
 		case "RECORD":
 			fenRecord.setVisible(true);
 			fenOptions.setVisible(false);
@@ -327,13 +382,14 @@ public class AppPrincipale12 extends JFrame {
 	}
 
 	/**
-	 * Méthode ...
+	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
+	 * à la fenetre de classement par piste
 	 * 
-	 * @param evt
-	 * @param fenOptions
-	 * @param fenRecord
+	 * @param evt				evenement
+	 * @param fenOptions		la fenetre de jeu d'options
+	 * @param fenRecord			la fenetre avec le classement par piste
 	 */
-	// TON NOM
+	// Ludovic Julien
 	public void actionfenRecord(PropertyChangeEvent evt, JeuOptions fenOptions, ClassementParPiste fenRecord) {
 		switch (evt.getPropertyName()) {
 		case "QUITTER":
