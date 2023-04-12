@@ -79,7 +79,9 @@ public class JeuOptions extends JPanel {
 		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");
 		// Icon icone = new ImageIcon(drapeuxMexique);
 		JButton btnMexique = new JButton("Mexique");
+
 		btnMexique.setBounds(130, 77, 126, 78);
+
 		add(btnMexique);
 		btnMexique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,7 +99,7 @@ public class JeuOptions extends JPanel {
 		}
 
 		JButton btnCanada = new JButton("Canada");
-		btnCanada.setBounds(307, 77, 126, 78);
+		btnCanada.setBounds(295, 77, 126, 78);
 		add(btnCanada);
 		btnCanada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -116,7 +118,7 @@ public class JeuOptions extends JPanel {
 		}
 		
 		JButton btnItalie = new JButton("Italie");
-		btnItalie.setBounds(474, 77, 126, 78);
+		btnItalie.setBounds(584, 77, 126, 78);
 		add(btnItalie);
 		btnItalie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -142,7 +144,7 @@ public class JeuOptions extends JPanel {
 		panel_1.setBorder(new LineBorder(new Color(255, 0, 0), 2, true));
 		Color a = new Color(240, 240, 240);
 		panel_1.setBackground(a);
-		panel_1.setBounds(760, 345, 549, 297);
+		panel_1.setBounds(1000, 345, 549, 297);
 		add(panel_1);
 		panel_1.setLayout(null);
 
@@ -266,18 +268,18 @@ public class JeuOptions extends JPanel {
 
 			}
 		});
-		btnCommencer.setBounds(984, 653, 143, 36);
+		btnCommencer.setBounds(1225, 653, 143, 36);
 		add(btnCommencer);
 
 		JPanel panel_V1 = new JPanel();
 		panel_V1.setBackground(Color.YELLOW);
-		panel_V1.setBounds(967, 77, 143, 90);
+		panel_V1.setBounds(1200, 77, 143, 90);
 		add(panel_V1);
 
 		//Ludovic Julien
 		//permet de changer la couleur du panel et de la voiture
 		JButton btnGauche = new JButton("<");
-		btnGauche.setBounds(891, 116, 55, 55);
+		btnGauche.setBounds(1123, 116, 55, 23);
 		btnGauche.addActionListener(new ActionListener() {
 			
 			
@@ -295,7 +297,7 @@ public class JeuOptions extends JPanel {
 		//Ludovic Julien
 		//permet de changer la couleur du panel et de la voiture
 		JButton btnDroite = new JButton(">");
-		btnDroite.setBounds(1123, 116, 55, 23);
+		btnDroite.setBounds(1365, 116, 55, 23);
 		btnDroite.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -318,20 +320,20 @@ public class JeuOptions extends JPanel {
 		add(btnRetour);
 
 		JPanel PanelV2 = new JPanel();
-		PanelV2.setBounds(967, 229, 143, 90);
+		PanelV2.setBounds(1200, 229, 143, 90);
 		PanelV2.setBackground(Color.WHITE);
 		add(PanelV2);
 
 		JLabel lblNewLabel = new JLabel("Couleur voiture #1");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(967, 42, 134, 13);
+		lblNewLabel.setBounds(1220, 42, 134, 13);
 		add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Couleur Voiture #2");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(967, 200, 143, 13);
+		lblNewLabel_1.setBounds(1220, 200, 143, 13);
 		add(lblNewLabel_1);
 
 		
@@ -339,7 +341,7 @@ public class JeuOptions extends JPanel {
 		//Ludovic Julien
 		//permet de changer la couleur du panel et de la voiture
 		JButton btnGauche1 = new JButton("<");
-		btnGauche1.setBounds(902, 264, 55, 23);
+		btnGauche1.setBounds(1123, 264, 55, 23);
 		btnGauche1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -356,7 +358,7 @@ public class JeuOptions extends JPanel {
 		//Ludovic Julien
 		//permet de changer la couleur du panel et de la voiture
 		JButton btnDroite1 = new JButton(">");
-		btnDroite1.setBounds(1123, 264, 55, 23);
+		btnDroite1.setBounds(1365, 264, 55, 23);
 		btnDroite1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -376,7 +378,7 @@ public class JeuOptions extends JPanel {
 		btnRecorsPiste.setForeground(new Color(0, 0, 0));
 		btnRecorsPiste.setBackground(Color.CYAN);
 		btnRecorsPiste.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRecorsPiste.setBounds(643, 77, 159, 78);
+		btnRecorsPiste.setBounds(769, 440, 159, 78);
 		btnRecorsPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("RECORD", null, -1);
@@ -396,7 +398,7 @@ public class JeuOptions extends JPanel {
 		add(lblLongueurPiste);
 
 		JLabel lblGif = new JLabel("");
-		lblGif.setBounds(0, 0, 1300, 700);
+		lblGif.setBounds(0, 0, 1408, 700);
 		add(lblGif);
 
 	}
