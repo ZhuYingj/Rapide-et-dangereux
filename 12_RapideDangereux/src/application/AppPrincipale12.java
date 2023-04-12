@@ -9,9 +9,7 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.net.URL;
 
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -19,6 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import fenetre.ClassementParPiste;
 import fenetre.FenetreEditeur;
@@ -58,6 +57,7 @@ public class AppPrincipale12 extends JFrame {
 	// Alexis Pineda-Alvarado
 
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -66,6 +66,17 @@ public class AppPrincipale12 extends JFrame {
 					frame.requestFocus();
 					frame.checkBoxModeNonScientifique.setEnabled(false);
 //					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+						if ("Nimbus".equals(info.getName())) {
+							try {
+								UIManager.setLookAndFeel(info.getClassName());
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							break;
+						}
+					} // fin for
+
 					frame.addKeyListener(new KeyAdapter() {
 						@Override
 						public void keyPressed(KeyEvent e) {
@@ -293,10 +304,14 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
-			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setNombreToursFaits(0);
-			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
-			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setNombreToursFaits(0);
-			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setNombreToursFaits(0);
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setNombreToursFaits(0);
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setNombreToursFaits(0);
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setNombreToursFaits(0);
 			break;
 
 		case "SKIN":
@@ -337,7 +352,7 @@ public class AppPrincipale12 extends JFrame {
 	public void actionfenRecord(PropertyChangeEvent evt, JeuOptions fenOptions, ClassementParPiste fenRecord) {
 		switch (evt.getPropertyName()) {
 		case "QUITTER":
-			
+
 			fenOptions.setVisible(true);
 			fenRecord.setVisible(false);
 			setContentPane(fenOptions);
@@ -655,15 +670,15 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			break;
-		case "VITESSEMAXINTERMEDIAIRE2"	:
+		case "VITESSEMAXINTERMEDIAIRE2":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			break;
-		case "VITESSEMAXAVANCE2" : 
+		case "VITESSEMAXAVANCE2":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			break;
-		case "NBRDETOUR" :
+		case "NBRDETOUR":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
 			break;
