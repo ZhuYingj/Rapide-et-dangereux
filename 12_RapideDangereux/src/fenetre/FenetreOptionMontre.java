@@ -9,6 +9,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -86,6 +87,12 @@ public class FenetreOptionMontre extends JPanel {
 
 			}
 		});
+		
+		Image imgCanada = OutilsImage.lireImageEtRedimensionner("canada.png", 140, 77);
+		if (imgCanada != null) {
+			btnCanada.setIcon(new ImageIcon(imgCanada));
+			imgCanada.flush();
+		}
 
 		JButton btnItalie = new JButton("Italie");
 		btnItalie.setBounds(474, 77, 126, 78);
@@ -100,6 +107,12 @@ public class FenetreOptionMontre extends JPanel {
 			}
 		});
 
+		Image imgItalia = OutilsImage.lireImageEtRedimensionner("italie-flag.jpg", 140, 77);
+		if (imgItalia != null) {
+			btnItalie.setIcon(new ImageIcon(imgItalia));
+			imgItalia.flush();
+		}
+		
 		JButton btnMexique = new JButton("Mexique");
 		btnMexique.setBounds(130, 77, 126, 78);
 		add(btnMexique);
@@ -111,6 +124,12 @@ public class FenetreOptionMontre extends JPanel {
 				zoneApercuPiste.repaint();
 			}
 		});
+		
+		Image imgMexique = OutilsImage.lireImageEtRedimensionner("mexicano.png", 140, 77);
+		if (imgMexique != null) {
+			btnMexique.setIcon(new ImageIcon(imgMexique));
+			imgMexique.flush();
+		}
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(255, 0, 0), 2));

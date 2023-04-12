@@ -7,7 +7,9 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -59,6 +61,8 @@ public class FenetreEditeur extends JPanel {
 	private PanelObjet panelObjet;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	
+	private JLabel lblNewLabel;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -89,8 +93,9 @@ public class FenetreEditeur extends JPanel {
 		add(btnRetour);
 
 		panelObjet = new PanelObjet();
+		panelObjet.setBackground(Color.WHITE);
 		panelObjet.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelObjet.setBounds(920, 11, 386, 720);
+		panelObjet.setBounds(1074, 11, 386, 720);
 		add(panelObjet);
 		panelObjet.setLayout(null);
 		panelObjet.setEnabled(false);
@@ -266,7 +271,7 @@ public class FenetreEditeur extends JPanel {
 			}
 		});
 
-		btnSauvegarde.setBounds(132, 508, 250, 23);
+		btnSauvegarde.setBounds(224, 508, 250, 23);
 
 		add(btnSauvegarde);
 
@@ -279,7 +284,7 @@ public class FenetreEditeur extends JPanel {
 			}
 		});
 
-		comboBoxPiste.setBounds(650, 508, 250, 23);
+		comboBoxPiste.setBounds(743, 508, 250, 23);
 
 		add(comboBoxPiste);
 
@@ -291,27 +296,37 @@ public class FenetreEditeur extends JPanel {
 			}
 		});
 
-		btnJouer.setBounds(408, 546, 214, 63);
+		btnJouer.setBounds(498, 501, 214, 63);
 		add(btnJouer);
 
 		panelRegroupement = new PanelRegroupement();
 
 		panelRegroupement.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelRegroupement.setBounds(132, 96, 769, 400);
+		panelRegroupement.setBounds(224, 97, 769, 400);
 		add(panelRegroupement);
 		panelRegroupement.setLayout(null);
 
 	
 
 		JLabel lblNbM = new JLabel("80 m");
+		lblNbM.setForeground(Color.WHITE);
 		lblNbM.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNbM.setBounds(148, 59, 46, 14);
+		lblNbM.setBounds(245, 68, 46, 14);
 		add(lblNbM);
 
 		JLabel lblFleche = new JLabel("<----->");
+		lblFleche.setForeground(Color.WHITE);
 		lblFleche.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblFleche.setBounds(132, 75, 82, 14);
+		lblFleche.setBounds(231, 82, 82, 14);
 		add(lblFleche);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(0, 0, 1600, 800);
+		add(lblNewLabel);
+		
+		URL urlBackgroudNoir = getClass().getClassLoader().getResource("blackwaves.gif");
+		ImageIcon noir = new ImageIcon(urlBackgroudNoir);
+		lblNewLabel.setIcon(noir);
 
 	}
 
