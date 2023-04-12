@@ -49,6 +49,9 @@ public class FenetreOptionMontre extends JPanel {
 	private final ButtonGroup buttonGroupDiff = new ButtonGroup();
 	private JLabel lblVitesseDifficile;
 	private JLabel lblImage;
+	private JButton btnCanada;
+	private JButton btnMexique;
+	private JButton btnItalie;
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
@@ -82,18 +85,7 @@ public class FenetreOptionMontre extends JPanel {
 		btnCanada.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (btnCanada.contains(e.getX(), e.getY())) {
-					type = TypePiste.CANADA;
-					imageActuelle = OutilsImage.lireImage("PisteCanada.png");
-					zoneApercuPiste.setImg(imageActuelle);
-					zoneApercuPiste.repaint();
-
-					Image imgHiver = OutilsImage.lireImageEtRedimensionner("canadaWinter.jpg", 1600, 800);
-					if (imgHiver != null) {
-						lblImage.setIcon(new ImageIcon(imgHiver));
-						imgHiver.flush();
-					}
-				}
+				selectionImageCanada(e);
 			}
 		});
 		btnCanada.setBounds(307, 77, 126, 78);
@@ -109,18 +101,7 @@ public class FenetreOptionMontre extends JPanel {
 		btnItalie.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (btnItalie.contains(e.getX(), e.getY())) {
-					type = TypePiste.ITALIE;
-					imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
-					zoneApercuPiste.setImg(imageActuelle);
-					zoneApercuPiste.repaint();
-
-					Image imgVenice = OutilsImage.lireImageEtRedimensionner("italie-rome.jpg", 1600, 800);
-					if (imgVenice != null) {
-						lblImage.setIcon(new ImageIcon(imgVenice));
-						imgVenice.flush();
-					}
-				}
+				selectionImageItalie(e);
 			}
 		});
 		btnItalie.setBounds(474, 77, 126, 78);
@@ -136,18 +117,7 @@ public class FenetreOptionMontre extends JPanel {
 		btnMexique.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (btnMexique.contains(e.getX(), e.getY())) {
-					type = TypePiste.MEXIQUE;
-					imageActuelle = OutilsImage.lireImage("PisteMexique.png");
-					zoneApercuPiste.setImg(imageActuelle);
-					zoneApercuPiste.repaint();
-
-					Image imgDesert = OutilsImage.lireImageEtRedimensionner("mexico-building.jpg", 1600, 800);
-					if (imgDesert != null) {
-						lblImage.setIcon(new ImageIcon(imgDesert));
-						imgDesert.flush();
-					}
-				}
+				selectionImageMexique(e);
 			}
 		});
 		btnMexique.setBounds(130, 77, 126, 78);
@@ -295,5 +265,70 @@ public class FenetreOptionMontre extends JPanel {
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
+	}
+	/**
+	 * Méthode qui choisie la piste et une photo de fond lorsque la souris et sur le
+	 * bouton
+	 * 
+	 * @param e evenement de la souris
+	 */
+	//Alexis Pineda-Alvarado
+	public void selectionImageCanada(MouseEvent e) {
+		if (btnCanada.contains(e.getX(), e.getY())) {
+			type = TypePiste.CANADA;
+			imageActuelle = OutilsImage.lireImage("PisteCanada.png");
+			zoneApercuPiste.setImg(imageActuelle);
+			zoneApercuPiste.repaint();
+
+			Image imgHiver = OutilsImage.lireImageEtRedimensionner("canadaWinter.jpg", 1600, 800);
+			if (imgHiver != null) {
+				lblImage.setIcon(new ImageIcon(imgHiver));
+				imgHiver.flush();
+			}
+		}
+	}
+
+	/**
+	 * Méthode qui choisie la piste et une photo de fond lorsque la souris et sur le
+	 * bouton
+	 * 
+	 * @param e evenement de la souris
+	 */
+	//Alexis Pineda-Alvarado
+	public void selectionImageMexique(MouseEvent e) {
+		if (btnMexique.contains(e.getX(), e.getY())) {
+			type = TypePiste.MEXIQUE;
+			imageActuelle = OutilsImage.lireImage("PisteMexique.png");
+			zoneApercuPiste.setImg(imageActuelle);
+			zoneApercuPiste.repaint();
+
+			Image imgDesert = OutilsImage.lireImageEtRedimensionner("mexico-building.jpg", 1600, 800);
+			if (imgDesert != null) {
+				lblImage.setIcon(new ImageIcon(imgDesert));
+				imgDesert.flush();
+			}
+		}
+	}
+
+	/**
+	 * Méthode qui choisie la piste et une photo de fond lorsque la souris et sur le
+	 * bouton
+	 * 
+	 * @param e evenement de la souris
+	 */
+	// Alexis Pineda-Alvarado
+	public void selectionImageItalie(MouseEvent e) {
+		if (btnItalie.contains(e.getX(), e.getY())) {
+			type = TypePiste.ITALIE;
+			imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
+			zoneApercuPiste.setImg(imageActuelle);
+			zoneApercuPiste.repaint();
+
+			Image imgVenice = OutilsImage.lireImageEtRedimensionner("italie-rome.jpg", 1600, 800);
+			if (imgVenice != null) {
+				lblImage.setIcon(new ImageIcon(imgVenice));
+				imgVenice.flush();
+			}
+		}
 	}
 }
