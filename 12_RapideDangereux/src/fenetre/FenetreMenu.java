@@ -1,5 +1,6 @@
 package fenetre;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -12,9 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import application.OutilsImage;
-import java.awt.Color;
 
 /**
  * Classe qui crée la premiere fenêtre "Menu"
@@ -79,7 +80,7 @@ public class FenetreMenu extends JPanel {
 		JLabel lblPhoto = new JLabel("");
 		lblPhoto.setBounds(0, 0, 1600, 800);
 		add(lblPhoto);
-		
+
 		Image deuxVoiture = OutilsImage.lireImageEtRedimensionner("DeuxVoiture.jpg", 1600, 800);
 		if (deuxVoiture != null) {
 			lblPhoto.setIcon(new ImageIcon(deuxVoiture));

@@ -90,13 +90,15 @@ public class FenetreJeuScientifique extends JPanel {
 		 */
 		// Ludovic Julien
 		try {
+
 		    clip = AudioSystem.getClip();
 		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
 		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
 		    clip.open(inputStream);
 		   
-		} catch (Exception ex) {
-		    ex.printStackTrace();
+		}  catch (Exception ex) {
+			ex.printStackTrace();
+
 		}
 
 		JPanel panelObjetEtGraphique = new JPanel();
