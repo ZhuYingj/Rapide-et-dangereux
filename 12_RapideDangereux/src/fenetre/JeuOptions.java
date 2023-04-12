@@ -22,6 +22,8 @@ import javax.swing.border.LineBorder;
 import application.OutilsImage;
 import dessin.ZoneApercuPiste;
 import interfaces.TypePiste;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Classe qui crée la fenêtre pour choisir les paramètres pour le mode de jeu
@@ -45,7 +47,7 @@ public class JeuOptions extends JPanel {
 	private Image imageActuelle;
 	private int indexCouleur = 0;
 	private int indexCouleur2 = 0;
-
+	private JLabel lblImage;
 
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.cyan };
@@ -75,23 +77,30 @@ public class JeuOptions extends JPanel {
 		zoneApercuPiste.setBounds(0, 0, 700, 439);
 		PanelApercu.add(zoneApercuPiste);
 
-		
 		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");
 		// Icon icone = new ImageIcon(drapeuxMexique);
 		JButton btnMexique = new JButton("Mexique");
+		btnMexique.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (btnMexique.contains(e.getX(), e.getY())) {
+					type = TypePiste.MEXIQUE;
+					imageActuelle = OutilsImage.lireImage("PisteMexique.png");
+					zoneApercuPiste.setImg(imageActuelle);
+					zoneApercuPiste.repaint();
+
+					Image imgDesert = OutilsImage.lireImageEtRedimensionner("mexico-building.jpg", 1600, 800);
+					if (imgDesert != null) {
+						lblImage.setIcon(new ImageIcon(imgDesert));
+						imgDesert.flush();
+					}
+				}
+			}
+		});
 
 		btnMexique.setBounds(130, 77, 126, 78);
-
 		add(btnMexique);
-		btnMexique.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				type = TypePiste.MEXIQUE;
-				imageActuelle = OutilsImage.lireImage("PisteMexique.png");
-				zoneApercuPiste.setImg(imageActuelle);
-				zoneApercuPiste.repaint();
-			}
-		});	
-		
+
 		Image imgMexique = OutilsImage.lireImageEtRedimensionner("mexicano.png", 140, 77);
 		if (imgMexique != null) {
 			btnMexique.setIcon(new ImageIcon(imgMexique));
@@ -99,37 +108,53 @@ public class JeuOptions extends JPanel {
 		}
 
 		JButton btnCanada = new JButton("Canada");
-		btnCanada.setBounds(295, 77, 126, 78);
-		add(btnCanada);
-		btnCanada.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				type = TypePiste.CANADA;
-				imageActuelle = OutilsImage.lireImage("PisteCanada.png");
-				zoneApercuPiste.setImg(imageActuelle);
-				zoneApercuPiste.repaint();
+		btnCanada.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (btnCanada.contains(e.getX(), e.getY())) {
+					type = TypePiste.CANADA;
+					imageActuelle = OutilsImage.lireImage("PisteCanada.png");
+					zoneApercuPiste.setImg(imageActuelle);
+					zoneApercuPiste.repaint();
 
+					Image imgHiver = OutilsImage.lireImageEtRedimensionner("canadaWinter.jpg", 1600, 800);
+					if (imgHiver != null) {
+						lblImage.setIcon(new ImageIcon(imgHiver));
+						imgHiver.flush();
+					}
+				}
 			}
 		});
-		
+		btnCanada.setBounds(305, 77, 126, 78);
+		add(btnCanada);
+
 		Image imgCanada = OutilsImage.lireImageEtRedimensionner("canada.png", 140, 77);
 		if (imgCanada != null) {
 			btnCanada.setIcon(new ImageIcon(imgCanada));
 			imgCanada.flush();
 		}
-		
-		JButton btnItalie = new JButton("Italie");
-		btnItalie.setBounds(584, 77, 126, 78);
-		add(btnItalie);
-		btnItalie.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				type = TypePiste.ITALIE;
-				imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
-				zoneApercuPiste.setImg(imageActuelle);
-				zoneApercuPiste.repaint();
 
+		JButton btnItalie = new JButton("Italie");
+		btnItalie.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (btnItalie.contains(e.getX(), e.getY())) {
+					type = TypePiste.ITALIE;
+					imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
+					zoneApercuPiste.setImg(imageActuelle);
+					zoneApercuPiste.repaint();
+
+					Image imgVenice = OutilsImage.lireImageEtRedimensionner("italie-rome.jpg", 1600, 800);
+					if (imgVenice != null) {
+						lblImage.setIcon(new ImageIcon(imgVenice));
+						imgVenice.flush();
+					}
+				}
 			}
 		});
-		
+		btnItalie.setBounds(486, 77, 126, 78);
+		add(btnItalie);
+
 		Image imgItalia = OutilsImage.lireImageEtRedimensionner("italie-flag.jpg", 140, 77);
 		if (imgItalia != null) {
 			btnItalie.setIcon(new ImageIcon(imgItalia));
@@ -183,7 +208,6 @@ public class JeuOptions extends JPanel {
 		rdbtnFacile.setSelected(true);
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				pcs.firePropertyChange("MASSE", null, 60.0);
 
 			}
@@ -259,11 +283,7 @@ public class JeuOptions extends JPanel {
 				pcs.firePropertyChange("TYPEPISTE", null, type);
 				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 				pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
-
-				
 				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
-
-
 				pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
 
 			}
@@ -276,13 +296,12 @@ public class JeuOptions extends JPanel {
 		panel_V1.setBounds(1200, 77, 143, 90);
 		add(panel_V1);
 
-		//Ludovic Julien
-		//permet de changer la couleur du panel et de la voiture
+		// Ludovic Julien
+		// permet de changer la couleur du panel et de la voiture
 		JButton btnGauche = new JButton("<");
 		btnGauche.setBounds(1123, 116, 55, 23);
 		btnGauche.addActionListener(new ActionListener() {
-			
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				indexCouleur--;
@@ -293,9 +312,9 @@ public class JeuOptions extends JPanel {
 			}
 		});
 		add(btnGauche);
-		
-		//Ludovic Julien
-		//permet de changer la couleur du panel et de la voiture
+
+		// Ludovic Julien
+		// permet de changer la couleur du panel et de la voiture
 		JButton btnDroite = new JButton(">");
 		btnDroite.setBounds(1365, 116, 55, 23);
 		btnDroite.addActionListener(new ActionListener() {
@@ -336,10 +355,8 @@ public class JeuOptions extends JPanel {
 		lblNewLabel_1.setBounds(1220, 200, 143, 13);
 		add(lblNewLabel_1);
 
-		
-		
-		//Ludovic Julien
-		//permet de changer la couleur du panel et de la voiture
+		// Ludovic Julien
+		// permet de changer la couleur du panel et de la voiture
 		JButton btnGauche1 = new JButton("<");
 		btnGauche1.setBounds(1123, 264, 55, 23);
 		btnGauche1.addActionListener(new ActionListener() {
@@ -354,9 +371,8 @@ public class JeuOptions extends JPanel {
 		});
 		add(btnGauche1);
 
-		
-		//Ludovic Julien
-		//permet de changer la couleur du panel et de la voiture
+		// Ludovic Julien
+		// permet de changer la couleur du panel et de la voiture
 		JButton btnDroite1 = new JButton(">");
 		btnDroite1.setBounds(1365, 264, 55, 23);
 		btnDroite1.addActionListener(new ActionListener() {
@@ -371,9 +387,8 @@ public class JeuOptions extends JPanel {
 		});
 		add(btnDroite1);
 
-		
-		//Ludovic Julien
-		//permet d'afficher le classement par piste
+		// Ludovic Julien
+		// permet d'afficher le classement par piste
 		JButton btnRecorsPiste = new JButton("Records par piste !");
 		btnRecorsPiste.setForeground(new Color(0, 0, 0));
 		btnRecorsPiste.setBackground(Color.CYAN);
@@ -401,5 +416,14 @@ public class JeuOptions extends JPanel {
 		lblGif.setBounds(0, 0, 1408, 700);
 		add(lblGif);
 
+		lblImage = new JLabel("");
+		lblImage.setBounds(0, 0, 1600, 800);
+		add(lblImage);
+
+
 	}
+	public void selectionImageCanada(MouseEvent e) {
+		
+	}
+	
 }

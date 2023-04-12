@@ -21,6 +21,8 @@ import application.OutilsImage;
 import dessin.ZoneApercuPiste;
 import interfaces.TypePiste;
 import utilitaireObjets.Regroupement;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * 
@@ -46,6 +48,7 @@ public class FenetreOptionMontre extends JPanel {
 	private JRadioButton rdbtnDifficile;
 	private final ButtonGroup buttonGroupDiff = new ButtonGroup();
 	private JLabel lblVitesseDifficile;
+	private JLabel lblImage;
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
@@ -76,18 +79,26 @@ public class FenetreOptionMontre extends JPanel {
 		PanelApercu.add(zoneApercuPiste);
 
 		JButton btnCanada = new JButton("Canada");
-		btnCanada.setBounds(307, 77, 126, 78);
-		add(btnCanada);
-		btnCanada.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				type = TypePiste.CANADA;
-				imageActuelle = OutilsImage.lireImage("PisteCanada.png");
-				zoneApercuPiste.setImg(imageActuelle);
-				zoneApercuPiste.repaint();
+		btnCanada.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (btnCanada.contains(e.getX(), e.getY())) {
+					type = TypePiste.CANADA;
+					imageActuelle = OutilsImage.lireImage("PisteCanada.png");
+					zoneApercuPiste.setImg(imageActuelle);
+					zoneApercuPiste.repaint();
 
+					Image imgHiver = OutilsImage.lireImageEtRedimensionner("canadaWinter.jpg", 1600, 800);
+					if (imgHiver != null) {
+						lblImage.setIcon(new ImageIcon(imgHiver));
+						imgHiver.flush();
+					}
+				}
 			}
 		});
-		
+		btnCanada.setBounds(307, 77, 126, 78);
+		add(btnCanada);
+
 		Image imgCanada = OutilsImage.lireImageEtRedimensionner("canada.png", 140, 77);
 		if (imgCanada != null) {
 			btnCanada.setIcon(new ImageIcon(imgCanada));
@@ -95,36 +106,53 @@ public class FenetreOptionMontre extends JPanel {
 		}
 
 		JButton btnItalie = new JButton("Italie");
-		btnItalie.setBounds(474, 77, 126, 78);
-		add(btnItalie);
-		btnItalie.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				type = TypePiste.ITALIE;
-				imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
-				zoneApercuPiste.setImg(imageActuelle);
-				zoneApercuPiste.repaint();
+		btnItalie.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (btnItalie.contains(e.getX(), e.getY())) {
+					type = TypePiste.ITALIE;
+					imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
+					zoneApercuPiste.setImg(imageActuelle);
+					zoneApercuPiste.repaint();
 
+					Image imgVenice = OutilsImage.lireImageEtRedimensionner("italie-rome.jpg", 1600, 800);
+					if (imgVenice != null) {
+						lblImage.setIcon(new ImageIcon(imgVenice));
+						imgVenice.flush();
+					}
+				}
 			}
 		});
+		btnItalie.setBounds(474, 77, 126, 78);
+		add(btnItalie);
 
 		Image imgItalia = OutilsImage.lireImageEtRedimensionner("italie-flag.jpg", 140, 77);
 		if (imgItalia != null) {
 			btnItalie.setIcon(new ImageIcon(imgItalia));
 			imgItalia.flush();
 		}
-		
+
 		JButton btnMexique = new JButton("Mexique");
-		btnMexique.setBounds(130, 77, 126, 78);
-		add(btnMexique);
-		btnMexique.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				type = TypePiste.MEXIQUE;
-				imageActuelle = OutilsImage.lireImage("PisteMexique.png");
-				zoneApercuPiste.setImg(imageActuelle);
-				zoneApercuPiste.repaint();
+		btnMexique.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (btnMexique.contains(e.getX(), e.getY())) {
+					type = TypePiste.MEXIQUE;
+					imageActuelle = OutilsImage.lireImage("PisteMexique.png");
+					zoneApercuPiste.setImg(imageActuelle);
+					zoneApercuPiste.repaint();
+
+					Image imgDesert = OutilsImage.lireImageEtRedimensionner("mexico-building.jpg", 1600, 800);
+					if (imgDesert != null) {
+						lblImage.setIcon(new ImageIcon(imgDesert));
+						imgDesert.flush();
+					}
+				}
 			}
 		});
-		
+		btnMexique.setBounds(130, 77, 126, 78);
+		add(btnMexique);
+
 		Image imgMexique = OutilsImage.lireImageEtRedimensionner("mexicano.png", 140, 77);
 		if (imgMexique != null) {
 			btnMexique.setIcon(new ImageIcon(imgMexique));
@@ -174,12 +202,10 @@ public class FenetreOptionMontre extends JPanel {
 		panel_1.add(rdbtnDifficile);
 		buttonGroupDiff.add(rdbtnDifficile);
 
-		
 		JLabel lblDifficulte = new JLabel("Difficulté du jeu : ");
 		lblDifficulte.setBounds(10, 182, 110, 14);
 		panel_1.add(lblDifficulte);
-		
-		
+
 		slider = new JSlider();
 
 		slider.setMajorTickSpacing(10);
@@ -227,15 +253,15 @@ public class FenetreOptionMontre extends JPanel {
 		JLabel lblNbrTour = new JLabel("Nombre de tour : \r\n");
 		lblNbrTour.setBounds(10, 135, 177, 14);
 		panel_1.add(lblNbrTour);
-		
+
 		JLabel lblVitesseFacile = new JLabel("60 m/s");
 		lblVitesseFacile.setBounds(280, 186, 46, 14);
 		panel_1.add(lblVitesseFacile);
-		
+
 		JLabel lblVitesseMedium = new JLabel("80 m/s");
 		lblVitesseMedium.setBounds(280, 211, 65, 14);
 		panel_1.add(lblVitesseMedium);
-		
+
 		lblVitesseDifficile = new JLabel("100 m/s");
 		lblVitesseDifficile.setBounds(280, 237, 65, 14);
 		panel_1.add(lblVitesseDifficile);
@@ -266,5 +292,8 @@ public class FenetreOptionMontre extends JPanel {
 		btnCommencer.setBounds(984, 653, 143, 36);
 		add(btnCommencer);
 
+		lblImage = new JLabel("");
+		lblImage.setBounds(0, 0, 1600, 800);
+		add(lblImage);
 	}
 }
