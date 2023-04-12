@@ -182,7 +182,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience, fenRecord);
+				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience);
 			}
 		});
 
@@ -358,28 +358,28 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenRecord			la fenetre avec le classement par piste
 	 */
 	//Ludovic Julien
-	public void actionFenOptions2(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
-			FenetreJeuSansScientifique fenSansScience, ClassementParPiste fenRecord) {
-		switch (evt.getPropertyName()) {
-		case "SKIN":
-			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
-					.setSkin((Color) evt.getNewValue());
-			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
-					.setSkin((Color) evt.getNewValue());
-			break;
-		case "SKIN2":
-			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
-					.setSkin((Color) evt.getNewValue());
-			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
-					.setSkin((Color) evt.getNewValue());
-			break;
-		case "RECORD":
-			fenRecord.setVisible(true);
-			fenOptions.setVisible(false);
-			setContentPane(fenRecord);
-			break;
-		}
-	}
+//	public void actionFenOptions2(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
+//			FenetreJeuSansScientifique fenSansScience, ClassementParPiste fenRecord) {
+//		switch (evt.getPropertyName()) {
+//		case "SKIN":
+//			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+//					.setSkin((Color) evt.getNewValue());
+//			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+//					.setSkin((Color) evt.getNewValue());
+//			break;
+//		case "SKIN2":
+//			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+//					.setSkin((Color) evt.getNewValue());
+//			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+//					.setSkin((Color) evt.getNewValue());
+//			break;
+//		case "RECORD":
+//			fenRecord.setVisible(true);
+//			fenOptions.setVisible(false);
+//			setContentPane(fenRecord);
+//			break;
+//		}
+//	}
 
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
