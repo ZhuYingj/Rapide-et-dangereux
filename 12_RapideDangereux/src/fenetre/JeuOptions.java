@@ -7,21 +7,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.net.URL;
 
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import dessin.OutilsImage;
+import application.OutilsImage;
 import dessin.ZoneApercuPiste;
 import interfaces.TypePiste;
 
@@ -78,12 +76,9 @@ public class JeuOptions extends JPanel {
 		PanelApercu.add(zoneApercuPiste);
 
 		
-		//Ludovic Julien
-		//permet de changer l'image de la piste appercu
 		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");
 		// Icon icone = new ImageIcon(drapeuxMexique);
 		JButton btnMexique = new JButton("Mexique");
-
 		btnMexique.setBounds(130, 77, 126, 78);
 		add(btnMexique);
 		btnMexique.addActionListener(new ActionListener() {
@@ -93,9 +88,13 @@ public class JeuOptions extends JPanel {
 				zoneApercuPiste.setImg(imageActuelle);
 				zoneApercuPiste.repaint();
 			}
-		});		
-		//Ludovic Julien
-		//permet de changer l'image de la piste appercu
+		});	
+		
+		Image imgMexique = OutilsImage.lireImageEtRedimensionner("mexicano.png", 140, 77);
+		if (imgMexique != null) {
+			btnMexique.setIcon(new ImageIcon(imgMexique));
+			imgMexique.flush();
+		}
 
 		JButton btnCanada = new JButton("Canada");
 		btnCanada.setBounds(307, 77, 126, 78);
@@ -109,9 +108,13 @@ public class JeuOptions extends JPanel {
 
 			}
 		});
-
-		//Ludovic Julien
-		//permet de changer l'image de la piste appercu
+		
+		Image imgCanada = OutilsImage.lireImageEtRedimensionner("canada.png", 140, 77);
+		if (imgCanada != null) {
+			btnCanada.setIcon(new ImageIcon(imgCanada));
+			imgCanada.flush();
+		}
+		
 		JButton btnItalie = new JButton("Italie");
 		btnItalie.setBounds(474, 77, 126, 78);
 		add(btnItalie);
@@ -124,6 +127,12 @@ public class JeuOptions extends JPanel {
 
 			}
 		});
+		
+		Image imgItalia = OutilsImage.lireImageEtRedimensionner("italie-flag.jpg", 140, 77);
+		if (imgItalia != null) {
+			btnItalie.setIcon(new ImageIcon(imgItalia));
+			imgItalia.flush();
+		}
 
 		Icon feuVert = new ImageIcon("green.jpg");
 		JLabel feuGreen = new JLabel();

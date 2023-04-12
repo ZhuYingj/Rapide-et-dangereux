@@ -87,17 +87,6 @@ public class FenetreJeuScientifique extends JPanel {
 		 * lit le fichier audio 
 		 */
 		//Ludovic Julien
-		try {
-		    clip = AudioSystem.getClip();
-		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
-		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
-		    clip.open(inputStream);
-		   
-		} catch (Exception ex) {
-		    ex.printStackTrace();
-		}
-
-
 //		try {
 //		    clip = AudioSystem.getClip();
 //		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
@@ -159,10 +148,10 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneVitesse2.renouvlerVitesse();
 				timerVitesse.stop();
 
-				if (clip != null) {
-					clip.stop();
-					clip.setMicrosecondPosition(0);
-				}
+//				if (clip != null) {
+//					clip.stop();
+//					clip.setMicrosecondPosition(0);
+//				}
 
 			}
 		});
