@@ -400,7 +400,6 @@ public class Voiture implements Dessinable, Serializable {
 	 * nouvelle vitesse d'impulsion de chacune des voitures
 	 * 
 	 * @param voiture1 La voiture du joueur 1
-	 * @param voiture2 La voiture du joueur 2
 	 * @throws Exception
 	 */
 	// Kevin Nguyen

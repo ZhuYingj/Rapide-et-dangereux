@@ -29,8 +29,6 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 
-	
-
 	/** La position en x du mure de haut **/
 	private int murGauche;
 
@@ -52,7 +50,6 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	private boolean collision = false;
 	private Rectangle2D.Double formeAire;
 	private int nombrePisteColle = 0;
-
 
 	private boolean enContactAvecColle = true;
 
@@ -127,7 +124,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else if (voiture.getPosition().getY() > murBas - voiture.getDiametre() ) {
+			} else if (voiture.getPosition().getY() > murBas - voiture.getDiametre()) {
 				try {
 					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(),
 							angleNormaleMurBas);
@@ -176,6 +173,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	 * et la boule de neige
 	 * 
 	 * @param objetSpecial L'objet special de type boule de neige
+	 * @return enCollision Collision avec les murs de la piste.
 	 */
 	// Tan Tommy Rin
 	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
@@ -222,9 +220,11 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	public boolean isEnContactAvecColle() {
 		return enContactAvecColle;
 	}
+
 	public void setTaillePiste(int taillePiste) {
 		this.taillePiste = taillePiste;
 	}
+
 	public void setEnContactAvecColle(boolean enContactAvecColle) {
 		this.enContactAvecColle = enContactAvecColle;
 	}

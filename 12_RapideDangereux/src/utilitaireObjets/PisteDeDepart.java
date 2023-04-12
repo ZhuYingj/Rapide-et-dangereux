@@ -168,6 +168,8 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	 * et la boule de neige
 	 * 
 	 * @param objetSpecial L'objet special de type boule de neige
+	 * @return enCollision si la boule de neige est en contact avec les murs de la
+	 *         piste
 	 */
 	// Tan Tommy Rin
 
@@ -239,9 +241,6 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 			return false;
 		}
 	}
-
-
-
 
 	public int getNombrePisteColle() {
 		return nombrePisteColle;
