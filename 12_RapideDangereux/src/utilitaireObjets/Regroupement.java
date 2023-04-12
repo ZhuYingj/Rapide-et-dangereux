@@ -3,11 +3,13 @@ package utilitaireObjets;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import application.OutilsImage;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.TypeObjetSpecial;
@@ -825,13 +827,6 @@ public class Regroupement implements Dessinable, Serializable {
 		for (int i = 0; i < listeAccelerateur.size(); i++) {
 			listeAccelerateur.get(i).dessiner(g2dCopie);
 		}
-		if (regroupementBoiteMystere.size() != 0) {
-			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
-
-				regroupementBoiteMystere.get(a).dessiner(g2dCopie);
-
-			}
-		}
 
 		if (objSpecial != null) {
 			if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
@@ -878,6 +873,21 @@ public class Regroupement implements Dessinable, Serializable {
 			}
 
 		}
+		if (regroupementBoiteMystere.size() != 0) {
+			Image boiteMystere = OutilsImage.lireImageEtRedimensionner("LuckyBox.png", 15, 15);
+			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
+
+				regroupementBoiteMystere.get(a).dessiner(g2dCopie);
+
+				if (boiteMystere != null) {
+					g2dCopie.drawImage(boiteMystere, (int) this.regroupementBoiteMystere.get(a).getPosition().getX(),
+							(int) this.regroupementBoiteMystere.get(a).getPosition().getY(), null);
+
+					boiteMystere.flush();
+				}
+			}
+		}
+
 		g2dCopie.setStroke(new BasicStroke(5));
 
 		g2dCopie.setColor(Color.WHITE);

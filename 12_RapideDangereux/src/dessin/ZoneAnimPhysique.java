@@ -1,6 +1,5 @@
 package dessin;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -824,7 +823,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 				.getNombreToursFaits()) {
 			JOptionPane.showMessageDialog(null, "LA VOITURE 2 A GAGNÉE!!!");
-			
+
 		}
 
 	}

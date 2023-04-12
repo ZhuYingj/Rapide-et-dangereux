@@ -13,13 +13,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSlider;
+import javax.swing.border.LineBorder;
 
-import dessin.OutilsImage;
+import application.OutilsImage;
 import dessin.ZoneApercuPiste;
 import interfaces.TypePiste;
 import utilitaireObjets.Regroupement;
-import javax.swing.JSlider;
-import javax.swing.border.LineBorder;
 
 /**
  * 

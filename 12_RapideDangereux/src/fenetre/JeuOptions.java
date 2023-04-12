@@ -7,21 +7,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.net.URL;
 
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import dessin.OutilsImage;
+import application.OutilsImage;
 import dessin.ZoneApercuPiste;
 import interfaces.TypePiste;
 
