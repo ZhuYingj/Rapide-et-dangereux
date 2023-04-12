@@ -2,10 +2,12 @@ package fenetre;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.SystemColor;
 
 import javax.swing.JPanel;
 
+import application.OutilsImage;
 import geometrie.Vecteur2D;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BlocMystere;
@@ -61,7 +63,7 @@ public class PanelObjet extends JPanel {
 		accelerateur = new Accelerateur(X_OBJET, Y_OBJET * 28);
 
 		pisteDeDepart.dessiner(g2d);
-		blocMystere.dessiner(g2d);
+
 		pisteHorizontale.dessiner(g2d);
 		pisteVerticale.dessiner(g2d);
 		pisteVirageBas.dessiner(g2d);
@@ -69,7 +71,11 @@ public class PanelObjet extends JPanel {
 		pisteVirageGauche.dessiner(g2d);
 		pisteVirageHaut.dessiner(g2d);
 		accelerateur.dessiner(g2d);
+		Image boiteMystere = OutilsImage.lireImageEtRedimensionner("LuckyBox.png", 75, 75);
+		g2d.drawImage(boiteMystere, (int) this.blocMystere.getPosition().getX(),
+				(int) this.blocMystere.getPosition().getY(), null);
 
+		boiteMystere.flush();
 	}
 
 }
