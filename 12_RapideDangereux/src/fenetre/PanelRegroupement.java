@@ -277,7 +277,7 @@ public class PanelRegroupement extends JPanel {
 		Image boiteMystere = OutilsImage.lireImageEtRedimensionner("LuckyBox.png", 15, 15);
 		for (int a = 0; a < listeBlocMystere.size(); a++) {
 
-//			listeBlocMystere.get(a).dessiner(g2d);
+
 			g2d.drawImage(boiteMystere, (int) listeBlocMystere.get(a).getPosition().getX(),
 					(int) listeBlocMystere.get(a).getPosition().getY(), null);
 
