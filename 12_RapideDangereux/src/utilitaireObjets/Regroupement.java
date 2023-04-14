@@ -904,22 +904,24 @@ public class Regroupement implements Dessinable, Serializable {
 						- listePisteDeDepart.get(0).getVoiture2().getDiametre() / 2),
 				(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
 	}
-	
+
 	/**
-	 * Méthode permettant de voir visuellement la durée de l'effet de la boule de neige 
+	 * Méthode permettant de voir visuellement la durée de l'effet de la boule de
+	 * neige
+	 * 
 	 * @param g2d Composant graphique
 	 */
-	//Kevin Nguyen
+	// Kevin Nguyen
 	private void effetNeige(Graphics2D g2d) {
-		if(firstTime) {
-			snowball = new DessinCollisionBouleDeNeige(
-					listePisteDeDepart.get(0).getVoiture2().getPosition(),
-					listePisteDeDepart.get(0).getVoiture2().getDiametre());
+		if (firstTime) {
+			snowball = new DessinCollisionBouleDeNeige(listePisteDeDepart.get(0).getVoiture2().getPosition(),
+					listePisteDeDepart.get(0).getVoiture2().getDiametre(),
+					listePisteDeDepart.get(0).getVoiture2().getSkin(), listePisteDeDepart.get(0).getVoiture2().getCercle());
 			snowball.dessiner(g2d);
-		} else if(firstTime2) {
-			snowball = new DessinCollisionBouleDeNeige(
-					listePisteDeDepart.get(0).getVoiture().getPosition(),
-					listePisteDeDepart.get(0).getVoiture().getDiametre());
+		} else if (firstTime2) {
+			snowball = new DessinCollisionBouleDeNeige(listePisteDeDepart.get(0).getVoiture().getPosition(),
+					listePisteDeDepart.get(0).getVoiture().getDiametre(),
+					listePisteDeDepart.get(0).getVoiture2().getSkin(), listePisteDeDepart.get(0).getVoiture2().getCercle());
 			snowball.dessiner(g2d);
 		}
 	}

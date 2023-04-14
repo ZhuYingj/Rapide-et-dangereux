@@ -21,7 +21,11 @@ public class DessinCollisionBouleDeNeige {
 	/** Diametre de la voiture pour un bloc de glace symmétrique **/
 	double diametre;
 	/** La forme du dessin **/
-	private Rectangle2D.Double rectangle;
+	Rectangle2D.Double rectangle;
+	/** Couleur de la voiture **/
+	Color couleur;
+	/** Forme de la voiture **/
+	Ellipse2D circle;
 
 	/**
 	 * Constructeur qui créé la forme du bloc de glace
@@ -29,9 +33,11 @@ public class DessinCollisionBouleDeNeige {
 	 * @param pos Position de la voiture
 	 * @param dia Diametre de la voiture
 	 */
-	public DessinCollisionBouleDeNeige(Vecteur2D pos, double dia) {
+	public DessinCollisionBouleDeNeige(Vecteur2D pos, double dia, Color col, Ellipse2D cercle) {
 		this.position = pos;
 		this.diametre = dia;
+		this.couleur = col;
+		this.circle = cercle;
 		creerLaGeometrie();
 	}
 
@@ -45,6 +51,8 @@ public class DessinCollisionBouleDeNeige {
 
 		g2dCop.setColor(Color.white);
 		g2dCop.fill(rectangle);
+		g2dCop.setColor(couleur);
+		g2dCop.fill(circle);
 	}
 
 	/**
