@@ -348,7 +348,7 @@ public class JeuOptions extends JPanel {
 		btnDroite1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ChangementImage();
+				changementImage();
 			}
 		});
 		add(btnDroite1);
@@ -451,7 +451,7 @@ public class JeuOptions extends JPanel {
 	}
 	
 	
-	public void ChangementImage() {
+	public void changementImage() {
 		
 		indexCouleur2++;
 		if (indexCouleur2 == couleurs2.length) {

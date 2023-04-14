@@ -571,7 +571,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		try {
 			voiture.collisionEntreVoiture(voiture2);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		repaint();
@@ -711,7 +711,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("angleV1", 0, voiture.getAngle());
 		pcs.firePropertyChange("nombreToursV1", 0,
 				regroupement.getListePisteDeDepart().get(0).getVoiture().getNombreToursFaits());
-
+		pcs.firePropertyChange("nombreToursV2", 0,
+				regroupement.getListePisteDeDepart().get(0).getVoiture2().getNombreToursFaits());
 		pcs.firePropertyChange("accEnXV2", 0, voiture2.getAccel().getX());
 		pcs.firePropertyChange("accEnYV2", 0, voiture2.getAccel().getY());
 		pcs.firePropertyChange("vitEnXV2", 0, voiture2.getVitesse().getX());
@@ -719,8 +720,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("posEnXV2", 0, voiture2.getPosition().getX());
 		pcs.firePropertyChange("posEnYV2", 0, voiture2.getPosition().getY());
 		pcs.firePropertyChange("angleV2", 0, voiture2.getAngle());
-		pcs.firePropertyChange("nombreToursV2", 0,
-				regroupement.getListePisteDeDepart().get(0).getVoiture2().getNombreToursFaits());
+		pcs.firePropertyChange("masse1", 0, voiture.getMasseEnKg());
+		pcs.firePropertyChange("masse2", 0, voiture2.getMasseEnKg());
+		pcs.firePropertyChange("diametre1", 0, voiture.getDiametre());
+		pcs.firePropertyChange("diametre2", 0, voiture2.getDiametre());
+	
 		if (regroupement.getObjSpecial() != null
 				&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
 			if (forceDeLancement > 150) {
@@ -756,7 +760,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		Vecteur2D forceTotal = new Vecteur2D(MoteurPhysique.calculerForceFrottement(0.45,
 				regroupement.getListePisteDeDepart().get(0).getVoiture().getMasseEnKg(),
 				regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()));
-
+		pcs.firePropertyChange("frottementEnXV1", 0, forceTotal.getX());
+		pcs.firePropertyChange("frottementEnYV1", 0, forceTotal.getY());
 		if (bas == true) {
 
 			forceFreinage = new Vecteur2D(MoteurPhysique
@@ -766,7 +771,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					.multiplie(2));
 
 			forceTotal = forceTotal.additionne(forceFreinage);
-
+			System.out.println("s");
+			pcs.firePropertyChange("freinageEnXV1", 0, forceFreinage.getX());
+			pcs.firePropertyChange("freinageEnYV1", 0, forceFreinage.getY());
 		}
 		if (haut == false && regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() != 0) {
 
@@ -819,7 +826,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				}
 			}
 		}
-
+		pcs.firePropertyChange("frottementEnXV2", 0, forceTotal2.getX());
+		pcs.firePropertyChange("frottementEnYV2", 0, forceTotal2.getY());
 		regroupement.avancerGroupe(deltaT, tempsTotalEcoule);
 		arretQuandFini();
 		arretMusic();

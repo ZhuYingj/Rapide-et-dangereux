@@ -31,6 +31,7 @@ public class ZoneVitesse extends JPanel {
 	/**
 	 * Methode qui permet de construire les deux tableaux
 	 */
+	// Ludovic Julien
 	public ZoneVitesse() {
 		temps = new ArrayList<>(Arrays.asList(0));
 		vitesses = new ArrayList<>(Arrays.asList(0));
@@ -39,6 +40,7 @@ public class ZoneVitesse extends JPanel {
 	/**
 	 * methode qui clear le tableau vitesse
 	 */
+	// Ludovic Julien
 	public void renouvlerVitesse() {
 		vitesses.clear();
 		repaint();
@@ -47,6 +49,7 @@ public class ZoneVitesse extends JPanel {
 	/**
 	 * methode qui clear le tableau temps
 	 */
+	// Ludovic Julien
 	public void renouvlerTemps() {
 		temps.clear();
 		repaint();
@@ -57,6 +60,7 @@ public class ZoneVitesse extends JPanel {
 	 * 
 	 * @param vitesse la vitesse actuel de la voiture
 	 */
+	// Ludovic Julien
 	public void ajouterVitesse(double vitesse) {
 		vitesses.add((int) vitesse);
 		repaint();
@@ -66,6 +70,7 @@ public class ZoneVitesse extends JPanel {
 	 * Methode qui permet de dessiner le graphiquet sur la zone d'animation a l'aide
 	 * de g2d
 	 */
+	// Ludovic Julien
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -78,13 +83,13 @@ public class ZoneVitesse extends JPanel {
 
 		g2d.setColor(Color.BLACK);
 		g2d.drawLine(x, y + hauteur, x + largeur, y + hauteur); // Axe horizontal
-		g2d.drawLine( x + largeur, y + hauteur, x + largeur-z, y + hauteur-z);
-		g2d.drawLine( x + largeur, y + hauteur, x + largeur-z, y + hauteur+z);
+		g2d.drawLine(x + largeur, y + hauteur, x + largeur - z, y + hauteur - z);
+		g2d.drawLine(x + largeur, y + hauteur, x + largeur - z, y + hauteur + z);
 		g2d.drawLine(x, y, x, y + hauteur); // Axe vertical
-		g2d.drawLine(x, y + hauteur, x-z, y + hauteur-z);
-		g2d.drawLine(x, y + hauteur, x+z, y + hauteur-z);
-		
-		g2d.drawLine(x, y+(largeur/2), x-z, y+(largeur/2));
+		g2d.drawLine(x, y + hauteur, x - z, y + hauteur - z);
+		g2d.drawLine(x, y + hauteur, x + z, y + hauteur - z);
+
+		g2d.drawLine(x, y + (largeur / 2), x - z, y + (largeur / 2));
 
 		g.setColor(Color.BLUE);
 
@@ -101,13 +106,12 @@ public class ZoneVitesse extends JPanel {
 	/**
 	 * methode qui ajoute une seconde au tableau temps
 	 */
+	// Ludovic Julien
 	public void ajouterTemps() {
 		int k;
 		int n = temps.size();
 		temps.add(n);
 		repaint();
 	}
-	
 
-	
 }
