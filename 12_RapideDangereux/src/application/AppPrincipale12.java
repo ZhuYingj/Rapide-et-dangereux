@@ -695,6 +695,8 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenOptionMontre fenêtre des paramètres a choisir dans le mode course
 	 *                        contre la montre
 	 * @param fenScience      fenetre avec le mode scientifique
+	 * @param fenSansScience  fenetre avec le mode sans les paramètres non
+	 *                        scientifique
 	 */
 // Alexis Pineda-Alvarado
 	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
