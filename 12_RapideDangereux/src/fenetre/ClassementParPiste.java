@@ -11,8 +11,9 @@ import java.beans.PropertyChangeSupport;
 import java.awt.event.ActionEvent;
 
 /**
+ * Class qui permet de creer et gerer le classement par piste
  * 
- * @author
+ * @author Ludovic Julien
  *
  */
 public class ClassementParPiste extends JPanel {
@@ -27,7 +28,7 @@ public class ClassementParPiste extends JPanel {
 	}
 
 	/**
-	 * 
+	 * Creation de la fenetre.
 	 */
 	public ClassementParPiste() {
 		setLayout(null);

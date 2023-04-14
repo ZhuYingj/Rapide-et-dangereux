@@ -72,12 +72,19 @@ public class ZoneVitesse extends JPanel {
 
 		int x = 50;
 		int y = 10;
+		int z = 3;
 		int largeur = 200;
 		int hauteur = 200;
 
 		g2d.setColor(Color.BLACK);
 		g2d.drawLine(x, y + hauteur, x + largeur, y + hauteur); // Axe horizontal
+		g2d.drawLine( x + largeur, y + hauteur, x + largeur-z, y + hauteur-z);
+		g2d.drawLine( x + largeur, y + hauteur, x + largeur-z, y + hauteur+z);
 		g2d.drawLine(x, y, x, y + hauteur); // Axe vertical
+		g2d.drawLine(x, y + hauteur, x-z, y + hauteur-z);
+		g2d.drawLine(x, y + hauteur, x+z, y + hauteur-z);
+		
+		g2d.drawLine(x, y+(largeur/2), x-z, y+(largeur/2));
 
 		g.setColor(Color.BLUE);
 

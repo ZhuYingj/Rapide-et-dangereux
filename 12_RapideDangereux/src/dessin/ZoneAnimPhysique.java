@@ -9,10 +9,12 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import application.GestionnaireDeFichiersSurLeBureau;
+import fenetre.FenetreJeuScientifique;
 import geometrie.Vecteur2D;
 import interfaces.TypeObjetSpecial;
 import interfaces.TypePiste;
@@ -103,6 +105,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private int angleVoitureDegre2;
 
 	private double forceDeLancement = 50;
+	
+	private Clip newClip;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -807,6 +811,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		regroupement.avancerGroupe(deltaT, tempsTotalEcoule);
 		arretQuandFini();
+		arretMusic();
 	}
 
 	/**
@@ -1072,5 +1077,26 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.creeBoiteDansListe();
 
 	}
-
+	
+	
+	
+	/**
+	 * méthode qui permet d'arreter la musique quand la partie est terminé
+	 * 
+	 */
+	//Ludovic Julien
+	public void arretMusic() {
+		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture().getNombreToursFaits()) {
+			if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2().getNombreToursFaits()) {
+			try {
+				 newClip = FenetreJeuScientifique.getClip();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (newClip != null) {
+				newClip.stop();
+			}
+		}	
+	}
+}
 }

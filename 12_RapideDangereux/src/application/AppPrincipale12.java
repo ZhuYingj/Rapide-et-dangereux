@@ -375,29 +375,29 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenSansScience	la fenetre non scientifique
 	 * @param fenRecord			la fenetre avec le classement par piste
 	 */
-	//Ludovic Julien
-//	public void actionFenOptions2(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
-//			FenetreJeuSansScientifique fenSansScience, ClassementParPiste fenRecord) {
-//		switch (evt.getPropertyName()) {
-//		case "SKIN":
-//			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
-//					.setSkin((Color) evt.getNewValue());
-//			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
-//					.setSkin((Color) evt.getNewValue());
-//			break;
-//		case "SKIN2":
-//			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
-//					.setSkin((Color) evt.getNewValue());
-//			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
-//					.setSkin((Color) evt.getNewValue());
-//			break;
-//		case "RECORD":
-//			fenRecord.setVisible(true);
-//			fenOptions.setVisible(false);
-//			setContentPane(fenRecord);
-//			break;
-//		}
-//	}
+	Ludovic Julien
+	public void actionFenOptions2(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
+			FenetreJeuSansScientifique fenSansScience, ClassementParPiste fenRecord) {
+		switch (evt.getPropertyName()) {
+		case "SKIN":
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setSkin((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setSkin((Color) evt.getNewValue());
+			break;
+		case "SKIN2":
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setSkin((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setSkin((Color) evt.getNewValue());
+			break;
+		case "RECORD":
+			fenRecord.setVisible(true);
+			fenOptions.setVisible(false);
+			setContentPane(fenRecord);
+			break;
+		}
+	}
 
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés

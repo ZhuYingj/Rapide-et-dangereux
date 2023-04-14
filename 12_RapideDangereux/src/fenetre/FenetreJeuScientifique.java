@@ -66,7 +66,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblPositionEnXV2;
 	private JLabel lblPositionEnYV2;
 	private JLabel lblNombreToursVoiture2;
-	private Clip clip;
+	private static Clip clip;
 	private ZoneVitesse zoneVitesse2;
 	private ZoneVitesse zoneVitesse;
 	private Timer timerVitesse;
@@ -85,21 +85,6 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 
-		/**
-		 * lit le fichier audio
-		 */
-		// Ludovic Julien
-		try {
-
-		    clip = AudioSystem.getClip();
-		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
-		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
-		    clip.open(inputStream);
-		   
-		}  catch (Exception ex) {
-			ex.printStackTrace();
-
-		}
 
 		JPanel panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
@@ -562,6 +547,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel_4.setBounds(948, 538, 46, 14);
 		add(lblNewLabel_4);
 		graphiqueVitesse();
+		audioMusic();
 	}
 
 	public JButton getBtnStart() {
@@ -675,5 +661,35 @@ public class FenetreJeuScientifique extends JPanel {
 			}
 		});
 	}
+	
+	
+	/**
+	 * Méthode qui permet de lire un fichier audio et de l'affecter a une variable 
+	 */
+	// Ludovic Julien
+	private void audioMusic() {
+	try {
+
+	    clip = AudioSystem.getClip();
+	    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+	    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+	    clip.open(inputStream);
+	   
+	}  catch (Exception ex) {
+		ex.printStackTrace();
+
+	}
+	}
+	
+	
+	/**
+	 * méthode qui retourne la valeur de la variable audio
+	 * 
+	 * @return clip
+	 */
+	public static Clip getClip() {
+		return clip;
+	}
+	
 
 }
