@@ -70,6 +70,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private ZoneVitesse zoneVitesse2;
 	private ZoneVitesse zoneVitesse;
 	private Timer timerVitesse;
+	private JPanel panelObjetEtGraphique;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -85,7 +86,22 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 
-		JPanel panelObjetEtGraphique = new JPanel();
+
+		/**
+		 * lit le fichier audio
+		 */
+		// Ludovic Julien
+		try {
+		    clip = AudioSystem.getClip();
+		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+		    clip.open(inputStream);
+		   
+		} catch (Exception ex) {
+		    ex.printStackTrace();
+		}
+
+		panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
 		add(panelObjetEtGraphique);
 		panelObjetEtGraphique.setLayout(null);
@@ -152,7 +168,10 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 				timerVitesse.start();
-				clip.start();
+				 clip.start();
+
+			
+
 			}
 		});
 		btnStart.setBounds(10, 650, 89, 76);
