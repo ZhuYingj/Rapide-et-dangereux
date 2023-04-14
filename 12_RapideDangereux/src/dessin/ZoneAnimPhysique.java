@@ -817,12 +817,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void arretQuandFini() {
 		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
 				.getNombreToursFaits()) {
-			JOptionPane.showMessageDialog(null, "LA VOITURE 1 A GAGNÉE!!!");
+			System.out.println("LA VOITURE 1 A GAGNÉE!!!");
+
 			arreter();
 
 		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 				.getNombreToursFaits()) {
-			JOptionPane.showMessageDialog(null, "LA VOITURE 2 A GAGNÉE!!!");
+			System.out.println("LA VOITURE 2 A GAGNÉE!!!");
+			arreter();
 
 		}
 

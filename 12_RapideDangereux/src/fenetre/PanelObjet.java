@@ -35,7 +35,7 @@ import java.awt.Color;
 public class PanelObjet extends JPanel {
 	public PanelObjet() {
 		setBackground(Color.WHITE);
-		setForeground(Color.WHITE);
+		setForeground(Color.BLACK);
 	}
 
 	private final int X_OBJET = 75;
@@ -58,7 +58,7 @@ public class PanelObjet extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 
-		blocMystere = new BlocMystere(75, new Vecteur2D(X_OBJET, Y_OBJET));
+		blocMystere = new BlocMystere(87, new Vecteur2D(X_OBJET, Y_OBJET));
 		pisteDeDepart = new PisteDeDepart(X_OBJET * 3, Y_OBJET);
 		pisteHorizontale = new PisteHorizontale(X_OBJET, Y_OBJET * 7);
 		pisteVerticale = new PisteVerticale(X_OBJET * 3, Y_OBJET * 7);
@@ -77,7 +77,7 @@ public class PanelObjet extends JPanel {
 		pisteVirageGauche.dessiner(g2d);
 		pisteVirageHaut.dessiner(g2d);
 		accelerateur.dessiner(g2d);
-		Image boiteMystere = OutilsImage.lireImageEtRedimensionner("LuckyBox.png", 80, 80);
+		Image boiteMystere = OutilsImage.lireImageEtRedimensionner("LuckyBox.png", 87, 87);
 		g2d.drawImage(boiteMystere, (int) this.blocMystere.getPosition().getX(),
 				(int) this.blocMystere.getPosition().getY(), null);
 
