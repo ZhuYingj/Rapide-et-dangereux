@@ -199,6 +199,12 @@ public class AppPrincipale12 extends JFrame {
 				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience);
 			}
 		});
+		
+		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				actionFenOptions2(evt, fenJeuScience, fenOptions, fenSansScience, fenRecord);
+			}
+		});
 
 		fenRecord.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -273,9 +279,9 @@ public class AppPrincipale12 extends JFrame {
 //		
 //	}
 
-	public Clip getClip() {
-		return clip;
-	}
+//	public Clip getClip() {
+//		return clip;
+//	}
 
 	/**
 	 * Méthode qui permet de changer de fenetre selon le check box
@@ -360,7 +366,7 @@ public class AppPrincipale12 extends JFrame {
 			break;
 		}
 	}
-
+	
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
 	 * à la fenetre de jeu d'options
