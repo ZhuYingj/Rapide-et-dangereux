@@ -22,6 +22,7 @@ import utilitaireObjets.Voiture;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.Color;
 
 /**
  * Classe qui permet de crée un panel composé d'objet. Ce panel servira de
@@ -32,6 +33,10 @@ import java.awt.event.MouseAdapter;
  */
 
 public class PanelObjet extends JPanel {
+	public PanelObjet() {
+		setBackground(Color.WHITE);
+		setForeground(Color.BLACK);
+	}
 
 	private final int X_OBJET = 75;
 	private final int Y_OBJET = 20;
@@ -50,9 +55,10 @@ public class PanelObjet extends JPanel {
 	 */
 //Tan Tommy Rin
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 
-		blocMystere = new BlocMystere(75, new Vecteur2D(X_OBJET, Y_OBJET));
+		blocMystere = new BlocMystere(87, new Vecteur2D(X_OBJET, Y_OBJET));
 		pisteDeDepart = new PisteDeDepart(X_OBJET * 3, Y_OBJET);
 		pisteHorizontale = new PisteHorizontale(X_OBJET, Y_OBJET * 7);
 		pisteVerticale = new PisteVerticale(X_OBJET * 3, Y_OBJET * 7);
@@ -71,7 +77,7 @@ public class PanelObjet extends JPanel {
 		pisteVirageGauche.dessiner(g2d);
 		pisteVirageHaut.dessiner(g2d);
 		accelerateur.dessiner(g2d);
-		Image boiteMystere = OutilsImage.lireImageEtRedimensionner("LuckyBox.png", 75, 75);
+		Image boiteMystere = OutilsImage.lireImageEtRedimensionner("LuckyBox.png", 87, 87);
 		g2d.drawImage(boiteMystere, (int) this.blocMystere.getPosition().getX(),
 				(int) this.blocMystere.getPosition().getY(), null);
 

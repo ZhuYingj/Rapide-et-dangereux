@@ -66,7 +66,11 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblPositionEnXV2;
 	private JLabel lblPositionEnYV2;
 	private JLabel lblNombreToursVoiture2;
-	private Clip clip;
+	private static Clip clip;
+	private ZoneVitesse zoneVitesse2;
+	private ZoneVitesse zoneVitesse;
+	private Timer timerVitesse;
+	private JPanel panelObjetEtGraphique;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -82,6 +86,7 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 
+
 		/**
 		 * lit le fichier audio
 		 */
@@ -96,42 +101,42 @@ public class FenetreJeuScientifique extends JPanel {
 		    ex.printStackTrace();
 		}
 
-		JPanel panelObjetEtGraphique = new JPanel();
+		panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
 		add(panelObjetEtGraphique);
 		panelObjetEtGraphique.setLayout(null);
 
-		ZoneVitesse zoneVitesse2 = new ZoneVitesse();
+		zoneVitesse2 = new ZoneVitesse();
 		zoneVitesse2.setBounds(254, 0, 250, 274);
 		panelObjetEtGraphique.add(zoneVitesse2);
+		zoneVitesse2.setLayout(null);
 
-		ZoneVitesse zoneVitesse = new ZoneVitesse();
+		JLabel lblNewLabel_1 = new JLabel("Graphique de vitesse de la voiture2");
+		lblNewLabel_1.setBounds(53, 0, 227, 32);
+		zoneVitesse2.add(lblNewLabel_1);
+
+		JLabel lblNewLabel_5 = new JLabel("V(m/s)");
+		lblNewLabel_5.setBounds(10, 18, 46, 14);
+		zoneVitesse2.add(lblNewLabel_5);
+
+		JLabel lblNewLabel_6 = new JLabel("T(s)");
+		lblNewLabel_6.setBounds(221, 211, 46, 14);
+		zoneVitesse2.add(lblNewLabel_6);
+
+		zoneVitesse = new ZoneVitesse();
 		zoneVitesse.setBounds(-41, 0, 250, 274);
 		panelObjetEtGraphique.add(zoneVitesse);
+		zoneVitesse.setLayout(null);
 
-		/**
-		 * Timer qui permet de prendre les donner de la vitesse des deux voiture
-		 */
-		// Ludovic Julien
-		Timer timerVitesse = new Timer(50, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				double vitesseActuelle1 = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture()
-						.getVitesse().module();
-				double vitesseActuelle2 = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0)
-						.getVoiture2().getVitesse().module();
-				if (vitesseActuelle1 < 0) {
-					vitesseActuelle1 = (vitesseActuelle1 * -1);
-				}
-				if (vitesseActuelle2 < 0) {
-					vitesseActuelle2 = (vitesseActuelle2 * -1);
-				}
-				zoneVitesse2.ajouterVitesse(vitesseActuelle2);
-				zoneVitesse.ajouterVitesse(vitesseActuelle1);
-				zoneVitesse2.ajouterTemps();
-				zoneVitesse.ajouterTemps();
+		JLabel lblNewLabel = new JLabel("Graphique de vitesse de la voiture1");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(40, 0, 227, 32);
+		zoneVitesse.add(lblNewLabel);
 
-			}
-		});
+		JLabel lblNewLabel_3 = new JLabel("T(s)");
+		lblNewLabel_3.setBounds(221, 211, 46, 14);
+		zoneVitesse.add(lblNewLabel_3);
+
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -164,6 +169,9 @@ public class FenetreJeuScientifique extends JPanel {
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 				timerVitesse.start();
 				 clip.start();
+
+			
+
 			}
 		});
 		btnStart.setBounds(10, 650, 89, 76);
@@ -547,6 +555,17 @@ public class FenetreJeuScientifique extends JPanel {
 
 		panelObjetEtGraphique.add(progressBarFroce2);
 
+		JLabel lblNewLabel_2 = new JLabel("V");
+		lblNewLabel_2.setBounds(963, 524, 56, 14);
+		add(lblNewLabel_2);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
+
+		JLabel lblNewLabel_4 = new JLabel("(m/s)");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNewLabel_4.setBounds(948, 538, 46, 14);
+		add(lblNewLabel_4);
+		graphiqueVitesse();
+		audioMusic();
 	}
 
 	public JButton getBtnStart() {
@@ -627,10 +646,74 @@ public class FenetreJeuScientifique extends JPanel {
 
 			Double newData = new Double((double) evt.getNewValue());
 			int valeur = newData.intValue();
+			progressBarFroce.setMinimum(0);
+			progressBarFroce.setMaximum(100);
+			progressBarFroce.setValue(valeur - 50);
+			break;
+		case "ForceLance2":
+
+			Double newData2 = new Double((double) evt.getNewValue());
+			int valeur2 = newData2.intValue();
 			progressBarFroce2.setMinimum(0);
 			progressBarFroce2.setMaximum(100);
-			progressBarFroce2.setValue(valeur - 50);
+			progressBarFroce2.setValue(valeur2 - 50);
+			break;
+
+		}
+
+	}
+
+	/**
+	 * Medote Timer qui permet de prendre les donner de la vitesse des deux voiture
+	 */
+	// Ludovic Julien
+	private void graphiqueVitesse() {
+		timerVitesse = new Timer(50, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double vitesseActuelle1 = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+						.getVitesse().module();
+				double vitesseActuelle2 = zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0)
+						.getVoiture2().getVitesse().module();
+				if (vitesseActuelle1 < 0) {
+					vitesseActuelle1 = (vitesseActuelle1 * -1);
+				}
+				if (vitesseActuelle2 < 0) {
+					vitesseActuelle2 = (vitesseActuelle2 * -1);
+				}
+				zoneVitesse2.ajouterVitesse(vitesseActuelle2);
+				zoneVitesse.ajouterVitesse(vitesseActuelle1);
+				zoneVitesse2.ajouterTemps();
+				zoneVitesse.ajouterTemps();
+
+			}
+		});
+	}
+
+	/**
+	 * Méthode qui permet de lire un fichier audio et de l'affecter a une variable
+	 */
+	// Ludovic Julien
+	private void audioMusic() {
+		try {
+
+			clip = AudioSystem.getClip();
+			URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+			clip.open(inputStream);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
 
 		}
 	}
+
+	/**
+	 * méthode qui retourne la valeur de la variable audio
+	 * 
+	 * @return clip
+	 */
+	public static Clip getClip() {
+		return clip;
+	}
+
 }

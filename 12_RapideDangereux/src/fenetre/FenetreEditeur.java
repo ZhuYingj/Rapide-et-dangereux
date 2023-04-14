@@ -49,7 +49,6 @@ public class FenetreEditeur extends JPanel {
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
 	private String pisteCourante = "Piste1.dat";
 
-
 	private JButton btnSauvegarde;
 	private JButton btnJouer;
 	private JButton btnRetour;
@@ -61,8 +60,8 @@ public class FenetreEditeur extends JPanel {
 	private PanelObjet panelObjet;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	
-	private JLabel lblNewLabel;
+
+	private JLabel lblImage;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -89,16 +88,14 @@ public class FenetreEditeur extends JPanel {
 				pcs.firePropertyChange("Retour", null, -1);
 			}
 		});
-		btnRetour.setBounds(10, 11, 89, 23);
-		add(btnRetour);
 
 		panelObjet = new PanelObjet();
+		panelObjet.setForeground(Color.WHITE);
 		panelObjet.setBackground(Color.WHITE);
-		panelObjet.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelObjet.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		panelObjet.setBounds(1074, 11, 386, 720);
 		add(panelObjet);
 		panelObjet.setLayout(null);
-		panelObjet.setEnabled(false);
 
 		btnAjouterAccelerateur = new JButton("+");
 		btnAjouterAccelerateur.addActionListener(new ActionListener() {
@@ -163,6 +160,7 @@ public class FenetreEditeur extends JPanel {
 		});
 		btnAjouterPisteVirageGauche.setBounds(217, 378, 41, 23);
 		panelObjet.add(btnAjouterPisteVirageGauche);
+		
 
 		JButton btnSupprimerPisteHorizontale = new JButton("-");
 		btnSupprimerPisteHorizontale.addActionListener(new ActionListener() {
@@ -262,6 +260,8 @@ public class FenetreEditeur extends JPanel {
 		});
 		btnSupprimerPisteVirageHaut.setBounds(114, 517, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageHaut);
+		btnRetour.setBounds(10, 11, 89, 23);
+		add(btnRetour);
 
 		btnSauvegarde = new JButton("SAUVEGARDER LA PISTE");
 		btnSauvegarde.setEnabled(false);
@@ -300,13 +300,12 @@ public class FenetreEditeur extends JPanel {
 		add(btnJouer);
 
 		panelRegroupement = new PanelRegroupement();
+		panelRegroupement.setForeground(Color.WHITE);
 
 		panelRegroupement.setBorder(new LineBorder(new Color(255, 255, 255), 3));
 		panelRegroupement.setBounds(224, 97, 769, 400);
 		add(panelRegroupement);
 		panelRegroupement.setLayout(null);
-
-	
 
 		JLabel lblNbM = new JLabel("80 m");
 		lblNbM.setForeground(Color.WHITE);
@@ -319,14 +318,14 @@ public class FenetreEditeur extends JPanel {
 		lblFleche.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblFleche.setBounds(231, 82, 82, 14);
 		add(lblFleche);
-		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(0, 0, 1600, 800);
-		add(lblNewLabel);
+
+		lblImage = new JLabel("");
+		lblImage.setBounds(0, 0, 1600, 800);
+		add(lblImage);
 		
 		URL urlBackgroudNoir = getClass().getClassLoader().getResource("blackwaves.gif");
 		ImageIcon noir = new ImageIcon(urlBackgroudNoir);
-		lblNewLabel.setIcon(noir);
+		lblImage.setIcon(noir);
 
 	}
 

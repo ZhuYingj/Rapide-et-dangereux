@@ -9,9 +9,12 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.net.URL;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -19,6 +22,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import fenetre.ClassementParPiste;
 import fenetre.FenetreEditeur;
@@ -35,6 +39,7 @@ import interfaces.TypePiste;
  * 
  * @author Alexis Pineda-Alvarado
  * @author Tan Tommy Rin
+ * @author Ludovic Julien
  *
  */
 
@@ -47,6 +52,8 @@ public class AppPrincipale12 extends JFrame {
 
 	private String sousDossierSurBureau = "SauvegardePiste";
 
+	private Clip clip;
+
 	File fichierDeTravail = new File(System.getProperty("user.home"),
 			"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
 
@@ -58,6 +65,7 @@ public class AppPrincipale12 extends JFrame {
 	// Alexis Pineda-Alvarado
 
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -66,6 +74,17 @@ public class AppPrincipale12 extends JFrame {
 					frame.requestFocus();
 					frame.checkBoxModeNonScientifique.setEnabled(false);
 //					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+						if ("Nimbus".equals(info.getName())) {
+							try {
+								UIManager.setLookAndFeel(info.getClassName());
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							break;
+						}
+					} // fin for
+
 					frame.addKeyListener(new KeyAdapter() {
 						@Override
 						public void keyPressed(KeyEvent e) {
@@ -177,7 +196,13 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience, fenRecord);
+				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience);
+			}
+		});
+		
+		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				actionFenOptions2(evt, fenJeuScience, fenOptions, fenSansScience, fenRecord);
 			}
 		});
 
@@ -226,7 +251,37 @@ public class AppPrincipale12 extends JFrame {
 		});
 		mnMenu.add(checkBoxModeNonScientifique);
 
+		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Effet Sonnor");
+		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				actionCheckBox2();
+			}
+		});
+		mnMenu.add(checkBoxModeNonScientifique);
+
 	}
+
+//	public void actionCheckBox2()  {
+//		try {
+//		    clip = AudioSystem.getClip();
+//		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+//		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+//		    clip.open(inputStream);
+//		   
+//		} catch (Exception ex) {
+//		    ex.printStackTrace();
+//		}
+//		if (checkBoxModeNonScientifique.isSelected()) {
+//			
+//		}else {
+//			clip = null;
+//		}
+//		
+//	}
+
+//	public Clip getClip() {
+//		return clip;
+//	}
 
 	/**
 	 * Méthode qui permet de changer de fenetre selon le check box
@@ -257,7 +312,7 @@ public class AppPrincipale12 extends JFrame {
 
 // Tan Tommy Rin
 	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
-			FenetreJeuSansScientifique fenSansScience, ClassementParPiste fenRecord) {
+			FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
 
 		case "COMMENCER!":
@@ -293,12 +348,39 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
-			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setNombreToursFaits(0);
-			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
-			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture().setNombreToursFaits(0);
-			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setNombreToursFaits(0);
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setNombreToursFaits(0);
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setNombreToursFaits(0);
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setNombreToursFaits(0);
 			break;
+		case "NBBOITE":
+			Double newData = new Double((double) evt.getNewValue());
+			int valeur = newData.intValue();
 
+			fenJeuScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
+			fenSansScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
+			break;
+		}
+	}
+	
+	/**
+	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
+	 * à la fenetre de jeu d'options
+	 * 
+	 * @param evt            evenement
+	 * @param fenJeuScience  la fenetre de jeu avec mode science activé
+	 * @param fenOptions     la fenetre de jeu d'options
+	 * @param fenSansScience la fenetre non scientifique
+	 * @param fenRecord      la fenetre avec le classement par piste
+	 */
+//	Ludovic Julien
+	public void actionFenOptions2(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
+			FenetreJeuSansScientifique fenSansScience, ClassementParPiste fenRecord) {
+		switch (evt.getPropertyName()) {
 		case "SKIN":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
 					.setSkin((Color) evt.getNewValue());
@@ -311,13 +393,6 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
 					.setSkin((Color) evt.getNewValue());
 			break;
-		case "NBBOITE":
-			Double newData = new Double((double) evt.getNewValue());
-			int valeur = newData.intValue();
-
-			fenJeuScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
-			fenSansScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
-			break;
 		case "RECORD":
 			fenRecord.setVisible(true);
 			fenOptions.setVisible(false);
@@ -327,17 +402,18 @@ public class AppPrincipale12 extends JFrame {
 	}
 
 	/**
-	 * Méthode ...
+	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
+	 * à la fenetre de classement par piste
 	 * 
-	 * @param evt
-	 * @param fenOptions
-	 * @param fenRecord
+	 * @param evt        evenement
+	 * @param fenOptions la fenetre de jeu d'options
+	 * @param fenRecord  la fenetre avec le classement par piste
 	 */
-	// TON NOM
+	// Ludovic Julien
 	public void actionfenRecord(PropertyChangeEvent evt, JeuOptions fenOptions, ClassementParPiste fenRecord) {
 		switch (evt.getPropertyName()) {
 		case "QUITTER":
-			
+
 			fenOptions.setVisible(true);
 			fenRecord.setVisible(false);
 			setContentPane(fenOptions);
@@ -655,15 +731,15 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			break;
-		case "VITESSEMAXINTERMEDIAIRE2"	:
+		case "VITESSEMAXINTERMEDIAIRE2":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			break;
-		case "VITESSEMAXAVANCE2" : 
+		case "VITESSEMAXAVANCE2":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			break;
-		case "NBRDETOUR" :
+		case "NBRDETOUR":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
 			break;

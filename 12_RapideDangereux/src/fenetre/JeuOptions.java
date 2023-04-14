@@ -348,17 +348,11 @@ public class JeuOptions extends JPanel {
 		btnDroite1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				indexCouleur2++;
-				if (indexCouleur2 == couleurs2.length) {
-					indexCouleur2 = 0;
-				}
-				PanelV2.setBackground(couleurs2[indexCouleur2]);
+				ChangementImage();
 			}
 		});
 		add(btnDroite1);
 
-		// Ludovic Julien
-		// permet d'afficher le classement par piste
 		JButton btnRecorsPiste = new JButton("Records par piste !");
 		btnRecorsPiste.setForeground(new Color(0, 0, 0));
 		btnRecorsPiste.setBackground(Color.CYAN);
@@ -454,6 +448,16 @@ public class JeuOptions extends JPanel {
 				imgVenice.flush();
 			}
 		}
+	}
+	
+	
+	public void ChangementImage() {
+		
+		indexCouleur2++;
+		if (indexCouleur2 == couleurs2.length) {
+			indexCouleur2 = 0;
+		}
+//		PanelV2.setBackground(couleurs2[indexCouleur2]);
 	}
 	
 }

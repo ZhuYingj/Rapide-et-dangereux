@@ -37,7 +37,6 @@ public class FenetreOptionMontre extends JPanel {
 
 	private TypePiste type = TypePiste.MEXIQUE;
 	private Image imageActuelle;
-	private Regroupement regroupement;
 	private ZoneApercuPiste zoneApercuPiste;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private JSlider slider;
@@ -81,7 +80,7 @@ public class FenetreOptionMontre extends JPanel {
 		zoneApercuPiste.setBounds(0, 0, 700, 439);
 		PanelApercu.add(zoneApercuPiste);
 
-		JButton btnCanada = new JButton("Canada");
+		btnCanada = new JButton("Canada");
 		btnCanada.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -97,7 +96,7 @@ public class FenetreOptionMontre extends JPanel {
 			imgCanada.flush();
 		}
 
-		JButton btnItalie = new JButton("Italie");
+		btnItalie = new JButton("Italie");
 		btnItalie.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -113,7 +112,7 @@ public class FenetreOptionMontre extends JPanel {
 			imgItalia.flush();
 		}
 
-		JButton btnMexique = new JButton("Mexique");
+		btnMexique = new JButton("Mexique");
 		btnMexique.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -266,13 +265,14 @@ public class FenetreOptionMontre extends JPanel {
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
 	}
+
 	/**
 	 * Méthode qui choisie la piste et une photo de fond lorsque la souris et sur le
 	 * bouton
 	 * 
 	 * @param e evenement de la souris
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public void selectionImageCanada(MouseEvent e) {
 		if (btnCanada.contains(e.getX(), e.getY())) {
 			type = TypePiste.CANADA;
@@ -294,7 +294,7 @@ public class FenetreOptionMontre extends JPanel {
 	 * 
 	 * @param e evenement de la souris
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public void selectionImageMexique(MouseEvent e) {
 		if (btnMexique.contains(e.getX(), e.getY())) {
 			type = TypePiste.MEXIQUE;
