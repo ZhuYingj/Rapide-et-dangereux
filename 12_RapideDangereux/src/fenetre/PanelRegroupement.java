@@ -30,6 +30,7 @@ import utilitaireObjets.PisteVirageBas;
 import utilitaireObjets.PisteVirageDroit;
 import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
+import utilitaireObjets.Fumee;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -76,6 +77,7 @@ public class PanelRegroupement extends JPanel {
 	private ArrayList<PisteDeDepart> listePisteDeDepart = new ArrayList<PisteDeDepart>();
 	private ArrayList<PisteVirageDroit> listePisteVirageDroit = new ArrayList<PisteVirageDroit>();
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
+	private ArrayList<Fumee> listeFumee  = new ArrayList<Fumee>();
 
 	private boolean objetSelectionne = false;
 	private boolean jouer = false;
@@ -952,6 +954,15 @@ public class PanelRegroupement extends JPanel {
 
 	public ArrayList<PisteVirageBas> getListePisteVirageBas() {
 		return listePisteVirageBas;
+	}
+	
+	
+	public ArrayList<Fumee> getListeFumee() {
+		return listeFumee;
+	}
+
+	public void setListeFumee(ArrayList<Fumee> listeFumee) {
+		this.listeFumee = listeFumee;
 	}
 
 	public void setListePisteVirageBas(ArrayList<PisteVirageBas> listePisteVirageBas) {

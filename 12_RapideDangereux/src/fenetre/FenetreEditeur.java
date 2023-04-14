@@ -22,6 +22,7 @@ import geometrie.Vecteur2D;
 import interfaces.TypePiste;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BlocMystere;
+import utilitaireObjets.Fumee;
 import utilitaireObjets.PisteDeDepart;
 import utilitaireObjets.PisteHorizontale;
 import utilitaireObjets.PisteVerticale;
@@ -160,7 +161,6 @@ public class FenetreEditeur extends JPanel {
 		});
 		btnAjouterPisteVirageGauche.setBounds(217, 378, 41, 23);
 		panelObjet.add(btnAjouterPisteVirageGauche);
-		
 
 		JButton btnSupprimerPisteHorizontale = new JButton("-");
 		btnSupprimerPisteHorizontale.addActionListener(new ActionListener() {
@@ -260,6 +260,24 @@ public class FenetreEditeur extends JPanel {
 		});
 		btnSupprimerPisteVirageHaut.setBounds(114, 517, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageHaut);
+
+		JButton btnAjouterFumee = new JButton("+");
+		btnAjouterFumee.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ajouterFumee();
+			}
+		});
+		btnAjouterFumee.setBounds(217, 652, 41, 23);
+		panelObjet.add(btnAjouterFumee);
+
+		JButton btnSupprimerFumee = new JButton("-");
+		btnSupprimerFumee.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				supprimerFumee();
+			}
+		});
+		btnSupprimerFumee.setBounds(268, 652, 41, 23);
+		panelObjet.add(btnSupprimerFumee);
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
@@ -322,7 +340,7 @@ public class FenetreEditeur extends JPanel {
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
-		
+
 		URL urlBackgroudNoir = getClass().getClassLoader().getResource("blackwaves.gif");
 		ImageIcon noir = new ImageIcon(urlBackgroudNoir);
 		lblImage.setIcon(noir);
@@ -517,6 +535,27 @@ public class FenetreEditeur extends JPanel {
 	public void supprimerPisteVirageHaut() {
 		if (panelRegroupement.getListePisteVirageHaut().size() != 0) {
 			panelRegroupement.getListePisteVirageHaut().remove(panelRegroupement.getListePisteVirageHaut().size() - 1);
+			repaint();
+		}
+	}
+
+	/**
+	 * Méthode qui permet d'ajouter le morceau de fumee
+	 */
+	// Alexis Pineda-Alvarado
+	public void ajouterFumee() {
+		Fumee fumee = new Fumee(650, 190);
+		panelRegroupement.getListeFumee().add(fumee);
+		repaint();
+	}
+
+	/**
+	 * Méthode qui supprime le morceau de fumee
+	 */
+	//Alexis Pineda-Alvarado
+	public void supprimerFumee() {
+		if (panelRegroupement.getListeFumee().size() != 0) {
+			panelRegroupement.getListeFumee().remove(panelRegroupement.getListeFumee().size() - 1);
 			repaint();
 		}
 	}
