@@ -85,7 +85,6 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 
-
 		JPanel panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
 		add(panelObjetEtGraphique);
@@ -628,12 +627,21 @@ public class FenetreJeuScientifique extends JPanel {
 
 			Double newData = new Double((double) evt.getNewValue());
 			int valeur = newData.intValue();
+			progressBarFroce.setMinimum(0);
+			progressBarFroce.setMaximum(100);
+			progressBarFroce.setValue(valeur - 50);
+			break;
+		case "ForceLance2":
+
+			Double newData2 = new Double((double) evt.getNewValue());
+			int valeur2 = newData2.intValue();
 			progressBarFroce2.setMinimum(0);
 			progressBarFroce2.setMaximum(100);
-			progressBarFroce2.setValue(valeur - 50);
+			progressBarFroce2.setValue(valeur2 - 50);
+			break;
 
 		}
-		
+
 	}
 
 	/**
@@ -661,27 +669,25 @@ public class FenetreJeuScientifique extends JPanel {
 			}
 		});
 	}
-	
-	
+
 	/**
-	 * Méthode qui permet de lire un fichier audio et de l'affecter a une variable 
+	 * Méthode qui permet de lire un fichier audio et de l'affecter a une variable
 	 */
 	// Ludovic Julien
 	private void audioMusic() {
-	try {
+		try {
 
-	    clip = AudioSystem.getClip();
-	    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
-	    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
-	    clip.open(inputStream);
-	   
-	}  catch (Exception ex) {
-		ex.printStackTrace();
+			clip = AudioSystem.getClip();
+			URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+			clip.open(inputStream);
 
+		} catch (Exception ex) {
+			ex.printStackTrace();
+
+		}
 	}
-	}
-	
-	
+
 	/**
 	 * méthode qui retourne la valeur de la variable audio
 	 * 
@@ -690,6 +696,5 @@ public class FenetreJeuScientifique extends JPanel {
 	public static Clip getClip() {
 		return clip;
 	}
-	
 
 }

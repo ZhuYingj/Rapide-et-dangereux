@@ -457,7 +457,7 @@ public class JeuOptions extends JPanel {
 		if (indexCouleur2 == couleurs2.length) {
 			indexCouleur2 = 0;
 		}
-		PanelV2.setBackground(couleurs2[indexCouleur2]);
+//		PanelV2.setBackground(couleurs2[indexCouleur2]);
 	}
 	
 }

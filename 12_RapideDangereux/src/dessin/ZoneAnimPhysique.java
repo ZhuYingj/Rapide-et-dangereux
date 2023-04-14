@@ -36,6 +36,7 @@ import utilitaireObjets.Voiture;
  * @author Kevin Nguyen
  * @author Tan Tommy Rin
  * @author Alexis Pineda
+ * @author Julien Ludovic
  */
 
 public class ZoneAnimPhysique extends JPanel implements Runnable {
@@ -105,7 +106,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private int angleVoitureDegre2;
 
 	private double forceDeLancement = 50;
-	
+	private double forceDeLancement2 = 50;
 	private Clip newClip;
 
 	/**
@@ -480,8 +481,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				if (regroupement.getObjSpecial2() != null) {
 					regroupement.setBoutonAppuye2(true);
 					regroupement.getObjSpecial2().setVitesse(new Vecteur2D(
-							50 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()),
-							50 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle())));
+							forceDeLancement2 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()),
+							forceDeLancement2 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle())));
 
 				}
 
@@ -729,6 +730,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 
 			pcs.firePropertyChange("ForceLance", 0, forceDeLancement);
+		}
+		if (regroupement.getObjSpecial2() != null
+				&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+			if (forceDeLancement2 > 150) {
+				forceDeLancement2 = 50;
+			} else if (forceDeLancement2 > 49 && forceDeLancement2 < 150) {
+				forceDeLancement2 = forceDeLancement2 + 0.3;
+			}
+
+			pcs.firePropertyChange("ForceLance2", 0, forceDeLancement2);
 		}
 
 	}
@@ -1077,26 +1088,26 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.creeBoiteDansListe();
 
 	}
-	
-	
-	
+
 	/**
 	 * méthode qui permet d'arreter la musique quand la partie est terminé
 	 * 
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void arretMusic() {
-		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture().getNombreToursFaits()) {
-			if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2().getNombreToursFaits()) {
-			try {
-				 newClip = FenetreJeuScientifique.getClip();
-			} catch (Exception e) {
-				e.printStackTrace();
+		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
+				.getNombreToursFaits()) {
+			if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+					.getNombreToursFaits()) {
+				try {
+					newClip = FenetreJeuScientifique.getClip();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (newClip != null) {
+					newClip.stop();
+				}
 			}
-			if (newClip != null) {
-				newClip.stop();
-			}
-		}	
+		}
 	}
-}
 }

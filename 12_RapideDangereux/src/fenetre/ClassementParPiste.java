@@ -22,7 +22,7 @@ public class ClassementParPiste extends JPanel {
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
 	 */
-
+//Ludovic Julien
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		this.pcs.addPropertyChangeListener(listener);
 	}
@@ -30,6 +30,7 @@ public class ClassementParPiste extends JPanel {
 	/**
 	 * Creation de la fenetre.
 	 */
+	//Ludovic Julien
 	public ClassementParPiste() {
 		setLayout(null);
 
@@ -87,19 +88,19 @@ public class ClassementParPiste extends JPanel {
 		lblMoyenne.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblMoyenne.setBounds(730, 219, 182, 64);
 		add(lblMoyenne);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("(Temps en seconde)");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(222, 276, 139, 33);
 		add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("piste a \r\n\u00E9t\u00E9 jou\u00E9e");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(541, 275, 144, 33);
 		add(lblNewLabel_2);
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("(Temps en seconde)");
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 13));

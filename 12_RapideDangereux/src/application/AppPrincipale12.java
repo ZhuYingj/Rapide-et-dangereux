@@ -10,7 +10,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -40,6 +39,7 @@ import interfaces.TypePiste;
  * 
  * @author Alexis Pineda-Alvarado
  * @author Tan Tommy Rin
+ * @author Ludovic Julien
  *
  */
 
@@ -51,7 +51,7 @@ public class AppPrincipale12 extends JFrame {
 	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String sousDossierSurBureau = "SauvegardePiste";
-	
+
 	private Clip clip;
 
 	File fichierDeTravail = new File(System.getProperty("user.home"),
@@ -253,8 +253,6 @@ public class AppPrincipale12 extends JFrame {
 		});
 		mnMenu.add(checkBoxModeNonScientifique);
 
-		
-		
 	}
 
 //	public void actionCheckBox2()  {
@@ -274,12 +272,11 @@ public class AppPrincipale12 extends JFrame {
 //		}
 //		
 //	}
-	
+
 	public Clip getClip() {
 		return clip;
 	}
-	
-	
+
 	/**
 	 * Méthode qui permet de changer de fenetre selon le check box
 	 * 
@@ -363,19 +360,18 @@ public class AppPrincipale12 extends JFrame {
 			break;
 		}
 	}
-	
-	
+
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
 	 * à la fenetre de jeu d'options
 	 * 
-	 * @param evt				evenement
-	 * @param fenJeuScience		la fenetre de jeu avec mode science activé
-	 * @param fenOptions		la fenetre de jeu d'options
-	 * @param fenSansScience	la fenetre non scientifique
-	 * @param fenRecord			la fenetre avec le classement par piste
+	 * @param evt            evenement
+	 * @param fenJeuScience  la fenetre de jeu avec mode science activé
+	 * @param fenOptions     la fenetre de jeu d'options
+	 * @param fenSansScience la fenetre non scientifique
+	 * @param fenRecord      la fenetre avec le classement par piste
 	 */
-	Ludovic Julien
+//	Ludovic Julien
 	public void actionFenOptions2(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
 			FenetreJeuSansScientifique fenSansScience, ClassementParPiste fenRecord) {
 		switch (evt.getPropertyName()) {
@@ -403,9 +399,9 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
 	 * à la fenetre de classement par piste
 	 * 
-	 * @param evt				evenement
-	 * @param fenOptions		la fenetre de jeu d'options
-	 * @param fenRecord			la fenetre avec le classement par piste
+	 * @param evt        evenement
+	 * @param fenOptions la fenetre de jeu d'options
+	 * @param fenRecord  la fenetre avec le classement par piste
 	 */
 	// Ludovic Julien
 	public void actionfenRecord(PropertyChangeEvent evt, JeuOptions fenOptions, ClassementParPiste fenRecord) {
