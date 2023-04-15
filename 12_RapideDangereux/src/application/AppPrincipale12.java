@@ -46,11 +46,15 @@ import interfaces.TypePiste;
 public class AppPrincipale12 extends JFrame {
 
 	private JCheckBoxMenuItem checkBoxModeNonScientifique;
+	
+	private JCheckBoxMenuItem checkBoxAudio;
 
 	private int nombrePiste = 1;
 	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String sousDossierSurBureau = "SauvegardePiste";
+	
+	private static int audio = 1;
 
 	File fichierDeTravail = new File(System.getProperty("user.home"),
 			"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
@@ -252,37 +256,32 @@ public class AppPrincipale12 extends JFrame {
 		});
 		mnMenu.add(checkBoxModeNonScientifique);
 
-		checkBoxModeNonScientifique = new JCheckBoxMenuItem("Effet Sonnor");
-		checkBoxModeNonScientifique.addActionListener(new ActionListener() {
+		checkBoxAudio = new JCheckBoxMenuItem("Supprimer effet Sonnor");
+		checkBoxAudio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				actionCheckBox2();
+				actionCheckBox2();
 			}
 		});
-		mnMenu.add(checkBoxModeNonScientifique);
+		mnMenu.add(checkBoxAudio);
 
 	}
 
-//	public void actionCheckBox2()  {
-//		try {
-//		    clip = AudioSystem.getClip();
-//		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
-//		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
-//		    clip.open(inputStream);
-//		   
-//		} catch (Exception ex) {
-//		    ex.printStackTrace();
-//		}
-//		if (checkBoxModeNonScientifique.isSelected()) {
-//			
-//		}else {
-//			clip = null;
-//		}
-//		
-//	}
+	/**
+	 * méthode qui permet de supprimer les effet audio
+	 * 
+	 */
+	//Ludovic Julien
+	public void actionCheckBox2()  {
+		if (checkBoxAudio.isSelected()) {
+			FenetreJeuScientifique.getClip().stop();
+		}else {
+			FenetreJeuScientifique.getClip().start();
+		}
+	}
 
-//	public Clip getClip() {
-//		return clip;
-//	}
+	public static int getAudio() {
+		return audio;
+	}
 
 	/**
 	 * Méthode qui permet de changer de fenetre selon le check box

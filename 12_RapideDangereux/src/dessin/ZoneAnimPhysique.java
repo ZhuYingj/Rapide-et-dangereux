@@ -1114,9 +1114,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Ludovic Julien
 	public void arretMusic() {
 		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
-				.getNombreToursFaits()) {
-			if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
-					.getNombreToursFaits()) {
+				.getNombreToursFaits() || regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+						.getNombreToursFaits() ) {
+//			if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+//					.getNombreToursFaits()) {
 				try {
 					newClip = FenetreJeuScientifique.getClip();
 				} catch (Exception e) {
@@ -1125,7 +1126,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				if (newClip != null) {
 					newClip.stop();
 				}
-			}
+//			}
 		}
+	}
+	
+	public void arretGraphique() {
+		
 	}
 }

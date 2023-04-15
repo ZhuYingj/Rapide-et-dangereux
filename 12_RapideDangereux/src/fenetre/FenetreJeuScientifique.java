@@ -21,6 +21,7 @@ import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import application.AppPrincipale12;
 import dessin.ZoneAnimPhysique;
 import dessin.ZoneVitesse;
 
@@ -100,20 +101,8 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 
-		/**
-		 * lit le fichier audio
-		 */
-		// Ludovic Julien
-		try {
-			clip = AudioSystem.getClip();
-			URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
-			AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
-			clip.open(inputStream);
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
+		
+		lireMusic();
 		panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
 		add(panelObjetEtGraphique);
@@ -162,11 +151,7 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneVitesse2.renouvlerVitesse();
 				timerVitesse.stop();
 
-				if (clip != null) {
-					clip.stop();
-					clip.setMicrosecondPosition(0);
-				}
-
+				resetMusic();
 			}
 		});
 
@@ -199,9 +184,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 				timerVitesse.stop();
 
-				if (clip != null) {
-					clip.stop();
-				}
+				arretMusic();
 			}
 		});
 		btnStop.setBounds(621, 650, 89, 76);
@@ -221,10 +204,7 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneVitesse.renouvlerTemps();
 				zoneVitesse.renouvlerVitesse();
 
-				if (clip != null) {
-					clip.stop();
-					clip.setMicrosecondPosition(0);
-				}
+				resetMusic();
 
 			}
 		});
@@ -937,7 +917,51 @@ public class FenetreJeuScientifique extends JPanel {
 	 * 
 	 * @return clip
 	 */
+	//Ludovic Julien
 	public static Clip getClip() {
 		return clip;
+	}
+	
+	/**
+	 * méthode qui permet d'arreter et de recommencer la music au debut 
+	 * 
+	 */
+	//Ludovic Julien
+	public void resetMusic() {
+		if (clip != null) {
+			clip.stop();
+			clip.setMicrosecondPosition(0);
+		}
+	}
+	
+	/**
+	 * méthode qui permet de lire un fichier audio
+	 */
+	//Ludovic Julien
+	public void lireMusic() {
+		if (AppPrincipale12.getAudio() != 0 ) {
+		try {
+			clip = AudioSystem.getClip();
+			URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+			clip.open(inputStream);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		}else {
+			clip.stop();
+			clip = null;
+		}
+	}
+	
+	/**
+	 * méthode qui permet d'arreter une music
+	 */
+	//Ludovic Julien
+	public void arretMusic() {
+		if (clip != null) {
+			clip.stop();
+		}
 	}
 }
