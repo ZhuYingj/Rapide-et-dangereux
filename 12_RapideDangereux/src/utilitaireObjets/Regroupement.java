@@ -25,11 +25,7 @@ import interfaces.TypePiste;
 
 public class Regroupement implements Dessinable, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -787642010013354365L;
-
 	/** Liste de boites mysteres **/
 	private ArrayList<BlocMystere> regroupementBoiteMystere;
 	/** Liste d'accelerateur **/
@@ -48,6 +44,8 @@ public class Regroupement implements Dessinable, Serializable {
 	private ArrayList<PisteVirageDroit> listePisteVirageDroit = new ArrayList<PisteVirageDroit>();
 	/** Piste Virage Haut **/
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
+	/** Liste Smoke **/
+	private ArrayList<Fumee> listeFumee = new ArrayList<Fumee>();
 	/** Le nombre de pixels par metre **/
 	private double pixelsParMetre = 1;
 	/** Le nombre de boite mystere **/
@@ -122,6 +120,19 @@ public class Regroupement implements Dessinable, Serializable {
 	private int pisteCouranteVirageHaut2 = 0;
 	/** Le morceau de piste courant de la liste **/
 	private int pisteCouranteVirageDroit2 = 0;
+
+	private DessinCollisionBouleDeNeige snowball;
+	/** support pour lancer des evenements de type PropertyChange **/
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private transient Graphics2D g2d;
+
+	/**
+	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 */
+	// Tan Tommy Rin
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		this.pcs.addPropertyChangeListener(listener);
+	}
 
 	/**
 	 * Méthode qui permet de créer un groupe à l'aide de paramètre
@@ -287,28 +298,42 @@ public class Regroupement implements Dessinable, Serializable {
 			else if (objSpecial.getType() == TypeObjetSpecial.TROUNOIR) {
 
 				// VOITURE 1 ET 2 POUR OBJET1
-				if (tempsTemp + 15 > tempsTotalEcoule) {
+				if (tempsTemp + 8 > tempsTotalEcoule) {
 					if (objSpecial.getTrouNoir().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
-						objSpecial.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture());
+
+						Vecteur2D forceAttraction = objSpecial.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture());
+						pcs.firePropertyChange("attractionV1X", 0, forceAttraction.getX());
+						pcs.firePropertyChange("attractionV1Y", 0, forceAttraction.getY());
+					} else {
+						pcs.firePropertyChange("attractionV1Reset", 0, -1);
+
 					}
 					if (objSpecial.getTrouNoir()
 							.collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
+						Vecteur2D forceAttraction = objSpecial
+								.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture2());
 						objSpecial.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture2());
+						pcs.firePropertyChange("attractionV2X", 0, forceAttraction.getX());
+						pcs.firePropertyChange("attractionV2Y", 0, forceAttraction.getY());
+					} else {
+						pcs.firePropertyChange("attractionV2Reset", 0, -1);
 
 					}
 
 				} else {
 					objSpecial = null;
+					pcs.firePropertyChange("attractionV1Reset", 0, -1);
+					pcs.firePropertyChange("attractionV2Reset", 0, -1);
 				}
 
 			} else if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
 
 				// Affecte les 2 voitures
-//				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
-//
-//					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
-//
-//				}
+				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
+
+					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
+
+				}
 
 				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
@@ -362,20 +387,35 @@ public class Regroupement implements Dessinable, Serializable {
 			else if (objSpecial2.getType() == TypeObjetSpecial.TROUNOIR) {
 
 				// VOITURE 1 ET 2 POUR OBJET1
-				if (tempsTemp2 + 6 > tempsTotalEcoule) {
+				if (tempsTemp2 + 8 > tempsTotalEcoule) {
 
 					if (objSpecial2.getTrouNoir()
 							.collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 						objSpecial2.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture());
+						Vecteur2D forceAttraction = objSpecial2
+								.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture());
+						pcs.firePropertyChange("attractionV1X", 0, forceAttraction.getX());
+						pcs.firePropertyChange("attractionV1Y", 0, forceAttraction.getY());
+					} else {
+						pcs.firePropertyChange("attractionV1Reset", 0, -1);
+
 					}
 					if (objSpecial2.getTrouNoir()
 							.collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
 						objSpecial2.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture2());
+						Vecteur2D forceAttraction = objSpecial2
+								.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture2());
+						pcs.firePropertyChange("attractionV2X", 0, forceAttraction.getX());
+						pcs.firePropertyChange("attractionV2Y", 0, forceAttraction.getY());
+					} else {
+						pcs.firePropertyChange("attractionV2Reset", 0, -1);
 
 					}
 
 				} else {
 					objSpecial2 = null;
+					pcs.firePropertyChange("attractionV1Reset", 0, -1);
+					pcs.firePropertyChange("attractionV2Reset", 0, -1);
 				}
 
 			} else if (objSpecial2.getType() == TypeObjetSpecial.COLLE) {
@@ -828,6 +868,10 @@ public class Regroupement implements Dessinable, Serializable {
 			listeAccelerateur.get(i).dessiner(g2dCopie);
 		}
 
+		for (int i = 0; i < listeFumee.size(); i++) {
+			listeFumee.get(i).dessiner(g2dCopie);
+		}
+
 		if (objSpecial != null) {
 			if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
 
@@ -839,7 +883,7 @@ public class Regroupement implements Dessinable, Serializable {
 					objSpecial.setPositionObjet(listePisteDeDepart.get(0).getVoiture().getPosition());
 
 				}
-
+				effetNeige(g2dCopie);
 				objSpecial.dessiner(g2dCopie);
 			}
 			if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
@@ -862,7 +906,7 @@ public class Regroupement implements Dessinable, Serializable {
 					objSpecial2.setPositionObjet(listePisteDeDepart.get(0).getVoiture2().getPosition());
 
 				}
-
+				effetNeige(g2dCopie);
 				objSpecial2.dessiner(g2dCopie);
 			}
 			if (objSpecial2.getType() == TypeObjetSpecial.COLLE) {
@@ -899,6 +943,29 @@ public class Regroupement implements Dessinable, Serializable {
 				(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getX()
 						- listePisteDeDepart.get(0).getVoiture2().getDiametre() / 2),
 				(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
+	}
+
+	/**
+	 * Méthode permettant de voir visuellement la durée de l'effet de la boule de
+	 * neige
+	 * 
+	 * @param g2d Composant graphique
+	 */
+	// Kevin Nguyen
+	private void effetNeige(Graphics2D g2d) {
+		if (firstTime) {
+			snowball = new DessinCollisionBouleDeNeige(listePisteDeDepart.get(0).getVoiture2().getPosition(),
+					listePisteDeDepart.get(0).getVoiture2().getDiametre(),
+					listePisteDeDepart.get(0).getVoiture2().getSkin(),
+					listePisteDeDepart.get(0).getVoiture2().getCercle());
+			snowball.dessiner(g2d);
+		} else if (firstTime2) {
+			snowball = new DessinCollisionBouleDeNeige(listePisteDeDepart.get(0).getVoiture().getPosition(),
+					listePisteDeDepart.get(0).getVoiture().getDiametre(),
+					listePisteDeDepart.get(0).getVoiture2().getSkin(),
+					listePisteDeDepart.get(0).getVoiture2().getCercle());
+			snowball.dessiner(g2d);
+		}
 	}
 
 	/**

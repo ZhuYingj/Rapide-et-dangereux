@@ -17,6 +17,10 @@ import application.OutilsImage;
 public class ZoneApercuPiste extends JPanel {
 	private Image img = null;
 
+	/**
+	 * Constructeur qui permet de créer une zone d'apercu de piste.
+	 */
+	// Ludovic Julien
 	public ZoneApercuPiste() {
 		img = OutilsImage.lireImage("PisteMexique.png");
 	}
@@ -26,7 +30,7 @@ public class ZoneApercuPiste extends JPanel {
 	 * 
 	 * @param img
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void setImg(Image img) {
 		this.img = img;
 	}
@@ -35,7 +39,7 @@ public class ZoneApercuPiste extends JPanel {
 	 * permet de dessiner les apercu des piste
 	 * 
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;

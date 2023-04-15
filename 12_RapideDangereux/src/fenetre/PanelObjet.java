@@ -1,9 +1,9 @@
 package fenetre;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.SystemColor;
 
 import javax.swing.JPanel;
 
@@ -11,6 +11,7 @@ import application.OutilsImage;
 import geometrie.Vecteur2D;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BlocMystere;
+import utilitaireObjets.Fumee;
 import utilitaireObjets.PisteDeDepart;
 import utilitaireObjets.PisteHorizontale;
 import utilitaireObjets.PisteVerticale;
@@ -18,11 +19,6 @@ import utilitaireObjets.PisteVirageBas;
 import utilitaireObjets.PisteVirageDroit;
 import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
-import utilitaireObjets.Voiture;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.Color;
 
 /**
  * Classe qui permet de crée un panel composé d'objet. Ce panel servira de
@@ -34,12 +30,10 @@ import java.awt.Color;
 
 public class PanelObjet extends JPanel {
 	public PanelObjet() {
-		setBackground(Color.WHITE);
-		setForeground(Color.BLACK);
 	}
 
 	private final int X_OBJET = 75;
-	private final int Y_OBJET = 20;
+	private final int Y_OBJET = 21;
 	private BlocMystere blocMystere;
 	private PisteDeDepart pisteDeDepart;
 	private PisteHorizontale pisteHorizontale;
@@ -49,6 +43,7 @@ public class PanelObjet extends JPanel {
 	private PisteVirageGauche pisteVirageGauche;
 	private PisteVirageHaut pisteVirageHaut;
 	private Accelerateur accelerateur;
+	private Fumee fumee;
 
 	/**
 	 * Méthode permettant de dessiner sur la fenetre
@@ -67,6 +62,7 @@ public class PanelObjet extends JPanel {
 		pisteVirageGauche = new PisteVirageGauche(X_OBJET * 3, Y_OBJET * 14);
 		pisteVirageHaut = new PisteVirageHaut(X_OBJET, Y_OBJET * 21);
 		accelerateur = new Accelerateur(X_OBJET, Y_OBJET * 28);
+		fumee = new Fumee(X_OBJET * 3, Y_OBJET * 28);
 
 		pisteDeDepart.dessiner(g2d);
 
@@ -77,6 +73,7 @@ public class PanelObjet extends JPanel {
 		pisteVirageGauche.dessiner(g2d);
 		pisteVirageHaut.dessiner(g2d);
 		accelerateur.dessiner(g2d);
+		fumee.dessiner(g2d);
 		Image boiteMystere = OutilsImage.lireImageEtRedimensionner("LuckyBox.png", 87, 87);
 		g2d.drawImage(boiteMystere, (int) this.blocMystere.getPosition().getX(),
 				(int) this.blocMystere.getPosition().getY(), null);

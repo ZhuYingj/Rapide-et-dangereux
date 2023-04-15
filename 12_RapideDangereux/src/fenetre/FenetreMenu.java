@@ -50,12 +50,13 @@ public class FenetreMenu extends JPanel {
 
 		JLabel lblNewLabel = new JLabel("Rapide et Dangereux");
 		lblNewLabel.setForeground(Color.DARK_GRAY);
-		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 25));
+		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(602, 146, 297, 75);
 		add(lblNewLabel);
 
 		btnJouer = new JButton("JOUER");
+		btnJouer.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnJouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("JOUER", 0, -1);
@@ -65,10 +66,12 @@ public class FenetreMenu extends JPanel {
 		add(btnJouer);
 
 		btnAide = new JButton("AIDE");
+		btnAide.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnAide.setBounds(700, 321, 100, 49);
 		add(btnAide);
 
 		btnQuitter = new JButton("QUITTER");
+		btnQuitter.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnQuitter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);

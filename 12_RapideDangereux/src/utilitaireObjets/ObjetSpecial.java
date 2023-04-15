@@ -87,9 +87,11 @@ public class ObjetSpecial implements Dessinable {
 	 * Méthode qui permet le fonctionnement du trou noir sur la voiture affecté
 	 * 
 	 * @param voiture Voiture affectée
+	 * @return Le vecteur de la force appliquée
 	 */
 //Tan Tommy Rin
-	public void fonctionTrouNoir(Voiture voiture) {
+
+	public Vecteur2D fonctionTrouNoir(Voiture voiture) {
 
 		Vecteur2D forceApplied = new Vecteur2D(trouNoir.getPosition());
 		forceApplied = forceApplied.soustrait(voiture.getPosition());
@@ -100,6 +102,7 @@ public class ObjetSpecial implements Dessinable {
 		forceApplied = forceApplied.multiplie(fg);
 		voiture.setSommeDesForces(forceApplied);
 
+		return forceApplied;
 	}
 
 	/**
@@ -139,17 +142,16 @@ public class ObjetSpecial implements Dessinable {
 	public boolean fonctionChampignon(Voiture voiture, double tempsTotalEcoule) {
 		Champignon champignon = new Champignon(this.positionObjet, this.diametreObjet, type);
 		boolean fonctionActive = false;
-		if (voiture.getDiametre() < 75) {
-			if ((tempsTemporaire + 5 > tempsTotalEcoule)) {
-				champignon.fonctionChampignonActivation(voiture);
 
-				fonctionActive = true;
-			} else {
-				voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
-				voiture.setDiametre(voiture.getDiametreInitial());
+		if ((tempsTemporaire + 8 > tempsTotalEcoule)) {
+			champignon.fonctionChampignonActivation(voiture);
 
-				fonctionActive = false;
-			}
+			fonctionActive = true;
+		} else  {
+			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
+			voiture.setDiametre(voiture.getDiametreInitial());			
+
+			fonctionActive = false;
 		}
 
 		return fonctionActive;

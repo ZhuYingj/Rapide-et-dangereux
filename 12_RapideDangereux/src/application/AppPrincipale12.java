@@ -2,6 +2,7 @@ package application;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -39,7 +40,6 @@ import interfaces.TypePiste;
  * 
  * @author Alexis Pineda-Alvarado
  * @author Tan Tommy Rin
- * @author Ludovic Julien
  *
  */
 
@@ -51,8 +51,6 @@ public class AppPrincipale12 extends JFrame {
 	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String sousDossierSurBureau = "SauvegardePiste";
-
-	private Clip clip;
 
 	File fichierDeTravail = new File(System.getProperty("user.home"),
 			"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
@@ -127,6 +125,9 @@ public class AppPrincipale12 extends JFrame {
 // Alexis Pineda-Alvarado
 	public AppPrincipale12() {
 
+		Image img = OutilsImage.lireImage("icon.png");
+		setIconImage(img);
+
 		FenetreMenu fenMenu = new FenetreMenu();
 		ModeDeJeu fenModeJeu = new ModeDeJeu();
 		FenetreEditeur fenEditeur = new FenetreEditeur();
@@ -199,7 +200,7 @@ public class AppPrincipale12 extends JFrame {
 				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience);
 			}
 		});
-		
+
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionFenOptions2(evt, fenJeuScience, fenOptions, fenSansScience, fenRecord);
@@ -366,7 +367,7 @@ public class AppPrincipale12 extends JFrame {
 			break;
 		}
 	}
-	
+
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
 	 * à la fenetre de jeu d'options
@@ -701,6 +702,8 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenOptionMontre fenêtre des paramètres a choisir dans le mode course
 	 *                        contre la montre
 	 * @param fenScience      fenetre avec le mode scientifique
+	 * @param fenSansScience  fenetre avec le mode sans les paramètres non
+	 *                        scientifique
 	 */
 // Alexis Pineda-Alvarado
 	public void actionChangeJeuCourse(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,

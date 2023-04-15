@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -18,7 +20,7 @@ import java.awt.Color;
  * @author Ludovic Julien
  *
  */
-public class ClassementParPiste extends JPanel {
+public class ClassementParPiste extends JPanel{
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	/**
@@ -35,6 +37,8 @@ public class ClassementParPiste extends JPanel {
 	//Ludovic Julien
 	public ClassementParPiste() {
 		setBackground(Color.CYAN);
+		setOpaque(true);
+		
 		setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Tableau du classement par piste");
@@ -58,6 +62,16 @@ public class ClassementParPiste extends JPanel {
 		add(btnFermer);
 
 		JButton btnColorer = new JButton("Colorer l'arriere plan");
+		btnColorer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Color bgColor = JColorChooser.showDialog(ClassementParPiste.this,"Choisir une couleur", Color.WHITE);
+				
+		        if (bgColor != null) { // vérifier si l'utilisateur a choisi une couleur
+		            setBackground(bgColor); // changer la couleur de l'arrière-plan
+		        }
+			}
+		});
 		btnColorer.setBounds(519, 403, 189, 39);
 		add(btnColorer);
 		
