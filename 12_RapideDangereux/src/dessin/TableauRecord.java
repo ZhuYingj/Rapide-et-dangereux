@@ -8,10 +8,14 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
+import application.GestionnaireDeFichiersSurLeBureau;
+
 public class TableauRecord extends JPanel{
+	private GestionnaireDeFichiersSurLeBureau fichierRecord;
 	
 	public TableauRecord() {
         setLayout(new BorderLayout());
+        fichierRecord = new GestionnaireDeFichiersSurLeBureau();
 
         // Définir le modèle de données pour le tableau
         MyTableModel model = new MyTableModel();

@@ -266,34 +266,24 @@ public class JeuOptions extends JPanel {
 		panel_V1.setBounds(1200, 77, 143, 90);
 		add(panel_V1);
 
-		// Ludovic Julien
-		// permet de changer la couleur du panel et de la voiture
 		JButton btnGauche = new JButton("<");
 		btnGauche.setBounds(1123, 116, 55, 23);
 		btnGauche.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				indexCouleur--;
-				if (indexCouleur < 0) {
-					indexCouleur = couleurs.length - 1;
-				}
+				ChangementImage(1,0);
 				panel_V1.setBackground(couleurs[indexCouleur]);
 			}
 		});
 		add(btnGauche);
-
-		// Ludovic Julien
-		// permet de changer la couleur du panel et de la voiture
+		
 		JButton btnDroite = new JButton(">");
 		btnDroite.setBounds(1365, 116, 55, 23);
 		btnDroite.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				indexCouleur++;
-				if (indexCouleur == couleurs.length) {
-					indexCouleur = 0;
-				}
+				ChangementImage(1,1);
 				panel_V1.setBackground(couleurs[indexCouleur]);
 			}
 		});
@@ -325,30 +315,24 @@ public class JeuOptions extends JPanel {
 		lblNewLabel_1.setBounds(1220, 200, 143, 13);
 		add(lblNewLabel_1);
 
-		// Ludovic Julien
-		// permet de changer la couleur du panel et de la voiture
 		JButton btnGauche1 = new JButton("<");
 		btnGauche1.setBounds(1123, 264, 55, 23);
 		btnGauche1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				indexCouleur2--;
-				if (indexCouleur2 < 0) {
-					indexCouleur2 = couleurs2.length - 1;
-				}
+				ChangementImage(0,0);
 				PanelV2.setBackground(couleurs2[indexCouleur2]);
 			}
 		});
 		add(btnGauche1);
 
-		// Ludovic Julien
-		// permet de changer la couleur du panel et de la voiture
 		JButton btnDroite1 = new JButton(">");
 		btnDroite1.setBounds(1365, 264, 55, 23);
 		btnDroite1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ChangementImage();
+				ChangementImage(0,1);
+				PanelV2.setBackground(couleurs2[indexCouleur2]);
 			}
 		});
 		add(btnDroite1);
@@ -450,14 +434,34 @@ public class JeuOptions extends JPanel {
 		}
 	}
 	
-	
-	public void ChangementImage() {
+	//Ludovic Julien
+	public void ChangementImage(int voiture, int direction) {
 		
-		indexCouleur2++;
-		if (indexCouleur2 == couleurs2.length) {
-			indexCouleur2 = 0;
+		if (voiture == 1) {
+			if (direction == 1) {
+				indexCouleur++;
+				if (indexCouleur == couleurs.length) {
+					indexCouleur = 0;
+				}
+			}else {
+				indexCouleur--;
+				if (indexCouleur < 0) {
+					indexCouleur = couleurs.length - 1;
+				}	
+			}	
+		}else {
+			if (direction == 1) {
+				indexCouleur2++;
+				if (indexCouleur2 == couleurs2.length) {
+					indexCouleur2 = 0;
+				}
+			}else {
+				indexCouleur2--;
+				if (indexCouleur2 < 0) {
+					indexCouleur2 = couleurs2.length - 1;
+				}
+			}
 		}
-//		PanelV2.setBackground(couleurs2[indexCouleur2]);
 	}
 	
 }
