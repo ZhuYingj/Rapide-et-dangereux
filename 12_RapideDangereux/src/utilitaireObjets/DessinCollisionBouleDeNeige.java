@@ -33,6 +33,7 @@ public class DessinCollisionBouleDeNeige {
 	 * @param pos Position de la voiture
 	 * @param dia Diametre de la voiture
 	 */
+	// Kevin Nguyen
 	public DessinCollisionBouleDeNeige(Vecteur2D pos, double dia, Color col, Ellipse2D cercle) {
 		this.position = pos;
 		this.diametre = dia;
@@ -46,6 +47,7 @@ public class DessinCollisionBouleDeNeige {
 	 * 
 	 * @param g2d Composant graphique
 	 */
+	// Kevin Nguyen
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCop = (Graphics2D) g2d.create();
 
@@ -58,6 +60,7 @@ public class DessinCollisionBouleDeNeige {
 	/**
 	 * Méthode qui permet de créer le carré selon la position de la voiture
 	 */
+	// Kevin Nguyen
 	private void creerLaGeometrie() {
 
 		rectangle = new Rectangle2D.Double(position.getX(), position.getY(), diametre, diametre);
