@@ -1014,7 +1014,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	/**
 	 * Méthode qui change le type de piste et change tous les listes des morceaux
-	 * par ceux de la piste choisi
+	 * par ceux de la piste choisie.
 	 * 
 	 * @param typePiste le type de piste voulu
 	 */
@@ -1114,23 +1114,24 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Ludovic Julien
 	public void arretMusic() {
 		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
-				.getNombreToursFaits() || regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
-						.getNombreToursFaits() ) {
+				.getNombreToursFaits()
+				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+						.getNombreToursFaits()) {
 //			if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 //					.getNombreToursFaits()) {
-				try {
-					newClip = FenetreJeuScientifique.getClip();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				if (newClip != null) {
-					newClip.stop();
-				}
+			try {
+				newClip = FenetreJeuScientifique.getClip();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (newClip != null) {
+				newClip.stop();
+			}
 //			}
 		}
 	}
-	
+
 	public void arretGraphique() {
-		
+
 	}
 }

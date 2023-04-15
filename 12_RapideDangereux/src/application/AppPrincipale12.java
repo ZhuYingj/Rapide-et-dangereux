@@ -75,7 +75,6 @@ public class AppPrincipale12 extends JFrame {
 					frame.setVisible(true);
 					frame.requestFocus();
 					frame.checkBoxModeNonScientifique.setEnabled(false);
-//					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 						if ("Nimbus".equals(info.getName())) {
 							try {
@@ -151,7 +150,7 @@ public class AppPrincipale12 extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu mnMenu = new JMenu("Menu");
+		JMenu mnMenu = new JMenu("Options");
 		menuBar.add(mnMenu);
 
 		setContentPane(fenMenu);
