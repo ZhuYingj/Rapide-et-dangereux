@@ -48,7 +48,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuSansScientifique() {
 		setLayout(null);
-		setBounds(100, 100, 1325, 700);
+		setBounds(100, 100, 1600, 800);
 
 		zoneAnimPhysique = new ZoneAnimPhysique();
 		zoneAnimPhysique.setBorder(null);
@@ -101,6 +101,16 @@ public class FenetreJeuSansScientifique extends JPanel {
 		btnStart = new JButton("Start");
 		btnStart.setBounds(30, 177, 97, 58);
 		add(btnStart);
+		
+		JLabel lblNewLabel = new JLabel("80 M");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel.setBounds(205, 724, 89, 14);
+		add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("<------------>");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_1.setBounds(175, 703, 269, 14);
+		add(lblNewLabel_1);
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();

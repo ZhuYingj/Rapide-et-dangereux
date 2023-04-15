@@ -23,7 +23,7 @@ public class Champignon extends ObjetSpecial {
 	private Vecteur2D position;
 	private TypeObjetSpecial typeObjet = TypeObjetSpecial.CHAMPIGNON;
 	private double GRADUATIONPROGESSIVEMASSE = 1.0025;
-	private double GRADUATIONPROGRESSIVEDIAMETRE = 1.0015;
+	private double GRADUATIONPROGRESSIVEDIAMETRE = 1.01;
 
 	/**
 	 * Méthode qui permet de créer un champignon à l'aide de paramètres
@@ -48,12 +48,14 @@ public class Champignon extends ObjetSpecial {
 	// Tan Tommy Rin
 	public void fonctionChampignonActivation(Voiture voitureAffecte) {
 
-		// Masse augmente pendant une durée voulue
-		double masseProgressive = voitureAffecte.getMasseEnKg() * GRADUATIONPROGESSIVEMASSE;
-		double diametreProgressif = voitureAffecte.getDiametre() * GRADUATIONPROGRESSIVEDIAMETRE;
+		if (voitureAffecte.getDiametre() < 45) {
+			// Masse augmente pendant une durée voulue
+			double masseProgressive = voitureAffecte.getMasseEnKg() * GRADUATIONPROGESSIVEMASSE;
+			double diametreProgressif = voitureAffecte.getDiametre() * GRADUATIONPROGRESSIVEDIAMETRE;
 
-		voitureAffecte.setMasseEnKg(masseProgressive);
-		voitureAffecte.setDiametre(diametreProgressif);
+			voitureAffecte.setMasseEnKg(masseProgressive);
+			voitureAffecte.setDiametre(diametreProgressif);
+		}
 
 	}
 

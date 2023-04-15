@@ -31,10 +31,11 @@ import java.awt.event.MouseEvent;
  * 
  * @author Alexis Pineda-Alvarado
  * @author Ludovic Julien
- * 
+ * @author Tan Tommy Rin
  */
 
 public class JeuOptions extends JPanel {
+	private JPanel PanelV2;
 	private ZoneApercuPiste zoneApercuPiste;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private final ButtonGroup buttonGroupDiff = new ButtonGroup();
@@ -51,9 +52,14 @@ public class JeuOptions extends JPanel {
 	private JButton btnCanada;
 	private JButton btnMexique;
 	private JButton btnItalie;
-
+	private JSlider sliderNbBoites;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.cyan };
+	private Color transparent = new Color(255, 255, 255, 0);
+	private JButton btnGauche2;
+	private JButton btnGauche;
+	private JButton btnDroit;
+	private JButton btnDroit2;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -69,7 +75,7 @@ public class JeuOptions extends JPanel {
 //Alexis Pineda-Alvarado
 	public JeuOptions() {
 		setLayout(null);
-
+		setBounds(0, 0, 1600, 800);
 		JPanel PanelApercu = new JPanel();
 		PanelApercu.setBackground(Color.WHITE);
 		PanelApercu.setBounds(10, 200, 700, 439);
@@ -83,6 +89,7 @@ public class JeuOptions extends JPanel {
 		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");
 		// Icon icone = new ImageIcon(drapeuxMexique);
 		btnMexique = new JButton("Mexique");
+		btnMexique.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnMexique.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -100,6 +107,7 @@ public class JeuOptions extends JPanel {
 		}
 
 		btnCanada = new JButton("Canada");
+		btnCanada.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnCanada.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -116,6 +124,7 @@ public class JeuOptions extends JPanel {
 		}
 
 		btnItalie = new JButton("Italie");
+		btnItalie.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnItalie.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -167,14 +176,17 @@ public class JeuOptions extends JPanel {
 		panel_1.add(slider);
 
 		JLabel lblMasse = new JLabel("Masse de la voiture 1 en kg : ");
+		lblMasse.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblMasse.setBounds(10, 39, 191, 20);
 		panel_1.add(lblMasse);
 
 		JLabel lblDifficulte = new JLabel("Difficulté du jeu : ");
+		lblDifficulte.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblDifficulte.setBounds(10, 182, 110, 14);
 		panel_1.add(lblDifficulte);
 
 		rdbtnFacile = new JRadioButton("Facile");
+		rdbtnFacile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		rdbtnFacile.setSelected(true);
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -187,6 +199,7 @@ public class JeuOptions extends JPanel {
 		buttonGroupDiff.add(rdbtnFacile);
 
 		rdbtnMedium = new JRadioButton("Intermédiaire");
+		rdbtnMedium.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		rdbtnMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -199,6 +212,7 @@ public class JeuOptions extends JPanel {
 		buttonGroupDiff.add(rdbtnMedium);
 
 		rdbtnDifficile = new JRadioButton("Avancé");
+		rdbtnDifficile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		rdbtnDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -211,26 +225,31 @@ public class JeuOptions extends JPanel {
 		buttonGroupDiff.add(rdbtnDifficile);
 
 		JLabel lblVitesseFacile = new JLabel("60 m/s");
+		lblVitesseFacile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblVitesseFacile.setBounds(280, 186, 46, 14);
 		panel_1.add(lblVitesseFacile);
 
 		JLabel lblVitesseIntermediaire = new JLabel("80 m/s");
+		lblVitesseIntermediaire.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblVitesseIntermediaire.setBounds(280, 211, 46, 14);
 		panel_1.add(lblVitesseIntermediaire);
 
 		JLabel lblVitesseAvance = new JLabel("100 m/s");
+		lblVitesseAvance.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblVitesseAvance.setBounds(280, 237, 46, 14);
 		panel_1.add(lblVitesseAvance);
 
 		JLabel lblMasse2 = new JLabel("Masse de la voiture 2 en kg : ");
+		lblMasse2.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblMasse2.setBounds(10, 86, 177, 20);
 		panel_1.add(lblMasse2);
 
 		JLabel lblNombreBoiteMystere = new JLabel("Nombre de boite mystere : ");
+		lblNombreBoiteMystere.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblNombreBoiteMystere.setBounds(10, 135, 159, 14);
 		panel_1.add(lblNombreBoiteMystere);
 
-		JSlider sliderNbBoites = new JSlider();
+		sliderNbBoites = new JSlider();
 
 		sliderNbBoites.setSnapToTicks(true);
 		sliderNbBoites.setPaintTicks(true);
@@ -245,16 +264,10 @@ public class JeuOptions extends JPanel {
 		panel_1.add(sliderNbBoites);
 
 		JButton btnCommencer = new JButton("COMMENCER!");
+		btnCommencer.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnCommencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("COMMENCER!", null, -1);
-				pcs.firePropertyChange("MASSE1", null, (double) slider.getValue());
-				pcs.firePropertyChange("MASSE2", null, (double) slider2.getValue());
-				pcs.firePropertyChange("TYPEPISTE", null, type);
-				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
-				pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
-				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
-				pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
+				actionCommencer();
 
 			}
 		});
@@ -268,7 +281,7 @@ public class JeuOptions extends JPanel {
 
 		// Ludovic Julien
 		// permet de changer la couleur du panel et de la voiture
-		JButton btnGauche = new JButton("<");
+		btnGauche = new JButton("");
 		btnGauche.setBounds(1123, 116, 55, 23);
 		btnGauche.addActionListener(new ActionListener() {
 
@@ -282,12 +295,20 @@ public class JeuOptions extends JPanel {
 			}
 		});
 		add(btnGauche);
+		btnGauche.setBorder(null);
+
+		Image arrowGauche = OutilsImage.lireImageEtRedimensionner("FlecheGauche.png", 50, 23);
+		if (arrowGauche != null) {
+			btnGauche.setIcon(new ImageIcon(arrowGauche));
+			arrowGauche.flush();
+		}
 
 		// Ludovic Julien
 		// permet de changer la couleur du panel et de la voiture
-		JButton btnDroite = new JButton(">");
-		btnDroite.setBounds(1365, 116, 55, 23);
-		btnDroite.addActionListener(new ActionListener() {
+		btnDroit = new JButton("");
+		btnDroit.setForeground(new Color(255, 255, 255));
+		btnDroit.setBounds(1365, 116, 55, 23);
+		btnDroit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				indexCouleur++;
@@ -297,9 +318,18 @@ public class JeuOptions extends JPanel {
 				panel_V1.setBackground(couleurs[indexCouleur]);
 			}
 		});
-		add(btnDroite);
+		add(btnDroit);
+
+		btnDroit.setBorder(null);
+
+		Image arrowDroite = OutilsImage.lireImageEtRedimensionner("FlecheDroite.png", 50, 23);
+		if (arrowDroite != null) {
+			btnDroit.setIcon(new ImageIcon(arrowDroite));
+			arrowDroite.flush();
+		}
 
 		JButton btnRetour = new JButton("Retour");
+		btnRetour.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("Retour", 0, -1);
@@ -308,28 +338,30 @@ public class JeuOptions extends JPanel {
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
-		JPanel PanelV2 = new JPanel();
+		PanelV2 = new JPanel();
 		PanelV2.setBounds(1200, 229, 143, 90);
 		PanelV2.setBackground(Color.WHITE);
 		add(PanelV2);
 
 		JLabel lblNewLabel = new JLabel("Couleur voiture #1");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(1220, 42, 134, 13);
+		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblNewLabel.setBounds(1200, 53, 134, 13);
 		add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Couleur Voiture #2");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(1220, 200, 143, 13);
+		lblNewLabel_1.setBounds(1200, 205, 143, 13);
 		add(lblNewLabel_1);
 
 		// Ludovic Julien
 		// permet de changer la couleur du panel et de la voiture
-		JButton btnGauche1 = new JButton("<");
-		btnGauche1.setBounds(1123, 264, 55, 23);
-		btnGauche1.addActionListener(new ActionListener() {
+		btnGauche2 = new JButton("");
+		btnGauche2.setBounds(1123, 264, 55, 23);
+
+		
+		btnGauche2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				indexCouleur2--;
@@ -339,24 +371,35 @@ public class JeuOptions extends JPanel {
 				PanelV2.setBackground(couleurs2[indexCouleur2]);
 			}
 		});
-		add(btnGauche1);
-
+		add(btnGauche2);
+		btnGauche2.setBorder(null);
+		Image arrowGauche2 = OutilsImage.lireImageEtRedimensionner("FlecheGauche.png", 50, 23);
+		if (arrowGauche2 != null) {
+			btnGauche2.setIcon(new ImageIcon(arrowGauche2));
+			arrowGauche2.flush();
+		}
 		// Ludovic Julien
 		// permet de changer la couleur du panel et de la voiture
-		JButton btnDroite1 = new JButton(">");
-		btnDroite1.setBounds(1365, 264, 55, 23);
-		btnDroite1.addActionListener(new ActionListener() {
+		btnDroit2 = new JButton("");
+		btnDroit2.setBounds(1365, 264, 55, 23);
+		btnDroit2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage();
 			}
 		});
-		add(btnDroite1);
+		add(btnDroit2);
+		btnDroit2.setBorder(null);
 
+		Image arrowDroite2 = OutilsImage.lireImageEtRedimensionner("FlecheDroite.png", 50, 23);
+		if (arrowDroite2 != null) {
+			btnDroit2.setIcon(new ImageIcon(arrowDroite2));
+			arrowDroite2.flush();
+		}
 		JButton btnRecorsPiste = new JButton("Records par piste !");
 		btnRecorsPiste.setForeground(new Color(0, 0, 0));
 		btnRecorsPiste.setBackground(Color.CYAN);
-		btnRecorsPiste.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnRecorsPiste.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		btnRecorsPiste.setBounds(769, 440, 159, 78);
 		btnRecorsPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -372,9 +415,14 @@ public class JeuOptions extends JPanel {
 		add(lblFlecheBasImage);
 
 		JLabel lblLongueurPiste = new JLabel("640 m");
-		lblLongueurPiste.setFont(new Font("Tahoma", Font.BOLD, 26));
+		lblLongueurPiste.setFont(new Font("Comic Sans MS", Font.BOLD, 26));
 		lblLongueurPiste.setBounds(325, 665, 89, 36);
 		add(lblLongueurPiste);
+
+		JLabel lblNewLabel_2 = new JLabel("MONDE");
+		lblNewLabel_2.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 44));
+		lblNewLabel_2.setBounds(769, 11, 220, 70);
+		add(lblNewLabel_2);
 
 		JLabel lblGif = new JLabel("");
 		lblGif.setBounds(0, 0, 1408, 700);
@@ -384,15 +432,32 @@ public class JeuOptions extends JPanel {
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
 
-
 	}
+
+	/**
+	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
+	 * levée d'évènements.
+	 * 
+	 */
+	// Tan Tommy Rin
+	private void actionCommencer() {
+		pcs.firePropertyChange("COMMENCER!", null, -1);
+		pcs.firePropertyChange("MASSE1", null, (double) slider.getValue());
+		pcs.firePropertyChange("MASSE2", null, (double) slider2.getValue());
+		pcs.firePropertyChange("TYPEPISTE", null, type);
+		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+		pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
+	}
+
 	/**
 	 * Méthode qui choisie la piste et une photo de fond lorsque la souris et sur le
 	 * bouton
 	 * 
 	 * @param e evenement de la souris
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public void selectionImageCanada(MouseEvent e) {
 		if (btnCanada.contains(e.getX(), e.getY())) {
 			type = TypePiste.CANADA;
@@ -405,15 +470,22 @@ public class JeuOptions extends JPanel {
 				lblImage.setIcon(new ImageIcon(imgHiver));
 				imgHiver.flush();
 			}
+
+			btnDroit.setBackground(transparent);
+			btnDroit2.setBackground(transparent);
+			btnGauche.setBackground(transparent);
+			btnGauche2.setBackground(transparent);
+
 		}
 	}
+
 	/**
 	 * Méthode qui choisie la piste et une photo de fond lorsque la souris et sur le
 	 * bouton
 	 * 
 	 * @param e evenement de la souris
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public void selectionImageMexique(MouseEvent e) {
 		if (btnMexique.contains(e.getX(), e.getY())) {
 			type = TypePiste.MEXIQUE;
@@ -426,15 +498,21 @@ public class JeuOptions extends JPanel {
 				lblImage.setIcon(new ImageIcon(imgDesert));
 				imgDesert.flush();
 			}
+
+			btnDroit.setBackground(transparent);
+			btnDroit2.setBackground(transparent);
+			btnGauche.setBackground(transparent);
+			btnGauche2.setBackground(transparent);
 		}
 	}
+
 	/**
 	 * Méthode qui choisie la piste et une photo de fond lorsque la souris et sur le
 	 * bouton
 	 * 
 	 * @param e evenement de la souris
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public void selectionImageItalie(MouseEvent e) {
 		if (btnItalie.contains(e.getX(), e.getY())) {
 			type = TypePiste.ITALIE;
@@ -447,17 +525,21 @@ public class JeuOptions extends JPanel {
 				lblImage.setIcon(new ImageIcon(imgVenice));
 				imgVenice.flush();
 			}
+
+			btnDroit.setBackground(transparent);
+			btnDroit2.setBackground(transparent);
+			btnGauche.setBackground(transparent);
+			btnGauche2.setBackground(transparent);
 		}
 	}
-	
-	
+
 	public void changementImage() {
-		
+
 		indexCouleur2++;
 		if (indexCouleur2 == couleurs2.length) {
 			indexCouleur2 = 0;
 		}
-//		PanelV2.setBackground(couleurs2[indexCouleur2]);
+		PanelV2.setBackground(couleurs2[indexCouleur2]);
 	}
-	
+
 }

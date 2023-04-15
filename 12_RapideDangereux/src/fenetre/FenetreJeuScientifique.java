@@ -7,27 +7,22 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.File;
 import java.net.URL;
 
-import javax.print.attribute.standard.Media;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import dessin.ZoneAnimPhysique;
 import dessin.ZoneVitesse;
-import interfaces.TypeObjetSpecial;
 
 /**
  * Classe qui permet de créer et gérer la fenetre du jeu avec le mode
@@ -91,7 +86,6 @@ public class FenetreJeuScientifique extends JPanel {
 
 	private JPanel panelObjetEtGraphique;
 
-
 	/**
 	 * Méthode qui permet de placer un écouteur
 	 */
@@ -106,19 +100,18 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 
-
 		/**
 		 * lit le fichier audio
 		 */
 		// Ludovic Julien
 		try {
-		    clip = AudioSystem.getClip();
-		    URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
-		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
-		    clip.open(inputStream);
-		   
+			clip = AudioSystem.getClip();
+			URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
+			clip.open(inputStream);
+
 		} catch (Exception ex) {
-		    ex.printStackTrace();
+			ex.printStackTrace();
 		}
 
 		panelObjetEtGraphique = new JPanel();
@@ -161,7 +154,6 @@ public class FenetreJeuScientifique extends JPanel {
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("RetourDuJeuScience", null, -1);
-
 				pcs.firePropertyChange("Test", null, -1);
 
 				zoneVitesse.renouvlerTemps();
@@ -188,9 +180,7 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 				timerVitesse.start();
-				 clip.start();
-
-			
+				clip.start();
 
 			}
 		});
@@ -314,7 +304,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblFrottement = new JLabel("Frottement :");
 		lblFrottement.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFrottement.setBounds(10, 165, 109, 29);
+		lblFrottement.setBounds(10, 167, 109, 29);
 		panelDonneScientifique.add(lblFrottement);
 
 		JLabel lblMasse1 = new JLabel("Masse  :");
@@ -324,12 +314,12 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblFreinage = new JLabel("Freinage :");
 		lblFreinage.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFreinage.setBounds(10, 193, 109, 29);
+		lblFreinage.setBounds(10, 201, 109, 29);
 		panelDonneScientifique.add(lblFreinage);
 
 		JLabel lblAttraction = new JLabel("Attraction :");
 		lblAttraction.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblAttraction.setBounds(10, 233, 109, 29);
+		lblAttraction.setBounds(10, 238, 109, 29);
 		panelDonneScientifique.add(lblAttraction);
 
 		JLabel lblMetreV1 = new JLabel("m");
@@ -359,7 +349,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblNV1 = new JLabel("N");
 		lblNV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNV1.setBounds(258, 165, 34, 29);
+		lblNV1.setBounds(258, 167, 34, 29);
 		panelDonneScientifique.add(lblNV1);
 
 		JLabel lblNV1_1 = new JLabel("N");
@@ -379,7 +369,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblNFreinageV1 = new JLabel("N");
 		lblNFreinageV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNFreinageV1.setBounds(258, 193, 34, 29);
+		lblNFreinageV1.setBounds(258, 201, 34, 29);
 		panelDonneScientifique.add(lblNFreinageV1);
 
 		JLabel lblM = new JLabel("m");
@@ -389,12 +379,12 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblNFreinageV2 = new JLabel("N");
 		lblNFreinageV2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNFreinageV2.setBounds(522, 165, 38, 29);
+		lblNFreinageV2.setBounds(522, 167, 38, 29);
 		panelDonneScientifique.add(lblNFreinageV2);
 
 		JLabel lblNAttractionV2 = new JLabel("N");
 		lblNAttractionV2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNAttractionV2.setBounds(523, 193, 38, 29);
+		lblNAttractionV2.setBounds(523, 201, 38, 29);
 		panelDonneScientifique.add(lblNAttractionV2);
 
 		JLabel lblNum2 = new JLabel("2");
@@ -594,12 +584,12 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblVitesseV1Separator_1 = new JLabel("[               ,               ]");
 		lblVitesseV1Separator_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVitesseV1Separator_1.setBounds(108, 165, 162, 29);
+		lblVitesseV1Separator_1.setBounds(108, 167, 162, 29);
 		panelDonneScientifique.add(lblVitesseV1Separator_1);
 
 		JLabel lblVitesseV1Separator_1_1 = new JLabel("[               ,               ]");
 		lblVitesseV1Separator_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVitesseV1Separator_1_1.setBounds(108, 193, 162, 29);
+		lblVitesseV1Separator_1_1.setBounds(108, 201, 162, 29);
 		panelDonneScientifique.add(lblVitesseV1Separator_1_1);
 
 		JLabel lblVitesseV1Separator_1_1_1 = new JLabel("[               ,               ]");
@@ -609,12 +599,12 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblVitesseV1Separator_1_1_2 = new JLabel("[               ,               ]");
 		lblVitesseV1Separator_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVitesseV1Separator_1_1_2.setBounds(350, 193, 162, 29);
+		lblVitesseV1Separator_1_1_2.setBounds(350, 201, 162, 29);
 		panelDonneScientifique.add(lblVitesseV1Separator_1_1_2);
 
 		JLabel lblVitesseV1Separator_1_1_3 = new JLabel("[               ,               ]");
 		lblVitesseV1Separator_1_1_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVitesseV1Separator_1_1_3.setBounds(350, 165, 162, 29);
+		lblVitesseV1Separator_1_1_3.setBounds(350, 167, 162, 29);
 		panelDonneScientifique.add(lblVitesseV1Separator_1_1_3);
 
 		JLabel lblVitesseV1Separator_1_1_4 = new JLabel("[               ,               ]");
@@ -634,42 +624,42 @@ public class FenetreJeuScientifique extends JPanel {
 
 		lblFrottementEnXV1 = new JLabel("0.00");
 		lblFrottementEnXV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFrottementEnXV1.setBounds(119, 165, 65, 29);
+		lblFrottementEnXV1.setBounds(119, 167, 65, 29);
 		panelDonneScientifique.add(lblFrottementEnXV1);
 
 		lblFrottementEnYV1 = new JLabel("0.00");
 		lblFrottementEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFrottementEnYV1.setBounds(194, 165, 65, 29);
+		lblFrottementEnYV1.setBounds(194, 167, 65, 29);
 		panelDonneScientifique.add(lblFrottementEnYV1);
 
 		lblFrottementEnXV2 = new JLabel("0.00");
 		lblFrottementEnXV2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFrottementEnXV2.setBounds(361, 165, 65, 29);
+		lblFrottementEnXV2.setBounds(361, 167, 65, 29);
 		panelDonneScientifique.add(lblFrottementEnXV2);
 
 		lblFrottementEnYV2 = new JLabel("0.00");
 		lblFrottementEnYV2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFrottementEnYV2.setBounds(436, 165, 65, 29);
+		lblFrottementEnYV2.setBounds(436, 167, 65, 29);
 		panelDonneScientifique.add(lblFrottementEnYV2);
 
 		lblFreinageEnXV1 = new JLabel("0.00");
 		lblFreinageEnXV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFreinageEnXV1.setBounds(119, 193, 65, 29);
+		lblFreinageEnXV1.setBounds(119, 201, 65, 29);
 		panelDonneScientifique.add(lblFreinageEnXV1);
 
 		lblFreinageEnYV1 = new JLabel("0.00");
 		lblFreinageEnYV1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFreinageEnYV1.setBounds(194, 193, 65, 29);
+		lblFreinageEnYV1.setBounds(194, 201, 65, 29);
 		panelDonneScientifique.add(lblFreinageEnYV1);
 
 		lblFreinageEnXV2 = new JLabel("0.00");
 		lblFreinageEnXV2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFreinageEnXV2.setBounds(361, 193, 65, 29);
+		lblFreinageEnXV2.setBounds(361, 201, 65, 29);
 		panelDonneScientifique.add(lblFreinageEnXV2);
 
 		lblFreinageEnYV2 = new JLabel("0.00");
 		lblFreinageEnYV2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFreinageEnYV2.setBounds(436, 193, 65, 29);
+		lblFreinageEnYV2.setBounds(436, 201, 65, 29);
 		panelDonneScientifique.add(lblFreinageEnYV2);
 
 		lblAttractionEnXV1 = new JLabel("0.00");
@@ -709,6 +699,16 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNewLabel_4.setBounds(948, 538, 46, 14);
 		add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_7 = new JLabel("<---------------->");
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_7.setBounds(361, 29, 120, 14);
+		add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_8 = new JLabel("80 M");
+		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_8.setBounds(406, 13, 46, 14);
+		add(lblNewLabel_8);
 		graphiqueVitesse();
 		audioMusic();
 	}
@@ -827,11 +827,45 @@ public class FenetreJeuScientifique extends JPanel {
 		case "frottementEnYV2":
 			lblFrottementEnYV2.setText(String.format("%.2f", evt.getNewValue()));
 			break;
+		case "freinageV1Reset":
+			lblFreinageEnXV1.setText(String.format("%.2f", 0.00));
+			lblFreinageEnYV1.setText(String.format("%.2f", 0.00));
+			break;
 		case "freinageEnXV1":
 			lblFreinageEnXV1.setText(String.format("%.2f", evt.getNewValue()));
 			break;
 		case "freinageEnYV1":
 			lblFreinageEnYV1.setText(String.format("%.2f", evt.getNewValue()));
+			break;
+		case "freinageV2Reset":
+			lblFreinageEnXV2.setText(String.format("%.2f", 0.00));
+			lblFreinageEnYV2.setText(String.format("%.2f", 0.00));
+			break;
+		case "freinageEnXV2":
+			lblFreinageEnXV2.setText(String.format("%.2f", evt.getNewValue()));
+			break;
+		case "freinageEnYV2":
+			lblFreinageEnYV2.setText(String.format("%.2f", evt.getNewValue()));
+			break;
+		case "attractionV1X":
+			lblAttractionEnXV1.setText(String.format("%.2f", evt.getNewValue()));
+			break;
+		case "attractionV1Y":
+			lblAttractionYV1.setText(String.format("%.2f", evt.getNewValue()));
+			break;
+		case "attractionV2X":
+			lblAttractionEnXV2.setText(String.format("%.2f", evt.getNewValue()));
+			break;
+		case "attractionV2Y":
+			lblAttractionYV2.setText(String.format("%.2f", evt.getNewValue()));
+			break;
+		case "attractionV1Reset":
+			lblAttractionEnXV1.setText(String.format("%.2f", 0.00));
+			lblAttractionYV1.setText(String.format("%.2f", 0.00));
+			break;
+		case "attractionV2Reset":
+			lblAttractionEnXV2.setText(String.format("%.2f", 0.00));
+			lblAttractionYV2.setText(String.format("%.2f", 0.00));
 			break;
 		case "ForceLance":
 

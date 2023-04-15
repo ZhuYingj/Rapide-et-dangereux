@@ -30,12 +30,10 @@ import utilitaireObjets.PisteVirageHaut;
 
 public class PanelObjet extends JPanel {
 	public PanelObjet() {
-		setBackground(Color.WHITE);
-		setForeground(Color.BLACK);
 	}
 
 	private final int X_OBJET = 75;
-	private final int Y_OBJET = 20;
+	private final int Y_OBJET = 21;
 	private BlocMystere blocMystere;
 	private PisteDeDepart pisteDeDepart;
 	private PisteHorizontale pisteHorizontale;

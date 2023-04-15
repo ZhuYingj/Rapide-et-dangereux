@@ -182,7 +182,6 @@ public class PanelRegroupement extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
-
 		creationQuadrillage(g2dCopie);
 		g2dCopie.setColor(Color.CYAN);
 		g2dCopie.setStroke(new BasicStroke(4));
@@ -200,9 +199,10 @@ public class PanelRegroupement extends JPanel {
 		}
 
 		for (int a = 0; a < listePisteDeDepart.size(); a++) {
-
+		
 			listePisteDeDepart.get(a).dessiner(g2d);
 			if (listePisteDeDepart.get(0).getNombrePisteColle() != 2 && jouer == true) {
+				System.out.println("s");
 				Rectangle2D.Double pisteIncomplete = new Rectangle2D.Double(listePisteDeDepart.get(a).getX(),
 						listePisteDeDepart.get(a).getY(), listePisteDeDepart.get(a).getTaillePiste(),
 						listePisteDeDepart.get(a).getTaillePiste());

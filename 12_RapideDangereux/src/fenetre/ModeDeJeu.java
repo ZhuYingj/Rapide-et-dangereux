@@ -57,6 +57,7 @@ public class ModeDeJeu extends JPanel {
 
 		setLayout(null);
 		btnMonde = new JButton("MONDE");
+		btnMonde.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnMonde.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -81,6 +82,7 @@ public class ModeDeJeu extends JPanel {
 		add(btnMonde);
 
 		btnCourseMontre = new JButton("COURSE CONTRE LA MONTRE");
+		btnCourseMontre.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnCourseMontre.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -101,6 +103,7 @@ public class ModeDeJeu extends JPanel {
 		add(btnCourseMontre);
 
 		btnEditeur = new JButton("EDITEUR");
+		btnEditeur.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnEditeur.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -122,12 +125,13 @@ public class ModeDeJeu extends JPanel {
 
 		lblTitre = new JLabel("Mode de jeu");
 		lblTitre.setForeground(Color.WHITE);
-		lblTitre.setFont(new Font("Arial Black", Font.PLAIN, 30));
+		lblTitre.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
 		lblTitre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitre.setBounds(568, 144, 349, 75);
 		add(lblTitre);
 
 		btnRetour = new JButton("Retour");
+		btnRetour.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("Retour", null, -1);
