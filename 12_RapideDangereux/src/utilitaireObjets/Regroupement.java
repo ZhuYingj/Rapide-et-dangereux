@@ -58,7 +58,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private ObjetSpecial objSpecial;
 	/** Notre deuxieme objet special **/
 	private ObjetSpecial objSpecial2;
-	private double nombreToursAFaire = 1;
+	private double nombreToursAFaire = 4;
 
 	private double tours = 0;
 
@@ -159,20 +159,7 @@ public class Regroupement implements Dessinable, Serializable {
 	public void avancerGroupe(double deltaT, double tempsTotalEcoule) {
 
 		listePisteDeDepart.get(0).getVoiture().avancerUnPas(deltaT);
-		if (listeAccelerateur.size() != 0) {
-			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
-					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
-				listePisteDeDepart.get(0).getVoiture()
-						.setAccel(new Vecteur2D(200 * Math.cos(listePisteDeDepart.get(0).getVoiture().getAngle()),
-								200 * Math.sin(listePisteDeDepart.get(0).getVoiture().getAngle())));
-			}
-			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
-					listePisteDeDepart.get(0).getVoiture2().getPosition().getY())) {
-				listePisteDeDepart.get(0).getVoiture2()
-						.setAccel(new Vecteur2D(200 * Math.cos(listePisteDeDepart.get(0).getVoiture2().getAngle()),
-								200 * Math.sin(listePisteDeDepart.get(0).getVoiture2().getAngle())));
-			}
-		}
+
 		listePisteDeDepart.get(0).getVoiture2().avancerUnPas(deltaT);
 		if (regroupementBoiteMystere.size() != 0) {
 			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
@@ -236,6 +223,7 @@ public class Regroupement implements Dessinable, Serializable {
 
 			creeBoiteDansListe();
 		}
+		accelerateurFonction();
 		fonctionDesObjetsPossibles(tempsTotalEcoule, deltaT);
 		placerColleBonMorceauPisteVoiture1(listePisteDeDepart.get(0).getVoiture());
 		placerColleBonMorceauPisteVoiture2(listePisteDeDepart.get(0).getVoiture2());
@@ -965,6 +953,42 @@ public class Regroupement implements Dessinable, Serializable {
 					listePisteDeDepart.get(0).getVoiture2().getSkin(),
 					listePisteDeDepart.get(0).getVoiture2().getCercle());
 			snowball.dessiner(g2d);
+		}
+	}
+
+	/**
+	 * Méthode qui permet d'appliquer la fonction de l'accelerateur sur les 2
+	 * voitures lorsqu'ils sont en contact avec celui-ci.
+	 */
+	// Tan Tommy Rin
+	private void accelerateurFonction() {
+
+		if (listeAccelerateur.size() != 0) {
+			// Voiture 1
+			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
+
+				listePisteDeDepart.get(0).getVoiture().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture().getVitesseMaxSelonNiveau() + 20);
+				listePisteDeDepart.get(0).getVoiture()
+						.setAccel(new Vecteur2D(200 * Math.cos(listePisteDeDepart.get(0).getVoiture().getAngle()),
+								200 * Math.sin(listePisteDeDepart.get(0).getVoiture().getAngle())));
+			} else {
+				listePisteDeDepart.get(0).getVoiture().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture().getVitesseMaxSelonNiveauInitiale());
+			}
+			// Voiture 2
+			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture2().getPosition().getY())) {
+				listePisteDeDepart.get(0).getVoiture2().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture2().getVitesseMaxSelonNiveau() + 20);
+				listePisteDeDepart.get(0).getVoiture2()
+						.setAccel(new Vecteur2D(200 * Math.cos(listePisteDeDepart.get(0).getVoiture2().getAngle()),
+								200 * Math.sin(listePisteDeDepart.get(0).getVoiture2().getAngle())));
+			} else {
+				listePisteDeDepart.get(0).getVoiture2().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture2().getVitesseMaxSelonNiveauInitiale());
+			}
 		}
 	}
 

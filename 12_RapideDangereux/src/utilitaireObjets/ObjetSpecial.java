@@ -119,15 +119,12 @@ public class ObjetSpecial implements Dessinable {
 		Vecteur2D forceFrottement = new Vecteur2D();
 		forceFrottement = MoteurPhysique.calculerForceFrottement(2.75, voiture.getMasseEnKg(), voiture.getAngle());
 		voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
-		if (voiture.getVitesse().module() < 0.3) {
-
-			voiture.setVitesse(new Vecteur2D(0.1, 0.1));
-
-		} else if (voiture.getVitesse().module() < 5) {
+		if (voiture.getVitesse().module() < 4) {
 			voiture.setSommeDesForces(new Vecteur2D(0, 0));
 		} else {
 			voiture.setSommeDesForces(forceFrottement);
 		}
+
 	}
 
 	/**
@@ -147,9 +144,9 @@ public class ObjetSpecial implements Dessinable {
 			champignon.fonctionChampignonActivation(voiture);
 
 			fonctionActive = true;
-		} else  {
+		} else {
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
-			voiture.setDiametre(voiture.getDiametreInitial());			
+			voiture.setDiametre(voiture.getDiametreInitial());
 
 			fonctionActive = false;
 		}
