@@ -939,7 +939,6 @@ public class FenetreJeuScientifique extends JPanel {
 	 */
 	//Ludovic Julien
 	public void lireMusic() {
-		if (AppPrincipale12.getAudio() != 0 ) {
 		try {
 			clip = AudioSystem.getClip();
 			URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
@@ -948,10 +947,6 @@ public class FenetreJeuScientifique extends JPanel {
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}
-		}else {
-			clip.stop();
-			clip = null;
 		}
 	}
 	

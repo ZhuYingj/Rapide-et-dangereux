@@ -54,7 +54,6 @@ public class AppPrincipale12 extends JFrame {
 
 	private String sousDossierSurBureau = "SauvegardePiste";
 	
-	private static int audio = 1;
 
 	File fichierDeTravail = new File(System.getProperty("user.home"),
 			"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
@@ -277,10 +276,6 @@ public class AppPrincipale12 extends JFrame {
 		}else {
 			FenetreJeuScientifique.getClip().start();
 		}
-	}
-
-	public static int getAudio() {
-		return audio;
 	}
 
 	/**
