@@ -66,7 +66,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private static Clip clip;
 	private ZoneVitesse zoneVitesse2;
 	private ZoneVitesse zoneVitesse;
-	private Timer timerVitesse;
+	private static Timer timerVitesse;
 
 	private JLabel lblAttractionYV2;
 	private JLabel lblDiametreV1;
@@ -892,6 +892,10 @@ public class FenetreJeuScientifique extends JPanel {
 
 			}
 		});
+	}
+	
+	public static Timer getTimer() {
+		return timerVitesse;
 	}
 
 	/**

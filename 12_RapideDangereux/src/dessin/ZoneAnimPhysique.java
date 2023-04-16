@@ -10,7 +10,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 import javax.sound.sampled.Clip;
-
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import application.GestionnaireDeFichiersSurLeBureau;
@@ -108,6 +108,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private double forceDeLancement = 50;
 	private double forceDeLancement2 = 50;
 	private Clip newClip;
+	private String piste;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -882,6 +883,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.avancerGroupe(deltaT, tempsTotalEcoule);
 		arretQuandFini();
 		arretMusic();
+		arretGraphique();
+		gagnantCourse();
 	}
 
 	/**
@@ -1157,8 +1160,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				.getNombreToursFaits()
 				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 						.getNombreToursFaits()) {
-//			if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
-//					.getNombreToursFaits()) {
 			try {
 				newClip = FenetreJeuScientifique.getClip();
 			} catch (Exception e) {
@@ -1167,11 +1168,47 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			if (newClip != null) {
 				newClip.stop();
 			}
-//			}
 		}
 	}
 
+	/**
+	 * méthode qui permet d'arreter le timer des grahique losrque la partie est terminé
+	 */
+	// Ludovic Julien
 	public void arretGraphique() {
-
+		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
+				.getNombreToursFaits()
+				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+						.getNombreToursFaits()) {
+						
+			FenetreJeuScientifique.getTimer().stop();
+		
+		}
+	}
+	
+	/**
+	 * méthode qui permet de récolter les information du gagnant de la course (nom,temps,piste jouer) 
+	 */
+	//Ludovic Julien
+	public void gagnantCourse() {
+		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
+				.getNombreToursFaits()
+				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+						.getNombreToursFaits()) {
+			
+			String nomUtilisateur = JOptionPane.showInputDialog(null, "félicitation pour cette belle victoire, entrer votre nom pour le classement !");
+			
+			if (typePiste == TypePiste.CANADA) {
+				piste = "Canada";
+			}else {
+				if (typePiste == TypePiste.MEXIQUE) {
+					piste = "Mexique";
+				}else {
+					piste = "Italie";
+				}
+			}
+			
+			GestionnaireDeFichiersSurLeBureau.ecrireFichier(nomUtilisateur, tempsTotalEcoule, piste);
+		}
 	}
 }
