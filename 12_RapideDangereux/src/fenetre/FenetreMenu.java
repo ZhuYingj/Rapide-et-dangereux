@@ -25,6 +25,7 @@ import application.OutilsImage;
  */
 
 public class FenetreMenu extends JPanel {
+	private JLabel lblInfoRecue;
 	private JButton btnJouer;
 	private JButton btnAide;
 	private JButton btnQuitter;

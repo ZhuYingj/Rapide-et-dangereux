@@ -447,7 +447,7 @@ public class FenetreEditeur extends JPanel {
 		lblFleche.setBounds(224, 82, 89, 14);
 		add(lblFleche);
 
-		JButton btnClear = new JButton("EFFACER TOUS LES MORCEAUX");
+		JButton btnClear = new JButton("EFFACER");
 		btnClear.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -709,7 +709,7 @@ public class FenetreEditeur extends JPanel {
 
 		pisteCourante = (String) comboBoxPiste.getSelectedItem();
 		chargementUnePiste();
-		JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDÉE SUR LE BUREAU\nNOM :" + pisteCourante);
+		JOptionPane.showMessageDialog(null, "PISTE SAUVEGARDER SUR LE BUREAU\nNOM :" + pisteCourante);
 	}
 
 	/**
@@ -729,7 +729,7 @@ public class FenetreEditeur extends JPanel {
 
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU PAS CONNECTÉ POUR JOUER");
+					"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU VIDE POUR JOUEZ");
 
 		}
 

@@ -24,7 +24,7 @@ import javax.swing.border.BevelBorder;
  * activé
  * 
  * @author Tan Tommy Rin
- * @author Alexis Pineda-Alvarado
+ *
  */
 
 public class FenetreJeuSansScientifique extends JPanel {
@@ -72,7 +72,11 @@ public class FenetreJeuSansScientifique extends JPanel {
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actionReset();
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.restartPos();
+				btnNextImg.setEnabled(true);
+				btnStart.setEnabled(true);
+				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
 			}
 		});
 		btnReset.setBounds(30, 345, 97, 58);
@@ -81,7 +85,10 @@ public class FenetreJeuSansScientifique extends JPanel {
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actionStop();
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.arreter();
+				btnNextImg.setEnabled(true);
+				btnStart.setEnabled(true);
 			}
 		});
 		btnStop.setBounds(30, 441, 97, 58);
@@ -94,71 +101,32 @@ public class FenetreJeuSansScientifique extends JPanel {
 		btnStart = new JButton("Start");
 		btnStart.setBounds(30, 177, 97, 58);
 		add(btnStart);
-
+		
 		JLabel lblNewLabel = new JLabel("80 M");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel.setBounds(205, 724, 89, 14);
 		add(lblNewLabel);
-
+		
 		JLabel lblNewLabel_1 = new JLabel("<------------>");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel_1.setBounds(175, 703, 269, 14);
 		add(lblNewLabel_1);
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actionStart();
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.setEnCoursDAnimation(false);
+				zoneAnimPhysique.demarrer();
+				btnNextImg.setEnabled(false);
+				btnStart.setEnabled(false);
+				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 			}
 		});
 		btnNextImg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actionNextImg();
+				zoneAnimPhysique.requestFocusInWindow();
+				zoneAnimPhysique.avancerUnPas();
 			}
 		});
-	}
-
-	/**
-	 * Méthode qui permet de faire des actions si le bouton est appuyé.
-	 */
-	// Alexis Pineda-Alvarado
-	private void actionReset() {
-		zoneAnimPhysique.requestFocusInWindow();
-		zoneAnimPhysique.restartPos();
-		btnNextImg.setEnabled(true);
-		btnStart.setEnabled(true);
-		pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
-	}
-
-	/**
-	 * Méthode qui permet de faire des actions si le bouton est appuyé.
-	 */
-	// Alexis Pineda-Alvarado
-	private void actionStop() {
-		zoneAnimPhysique.requestFocusInWindow();
-		zoneAnimPhysique.arreter();
-		btnNextImg.setEnabled(true);
-		btnStart.setEnabled(true);
-	}
-
-	/**
-	 * Méthode qui permet de faire des actions si le bouton est appuyé.
-	 */
-	// Alexis Pineda-Alvarado
-	private void actionStart() {
-		zoneAnimPhysique.requestFocusInWindow();
-		zoneAnimPhysique.setEnCoursDAnimation(false);
-		zoneAnimPhysique.demarrer();
-		btnNextImg.setEnabled(false);
-		btnStart.setEnabled(false);
-		pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
-	}
-
-	/**
-	 * Méthode qui permet de faire des actions si le bouton est appuyé.
-	 */
-	// Alexis Pineda-Alvarado
-	private void actionNextImg() {
-		zoneAnimPhysique.requestFocusInWindow();
-		zoneAnimPhysique.avancerUnPas();
 	}
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {
