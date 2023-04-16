@@ -1074,7 +1074,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageHaut(pisteMexique.getHaut());
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
-
+			
 			regroupement.creeBoiteDansListe();
 
 		}
@@ -1113,6 +1113,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageGauche(regroupementTempo.getListePisteVirageGauche());
 			regroupement.setListePisteVirageHaut(regroupementTempo.getListePisteVirageHaut());
 			regroupement.setListeAccelerateur(regroupementTempo.getListeAccelerateur());
+			regroupement.setListeFumee(regroupementTempo.getListeFumee());
 			voiture.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
 					regroupement.getListePisteDeDepart().get(0).getY()
 							+ regroupement.getListePisteDeDepart().get(0).getTaillePiste() / 4));

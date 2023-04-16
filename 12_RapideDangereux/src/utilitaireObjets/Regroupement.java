@@ -46,7 +46,6 @@ public class Regroupement implements Dessinable, Serializable {
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
 	/** Liste Smoke **/
 	private ArrayList<Fumee> listeFumee = new ArrayList<Fumee>();
-	
 
 	/** Le nombre de pixels par metre **/
 	private double pixelsParMetre = 1;
@@ -162,6 +161,7 @@ public class Regroupement implements Dessinable, Serializable {
 
 		listePisteDeDepart.get(0).getVoiture().avancerUnPas(deltaT);
 		accelerateurFonction();
+		fumeeFonction();
 		listePisteDeDepart.get(0).getVoiture2().avancerUnPas(deltaT);
 		if (regroupementBoiteMystere.size() != 0) {
 			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
@@ -993,6 +993,35 @@ public class Regroupement implements Dessinable, Serializable {
 	}
 
 	/**
+	 * Methode qui permet de set le diametre des deux voitures à 0 lorsqu'ils sont
+	 * dans la boite de fumee et le remmet au diametre diametre initial lorsqu'ils
+	 * ne sont plus dans la boite a fumee
+	 */
+	// Alexis Pineda-Alvarado
+	private void fumeeFonction() {
+		if (listeAccelerateur.size() != 0) {
+			// Voiture 1
+			if (listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
+
+				listePisteDeDepart.get(0).getVoiture().setDiametre(0);
+			} else {
+				listePisteDeDepart.get(0).getVoiture()
+						.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
+			}
+			// Voiture 2
+			if (listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture2().getPosition().getY())) {
+				
+				listePisteDeDepart.get(0).getVoiture2().setDiametre(0);
+			} else {
+				listePisteDeDepart.get(0).getVoiture2()
+						.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
+			}
+		}
+	}
+
+	/**
 	 * Gérer les collisions avec chaque morceau de piste
 	 * 
 	 * @param voiture La voiture controllée
@@ -1503,7 +1532,7 @@ public class Regroupement implements Dessinable, Serializable {
 	public void setListeAccelerateur(ArrayList<Accelerateur> listeAccelerateur) {
 		this.listeAccelerateur = listeAccelerateur;
 	}
-	
+
 	public ArrayList<Fumee> getListeFumee() {
 		return listeFumee;
 	}
