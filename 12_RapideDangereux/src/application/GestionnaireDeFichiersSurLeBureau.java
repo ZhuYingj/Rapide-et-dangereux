@@ -5,10 +5,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.BufferedWriter;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -23,6 +28,7 @@ import utilitaireObjets.Voiture;
  * 
  * @author Caroline Houle
  * @author Tan Tommy Rin
+ * @author Ludovic Julien
  */
 public class GestionnaireDeFichiersSurLeBureau {
 
@@ -236,5 +242,36 @@ public class GestionnaireDeFichiersSurLeBureau {
 		} // fin finally
 
 	}
+	
+	/**
+	 * méthode qui permet de creer un fichier (S'il existe pas déjà) et d'ecrire a l'interieur les donner du gagant 
+	 * 
+	 * @param nomUtilisateur		nom d'utilisateur du gagant de la course
+	 * @param temps					le temps fait pour terminer la course
+	 * @param piste					la piste qu'il a jouer
+	 */
+	// Ludovic Julien
+	public static void ecrireFichier(String nomUtilisateur, double temps, String piste) {
+        String cheminFichier = System.getProperty("user.home") + "/Desktop/donnees.txt";
+        
+        try {
+            // Créer le fichier s'il n'existe pas déjà
+            Path fichier = Paths.get(cheminFichier);
+            if (!Files.exists(fichier)) {
+                Files.createFile(fichier);
+            }
+            
+            BufferedWriter writer = new BufferedWriter(new FileWriter(cheminFichier, true));
+            
+            writer.write(nomUtilisateur + ";" + temps + ";" + piste);
+            writer.newLine();
+            writer.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+	
 
 }

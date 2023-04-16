@@ -10,6 +10,13 @@ import javax.swing.table.TableModel;
 
 import application.GestionnaireDeFichiersSurLeBureau;
 
+/**
+ * zone qui permet d'afficher le tableau record par piste
+ * 
+ * @author Ludovic Julien 
+ *
+ */
+
 public class TableauRecord extends JPanel{
 	private GestionnaireDeFichiersSurLeBureau fichierRecord;
 	

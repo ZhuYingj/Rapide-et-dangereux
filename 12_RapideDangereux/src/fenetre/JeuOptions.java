@@ -550,6 +550,12 @@ public class JeuOptions extends JPanel {
 		}
 	}
 	
+	/**
+	 * méthode qui permet le changement de couleur des voiture
+	 * 
+	 * @param voiture 	voiture 1 ou 2 
+	 * @param direction  changer de couleur vers la droite ou vers la geuche
+	 */
 	//Ludovic Julien
 	public void changementImage(int voiture, int direction) {
 		
