@@ -5,12 +5,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
+
 import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import dessin.ZoneVitesse;
 import geometrie.FlecheVectorielle;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -52,6 +51,8 @@ public class Voiture implements Dessinable, Serializable {
 	private transient Shape voitureTransfo;
 	/** Vitesse maximale selon le niveau sélectionné **/
 	private double vitesseMaxSelonNiveau;
+	/** Vitesse maximale initiale selon le niveau sélectionné **/
+	private double vitesseMaxSelonNiveauInitiale;
 	/** Le diametre de la voiture initial **/
 	private double diametreInitial;
 	private double nombreToursFaits = 0;
@@ -79,6 +80,8 @@ public class Voiture implements Dessinable, Serializable {
 		this.masseEnKg = masse;
 		masseEnKgInitial = masseEnKg;
 		diametreInitial = diametre;
+		vitesseMaxSelonNiveauInitiale = vitesseMaxSelonNiveau;
+		
 		creerLaGeometrie();
 		vitessesParSeconde = new ArrayList<Double>();
 	}
@@ -160,6 +163,14 @@ public class Voiture implements Dessinable, Serializable {
 	// Tan Tommy Rin
 	public double getMasseEnKg() {
 		return masseEnKg;
+	}
+
+	public double getVitesseMaxSelonNiveauInitiale() {
+		return vitesseMaxSelonNiveauInitiale;
+	}
+
+	public void setVitesseMaxSelonNiveauInitiale(double vitesseMaxSelonNiveauInitiale) {
+		this.vitesseMaxSelonNiveauInitiale = vitesseMaxSelonNiveauInitiale;
 	}
 
 	/**

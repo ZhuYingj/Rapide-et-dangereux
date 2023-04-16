@@ -57,8 +57,8 @@ public class JeuOptions extends JPanel {
 	private Color[] couleurs2 = { Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.cyan };
 	private Color transparent = new Color(255, 255, 255, 0);
 	private JButton btnGauche2;
-	private JButton btnDroit1;
 	private JButton btnGauche1;
+	private JButton btnDroit1;
 	private JButton btnDroit2;
 
 	/**
@@ -86,6 +86,8 @@ public class JeuOptions extends JPanel {
 		zoneApercuPiste.setBounds(0, 0, 700, 439);
 		PanelApercu.add(zoneApercuPiste);
 
+		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");
+		// Icon icone = new ImageIcon(drapeuxMexique);
 		btnMexique = new JButton("Mexique");
 		btnMexique.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnMexique.addMouseListener(new MouseAdapter() {
@@ -277,6 +279,55 @@ public class JeuOptions extends JPanel {
 		panel_V1.setBounds(1200, 77, 143, 90);
 		add(panel_V1);
 
+
+//		JButton btnGauche = new JButton("<");
+
+//		btnGauche = new JButton("");
+//		btnGauche.setBounds(1123, 116, 55, 23);
+//		btnGauche.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				ChangementImage(1,0);
+//				panel_V1.setBackground(couleurs[indexCouleur]);
+//			}
+//		});
+//		add(btnGauche);
+//
+//		
+//		JButton btnDroite = new JButton(">");
+//		btnDroite.setBounds(1365, 116, 55, 23);
+//		btnDroite.addActionListener(new ActionListener() {
+//
+//		btnGauche.setBorder(null);
+//
+//		Image arrowGauche = OutilsImage.lireImageEtRedimensionner("FlecheGauche.png", 50, 23);
+//		if (arrowGauche != null) {
+//			btnGauche.setIcon(new ImageIcon(arrowGauche));
+//			arrowGauche.flush();
+//		}
+//
+//		
+//		btnDroit = new JButton("");
+//		btnDroit.setForeground(new Color(255, 255, 255));
+//		btnDroit.setBounds(1365, 116, 55, 23);
+//		btnDroit.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				ChangementImage(1,1);
+//				panel_V1.setBackground(couleurs[indexCouleur]);
+//			}
+//		});
+//		add(btnDroit);
+//
+//		btnDroit.setBorder(null);
+
+//		Image arrowDroite = OutilsImage.lireImageEtRedimensionner("FlecheDroite.png", 50, 23);
+//		if (arrowDroite != null) {
+//			btnDroit.setIcon(new ImageIcon(arrowDroite));
+//			arrowDroite.flush();
+//		}
+
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnRetour.addActionListener(new ActionListener() {
@@ -304,73 +355,64 @@ public class JeuOptions extends JPanel {
 		lblNewLabel_1.setBounds(1200, 205, 143, 13);
 		add(lblNewLabel_1);
 
-		btnGauche1 = new JButton("");
+
+		JButton btnGauche1 = new JButton("<");
 		btnGauche1.setBounds(1123, 116, 55, 23);
 		btnGauche1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changementImage(1, 0);
+				changementImage(1,0);
 				panel_V1.setBackground(couleurs[indexCouleur]);
 			}
 		});
 		add(btnGauche1);
-		btnGauche1.setBorder(null);
-		Image arrowGauche = OutilsImage.lireImageEtRedimensionner("FlecheGauche.png", 50, 23);
-		if (arrowGauche != null) {
-			btnGauche1.setIcon(new ImageIcon(arrowGauche));
-			arrowGauche.flush();
-		}
-		btnGauche2 = new JButton("");
+
+		btnGauche2 = new JButton("<");
 		btnGauche2.setBounds(1123, 264, 55, 23);
 		btnGauche2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changementImage(0, 0);
+				changementImage(0,0);
 				PanelV2.setBackground(couleurs2[indexCouleur2]);
 			}
 		});
 		add(btnGauche2);
 		btnGauche2.setBorder(null);
 
-		btnDroit1 = new JButton("");
+		btnDroit1 = new JButton(">");
 		btnDroit1.setBounds(1365, 116, 55, 23);
-		Image arrowGauche2 = OutilsImage.lireImageEtRedimensionner("FlecheGauche.png", 50, 23);
-		if (arrowGauche2 != null) {
-			btnGauche2.setIcon(new ImageIcon(arrowGauche2));
-			arrowGauche2.flush();
-		}
+		//Image arrowGauche2 = OutilsImage.lireImageEtRedimensionner("FlecheGauche.png", 50, 23);
 		btnDroit1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				changementImage(1, 1);
+//		if (arrowGauche2 != null) {
+//			btnGauche2.setIcon(new ImageIcon(arrowGauche2));
+//			arrowGauche2.flush();
+//		}
+				changementImage(1,1);
 				panel_V1.setBackground(couleurs[indexCouleur]);
-			}
+		}
 		});
 		add(btnDroit1);
 		btnDroit1.setBorder(null);
-		Image arrowDroite = OutilsImage.lireImageEtRedimensionner("FlecheDroite.png", 50, 23);
-		if (arrowDroite != null) {
-			btnDroit1.setIcon(new ImageIcon(arrowDroite));
-			arrowDroite.flush();
-		}
-		btnDroit2 = new JButton("");
+		
+		btnDroit2 = new JButton(">");
 		btnDroit2.setBounds(1365, 264, 55, 23);
 		btnDroit2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changementImage(0, 1);
+				changementImage(0,1);
 				PanelV2.setBackground(couleurs2[indexCouleur2]);
 			}
 		});
 		add(btnDroit2);
 		btnDroit2.setBorder(null);
 
-		Image arrowDroite2 = OutilsImage.lireImageEtRedimensionner("FlecheDroite.png", 50, 23);
-		if (arrowDroite2 != null) {
-			btnDroit2.setIcon(new ImageIcon(arrowDroite2));
-			arrowDroite2.flush();
-		}
-
+//		Image arrowDroite2 = OutilsImage.lireImageEtRedimensionner("FlecheDroite.png", 50, 23);
+//		if (arrowDroite2 != null) {
+//			btnDroit2.setIcon(new ImageIcon(arrowDroite2));
+//			arrowDroite2.flush();
+//		}
+		
 		JButton btnRecorsPiste = new JButton("Records par piste !");
 		btnRecorsPiste.setForeground(new Color(0, 0, 0));
 		btnRecorsPiste.setBackground(Color.CYAN);
@@ -446,9 +488,9 @@ public class JeuOptions extends JPanel {
 				imgHiver.flush();
 			}
 
-			btnDroit1.setBackground(transparent);
+			//btnDroit.setBackground(transparent);
 			btnDroit2.setBackground(transparent);
-			btnGauche1.setBackground(transparent);
+		//	btnGauche.setBackground(transparent);
 			btnGauche2.setBackground(transparent);
 
 		}
@@ -474,9 +516,9 @@ public class JeuOptions extends JPanel {
 				imgDesert.flush();
 			}
 
-			btnDroit1.setBackground(transparent);
+			//btnDroit.setBackground(transparent);
 			btnDroit2.setBackground(transparent);
-			btnGauche1.setBackground(transparent);
+			//btnGauche.setBackground(transparent);
 			btnGauche2.setBackground(transparent);
 		}
 	}
@@ -501,42 +543,42 @@ public class JeuOptions extends JPanel {
 				imgVenice.flush();
 			}
 
-			btnDroit1.setBackground(transparent);
+		//	btnDroit.setBackground(transparent);
 			btnDroit2.setBackground(transparent);
-			btnGauche1.setBackground(transparent);
+		//	btnGauche.setBackground(transparent);
 			btnGauche2.setBackground(transparent);
 		}
 	}
-
-	// Ludovic Julien
+	
+	//Ludovic Julien
 	public void changementImage(int voiture, int direction) {
-
+		
 		if (voiture == 1) {
 			if (direction == 1) {
 				indexCouleur++;
 				if (indexCouleur == couleurs.length) {
 					indexCouleur = 0;
 				}
-			} else {
+			}else {
 				indexCouleur--;
 				if (indexCouleur < 0) {
 					indexCouleur = couleurs.length - 1;
-				}
-			}
-		} else {
+				}	
+			}	
+		}else {
 			if (direction == 1) {
 				indexCouleur2++;
 				if (indexCouleur2 == couleurs2.length) {
 					indexCouleur2 = 0;
 				}
-			} else {
+			}else {
 				indexCouleur2--;
 				if (indexCouleur2 < 0) {
 					indexCouleur2 = couleurs2.length - 1;
 				}
 			}
 
-		}
-
-	}
 }
+
+		}
+	}

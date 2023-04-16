@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,9 +10,12 @@ import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
+import geometrie.Vecteur2D;
 import utilitaireObjets.Regroupement;
+import utilitaireObjets.Voiture;
 
 /**
  * Classe offrant un ensemble de m�thodes pour illustrer le fonctionnement des
