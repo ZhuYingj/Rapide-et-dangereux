@@ -46,6 +46,8 @@ public class Regroupement implements Dessinable, Serializable {
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
 	/** Liste Smoke **/
 	private ArrayList<Fumee> listeFumee = new ArrayList<Fumee>();
+	
+
 	/** Le nombre de pixels par metre **/
 	private double pixelsParMetre = 1;
 	/** Le nombre de boite mystere **/
@@ -1478,6 +1480,14 @@ public class Regroupement implements Dessinable, Serializable {
 
 	public void setListeAccelerateur(ArrayList<Accelerateur> listeAccelerateur) {
 		this.listeAccelerateur = listeAccelerateur;
+	}
+	
+	public ArrayList<Fumee> getListeFumee() {
+		return listeFumee;
+	}
+
+	public void setListeFumee(ArrayList<Fumee> listeFumee) {
+		this.listeFumee = listeFumee;
 	}
 
 	public ObjetSpecial getObjSpecial() {
