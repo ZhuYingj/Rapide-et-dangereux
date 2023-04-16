@@ -58,7 +58,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private ObjetSpecial objSpecial;
 	/** Notre deuxieme objet special **/
 	private ObjetSpecial objSpecial2;
-	private double nombreToursAFaire = 1;
+	private double nombreToursAFaire = 4;
 
 	private double tours = 0;
 
@@ -159,7 +159,7 @@ public class Regroupement implements Dessinable, Serializable {
 	public void avancerGroupe(double deltaT, double tempsTotalEcoule) {
 
 		listePisteDeDepart.get(0).getVoiture().avancerUnPas(deltaT);
-		accelerateurFonction();
+
 		listePisteDeDepart.get(0).getVoiture2().avancerUnPas(deltaT);
 		if (regroupementBoiteMystere.size() != 0) {
 			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
@@ -223,6 +223,7 @@ public class Regroupement implements Dessinable, Serializable {
 
 			creeBoiteDansListe();
 		}
+		accelerateurFonction();
 		fonctionDesObjetsPossibles(tempsTotalEcoule, deltaT);
 		placerColleBonMorceauPisteVoiture1(listePisteDeDepart.get(0).getVoiture());
 		placerColleBonMorceauPisteVoiture2(listePisteDeDepart.get(0).getVoiture2());
@@ -961,6 +962,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 */
 	// Tan Tommy Rin
 	private void accelerateurFonction() {
+
 		if (listeAccelerateur.size() != 0) {
 			// Voiture 1
 			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),

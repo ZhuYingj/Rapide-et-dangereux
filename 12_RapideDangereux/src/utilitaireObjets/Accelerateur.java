@@ -127,11 +127,4 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 		this.formeAire = formeAire;
 	}
 
-//	public void fonctionAccelarateur(Voiture voitureAffecte) {
-//		// augmente la vitesse 
-//		final double vitesseAccelerer = voitureAffecte.getVitesseMaxSelonNiveau() * 2;
-//		//voitureAffecte.setVitesse(vitesseAccelerer);
-//		voitureAffecte.setVitesseMaxSelonNiveau(vitesseAccelerer);
-//	}
-
 }
