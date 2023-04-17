@@ -59,7 +59,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private ObjetSpecial objSpecial;
 	/** Notre deuxieme objet special **/
 	private ObjetSpecial objSpecial2;
-	private double nombreToursAFaire = 1;  ////////////////////////////////////
+	private double nombreToursAFaire = 1; ////////////////////////////////////
 
 	private double tours = 0;
 
@@ -160,7 +160,6 @@ public class Regroupement implements Dessinable, Serializable {
 	public void avancerGroupe(double deltaT, double tempsTotalEcoule) {
 
 		listePisteDeDepart.get(0).getVoiture().avancerUnPas(deltaT);
-
 
 		listePisteDeDepart.get(0).getVoiture2().avancerUnPas(deltaT);
 		if (regroupementBoiteMystere.size() != 0) {
@@ -926,14 +925,23 @@ public class Regroupement implements Dessinable, Serializable {
 		g2dCopie.setStroke(new BasicStroke(5));
 
 		g2dCopie.setColor(Color.WHITE);
-		g2dCopie.drawString("Voiture1",
-				(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getX()
-						- listePisteDeDepart.get(0).getVoiture().getDiametre() / 2),
-				(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getY()));
-		g2dCopie.drawString("Voiture2",
-				(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getX()
-						- listePisteDeDepart.get(0).getVoiture2().getDiametre() / 2),
-				(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
+
+		if (!listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
+				listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
+			g2dCopie.drawString("Voiture1",
+					(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getX()
+							- listePisteDeDepart.get(0).getVoiture().getDiametre() / 2),
+					(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getY()));
+
+		}
+		if (!listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
+				listePisteDeDepart.get(0).getVoiture2().getPosition().getY())) {
+			g2dCopie.drawString("Voiture2",
+					(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getX()
+							- listePisteDeDepart.get(0).getVoiture2().getDiametre() / 2),
+					(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
+		}
+
 	}
 
 	/**
@@ -1015,7 +1023,7 @@ public class Regroupement implements Dessinable, Serializable {
 			// Voiture 2
 			if (listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
 					listePisteDeDepart.get(0).getVoiture2().getPosition().getY())) {
-				
+
 				listePisteDeDepart.get(0).getVoiture2().setDiametre(0);
 			} else {
 				listePisteDeDepart.get(0).getVoiture2()
