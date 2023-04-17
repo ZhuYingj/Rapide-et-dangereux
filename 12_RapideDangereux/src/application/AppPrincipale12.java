@@ -274,10 +274,6 @@ public class AppPrincipale12 extends JFrame {
 		}
 	}
 
-	public static int getAudio() {
-		return audio;
-	}
-
 	/**
 	 * Méthode qui permet de changer de fenetre selon le check box
 	 * 

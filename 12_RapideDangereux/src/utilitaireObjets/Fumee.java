@@ -29,28 +29,49 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 	private double pixelParMetre;
 	private Rectangle2D.Double formeAire;
 
+	
+	/**
+	 * Methode qui permet de construire l'objet Fumee a l'aide de parametres
+	 * 
+	 * @param x position en x de la piste
+	 * @param y position en y de la piste
+	 */
+	//Alexis Pineda-Alvarado
 	public Fumee(int x, int y) {
 		this.x = x;
 		this.y = y;
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
-
+	/**
+	 * Methode qui permet de dessiner la fumee sur la zone d'animation a
+	 * l'aide de g2d
+	 */
+	// Alexis Pineda-Alvarado
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(Color.gray);
 
 		Stroke stroke = new BasicStroke(3f);
 		g2d.setStroke(stroke);
 		g2d.drawLine(x, y, x + taillePiste, y);
-		
+
 		g2d.drawLine(x, y + taillePiste - 1, x + taillePiste, y + taillePiste - 1);
 		g2d.drawLine(x, y, x, y + taillePiste);
 		g2d.drawLine(x + taillePiste, y, x + taillePiste, y + taillePiste);
 
 	}
 
+	/**
+	 * Méthode qui permet de détecter si la fumee est contenue au clic de la
+	 * souris 
+	 **/
+	// Alexis Pineda-Alvarado
 	public boolean contient(double xPix, double yPix) {
+		if (formeAire.contains(xPix, yPix)) {
 
-		return false;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public double getPixelsParMetre() {

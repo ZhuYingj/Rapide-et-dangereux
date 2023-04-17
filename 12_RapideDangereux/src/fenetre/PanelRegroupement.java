@@ -53,6 +53,7 @@ public class PanelRegroupement extends JPanel {
 	private Rectangle2D.Double poubelle = new Rectangle2D.Double(640, 320, 80, 80);
 	private BlocMystere blocMystere;
 	private Accelerateur acc;
+	private Fumee fumee;
 	private PisteDeDepart pisteDeDepart;
 	private PisteHorizontale pisteHorizontale;
 	private PisteVerticale pisteVerticale;
@@ -77,7 +78,7 @@ public class PanelRegroupement extends JPanel {
 	private ArrayList<PisteDeDepart> listePisteDeDepart = new ArrayList<PisteDeDepart>();
 	private ArrayList<PisteVirageDroit> listePisteVirageDroit = new ArrayList<PisteVirageDroit>();
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
-	private ArrayList<Fumee> listeFumee  = new ArrayList<Fumee>();
+	private ArrayList<Fumee> listeFumee = new ArrayList<Fumee>();
 
 	private boolean objetSelectionne = false;
 	private boolean jouer = false;
@@ -135,6 +136,9 @@ public class PanelRegroupement extends JPanel {
 
 				// Pour la piste de virage haut
 				pisteVirageHautDrag(e);
+				
+				// Pour la morceau de fumee
+				fumeeDrag(e);
 
 				repaint();
 			}
@@ -161,6 +165,8 @@ public class PanelRegroupement extends JPanel {
 				pisteVirageDroitPressed(e);
 				// Condition pour piste virage haut
 				pisteVirageHautPressed(e);
+				// Condition pour la fumee
+				fumeePressed(e);
 
 			}
 
@@ -199,7 +205,7 @@ public class PanelRegroupement extends JPanel {
 		}
 
 		for (int a = 0; a < listePisteDeDepart.size(); a++) {
-		
+
 			listePisteDeDepart.get(a).dessiner(g2d);
 			if (listePisteDeDepart.get(0).getNombrePisteColle() != 2 && jouer == true) {
 				System.out.println("s");
@@ -276,6 +282,12 @@ public class PanelRegroupement extends JPanel {
 			listeAccelerateur.get(a).dessiner(g2d);
 
 		}
+
+		for (int a = 0; a < listeFumee.size(); a++) {
+
+			listeFumee.get(a).dessiner(g2d);
+		}
+
 		Image boiteMystere = OutilsImage.lireImageEtRedimensionner("LuckyBox.png", 15, 15);
 		for (int a = 0; a < listeBlocMystere.size(); a++) {
 
@@ -334,6 +346,10 @@ public class PanelRegroupement extends JPanel {
 		} else if (type == TypeObjetDeplacable.PISTEVIRAGEHAUT
 				&& poubelle.contains(listePisteVirageHaut.get(indexObjetPris).getFormeAire())) {
 			listePisteVirageHaut.remove(indexObjetPris);
+			poubelleVide = false;
+		} else if (type == TypeObjetDeplacable.FUMEE
+				&& poubelle.contains(listeFumee.get(indexObjetPris).getFormeAire())) {
+			listeFumee.remove(indexObjetPris);
 			poubelleVide = false;
 		} else {
 
@@ -770,6 +786,24 @@ public class PanelRegroupement extends JPanel {
 			} // Fin loop
 		}
 	}
+	
+	private void fumeePressed(MouseEvent e) { 
+		if(objetSelectionne == false) {
+			for(int a = 0; a < listeFumee.size(); a++) {
+				if(listeFumee.get(a).contient(e.getX(), e.getY())) {
+					indexObjetPris = a;
+					xPrecedent = e.getX();
+					yPrecedent = e.getY();
+					
+					fumee = listeFumee.get(a);
+					
+					objetSelectionne = true;
+					type = TypeObjetDeplacable.FUMEE;
+					break;
+				}
+			}
+		}
+	}
 
 	/**
 	 * Méthode qui permet de determiner si un bloc mystere est contenue dans le clic
@@ -818,6 +852,25 @@ public class PanelRegroupement extends JPanel {
 			acc.setY(collerY(e));
 			acc.getFormeAire().setRect(acc.getX(), acc.getY(), acc.getTaillePiste(), acc.getTaillePiste());
 
+		}
+	}
+	
+	/**
+	 * Méthode qui permet de modifier la postion de l'accelerateur en la bougeant
+	 * avec la souris
+	 * 
+	 * @param e Évenement de souris
+	 */
+	//Alexis Pineda-Alvarado
+	private void fumeeDrag(MouseEvent e) {
+		if(listeFumee.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.FUMEE) {
+			
+			xPrecedent = e.getX();
+			yPrecedent = e.getY();
+			
+			fumee.setX(collerX(e));
+			fumee.setY(collerY(e));
+			fumee.getFormeAire().setRect(fumee.getX(), fumee.getY(), fumee.getTaillePiste(), fumee.getTaillePiste());
 		}
 	}
 
@@ -955,8 +1008,7 @@ public class PanelRegroupement extends JPanel {
 	public ArrayList<PisteVirageBas> getListePisteVirageBas() {
 		return listePisteVirageBas;
 	}
-	
-	
+
 	public ArrayList<Fumee> getListeFumee() {
 		return listeFumee;
 	}

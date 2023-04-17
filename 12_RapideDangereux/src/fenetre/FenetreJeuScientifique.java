@@ -66,7 +66,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private static Clip clip;
 	private ZoneVitesse zoneVitesse2;
 	private ZoneVitesse zoneVitesse;
-	private Timer timerVitesse;
+	private static Timer timerVitesse;
 
 	private JLabel lblAttractionYV2;
 	private JLabel lblDiametreV1;
@@ -893,6 +893,10 @@ public class FenetreJeuScientifique extends JPanel {
 			}
 		});
 	}
+	
+	public static Timer getTimer() {
+		return timerVitesse;
+	}
 
 	/**
 	 * Méthode qui permet de lire un fichier audio et de l'affecter a une variable
@@ -939,7 +943,6 @@ public class FenetreJeuScientifique extends JPanel {
 	 */
 	//Ludovic Julien
 	public void lireMusic() {
-		if (AppPrincipale12.getAudio() != 0 ) {
 		try {
 			clip = AudioSystem.getClip();
 			URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
@@ -948,10 +951,6 @@ public class FenetreJeuScientifique extends JPanel {
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}
-		}else {
-			clip.stop();
-			clip = null;
 		}
 	}
 	
