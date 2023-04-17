@@ -40,7 +40,7 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 	public Fumee(int x, int y) {
 		this.x = x;
 		this.y = y;
-		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
+
 	}
 	/**
 	 * Methode qui permet de dessiner la fumee sur la zone d'animation a
