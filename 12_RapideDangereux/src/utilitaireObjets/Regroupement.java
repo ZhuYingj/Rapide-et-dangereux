@@ -160,8 +160,8 @@ public class Regroupement implements Dessinable, Serializable {
 	public void avancerGroupe(double deltaT, double tempsTotalEcoule) {
 
 		listePisteDeDepart.get(0).getVoiture().avancerUnPas(deltaT);
-		accelerateurFonction();
-		fumeeFonction();
+
+
 		listePisteDeDepart.get(0).getVoiture2().avancerUnPas(deltaT);
 		if (regroupementBoiteMystere.size() != 0) {
 			for (int a = 0; a < regroupementBoiteMystere.size(); a++) {
@@ -225,6 +225,7 @@ public class Regroupement implements Dessinable, Serializable {
 
 			creeBoiteDansListe();
 		}
+		fumeeFonction();
 		accelerateurFonction();
 		fonctionDesObjetsPossibles(tempsTotalEcoule, deltaT);
 		placerColleBonMorceauPisteVoiture1(listePisteDeDepart.get(0).getVoiture());
@@ -1001,7 +1002,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 */
 	// Alexis Pineda-Alvarado
 	private void fumeeFonction() {
-		if (listeAccelerateur.size() != 0) {
+		if (listeFumee.size() != 0) {
 			// Voiture 1
 			if (listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
 					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
