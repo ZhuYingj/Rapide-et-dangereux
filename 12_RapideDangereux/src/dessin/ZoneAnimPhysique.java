@@ -503,15 +503,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			if (w == false) {
 				if ((regroupement.getObjSpecial() != null
 						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
-						&& regroupement.getObjSpecial().getTrouNoir().collisionDeLaVoiture(
-								regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
+						&& regroupement.getObjSpecial().getTrouNoir()
+								.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
 						|| (regroupement.getObjSpecial2() != null
 								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR
 								&& regroupement.getObjSpecial2().getTrouNoir().collisionDeLaVoiture(
-										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
-						|| (regroupement.getObjSpecial() != null
-								&& regroupement.getObjSpecial().getColle().collisionDeLaVoiture(
-										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
+										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)) {
+
+				} else if ((regroupement.getObjSpecial() != null && regroupement.getObjSpecial().getColle()
+						.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
 						|| (regroupement.getObjSpecial2() != null
 								&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
 										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)) {
@@ -520,16 +520,20 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						.contient(regroupement.getListePisteDeDepart().get(0).getVoiture2().getPosition().getX(),
 								regroupement.getListePisteDeDepart().get(0).getVoiture2().getPosition().getY())) {
 
-				} else {
-					voiture2.setAccel(valeurInit);
+				}
 
+				else {
+
+					voiture2.setAccel(valeurInit);
 				}
 
 			}
 
 			repaint();
 
-			try {
+			try
+
+			{
 				Thread.sleep(tempsDuSleep);
 
 			} catch (InterruptedException e) {
@@ -808,11 +812,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			} else if ((regroupement.getObjSpecial() != null
 					&& regroupement.getObjSpecial().getColle()
 							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true
-					&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 4)
+					&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 5)
 					|| (regroupement.getObjSpecial2() != null
 							&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
 									regroupement.getListePisteDeDepart().get(0).getVoiture()) == true
-							&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 4)) {
+							&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 5)) {
 
 			}
 
@@ -861,11 +865,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			} else if ((regroupement.getObjSpecial() != null
 					&& regroupement.getObjSpecial().getColle()
 							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true
-					&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 4)
+					&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 5)
 					|| (regroupement.getObjSpecial2() != null
 							&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
 									regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true
-							&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 4)) {
+							&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 5)) {
 
 			}
 

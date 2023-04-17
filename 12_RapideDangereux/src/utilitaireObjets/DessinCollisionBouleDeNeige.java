@@ -32,6 +32,8 @@ public class DessinCollisionBouleDeNeige {
 	 * 
 	 * @param pos Position de la voiture
 	 * @param dia Diametre de la voiture
+	 * @param col Couleur de la voiture
+	 * @param cercle Forme cercle de la voiture
 	 */
 	// Kevin Nguyen
 	public DessinCollisionBouleDeNeige(Vecteur2D pos, double dia, Color col, Ellipse2D cercle) {

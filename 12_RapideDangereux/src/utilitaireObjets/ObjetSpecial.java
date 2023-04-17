@@ -117,9 +117,10 @@ public class ObjetSpecial implements Dessinable {
 	public void fonctionColle(Voiture voiture) {
 
 		Vecteur2D forceFrottement = new Vecteur2D();
+		// Coefficient de 2.75, colle.(Inventé)
 		forceFrottement = MoteurPhysique.calculerForceFrottement(2.75, voiture.getMasseEnKg(), voiture.getAngle());
 		voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
-		if (voiture.getVitesse().module() < 4) {
+		if (voiture.getVitesse().module() < 5) {
 			voiture.setSommeDesForces(new Vecteur2D(0, 0));
 		} else {
 			voiture.setSommeDesForces(forceFrottement);

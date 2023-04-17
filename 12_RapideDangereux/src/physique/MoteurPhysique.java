@@ -154,7 +154,6 @@ public class MoteurPhysique {
 	 * @param vitesseImp2 Vitesse de la deuxieme en mouvement au moment de l'impact.
 	 * @param masse1      Masse de l'objet en mouvement.
 	 * @param masse2      Masse de l'objet immobile.
-	 * @param angle       L'angle en rad
 	 * @return La vitesse initiale transmise a l'objet immobile.
 	 */
 	public static Vecteur2D calculerVitesseSelonImpulsionA(double vitesseImp1, double vitesseImp2, double masse1,
@@ -173,7 +172,6 @@ public class MoteurPhysique {
 	 * @param vitesseImp2 Vitesse de la deuxieme en mouvement au moment de l'impact.
 	 * @param masse1      Masse de l'objet en mouvement.
 	 * @param masse2      Masse de l'objet immobile.
-	 * @param angle       L'angle en rad
 	 * @return La vitesse initiale transmise a l'objet immobile.
 	 */
 	public static Vecteur2D calculerVitesseSelonImpulsionB(double vitesseImp1, double vitesseImp2, double masse1,

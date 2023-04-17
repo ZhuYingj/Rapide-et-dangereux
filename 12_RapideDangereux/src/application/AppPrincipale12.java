@@ -11,11 +11,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.swing.ImageIcon;
-
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -46,14 +41,14 @@ import interfaces.TypePiste;
 public class AppPrincipale12 extends JFrame {
 
 	private JCheckBoxMenuItem checkBoxModeNonScientifique;
-	
+
 	private JCheckBoxMenuItem checkBoxAudio;
 
 	private int nombrePiste = 1;
 	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String sousDossierSurBureau = "SauvegardePiste";
-	
+
 	private static int audio = 1;
 
 	File fichierDeTravail = new File(System.getProperty("user.home"),
@@ -270,11 +265,11 @@ public class AppPrincipale12 extends JFrame {
 	 * méthode qui permet de supprimer les effet audio
 	 * 
 	 */
-	//Ludovic Julien
-	public void actionCheckBox2()  {
+	// Ludovic Julien
+	public void actionCheckBox2() {
 		if (checkBoxAudio.isSelected()) {
 			FenetreJeuScientifique.getClip().stop();
-		}else {
+		} else {
 			FenetreJeuScientifique.getClip().start();
 		}
 	}
@@ -700,7 +695,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param evt             evenement
 	 * @param fenOptionMontre fenêtre des paramètres a choisir dans le mode course
 	 *                        contre la montre
-	 * @param fenScience      fenetre avec le mode scientifique
+	 * @param fenJeuScience   fenetre avec le mode scientifique
 	 * @param fenSansScience  fenetre avec le mode sans les paramètres non
 	 *                        scientifique
 	 */
