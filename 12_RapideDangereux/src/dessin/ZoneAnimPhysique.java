@@ -1201,7 +1201,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 						.getNombreToursFaits()) {
 			
-			String nomUtilisateur = JOptionPane.showInputDialog(null, "félicitation pour cette belle victoire, entrer votre nom pour le classement !");
+			String nomUtilisateur = JOptionPane.showInputDialog(null, "félicitation pour cette belle victoire, entrez votre nom pour le classement !");
 			
 			if (typePiste == TypePiste.CANADA) {
 				piste = "Canada";

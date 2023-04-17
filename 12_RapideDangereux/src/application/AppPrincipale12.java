@@ -35,7 +35,7 @@ import interfaces.TypePiste;
  * 
  * @author Alexis Pineda-Alvarado
  * @author Tan Tommy Rin
- *
+ * @author Ludovic Julien
  */
 
 public class AppPrincipale12 extends JFrame {

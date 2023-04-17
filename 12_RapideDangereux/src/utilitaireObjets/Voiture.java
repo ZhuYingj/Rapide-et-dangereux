@@ -67,6 +67,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * @param skin               La couleur de la voiture
 	 * @param masse              La masse de la voiture
 	 * @param diametre           Le diametre de la voiture
+	 * @param angle              L'angle de la voiture en degré
 	 * @param vitesseMaxSelonNiv La vitesse maximale selon le niveau selectionné
 	 */
 	// Tan Tommy Rin
@@ -81,7 +82,7 @@ public class Voiture implements Dessinable, Serializable {
 		masseEnKgInitial = masseEnKg;
 		diametreInitial = diametre;
 		vitesseMaxSelonNiveauInitiale = vitesseMaxSelonNiveau;
-		
+
 		creerLaGeometrie();
 		vitessesParSeconde = new ArrayList<Double>();
 	}

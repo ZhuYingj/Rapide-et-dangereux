@@ -29,6 +29,9 @@ import utilitaireObjets.PisteVirageHaut;
  */
 
 public class PanelObjet extends JPanel {
+	/**
+	 * Constructeur par défaut de la fenetre objet.
+	 */
 	public PanelObjet() {
 	}
 
