@@ -13,66 +13,58 @@ import application.GestionnaireDeFichiersSurLeBureau;
 /**
  * zone qui permet d'afficher le tableau record par piste
  * 
- * @author Ludovic Julien 
+ * @author Ludovic Julien
  *
  */
 
-public class TableauRecord extends JPanel{
+public class TableauRecord extends JPanel {
 	private GestionnaireDeFichiersSurLeBureau fichierRecord;
-	
+
 	public TableauRecord() {
-        setLayout(new BorderLayout());
-        fichierRecord = new GestionnaireDeFichiersSurLeBureau();
+		setLayout(new BorderLayout());
+		fichierRecord = new GestionnaireDeFichiersSurLeBureau();
 
-        // Définir le modèle de données pour le tableau
-        MyTableModel model = new MyTableModel();
-       JTable table = new JTable(model);
+		// Définir le modèle de données pour le tableau
+		MyTableModel model = new MyTableModel();
+		JTable table = new JTable(model);
 
-        // Ajouter le tableau à notre JPanel
-        JScrollPane scrollPane = new JScrollPane(table);
-        add(scrollPane, BorderLayout.CENTER);
-    }
+		// Ajouter le tableau à notre JPanel
+		JScrollPane scrollPane = new JScrollPane(table);
+		add(scrollPane, BorderLayout.CENTER);
+	}
 
-    // Définir le modèle de données pour le tableau
-    private class MyTableModel extends AbstractTableModel {
-        private String[] columnNames = {"Piste", "Record(temps en secondes)", "Record Par", "Nb fois ou lapiste a été joué", "moyenne(temps en secondes)"};
-        private Object[][] data = {
-            {"Mexique", "0:00","-", "0","0"},
-            {"Canada", "0:00","-","0","0"},
-            {"Italie", "0:00","-","0","0"}
-        };
+	// Définir le modèle de données pour le tableau
+	private class MyTableModel extends AbstractTableModel {
+		private String[] columnNames = { "Piste", "Record(temps en secondes)", "Record Par",
+				"Nb fois ou lapiste a été joué", "moyenne(temps en secondes)" };
+		private Object[][] data = { { "Mexique", "0:00", "-", "0", "0" }, { "Canada", "0:00", "-", "0", "0" },
+				{ "Italie", "0:00", "-", "0", "0" } };
 
-        @Override
-        public int getRowCount() {
-            return data.length;
-        }
+		@Override
+		public int getRowCount() {
+			return data.length;
+		}
 
-        
-        public int getColumnCount() {
-            return columnNames.length;
-        }
+		public int getColumnCount() {
+			return columnNames.length;
+		}
 
-        
-        public Object getValueAt(int row, int col) {
-            return data[row][col];
-        }
+		public Object getValueAt(int row, int col) {
+			return data[row][col];
+		}
 
-        
-        public String getColumnName(int col) {
-            return columnNames[col];
-        }
+		public String getColumnName(int col) {
+			return columnNames[col];
+		}
 
-       
-        public Class getColumnClass(int c) {
-            return getValueAt(0, c).getClass();
-        }
+		public Class getColumnClass(int c) {
+			return getValueAt(0, c).getClass();
+		}
 
-        
-        public void setValueAt(Object value, int row, int col) {
-            data[row][col] = value;
-            fireTableCellUpdated(row, col);
-        }
-    }
+		public void setValueAt(Object value, int row, int col) {
+			data[row][col] = value;
+			fireTableCellUpdated(row, col);
+		}
+	}
 
 }
-

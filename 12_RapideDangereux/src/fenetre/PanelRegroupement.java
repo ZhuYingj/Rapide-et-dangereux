@@ -786,7 +786,13 @@ public class PanelRegroupement extends JPanel {
 			} // Fin loop
 		}
 	}
-	
+	/**
+	 * Méthode qui permet de determiner si un fumée est contenue dans le clic
+	 * de la souris
+	 * 
+	 * @param e Évenement de souris
+	 */
+	// Alexis Pineda-Alvarado
 	private void fumeePressed(MouseEvent e) { 
 		if(objetSelectionne == false) {
 			for(int a = 0; a < listeFumee.size(); a++) {

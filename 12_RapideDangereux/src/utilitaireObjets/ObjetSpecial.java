@@ -1,9 +1,6 @@
 package utilitaireObjets;
 
 import java.awt.Graphics2D;
-import java.awt.geom.Area;
-import java.awt.geom.Ellipse2D;
-import java.util.ArrayList;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -185,8 +182,7 @@ public class ObjetSpecial implements Dessinable {
 	}
 
 	/**
-	 * Calcule la nouvelle vitesse et la nouvelle position de la boule de neige ou
-	 * trou noir apres cet nouvel intervalle de temps.
+	 * Calcule la nouvelle vitesse et la nouvelle position de l'objet special
 	 * 
 	 * @param deltaT intervalle de temps (pas)
 	 */
@@ -198,13 +194,12 @@ public class ObjetSpecial implements Dessinable {
 	}
 
 	/**
-	 * Recalcule l'acceleration de la boule de neige ou le trou noir a l'aide la
-	 * nouvelle somme des forces passee en parametre Ceci aura pour consequence de
-	 * modifier l'acceleration
+	 * Recalcule l'acceleration de l'objet special a l'aide la nouvelle somme des
+	 * forces passee en parametre Ceci aura pour consequence de modifier
+	 * l'acceleration
 	 * 
 	 * @param sommeForcesSurLaBouleDeNeigeOuTrouNoir La somme des forces exercees
-	 *                                               sur la boule de neige ou le
-	 *                                               trou noir
+	 *                                               sur l'objet special
 	 */
 	// Tan Tommy Rin
 	public void setSommeDesForces(Vecteur2D sommeForcesSurLaBouleDeNeigeOuTrouNoir) {

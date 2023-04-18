@@ -21,7 +21,6 @@ import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import application.AppPrincipale12;
 import dessin.ZoneAnimPhysique;
 import dessin.ZoneVitesse;
 

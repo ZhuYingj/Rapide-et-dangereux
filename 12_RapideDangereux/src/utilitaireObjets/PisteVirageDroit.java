@@ -49,8 +49,6 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 	private double angleNormaleMurBas = 270;
 	/** Normale du mur droite **/
 	private double angleNormaleMurDroite = 180;
-	/** Pixels par metre par defaut **/
-	private double pixelsParMetre = 1; // Defaut
 
 	/** Initialise la forme du triangle **/
 	private Path2D triangle;
@@ -90,7 +88,7 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
-//		g2d.scale(pixelsParMetre, pixelsParMetre);
+
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(Color.RED);

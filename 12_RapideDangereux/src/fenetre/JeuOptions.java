@@ -262,6 +262,11 @@ public class JeuOptions extends JPanel {
 		sliderNbBoites.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		sliderNbBoites.setBounds(165, 135, 343, 40);
 		panel_1.add(sliderNbBoites);
+		
+		JLabel lblVitesseMaximale = new JLabel("Vitesse maximale");
+		lblVitesseMaximale.setFont(new Font("Comic Sans MS", Font.PLAIN, 9));
+		lblVitesseMaximale.setBounds(20, 191, 80, 14);
+		panel_1.add(lblVitesseMaximale);
 
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));

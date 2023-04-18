@@ -504,8 +504,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			if (w == false) {
 				if ((regroupement.getObjSpecial() != null
 						&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
-						&& regroupement.getObjSpecial().getTrouNoir()
-								.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
+						&& regroupement.getObjSpecial().getTrouNoir().collisionDeLaVoiture(
+								regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
 						|| (regroupement.getObjSpecial2() != null
 								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR
 								&& regroupement.getObjSpecial2().getTrouNoir().collisionDeLaVoiture(
@@ -1148,6 +1148,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		return nombreBlocMystere;
 	}
 
+	/**
+	 * Méthode qui permet de set le nombre de bloc mystere
+	 * 
+	 * @param nombreBlocMystere le nombre voulu
+	 */
+//Tan Tommy Rin
 	public void setNombreBlocMystere(int nombreBlocMystere) {
 		this.nombreBlocMystere = nombreBlocMystere;
 		regroupement.setNombreBoiteMystere(nombreBlocMystere);
@@ -1177,7 +1183,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	/**
-	 * méthode qui permet d'arreter le timer des grahique losrque la partie est terminé
+	 * méthode qui permet d'arreter le timer des grahique losrque la partie est
+	 * terminé
 	 */
 	// Ludovic Julien
 	public void arretGraphique() {
@@ -1185,34 +1192,36 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				.getNombreToursFaits()
 				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 						.getNombreToursFaits()) {
-						
+
 			FenetreJeuScientifique.getTimer().stop();
-		
+
 		}
 	}
-	
+
 	/**
-	 * méthode qui permet de récolter les information du gagnant de la course (nom,temps,piste jouer) 
+	 * méthode qui permet de récolter les information du gagnant de la course
+	 * (nom,temps,piste jouer)
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void gagnantCourse() {
 		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
 				.getNombreToursFaits()
 				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 						.getNombreToursFaits()) {
-			
-			String nomUtilisateur = JOptionPane.showInputDialog(null, "félicitation pour cette belle victoire, entrez votre nom pour le classement !");
-			
+
+			String nomUtilisateur = JOptionPane.showInputDialog(null,
+					"félicitation pour cette belle victoire, entrez votre nom pour le classement !");
+
 			if (typePiste == TypePiste.CANADA) {
 				piste = "Canada";
-			}else {
+			} else {
 				if (typePiste == TypePiste.MEXIQUE) {
 					piste = "Mexique";
-				}else {
+				} else {
 					piste = "Italie";
 				}
 			}
-			
+
 			GestionnaireDeFichiersSurLeBureau.ecrireFichier(nomUtilisateur, tempsTotalEcoule, piste);
 		}
 	}

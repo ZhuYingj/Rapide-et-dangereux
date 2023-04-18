@@ -1,6 +1,5 @@
 package application;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,12 +14,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.BufferedWriter;
 
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
-import geometrie.Vecteur2D;
 import utilitaireObjets.Regroupement;
-import utilitaireObjets.Voiture;
 
 /**
  * Classe offrant un ensemble de m�thodes pour illustrer le fonctionnement des
@@ -77,7 +73,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 			oos = new ObjectOutputStream(new FileOutputStream(fichierDeTravail));
 
-// on �crit chacun des objets
+// on écrit chacun des objets
 			oos.writeObject(regroupement);
 			System.out.println(
 					"\nLes informations sur la voiture et le regroupement sont écrites avec succès. \nLe fichier "
@@ -104,7 +100,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 	/**
 	 * lit un fichier binaire et y lit un objet regroupement (compos� de d'autres
-	 * objets) Le fichier est a un endroti sp�cifique sur le Bureau de l'utilisateur
+	 * objets) Le fichier est a un endroti spécifique sur le Bureau de l'utilisateur
 	 * 
 	 * @param nomFichierVoulu le nom du fichier voulu
 	 * @return le groupe lue
@@ -120,7 +116,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 		File fichierDeTravail = new File(System.getProperty("user.home"),
 				"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
 
-// on teste si le fichier � lire existe
+// on teste si le fichier à lire existe
 		if (!fichierDeTravail.exists()) {
 			JOptionPane.showMessageDialog(null,
 					"Probl�me! Le fichier " + fichierDeTravail.toString() + " n'existe pas...");
@@ -153,7 +149,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 		}
 
 		finally {
-// on ex�cutera toujours ceci, erreur ou pas
+
 			try {
 				ois.close();
 			} catch (IOException e) {
@@ -242,36 +238,35 @@ public class GestionnaireDeFichiersSurLeBureau {
 		} // fin finally
 
 	}
-	
+
 	/**
-	 * méthode qui permet de creer un fichier (S'il existe pas déjà) et d'ecrire a l'interieur les donner du gagant 
+	 * méthode qui permet de creer un fichier (S'il existe pas déjà) et d'ecrire a
+	 * l'interieur les donner du gagant
 	 * 
-	 * @param nomUtilisateur		nom d'utilisateur du gagant de la course
-	 * @param temps					le temps fait pour terminer la course
-	 * @param piste					la piste qu'il a jouer
+	 * @param nomUtilisateur nom d'utilisateur du gagant de la course
+	 * @param temps          le temps fait pour terminer la course
+	 * @param piste          la piste qu'il a jouer
 	 */
 	// Ludovic Julien
 	public static void ecrireFichier(String nomUtilisateur, double temps, String piste) {
-        String cheminFichier = System.getProperty("user.home") + "/Desktop/donnees.txt";
-        
-        try {
-            // Créer le fichier s'il n'existe pas déjà
-            Path fichier = Paths.get(cheminFichier);
-            if (!Files.exists(fichier)) {
-                Files.createFile(fichier);
-            }
-            
-            BufferedWriter writer = new BufferedWriter(new FileWriter(cheminFichier, true));
-            
-            writer.write(nomUtilisateur + ";" + temps + ";" + piste);
-            writer.newLine();
-            writer.close();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		String cheminFichier = System.getProperty("user.home") + "/Desktop/donnees.txt";
 
-	
+		try {
+			// Créer le fichier s'il n'existe pas déjà
+			Path fichier = Paths.get(cheminFichier);
+			if (!Files.exists(fichier)) {
+				Files.createFile(fichier);
+			}
+
+			BufferedWriter writer = new BufferedWriter(new FileWriter(cheminFichier, true));
+
+			writer.write(nomUtilisateur + ";" + temps + ";" + piste);
+			writer.newLine();
+			writer.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
