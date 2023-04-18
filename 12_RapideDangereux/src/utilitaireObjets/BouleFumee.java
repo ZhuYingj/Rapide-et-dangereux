@@ -18,13 +18,17 @@ import geometrie.Vecteur2D;
 public class BouleFumee {
 	/** Position de la boule fumee **/
 	Vecteur2D position;
-	/** Diametre de la boule fumee car cela est va etre un cercle**/
+	/** Diametre de la boule fumee car cela est va etre un cercle **/
 	double diametre;
 	/** Forme de la boule de fumee **/
 	Ellipse2D circle;
-	
 
-	
+	/**
+	 * Méthode qui permet de creer la boule de fumee a l'aide des parametres
+	 * 
+	 * @param position
+	 * @param diametre
+	 */
 	// Alexis Pineda-Alvarado
 	public BouleFumee(Vecteur2D position, double diametre) {
 		this.position = position;
@@ -34,7 +38,7 @@ public class BouleFumee {
 	}
 
 	/**
-	 * Méthode qui dessine le bloc de glace
+	 * Méthode qui dessine la boule de fumee
 	 * 
 	 * @param g2d Composant graphique
 	 */
@@ -47,7 +51,7 @@ public class BouleFumee {
 	}
 
 	/**
-	 * Méthode qui permet de créer le carré selon la position de la voiture
+	 * Méthode qui permet de créer la boule selon la position
 	 */
 	// Alexis Pineda-Alvarado
 	private void creerLaGeometrie() {
