@@ -7,6 +7,7 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
 
@@ -19,6 +20,8 @@ import interfaces.Selectionnable;
  */
 
 public class Fumee implements Dessinable, Selectionnable, Serializable {
+	
+	
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 	/** la position en x de depart que l'objet piste vas etre creer **/
@@ -27,25 +30,30 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 	private int y;
 	/** Nombre de pixel par metre **/
 	private double pixelParMetre;
-	/** Creer la forme du carre**/
+	/** Creer la forme du carre **/
 	private Rectangle2D.Double formeAire;
 
-	
+	//private BouleFumee bouleFumee;
+
 	/**
 	 * Methode qui permet de construire l'objet Fumee a l'aide de parametres
 	 * 
 	 * @param x position en x de la piste
 	 * @param y position en y de la piste
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public Fumee(int x, int y) {
 		this.x = x;
 		this.y = y;
-		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);	
+		
+		//bouleFumee = new BouleFumee(new Vecteur2D(x + taillePiste / 4, y + taillePiste / 4), 16);
+		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
+
 	}
+
 	/**
-	 * Methode qui permet de dessiner la fumee sur la zone d'animation a
-	 * l'aide de g2d
+	 * Methode qui permet de dessiner la fumee sur la zone d'animation a l'aide de
+	 * g2d
 	 */
 	// Alexis Pineda-Alvarado
 	public void dessiner(Graphics2D g2d) {
@@ -59,11 +67,12 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 		g2d.drawLine(x, y, x, y + taillePiste);
 		g2d.drawLine(x + taillePiste, y, x + taillePiste, y + taillePiste);
 
+		//bouleFumee.dessiner(g2d);
+
 	}
 
 	/**
-	 * Méthode qui permet de détecter si la fumee est contenue au clic de la
-	 * souris 
+	 * Méthode qui permet de détecter si la fumee est contenue au clic de la souris
 	 **/
 	// Alexis Pineda-Alvarado
 	public boolean contient(double xPix, double yPix) {
@@ -83,6 +92,14 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 		this.pixelParMetre = pixelParMetre;
 
 	}
+
+//	public BouleFumee getBouleFumee() {
+//		return bouleFumee;
+//	}
+//
+//	public void setBouleFumee(BouleFumee bouleFumee) {
+//		this.bouleFumee = bouleFumee;
+//	}
 
 	public int getX() {
 		return x;

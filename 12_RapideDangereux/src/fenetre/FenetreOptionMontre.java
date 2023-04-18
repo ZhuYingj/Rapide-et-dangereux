@@ -162,9 +162,7 @@ public class FenetreOptionMontre extends JPanel {
 		rdbtnDifficile = new JRadioButton("Avancé");
 		rdbtnDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				pcs.firePropertyChange("VITESSEMAXAVANCE2", null, 100.0);
-
 			}
 		});
 		rdbtnDifficile.setBounds(165, 233, 109, 23);

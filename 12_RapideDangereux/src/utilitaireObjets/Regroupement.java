@@ -126,6 +126,7 @@ public class Regroupement implements Dessinable, Serializable {
 	/** support pour lancer des evenements de type PropertyChange **/
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private transient Graphics2D g2d;
+	private BouleFumee smokeScreen;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -979,7 +980,7 @@ public class Regroupement implements Dessinable, Serializable {
 			snowball.dessiner(g2d);
 		}
 	}
-
+	
 	/**
 	 * Méthode qui permet d'appliquer la fonction de l'accelerateur sur les 2
 	 * voitures lorsqu'ils sont en contact avec celui-ci.
