@@ -28,6 +28,9 @@ import dessin.ZoneApercuPiste;
 import interfaces.TypePiste;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.JScrollBar;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  * Classe qui crée la fenêtre pour choisir les paramètres pour le mode de jeu
@@ -101,6 +104,7 @@ public class JeuOptions extends JPanel {
 		panelPourMessage.add(spPourMessage);
 
 		txtArea = new JTextArea();
+		txtArea.setEditable(false);
 		txtArea.setForeground(Color.RED);
 		txtArea.setFont(new Font("Dubai", Font.PLAIN, 18));
 		txtArea.setText("Choisisez les paramètres!");
@@ -170,7 +174,7 @@ public class JeuOptions extends JPanel {
 		panel_1.setBorder(new LineBorder(new Color(255, 0, 0), 2, true));
 		Color a = new Color(240, 240, 240);
 		panel_1.setBackground(a);
-		panel_1.setBounds(1000, 345, 549, 297);
+		panel_1.setBounds(1000, 345, 549, 309);
 		add(panel_1);
 		panel_1.setLayout(null);
 
@@ -218,7 +222,7 @@ public class JeuOptions extends JPanel {
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
-				pcs.firePropertyChange("MASSE", null, 60.0);
+				pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
 
 			}
 		});
@@ -295,6 +299,21 @@ public class JeuOptions extends JPanel {
 		lblVitesseMaximale.setFont(new Font("Comic Sans MS", Font.PLAIN, 9));
 		lblVitesseMaximale.setBounds(20, 191, 80, 14);
 		panel_1.add(lblVitesseMaximale);
+		
+		JComboBox cbMatPiste = new JComboBox();
+		cbMatPiste.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pcs.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
+			}
+		});
+		cbMatPiste.setModel(new DefaultComboBoxModel(new String[] {"Asphalt", "Sable", "Glace"}));
+		cbMatPiste.setBounds(165, 263, 75, 22);
+		panel_1.add(cbMatPiste);
+		
+		JLabel lblMatPiste = new JLabel("Matériel de la piste :");
+		lblMatPiste.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		lblMatPiste.setBounds(10, 261, 110, 14);
+		panel_1.add(lblMatPiste);
 
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -304,7 +323,7 @@ public class JeuOptions extends JPanel {
 
 			}
 		});
-		btnCommencer.setBounds(1225, 653, 143, 36);
+		btnCommencer.setBounds(1223, 671, 143, 36);
 		add(btnCommencer);
 
 		JPanel panel_V1 = new JPanel();
@@ -618,5 +637,4 @@ public class JeuOptions extends JPanel {
 		}
 
 	}
-
 }

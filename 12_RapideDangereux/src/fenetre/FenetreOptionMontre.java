@@ -98,6 +98,7 @@ public class FenetreOptionMontre extends JPanel {
 		add(lblTitre);
 
 		txtArea = new JTextArea();
+		txtArea.setEditable(false);
 		txtArea.setForeground(Color.RED);
 		txtArea.setFont(new Font("Dubai", Font.PLAIN, 18));
 		txtArea.setText("Choisisez les paramètres!");
