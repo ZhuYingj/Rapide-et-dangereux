@@ -22,6 +22,7 @@ import interfaces.Selectionnable;
 public class Fumee implements Dessinable, Selectionnable, Serializable {
 	
 	
+	//private static final long serialVersionUID = 1L;
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 	/** la position en x de depart que l'objet piste vas etre creer **/

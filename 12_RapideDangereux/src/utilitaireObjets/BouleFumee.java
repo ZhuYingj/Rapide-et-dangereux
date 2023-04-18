@@ -3,9 +3,10 @@ package utilitaireObjets;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 
 import geometrie.Vecteur2D;
+import interfaces.Dessinable;
 
 /**
  * 
@@ -15,7 +16,9 @@ import geometrie.Vecteur2D;
  *
  */
 
-public class BouleFumee {
+public class BouleFumee implements Dessinable, Serializable {
+
+	//private static final long serialVersionUID = 1L;
 	/** Position de la boule fumee **/
 	Vecteur2D position;
 	/** Diametre de la boule fumee car cela est va etre un cercle **/
@@ -38,6 +41,15 @@ public class BouleFumee {
 	}
 
 	/**
+	 * Méthode qui permet de créer la boule selon la position
+	 */
+	// Alexis Pineda-Alvarado
+	private void creerLaGeometrie() {
+
+		circle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
+	}
+
+	/**
 	 * Méthode qui dessine la boule de fumee
 	 * 
 	 * @param g2d Composant graphique
@@ -50,12 +62,4 @@ public class BouleFumee {
 		g2dCop.fill(circle);
 	}
 
-	/**
-	 * Méthode qui permet de créer la boule selon la position
-	 */
-	// Alexis Pineda-Alvarado
-	private void creerLaGeometrie() {
-
-		circle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
-	}
 }
