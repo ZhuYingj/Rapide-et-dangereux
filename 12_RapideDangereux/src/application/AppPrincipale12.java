@@ -351,6 +351,9 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
 			fenSansScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
 			break;
+			
+		case "MATERIEL":
+			//fenJeuScience.getZoneAnimPhysique().setTestFrottement(10);
 		}
 	}
 

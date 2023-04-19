@@ -55,6 +55,7 @@ public class JeuOptions extends JPanel {
 	private Image imageActuelle;
 	private int indexCouleur = 0;
 	private int indexCouleur2 = 0;
+	private int indexMateriel = 0;
 	private JLabel lblImage;
 	private JButton btnCanada;
 	private JButton btnMexique;
@@ -68,6 +69,7 @@ public class JeuOptions extends JPanel {
 	private JButton btnDroit1;
 	private JButton btnDroit2;
 	private JTextArea txtArea;
+	private JComboBox cbMatPiste;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -192,7 +194,7 @@ public class JeuOptions extends JPanel {
 		slider = new JSlider();
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				
+
 			}
 		});
 
@@ -299,17 +301,17 @@ public class JeuOptions extends JPanel {
 		lblVitesseMaximale.setFont(new Font("Comic Sans MS", Font.PLAIN, 9));
 		lblVitesseMaximale.setBounds(20, 191, 80, 14);
 		panel_1.add(lblVitesseMaximale);
-		
-		JComboBox cbMatPiste = new JComboBox();
+
+		cbMatPiste = new JComboBox();
 		cbMatPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
+				actionMatierielPiste();
 			}
 		});
-		cbMatPiste.setModel(new DefaultComboBoxModel(new String[] {"Asphalt", "Sable", "Glace"}));
+		cbMatPiste.setModel(new DefaultComboBoxModel(new String[] { "Asphalt", "Sable", "Glace" }));
 		cbMatPiste.setBounds(165, 263, 75, 22);
 		panel_1.add(cbMatPiste);
-		
+
 		JLabel lblMatPiste = new JLabel("Matériel de la piste :");
 		lblMatPiste.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblMatPiste.setBounds(10, 261, 110, 14);
@@ -513,6 +515,18 @@ public class JeuOptions extends JPanel {
 		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
 		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 		pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
+	}
+
+	/**
+	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
+	 * levée d'évènements.
+	 * 
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionMatierielPiste() {
+		pcs.firePropertyChange("MATERIEL", null, cbMatPiste.getItemAt(0));
+		pcs.firePropertyChange("MATERIEL2", null, cbMatPiste.getItemAt(1));
+		pcs.firePropertyChange("MATERIEL3", null, cbMatPiste.getItemAt(2));
 	}
 
 	/**
