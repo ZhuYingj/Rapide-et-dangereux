@@ -62,7 +62,7 @@ public class JeuOptions extends JPanel {
 	private JButton btnItalie;
 	private JSlider sliderNbBoites;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
-	private Color[] couleurs2 = { Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.cyan };
+	private Color[] couleurs2 = { Color.cyan,Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, };
 	private Color transparent = new Color(255, 255, 255, 0);
 	private JButton btnGauche2;
 	private JButton btnGauche1;
@@ -394,6 +394,10 @@ public class JeuOptions extends JPanel {
 		add(btnRetour);
 
 		PanelV2 = new JPanel();
+
+		PanelV2.setBounds(1200, 229, 143, 90);
+		PanelV2.setBackground(Color.CYAN);
+
 		PanelV2.setBounds(1330, 77, 143, 90);
 		PanelV2.setBackground(Color.WHITE);
 		add(PanelV2);

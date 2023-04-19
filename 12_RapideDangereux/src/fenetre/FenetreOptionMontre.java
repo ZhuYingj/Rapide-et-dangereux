@@ -53,8 +53,12 @@ public class FenetreOptionMontre extends JPanel {
 	private JButton btnCanada;
 	private JButton btnMexique;
 	private JButton btnItalie;
+	private int indexCouleur = 0;
+	private int indexCouleur2 = 0;
+	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
+	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK};
 	private JTextArea txtArea;
-
+	
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -260,15 +264,70 @@ public class FenetreOptionMontre extends JPanel {
 		lblVitesseDifficile.setBounds(280, 237, 65, 14);
 		panel_1.add(lblVitesseDifficile);
 
+		JPanel panel_V1 = new JPanel();
+		panel_V1.setBackground(Color.YELLOW);
+		panel_V1.setBounds(970, 77, 143, 84);
+		add(panel_V1);
+		
+		JPanel panel_V2 = new JPanel();
+		panel_V2.setBackground(Color.CYAN);
+		panel_V2.setBounds(970, 232, 143, 84);
+		add(panel_V2);
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
 		panel_2.setBounds(917, 77, 143, 78);
 		add(panel_2);
 
+		JButton btnGauche1 = new JButton("<");
+		btnGauche1.setBounds(905, 105, 55, 23);
+		btnGauche1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changementImage(1,0);
+				panel_V1.setBackground(couleurs[indexCouleur]);
+			}
+		});
+		add(btnGauche1);
+
 		JButton btnGauche = new JButton("<");
 		btnGauche.setBounds(852, 105, 55, 23);
 		add(btnGauche);
 
+
+		JButton btnDroite1 = new JButton(">");
+		btnDroite1.setBounds(1123, 105, 55, 23);
+		btnDroite1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				changementImage(1,1);
+				panel_V1.setBackground(couleurs[indexCouleur]);
+		}
+		});
+		add(btnDroite1);
+		
+		JButton btnGauche2 = new JButton("<");
+		btnGauche2.setBounds(905, 260, 55, 23);
+		btnGauche2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changementImage(0,0);
+				
+				panel_V2.setBackground(couleurs2[indexCouleur2]);
+			}
+		});
+		add(btnGauche2);
+		
+		JButton btnDroite2 = new JButton(">");
+		btnDroite2.setBounds(1123, 260, 55, 23);
+		btnDroite2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changementImage(0,1);
+				panel_V2.setBackground(couleurs2[indexCouleur2]);
+			}
+		});
+		add(btnDroite2);
+		
 		JButton btnDroite = new JButton(">");
 		btnDroite.setBounds(1070, 105, 55, 23);
 		add(btnDroite);
@@ -281,14 +340,18 @@ public class FenetreOptionMontre extends JPanel {
 				pcs.firePropertyChange("MASSEMONTRE1", null, (double) slider.getValue());
 				pcs.firePropertyChange("MASSEMONTRE2", null, (double) slider2.getValue());
 				pcs.firePropertyChange("NBRDETOUR", null, (double) sliderNbrTour.getValue());
+				//actionSkin();
+				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+				pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
 			}
 		});
 		btnCommencer.setBounds(1225, 653, 143, 36);
 		add(btnCommencer);
 
 		lblImage = new JLabel("");
-		lblImage.setBounds(0, 0, 1600, 800);
+		lblImage.setBounds(10, 0, 1600, 800);
 		add(lblImage);
+		
 	}
 
 	/**
@@ -358,5 +421,53 @@ public class FenetreOptionMontre extends JPanel {
 				imgVenice.flush();
 			}
 		}
+	}
+	
+	/**
+	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
+	 * levée d'évènements.
+	 */
+	//Ludovic Julien
+	private void actionSkin() {
+		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+	}
+	
+	
+	/**
+	 * méthode qui permet le changement de couleur des voiture
+	 * 
+	 * @param voiture 	voiture 1 ou 2 
+	 * @param direction  changer de couleur vers la droite ou vers la geuche
+	 */
+	//Ludovic Julien
+	public void changementImage(int voiture, int direction) {
+		
+		if (voiture == 1) {
+			if (direction == 1) {
+				indexCouleur++;
+				if (indexCouleur == couleurs.length) {
+					indexCouleur = 0;
+				}
+			}else {
+				indexCouleur--;
+				if (indexCouleur < 0) {
+					indexCouleur = couleurs.length - 1;
+				}	
+			}	
+		}else {
+			if (direction == 1) {
+				indexCouleur2++;
+				if (indexCouleur2 == couleurs2.length) {
+					indexCouleur2 = 0;
+				}
+			}else {
+				indexCouleur2--;
+				if (indexCouleur2 < 0) {
+					indexCouleur2 = couleurs2.length - 1;
+				}
+			}
+
+}
 	}
 }
