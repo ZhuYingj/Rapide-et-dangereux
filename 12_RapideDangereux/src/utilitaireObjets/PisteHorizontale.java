@@ -52,6 +52,8 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	private int nombrePisteColle = 0;
 
 	private boolean enContactAvecColle = true;
+	/** Couleur de la bordure **/
+	private Color bordure = Color.red;
 
 	/**
 	 * Methode qui permet de construire la piste horizontale a l'aide de parametres
@@ -82,8 +84,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
 		g2dCopie.setColor(color);
 		g2dCopie.fillRect(x, y, taillePiste, taillePiste);
-		g2dCopie.setColor(Color.RED);
-		g2dCopie.setColor(Color.RED);
+		g2dCopie.setColor(bordure);
 		Stroke stroke = new BasicStroke(2f);
 		g2dCopie.setStroke(stroke);
 		g2dCopie.drawLine(x, y, x + taillePiste, y);
@@ -318,5 +319,8 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 
 	public void setNombrePisteColle(int nombrePisteColle) {
 		this.nombrePisteColle = nombrePisteColle;
+	}
+	public void setBordure(Color bordure) {
+		this.bordure = bordure;
 	}
 }

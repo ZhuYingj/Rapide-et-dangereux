@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
+import interfaces.Selectionnable;
 
 /**
  * 
@@ -16,15 +17,18 @@ import interfaces.Dessinable;
  *
  */
 
-public class BouleFumee implements Dessinable, Serializable {
+public class BouleFumee implements Dessinable,  Serializable {
 
-	//private static final long serialVersionUID = 1L;
+	
+
 	/** Position de la boule fumee **/
 	Vecteur2D position;
 	/** Diametre de la boule fumee car cela est va etre un cercle **/
 	double diametre;
 	/** Forme de la boule de fumee **/
-	Ellipse2D circle;
+	private Ellipse2D circle;
+	/** Nombre de boule de fumee qui aura dans le jeu **/
+	int nbrSmoke;
 
 	/**
 	 * Méthode qui permet de creer la boule de fumee a l'aide des parametres
@@ -33,9 +37,10 @@ public class BouleFumee implements Dessinable, Serializable {
 	 * @param diametre
 	 */
 	// Alexis Pineda-Alvarado
-	public BouleFumee(Vecteur2D position, double diametre) {
+	public BouleFumee(Vecteur2D position, double diametre, int nbrSmoke) {
 		this.position = position;
 		this.diametre = diametre;
+		this.nbrSmoke = nbrSmoke;
 
 		creerLaGeometrie();
 	}
@@ -46,7 +51,10 @@ public class BouleFumee implements Dessinable, Serializable {
 	// Alexis Pineda-Alvarado
 	private void creerLaGeometrie() {
 
-		circle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
+		for (int i = 0; i < nbrSmoke; i++) {
+			circle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
+		}
+
 	}
 
 	/**

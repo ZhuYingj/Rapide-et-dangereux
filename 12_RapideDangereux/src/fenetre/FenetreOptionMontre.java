@@ -25,6 +25,7 @@ import interfaces.TypePiste;
 import utilitaireObjets.Regroupement;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 /**
  * 
@@ -32,6 +33,7 @@ import java.awt.event.MouseEvent;
  * course contre la montre
  * 
  * @author Alexis Pineda-Alvarado
+ *@author Ludovic Julien
  *
  */
 
@@ -55,9 +57,15 @@ public class FenetreOptionMontre extends JPanel {
 	private JButton btnItalie;
 	private int indexCouleur = 0;
 	private int indexCouleur2 = 0;
+	private int couleurPiste = 0;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK};
+	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.YELLOW,
+			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private JTextArea txtArea;
+	private boolean gauche = false;
+	private boolean droite = false;
+	private JPanel panelCouleurPiste;
 	
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
@@ -66,6 +74,7 @@ public class FenetreOptionMontre extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	//Alexis Pineda-Alvarado
 	public FenetreOptionMontre() {
 		setLayout(null);
 
@@ -266,71 +275,59 @@ public class FenetreOptionMontre extends JPanel {
 
 		JPanel panel_V1 = new JPanel();
 		panel_V1.setBackground(Color.YELLOW);
-		panel_V1.setBounds(970, 77, 143, 84);
+		panel_V1.setBounds(1044, 77, 143, 90);
 		add(panel_V1);
 		
 		JPanel panel_V2 = new JPanel();
 		panel_V2.setBackground(Color.CYAN);
-		panel_V2.setBounds(970, 232, 143, 84);
+		panel_V2.setBounds(1330, 77, 143, 90);
 		add(panel_V2);
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(917, 77, 143, 78);
-		add(panel_2);
-
 		JButton btnGauche1 = new JButton("<");
-		btnGauche1.setBounds(905, 105, 55, 23);
+		btnGauche1.setBounds(979, 106, 55, 23);
 		btnGauche1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(1,0);
-				panel_V1.setBackground(couleurs[indexCouleur]);
+				setBackgroundV1(panel_V1);
 			}
 		});
 		add(btnGauche1);
 
-		JButton btnGauche = new JButton("<");
-		btnGauche.setBounds(852, 105, 55, 23);
-		add(btnGauche);
 
 
 		JButton btnDroite1 = new JButton(">");
-		btnDroite1.setBounds(1123, 105, 55, 23);
+		btnDroite1.setBounds(1197, 106, 55, 23);
 		btnDroite1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changementImage(1,1);
-				panel_V1.setBackground(couleurs[indexCouleur]);
+				setBackgroundV1(panel_V1);
 		}
 		});
 		add(btnDroite1);
 		
 		JButton btnGauche2 = new JButton("<");
-		btnGauche2.setBounds(905, 260, 55, 23);
+		btnGauche2.setBounds(1262, 106, 55, 23);
 		btnGauche2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0,0);
-				
-				panel_V2.setBackground(couleurs2[indexCouleur2]);
+				setBackgroundV2(panel_V2);
 			}
 		});
 		add(btnGauche2);
 		
 		JButton btnDroite2 = new JButton(">");
-		btnDroite2.setBounds(1123, 260, 55, 23);
+		btnDroite2.setBounds(1483, 106, 55, 23);
 		btnDroite2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0,1);
-				panel_V2.setBackground(couleurs2[indexCouleur2]);
+				setBackgroundV2(panel_V2);
 			}
 		});
 		add(btnDroite2);
 		
-		JButton btnDroite = new JButton(">");
-		btnDroite.setBounds(1070, 105, 55, 23);
-		add(btnDroite);
 
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.addActionListener(new ActionListener() {
@@ -340,9 +337,7 @@ public class FenetreOptionMontre extends JPanel {
 				pcs.firePropertyChange("MASSEMONTRE1", null, (double) slider.getValue());
 				pcs.firePropertyChange("MASSEMONTRE2", null, (double) slider2.getValue());
 				pcs.firePropertyChange("NBRDETOUR", null, (double) sliderNbrTour.getValue());
-				//actionSkin();
-				pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
-				pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+				actionSkin();
 			}
 		});
 		btnCommencer.setBounds(1225, 653, 143, 36);
@@ -351,6 +346,50 @@ public class FenetreOptionMontre extends JPanel {
 		lblImage = new JLabel("");
 		lblImage.setBounds(10, 0, 1600, 800);
 		add(lblImage);
+		
+		panelCouleurPiste = new JPanel();
+		panelCouleurPiste.setBackground(Color.RED);
+		panelCouleurPiste.setBounds(788, 316, 143, 90);
+		add(panelCouleurPiste);
+		
+		JLabel lblImage_1 = new JLabel("");
+		panelCouleurPiste.add(lblImage_1);
+		
+		JButton btnGauche3 = new JButton("<");
+		btnGauche3.setBounds(734, 347, 55, 23);
+		add(btnGauche3);
+		
+		btnGauche3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				gauche = true;
+				changeCouleurPiste();
+				gauche = false;
+			}
+		});
+		
+		JButton btnDroit3 = new JButton(">");
+		btnDroit3.setBounds(932, 347, 55, 23);
+		add(btnDroit3);
+		
+		btnDroit3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				droite = true;
+				changeCouleurPiste();
+				droite = false;
+			}
+		});
+		
+		JLabel lblImage_2 = new JLabel("");
+		lblImage_2.setBounds(19, 81, 1600, 800);
+		add(lblImage_2);
+		
+		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
+		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblCouleurBordureDe.setBounds(774, 279, 177, 43);
+		add(lblCouleurBordureDe);
 		
 	}
 
@@ -425,17 +464,18 @@ public class FenetreOptionMontre extends JPanel {
 	
 	/**
 	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
-	 * levée d'évènements.
+	 * levée d'évènements. pour faire le changement de couleur des voiture
 	 */
 	//Ludovic Julien
 	private void actionSkin() {
 		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
 	}
 	
 	
 	/**
-	 * méthode qui permet le changement de couleur des voiture
+	 * méthode qui permet le changement de couleur de la liste de couleur
 	 * 
 	 * @param voiture 	voiture 1 ou 2 
 	 * @param direction  changer de couleur vers la droite ou vers la geuche
@@ -469,5 +509,45 @@ public class FenetreOptionMontre extends JPanel {
 			}
 
 }
+	}
+	
+	/**
+	 * Méthode pour changer la couleur des côtés de piste
+	 */
+	// Kevin Nguyen
+	public void changeCouleurPiste() {
+		if (gauche) {
+			couleurPiste--;
+			if (couleurPiste < 0) {
+				couleurPiste = couleursPiste.length - 1;
+			}
+		}
+		if (droite) {
+			couleurPiste++;
+			if (couleurPiste == couleursPiste.length) {
+				couleurPiste = 0;
+			}
+		}
+		panelCouleurPiste.setBackground(couleursPiste[couleurPiste]);
+	}
+	
+	/**
+	 * méthode qui change la couleur du panel pour permettre de visualiser la couleur choisit par l'utilisateur
+	 * 
+	 * @param panel		panel a changer la couleur pour la voiture 1 
+	 */
+	//Ludovic Julien
+	public void setBackgroundV1(JPanel panel) {
+		panel.setBackground(couleurs[indexCouleur]);
+	}
+	
+	/**
+	 * méthode qui change la couleur du panel pour permettre de visualiser la couleur choisit par l'utilisateur
+	 * 
+	 * @param panel		panel a changer la couleur pour la voiture 2
+	 */
+	//Ludovic Julien
+	public void setBackgroundV2(JPanel panel) {
+		panel.setBackground(couleurs2[indexCouleur2]);
 	}
 }

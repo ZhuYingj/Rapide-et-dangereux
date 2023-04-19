@@ -21,6 +21,7 @@ import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import application.AppPrincipale12;
 import dessin.ZoneAnimPhysique;
 import dessin.ZoneVitesse;
 
@@ -144,12 +145,7 @@ public class FenetreJeuScientifique extends JPanel {
 				pcs.firePropertyChange("RetourDuJeuScience", null, -1);
 				pcs.firePropertyChange("Test", null, -1);
 
-				zoneVitesse.renouvlerTemps();
-				zoneVitesse.renouvlerVitesse();
-				zoneVitesse2.renouvlerTemps();
-				zoneVitesse2.renouvlerVitesse();
-				timerVitesse.stop();
-
+				resetGraphique();
 				resetMusic();
 			}
 		});
@@ -163,8 +159,8 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(false);
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
-				timerVitesse.start();
-				clip.start();
+				actionStart();
+				musicStart();
 
 			}
 		});
@@ -180,9 +176,7 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.arreter();
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
-
-				timerVitesse.stop();
-
+				stopGraphique();
 				arretMusic();
 			}
 		});
@@ -198,11 +192,7 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(true);
 				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
 
-				zoneVitesse2.renouvlerTemps();
-				zoneVitesse2.renouvlerVitesse();
-				zoneVitesse.renouvlerTemps();
-				zoneVitesse.renouvlerVitesse();
-
+				resetGraphique();
 				resetMusic();
 
 			}
@@ -689,7 +679,6 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel_8.setBounds(406, 13, 46, 14);
 		add(lblNewLabel_8);
 		graphiqueVitesse();
-		audioMusic();
 	}
 
 	public JButton getBtnStart() {
@@ -893,27 +882,55 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 	}
 	
+	/**
+	 * méthode qui retourn le timer des graphique
+	 * 
+	 * @return		timerVitesse
+	 */
+	//Ludovic Julien
 	public static Timer getTimer() {
 		return timerVitesse;
 	}
+	
+	/**
+	 * méthode qui permet de reset les graphhique de vitesse en fonction du temps
+	 */
+	//Ludovic Julien
+	public void resetGraphique() {
+		zoneVitesse.renouvlerTemps();
+		zoneVitesse.renouvlerVitesse();
+		zoneVitesse2.renouvlerTemps();
+		zoneVitesse2.renouvlerVitesse();
+		timerVitesse.stop();
+	}
+	
+	/**
+	 * méthode qui permet de mettre en pause les graphique de vitesse en fonction du temps
+	 */
+	//Ludovic Julien
+	public void stopGraphique() {
+		timerVitesse.stop();
+	}
+	
+	/**
+	 * méthode qui permet d'activer le timer pour les graphique 
+	 */
+	//Ludovic Julien
+	public void actionStart() {
+		timerVitesse.start();
+	}
 
 	/**
-	 * Méthode qui permet de lire un fichier audio et de l'affecter a une variable
+	 * méthode qui permet de lancer la piste audio
 	 */
-	// Ludovic Julien
-	private void audioMusic() {
-		try {
-
-			clip = AudioSystem.getClip();
-			URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
-			AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
-			clip.open(inputStream);
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-
+	//Ludovic Julien
+	public void musicStart() {
+		if (AppPrincipale12.getCheckAudio() == false) {
+			clip.start();
 		}
 	}
+	
+	
 
 	/**
 	 * méthode qui retourne la valeur de la variable audio
