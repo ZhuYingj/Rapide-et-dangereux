@@ -231,10 +231,10 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionChangeJeuCourse2(evt,fenOptionMontre, fenJeuScience, fenSansScience);
+				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience);
 			}
 		});
-		
+
 		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionChangeJeuCourse(evt, fenOptionMontre, fenJeuScience, fenSansScience);
@@ -346,9 +346,10 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
 					.setNombreToursFaits(0);
-
 			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
 					.setNombreToursFaits(0);
+			fenOptions.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
+			
 			break;
 		case "NBBOITE":
 			Double newData = new Double((double) evt.getNewValue());
@@ -357,9 +358,9 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
 			fenSansScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
 			break;
-			
+
 		case "MATERIEL":
-			//fenJeuScience.getZoneAnimPhysique().setTestFrottement(10);
+			// fenJeuScience.getZoneAnimPhysique().setTestFrottement(10);
 		}
 	}
 
@@ -396,17 +397,17 @@ public class AppPrincipale12 extends JFrame {
 			break;
 		}
 	}
-	
+
 	/**
-	 *  Méthode permettant d'accomplir des actions selon des levés d'évènements liés
+	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
 	 * à la fenetre FenetreOptionMontre
 	 * 
-	 * @param evt					evenement
-	 * @param fenOptionMontre		fenetre du mode course contre la montre
-	 * @param fenJeuScience			la fenetre de jeu avec mode science activé
-	 * @param fenSansScience		la fenetre non scientifique
+	 * @param evt             evenement
+	 * @param fenOptionMontre fenetre du mode course contre la montre
+	 * @param fenJeuScience   la fenetre de jeu avec mode science activé
+	 * @param fenSansScience  la fenetre non scientifique
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void actionChangeJeuCourse2(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
 			FenetreJeuScientifique fenJeuScience, FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
@@ -422,10 +423,9 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
 					.setSkin((Color) evt.getNewValue());
 			break;
-		
+
 		}
 	}
-
 
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
@@ -580,7 +580,8 @@ public class AppPrincipale12 extends JFrame {
 			fenOptions.setVisible(true);
 			setContentPane(fenOptions);
 			break;
-
+		case "PISTECREATION":
+			fenOptions.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 		}
 	}
 

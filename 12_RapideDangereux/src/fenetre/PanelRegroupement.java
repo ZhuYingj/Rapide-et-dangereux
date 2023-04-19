@@ -208,7 +208,7 @@ public class PanelRegroupement extends JPanel {
 
 			listePisteDeDepart.get(a).dessiner(g2d);
 			if (listePisteDeDepart.get(0).getNombrePisteColle() != 2 && jouer == true) {
-				System.out.println("s");
+			
 				Rectangle2D.Double pisteIncomplete = new Rectangle2D.Double(listePisteDeDepart.get(a).getX(),
 						listePisteDeDepart.get(a).getY(), listePisteDeDepart.get(a).getTaillePiste(),
 						listePisteDeDepart.get(a).getTaillePiste());

@@ -17,6 +17,8 @@ import application.OutilsImage;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import dessin.ZoneAnimPhysique;
+import interfaces.TypePiste;
+
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -61,7 +63,7 @@ public class ModeDeJeu extends JPanel {
 		btnMonde.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-
+				pcs.firePropertyChange("PISTECREATION", 0, TypePiste.MEXIQUE);
 				if (btnMonde.contains(e.getX(), e.getY())) {
 					URL urlPlanete = getClass().getClassLoader().getResource("earth.gif");
 					ImageIcon planete = new ImageIcon(urlPlanete);

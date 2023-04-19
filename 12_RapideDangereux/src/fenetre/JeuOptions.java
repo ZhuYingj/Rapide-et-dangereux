@@ -31,6 +31,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import dessin.ZoneAnimPhysique;
 
 /**
  * Classe qui crée la fenêtre pour choisir les paramètres pour le mode de jeu
@@ -62,14 +63,22 @@ public class JeuOptions extends JPanel {
 	private JButton btnItalie;
 	private JSlider sliderNbBoites;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
-	private Color[] couleurs2 = { Color.cyan,Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, };
-	private Color transparent = new Color(255, 255, 255, 0);
+	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, };
 	private JButton btnGauche2;
 	private JButton btnGauche1;
 	private JButton btnDroit1;
 	private JButton btnDroit2;
 	private JTextArea txtArea;
 	private JComboBox cbMatPiste;
+	private ZoneAnimPhysique zoneAnimPhysique;
+
+	public ZoneAnimPhysique getZoneAnimPhysique() {
+		return zoneAnimPhysique;
+	}
+
+	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
+		this.zoneAnimPhysique = zoneAnimPhysique;
+	}
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -86,6 +95,11 @@ public class JeuOptions extends JPanel {
 	public JeuOptions() {
 		setLayout(null);
 		setBounds(0, 0, 1600, 800);
+
+		zoneAnimPhysique = new ZoneAnimPhysique();
+		zoneAnimPhysique.setBounds(769, 77, 164, 136);
+		add(zoneAnimPhysique);
+
 		JPanel PanelApercu = new JPanel();
 		PanelApercu.setBackground(Color.WHITE);
 		PanelApercu.setBounds(10, 200, 700, 439);
@@ -114,14 +128,13 @@ public class JeuOptions extends JPanel {
 		txtArea.setLineWrap(true);
 		spPourMessage.setViewportView(txtArea);
 
-		Object drapeuxMexique = OutilsImage.lireImage("PisteMexique.png");
-		// Icon icone = new ImageIcon(drapeuxMexique);
 		btnMexique = new JButton("Mexique");
 		btnMexique.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnMexique.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				selectionImageMexique(e);
+
 			}
 		});
 
@@ -192,11 +205,6 @@ public class JeuOptions extends JPanel {
 		panel_1.add(slider2);
 
 		slider = new JSlider();
-		slider.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-
-			}
-		});
 
 		slider.setMajorTickSpacing(10);
 		slider.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -333,54 +341,6 @@ public class JeuOptions extends JPanel {
 		panel_V1.setBounds(1044, 77, 143, 90);
 		add(panel_V1);
 
-//		JButton btnGauche = new JButton("<");
-
-//		btnGauche = new JButton("");
-//		btnGauche.setBounds(1123, 116, 55, 23);
-//		btnGauche.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				ChangementImage(1,0);
-//				panel_V1.setBackground(couleurs[indexCouleur]);
-//			}
-//		});
-//		add(btnGauche);
-//
-//		
-//		JButton btnDroite = new JButton(">");
-//		btnDroite.setBounds(1365, 116, 55, 23);
-//		btnDroite.addActionListener(new ActionListener() {
-//
-//		btnGauche.setBorder(null);
-//
-//		Image arrowGauche = OutilsImage.lireImageEtRedimensionner("FlecheGauche.png", 50, 23);
-//		if (arrowGauche != null) {
-//			btnGauche.setIcon(new ImageIcon(arrowGauche));
-//			arrowGauche.flush();
-//		}
-//
-//		
-//		btnDroit = new JButton("");
-//		btnDroit.setForeground(new Color(255, 255, 255));
-//		btnDroit.setBounds(1365, 116, 55, 23);
-//		btnDroit.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				ChangementImage(1,1);
-//				panel_V1.setBackground(couleurs[indexCouleur]);
-//			}
-//		});
-//		add(btnDroit);
-//
-//		btnDroit.setBorder(null);
-
-//		Image arrowDroite = OutilsImage.lireImageEtRedimensionner("FlecheDroite.png", 50, 23);
-//		if (arrowDroite != null) {
-//			btnDroit.setIcon(new ImageIcon(arrowDroite));
-//			arrowDroite.flush();
-//		}
-
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnRetour.addActionListener(new ActionListener() {
@@ -437,14 +397,10 @@ public class JeuOptions extends JPanel {
 
 		btnDroit1 = new JButton(">");
 		btnDroit1.setBounds(1197, 106, 55, 23);
-		// Image arrowGauche2 =
-		// OutilsImage.lireImageEtRedimensionner("FlecheGauche.png", 50, 23);
+
 		btnDroit1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//		if (arrowGauche2 != null) {
-//			btnGauche2.setIcon(new ImageIcon(arrowGauche2));
-//			arrowGauche2.flush();
-//		}
+
 				changementImage(1, 1);
 				panel_V1.setBackground(couleurs[indexCouleur]);
 			}
@@ -463,12 +419,6 @@ public class JeuOptions extends JPanel {
 		});
 		add(btnDroit2);
 		btnDroit2.setBorder(null);
-
-//		Image arrowDroite2 = OutilsImage.lireImageEtRedimensionner("FlecheDroite.png", 50, 23);
-//		if (arrowDroite2 != null) {
-//			btnDroit2.setIcon(new ImageIcon(arrowDroite2));
-//			arrowDroite2.flush();
-//		}
 
 		JButton btnRecorsPiste = new JButton("Records par piste !");
 		btnRecorsPiste.setForeground(new Color(0, 0, 0));
@@ -554,11 +504,6 @@ public class JeuOptions extends JPanel {
 				imgHiver.flush();
 			}
 
-			// btnDroit.setBackground(transparent);
-			btnDroit2.setBackground(transparent);
-			// btnGauche.setBackground(transparent);
-			btnGauche2.setBackground(transparent);
-
 		}
 	}
 
@@ -583,10 +528,6 @@ public class JeuOptions extends JPanel {
 				imgDesert.flush();
 			}
 
-			// btnDroit.setBackground(transparent);
-			btnDroit2.setBackground(transparent);
-			// btnGauche.setBackground(transparent);
-			btnGauche2.setBackground(transparent);
 		}
 	}
 
@@ -611,10 +552,6 @@ public class JeuOptions extends JPanel {
 				imgVenice.flush();
 			}
 
-			// btnDroit.setBackground(transparent);
-			btnDroit2.setBackground(transparent);
-			// btnGauche.setBackground(transparent);
-			btnGauche2.setBackground(transparent);
 		}
 	}
 
