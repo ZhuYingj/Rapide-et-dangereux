@@ -37,8 +37,6 @@ import javax.swing.DefaultComboBoxModel;
 
 import javax.swing.JLayeredPane;
 
-
-
 /**
  * Classe qui crée la fenêtre pour choisir les paramètres pour le mode de jeu
  * Monde
@@ -118,20 +116,20 @@ public class JeuOptions extends JPanel {
 		JPanel panelPourMessage = new JPanel();
 		panelPourMessage.setBounds(1044, 200, 549, 134);
 		add(panelPourMessage);
-				panelPourMessage.setLayout(null);
-		
-				JScrollPane spPourMessage = new JScrollPane();
-				spPourMessage.setBounds(0, 0, 549, 134);
-				panelPourMessage.add(spPourMessage);
-				
-						txtArea = new JTextArea();
-						spPourMessage.setViewportView(txtArea);
-						txtArea.setEditable(false);
-						txtArea.setForeground(Color.RED);
-						txtArea.setFont(new Font("Dubai", Font.PLAIN, 18));
-						txtArea.setText("Choisisez les paramètres!");
-						txtArea.setWrapStyleWord(true);
-						txtArea.setLineWrap(true);
+		panelPourMessage.setLayout(null);
+
+		JScrollPane spPourMessage = new JScrollPane();
+		spPourMessage.setBounds(0, 0, 549, 134);
+		panelPourMessage.add(spPourMessage);
+
+		txtArea = new JTextArea();
+		spPourMessage.setViewportView(txtArea);
+		txtArea.setEditable(false);
+		txtArea.setForeground(Color.RED);
+		txtArea.setFont(new Font("Dubai", Font.PLAIN, 18));
+		txtArea.setText("Choisisez les paramètres!");
+		txtArea.setWrapStyleWord(true);
+		txtArea.setLineWrap(true);
 
 		btnMexique = new JButton("Mexique");
 		btnMexique.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -198,6 +196,12 @@ public class JeuOptions extends JPanel {
 		panel_1.setLayout(null);
 
 		slider2 = new JSlider();
+		slider2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				actionSliderMasse2();
+			}
+		});
 		slider2.setSnapToTicks(true);
 		slider2.setPaintTicks(true);
 		slider2.setPaintLabels(true);
@@ -209,6 +213,14 @@ public class JeuOptions extends JPanel {
 		panel_1.add(slider2);
 
 		slider = new JSlider();
+
+		slider.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				actionSliderMasse1();
+			}
+		});
+
 		slider.setMajorTickSpacing(10);
 		slider.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		slider.setPaintLabels(true);
@@ -234,8 +246,7 @@ public class JeuOptions extends JPanel {
 		rdbtnFacile.setSelected(true);
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
-				pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
+				actionRdbtnVitesseFacile();
 
 			}
 		});
@@ -247,8 +258,7 @@ public class JeuOptions extends JPanel {
 		rdbtnMedium.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		rdbtnMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtArea.append("\nVous avez choisi la difficulter <<Intermédiaire>> ");
-				pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 80.0);
+				actionRdbtnVitesseIntermediaire();
 
 			}
 		});
@@ -260,8 +270,7 @@ public class JeuOptions extends JPanel {
 		rdbtnDifficile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		rdbtnDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtArea.append("\nVous avez choisi la difficulter <<Avancé>> ");
-				pcs.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
+				actionRdbtnVitesseAvance();
 
 			}
 		});
@@ -295,6 +304,12 @@ public class JeuOptions extends JPanel {
 		panel_1.add(lblNombreBoiteMystere);
 
 		sliderNbBoites = new JSlider();
+		sliderNbBoites.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				actionSliderBloc();
+			}
+		});
 
 		sliderNbBoites.setSnapToTicks(true);
 		sliderNbBoites.setPaintTicks(true);
@@ -316,7 +331,7 @@ public class JeuOptions extends JPanel {
 		cbMatPiste = new JComboBox();
 		cbMatPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actionMatierielPiste();
+
 			}
 		});
 		cbMatPiste.setModel(new DefaultComboBoxModel(new String[] { "Asphalt", "Sable", "Glace" }));
@@ -327,7 +342,10 @@ public class JeuOptions extends JPanel {
 		lblMatPiste.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblMatPiste.setBounds(10, 261, 110, 14);
 		panel_1.add(lblMatPiste);
-		
+
+		lblImage = new JLabel("");
+		lblImage.setBounds(-815, -417, 1600, 800);
+		panel_1.add(lblImage);
 
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -356,16 +374,11 @@ public class JeuOptions extends JPanel {
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
-
-	
-
-
 		JPanel panel_V2 = new JPanel();
+
 		panel_V2.setBounds(1330, 77, 143, 90);
 		panel_V2.setBackground(Color.CYAN);
 		add(panel_V2);
-
-
 
 		JLabel lblNewLabel = new JLabel("Couleur voiture #1");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -416,21 +429,14 @@ public class JeuOptions extends JPanel {
 		btnDroit1 = new JButton(">");
 		btnDroit1.setBounds(1197, 106, 55, 23);
 
-
-
-
 		btnDroit1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-
 
 				changementImage(1, 1);
 
 				panel_V1.setBackground(couleurs[indexCouleur]);
 				zoneApercuPiste.setColor1(couleurs[indexCouleur]);
 				repaint();
-
-				
 
 			}
 		});
@@ -480,6 +486,7 @@ public class JeuOptions extends JPanel {
 		lblNewLabel_2.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 44));
 		lblNewLabel_2.setBounds(769, 11, 220, 70);
 		add(lblNewLabel_2);
+
 		panelCouleurPiste = new JPanel();
 		panelCouleurPiste.setBackground(Color.RED);
 		panelCouleurPiste.setBounds(769, 235, 143, 90);
@@ -497,8 +504,7 @@ public class JeuOptions extends JPanel {
 				gauche = false;
 			}
 		});
-		
-		
+
 		btnGauche3.setBounds(715, 266, 55, 23);
 		add(btnGauche3);
 
@@ -511,16 +517,13 @@ public class JeuOptions extends JPanel {
 				droite = false;
 			}
 		});
-		
-		
+
 		btnDroit3.setBounds(913, 266, 55, 23);
 		add(btnDroit3);
 
-		
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
-
 
 	}
 
@@ -537,19 +540,6 @@ public class JeuOptions extends JPanel {
 		pcs.firePropertyChange("TYPEPISTE", null, type);
 		pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
 		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
-	}
-
-
-	/**
-	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
-	 * levée d'évènements.
-	 * 
-	 */
-	// Alexis Pineda-Alvarado
-	private void actionMatierielPiste() {
-		pcs.firePropertyChange("MATERIEL", null, cbMatPiste.getItemAt(0));
-		pcs.firePropertyChange("MATERIEL2", null, cbMatPiste.getItemAt(1));
-		pcs.firePropertyChange("MATERIEL3", null, cbMatPiste.getItemAt(2));
 	}
 
 	/**
@@ -640,13 +630,12 @@ public class JeuOptions extends JPanel {
 	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
 	 * levée d'évènements. pour faire le changement de couleur des voiture
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	private void actionSkin() {
 		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
 	}
-	
-	
+
 	/**
 	 * méthode qui permet le changement de couleur des voiture
 	 * 
@@ -685,7 +674,6 @@ public class JeuOptions extends JPanel {
 
 	}
 
-
 	/**
 	 * Méthode pour changer la couleur des côtés de piste
 	 */
@@ -694,9 +682,9 @@ public class JeuOptions extends JPanel {
 		if (gauche) {
 			couleurPiste--;
 			if (couleurPiste < 0) {
-				couleurPiste = couleursPiste.length -1;
+				couleurPiste = couleursPiste.length - 1;
 			}
-		} 
+		}
 		if (droite) {
 			couleurPiste++;
 			if (couleurPiste == couleursPiste.length) {
@@ -705,26 +693,82 @@ public class JeuOptions extends JPanel {
 		}
 		panelCouleurPiste.setBackground(couleursPiste[couleurPiste]);
 	}
-	
+
 	/**
-	 * méthode qui change la couleur du panel pour permettre de visualiser la couleur choisit par l'utilisateur
-	 * 
-	 * @param panel		panel a changer la couleur pour la voiture 1 
+	 * méthode qui dicte le message du slider de la masse de la première voiture
 	 */
-	//Ludovic Julien
+	// Alexis Pineda-Alvarado
+	public void actionSliderMasse1() {
+		txtArea.append("\nVous avez choisi la masse pour la première voiture!");
+	}
+
+	/**
+	 * méthode qui dicte le message du slider de la masse de la deuxième voiture
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionSliderMasse2() {
+		txtArea.append("\nVous avez choisi la masse pour la deuxième voiture!");
+	}
+
+	/**
+	 * méthode qui dicte le message du slider du nombre de boîte mystère choisi
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionSliderBloc() {
+		txtArea.append("\nVous avez choisi le nombre de boîte mystère pour le jeu!");
+	}
+
+	/**
+	 * méthode qui dicte le message et l'événement du radio button de la vitesse
+	 * choisi
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionRdbtnVitesseFacile() {
+		txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
+		pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
+	}
+
+	/**
+	 * méthode qui dicte le message et l'événement du radio button de la vitesse
+	 * choisi
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionRdbtnVitesseIntermediaire() {
+		txtArea.append("\nVous avez choisi la difficulter <<Intermédiaire>> ");
+		pcs.firePropertyChange("VITESSEMAXFACILE", null, 80.0);
+	}
+
+	/**
+	 * méthode qui dicte le message et l'événement du radio button de la vitesse
+	 * choisi
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionRdbtnVitesseAvance() {
+		txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
+		pcs.firePropertyChange("VITESSEMAXFACILE", null, 100.0);
+	}
+
+	/**
+	 * méthode qui change la couleur du panel pour permettre de visualiser la
+	 * couleur choisit par l'utilisateur
+	 * 
+	 * @param panel panel a changer la couleur pour la voiture 1
+	 */
+	// Ludovic Julien
 	public void setBackgroundV1(JPanel panel) {
 		panel.setBackground(couleurs[indexCouleur]);
 	}
-	
+
 	/**
-	 * méthode qui change la couleur du panel pour permettre de visualiser la couleur choisit par l'utilisateur
+	 * méthode qui change la couleur du panel pour permettre de visualiser la
+	 * couleur choisit par l'utilisateur
 	 * 
-	 * @param panel		panel a changer la couleur pour la voiture 2
+	 * @param panel panel a changer la couleur pour la voiture 2
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void setBackgroundV2(JPanel panel) {
 		panel.setBackground(couleurs2[indexCouleur2]);
 
 	}
-	
+
 }

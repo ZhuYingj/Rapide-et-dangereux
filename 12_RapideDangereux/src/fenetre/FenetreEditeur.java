@@ -463,7 +463,7 @@ public class FenetreEditeur extends JPanel {
 //		URL urlBackgroudNoir = getClass().getClassLoader().getResource("blackwaves.gif");
 //		ImageIcon noir = new ImageIcon(urlBackgroudNoir);
 //		lblImage.setIcon(noir);
-	
+
 	}
 
 	/**
@@ -1635,11 +1635,9 @@ public class FenetreEditeur extends JPanel {
 		}
 // Pour la fumee		
 
-
 		for (int a = 0; a < regroupementSauvegarde.getListeFumee().size(); a++) {
 			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
 		}
-
 
 		resetValeur();
 		repaint();
