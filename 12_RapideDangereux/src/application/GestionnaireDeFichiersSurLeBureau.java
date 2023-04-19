@@ -272,6 +272,11 @@ public class GestionnaireDeFichiersSurLeBureau {
         }
     }
 
+	public static String getBureau() {
+		// TODO Auto-generated method stub
+		return System.getProperty("user.home");
+	}
+
 	
 
 }
