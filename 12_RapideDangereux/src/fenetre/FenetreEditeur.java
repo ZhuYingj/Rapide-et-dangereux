@@ -1638,7 +1638,9 @@ public class FenetreEditeur extends JPanel {
 //		for(int a = 0; a< regroupementSauvegarde.getListeFumee().size(); a++) {
 //			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
 //		}
+
 //		
+
 		resetValeur();
 		repaint();
 
