@@ -49,6 +49,8 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	private Rectangle2D.Double formeAire;
 	private boolean enContactAvecColle = false;
 	private int nombrePisteColle = 0;
+	/** Couleur de la bordure **/
+	private Color bordure = Color.red;
 
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -77,7 +79,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
-		g2d.setColor(Color.RED);
+		g2d.setColor(bordure);
 		//Stroke stroke = new BasicStroke(0.5f);
 		g2d.setStroke( new BasicStroke(2) );
 		g2d.drawLine(x, y + 1, x, y + taillePiste - 1);
@@ -304,4 +306,10 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	public void setNombrePisteColle(int nombrePisteColle) {
 		this.nombrePisteColle = nombrePisteColle;
 	}
+
+	public void setBordure(Color bordure) {
+		this.bordure = bordure;
+	}
+	
+	
 }

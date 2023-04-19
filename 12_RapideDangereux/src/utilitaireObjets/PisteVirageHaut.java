@@ -66,6 +66,8 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	private int nombrePisteColle = 0;
 	
 	private boolean enContactAvecColle = false;
+	/** Couleur de la bordure **/
+	private Color bordure = Color.red;
 
 	/**
 	 * Methode qui permet de construire la piste virage haut a l'aide de parametres
@@ -95,7 +97,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
-		g2d.setColor(Color.RED);
+		g2d.setColor(bordure);
 		Stroke stroke = new BasicStroke(2f);
 		g2d.setStroke(stroke);
 		g2d.drawLine(x, y, x, y + (taillePiste / 3));
@@ -398,5 +400,9 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 
 	public void setMurBas(int murBas) {
 		this.murBas = murBas;
+	}
+
+	public void setBordure(Color bordure) {
+		this.bordure = bordure;
 	}
 }

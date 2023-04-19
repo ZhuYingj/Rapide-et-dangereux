@@ -50,6 +50,8 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	private Voiture voiture2;
 	private boolean enContactAvecColle = false;
 	private int nombrePisteColle = 0;
+	/** Couleur de la bordure **/
+	private Color bordure = Color.red;
 
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
@@ -81,8 +83,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
-		g2d.setColor(Color.RED);
-		g2d.setColor(Color.RED);
+		g2d.setColor(bordure);
 		Stroke stroke1 = new BasicStroke(2f);
 		g2d.setStroke(stroke1);
 		g2d.drawLine(x + 1, y, x + taillePiste - 1, y);
@@ -367,6 +368,14 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 
 	public void setMurBas(int murBas) {
 		this.murBas = murBas;
+	}
+	
+	public Color getBordure() {
+		return bordure;
+	}
+
+	public void setBordure(Color bordure) {
+		this.bordure = bordure;
 	}
 
 }
