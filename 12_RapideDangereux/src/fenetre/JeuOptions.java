@@ -62,7 +62,7 @@ public class JeuOptions extends JPanel {
 	private JButton btnItalie;
 	private JSlider sliderNbBoites;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
-	private Color[] couleurs2 = { Color.cyan,Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, };
+	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, };
 	private Color transparent = new Color(255, 255, 255, 0);
 	private JButton btnGauche2;
 	private JButton btnGauche1;
@@ -181,6 +181,12 @@ public class JeuOptions extends JPanel {
 		panel_1.setLayout(null);
 
 		slider2 = new JSlider();
+		slider2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				actionSliderMasse2();
+			}
+		});
 		slider2.setSnapToTicks(true);
 		slider2.setPaintTicks(true);
 		slider2.setPaintLabels(true);
@@ -192,9 +198,10 @@ public class JeuOptions extends JPanel {
 		panel_1.add(slider2);
 
 		slider = new JSlider();
-		slider.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-
+		slider.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				actionSliderMasse1();
 			}
 		});
 
@@ -223,8 +230,7 @@ public class JeuOptions extends JPanel {
 		rdbtnFacile.setSelected(true);
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
-				pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
+				actionRdbtnVitesseFacile();
 
 			}
 		});
@@ -236,8 +242,7 @@ public class JeuOptions extends JPanel {
 		rdbtnMedium.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		rdbtnMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtArea.append("\nVous avez choisi la difficulter <<Intermédiaire>> ");
-				pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 80.0);
+				actionRdbtnVitesseIntermediaire();
 
 			}
 		});
@@ -249,8 +254,7 @@ public class JeuOptions extends JPanel {
 		rdbtnDifficile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		rdbtnDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtArea.append("\nVous avez choisi la difficulter <<Avancé>> ");
-				pcs.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
+				actionRdbtnVitesseAvance();
 
 			}
 		});
@@ -284,6 +288,12 @@ public class JeuOptions extends JPanel {
 		panel_1.add(lblNombreBoiteMystere);
 
 		sliderNbBoites = new JSlider();
+		sliderNbBoites.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				actionSliderBloc();
+			}
+		});
 
 		sliderNbBoites.setSnapToTicks(true);
 		sliderNbBoites.setPaintTicks(true);
@@ -305,7 +315,7 @@ public class JeuOptions extends JPanel {
 		cbMatPiste = new JComboBox();
 		cbMatPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actionMatierielPiste();
+
 			}
 		});
 		cbMatPiste.setModel(new DefaultComboBoxModel(new String[] { "Asphalt", "Sable", "Glace" }));
@@ -522,18 +532,6 @@ public class JeuOptions extends JPanel {
 	}
 
 	/**
-	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
-	 * levée d'évènements.
-	 * 
-	 */
-	// Alexis Pineda-Alvarado
-	private void actionMatierielPiste() {
-		pcs.firePropertyChange("MATERIEL", null, cbMatPiste.getItemAt(0));
-		pcs.firePropertyChange("MATERIEL2", null, cbMatPiste.getItemAt(1));
-		pcs.firePropertyChange("MATERIEL3", null, cbMatPiste.getItemAt(2));
-	}
-
-	/**
 	 * Méthode qui choisie la piste et une photo de fond lorsque la souris et sur le
 	 * bouton
 	 * 
@@ -654,5 +652,59 @@ public class JeuOptions extends JPanel {
 
 		}
 
+	}
+
+	/**
+	 * méthode qui dicte le message du slider de la masse de la première voiture
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionSliderMasse1() {
+		txtArea.append("\nVous avez choisi la masse pour la première voiture!");
+	}
+
+	/**
+	 * méthode qui dicte le message du slider de la masse de la deuxième voiture
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionSliderMasse2() {
+		txtArea.append("\nVous avez choisi la masse pour la deuxième voiture!");
+	}
+
+	/**
+	 * méthode qui dicte le message du slider du nombre de boîte mystère choisi
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionSliderBloc() {
+		txtArea.append("\nVous avez choisi le nombre de boîte mystère pour le jeu!");
+	}
+
+	/**
+	 * méthode qui dicte le message et l'événement du radio button de la vitesse
+	 * choisi
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionRdbtnVitesseFacile() {
+		txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
+		pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
+	}
+
+	/**
+	 * méthode qui dicte le message et l'événement du radio button de la vitesse
+	 * choisi
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionRdbtnVitesseIntermediaire() {
+		txtArea.append("\nVous avez choisi la difficulter <<Intermédiaire>> ");
+		pcs.firePropertyChange("VITESSEMAXFACILE", null, 80.0);
+	}
+
+	/**
+	 * méthode qui dicte le message et l'événement du radio button de la vitesse
+	 * choisi
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionRdbtnVitesseAvance() {
+		txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
+		pcs.firePropertyChange("VITESSEMAXFACILE", null, 100.0);
 	}
 }

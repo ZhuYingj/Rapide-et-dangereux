@@ -20,9 +20,7 @@ import interfaces.Selectionnable;
  */
 
 public class Fumee implements Dessinable, Selectionnable, Serializable {
-	
-	
-	//private static final long serialVersionUID = 1L;
+
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 	/** la position en x de depart que l'objet piste vas etre creer **/
@@ -33,8 +31,8 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 	private double pixelParMetre;
 	/** Creer la forme du carre **/
 	private Rectangle2D.Double formeAire;
-
-	//private BouleFumee bouleFumee;
+	/** Prend la boule creer de la classe BouleFumee **/
+	private transient BouleFumee bouleFumee;
 
 	/**
 	 * Methode qui permet de construire l'objet Fumee a l'aide de parametres
@@ -46,8 +44,8 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 	public Fumee(int x, int y) {
 		this.x = x;
 		this.y = y;
-		
-		//bouleFumee = new BouleFumee(new Vecteur2D(x + taillePiste / 4, y + taillePiste / 4), 16);
+
+		bouleFumee = new BouleFumee(new Vecteur2D(x + taillePiste / 4, y + taillePiste / 4), 16, 1);
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 
 	}
@@ -68,7 +66,7 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 		g2d.drawLine(x, y, x, y + taillePiste);
 		g2d.drawLine(x + taillePiste, y, x + taillePiste, y + taillePiste);
 
-		//bouleFumee.dessiner(g2d);
+		bouleFumee.dessiner(g2d);
 
 	}
 

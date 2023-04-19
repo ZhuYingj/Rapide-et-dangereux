@@ -66,6 +66,7 @@ public class FenetreOptionMontre extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	//Alexis Pineda-Alvarado
 	public FenetreOptionMontre() {
 		setLayout(null);
 

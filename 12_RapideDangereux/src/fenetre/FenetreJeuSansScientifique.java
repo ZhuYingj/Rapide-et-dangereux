@@ -72,11 +72,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.restartPos();
-				btnNextImg.setEnabled(true);
-				btnStart.setEnabled(true);
-				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
+				actionBtnReset();
 			}
 		});
 		btnReset.setBounds(30, 345, 97, 58);
@@ -85,10 +81,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.arreter();
-				btnNextImg.setEnabled(true);
-				btnStart.setEnabled(true);
+				actionBtnStop();
 			}
 		});
 		btnStop.setBounds(30, 441, 97, 58);
@@ -101,32 +94,71 @@ public class FenetreJeuSansScientifique extends JPanel {
 		btnStart = new JButton("Start");
 		btnStart.setBounds(30, 177, 97, 58);
 		add(btnStart);
-		
+
 		JLabel lblNewLabel = new JLabel("80 M");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel.setBounds(205, 724, 89, 14);
 		add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("<------------>");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel_1.setBounds(175, 703, 269, 14);
 		add(lblNewLabel_1);
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.setEnCoursDAnimation(false);
-				zoneAnimPhysique.demarrer();
-				btnNextImg.setEnabled(false);
-				btnStart.setEnabled(false);
-				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+				actionBtnStart();
 			}
 		});
 		btnNextImg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.avancerUnPas();
+				actionBtnProchImage();
 			}
 		});
+	}
+
+	/**
+	 * Méthode qui va reinitialiser tous les valeurs du jeu
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionBtnReset() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.restartPos();
+		btnNextImg.setEnabled(true);
+		btnStart.setEnabled(true);
+		pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
+	}
+
+	/**
+	 * Méthode qui arrêtre l'animation du jeu
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionBtnStop() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.arreter();
+		btnNextImg.setEnabled(true);
+		btnStart.setEnabled(true);
+	}
+
+	/**
+	 * Méthode qui commence l'animation du jeu
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionBtnStart() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.setEnCoursDAnimation(false);
+		zoneAnimPhysique.demarrer();
+		btnNextImg.setEnabled(false);
+		btnStart.setEnabled(false);
+		pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+	}
+
+	/**
+	 * Méthode qui prend la prochaine image du jeu
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionBtnProchImage() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.avancerUnPas();
 	}
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {
