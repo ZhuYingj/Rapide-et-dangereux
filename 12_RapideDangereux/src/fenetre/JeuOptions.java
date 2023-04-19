@@ -303,13 +303,15 @@ public class JeuOptions extends JPanel {
 		panel_1.add(lblVitesseMaximale);
 
 		cbMatPiste = new JComboBox();
+		
 		cbMatPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actionMatierielPiste();
+				 
 			}
 		});
 		cbMatPiste.setModel(new DefaultComboBoxModel(new String[] { "Asphalt", "Sable", "Glace" }));
 		cbMatPiste.setBounds(165, 263, 75, 22);
+		cbMatPiste.setSelectedItem("Asphalt");
 		panel_1.add(cbMatPiste);
 
 		JLabel lblMatPiste = new JLabel("Matériel de la piste :");
@@ -515,18 +517,6 @@ public class JeuOptions extends JPanel {
 		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
 		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 		pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
-	}
-
-	/**
-	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
-	 * levée d'évènements.
-	 * 
-	 */
-	// Alexis Pineda-Alvarado
-	private void actionMatierielPiste() {
-		pcs.firePropertyChange("MATERIEL", null, cbMatPiste.getItemAt(0));
-		pcs.firePropertyChange("MATERIEL2", null, cbMatPiste.getItemAt(1));
-		pcs.firePropertyChange("MATERIEL3", null, cbMatPiste.getItemAt(2));
 	}
 
 	/**
