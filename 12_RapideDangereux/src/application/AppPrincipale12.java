@@ -231,6 +231,12 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
+				actionChangeJeuCourse2(evt,fenOptionMontre, fenJeuScience, fenSansScience);
+			}
+		});
+		
+		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
 				actionChangeJeuCourse(evt, fenOptionMontre, fenJeuScience, fenSansScience);
 				actionRetourOptionCCM(evt, fenOptionMontre, fenModeJeu);
 			}
@@ -390,6 +396,36 @@ public class AppPrincipale12 extends JFrame {
 			break;
 		}
 	}
+	
+	/**
+	 *  Méthode permettant d'accomplir des actions selon des levés d'évènements liés
+	 * à la fenetre FenetreOptionMontre
+	 * 
+	 * @param evt					evenement
+	 * @param fenOptionMontre		fenetre du mode course contre la montre
+	 * @param fenJeuScience			la fenetre de jeu avec mode science activé
+	 * @param fenSansScience		la fenetre non scientifique
+	 */
+	//Ludovic Julien
+	public void actionChangeJeuCourse2(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
+			FenetreJeuScientifique fenJeuScience, FenetreJeuSansScientifique fenSansScience) {
+		switch (evt.getPropertyName()) {
+		case "SKIN":
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setSkin((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setSkin((Color) evt.getNewValue());
+			break;
+		case "SKIN2":
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setSkin((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setSkin((Color) evt.getNewValue());
+			break;
+		
+		}
+	}
+
 
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés

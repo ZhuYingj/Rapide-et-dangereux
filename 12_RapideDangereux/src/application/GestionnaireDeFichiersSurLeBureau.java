@@ -251,6 +251,14 @@ public class GestionnaireDeFichiersSurLeBureau {
 	public static void ecrireFichier(String nomUtilisateur, double temps, String piste) {
 		String cheminFichier = System.getProperty("user.home") + "/Desktop/donnees.txt";
 
+
+//	public static String getBureau() {
+//		// TODO Auto-generated method stub
+//		return System.getProperty("user.home");
+//	}
+
+	
+
 		try {
 			// Créer le fichier s'il n'existe pas déjà
 			Path fichier = Paths.get(cheminFichier);
@@ -268,5 +276,11 @@ public class GestionnaireDeFichiersSurLeBureau {
 			e.printStackTrace();
 		}
 	}
+
+	public static String getBureau() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
