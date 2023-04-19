@@ -144,12 +144,7 @@ public class FenetreJeuScientifique extends JPanel {
 				pcs.firePropertyChange("RetourDuJeuScience", null, -1);
 				pcs.firePropertyChange("Test", null, -1);
 
-				zoneVitesse.renouvlerTemps();
-				zoneVitesse.renouvlerVitesse();
-				zoneVitesse2.renouvlerTemps();
-				zoneVitesse2.renouvlerVitesse();
-				timerVitesse.stop();
-
+				resetGraphique();
 				resetMusic();
 			}
 		});
@@ -163,8 +158,7 @@ public class FenetreJeuScientifique extends JPanel {
 				btnNextImg.setEnabled(false);
 				btnStart.setEnabled(false);
 				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
-				timerVitesse.start();
-				clip.start();
+				actionStart();
 
 			}
 		});
@@ -180,9 +174,7 @@ public class FenetreJeuScientifique extends JPanel {
 				zoneAnimPhysique.arreter();
 				btnNextImg.setEnabled(true);
 				btnStart.setEnabled(true);
-
-				timerVitesse.stop();
-
+				stopGraphique();
 				arretMusic();
 			}
 		});
@@ -198,11 +190,7 @@ public class FenetreJeuScientifique extends JPanel {
 				btnStart.setEnabled(true);
 				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
 
-				zoneVitesse2.renouvlerTemps();
-				zoneVitesse2.renouvlerVitesse();
-				zoneVitesse.renouvlerTemps();
-				zoneVitesse.renouvlerVitesse();
-
+				resetGraphique();
 				resetMusic();
 
 			}
@@ -893,8 +881,43 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 	}
 	
+	/**
+	 * méthode qui retourn le timer des graphique
+	 * 
+	 * @return		timerVitesse
+	 */
+	//Ludovic Julien
 	public static Timer getTimer() {
 		return timerVitesse;
+	}
+	
+	/**
+	 * méthode qui permet de reset les graphhique de vitesse en fonction du temps
+	 */
+	//Ludovic Julien
+	public void resetGraphique() {
+		zoneVitesse.renouvlerTemps();
+		zoneVitesse.renouvlerVitesse();
+		zoneVitesse2.renouvlerTemps();
+		zoneVitesse2.renouvlerVitesse();
+		timerVitesse.stop();
+	}
+	
+	/**
+	 * méthode qui permet de mettre en pause les graphique de vitesse en fonction du temps
+	 */
+	//Ludovic Julien
+	public void stopGraphique() {
+		timerVitesse.stop();
+	}
+	
+	/**
+	 * méthode qui permet d'activer le timer pour les graphique et d'activer la piste audio
+	 */
+	//Ludovic Julien
+	public void actionStart() {
+		timerVitesse.start();
+		clip.start();
 	}
 
 	/**
