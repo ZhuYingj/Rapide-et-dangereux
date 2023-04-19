@@ -69,7 +69,7 @@ public class PanelRegroupement extends JPanel {
 	private boolean poubelleVide = true;
 
 	private ArrayList<Accelerateur> listeAccelerateur = new ArrayList<Accelerateur>();
-
+	private ArrayList<Fumee> listeFumee = new ArrayList<Fumee>();
 	private ArrayList<BlocMystere> listeBlocMystere = new ArrayList<BlocMystere>();
 	private ArrayList<PisteHorizontale> listePisteHorizontale = new ArrayList<PisteHorizontale>();
 	private ArrayList<PisteVirageBas> listePisteVirageBas = new ArrayList<PisteVirageBas>();
@@ -78,7 +78,7 @@ public class PanelRegroupement extends JPanel {
 	private ArrayList<PisteDeDepart> listePisteDeDepart = new ArrayList<PisteDeDepart>();
 	private ArrayList<PisteVirageDroit> listePisteVirageDroit = new ArrayList<PisteVirageDroit>();
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
-	private ArrayList<Fumee> listeFumee = new ArrayList<Fumee>();
+
 
 	private boolean objetSelectionne = false;
 	private boolean jouer = false;
@@ -862,7 +862,7 @@ public class PanelRegroupement extends JPanel {
 	}
 	
 	/**
-	 * Méthode qui permet de modifier la postion de l'accelerateur en la bougeant
+	 * Méthode qui permet de modifier la postion de la fumée en la bougeant
 	 * avec la souris
 	 * 
 	 * @param e Évenement de souris
