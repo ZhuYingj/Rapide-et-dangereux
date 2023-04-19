@@ -31,6 +31,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JList;
 
 /**
  * Classe qui crée la fenêtre pour choisir les paramètres pour le mode de jeu
@@ -501,6 +502,10 @@ public class JeuOptions extends JPanel {
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
+		
+		JList list = new JList();
+		list.setBounds(872, 573, 63, 23);
+		add(list);
 
 	}
 
