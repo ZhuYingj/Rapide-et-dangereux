@@ -51,6 +51,7 @@ public class AppPrincipale12 extends JFrame {
 	private String sousDossierSurBureau = "SauvegardePiste";
 
 	private static int audio = 1;
+	private static boolean pisteAudio;
 
 	File fichierDeTravail = new File(System.getProperty("user.home"),
 			"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
@@ -277,9 +278,24 @@ public class AppPrincipale12 extends JFrame {
 	public void actionCheckBox2() {
 		if (checkBoxAudio.isSelected()) {
 			FenetreJeuScientifique.getClip().stop();
+			FenetreJeuSansScientifique.getClip().stop();
+			pisteAudio = true;
 		} else {
 			FenetreJeuScientifique.getClip().start();
+			FenetreJeuSansScientifique.getClip().start();
+			pisteAudio = false;
 		}
+	}
+	
+	/**
+	 * méthode qui retourne true si l'option checkbox pour supprimer les effets sonor est cocher 
+	 * 
+	 * @return		 pisteAudio
+	 */
+	//Ludovic Julien
+	public static boolean getCheckAudio() {
+		return pisteAudio;
+		
 	}
 
 	/**
