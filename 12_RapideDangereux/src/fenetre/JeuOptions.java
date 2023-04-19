@@ -40,6 +40,7 @@ import javax.swing.JList;
  * @author Alexis Pineda-Alvarado
  * @author Ludovic Julien
  * @author Tan Tommy Rin
+ * @author Kevin Nguyen
  */
 
 public class JeuOptions extends JPanel {
@@ -56,6 +57,7 @@ public class JeuOptions extends JPanel {
 	private int indexCouleur = 0;
 	private int indexCouleur2 = 0;
 	private int indexMateriel = 0;
+	private int couleurPiste = 0;
 	private JLabel lblImage;
 	private JButton btnCanada;
 	private JButton btnMexique;
@@ -63,6 +65,10 @@ public class JeuOptions extends JPanel {
 	private JSlider sliderNbBoites;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, };
+
+	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.YELLOW,
+			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
+
 	private Color transparent = new Color(255, 255, 255, 0);
 	private JButton btnGauche2;
 	private JButton btnGauche1;
@@ -70,6 +76,11 @@ public class JeuOptions extends JPanel {
 	private JButton btnDroit2;
 	private JTextArea txtArea;
 	private JComboBox cbMatPiste;
+	private JButton btnGauche3;
+	private JButton btnDroit3;
+	private JPanel panelCouleurPiste;
+	private boolean gauche = false;
+	private boolean droite = false;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -414,6 +425,7 @@ public class JeuOptions extends JPanel {
 		add(PanelV2);
 
 		JPanel panel_V2 = new JPanel();
+
 		panel_V2.setBounds(1330, 77, 143, 90);
 		panel_V2.setBackground(Color.CYAN);
 		add(panel_V2);
@@ -451,7 +463,6 @@ public class JeuOptions extends JPanel {
 			}
 		});
 		add(btnGauche2);
-		btnGauche2.setBorder(null);
 
 		btnDroit1 = new JButton(">");
 		btnDroit1.setBounds(1197, 106, 55, 23);
@@ -462,7 +473,6 @@ public class JeuOptions extends JPanel {
 			}
 		});
 		add(btnDroit1);
-		btnDroit1.setBorder(null);
 
 		btnDroit2 = new JButton(">");
 		btnDroit2.setBounds(1483, 106, 55, 23);
@@ -474,7 +484,6 @@ public class JeuOptions extends JPanel {
 			}
 		});
 		add(btnDroit2);
-		btnDroit2.setBorder(null);
 
 //		Image arrowDroite2 = OutilsImage.lireImageEtRedimensionner("FlecheDroite.png", 50, 23);
 //		if (arrowDroite2 != null) {
@@ -514,6 +523,44 @@ public class JeuOptions extends JPanel {
 		list.setBounds(872, 573, 63, 23);
 		add(list);
 
+		panelCouleurPiste = new JPanel();
+		panelCouleurPiste.setBackground(Color.RED);
+		panelCouleurPiste.setBounds(769, 235, 143, 90);
+		add(panelCouleurPiste);
+
+		lblImage = new JLabel("");
+		panelCouleurPiste.add(lblImage);
+
+		btnGauche3 = new JButton("<");
+		btnGauche3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				gauche = true;
+				changeCouleurPiste();
+				gauche = false;
+			}
+		});
+
+		btnGauche3.setBounds(715, 266, 55, 23);
+		add(btnGauche3);
+
+		btnDroit3 = new JButton(">");
+		btnDroit3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				droite = true;
+				changeCouleurPiste();
+				droite = false;
+			}
+		});
+
+		btnDroit3.setBounds(913, 266, 55, 23);
+		add(btnDroit3);
+
+		lblImage = new JLabel("");
+		lblImage.setBounds(0, 0, 1600, 800);
+		add(lblImage);
+
 	}
 
 	/**
@@ -528,6 +575,7 @@ public class JeuOptions extends JPanel {
 		pcs.firePropertyChange("MASSE2", null, (double) slider2.getValue());
 		pcs.firePropertyChange("TYPEPISTE", null, type);
 		pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
+		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
 	}
 
 	/**
@@ -664,6 +712,26 @@ public class JeuOptions extends JPanel {
 	}
 
 	/**
+	 * Méthode pour changer la couleur des côtés de piste
+	 */
+	// Kevin Nguyen
+	public void changeCouleurPiste() {
+		if (gauche) {
+			couleurPiste--;
+			if (couleurPiste < 0) {
+				couleurPiste = couleursPiste.length - 1;
+			}
+		}
+		if (droite) {
+			couleurPiste++;
+			if (couleurPiste == couleursPiste.length) {
+				couleurPiste = 0;
+			}
+		}
+		panelCouleurPiste.setBackground(couleursPiste[couleurPiste]);
+	}
+
+	/**
 	 * méthode qui dicte le message du slider de la masse de la première voiture
 	 */
 	// Alexis Pineda-Alvarado
@@ -737,6 +805,7 @@ public class JeuOptions extends JPanel {
 	// Ludovic Julien
 	public void setBackgroundV2(JPanel panel) {
 		panel.setBackground(couleurs2[indexCouleur2]);
+
 	}
 
 }
