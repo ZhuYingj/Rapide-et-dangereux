@@ -317,9 +317,6 @@ public class JeuOptions extends JPanel {
 		lblMatPiste.setBounds(10, 261, 110, 14);
 		panel_1.add(lblMatPiste);
 		
-				lblImage = new JLabel("");
-				lblImage.setBounds(-815, -417, 1600, 800);
-				panel_1.add(lblImage);
 
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -496,6 +493,10 @@ public class JeuOptions extends JPanel {
 		JList list = new JList();
 		list.setBounds(872, 573, 63, 23);
 		add(list);
+		
+		lblImage = new JLabel("");
+		lblImage.setBounds(0, 0, 1600, 800);
+		add(lblImage);
 
 	}
 
