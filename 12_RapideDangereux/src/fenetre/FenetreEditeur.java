@@ -460,9 +460,9 @@ public class FenetreEditeur extends JPanel {
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
 
-		URL urlBackgroudNoir = getClass().getClassLoader().getResource("blackwaves.gif");
-		ImageIcon noir = new ImageIcon(urlBackgroudNoir);
-		lblImage.setIcon(noir);
+//		URL urlBackgroudNoir = getClass().getClassLoader().getResource("blackwaves.gif");
+//		ImageIcon noir = new ImageIcon(urlBackgroudNoir);
+//		lblImage.setIcon(noir);
 
 	}
 
@@ -1634,11 +1634,11 @@ public class FenetreEditeur extends JPanel {
 			panelRegroupement.getListeBlocMystere().add(regroupementSauvegarde.getRegroupementBoiteMystere().get(a));
 		}
 // Pour la fumee		
-		
-//		for(int a = 0; a< regroupementSauvegarde.getListeFumee().size(); a++) {
-//			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
-//		}
-		
+
+		for (int a = 0; a < regroupementSauvegarde.getListeFumee().size(); a++) {
+			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
+		}
+
 		resetValeur();
 		repaint();
 
