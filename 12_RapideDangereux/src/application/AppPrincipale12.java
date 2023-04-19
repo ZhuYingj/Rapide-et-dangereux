@@ -192,7 +192,6 @@ public class AppPrincipale12 extends JFrame {
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionRetourModeJeu2(evt, fenModeJeu, fenOptions);
-				actionPisteCouleur(evt, fenJeuScience, fenSansScience);
 			}
 		});
 
@@ -236,6 +235,7 @@ public class AppPrincipale12 extends JFrame {
 		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionChangeJeuCourse2(evt,fenOptionMontre, fenJeuScience, fenSansScience);
+				actionPisteCouleur(evt, fenJeuScience, fenSansScience);
 			}
 		});
 		
@@ -843,6 +843,26 @@ public class AppPrincipale12 extends JFrame {
 			}
 			for (int i = 0; i< fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().size(); i++ ) {
 				fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(i).setBordure((Color) evt.getNewValue());
+			}
+			
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).setBordure((Color) evt.getNewValue());
+			for (int i = 0; i< fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().size(); i++ ) {
+				fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(i).setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i< fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().size(); i++ ) {
+				fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().get(i).setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i< fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().size(); i++ ) {
+				fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().get(i).setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i< fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size(); i++ ) {
+				fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().get(i).setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i< fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().size(); i++ ) {
+				fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().get(i).setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i< fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().size(); i++ ) {
+				fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(i).setBordure((Color) evt.getNewValue());
 			}
 			
 			

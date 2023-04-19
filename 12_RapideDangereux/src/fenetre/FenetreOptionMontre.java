@@ -25,6 +25,7 @@ import interfaces.TypePiste;
 import utilitaireObjets.Regroupement;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 /**
  * 
@@ -56,9 +57,15 @@ public class FenetreOptionMontre extends JPanel {
 	private JButton btnItalie;
 	private int indexCouleur = 0;
 	private int indexCouleur2 = 0;
+	private int couleurPiste = 0;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK};
+	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.YELLOW,
+			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private JTextArea txtArea;
+	private boolean gauche = false;
+	private boolean droite = false;
+	private JPanel panelCouleurPiste;
 	
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
@@ -340,6 +347,50 @@ public class FenetreOptionMontre extends JPanel {
 		lblImage.setBounds(10, 0, 1600, 800);
 		add(lblImage);
 		
+		panelCouleurPiste = new JPanel();
+		panelCouleurPiste.setBackground(Color.RED);
+		panelCouleurPiste.setBounds(788, 316, 143, 90);
+		add(panelCouleurPiste);
+		
+		JLabel lblImage_1 = new JLabel("");
+		panelCouleurPiste.add(lblImage_1);
+		
+		JButton btnGauche3 = new JButton("<");
+		btnGauche3.setBounds(734, 347, 55, 23);
+		add(btnGauche3);
+		
+		btnGauche3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				gauche = true;
+				changeCouleurPiste();
+				gauche = false;
+			}
+		});
+		
+		JButton btnDroit3 = new JButton(">");
+		btnDroit3.setBounds(932, 347, 55, 23);
+		add(btnDroit3);
+		
+		btnDroit3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				droite = true;
+				changeCouleurPiste();
+				droite = false;
+			}
+		});
+		
+		JLabel lblImage_2 = new JLabel("");
+		lblImage_2.setBounds(19, 81, 1600, 800);
+		add(lblImage_2);
+		
+		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
+		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblCouleurBordureDe.setBounds(774, 279, 177, 43);
+		add(lblCouleurBordureDe);
+		
 	}
 
 	/**
@@ -419,6 +470,7 @@ public class FenetreOptionMontre extends JPanel {
 	private void actionSkin() {
 		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
 	}
 	
 	
@@ -458,6 +510,27 @@ public class FenetreOptionMontre extends JPanel {
 
 }
 	}
+	
+	/**
+	 * Méthode pour changer la couleur des côtés de piste
+	 */
+	// Kevin Nguyen
+	public void changeCouleurPiste() {
+		if (gauche) {
+			couleurPiste--;
+			if (couleurPiste < 0) {
+				couleurPiste = couleursPiste.length - 1;
+			}
+		}
+		if (droite) {
+			couleurPiste++;
+			if (couleurPiste == couleursPiste.length) {
+				couleurPiste = 0;
+			}
+		}
+		panelCouleurPiste.setBackground(couleursPiste[couleurPiste]);
+	}
+	
 	/**
 	 * méthode qui change la couleur du panel pour permettre de visualiser la couleur choisit par l'utilisateur
 	 * 

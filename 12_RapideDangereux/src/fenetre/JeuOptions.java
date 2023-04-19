@@ -591,6 +591,12 @@ public class JeuOptions extends JPanel {
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
+		
+		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
+		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblCouleurBordureDe.setBounds(755, 198, 177, 43);
+		add(lblCouleurBordureDe);
 
 	}
 
@@ -852,5 +858,4 @@ public class JeuOptions extends JPanel {
 		panel.setBackground(couleurs2[indexCouleur2]);
 
 	}
-
 }
