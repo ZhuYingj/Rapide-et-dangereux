@@ -36,6 +36,7 @@ import interfaces.TypePiste;
  * @author Alexis Pineda-Alvarado
  * @author Tan Tommy Rin
  * @author Ludovic Julien
+ * @author Kevin Nguyen
  */
 
 public class AppPrincipale12 extends JFrame {
@@ -50,6 +51,7 @@ public class AppPrincipale12 extends JFrame {
 	private String sousDossierSurBureau = "SauvegardePiste";
 
 	private static int audio = 1;
+	private static boolean pisteAudio;
 
 	File fichierDeTravail = new File(System.getProperty("user.home"),
 			"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
@@ -190,6 +192,7 @@ public class AppPrincipale12 extends JFrame {
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionRetourModeJeu2(evt, fenModeJeu, fenOptions);
+				actionPisteCouleur(evt, fenJeuScience, fenSansScience);
 			}
 		});
 
@@ -202,6 +205,7 @@ public class AppPrincipale12 extends JFrame {
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionFenOptions2(evt, fenJeuScience, fenOptions, fenSansScience, fenRecord);
+				actionPisteCouleur(evt, fenJeuScience, fenSansScience);
 			}
 		});
 
@@ -274,9 +278,24 @@ public class AppPrincipale12 extends JFrame {
 	public void actionCheckBox2() {
 		if (checkBoxAudio.isSelected()) {
 			FenetreJeuScientifique.getClip().stop();
+			FenetreJeuSansScientifique.getClip().stop();
+			pisteAudio = true;
 		} else {
 			FenetreJeuScientifique.getClip().start();
+			FenetreJeuSansScientifique.getClip().start();
+			pisteAudio = false;
 		}
+	}
+	
+	/**
+	 * méthode qui retourne true si l'option checkbox pour supprimer les effets sonor est cocher 
+	 * 
+	 * @return		 pisteAudio
+	 */
+	//Ludovic Julien
+	public static boolean getCheckAudio() {
+		return pisteAudio;
+		
 	}
 
 	/**
@@ -791,6 +810,42 @@ public class AppPrincipale12 extends JFrame {
 			fenOptionMontre.setVisible(false);
 			fenModeJeu.setVisible(true);
 			setContentPane(fenModeJeu);
+			break;
+		}
+	}
+	
+	/**
+	 * Méthode qui change la couleur des bordures de pistes selon l'option choisi dans le panel option
+	 * @param evt evenement
+	 * @param fenJeuScience fenètre jeu scientifique
+	 * @param fenSansScience fenètre jeu non-scientifique
+	 */
+	// Kevin Nguyen
+	public void actionPisteCouleur(PropertyChangeEvent evt,
+			FenetreJeuScientifique fenJeuScience, FenetreJeuSansScientifique fenSansScience) {
+		switch (evt.getPropertyName()) {
+		case "COULEURPISTE":
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).setBordure((Color) evt.getNewValue());
+			for (int i = 0; i< fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().size(); i++ ) {
+				fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(i).setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i< fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().size(); i++ ) {
+				fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().get(i).setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i< fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().size(); i++ ) {
+				fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().get(i).setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i< fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size(); i++ ) {
+				fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().get(i).setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i< fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().size(); i++ ) {
+				fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().get(i).setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i< fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().size(); i++ ) {
+				fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(i).setBordure((Color) evt.getNewValue());
+			}
+			
+			
 			break;
 		}
 	}
