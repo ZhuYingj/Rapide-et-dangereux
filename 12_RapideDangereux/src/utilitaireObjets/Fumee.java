@@ -21,8 +21,6 @@ import interfaces.Selectionnable;
 
 public class Fumee implements Dessinable, Selectionnable, Serializable {
 	
-	
-	//private static final long serialVersionUID = 1L;
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 	/** la position en x de depart que l'objet piste vas etre creer **/
@@ -33,8 +31,6 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 	private double pixelParMetre;
 	/** Creer la forme du carre **/
 	private Rectangle2D.Double formeAire;
-
-	//private BouleFumee bouleFumee;
 
 	/**
 	 * Methode qui permet de construire l'objet Fumee a l'aide de parametres
