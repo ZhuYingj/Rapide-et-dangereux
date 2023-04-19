@@ -481,6 +481,7 @@ public class FenetreEditeur extends JPanel {
 		panelRegroupement.getListePisteVerticale().clear();
 		panelRegroupement.getListePisteHorizontale().clear();
 		panelRegroupement.getListeBlocMystere().clear();
+		panelRegroupement.getListeFumee().clear();
 		repaint();
 
 	}
@@ -1485,6 +1486,7 @@ public class FenetreEditeur extends JPanel {
 		regroupement.setListePisteVirageGauche(panelRegroupement.getListePisteVirageGauche());
 		regroupement.setListePisteVirageHaut(panelRegroupement.getListePisteVirageHaut());
 		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
+		regroupement.setListeFumee(panelRegroupement.getListeFumee());
 
 		gestionFich.ecrireFichierBinBureauRegroupement2(regroupement, pisteCourante);
 		boolean dejaDansComboBox = false;
@@ -1527,6 +1529,7 @@ public class FenetreEditeur extends JPanel {
 		regroupement.setListePisteVirageGauche(panelRegroupement.getListePisteVirageGauche());
 		regroupement.setListePisteVirageHaut(panelRegroupement.getListePisteVirageHaut());
 		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
+		regroupement.setListeFumee(panelRegroupement.getListeFumee());
 
 		gestionFich.ecrireFichierBinBureauRegroupement(regroupement);
 		boolean dejaDansComboBox = false;
@@ -1571,6 +1574,7 @@ public class FenetreEditeur extends JPanel {
 		panelRegroupement.getListePisteHorizontale().clear();
 		panelRegroupement.getListePisteDeDepart().clear();
 		panelRegroupement.getListeBlocMystere().clear();
+		panelRegroupement.getListeFumee().clear();
 
 // Pour les accelerateurs
 
@@ -1629,6 +1633,12 @@ public class FenetreEditeur extends JPanel {
 		for (int a = 0; a < regroupementSauvegarde.getRegroupementBoiteMystere().size(); a++) {
 			panelRegroupement.getListeBlocMystere().add(regroupementSauvegarde.getRegroupementBoiteMystere().get(a));
 		}
+// Pour la fumee		
+		
+		for(int a = 0; a< regroupementSauvegarde.getListeFumee().size(); a++) {
+			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
+		}
+		
 		resetValeur();
 		repaint();
 

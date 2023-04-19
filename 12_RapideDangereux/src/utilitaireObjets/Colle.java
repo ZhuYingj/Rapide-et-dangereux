@@ -4,7 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
-import java.awt.Stroke;
+
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
@@ -65,7 +65,7 @@ public class Colle implements Dessinable {
 	public void dessiner(Graphics2D g2dcop) {
 		Graphics2D g2dcopcop = (Graphics2D) g2dcop.create();
 		AffineTransform mat = new AffineTransform();
-//		mat.scale(pixelsParMetre, pixelsParMetre);
+
 		shapeColle = mat.createTransformedShape(colle);
 		g2dcopcop.setColor(Color.ORANGE);
 

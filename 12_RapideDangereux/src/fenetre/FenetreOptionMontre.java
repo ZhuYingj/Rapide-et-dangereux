@@ -14,7 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 import application.OutilsImage;
@@ -55,7 +57,8 @@ public class FenetreOptionMontre extends JPanel {
 	private int indexCouleur2 = 0;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK};
-
+	private JTextArea txtArea;
+	
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -83,6 +86,29 @@ public class FenetreOptionMontre extends JPanel {
 		zoneApercuPiste = new ZoneApercuPiste();
 		zoneApercuPiste.setBounds(0, 0, 700, 439);
 		PanelApercu.add(zoneApercuPiste);
+
+		JPanel panelPourMessage = new JPanel();
+		panelPourMessage.setBounds(1000, 200, 549, 134);
+		add(panelPourMessage);
+		panelPourMessage.setLayout(null);
+
+		JScrollPane spPourMessage = new JScrollPane();
+		spPourMessage.setBounds(0, 0, 549, 134);
+		panelPourMessage.add(spPourMessage);
+		
+		JLabel lblTitre = new JLabel("Course Contre La Montre");
+		lblTitre.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 44));
+		lblTitre.setBounds(503, 11, 540, 70);
+		add(lblTitre);
+
+		txtArea = new JTextArea();
+		txtArea.setEditable(false);
+		txtArea.setForeground(Color.RED);
+		txtArea.setFont(new Font("Dubai", Font.PLAIN, 18));
+		txtArea.setText("Choisisez les paramètres!");
+		txtArea.setWrapStyleWord(true);
+		txtArea.setLineWrap(true);
+		spPourMessage.setViewportView(txtArea);
 
 		btnCanada = new JButton("Canada");
 		btnCanada.addMouseListener(new MouseAdapter() {
@@ -134,7 +160,7 @@ public class FenetreOptionMontre extends JPanel {
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(255, 0, 0), 2));
-		panel_1.setBounds(760, 345, 549, 297);
+		panel_1.setBounds(1000, 345, 549, 297);
 		add(panel_1);
 		panel_1.setLayout(null);
 
@@ -142,7 +168,7 @@ public class FenetreOptionMontre extends JPanel {
 		rdbtnFacile.setSelected(true);
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
 				pcs.firePropertyChange("VITESSEMAXFACILE2", null, 60.0);
 
 			}
@@ -154,7 +180,7 @@ public class FenetreOptionMontre extends JPanel {
 		rdbtnMedium = new JRadioButton("Intermédiaire");
 		rdbtnMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				txtArea.append("\nVous avez choisi la difficulter <<Intermédiaire>> ");
 				pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE2", null, 80.0);
 
 			}
@@ -166,9 +192,8 @@ public class FenetreOptionMontre extends JPanel {
 		rdbtnDifficile = new JRadioButton("Avancé");
 		rdbtnDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				txtArea.append("\nVous avez choisi la difficulter <<Avancé>> ");
 				pcs.firePropertyChange("VITESSEMAXAVANCE2", null, 100.0);
-
 			}
 		});
 		rdbtnDifficile.setBounds(165, 233, 109, 23);
@@ -249,6 +274,11 @@ public class FenetreOptionMontre extends JPanel {
 		panel_V2.setBounds(970, 232, 143, 84);
 		add(panel_V2);
 
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
+		panel_2.setBounds(917, 77, 143, 78);
+		add(panel_2);
+
 		JButton btnGauche1 = new JButton("<");
 		btnGauche1.setBounds(905, 105, 55, 23);
 		btnGauche1.addActionListener(new ActionListener() {
@@ -259,6 +289,11 @@ public class FenetreOptionMontre extends JPanel {
 			}
 		});
 		add(btnGauche1);
+
+		JButton btnGauche = new JButton("<");
+		btnGauche.setBounds(852, 105, 55, 23);
+		add(btnGauche);
+
 
 		JButton btnDroite1 = new JButton(">");
 		btnDroite1.setBounds(1123, 105, 55, 23);
@@ -293,6 +328,9 @@ public class FenetreOptionMontre extends JPanel {
 		});
 		add(btnDroite2);
 		
+		JButton btnDroite = new JButton(">");
+		btnDroite.setBounds(1070, 105, 55, 23);
+		add(btnDroite);
 
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.addActionListener(new ActionListener() {
@@ -307,7 +345,7 @@ public class FenetreOptionMontre extends JPanel {
 				pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
 			}
 		});
-		btnCommencer.setBounds(984, 653, 143, 36);
+		btnCommencer.setBounds(1225, 653, 143, 36);
 		add(btnCommencer);
 
 		lblImage = new JLabel("");
@@ -325,6 +363,7 @@ public class FenetreOptionMontre extends JPanel {
 	// Alexis Pineda-Alvarado
 	public void selectionImageCanada(MouseEvent e) {
 		if (btnCanada.contains(e.getX(), e.getY())) {
+			txtArea.append("\nVous avez choisi la piste Canada!");
 			type = TypePiste.CANADA;
 			imageActuelle = OutilsImage.lireImage("PisteCanada.png");
 			zoneApercuPiste.setImg(imageActuelle);
@@ -348,6 +387,7 @@ public class FenetreOptionMontre extends JPanel {
 	public void selectionImageMexique(MouseEvent e) {
 		if (btnMexique.contains(e.getX(), e.getY())) {
 			type = TypePiste.MEXIQUE;
+			txtArea.append("\nVous avez choisi la piste Mexique!");
 			imageActuelle = OutilsImage.lireImage("PisteMexique.png");
 			zoneApercuPiste.setImg(imageActuelle);
 			zoneApercuPiste.repaint();
@@ -370,6 +410,7 @@ public class FenetreOptionMontre extends JPanel {
 	public void selectionImageItalie(MouseEvent e) {
 		if (btnItalie.contains(e.getX(), e.getY())) {
 			type = TypePiste.ITALIE;
+			txtArea.append("\nVous avez choisi la piste Italie!");
 			imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
 			zoneApercuPiste.setImg(imageActuelle);
 			zoneApercuPiste.repaint();

@@ -3,7 +3,7 @@ package utilitaireObjets;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Ellipse2D.Double;
+
 import java.awt.geom.Rectangle2D;
 
 import geometrie.Vecteur2D;
@@ -32,6 +32,8 @@ public class DessinCollisionBouleDeNeige {
 	 * 
 	 * @param pos Position de la voiture
 	 * @param dia Diametre de la voiture
+	 * @param col Couleur de la voiture
+	 * @param cercle Forme cercle de la voiture
 	 */
 	// Kevin Nguyen
 	public DessinCollisionBouleDeNeige(Vecteur2D pos, double dia, Color col, Ellipse2D cercle) {

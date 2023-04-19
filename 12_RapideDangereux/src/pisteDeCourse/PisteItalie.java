@@ -1,14 +1,9 @@
 package pisteDeCourse;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
+
 import java.util.ArrayList;
 
-import interfaces.Dessinable;
-import interfaces.TypePiste;
-import utilitaireObjets.Accelerateur;
+
 import utilitaireObjets.PisteDeDepart;
 import utilitaireObjets.PisteHorizontale;
 import utilitaireObjets.PisteVerticale;
@@ -16,7 +11,7 @@ import utilitaireObjets.PisteVirageBas;
 import utilitaireObjets.PisteVirageDroit;
 import utilitaireObjets.PisteVirageGauche;
 import utilitaireObjets.PisteVirageHaut;
-import utilitaireObjets.Voiture;
+
 
 /**
  * Classe qui crée la piste Italie

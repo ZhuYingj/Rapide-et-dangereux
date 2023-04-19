@@ -509,10 +509,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						|| (regroupement.getObjSpecial2() != null
 								&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR
 								&& regroupement.getObjSpecial2().getTrouNoir().collisionDeLaVoiture(
-										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
-						|| (regroupement.getObjSpecial() != null
-								&& regroupement.getObjSpecial().getColle().collisionDeLaVoiture(
-										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
+										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)) {
+
+				} else if ((regroupement.getObjSpecial() != null && regroupement.getObjSpecial().getColle()
+						.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)
 						|| (regroupement.getObjSpecial2() != null
 								&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
 										regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true)) {
@@ -521,16 +521,20 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						.contient(regroupement.getListePisteDeDepart().get(0).getVoiture2().getPosition().getX(),
 								regroupement.getListePisteDeDepart().get(0).getVoiture2().getPosition().getY())) {
 
-				} else {
-					voiture2.setAccel(valeurInit);
+				}
 
+				else {
+
+					voiture2.setAccel(valeurInit);
 				}
 
 			}
 
 			repaint();
 
-			try {
+			try
+
+			{
 				Thread.sleep(tempsDuSleep);
 
 			} catch (InterruptedException e) {
@@ -809,11 +813,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			} else if ((regroupement.getObjSpecial() != null
 					&& regroupement.getObjSpecial().getColle()
 							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true
-					&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 4)
+					&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 5)
 					|| (regroupement.getObjSpecial2() != null
 							&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
 									regroupement.getListePisteDeDepart().get(0).getVoiture()) == true
-							&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 4)) {
+							&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 5)) {
 
 			}
 
@@ -862,11 +866,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			} else if ((regroupement.getObjSpecial() != null
 					&& regroupement.getObjSpecial().getColle()
 							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true
-					&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 4)
+					&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 5)
 					|| (regroupement.getObjSpecial2() != null
 							&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
 									regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true
-							&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 4)) {
+							&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 5)) {
 
 			}
 
@@ -1115,6 +1119,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.setListePisteVirageGauche(regroupementTempo.getListePisteVirageGauche());
 			regroupement.setListePisteVirageHaut(regroupementTempo.getListePisteVirageHaut());
 			regroupement.setListeAccelerateur(regroupementTempo.getListeAccelerateur());
+			regroupement.setListeFumee(regroupementTempo.getListeFumee());
 			voiture.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
 					regroupement.getListePisteDeDepart().get(0).getY()
 							+ regroupement.getListePisteDeDepart().get(0).getTaillePiste() / 4));
@@ -1143,6 +1148,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		return nombreBlocMystere;
 	}
 
+	/**
+	 * Méthode qui permet de set le nombre de bloc mystere
+	 * 
+	 * @param nombreBlocMystere le nombre voulu
+	 */
+//Tan Tommy Rin
 	public void setNombreBlocMystere(int nombreBlocMystere) {
 		this.nombreBlocMystere = nombreBlocMystere;
 		regroupement.setNombreBoiteMystere(nombreBlocMystere);
@@ -1172,7 +1183,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 
 	/**
-	 * méthode qui permet d'arreter le timer des grahique losrque la partie est terminé
+	 * méthode qui permet d'arreter le timer des grahique losrque la partie est
+	 * terminé
 	 */
 	// Ludovic Julien
 	public void arretGraphique() {
@@ -1180,34 +1192,36 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				.getNombreToursFaits()
 				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 						.getNombreToursFaits()) {
-						
+
 			FenetreJeuScientifique.getTimer().stop();
-		
+
 		}
 	}
-	
+
 	/**
-	 * méthode qui permet de récolter les information du gagnant de la course (nom,temps,piste jouer) 
+	 * méthode qui permet de récolter les information du gagnant de la course
+	 * (nom,temps,piste jouer)
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void gagnantCourse() {
 		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
 				.getNombreToursFaits()
 				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 						.getNombreToursFaits()) {
-			
-			String nomUtilisateur = JOptionPane.showInputDialog(null, "félicitation pour cette belle victoire, entrer votre nom pour le classement !");
-			
+
+			String nomUtilisateur = JOptionPane.showInputDialog(null,
+					"félicitation pour cette belle victoire, entrez votre nom pour le classement !");
+
 			if (typePiste == TypePiste.CANADA) {
 				piste = "Canada";
-			}else {
+			} else {
 				if (typePiste == TypePiste.MEXIQUE) {
 					piste = "Mexique";
-				}else {
+				} else {
 					piste = "Italie";
 				}
 			}
-			
+
 			GestionnaireDeFichiersSurLeBureau.ecrireFichier(nomUtilisateur, tempsTotalEcoule, piste);
 		}
 	}

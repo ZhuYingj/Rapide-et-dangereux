@@ -7,10 +7,10 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
-import geometrie.Vecteur2D;
+
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
-import interfaces.TypeObjetSpecial;
+
 
 /**
  * Classe permettant de gérer et créer un accélérateur

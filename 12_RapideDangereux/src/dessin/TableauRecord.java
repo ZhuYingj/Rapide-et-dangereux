@@ -22,22 +22,24 @@ import application.GestionnaireDeFichiersSurLeBureau;
 /**
  * zone qui permet d'afficher le tableau record par piste
  * 
- * @author Ludovic Julien 
+ * @author Ludovic Julien
  *
  */
 
-public class TableauRecord extends JPanel{
+public class TableauRecord extends JPanel {
 	private GestionnaireDeFichiersSurLeBureau fichierRecord;
 	private MyTableModel model;
 	
+
 	public TableauRecord() {
-        setLayout(new BorderLayout());
-        fichierRecord = new GestionnaireDeFichiersSurLeBureau();
+		setLayout(new BorderLayout());
+		fichierRecord = new GestionnaireDeFichiersSurLeBureau();
 
         // Définir le modèle de données pour le tableau
        // MyTableModel model = new MyTableModel();
         model = new MyTableModel();
        JTable table = new JTable(model);
+
 
        // Mettre à jour le modèle avec les données des fichiers
     //   updateModelWithFileData();
@@ -85,6 +87,11 @@ public class TableauRecord extends JPanel{
 //        }
 //    }
 //	
+		// Ajouter le tableau à notre JPanel
+//		JScrollPane scrollPane = new JScrollPane(table);
+//		add(scrollPane, BorderLayout.CENTER);
+//	}
+
 
     // Définir le modèle de données pour le tableau
     private class MyTableModel extends AbstractTableModel {
@@ -106,41 +113,41 @@ public class TableauRecord extends JPanel{
             };
             
             // Load data from file and update the table
-            chargerDonnees();
+           // chargerDonnees();
         }
         
-        private void chargerDonnees() {
-            // Get the path to the file
-            String cheminFichier = GestionnaireDeFichiersSurLeBureau.getBureau() + "/Desktop/donnees.txt";
-            Path fichier = Paths.get(cheminFichier);
-            
-            try {
-                // Read all lines from the file
-                List<String> lignes = Files.readAllLines(fichier, StandardCharsets.UTF_8);
-                
-                // Create a new data array with the appropriate size
-                Object[][] newData = new Object[lignes.size()][columnNames.length];
-                
-                // Parse each line and add the data to the new array
-                for (int i = 0; i < lignes.size(); i++) {
-                    String[] champs = lignes.get(i).split(";");
-                    newData[i][0] = champs[2];
-                    newData[i][1] = champs[1];
-                    newData[i][2] = champs[0];
-                  //  newData[i][3] = 1; // Set the number of times played to 1
-                  //  newData[i][4] = champs[1]; // Set the average time to the initial time
-                }
-                
-                // Replace the old data array with the new one
-                data = newData;
-                
-                // Update the table
-                fireTableDataChanged();
-                
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        private void chargerDonnees() {
+//            // Get the path to the file
+//            String cheminFichier = GestionnaireDeFichiersSurLeBureau.getBureau() + "/Desktop/donnees.txt";
+//            Path fichier = Paths.get(cheminFichier);
+//            
+//            try {
+//                // Read all lines from the file
+//                List<String> lignes = Files.readAllLines(fichier,StandardCharsets.UTF_8);
+//                
+//                // Create a new data array with the appropriate size
+//                Object[][] newData = new Object[lignes.size()][columnNames.length];
+//                
+//                // Parse each line and add the data to the new array
+//                for (int i = 0; i < lignes.size(); i++) {
+//                    String[] champs = lignes.get(i).split(";");
+//                    newData[i][0] = champs[2];
+//                    newData[i][1] = champs[1];
+//                    newData[i][2] = champs[0];
+//                  //  newData[i][3] = 1; // Set the number of times played to 1
+//                  //  newData[i][4] = champs[1]; // Set the average time to the initial time
+//                }
+//                
+//                // Replace the old data array with the new one
+//                data = newData;
+//                
+//                // Update the table
+//                fireTableDataChanged();
+//                
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
         
         private ArrayList<Object[]> donnees = new ArrayList<>();
 
@@ -149,37 +156,58 @@ public class TableauRecord extends JPanel{
             fireTableRowsInserted(donnees.size()-1, donnees.size()-1);
         }
 
-        @Override
-        public int getRowCount() {
-            return data.length;
-        }
+//	// Définir le modèle de données pour le tableau
+//	private class MyTableModel extends AbstractTableModel {
+//		private String[] columnNames = { "Piste", "Record(temps en secondes)", "Record Par",
+//				"Nb fois ou lapiste a été joué", "moyenne(temps en secondes)" };
+//		private Object[][] data = { { "Mexique", "0:00", "-", "0", "0" }, { "Canada", "0:00", "-", "0", "0" },
+//				{ "Italie", "0:00", "-", "0", "0" } };
+//
+//		@Override
+//		public int getRowCount() {
+//			return data.length;
+//		}
+//
+//		public int getColumnCount() {
+//			return columnNames.length;
+//		}
+//
+//		public Object getValueAt(int row, int col) {
+//			return data[row][col];
+//		}
+//
+//		public String getColumnName(int col) {
+//			return columnNames[col];
+//		}
+//
+//		public Class getColumnClass(int c) {
+//			return getValueAt(0, c).getClass();
+//		}
+//
+//		public void setValueAt(Object value, int row, int col) {
+//			data[row][col] = value;
+//			fireTableCellUpdated(row, col);
+//		}
+//	}
 
-        
-        public int getColumnCount() {
-            return columnNames.length;
-        }
+	@Override
+	public int getRowCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-        
-        public Object getValueAt(int row, int col) {
-            return data[row][col];
-        }
+	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-        
-        public String getColumnName(int col) {
-            return columnNames[col];
-        }
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-       
-        public Class getColumnClass(int c) {
-            return getValueAt(0, c).getClass();
-        }
-
-        
-        public void setValueAt(Object value, int row, int col) {
-            data[row][col] = value;
-            fireTableCellUpdated(row, col);
-        }
-    }
-
+}
 }
 

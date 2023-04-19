@@ -32,7 +32,7 @@ public class FenetreMenu extends JPanel {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	/**
-	 * Création de la fenetre.
+	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
 	 */
 //Ludovic Julien
 	public void addPropertyChangeListener(PropertyChangeListener listener) {

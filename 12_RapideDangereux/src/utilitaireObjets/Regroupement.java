@@ -46,6 +46,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
 	/** Liste Smoke **/
 	private ArrayList<Fumee> listeFumee = new ArrayList<Fumee>();
+
 	/** Le nombre de pixels par metre **/
 	private double pixelsParMetre = 1;
 	/** Le nombre de boite mystere **/
@@ -58,7 +59,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private ObjetSpecial objSpecial;
 	/** Notre deuxieme objet special **/
 	private ObjetSpecial objSpecial2;
-	private double nombreToursAFaire = 1;  ////////////////////////////////////
+	private double nombreToursAFaire = 1;
 
 	private double tours = 0;
 
@@ -125,6 +126,7 @@ public class Regroupement implements Dessinable, Serializable {
 	/** support pour lancer des evenements de type PropertyChange **/
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private transient Graphics2D g2d;
+	private BouleFumee smokeScreen;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -223,8 +225,10 @@ public class Regroupement implements Dessinable, Serializable {
 
 			creeBoiteDansListe();
 		}
+		fumeeFonction();
 		accelerateurFonction();
 		fonctionDesObjetsPossibles(tempsTotalEcoule, deltaT);
+
 		placerColleBonMorceauPisteVoiture1(listePisteDeDepart.get(0).getVoiture());
 		placerColleBonMorceauPisteVoiture2(listePisteDeDepart.get(0).getVoiture2());
 	}
@@ -411,13 +415,13 @@ public class Regroupement implements Dessinable, Serializable {
 				// Affecte les 2 voitures
 				if (objSpecial2.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
 
-//					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
+					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture2());
 
 				}
 
 				if (objSpecial2.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
-//					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture());
+					objSpecial2.fonctionColle(listePisteDeDepart.get(0).getVoiture());
 
 				}
 			}
@@ -456,6 +460,7 @@ public class Regroupement implements Dessinable, Serializable {
 
 				if (listePisteHorizontale.size() != 0) {
 					int nombreRandomPiste = ((int) (Math.random() * (listePisteHorizontale.size())));
+
 					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
 							new Vecteur2D(
 									listePisteHorizontale.get(nombreRandomPiste).getX() + petiteDeviation
@@ -466,7 +471,7 @@ public class Regroupement implements Dessinable, Serializable {
 				} else {
 
 					regroupementBoiteMystere
-							.add(new BlocMystere(diametreBoite, new Vecteur2D(listePisteDeDepart.get(0).getX() / 2 + 40,
+							.add(new BlocMystere(diametreBoite, new Vecteur2D(listePisteDeDepart.get(0).getX() + 65,
 									listePisteDeDepart.get(0).getY() / 2 + 40)));
 				}
 
@@ -485,9 +490,8 @@ public class Regroupement implements Dessinable, Serializable {
 											+ listePisteVerticale.get(nombreRandomPiste).getTaillePiste() / 2)));
 				} else {
 
-					regroupementBoiteMystere
-							.add(new BlocMystere(diametreBoite, new Vecteur2D(listePisteDeDepart.get(0).getX() / 2 - 30,
-									listePisteDeDepart.get(0).getY() / 2 - 30)));
+					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
+							new Vecteur2D(listePisteDeDepart.get(0).getX() + 30, listePisteDeDepart.get(0).getY())));
 				}
 
 			}
@@ -524,8 +528,9 @@ public class Regroupement implements Dessinable, Serializable {
 											+ listePisteVirageGauche.get(nombreRandomPiste).getTaillePiste() / 2)));
 				} else {
 
-					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
-							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+					regroupementBoiteMystere
+							.add(new BlocMystere(diametreBoite, new Vecteur2D(listePisteDeDepart.get(0).getX() + 65,
+									listePisteDeDepart.get(0).getY() + 65)));
 				}
 			}
 			// 15 % que ce soit dans une piste de virage bas
@@ -542,8 +547,9 @@ public class Regroupement implements Dessinable, Serializable {
 											+ listePisteVirageBas.get(nombreRandomPiste).getTaillePiste() / 2)));
 				} else {
 
-					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
-							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+					regroupementBoiteMystere
+							.add(new BlocMystere(diametreBoite, new Vecteur2D(listePisteDeDepart.get(0).getX() - 15,
+									listePisteDeDepart.get(0).getY() / 2)));
 				}
 			}
 			// 10 % que ce soit dans une piste de virage haut
@@ -560,8 +566,9 @@ public class Regroupement implements Dessinable, Serializable {
 											- listePisteVirageHaut.get(nombreRandomPiste).getTaillePiste() / 2)));
 				} else {
 
-					regroupementBoiteMystere.add(new BlocMystere(diametreBoite,
-							new Vecteur2D(listePisteDeDepart.get(0).getX() / 2, listePisteDeDepart.get(0).getY() / 2)));
+					regroupementBoiteMystere
+							.add(new BlocMystere(diametreBoite, new Vecteur2D(listePisteDeDepart.get(0).getX() - 65,
+									listePisteDeDepart.get(0).getY() / 2)));
 				}
 			}
 			petiteDeviation = petiteDeviation + 15;
@@ -577,119 +584,124 @@ public class Regroupement implements Dessinable, Serializable {
 	 */
 //Tan Tommy Rin
 	public void placerColleBonMorceauPisteVoiture2(Voiture voiture) {
-		for (int i = 0; i < listePisteHorizontale.size(); i++) {
-			listePisteHorizontale.get(i).collisionColle(voiture);
-			if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE
-					&& listePisteHorizontale.get(i).isEnContactAvecColle() && enContactAvecColle2 == false) {
-				pisteCouranteHorizontale2 = i;
-				collePisteHorizontale2 = true;
-				enContactAvecColle2 = true;
+
+		if (objSpecial2 != null) {
+			for (int i = 0; i < listePisteHorizontale.size(); i++) {
+				listePisteHorizontale.get(i).collisionColle(voiture);
+				if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE
+						&& listePisteHorizontale.get(i).isEnContactAvecColle() && enContactAvecColle2 == false) {
+					pisteCouranteHorizontale2 = i;
+					collePisteHorizontale2 = true;
+					enContactAvecColle2 = true;
+				}
+
+			}
+			if (collePisteHorizontale2 == true) {
+
+				objSpecial2.setPositionObjet(
+						new Vecteur2D(listePisteHorizontale.get(pisteCouranteHorizontale2).getFormeAire().getX(),
+								listePisteHorizontale.get(pisteCouranteHorizontale2).getFormeAire().getY()));
+
 			}
 
-		}
-		if (collePisteHorizontale2 == true) {
-
-			objSpecial2.setPositionObjet(
-					new Vecteur2D(listePisteHorizontale.get(pisteCouranteHorizontale2).getFormeAire().getX(),
-							listePisteHorizontale.get(pisteCouranteHorizontale2).getFormeAire().getY()));
-
-		}
-
-		for (int i = 0; i < listePisteVerticale.size(); i++) {
-			listePisteVerticale.get(i).collisionColle(voiture);
-			if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE
-					&& listePisteVerticale.get(i).isEnContactAvecColle() == true && enContactAvecColle2 == false) {
-				pisteCouranteVerticale2 = i;
-				collePisteVerticale2 = true;
-				enContactAvecColle2 = true;
+			for (int i = 0; i < listePisteVerticale.size(); i++) {
+				listePisteVerticale.get(i).collisionColle(voiture);
+				if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE
+						&& listePisteVerticale.get(i).isEnContactAvecColle() == true && enContactAvecColle2 == false) {
+					pisteCouranteVerticale2 = i;
+					collePisteVerticale2 = true;
+					enContactAvecColle2 = true;
+				}
 			}
-		}
-		if (collePisteVerticale2 == true) {
+			if (collePisteVerticale2 == true) {
 
-			objSpecial2.setPositionObjet(
-					new Vecteur2D(listePisteVerticale.get(pisteCouranteVerticale2).getFormeAire().getX(),
-							listePisteVerticale.get(pisteCouranteVerticale2).getFormeAire().getY()));
+				objSpecial2.setPositionObjet(
+						new Vecteur2D(listePisteVerticale.get(pisteCouranteVerticale2).getFormeAire().getX(),
+								listePisteVerticale.get(pisteCouranteVerticale2).getFormeAire().getY()));
 
-		}
-		for (int i = 0; i < listePisteVirageBas.size(); i++) {
-			listePisteVirageBas.get(i).collisionColle(voiture);
+			}
+			for (int i = 0; i < listePisteVirageBas.size(); i++) {
+				listePisteVirageBas.get(i).collisionColle(voiture);
+				if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE
+						&& enContactAvecColle2 == false && listePisteVirageBas.get(i).isEnContactAvecColle() == true) {
+					pisteCouranteVirageBas2 = i;
+					collePisteVirageBas2 = true;
+					enContactAvecColle2 = true;
+				}
+			}
+
+			if (collePisteVirageBas2 == true) {
+
+				objSpecial2.setPositionObjet(
+						new Vecteur2D(listePisteVirageBas.get(pisteCouranteVirageBas2).getFormeAire().getX(),
+								listePisteVirageBas.get(pisteCouranteVirageBas2).getFormeAire().getY()));
+
+			}
+			for (int i = 0; i < listePisteVirageGauche.size(); i++) {
+				listePisteVirageGauche.get(i).collisionColle(voiture);
+				if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE
+						&& enContactAvecColle2 == false
+						&& listePisteVirageGauche.get(i).isEnContactAvecColle() == true) {
+					pisteCouranteVirageGauche2 = i;
+					collePisteVirageGauche2 = true;
+					enContactAvecColle2 = true;
+				}
+			}
+			if (collePisteVirageGauche2 == true) {
+
+				objSpecial2.setPositionObjet(
+						new Vecteur2D(listePisteVirageGauche.get(pisteCouranteVirageGauche2).getFormeAire().getX(),
+								listePisteVirageGauche.get(pisteCouranteVirageGauche2).getFormeAire().getY()));
+
+			}
+
+			for (int i = 0; i < listePisteVirageDroit.size(); i++) {
+				listePisteVirageDroit.get(i).collisionColle(voiture);
+				if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE
+						&& enContactAvecColle2 == false
+						&& listePisteVirageDroit.get(i).isEnContactAvecColle() == true) {
+					pisteCouranteVirageDroit2 = i;
+					collePisteVirageDroit2 = true;
+					enContactAvecColle2 = true;
+				}
+			}
+			if (collePisteVirageDroit2 == true) {
+
+				objSpecial2.setPositionObjet(
+						new Vecteur2D(listePisteVirageDroit.get(pisteCouranteVirageDroit2).getFormeAire().getX(),
+								listePisteVirageDroit.get(pisteCouranteVirageDroit2).getFormeAire().getY()));
+
+			}
+			for (int i = 0; i < listePisteVirageHaut.size(); i++) {
+				listePisteVirageHaut.get(i).collisionColle(voiture);
+				if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE
+						&& enContactAvecColle2 == false && listePisteVirageHaut.get(i).isEnContactAvecColle() == true) {
+					pisteCouranteVirageHaut2 = i;
+					collePisteVirageHaut2 = true;
+					enContactAvecColle2 = true;
+				}
+			}
+			if (collePisteVirageHaut2 == true) {
+
+				objSpecial2.setPositionObjet(
+						new Vecteur2D(listePisteVirageHaut.get(pisteCouranteVirageHaut2).getFormeAire().getX(),
+								listePisteVirageHaut.get(pisteCouranteVirageHaut2).getFormeAire().getY()));
+
+			}
+			listePisteDeDepart.get(0).collisionColle(voiture);
 			if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE && enContactAvecColle2 == false
-					&& listePisteVirageBas.get(i).isEnContactAvecColle() == true) {
-				pisteCouranteVirageBas2 = i;
-				collePisteVirageBas2 = true;
+					&& listePisteDeDepart.get(0).isEnContactAvecColle() == true) {
+
 				enContactAvecColle2 = true;
+				collePisteDepart2 = true;
 			}
-		}
+			if (collePisteDepart2 == true) {
+				if (objSpecial2 != null) {
+					objSpecial2.setPositionObjet(new Vecteur2D(listePisteDeDepart.get(0).getFormeAire().getX(),
+							listePisteDeDepart.get(0).getFormeAire().getY()));
+				}
 
-		if (collePisteVirageBas2 == true) {
-
-			objSpecial2.setPositionObjet(
-					new Vecteur2D(listePisteVirageBas.get(pisteCouranteVirageBas2).getFormeAire().getX(),
-							listePisteVirageBas.get(pisteCouranteVirageBas2).getFormeAire().getY()));
-
-		}
-		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
-			listePisteVirageGauche.get(i).collisionColle(voiture);
-			if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE && enContactAvecColle2 == false
-					&& listePisteVirageGauche.get(i).isEnContactAvecColle() == true) {
-				pisteCouranteVirageGauche2 = i;
-				collePisteVirageGauche2 = true;
-				enContactAvecColle2 = true;
 			}
-		}
-		if (collePisteVirageGauche2 == true) {
-
-			objSpecial2.setPositionObjet(
-					new Vecteur2D(listePisteVirageGauche.get(pisteCouranteVirageGauche2).getFormeAire().getX(),
-							listePisteVirageGauche.get(pisteCouranteVirageGauche2).getFormeAire().getY()));
-
-		}
-
-		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
-			listePisteVirageDroit.get(i).collisionColle(voiture);
-			if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE && enContactAvecColle2 == false
-					&& listePisteVirageDroit.get(i).isEnContactAvecColle() == true) {
-				pisteCouranteVirageDroit2 = i;
-				collePisteVirageDroit2 = true;
-				enContactAvecColle2 = true;
-			}
-		}
-		if (collePisteVirageDroit2 == true) {
-
-			objSpecial2.setPositionObjet(
-					new Vecteur2D(listePisteVirageDroit.get(pisteCouranteVirageDroit2).getFormeAire().getX(),
-							listePisteVirageDroit.get(pisteCouranteVirageDroit2).getFormeAire().getY()));
-
-		}
-		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
-			listePisteVirageHaut.get(i).collisionColle(voiture);
-			if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE && enContactAvecColle2 == false
-					&& listePisteVirageHaut.get(i).isEnContactAvecColle() == true) {
-				pisteCouranteVirageHaut2 = i;
-				collePisteVirageHaut2 = true;
-				enContactAvecColle2 = true;
-			}
-		}
-		if (collePisteVirageHaut2 == true) {
-
-			objSpecial2.setPositionObjet(
-					new Vecteur2D(listePisteVirageHaut.get(pisteCouranteVirageHaut2).getFormeAire().getX(),
-							listePisteVirageHaut.get(pisteCouranteVirageHaut2).getFormeAire().getY()));
-
-		}
-		listePisteDeDepart.get(0).collisionColle(voiture);
-		if (objSpecial2 != null && objSpecial2.getType() == TypeObjetSpecial.COLLE && enContactAvecColle2 == false
-				&& listePisteDeDepart.get(0).isEnContactAvecColle() == true) {
-
-			enContactAvecColle2 = true;
-			collePisteDepart2 = true;
-		}
-		if (collePisteDepart2 == true) {
-			if (objSpecial2 != null) {
-				objSpecial2.setPositionObjet(new Vecteur2D(listePisteDeDepart.get(0).getFormeAire().getX(),
-						listePisteDeDepart.get(0).getFormeAire().getY()));
-			}
-
 		}
 	}
 
@@ -701,117 +713,120 @@ public class Regroupement implements Dessinable, Serializable {
 //Tan Tommy Rin
 	public void placerColleBonMorceauPisteVoiture1(Voiture voiture) {
 
-		for (int i = 0; i < listePisteHorizontale.size(); i++) {
-			listePisteHorizontale.get(i).collisionColle(voiture);
-			if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE
-					&& listePisteHorizontale.get(i).isEnContactAvecColle() && enContactAvecColle == false) {
-				pisteCouranteHorizontale = i;
-				collePisteHorizontale = true;
-				enContactAvecColle = true;
+		if (objSpecial != null) {
+
+			for (int i = 0; i < listePisteHorizontale.size(); i++) {
+				listePisteHorizontale.get(i).collisionColle(voiture);
+				if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE
+						&& listePisteHorizontale.get(i).isEnContactAvecColle() && enContactAvecColle == false) {
+					pisteCouranteHorizontale = i;
+					collePisteHorizontale = true;
+					enContactAvecColle = true;
+				}
+
+			}
+			if (collePisteHorizontale == true) {
+
+				objSpecial.setPositionObjet(
+						new Vecteur2D(listePisteHorizontale.get(pisteCouranteHorizontale).getFormeAire().getX(),
+								listePisteHorizontale.get(pisteCouranteHorizontale).getFormeAire().getY()));
+
 			}
 
-		}
-		if (collePisteHorizontale == true) {
-
-			objSpecial.setPositionObjet(
-					new Vecteur2D(listePisteHorizontale.get(pisteCouranteHorizontale).getFormeAire().getX(),
-							listePisteHorizontale.get(pisteCouranteHorizontale).getFormeAire().getY()));
-
-		}
-
-		for (int i = 0; i < listePisteVerticale.size(); i++) {
-			listePisteVerticale.get(i).collisionColle(voiture);
-			if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE
-					&& listePisteVerticale.get(i).isEnContactAvecColle() == true && enContactAvecColle == false) {
-				pisteCouranteVerticale = i;
-				collePisteVerticale = true;
-				enContactAvecColle = true;
+			for (int i = 0; i < listePisteVerticale.size(); i++) {
+				listePisteVerticale.get(i).collisionColle(voiture);
+				if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE
+						&& listePisteVerticale.get(i).isEnContactAvecColle() == true && enContactAvecColle == false) {
+					pisteCouranteVerticale = i;
+					collePisteVerticale = true;
+					enContactAvecColle = true;
+				}
 			}
-		}
-		if (collePisteVerticale == true) {
+			if (collePisteVerticale == true) {
 
-			objSpecial.setPositionObjet(
-					new Vecteur2D(listePisteVerticale.get(pisteCouranteVerticale).getFormeAire().getX(),
-							listePisteVerticale.get(pisteCouranteVerticale).getFormeAire().getY()));
+				objSpecial.setPositionObjet(
+						new Vecteur2D(listePisteVerticale.get(pisteCouranteVerticale).getFormeAire().getX(),
+								listePisteVerticale.get(pisteCouranteVerticale).getFormeAire().getY()));
 
-		}
-		for (int i = 0; i < listePisteVirageBas.size(); i++) {
-			listePisteVirageBas.get(i).collisionColle(voiture);
+			}
+			for (int i = 0; i < listePisteVirageBas.size(); i++) {
+				listePisteVirageBas.get(i).collisionColle(voiture);
+				if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE && enContactAvecColle == false
+						&& listePisteVirageBas.get(i).isEnContactAvecColle() == true) {
+					pisteCouranteVirageBas = i;
+					collePisteVirageBas = true;
+					enContactAvecColle = true;
+				}
+			}
+
+			if (collePisteVirageBas == true) {
+
+				objSpecial.setPositionObjet(
+						new Vecteur2D(listePisteVirageBas.get(pisteCouranteVirageBas).getFormeAire().getX(),
+								listePisteVirageBas.get(pisteCouranteVirageBas).getFormeAire().getY()));
+
+			}
+			for (int i = 0; i < listePisteVirageGauche.size(); i++) {
+				listePisteVirageGauche.get(i).collisionColle(voiture);
+				if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE && enContactAvecColle == false
+						&& listePisteVirageGauche.get(i).isEnContactAvecColle() == true) {
+					pisteCouranteVirageGauche = i;
+					collePisteVirageGauche = true;
+					enContactAvecColle = true;
+				}
+			}
+			if (collePisteVirageGauche == true) {
+
+				objSpecial.setPositionObjet(
+						new Vecteur2D(listePisteVirageGauche.get(pisteCouranteVirageGauche).getFormeAire().getX(),
+								listePisteVirageGauche.get(pisteCouranteVirageGauche).getFormeAire().getY()));
+
+			}
+
+			for (int i = 0; i < listePisteVirageDroit.size(); i++) {
+				listePisteVirageDroit.get(i).collisionColle(voiture);
+				if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE && enContactAvecColle == false
+						&& listePisteVirageDroit.get(i).isEnContactAvecColle() == true) {
+					pisteCouranteVirageDroit = i;
+					collePisteVirageDroit = true;
+					enContactAvecColle = true;
+				}
+			}
+			if (collePisteVirageDroit == true) {
+
+				objSpecial.setPositionObjet(
+						new Vecteur2D(listePisteVirageDroit.get(pisteCouranteVirageDroit).getFormeAire().getX(),
+								listePisteVirageDroit.get(pisteCouranteVirageDroit).getFormeAire().getY()));
+
+			}
+			for (int i = 0; i < listePisteVirageHaut.size(); i++) {
+				listePisteVirageHaut.get(i).collisionColle(voiture);
+				if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE && enContactAvecColle == false
+						&& listePisteVirageHaut.get(i).isEnContactAvecColle() == true) {
+					pisteCouranteVirageHaut = i;
+					collePisteVirageHaut = true;
+					enContactAvecColle = true;
+				}
+			}
+			if (collePisteVirageHaut == true) {
+
+				objSpecial.setPositionObjet(
+						new Vecteur2D(listePisteVirageHaut.get(pisteCouranteVirageHaut).getFormeAire().getX(),
+								listePisteVirageHaut.get(pisteCouranteVirageHaut).getFormeAire().getY()));
+
+			}
+			listePisteDeDepart.get(0).collisionColle(voiture);
 			if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE && enContactAvecColle == false
-					&& listePisteVirageBas.get(i).isEnContactAvecColle() == true) {
-				pisteCouranteVirageBas = i;
-				collePisteVirageBas = true;
+					&& listePisteDeDepart.get(0).isEnContactAvecColle() == true) {
+
 				enContactAvecColle = true;
+				collePisteDepart = true;
 			}
-		}
+			if (collePisteDepart == true) {
 
-		if (collePisteVirageBas == true) {
-
-			objSpecial.setPositionObjet(
-					new Vecteur2D(listePisteVirageBas.get(pisteCouranteVirageBas).getFormeAire().getX(),
-							listePisteVirageBas.get(pisteCouranteVirageBas).getFormeAire().getY()));
-
-		}
-		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
-			listePisteVirageGauche.get(i).collisionColle(voiture);
-			if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE && enContactAvecColle == false
-					&& listePisteVirageGauche.get(i).isEnContactAvecColle() == true) {
-				pisteCouranteVirageGauche = i;
-				collePisteVirageGauche = true;
-				enContactAvecColle = true;
+				objSpecial.setPositionObjet(new Vecteur2D(listePisteDeDepart.get(0).getFormeAire().getX(),
+						listePisteDeDepart.get(0).getFormeAire().getY()));
 			}
-		}
-		if (collePisteVirageGauche == true) {
-
-			objSpecial.setPositionObjet(
-					new Vecteur2D(listePisteVirageGauche.get(pisteCouranteVirageGauche).getFormeAire().getX(),
-							listePisteVirageGauche.get(pisteCouranteVirageGauche).getFormeAire().getY()));
-
-		}
-
-		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
-			listePisteVirageDroit.get(i).collisionColle(voiture);
-			if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE && enContactAvecColle == false
-					&& listePisteVirageDroit.get(i).isEnContactAvecColle() == true) {
-				pisteCouranteVirageDroit = i;
-				collePisteVirageDroit = true;
-				enContactAvecColle = true;
-			}
-		}
-		if (collePisteVirageDroit == true) {
-
-			objSpecial.setPositionObjet(
-					new Vecteur2D(listePisteVirageDroit.get(pisteCouranteVirageDroit).getFormeAire().getX(),
-							listePisteVirageDroit.get(pisteCouranteVirageDroit).getFormeAire().getY()));
-
-		}
-		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
-			listePisteVirageHaut.get(i).collisionColle(voiture);
-			if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE && enContactAvecColle == false
-					&& listePisteVirageHaut.get(i).isEnContactAvecColle() == true) {
-				pisteCouranteVirageHaut = i;
-				collePisteVirageHaut = true;
-				enContactAvecColle = true;
-			}
-		}
-		if (collePisteVirageHaut == true) {
-
-			objSpecial.setPositionObjet(
-					new Vecteur2D(listePisteVirageHaut.get(pisteCouranteVirageHaut).getFormeAire().getX(),
-							listePisteVirageHaut.get(pisteCouranteVirageHaut).getFormeAire().getY()));
-
-		}
-		listePisteDeDepart.get(0).collisionColle(voiture);
-		if (objSpecial != null && objSpecial.getType() == TypeObjetSpecial.COLLE && enContactAvecColle == false
-				&& listePisteDeDepart.get(0).isEnContactAvecColle() == true) {
-
-			enContactAvecColle = true;
-			collePisteDepart = true;
-		}
-		if (collePisteDepart == true) {
-
-			objSpecial.setPositionObjet(new Vecteur2D(listePisteDeDepart.get(0).getFormeAire().getX(),
-					listePisteDeDepart.get(0).getFormeAire().getY()));
 		}
 	}
 
@@ -923,14 +938,24 @@ public class Regroupement implements Dessinable, Serializable {
 		g2dCopie.setStroke(new BasicStroke(5));
 
 		g2dCopie.setColor(Color.WHITE);
-		g2dCopie.drawString("Voiture1",
-				(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getX()
-						- listePisteDeDepart.get(0).getVoiture().getDiametre() / 2),
-				(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getY()));
-		g2dCopie.drawString("Voiture2",
-				(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getX()
-						- listePisteDeDepart.get(0).getVoiture2().getDiametre() / 2),
-				(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
+		if (listeFumee.size() != 0) {
+			if (!listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
+				g2dCopie.drawString("Voiture1",
+						(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getX()
+								- listePisteDeDepart.get(0).getVoiture().getDiametre() / 2),
+						(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getY()));
+
+			}
+			if (!listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture2().getPosition().getY())) {
+				g2dCopie.drawString("Voiture2",
+						(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getX()
+								- listePisteDeDepart.get(0).getVoiture2().getDiametre() / 2),
+						(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
+			}
+		}
+
 	}
 
 	/**
@@ -955,7 +980,7 @@ public class Regroupement implements Dessinable, Serializable {
 			snowball.dessiner(g2d);
 		}
 	}
-
+	
 	/**
 	 * Méthode qui permet d'appliquer la fonction de l'accelerateur sur les 2
 	 * voitures lorsqu'ils sont en contact avec celui-ci.
@@ -993,6 +1018,35 @@ public class Regroupement implements Dessinable, Serializable {
 	}
 
 	/**
+	 * Methode qui permet de set le diametre des deux voitures à 0 lorsqu'ils sont
+	 * dans la boite de fumee et le remmet au diametre diametre initial lorsqu'ils
+	 * ne sont plus dans la boite a fumee
+	 */
+	// Alexis Pineda-Alvarado
+	private void fumeeFonction() {
+		if (listeFumee.size() != 0) {
+			// Voiture 1
+			if (listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
+
+				listePisteDeDepart.get(0).getVoiture().setDiametre(0);
+			} else {
+				listePisteDeDepart.get(0).getVoiture()
+						.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
+			}
+			// Voiture 2
+			if (listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture2().getPosition().getY())) {
+
+				listePisteDeDepart.get(0).getVoiture2().setDiametre(0);
+			} else {
+				listePisteDeDepart.get(0).getVoiture2()
+						.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
+			}
+		}
+	}
+
+	/**
 	 * Gérer les collisions avec chaque morceau de piste
 	 * 
 	 * @param voiture La voiture controllée
@@ -1006,23 +1060,12 @@ public class Regroupement implements Dessinable, Serializable {
 			listePisteHorizontale.get(i).traverserPiste(voiture);
 			collisionBouleDeNeigeAvecPisteHorizontale(i);
 
-			if (listePisteHorizontale.get(i).isCollision() == true) {
-				listePisteHorizontale.get(i).setColor(Color.blue);
-			} else {
-				listePisteHorizontale.get(i).setColor(Color.black);
-			}
-
 		}
 
 		for (int i = 0; i < listePisteVerticale.size(); i++) {
 			listePisteVerticale.get(i).enCollisionAvec(voiture);
 			listePisteVerticale.get(i).traverserPiste(voiture);
 			collisionBouleDeNeigeAvecPisteVerticale(i);
-			if (listePisteVerticale.get(i).isCollision() == true) {
-				listePisteVerticale.get(i).setColor(Color.blue);
-			} else {
-				listePisteVerticale.get(i).setColor(Color.black);
-			}
 
 		}
 
@@ -1030,22 +1073,13 @@ public class Regroupement implements Dessinable, Serializable {
 			listePisteVirageBas.get(i).enCollisionAvec(voiture);
 			listePisteVirageBas.get(i).traverserPiste(voiture);
 			collisionBouleDeNeigeAvecPisteVirageBas(i);
-			if (listePisteVirageBas.get(i).isCollision() == true) {
-				listePisteVirageBas.get(i).setColor(Color.blue);
-			} else {
-				listePisteVirageBas.get(i).setColor(Color.black);
-			}
+
 		}
 
 		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
 			listePisteVirageGauche.get(i).enCollisionAvec(voiture);
 			listePisteVirageGauche.get(i).traverserPiste(voiture);
 			collisionBouleDeNeigeAvecPisteVirageGauche(i);
-			if (listePisteVirageGauche.get(i).isCollision() == true) {
-				listePisteVirageGauche.get(i).setColor(Color.blue);
-			} else {
-				listePisteVirageGauche.get(i).setColor(Color.black);
-			}
 
 		}
 
@@ -1053,11 +1087,6 @@ public class Regroupement implements Dessinable, Serializable {
 			listePisteVirageDroit.get(i).enCollisionAvec(voiture);
 			listePisteVirageDroit.get(i).traverserPiste(voiture);
 			collisionBouleDeNeigeAvecPisteVirageDroit(i);
-			if (listePisteVirageDroit.get(i).isCollision() == true) {
-				listePisteVirageDroit.get(i).setColor(Color.blue);
-			} else {
-				listePisteVirageDroit.get(i).setColor(Color.black);
-			}
 
 		}
 
@@ -1065,23 +1094,12 @@ public class Regroupement implements Dessinable, Serializable {
 			listePisteVirageHaut.get(i).enCollisionAvec(voiture);
 			listePisteVirageHaut.get(i).traverserPiste(voiture);
 			collisionBouleDeNeigeAvecPisteVirageHaut(i);
-			if (listePisteVirageHaut.get(i).isCollision() == true) {
-				listePisteVirageHaut.get(i).setColor(Color.blue);
-			} else {
-				listePisteVirageHaut.get(i).setColor(Color.black);
-			}
 
 		}
 
 		listePisteDeDepart.get(0).enCollisionAvec(voiture);
 		listePisteDeDepart.get(0).traverserPiste(voiture);
 		collisionBouleDeNeigeAvecPisteDeDepart(0);
-
-		if (listePisteDeDepart.get(0).isCollision() == true) {
-			listePisteDeDepart.get(0).setColor(Color.blue);
-		} else {
-			listePisteDeDepart.get(0).setColor(Color.black);
-		}
 
 		tourComplet(voiture);
 	}
@@ -1364,37 +1382,35 @@ public class Regroupement implements Dessinable, Serializable {
 
 		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
 			listePisteVirageDroit.get(i).setCollision(false);
-			listePisteVirageDroit.get(i).setColor(Color.black);
 
 		}
 		for (int i = 0; i < listePisteDeDepart.size(); i++) {
 			listePisteDeDepart.get(i).setCollision(false);
-			listePisteDeDepart.get(i).setColor(Color.black);
+
 		}
 
 		for (int i = 0; i < listePisteHorizontale.size(); i++) {
 			listePisteHorizontale.get(i).setCollision(false);
-			listePisteHorizontale.get(i).setColor(Color.black);
 
 		}
 		for (int i = 0; i < listePisteVerticale.size(); i++) {
 			listePisteVerticale.get(i).setCollision(false);
-			listePisteVerticale.get(i).setColor(Color.black);
+
 		}
 
 		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
 			listePisteVirageGauche.get(i).setCollision(false);
-			listePisteVirageGauche.get(i).setColor(Color.black);
+
 		}
 
 		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
 			listePisteVirageHaut.get(i).setCollision(false);
-			listePisteVirageHaut.get(i).setColor(Color.black);
+
 		}
 
 		for (int i = 0; i < listePisteVirageBas.size(); i++) {
 			listePisteVirageBas.get(i).setCollision(false);
-			listePisteVirageBas.get(i).setColor(Color.black);
+
 		}
 
 	}
@@ -1502,6 +1518,14 @@ public class Regroupement implements Dessinable, Serializable {
 
 	public void setListeAccelerateur(ArrayList<Accelerateur> listeAccelerateur) {
 		this.listeAccelerateur = listeAccelerateur;
+	}
+
+	public ArrayList<Fumee> getListeFumee() {
+		return listeFumee;
+	}
+
+	public void setListeFumee(ArrayList<Fumee> listeFumee) {
+		this.listeFumee = listeFumee;
 	}
 
 	public ObjetSpecial getObjSpecial() {

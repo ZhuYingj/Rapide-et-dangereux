@@ -40,6 +40,7 @@ public class ZoneApercuPiste extends JPanel {
 	 * 
 	 */
 	// Ludovic Julien
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;

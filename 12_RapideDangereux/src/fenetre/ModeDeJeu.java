@@ -41,7 +41,7 @@ public class ModeDeJeu extends JPanel {
 	private JLabel lblNewLabel;
 
 	/**
-	 * Création de la fenetre
+	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
 	 */
 //	Alexis Pineda-Alvarado
 	public void addPropertyChangeListener(PropertyChangeListener listener) {

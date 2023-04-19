@@ -4,14 +4,14 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
-import java.awt.geom.Area;
+
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
-import interfaces.TypeObjetSpecial;
+
 import physique.MoteurPhysique;
 
 /**
@@ -144,7 +144,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 								Math.toDegrees(voiture.getAngle()) + (360 - (Math.toDegrees(voiture.getAngle()) * 2)));
 					}
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}
 			}
