@@ -267,21 +267,21 @@ public class FenetreOptionMontre extends JPanel {
 
 		JPanel panel_V1 = new JPanel();
 		panel_V1.setBackground(Color.YELLOW);
-		panel_V1.setBounds(970, 77, 143, 84);
+		panel_V1.setBounds(1044, 77, 143, 90);
 		add(panel_V1);
 		
 		JPanel panel_V2 = new JPanel();
 		panel_V2.setBackground(Color.CYAN);
-		panel_V2.setBounds(970, 232, 143, 84);
+		panel_V2.setBounds(1330, 77, 143, 90);
 		add(panel_V2);
 
 		JButton btnGauche1 = new JButton("<");
-		btnGauche1.setBounds(905, 105, 55, 23);
+		btnGauche1.setBounds(979, 106, 55, 23);
 		btnGauche1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(1,0);
-				setBackground(panel_V1);
+				setBackgroundV1(panel_V1);
 			}
 		});
 		add(btnGauche1);
@@ -289,33 +289,33 @@ public class FenetreOptionMontre extends JPanel {
 
 
 		JButton btnDroite1 = new JButton(">");
-		btnDroite1.setBounds(1123, 105, 55, 23);
+		btnDroite1.setBounds(1197, 106, 55, 23);
 		btnDroite1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changementImage(1,1);
-				setBackground(panel_V1);
+				setBackgroundV1(panel_V1);
 		}
 		});
 		add(btnDroite1);
 		
 		JButton btnGauche2 = new JButton("<");
-		btnGauche2.setBounds(905, 260, 55, 23);
+		btnGauche2.setBounds(1262, 106, 55, 23);
 		btnGauche2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0,0);
-				setBackground(panel_V2);
+				setBackgroundV2(panel_V2);
 			}
 		});
 		add(btnGauche2);
 		
 		JButton btnDroite2 = new JButton(">");
-		btnDroite2.setBounds(1123, 260, 55, 23);
+		btnDroite2.setBounds(1483, 106, 55, 23);
 		btnDroite2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0,1);
-				setBackground(panel_V2);
+				setBackgroundV2(panel_V2);
 			}
 		});
 		add(btnDroite2);
@@ -460,10 +460,20 @@ public class FenetreOptionMontre extends JPanel {
 	/**
 	 * méthode qui change la couleur du panel pour permettre de visualiser la couleur choisit par l'utilisateur
 	 * 
-	 * @param panel		panel a changer la couleur pour la voiture 1 ou 2
+	 * @param panel		panel a changer la couleur pour la voiture 1 
 	 */
 	//Ludovic Julien
-	public void setBackground(JPanel panel) {
+	public void setBackgroundV1(JPanel panel) {
 		panel.setBackground(couleurs[indexCouleur]);
+	}
+	
+	/**
+	 * méthode qui change la couleur du panel pour permettre de visualiser la couleur choisit par l'utilisateur
+	 * 
+	 * @param panel		panel a changer la couleur pour la voiture 2
+	 */
+	//Ludovic Julien
+	public void setBackgroundV2(JPanel panel) {
+		panel.setBackground(couleurs2[indexCouleur2]);
 	}
 }
