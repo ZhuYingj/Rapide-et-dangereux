@@ -2,6 +2,7 @@ package fenetre;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
@@ -18,7 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import application.GestionnaireDeFichiersSurLeBureau;
+import application.OutilsImage;
 import geometrie.Vecteur2D;
+import interfaces.TypeObjetSpecial;
 import interfaces.TypePiste;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BlocMystere;
@@ -48,11 +51,9 @@ public class FenetreEditeur extends JPanel {
 	private PanelRegroupement panelRegroupement;
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
 	private String pisteCourante = "Piste1.dat";
-
 	private JButton btnSauvegarde;
 	private JButton btnJouer;
 	private JButton btnRetour;
-	private JButton btnAjouterPisteDeDepart;
 	private JComboBox<String> comboBoxPiste;
 
 	private Regroupement regroupementSauvegarde;
@@ -98,6 +99,10 @@ public class FenetreEditeur extends JPanel {
 		panelRegroupement.setBounds(224, 97, 769, 400);
 		add(panelRegroupement);
 		panelRegroupement.setLayout(null);
+		if (panelRegroupement.getListePisteDeDepart().size() == 0) {
+			PisteDeDepart pisteDeDepart = new PisteDeDepart(320, 160);
+			panelRegroupement.getListePisteDeDepart().add(pisteDeDepart);
+		}
 
 		JLabel lblTextEditeur = new JLabel("MODE ÉDITEUR");
 		lblTextEditeur.setForeground(new Color(255, 255, 255));
@@ -204,15 +209,6 @@ public class FenetreEditeur extends JPanel {
 		btnSupprimerPisteVirageGauche.setBounds(265, 389, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageGauche);
 
-		btnAjouterPisteDeDepart = new JButton("+");
-		btnAjouterPisteDeDepart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ajouterPisteDepart();
-			}
-		});
-		btnAjouterPisteDeDepart.setBounds(225, 107, 41, 23);
-		panelObjet.add(btnAjouterPisteDeDepart);
-
 		JButton btnAjouterPisteVerticale = new JButton("+");
 		btnAjouterPisteVerticale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -230,15 +226,6 @@ public class FenetreEditeur extends JPanel {
 		});
 		btnSupprimerPisteVerticale.setBounds(265, 245, 41, 23);
 		panelObjet.add(btnSupprimerPisteVerticale);
-
-		JButton btnSupprimerPisteDeDepart = new JButton("-");
-		btnSupprimerPisteDeDepart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				supprimerPisteDepart();
-			}
-		});
-		btnSupprimerPisteDeDepart.setBounds(265, 107, 41, 23);
-		panelObjet.add(btnSupprimerPisteDeDepart);
 
 		JButton btnAjouterPisteVirageDroite = new JButton("+");
 		btnAjouterPisteVirageDroite.addActionListener(new ActionListener() {
@@ -398,7 +385,6 @@ public class FenetreEditeur extends JPanel {
 
 		btnSauvegarde = new JButton("SAUVEGARDER LA PISTE");
 		btnSauvegarde.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
-		btnSauvegarde.setEnabled(false);
 		btnSauvegarde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sauvegarde();
@@ -425,7 +411,6 @@ public class FenetreEditeur extends JPanel {
 
 		btnJouer = new JButton("JOUER");
 		btnJouer.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
-		btnJouer.setEnabled(false);
 		btnJouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jouer();
@@ -459,7 +444,12 @@ public class FenetreEditeur extends JPanel {
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
-
+		
+		Image background = OutilsImage.lireImageEtRedimensionner("BackgroundEdition.jpg", 1600, 800);
+		if (background != null) {
+			lblImage.setIcon(new ImageIcon(background));
+			background.flush();
+		}
 
 	}
 
@@ -583,22 +573,6 @@ public class FenetreEditeur extends JPanel {
 	}
 
 	/**
-	 * Méthode qui permet d'ajouter une piste de depart
-	 */
-	// Tan Tommy Rin
-	public void ajouterPisteDepart() {
-		if (panelRegroupement.getListePisteDeDepart().size() == 0) {
-			PisteDeDepart pisteDeDepart = new PisteDeDepart(650, 150);
-			panelRegroupement.getListePisteDeDepart().add(pisteDeDepart);
-			btnAjouterPisteDeDepart.setEnabled(false);
-			btnSauvegarde.setEnabled(true);
-		} else {
-			btnSauvegarde.setEnabled(false);
-		}
-		repaint();
-	}
-
-	/**
 	 * Méthode qui permet d'ajouter une piste verticale
 	 */
 	// Tan Tommy Rin
@@ -615,19 +589,6 @@ public class FenetreEditeur extends JPanel {
 	public void supprimerPisteVerticale() {
 		if (panelRegroupement.getListePisteVerticale().size() != 0) {
 			panelRegroupement.getListePisteVerticale().remove(panelRegroupement.getListePisteVerticale().size() - 1);
-			repaint();
-		}
-	}
-
-	/**
-	 * Méthode qui permet de supprimer une piste de depart
-	 */
-	// Tan Tommy Rin
-	public void supprimerPisteDepart() {
-		if (panelRegroupement.getListePisteDeDepart().size() != 0) {
-			panelRegroupement.getListePisteDeDepart().remove(panelRegroupement.getListePisteDeDepart().size() - 1);
-			btnAjouterPisteDeDepart.setEnabled(true);
-			btnSauvegarde.setEnabled(false);
 			repaint();
 		}
 	}
@@ -1632,11 +1593,9 @@ public class FenetreEditeur extends JPanel {
 		}
 // Pour la fumee		
 
-
 		for (int a = 0; a < regroupementSauvegarde.getListeFumee().size(); a++) {
 			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
 		}
-
 
 		resetValeur();
 		repaint();

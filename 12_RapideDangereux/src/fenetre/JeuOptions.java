@@ -112,56 +112,56 @@ public class JeuOptions extends JPanel {
 
 		setLayout(null);
 		setBounds(0, 0, 1600, 800);
-		
-				JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
-				lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
-				lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
-				lblCouleurBordureDe.setBounds(755, 198, 177, 43);
-				add(lblCouleurBordureDe);
-		
-				panelCouleurPiste = new JPanel();
-				panelCouleurPiste.setBackground(Color.RED);
-				panelCouleurPiste.setBounds(769, 235, 143, 90);
-				add(panelCouleurPiste);
-				
-						lblImage = new JLabel("");
-						panelCouleurPiste.add(lblImage);
-		
-				btnGauche3 = new JButton("<");
-				btnGauche3.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent e) {
-						gauche = true;
-						changeCouleurPiste();
-						gauche = false;
-					}
-				});
-				
-						btnGauche3.setBounds(715, 266, 55, 23);
-						add(btnGauche3);
-		
-				btnDroit3 = new JButton(">");
-				btnDroit3.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent e) {
-						droite = true;
-						changeCouleurPiste();
-						droite = false;
-					}
-				});
-				
-						btnDroit3.setBounds(913, 266, 55, 23);
-						add(btnDroit3);
+
+		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
+		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblCouleurBordureDe.setBounds(755, 198, 177, 43);
+		add(lblCouleurBordureDe);
+
+		panelCouleurPiste = new JPanel();
+		panelCouleurPiste.setBackground(Color.RED);
+		panelCouleurPiste.setBounds(769, 235, 143, 90);
+		add(panelCouleurPiste);
+
+		lblImage = new JLabel("");
+		panelCouleurPiste.add(lblImage);
+
+		btnGauche3 = new JButton("<");
+		btnGauche3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				gauche = true;
+				changeCouleurPiste();
+				gauche = false;
+			}
+		});
+
+		btnGauche3.setBounds(715, 266, 55, 23);
+		add(btnGauche3);
+
+		btnDroit3 = new JButton(">");
+		btnDroit3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				droite = true;
+				changeCouleurPiste();
+				droite = false;
+			}
+		});
+
+		btnDroit3.setBounds(913, 266, 55, 23);
+		add(btnDroit3);
 
 		JPanel PanelApercu = new JPanel();
 		PanelApercu.setBackground(Color.WHITE);
 		PanelApercu.setBounds(10, 200, 700, 439);
 		add(PanelApercu);
 		PanelApercu.setLayout(null);
-		
-				zoneAnimPhysique = new ZoneAnimPhysique();
-				zoneAnimPhysique.setBounds(0, 0, 700, 439);
-				PanelApercu.add(zoneAnimPhysique);
+
+		zoneAnimPhysique = new ZoneAnimPhysique();
+		zoneAnimPhysique.setBounds(0, 0, 700, 439);
+		PanelApercu.add(zoneAnimPhysique);
 
 		JPanel panelPourMessage = new JPanel();
 		panelPourMessage.setBounds(1044, 200, 549, 134);
@@ -434,8 +434,6 @@ public class JeuOptions extends JPanel {
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
-		
-
 		JPanel panel_V2 = new JPanel();
 
 		panel_V2.setBounds(1330, 77, 143, 90);
@@ -568,8 +566,7 @@ public class JeuOptions extends JPanel {
 		pcs.firePropertyChange("TYPEPISTE", null, type);
 		pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
 		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
-		
-		
+
 	}
 
 	/**
@@ -663,7 +660,7 @@ public class JeuOptions extends JPanel {
 //			zoneApercuPiste.setImg(imageActuelle);
 			zoneAnimPhysique.setTypePiste(type);
 			changeCouleurPiste();
-			
+
 			Image imgVenice = OutilsImage.lireImageEtRedimensionner("italie-rome.jpg", 1600, 800);
 			if (imgVenice != null) {
 				lblImage.setIcon(new ImageIcon(imgVenice));
@@ -686,8 +683,7 @@ public class JeuOptions extends JPanel {
 	private void actionSkin() {
 		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
-		
-		
+
 	}
 
 	/**
@@ -782,7 +778,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRdbtnVitesseFacile() {
-		txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
+		txtArea.append("\nVous avez choisi la difficulté <<Facile>> ");
 		pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
 	}
 
@@ -792,7 +788,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRdbtnVitesseIntermediaire() {
-		txtArea.append("\nVous avez choisi la difficulter <<Intermédiaire>> ");
+		txtArea.append("\nVous avez choisi la difficulté <<Intermédiaire>> ");
 		pcs.firePropertyChange("VITESSEMAXFACILE", null, 80.0);
 	}
 
@@ -802,7 +798,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRdbtnVitesseAvance() {
-		txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
+		txtArea.append("\nVous avez choisi la difficulté <<Facile>> ");
 		pcs.firePropertyChange("VITESSEMAXFACILE", null, 100.0);
 	}
 
@@ -829,6 +825,5 @@ public class JeuOptions extends JPanel {
 		panel.setBackground(couleurs2[indexCouleur2]);
 
 	}
-	
-	
+
 }
