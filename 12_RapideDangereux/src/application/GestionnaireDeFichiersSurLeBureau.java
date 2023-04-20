@@ -274,7 +274,14 @@ public class GestionnaireDeFichiersSurLeBureau {
 		}
 	}
 	
-	
+	/**
+	 * méthode qui permet de lire le fichier des donnes
+	 * 
+	 * @param nomFichier					nom du fichier en question
+	 * @return								liste avec les données
+	 * @throws FileNotFoundException		exeption si fichier introuvable
+	 */
+	//Ludovic Julien
 	 public static List<InfoLigne> lireFichier(String nomFichier) throws FileNotFoundException {
 	        List<InfoLigne> listeLignes = new ArrayList<>();
 	        File dossier = new File(System.getProperty("user.home") + "/Desktop/"+ nomFichier);
@@ -293,7 +300,13 @@ public class GestionnaireDeFichiersSurLeBureau {
 	        return listeLignes;
 	    }
 	
-	
+	 /**
+	  * méthode qui permet de retourner le meilleur temps de chaque piste 
+	  * 
+	  * @param listeLignes		liste des donner de temps 
+	  * @return					meilleur temps de chaque piste
+	  */
+	//Ludovic Julien
 	 public static Map<String, InfoLigne> trouverMeilleursTemps(List<InfoLigne> listeLignes) {
 	        Map<String, InfoLigne> meilleursTemps = new HashMap<>();
 
