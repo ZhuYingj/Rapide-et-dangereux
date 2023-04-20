@@ -130,7 +130,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pisteCanada = new PisteCanada(0, 0);
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
 
-		voiture2 = new Voiture(posInit2, Color.white, 50, 16, angleVoitureRad2, 60);
+		voiture2 = new Voiture(posInit2, Color.cyan, 50, 16, angleVoitureRad2, 60);
 
 		regroupement = new Regroupement(voiture, nombreBlocMystere, typePiste);
 

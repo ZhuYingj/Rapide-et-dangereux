@@ -49,7 +49,6 @@ import javax.swing.JLayeredPane;
  */
 
 public class JeuOptions extends JPanel {
-	private ZoneApercuPiste zoneApercuPiste;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private final ButtonGroup buttonGroupDiff = new ButtonGroup();
 	private JRadioButton rdbtnFacile;
@@ -114,19 +113,15 @@ public class JeuOptions extends JPanel {
 		setLayout(null);
 		setBounds(0, 0, 1600, 800);
 
-		zoneAnimPhysique = new ZoneAnimPhysique();
-		zoneAnimPhysique.setBounds(769, 77, 164, 136);
-		add(zoneAnimPhysique);
-
 		JPanel PanelApercu = new JPanel();
 		PanelApercu.setBackground(Color.WHITE);
 		PanelApercu.setBounds(10, 200, 700, 439);
 		add(PanelApercu);
 		PanelApercu.setLayout(null);
-
-		zoneApercuPiste = new ZoneApercuPiste();
-		zoneApercuPiste.setBounds(0, 0, 700, 439);
-		PanelApercu.add(zoneApercuPiste);
+		
+				zoneAnimPhysique = new ZoneAnimPhysique();
+				zoneAnimPhysique.setBounds(0, 0, 700, 439);
+				PanelApercu.add(zoneAnimPhysique);
 
 		JPanel panelPourMessage = new JPanel();
 		panelPourMessage.setBounds(1044, 200, 549, 134);
@@ -399,14 +394,7 @@ public class JeuOptions extends JPanel {
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
-		JPanel PanelV2 = new JPanel();
-
-		PanelV2.setBounds(1200, 229, 143, 90);
-		PanelV2.setBackground(Color.CYAN);
-
-		PanelV2.setBounds(1330, 77, 143, 90);
-		PanelV2.setBackground(Color.WHITE);
-		add(PanelV2);
+		
 
 		JPanel panel_V2 = new JPanel();
 
@@ -434,7 +422,7 @@ public class JeuOptions extends JPanel {
 				changementImage(1, 0);
 
 				panel_V1.setBackground(couleurs[indexCouleur]);
-				zoneApercuPiste.setColor1(couleurs[indexCouleur]);
+//				zoneApercuPiste.setColor1(couleurs[indexCouleur]);
 				repaint();
 
 				setBackgroundV1(panel_V1);
@@ -451,7 +439,7 @@ public class JeuOptions extends JPanel {
 				changementImage(0, 0);
 
 				panel_V2.setBackground(couleurs2[indexCouleur2]);
-				zoneApercuPiste.setColor2(couleurs2[indexCouleur2]);
+//				zoneApercuPiste.setColor2(couleurs2[indexCouleur2]);
 				repaint();
 
 				setBackgroundV2(panel_V2);
@@ -469,7 +457,7 @@ public class JeuOptions extends JPanel {
 				changementImage(1, 1);
 
 				panel_V1.setBackground(couleurs[indexCouleur]);
-				zoneApercuPiste.setColor1(couleurs[indexCouleur]);
+//				zoneApercuPiste.setColor1(couleurs[indexCouleur]);
 				repaint();
 
 			}
@@ -484,7 +472,7 @@ public class JeuOptions extends JPanel {
 				changementImage(0, 1);
 
 				panel_V2.setBackground(couleurs2[indexCouleur2]);
-				zoneApercuPiste.setColor2(couleurs2[indexCouleur2]);
+//				zoneApercuPiste.setColor2(couleurs2[indexCouleur2]);
 				repaint();
 
 				setBackgroundV2(panel_V2);
@@ -580,6 +568,8 @@ public class JeuOptions extends JPanel {
 		pcs.firePropertyChange("TYPEPISTE", null, type);
 		pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
 		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
+		
+		
 	}
 
 	/**
@@ -606,8 +596,9 @@ public class JeuOptions extends JPanel {
 			txtArea.append("\nVous avez choisi la piste Canada!");
 			type = TypePiste.CANADA;
 			imageActuelle = OutilsImage.lireImage("PisteCanada.png");
-			zoneApercuPiste.setImg(imageActuelle);
-			zoneApercuPiste.repaint();
+//			zoneApercuPiste.setImg(imageActuelle);
+			zoneAnimPhysique.setTypePiste(type);
+			changeCouleurPiste();
 
 			Image imgHiver = OutilsImage.lireImageEtRedimensionner("canadaWinter.jpg", 1600, 800);
 			if (imgHiver != null) {
@@ -615,10 +606,10 @@ public class JeuOptions extends JPanel {
 				imgHiver.flush();
 			}
 
-			zoneApercuPiste.getPos1().setX(523);
-			zoneApercuPiste.getPos1().setY(358);
-			zoneApercuPiste.getPos2().setX(523);
-			zoneApercuPiste.getPos2().setY(403);
+//			zoneApercuPiste.getPos1().setX(523);
+//			zoneApercuPiste.getPos1().setY(358);
+//			zoneApercuPiste.getPos2().setX(523);
+//			zoneApercuPiste.getPos2().setY(403);
 
 		}
 	}
@@ -635,22 +626,24 @@ public class JeuOptions extends JPanel {
 			type = TypePiste.MEXIQUE;
 			txtArea.append("\nVous avez choisi la piste Mexique!");
 			imageActuelle = OutilsImage.lireImage("PisteMexique.png");
-			zoneApercuPiste.setImg(imageActuelle);
-			zoneApercuPiste.repaint();
-			zoneApercuPiste.getPos1().setX(86);
-			zoneApercuPiste.getPos1().setY(10);
-			zoneApercuPiste.getPos2().setX(86);
-			zoneApercuPiste.getPos2().setY(53);
+//			zoneApercuPiste.setImg(imageActuelle);
+			zoneAnimPhysique.setTypePiste(type);
+			changeCouleurPiste();
+
+//			zoneApercuPiste.getPos1().setX(86);
+//			zoneApercuPiste.getPos1().setY(10);
+//			zoneApercuPiste.getPos2().setX(86);
+//			zoneApercuPiste.getPos2().setY(53);
 			Image imgDesert = OutilsImage.lireImageEtRedimensionner("mexico-building.jpg", 1600, 800);
 			if (imgDesert != null) {
 				lblImage.setIcon(new ImageIcon(imgDesert));
 				imgDesert.flush();
 			}
 
-			zoneApercuPiste.getPos1().setX(86);
-			zoneApercuPiste.getPos1().setY(9);
-			zoneApercuPiste.getPos2().setX(86);
-			zoneApercuPiste.getPos2().setY(53);
+//			zoneApercuPiste.getPos1().setX(86);
+//			zoneApercuPiste.getPos1().setY(9);
+//			zoneApercuPiste.getPos2().setX(86);
+//			zoneApercuPiste.getPos2().setY(53);
 
 		}
 	}
@@ -667,19 +660,20 @@ public class JeuOptions extends JPanel {
 			type = TypePiste.ITALIE;
 			txtArea.append("\nVous avez choisi la piste Italie!");
 			imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
-			zoneApercuPiste.setImg(imageActuelle);
-			zoneApercuPiste.repaint();
-
+//			zoneApercuPiste.setImg(imageActuelle);
+			zoneAnimPhysique.setTypePiste(type);
+			changeCouleurPiste();
+			
 			Image imgVenice = OutilsImage.lireImageEtRedimensionner("italie-rome.jpg", 1600, 800);
 			if (imgVenice != null) {
 				lblImage.setIcon(new ImageIcon(imgVenice));
 				imgVenice.flush();
 			}
 
-			zoneApercuPiste.getPos1().setX(86);
-			zoneApercuPiste.getPos1().setY(9);
-			zoneApercuPiste.getPos2().setX(86);
-			zoneApercuPiste.getPos2().setY(53);
+//			zoneApercuPiste.getPos1().setX(86);
+//			zoneApercuPiste.getPos1().setY(9);
+//			zoneApercuPiste.getPos2().setX(86);
+//			zoneApercuPiste.getPos2().setY(53);
 
 		}
 	}
@@ -692,6 +686,8 @@ public class JeuOptions extends JPanel {
 	private void actionSkin() {
 		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+		
+		
 	}
 
 	/**
@@ -729,7 +725,8 @@ public class JeuOptions extends JPanel {
 			}
 
 		}
-
+		pcs.firePropertyChange("SKINOPTIONS1", null, couleurs[indexCouleur]);
+		pcs.firePropertyChange("SKINOPTIONS2", null, couleurs2[indexCouleur2]);
 	}
 
 	/**
@@ -750,6 +747,8 @@ public class JeuOptions extends JPanel {
 			}
 		}
 		panelCouleurPiste.setBackground(couleursPiste[couleurPiste]);
+		pcs.firePropertyChange("COULEURPISTE2", null, couleursPiste[couleurPiste]);
+		repaint();
 	}
 
 	/**
@@ -830,4 +829,6 @@ public class JeuOptions extends JPanel {
 		panel.setBackground(couleurs2[indexCouleur2]);
 
 	}
+	
+	
 }
