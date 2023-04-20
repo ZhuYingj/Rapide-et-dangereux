@@ -112,6 +112,46 @@ public class JeuOptions extends JPanel {
 
 		setLayout(null);
 		setBounds(0, 0, 1600, 800);
+		
+				JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
+				lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
+				lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+				lblCouleurBordureDe.setBounds(755, 198, 177, 43);
+				add(lblCouleurBordureDe);
+		
+				panelCouleurPiste = new JPanel();
+				panelCouleurPiste.setBackground(Color.RED);
+				panelCouleurPiste.setBounds(769, 235, 143, 90);
+				add(panelCouleurPiste);
+				
+						lblImage = new JLabel("");
+						panelCouleurPiste.add(lblImage);
+		
+				btnGauche3 = new JButton("<");
+				btnGauche3.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
+						gauche = true;
+						changeCouleurPiste();
+						gauche = false;
+					}
+				});
+				
+						btnGauche3.setBounds(715, 266, 55, 23);
+						add(btnGauche3);
+		
+				btnDroit3 = new JButton(">");
+				btnDroit3.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
+						droite = true;
+						changeCouleurPiste();
+						droite = false;
+					}
+				});
+				
+						btnDroit3.setBounds(913, 266, 55, 23);
+						add(btnDroit3);
 
 		JPanel PanelApercu = new JPanel();
 		PanelApercu.setBackground(Color.WHITE);
@@ -509,49 +549,9 @@ public class JeuOptions extends JPanel {
 		lblNewLabel_2.setBounds(769, 11, 220, 70);
 		add(lblNewLabel_2);
 
-		panelCouleurPiste = new JPanel();
-		panelCouleurPiste.setBackground(Color.RED);
-		panelCouleurPiste.setBounds(769, 235, 143, 90);
-		add(panelCouleurPiste);
-
-		lblImage = new JLabel("");
-		panelCouleurPiste.add(lblImage);
-
-		btnGauche3 = new JButton("<");
-		btnGauche3.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				gauche = true;
-				changeCouleurPiste();
-				gauche = false;
-			}
-		});
-
-		btnGauche3.setBounds(715, 266, 55, 23);
-		add(btnGauche3);
-
-		btnDroit3 = new JButton(">");
-		btnDroit3.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				droite = true;
-				changeCouleurPiste();
-				droite = false;
-			}
-		});
-
-		btnDroit3.setBounds(913, 266, 55, 23);
-		add(btnDroit3);
-
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
-
-		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
-		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
-		lblCouleurBordureDe.setBounds(755, 198, 177, 43);
-		add(lblCouleurBordureDe);
 
 	}
 
