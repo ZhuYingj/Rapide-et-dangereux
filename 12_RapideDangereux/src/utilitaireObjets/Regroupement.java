@@ -343,6 +343,7 @@ public class Regroupement implements Dessinable, Serializable {
 				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
 					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture());
+					
 
 				}
 			}

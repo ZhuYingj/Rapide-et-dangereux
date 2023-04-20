@@ -45,6 +45,7 @@ public class Voiture implements Dessinable, Serializable {
 	private Vecteur2D accel = new Vecteur2D(0, 0); // par defaut
 	/** Fleche vectorielle visuelle **/
 	private FlecheVectorielle flecheVectorielle;
+
 	/** Angle en degré pour la fleche vectorielle **/
 	private double angle = 0;
 	/** Notre voiture après transformation **/
@@ -57,6 +58,12 @@ public class Voiture implements Dessinable, Serializable {
 	private double diametreInitial;
 	private double nombreToursFaits = 0;
 	private double tempsCourse = 0;
+
+	private double diametreFleche = 16;
+
+	private double strokeVoulu = 0.5;
+
+	private double longueurTete = 2.5;
 
 	public static ArrayList<Double> vitessesParSeconde;
 
@@ -96,6 +103,7 @@ public class Voiture implements Dessinable, Serializable {
 		this.vitesseMaxSelonNiveau = 5.0;
 		masseEnKgInitial = masseEnKg;
 		diametreInitial = diametre;
+		diametreFleche = 16;
 	}
 
 	/**
@@ -106,9 +114,9 @@ public class Voiture implements Dessinable, Serializable {
 
 		cercle = new Ellipse2D.Double(position.getX(), position.getY(), diametre, diametre);
 		flecheVectorielle = new FlecheVectorielle(position.getX() + diametre / 2, (position.getY() + diametre / 2),
-				diametre, 0);
+				diametreFleche, 0);
 
-		flecheVectorielle.setLongueurTraitDeTete(2.5);
+		flecheVectorielle.setLongueurTraitDeTete(longueurTete);
 		flecheVectorielle.setAngleTete(90);
 
 	}
@@ -130,7 +138,7 @@ public class Voiture implements Dessinable, Serializable {
 		gCopie.fill(voitureTransfo);
 		gCopie.setColor(Color.RED);
 
-		gCopie.setStroke(new BasicStroke((float) 0.5));
+		gCopie.setStroke(new BasicStroke((float) strokeVoulu));
 		flecheVectorielle.dessiner(gCopie);
 
 	}
@@ -145,6 +153,31 @@ public class Voiture implements Dessinable, Serializable {
 		return diametre;
 	}
 
+	public double getLongueurTete() {
+		return longueurTete;
+	}
+
+	public double getStrokeVoulu() {
+		return strokeVoulu;
+	}
+
+	public double getDiametreFleche() {
+		return diametreFleche;
+	}
+
+	public void setDiametreFleche(double diametreFleche) {
+		this.diametreFleche = diametreFleche;
+	}
+
+	public void setStrokeVoulu(double strokeVoulu) {
+		this.strokeVoulu = strokeVoulu;
+	}
+
+	public void setLongueurTete(double longueurTete) {
+		this.longueurTete = longueurTete;
+		creerLaGeometrie();
+	}
+
 	/**
 	 * Méthode qui change la valeur du diametre par un diametre voulu
 	 * 
@@ -154,6 +187,14 @@ public class Voiture implements Dessinable, Serializable {
 	public void setDiametre(double diametre) {
 		this.diametre = diametre;
 		creerLaGeometrie();
+	}
+
+	public FlecheVectorielle getFlecheVectorielle() {
+		return flecheVectorielle;
+	}
+
+	public void setFlecheVectorielle(FlecheVectorielle flecheVectorielle) {
+		this.flecheVectorielle = flecheVectorielle;
 	}
 
 	/**

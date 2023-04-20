@@ -151,33 +151,43 @@ public class FenetreJeuSansScientifique extends JPanel {
 		add(lblS);
 		JLabel lblForce1 = new JLabel("Force lancement voiture 1 :");
 		lblForce1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblForce1.setBounds(1282, 100, 271, 22);
+		lblForce1.setBounds(1282, 70, 271, 22);
 		add(lblForce1);
 
 		progressBarFroce = new JProgressBar();
-		progressBarFroce.setBounds(1282, 144, 248, 45);
+		progressBarFroce.setBounds(1282, 103, 248, 45);
 		add(progressBarFroce);
 		progressBarFroce.setFont(new Font("Tahoma", Font.BOLD, 12));
 		progressBarFroce.setStringPainted(true);
 
 		JLabel lblForce1_1 = new JLabel("Force lancement voiture 1 :");
 		lblForce1_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblForce1_1.setBounds(1282, 381, 271, 22);
+		lblForce1_1.setBounds(1282, 386, 271, 22);
 		add(lblForce1_1);
 
 		progressBarFroce2 = new JProgressBar();
 		progressBarFroce2.setStringPainted(true);
 		progressBarFroce2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		progressBarFroce2.setBounds(1282, 416, 248, 45);
+		progressBarFroce2.setBounds(1282, 419, 248, 45);
 		add(progressBarFroce2);
 
 		lblImageObjet1 = new JLabel("");
-		lblImageObjet1.setBounds(1282, 199, 248, 169);
+		lblImageObjet1.setBounds(1282, 206, 248, 169);
 		add(lblImageObjet1);
 
 		lblImageObjet2 = new JLabel("");
-		lblImageObjet2.setBounds(1282, 500, 248, 169);
+		lblImageObjet2.setBounds(1282, 508, 248, 169);
 		add(lblImageObjet2);
+		
+		JLabel lblObjetVoiture = new JLabel("Objet special voiture 1 :");
+		lblObjetVoiture.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblObjetVoiture.setBounds(1282, 173, 271, 22);
+		add(lblObjetVoiture);
+		
+		JLabel lblObjetSpecialVoiture = new JLabel("Objet special voiture 2 :");
+		lblObjetSpecialVoiture.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblObjetSpecialVoiture.setBounds(1282, 475, 271, 22);
+		add(lblObjetSpecialVoiture);
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
@@ -322,7 +332,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 		zoneAnimPhysique.arreter();
 		btnNextImg.setEnabled(true);
 		btnStart.setEnabled(true);
-
+		arretMusic();
 	}
 
 	/**

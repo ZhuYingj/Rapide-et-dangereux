@@ -108,18 +108,16 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	public void objetRandomChoisi(Voiture voiture) {
 
 		// Crée nombre au hasard de 0 - 1
-		double nombreRandom = Math.random();
+		double nombreRandom = 0.4;
 		// 20 % de chance que ce soit un champignon
 		if (nombreRandom < 0.2) {
 			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.CHAMPIGNON);
 
-			System.out.println("Champignon");
 		}
 		// 30 % de chance que ce soit une boule de enige
 		else if (nombreRandom < 0.5) {
 
 			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.BOULEDENEIGE);
-			System.out.println("Boule de neige");
 
 		}
 
@@ -127,12 +125,10 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 		else if (nombreRandom < 0.8) {
 			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.COLLE);
 
-			System.out.println("Colle");
 		}
 		// 20 % de chance que ce soit un trou noir
 		else {
 			objetSpecial = new ObjetSpecial(this.position, this.diametre, TypeObjetSpecial.TROUNOIR);
-			System.out.println("Trou noir");
 
 		}
 
