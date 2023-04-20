@@ -79,7 +79,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private double angleCoinRad = Math.toRadians(angleCoinDegre);
 	/** Vecteur de la position initiale de la voiture **/
 	private Vecteur2D posInit = new Vecteur2D(90, 20);
-
 	/** Vecteur de la position initiale de la voiture **/
 	private Vecteur2D posInit2 = new Vecteur2D(90, 40);
 	/** Vecteur qui reset les valeurs a 0 **/
@@ -134,7 +133,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pisteCanada = new PisteCanada(0, 0);
 		voiture = new Voiture(posInit, Color.yellow, 50, 16, angleVoitureRad, 60);
 
-		voiture2 = new Voiture(posInit2, Color.white, 50, 16, angleVoitureRad2, 60);
+		voiture2 = new Voiture(posInit2, Color.cyan, 50, 16, angleVoitureRad2, 60);
 
 		regroupement = new Regroupement(voiture, nombreBlocMystere, typePiste);
 
@@ -166,30 +165,30 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * @param g Contexte graphique
 	 */
 	// Kevin Nguyen
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		if (premiereFois) {
-			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
-			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
-			enCoursDAnimation = true;
-			premiereFois = false;
-			regroupement.getListePisteDeDepart().get(0).getVoiture()
-					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-							regroupement.getListePisteDeDepart().get(0).getY() + 10));
-
-			regroupement.getListePisteDeDepart().get(0).getVoiture2()
-					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-							regroupement.getListePisteDeDepart().get(0).getY() + 50));
-
-		}
-
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-		regroupement.setPixelsParMetre(pixelsParMetre);
-		regroupement.dessiner(g2d);
-
-	}
+//	public void paintComponent(Graphics g) {
+//		super.paintComponent(g);
+//		if (premiereFois) {
+//			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
+//			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
+//			enCoursDAnimation = true;
+//			premiereFois = false;
+//			regroupement.getListePisteDeDepart().get(0).getVoiture()
+//					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+//							regroupement.getListePisteDeDepart().get(0).getY() + 10));
+//
+//			regroupement.getListePisteDeDepart().get(0).getVoiture2()
+//					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+//							regroupement.getListePisteDeDepart().get(0).getY() + 50));
+//
+//		}
+//
+//		Graphics2D g2d = (Graphics2D) g;
+//		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//
+//		regroupement.setPixelsParMetre(pixelsParMetre);
+//		regroupement.dessiner(g2d);
+//
+//	}
 
 	/**
 	 * Méthode qui détecte quand plusieurs touches sont appuyés en même temps

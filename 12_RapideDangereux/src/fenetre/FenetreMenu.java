@@ -89,16 +89,18 @@ public class FenetreMenu extends JPanel {
 		});
 		btnQuitter.setBounds(700, 402, 100, 49);
 		add(btnQuitter);
-		
+
 		FenetreAPropos pnlAPropos = new FenetreAPropos();
-		pnlAPropos.setPreferredSize(new Dimension(500,250));
-		
-		JButton btnTesterAPropos = new JButton("A Propos");
+		pnlAPropos.setPreferredSize(new Dimension(500, 250));
+
+		JButton btnTesterAPropos = new JButton("À PROPOS");
+		btnTesterAPropos.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnQuitter.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnTesterAPropos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//on utilise simplement un JOptionPane ici
-				JOptionPane.showMessageDialog(null, pnlAPropos,"� Propos de cette application",JOptionPane.PLAIN_MESSAGE);
+				// on utilise simplement un JOptionPane ici
+				JOptionPane.showMessageDialog(null, pnlAPropos, "� Propos de cette application",
+						JOptionPane.PLAIN_MESSAGE);
 			}
 		});
 		btnTesterAPropos.setBounds(700, 483, 100, 49);

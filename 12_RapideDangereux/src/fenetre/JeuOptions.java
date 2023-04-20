@@ -34,6 +34,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import dessin.ZoneAnimPhysique;
 
 import javax.swing.JLayeredPane;
 
@@ -48,7 +49,6 @@ import javax.swing.JLayeredPane;
  */
 
 public class JeuOptions extends JPanel {
-	private ZoneApercuPiste zoneApercuPiste;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private final ButtonGroup buttonGroupDiff = new ButtonGroup();
 	private JRadioButton rdbtnFacile;
@@ -73,13 +73,23 @@ public class JeuOptions extends JPanel {
 	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.YELLOW,
 			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
 
-	private Color transparent = new Color(255, 255, 255, 0);
 	private JButton btnGauche2;
 	private JButton btnGauche1;
 	private JButton btnDroit1;
 	private JButton btnDroit2;
 	private JTextArea txtArea;
 	private JComboBox cbMatPiste;
+
+	private ZoneAnimPhysique zoneAnimPhysique;
+
+	public ZoneAnimPhysique getZoneAnimPhysique() {
+		return zoneAnimPhysique;
+	}
+
+	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
+		this.zoneAnimPhysique = zoneAnimPhysique;
+	}
+
 	private JButton btnGauche3;
 	private JButton btnDroit3;
 	private JPanel panelCouleurPiste;
@@ -89,7 +99,7 @@ public class JeuOptions extends JPanel {
 	/**
 	 * Méthode qui permet de placer un écouteur
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -97,11 +107,51 @@ public class JeuOptions extends JPanel {
 	/**
 	 * Creation de la fenetre.
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public JeuOptions() {
 
 		setLayout(null);
 		setBounds(0, 0, 1600, 800);
+
+		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
+		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblCouleurBordureDe.setBounds(755, 198, 177, 43);
+		add(lblCouleurBordureDe);
+
+		panelCouleurPiste = new JPanel();
+		panelCouleurPiste.setBackground(Color.RED);
+		panelCouleurPiste.setBounds(769, 235, 143, 90);
+		add(panelCouleurPiste);
+
+		lblImage = new JLabel("");
+		panelCouleurPiste.add(lblImage);
+
+		btnGauche3 = new JButton("<");
+		btnGauche3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				gauche = true;
+				changeCouleurPiste();
+				gauche = false;
+			}
+		});
+
+		btnGauche3.setBounds(715, 266, 55, 23);
+		add(btnGauche3);
+
+		btnDroit3 = new JButton(">");
+		btnDroit3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				droite = true;
+				changeCouleurPiste();
+				droite = false;
+			}
+		});
+
+		btnDroit3.setBounds(913, 266, 55, 23);
+		add(btnDroit3);
 
 		JPanel PanelApercu = new JPanel();
 		PanelApercu.setBackground(Color.WHITE);
@@ -109,9 +159,9 @@ public class JeuOptions extends JPanel {
 		add(PanelApercu);
 		PanelApercu.setLayout(null);
 
-		zoneApercuPiste = new ZoneApercuPiste();
-		zoneApercuPiste.setBounds(0, 0, 700, 439);
-		PanelApercu.add(zoneApercuPiste);
+		zoneAnimPhysique = new ZoneAnimPhysique();
+		zoneAnimPhysique.setBounds(0, 0, 700, 439);
+		PanelApercu.add(zoneAnimPhysique);
 
 		JPanel panelPourMessage = new JPanel();
 		panelPourMessage.setBounds(1044, 200, 549, 134);
@@ -131,8 +181,6 @@ public class JeuOptions extends JPanel {
 		txtArea.setWrapStyleWord(true);
 		txtArea.setLineWrap(true);
 
-		
-
 		txtArea = new JTextArea();
 		spPourMessage.setViewportView(txtArea);
 		txtArea.setEditable(false);
@@ -148,6 +196,7 @@ public class JeuOptions extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				selectionImageMexique(e);
+
 			}
 		});
 
@@ -375,55 +424,6 @@ public class JeuOptions extends JPanel {
 		panel_V1.setBounds(1044, 77, 143, 90);
 		add(panel_V1);
 
-
-		//		JButton btnGauche = new JButton("<");
-
-		//		btnGauche = new JButton("");
-		//		btnGauche.setBounds(1123, 116, 55, 23);
-		//		btnGauche.addActionListener(new ActionListener() {
-		//
-		//			@Override
-		//			public void actionPerformed(ActionEvent e) {
-		//				ChangementImage(1,0);
-		//				panel_V1.setBackground(couleurs[indexCouleur]);
-		//			}
-		//		});
-		//		add(btnGauche);
-		//
-		//		
-		//		JButton btnDroite = new JButton(">");
-		//		btnDroite.setBounds(1365, 116, 55, 23);
-		//		btnDroite.addActionListener(new ActionListener() {
-		//
-		//		btnGauche.setBorder(null);
-		//
-		//		Image arrowGauche = OutilsImage.lireImageEtRedimensionner("FlecheGauche.png", 50, 23);
-		//		if (arrowGauche != null) {
-		//			btnGauche.setIcon(new ImageIcon(arrowGauche));
-		//			arrowGauche.flush();
-		//		}
-		//
-		//		
-		//		btnDroit = new JButton("");
-		//		btnDroit.setForeground(new Color(255, 255, 255));
-		//		btnDroit.setBounds(1365, 116, 55, 23);
-		//		btnDroit.addActionListener(new ActionListener() {
-		//			@Override
-		//			public void actionPerformed(ActionEvent e) {
-		//				ChangementImage(1,1);
-		//				panel_V1.setBackground(couleurs[indexCouleur]);
-		//			}
-		//		});
-		//		add(btnDroit);
-		//
-		//		btnDroit.setBorder(null);
-
-		//		Image arrowDroite = OutilsImage.lireImageEtRedimensionner("FlecheDroite.png", 50, 23);
-		//		if (arrowDroite != null) {
-		//			btnDroit.setIcon(new ImageIcon(arrowDroite));
-		//			arrowDroite.flush();
-		//		}
-
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnRetour.addActionListener(new ActionListener() {
@@ -460,7 +460,7 @@ public class JeuOptions extends JPanel {
 				changementImage(1, 0);
 
 				panel_V1.setBackground(couleurs[indexCouleur]);
-				zoneApercuPiste.setColor1(couleurs[indexCouleur]);
+//				zoneApercuPiste.setColor1(couleurs[indexCouleur]);
 				repaint();
 
 				setBackgroundV1(panel_V1);
@@ -477,7 +477,7 @@ public class JeuOptions extends JPanel {
 				changementImage(0, 0);
 
 				panel_V2.setBackground(couleurs2[indexCouleur2]);
-				zoneApercuPiste.setColor2(couleurs2[indexCouleur2]);
+//				zoneApercuPiste.setColor2(couleurs2[indexCouleur2]);
 				repaint();
 
 				setBackgroundV2(panel_V2);
@@ -495,7 +495,7 @@ public class JeuOptions extends JPanel {
 				changementImage(1, 1);
 
 				panel_V1.setBackground(couleurs[indexCouleur]);
-				zoneApercuPiste.setColor1(couleurs[indexCouleur]);
+//				zoneApercuPiste.setColor1(couleurs[indexCouleur]);
 				repaint();
 
 			}
@@ -510,7 +510,7 @@ public class JeuOptions extends JPanel {
 				changementImage(0, 1);
 
 				panel_V2.setBackground(couleurs2[indexCouleur2]);
-				zoneApercuPiste.setColor2(couleurs2[indexCouleur2]);
+//				zoneApercuPiste.setColor2(couleurs2[indexCouleur2]);
 				repaint();
 
 				setBackgroundV2(panel_V2);
@@ -518,13 +518,6 @@ public class JeuOptions extends JPanel {
 			}
 		});
 		add(btnDroit2);
-
-
-		//		Image arrowDroite2 = OutilsImage.lireImageEtRedimensionner("FlecheDroite.png", 50, 23);
-		//		if (arrowDroite2 != null) {
-		//			btnDroit2.setIcon(new ImageIcon(arrowDroite2));
-		//			arrowDroite2.flush();
-		//		}
 
 		JButton btnRecorsPiste = new JButton("Records par piste !");
 		btnRecorsPiste.setForeground(new Color(0, 0, 0));
@@ -554,49 +547,9 @@ public class JeuOptions extends JPanel {
 		lblNewLabel_2.setBounds(769, 11, 220, 70);
 		add(lblNewLabel_2);
 
-		panelCouleurPiste = new JPanel();
-		panelCouleurPiste.setBackground(Color.RED);
-		panelCouleurPiste.setBounds(769, 235, 143, 90);
-		add(panelCouleurPiste);
-
-		lblImage = new JLabel("");
-		panelCouleurPiste.add(lblImage);
-
-		btnGauche3 = new JButton("<");
-		btnGauche3.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				gauche = true;
-				changeCouleurPiste();
-				gauche = false;
-			}
-		});
-
-		btnGauche3.setBounds(715, 266, 55, 23);
-		add(btnGauche3);
-
-		btnDroit3 = new JButton(">");
-		btnDroit3.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				droite = true;
-				changeCouleurPiste();
-				droite = false;
-			}
-		});
-
-		btnDroit3.setBounds(913, 266, 55, 23);
-		add(btnDroit3);
-
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
-		
-		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
-		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
-		lblCouleurBordureDe.setBounds(755, 198, 177, 43);
-		add(lblCouleurBordureDe);
 
 	}
 
@@ -613,8 +566,8 @@ public class JeuOptions extends JPanel {
 		pcs.firePropertyChange("TYPEPISTE", null, type);
 		pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
 		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
-	}
 
+	}
 
 	/**
 	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
@@ -640,18 +593,21 @@ public class JeuOptions extends JPanel {
 			txtArea.append("\nVous avez choisi la piste Canada!");
 			type = TypePiste.CANADA;
 			imageActuelle = OutilsImage.lireImage("PisteCanada.png");
-			zoneApercuPiste.setImg(imageActuelle);
-			zoneApercuPiste.repaint();
+//			zoneApercuPiste.setImg(imageActuelle);
+			zoneAnimPhysique.setTypePiste(type);
+			changeCouleurPiste();
 
 			Image imgHiver = OutilsImage.lireImageEtRedimensionner("canadaWinter.jpg", 1600, 800);
 			if (imgHiver != null) {
 				lblImage.setIcon(new ImageIcon(imgHiver));
 				imgHiver.flush();
 			}
-			zoneApercuPiste.getPos1().setX(523);
-			zoneApercuPiste.getPos1().setY(358);
-			zoneApercuPiste.getPos2().setX(523);
-			zoneApercuPiste.getPos2().setY(403);
+
+//			zoneApercuPiste.getPos1().setX(523);
+//			zoneApercuPiste.getPos1().setY(358);
+//			zoneApercuPiste.getPos2().setX(523);
+//			zoneApercuPiste.getPos2().setY(403);
+
 		}
 	}
 
@@ -667,21 +623,25 @@ public class JeuOptions extends JPanel {
 			type = TypePiste.MEXIQUE;
 			txtArea.append("\nVous avez choisi la piste Mexique!");
 			imageActuelle = OutilsImage.lireImage("PisteMexique.png");
-			zoneApercuPiste.setImg(imageActuelle);
-			zoneApercuPiste.repaint();
-			zoneApercuPiste.getPos1().setX(86);
-			zoneApercuPiste.getPos1().setY(10);
-			zoneApercuPiste.getPos2().setX(86);
-			zoneApercuPiste.getPos2().setY(53);
+//			zoneApercuPiste.setImg(imageActuelle);
+			zoneAnimPhysique.setTypePiste(type);
+			changeCouleurPiste();
+
+//			zoneApercuPiste.getPos1().setX(86);
+//			zoneApercuPiste.getPos1().setY(10);
+//			zoneApercuPiste.getPos2().setX(86);
+//			zoneApercuPiste.getPos2().setY(53);
 			Image imgDesert = OutilsImage.lireImageEtRedimensionner("mexico-building.jpg", 1600, 800);
 			if (imgDesert != null) {
 				lblImage.setIcon(new ImageIcon(imgDesert));
 				imgDesert.flush();
 			}
-			zoneApercuPiste.getPos1().setX(86);
-			zoneApercuPiste.getPos1().setY(9);
-			zoneApercuPiste.getPos2().setX(86);
-			zoneApercuPiste.getPos2().setY(53);
+
+//			zoneApercuPiste.getPos1().setX(86);
+//			zoneApercuPiste.getPos1().setY(9);
+//			zoneApercuPiste.getPos2().setX(86);
+//			zoneApercuPiste.getPos2().setY(53);
+
 		}
 	}
 
@@ -697,18 +657,21 @@ public class JeuOptions extends JPanel {
 			type = TypePiste.ITALIE;
 			txtArea.append("\nVous avez choisi la piste Italie!");
 			imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
-			zoneApercuPiste.setImg(imageActuelle);
-			zoneApercuPiste.repaint();
+//			zoneApercuPiste.setImg(imageActuelle);
+			zoneAnimPhysique.setTypePiste(type);
+			changeCouleurPiste();
 
 			Image imgVenice = OutilsImage.lireImageEtRedimensionner("italie-rome.jpg", 1600, 800);
 			if (imgVenice != null) {
 				lblImage.setIcon(new ImageIcon(imgVenice));
 				imgVenice.flush();
 			}
-			zoneApercuPiste.getPos1().setX(86);
-			zoneApercuPiste.getPos1().setY(9);
-			zoneApercuPiste.getPos2().setX(86);
-			zoneApercuPiste.getPos2().setY(53);
+
+//			zoneApercuPiste.getPos1().setX(86);
+//			zoneApercuPiste.getPos1().setY(9);
+//			zoneApercuPiste.getPos2().setX(86);
+//			zoneApercuPiste.getPos2().setY(53);
+
 		}
 	}
 
@@ -720,6 +683,7 @@ public class JeuOptions extends JPanel {
 	private void actionSkin() {
 		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
 		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+
 	}
 
 	/**
@@ -757,7 +721,8 @@ public class JeuOptions extends JPanel {
 			}
 
 		}
-
+		pcs.firePropertyChange("SKINOPTIONS1", null, couleurs[indexCouleur]);
+		pcs.firePropertyChange("SKINOPTIONS2", null, couleurs2[indexCouleur2]);
 	}
 
 	/**
@@ -778,6 +743,8 @@ public class JeuOptions extends JPanel {
 			}
 		}
 		panelCouleurPiste.setBackground(couleursPiste[couleurPiste]);
+		pcs.firePropertyChange("COULEURPISTE2", null, couleursPiste[couleurPiste]);
+		repaint();
 	}
 
 	/**
@@ -811,7 +778,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRdbtnVitesseFacile() {
-		txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
+		txtArea.append("\nVous avez choisi la difficulté <<Facile>> ");
 		pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
 	}
 
@@ -821,7 +788,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRdbtnVitesseIntermediaire() {
-		txtArea.append("\nVous avez choisi la difficulter <<Intermédiaire>> ");
+		txtArea.append("\nVous avez choisi la difficulté <<Intermédiaire>> ");
 		pcs.firePropertyChange("VITESSEMAXFACILE", null, 80.0);
 	}
 
@@ -831,7 +798,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRdbtnVitesseAvance() {
-		txtArea.append("\nVous avez choisi la difficulter <<Facile>> ");
+		txtArea.append("\nVous avez choisi la difficulté <<Facile>> ");
 		pcs.firePropertyChange("VITESSEMAXFACILE", null, 100.0);
 	}
 
@@ -858,4 +825,5 @@ public class JeuOptions extends JPanel {
 		panel.setBackground(couleurs2[indexCouleur2]);
 
 	}
+
 }
