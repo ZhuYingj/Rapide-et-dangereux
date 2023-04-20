@@ -21,9 +21,8 @@ import javax.swing.border.LineBorder;
 
 import application.OutilsImage;
 import dessin.ZoneAnimPhysique;
-import dessin.ZoneApercuPiste;
+import geometrie.Vecteur2D;
 import interfaces.TypePiste;
-import utilitaireObjets.Regroupement;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
@@ -42,7 +41,6 @@ public class FenetreOptionMontre extends JPanel {
 
 	private TypePiste type = TypePiste.MEXIQUE;
 	private Image imageActuelle;
-	private ZoneApercuPiste zoneApercuPiste;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private JSlider slider;
 	private JSlider slider2;
@@ -94,46 +92,46 @@ public class FenetreOptionMontre extends JPanel {
 				pcs.firePropertyChange("Retour", 0, -1);
 			}
 		});
-		
-				JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
-				lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
-				lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
-				lblCouleurBordureDe.setBounds(774, 279, 177, 43);
-				add(lblCouleurBordureDe);
-		
-				JButton btnGauche3 = new JButton("<");
-				btnGauche3.setBounds(734, 347, 55, 23);
-				add(btnGauche3);
-				
-						btnGauche3.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mousePressed(MouseEvent e) {
-								gauche = true;
-								changeCouleurPiste();
-								gauche = false;
-							}
-						});
-		
-				JButton btnDroit3 = new JButton(">");
-				btnDroit3.setBounds(932, 347, 55, 23);
-				add(btnDroit3);
-				
-						btnDroit3.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mousePressed(MouseEvent e) {
-								droite = true;
-								changeCouleurPiste();
-								droite = false;
-							}
-						});
-		
-				panelCouleurPiste = new JPanel();
-				panelCouleurPiste.setBackground(Color.RED);
-				panelCouleurPiste.setBounds(788, 316, 143, 90);
-				add(panelCouleurPiste);
-				
-						JLabel lblImage_1 = new JLabel("");
-						panelCouleurPiste.add(lblImage_1);
+
+		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
+		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblCouleurBordureDe.setBounds(774, 279, 177, 43);
+		add(lblCouleurBordureDe);
+
+		JButton btnGauche3 = new JButton("<");
+		btnGauche3.setBounds(734, 347, 55, 23);
+		add(btnGauche3);
+
+		btnGauche3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				gauche = true;
+				changeCouleurPiste();
+				gauche = false;
+			}
+		});
+
+		JButton btnDroit3 = new JButton(">");
+		btnDroit3.setBounds(932, 347, 55, 23);
+		add(btnDroit3);
+
+		btnDroit3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				droite = true;
+				changeCouleurPiste();
+				droite = false;
+			}
+		});
+
+		panelCouleurPiste = new JPanel();
+		panelCouleurPiste.setBackground(Color.RED);
+		panelCouleurPiste.setBounds(788, 316, 143, 90);
+		add(panelCouleurPiste);
+
+		JLabel lblImage_1 = new JLabel("");
+		panelCouleurPiste.add(lblImage_1);
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
@@ -417,8 +415,14 @@ public class FenetreOptionMontre extends JPanel {
 			txtArea.append("\nVous avez choisi la piste Canada!");
 			type = TypePiste.CANADA;
 			imageActuelle = OutilsImage.lireImage("PisteCanada.png");
-//			zoneApercuPiste.setImg(imageActuelle);
+
 			zoneAnimPhysique.setTypePiste(type);
+			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().setPosition(
+					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
+							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 10)));
+			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setPosition(
+					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
+							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 50)));
 			changeCouleurPiste();
 
 			Image imgHiver = OutilsImage.lireImageEtRedimensionner("canadaWinter.jpg", 1600, 800);
@@ -441,8 +445,14 @@ public class FenetreOptionMontre extends JPanel {
 			type = TypePiste.MEXIQUE;
 			txtArea.append("\nVous avez choisi la piste Mexique!");
 			imageActuelle = OutilsImage.lireImage("PisteMexique.png");
-//			zoneApercuPiste.setImg(imageActuelle);
+
 			zoneAnimPhysique.setTypePiste(type);
+			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().setPosition(
+					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
+							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 10)));
+			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setPosition(
+					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
+							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 50)));
 			changeCouleurPiste();
 
 			Image imgDesert = OutilsImage.lireImageEtRedimensionner("mexico-building.jpg", 1600, 800);
@@ -465,8 +475,14 @@ public class FenetreOptionMontre extends JPanel {
 			type = TypePiste.ITALIE;
 			txtArea.append("\nVous avez choisi la piste Italie!");
 			imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
-//			zoneApercuPiste.setImg(imageActuelle);
+
 			zoneAnimPhysique.setTypePiste(type);
+			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().setPosition(
+					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
+							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 10)));
+			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture2().setPosition(
+					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
+							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 50)));
 			changeCouleurPiste();
 
 			Image imgVenice = OutilsImage.lireImageEtRedimensionner("italie-rome.jpg", 1600, 800);

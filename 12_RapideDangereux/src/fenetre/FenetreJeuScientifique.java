@@ -101,7 +101,6 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 
-		
 		lireMusic();
 		panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
@@ -668,12 +667,12 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNewLabel_4.setBounds(948, 538, 46, 14);
 		add(lblNewLabel_4);
-		
+
 		JLabel lblNewLabel_7 = new JLabel("<---------------->");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_7.setBounds(361, 29, 120, 14);
 		add(lblNewLabel_7);
-		
+
 		JLabel lblNewLabel_8 = new JLabel("80 M");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_8.setBounds(406, 13, 46, 14);
@@ -851,7 +850,12 @@ public class FenetreJeuScientifique extends JPanel {
 			progressBarFroce2.setMaximum(100);
 			progressBarFroce2.setValue(valeur2 - 50);
 			break;
-
+		case "resetBar1":
+			progressBarFroce.setValue(0);
+			break;
+		case "resetBar2":
+			progressBarFroce2.setValue(0);
+			break;
 		}
 
 	}
@@ -881,21 +885,21 @@ public class FenetreJeuScientifique extends JPanel {
 			}
 		});
 	}
-	
+
 	/**
 	 * méthode qui retourn le timer des graphique
 	 * 
-	 * @return		timerVitesse
+	 * @return timerVitesse
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public static Timer getTimer() {
 		return timerVitesse;
 	}
-	
+
 	/**
 	 * méthode qui permet de reset les graphhique de vitesse en fonction du temps
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void resetGraphique() {
 		zoneVitesse.renouvlerTemps();
 		zoneVitesse.renouvlerVitesse();
@@ -903,19 +907,20 @@ public class FenetreJeuScientifique extends JPanel {
 		zoneVitesse2.renouvlerVitesse();
 		timerVitesse.stop();
 	}
-	
+
 	/**
-	 * méthode qui permet de mettre en pause les graphique de vitesse en fonction du temps
+	 * méthode qui permet de mettre en pause les graphique de vitesse en fonction du
+	 * temps
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void stopGraphique() {
 		timerVitesse.stop();
 	}
-	
+
 	/**
-	 * méthode qui permet d'activer le timer pour les graphique 
+	 * méthode qui permet d'activer le timer pour les graphique
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void actionStart() {
 		timerVitesse.start();
 	}
@@ -923,41 +928,39 @@ public class FenetreJeuScientifique extends JPanel {
 	/**
 	 * méthode qui permet de lancer la piste audio
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void musicStart() {
 		if (AppPrincipale12.getCheckAudio() == false) {
 			clip.start();
 		}
 	}
-	
-	
 
 	/**
 	 * méthode qui retourne la valeur de la variable audio
 	 * 
 	 * @return clip
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public static Clip getClip() {
 		return clip;
 	}
-	
+
 	/**
-	 * méthode qui permet d'arreter et de recommencer la music au debut 
+	 * méthode qui permet d'arreter et de recommencer la music au debut
 	 * 
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void resetMusic() {
 		if (clip != null) {
 			clip.stop();
 			clip.setMicrosecondPosition(0);
 		}
 	}
-	
+
 	/**
 	 * méthode qui permet de lire un fichier audio
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void lireMusic() {
 		try {
 			clip = AudioSystem.getClip();
@@ -969,11 +972,11 @@ public class FenetreJeuScientifique extends JPanel {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * méthode qui permet d'arreter une music
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void arretMusic() {
 		if (clip != null) {
 			clip.stop();

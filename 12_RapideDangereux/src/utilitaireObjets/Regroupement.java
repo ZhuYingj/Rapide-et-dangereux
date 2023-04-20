@@ -9,6 +9,8 @@ import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import application.OutilsImage;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -225,6 +227,13 @@ public class Regroupement implements Dessinable, Serializable {
 
 			creeBoiteDansListe();
 		}
+
+		if (objSpecial == null) {
+			pcs.firePropertyChange("reset1", 0, -1);
+		}
+		if (objSpecial2 == null) {
+			pcs.firePropertyChange("reset2", 0, -1);
+		}
 		fumeeFonction();
 		accelerateurFonction();
 		fonctionDesObjetsPossibles(tempsTotalEcoule, deltaT);
@@ -251,6 +260,10 @@ public class Regroupement implements Dessinable, Serializable {
 				objSpecial.setTempsTemporaire(tempsTemp);
 
 				objSpecial.fonctionChampignon(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule);
+
+				if (objSpecial.fonctionChampignon(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule) == false) {
+					objSpecial = null;
+				}
 
 			} else if (objSpecial.getType() == TypeObjetSpecial.BOULEDENEIGE) {
 
@@ -341,7 +354,9 @@ public class Regroupement implements Dessinable, Serializable {
 				objSpecial2.setTempsTemporaire(tempsTemp2);
 
 				objSpecial2.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule);
-
+				if (objSpecial2.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule) == false) {
+					objSpecial2 = null;
+				}
 			} else if (objSpecial2.getType() == TypeObjetSpecial.BOULEDENEIGE) {
 
 				// Si la boule de neige est lancé on avance d'un pas.
@@ -980,7 +995,7 @@ public class Regroupement implements Dessinable, Serializable {
 			snowball.dessiner(g2d);
 		}
 	}
-	
+
 	/**
 	 * Méthode qui permet d'appliquer la fonction de l'accelerateur sur les 2
 	 * voitures lorsqu'ils sont en contact avec celui-ci.

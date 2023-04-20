@@ -45,7 +45,7 @@ import utilitaireObjets.Voiture;
 
 public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
-	private int nombreBlocMystere = 5;
+	private int nombreBlocMystere = 3;
 
 	/** Largeur du composant en metres. */
 	private double largeurDuComposantEnMetres = 640;
@@ -726,6 +726,29 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Tan Tommy Rin
 	public void changementTexteParIteration() {
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
+		if (regroupement.getObjSpecial() != null) {
+			if (regroupement.getObjSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
+				pcs.firePropertyChange("champignon1", 0, -1);
+			} else if (regroupement.getObjSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+				pcs.firePropertyChange("bouleNeige1", 0, -1);
+			} else if (regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR) {
+				pcs.firePropertyChange("trouNoir1", 0, -1);
+			} else {
+				pcs.firePropertyChange("colle1", 0, -1);
+			}
+		}
+		if (regroupement.getObjSpecial2() != null) {
+			if (regroupement.getObjSpecial2().getType() == TypeObjetSpecial.CHAMPIGNON) {
+				pcs.firePropertyChange("champignon2", 0, -1);
+			} else if (regroupement.getObjSpecial2().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+				pcs.firePropertyChange("bouleNeige2", 0, -1);
+			} else if (regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR) {
+				pcs.firePropertyChange("trouNoir2", 0, -1);
+			} else {
+				pcs.firePropertyChange("colle2", 0, -1);
+			}
+		}
+
 		pcs.firePropertyChange("accEnXV1", 0, voiture.getAccel().getX());
 		pcs.firePropertyChange("accEnYV1", 0, voiture.getAccel().getY());
 		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getX());
@@ -816,11 +839,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			} else if ((regroupement.getObjSpecial() != null
 					&& regroupement.getObjSpecial().getColle()
 							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true
-					&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 5)
+					&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 8)
 					|| (regroupement.getObjSpecial2() != null
 							&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
 									regroupement.getListePisteDeDepart().get(0).getVoiture()) == true
-							&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 5)) {
+							&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 8)) {
 
 			}
 
@@ -869,11 +892,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			} else if ((regroupement.getObjSpecial() != null
 					&& regroupement.getObjSpecial().getColle()
 							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true
-					&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 5)
+					&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 8)
 					|| (regroupement.getObjSpecial2() != null
 							&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
 									regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true
-							&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 5)) {
+							&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 8)) {
 
 			}
 
@@ -892,7 +915,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		arretMusic();
 		arretGraphique();
 		gagnantCourse();
-		//meilleurTemps();
+		// meilleurTemps();
 	}
 
 	/**
@@ -1214,8 +1237,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						.getNombreToursFaits()) {
 
 			String nomUtilisateur = "Inconnue";
-			 nomUtilisateur = JOptionPane.showInputDialog(
-					"félicitation pour cette belle victoire, entrez votre nom pour le classement !");
+			nomUtilisateur = JOptionPane
+					.showInputDialog("félicitation pour cette belle victoire, entrez votre nom pour le classement !");
 
 			if (typePiste == TypePiste.CANADA) {
 				piste = "Canada";
@@ -1226,23 +1249,24 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					piste = "Italie";
 				}
 			}
-			
 
-			GestionnaireDeFichiersSurLeBureau.ecrireFichier(nomUtilisateur,Math.round(tempsTotalEcoule * 100.0) / 100.0, piste);
+			GestionnaireDeFichiersSurLeBureau.ecrireFichier(nomUtilisateur,
+					Math.round(tempsTotalEcoule * 100.0) / 100.0, piste);
 		}
 	}
-	
+
 	public void meilleurTemps() {
 		try {
-            List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-            Map<String, InfoLigne> meilleursTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
+			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+			Map<String, InfoLigne> meilleursTemps = GestionnaireDeFichiersSurLeBureau
+					.trouverMeilleursTemps(listeLignes);
 
-            for (InfoLigne meilleurTemps : meilleursTemps.values()) {
-                System.out.println(meilleurTemps);
-            }
-        } catch (FileNotFoundException e) {
-            System.err.println("Erreur : fichier introuvable");
-        }
+			for (InfoLigne meilleurTemps : meilleursTemps.values()) {
+				System.out.println(meilleurTemps);
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Erreur : fichier introuvable");
+		}
 	}
-	
+
 }
