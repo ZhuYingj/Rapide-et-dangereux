@@ -12,7 +12,12 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import java.io.BufferedWriter;
+import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
@@ -249,15 +254,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 	 */
 	// Ludovic Julien
 	public static void ecrireFichier(String nomUtilisateur, double temps, String piste) {
-		String cheminFichier = System.getProperty("user.home") + "/Desktop/donnees.txt";
-
-
-//	public static String getBureau() {
-//		// TODO Auto-generated method stub
-//		return System.getProperty("user.home");
-//	}
-
-	
+		String cheminFichier = System.getProperty("user.home") + "/Desktop/donnees.txt";	
 
 		try {
 			// Créer le fichier s'il n'existe pas déjà
@@ -276,10 +273,44 @@ public class GestionnaireDeFichiersSurLeBureau {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	 public static List<InfoLigne> lireFichier(String nomFichier) throws FileNotFoundException {
+	        List<InfoLigne> listeLignes = new ArrayList<>();
+	        File dossier = new File(System.getProperty("user.home") + "/Desktop/"+ nomFichier);
+
+	        Scanner scanner = new Scanner(dossier);
+	        while (scanner.hasNextLine()) {
+	            String ligne = scanner.nextLine();
+	            String[] infos = ligne.split(";");
+	            String nom = infos[0];
+	            double temps = Double.parseDouble(infos[1]);
+	            String piste = infos[2];
+	            listeLignes.add(new InfoLigne(nom, temps, piste));
+	        }
+
+	        scanner.close();
+	        return listeLignes;
+	    }
+	
+	
+	 public static Map<String, InfoLigne> trouverMeilleursTemps(List<InfoLigne> listeLignes) {
+	        Map<String, InfoLigne> meilleursTemps = new HashMap<>();
+
+	        for (InfoLigne ligne : listeLignes) {
+	            String piste = ligne.getPiste();
+	            if (!meilleursTemps.containsKey(piste) || ligne.getTemps() < meilleursTemps.get(piste).getTemps()) {
+	                meilleursTemps.put(piste, ligne);
+	            }
+	        }
+
+	        return meilleursTemps;
+	    }
+	
 
 	public static String getBureau() {
 		// TODO Auto-generated method stub
-		return null;
+		return System.getProperty("user.home");
 	}
 
 

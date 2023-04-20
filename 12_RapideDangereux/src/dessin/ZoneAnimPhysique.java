@@ -8,12 +8,16 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.Map;
 
 import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import application.GestionnaireDeFichiersSurLeBureau;
+import application.InfoLigne;
 import fenetre.FenetreJeuScientifique;
 import geometrie.Vecteur2D;
 import interfaces.TypeObjetSpecial;
@@ -889,6 +893,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		arretMusic();
 		arretGraphique();
 		gagnantCourse();
+		//meilleurTemps();
 	}
 
 	/**
@@ -1209,7 +1214,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 						.getNombreToursFaits()) {
 
-			String nomUtilisateur = JOptionPane.showInputDialog(null,
+			String nomUtilisateur = "Inconnue";
+			 nomUtilisateur = JOptionPane.showInputDialog(
 					"félicitation pour cette belle victoire, entrez votre nom pour le classement !");
 
 			if (typePiste == TypePiste.CANADA) {
@@ -1221,8 +1227,23 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					piste = "Italie";
 				}
 			}
+			
 
-			GestionnaireDeFichiersSurLeBureau.ecrireFichier(nomUtilisateur, tempsTotalEcoule, piste);
+			GestionnaireDeFichiersSurLeBureau.ecrireFichier(nomUtilisateur,Math.round(tempsTotalEcoule * 100.0) / 100.0, piste);
 		}
 	}
+	
+	public void meilleurTemps() {
+		try {
+            List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+            Map<String, InfoLigne> meilleursTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
+
+            for (InfoLigne meilleurTemps : meilleursTemps.values()) {
+                System.out.println(meilleurTemps);
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Erreur : fichier introuvable");
+        }
+	}
+	
 }
