@@ -71,6 +71,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblPositionEnXV2;
 	private JLabel lblPositionEnYV2;
 	private JLabel lblNombreToursVoiture2;
+	private JLabel lblBackgroundBleu;
 
 	private static Clip clip;
 	private ZoneVitesse zoneVitesse2;
@@ -740,6 +741,16 @@ public class FenetreJeuScientifique extends JPanel {
 		lblObjet2.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblObjet2.setBounds(810, 650, 137, 14);
 		add(lblObjet2);
+		
+		lblBackgroundBleu = new JLabel("");
+		lblBackgroundBleu.setBounds(0, 0, 1600, 800);
+		add(lblBackgroundBleu);
+		
+		Image imgBleu = OutilsImage.lireImageEtRedimensionner("backgroundJeu.jpg", 1600, 800);
+		if (imgBleu != null) {
+			lblBackgroundBleu.setIcon(new ImageIcon(imgBleu));
+			imgBleu.flush();
+		}
 
 		graphiqueVitesse();
 	}
