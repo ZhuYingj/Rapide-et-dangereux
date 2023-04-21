@@ -11,6 +11,7 @@ import java.beans.PropertyChangeSupport;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
@@ -892,7 +893,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		arretMusic();
 		arretGraphique();
 		gagnantCourse();
-		//meilleurTemps();
+	//	meilleurTemps();
+		//moyenTemps();
+		//nbJouer();
+		
 	}
 
 	/**
@@ -1134,9 +1138,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
 			regroupement.setNombreBoiteMystere(regroupementTempo.getRegroupementBoiteMystere().size());
 			regroupement.setRegroupementObjet(regroupementTempo.getRegroupementBoiteMystere());
-
 		}
-
 	}
 
 	public String getNomFichierRegroupement() {
@@ -1145,7 +1147,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	public void setNomFichierRegroupement(String nomFichierRegroupement) {
 		this.nomFichierRegroupement = nomFichierRegroupement;
-
 	}
 
 	public int getNombreBlocMystere() {
@@ -1162,7 +1163,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		this.nombreBlocMystere = nombreBlocMystere;
 		regroupement.setNombreBoiteMystere(nombreBlocMystere);
 		regroupement.creeBoiteDansListe();
-
 	}
 
 	/**
@@ -1233,16 +1233,58 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	}
 	
 	public void meilleurTemps() {
+//		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
+//				.getNombreToursFaits()
+//				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+//						.getNombreToursFaits()) {
+		
 		try {
             List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-            Map<String, InfoLigne> meilleursTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
+           //Map<String, InfoLigne> meilleurTempsMexique = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes,"Mexique");
+            Map<String, InfoLigne> meilleurTempsCanada = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
+          // Map<String, InfoLigne> meilleurTempsItalie = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes,"Italie");
 
-            for (InfoLigne meilleurTemps : meilleursTemps.values()) {
-                System.out.println(meilleurTemps);
-            }
+            System.out.println(meilleurTempsCanada);
+            
+            
+            //TableauRecord.getTableau().updateRecord("Mexique",meilleurTempsMexique);
+            TableauRecord.getTableau().updateRecord("Canada",meilleurTempsCanada);
+         //   TableauRecord.getTableau().updateRecord("Italie",meilleurTempsItalie);
+            
+            
         } catch (FileNotFoundException e) {
             System.err.println("Erreur : fichier introuvable");
         }
+        }
+       // }
+	
+	
+	public void moyenTemps() {
+		 try {
+		        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+		        Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
+
+		        for (String piste : moyennes.keySet()) {
+		            double moyenne = moyennes.get(piste);
+		            System.out.println("Moyenne de temps pour la piste " + piste + " : " + moyenne);
+		        }
+		    } catch (FileNotFoundException e) {
+		        System.err.println("Erreur : fichier introuvable");
+		    }
+	}
+	
+	public void nbJouer() {
+		try {
+	        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+	        Map<String, Integer> comptages = GestionnaireDeFichiersSurLeBureau.compterPistes(listeLignes);
+
+	        for (String piste : comptages.keySet()) {
+	            int comptage = comptages.get(piste);
+	            System.out.println("La piste " + piste + " a été jouée " + comptage + " fois");
+	        }
+	    } catch (FileNotFoundException e) {
+	        System.err.println("Erreur : fichier introuvable");
+	    }
 	}
 	
 }
