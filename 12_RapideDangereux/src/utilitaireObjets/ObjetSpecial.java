@@ -89,15 +89,16 @@ public class ObjetSpecial implements Dessinable {
 //Tan Tommy Rin
 
 	public Vecteur2D fonctionTrouNoir(Voiture voiture) {
-
+//Plus eloigné du centre, moins l'attraction est forte.
 		Vecteur2D forceApplied = new Vecteur2D(trouNoir.getPosition());
 		forceApplied = forceApplied.soustrait(voiture.getPosition());
 		// Distance entre la voiture et le trou noir
 		double r = forceApplied.module();
-
-		double fg = (trouNoir.getMasseTrouNoir() * 35) / (r * r);
+//Normalement x 9.8, mais sinon trop faible comme force et voiture peut s'échapper
+		double fg = (trouNoir.getMasseTrouNoir() * 75) / (r * r);
 		forceApplied = forceApplied.multiplie(fg);
 		voiture.setSommeDesForces(forceApplied);
+		System.out.println(forceApplied.module());
 
 		return forceApplied;
 	}

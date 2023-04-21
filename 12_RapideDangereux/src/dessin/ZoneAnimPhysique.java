@@ -165,30 +165,30 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * @param g Contexte graphique
 	 */
 	// Kevin Nguyen
-//	public void paintComponent(Graphics g) {
-//		super.paintComponent(g);
-//		if (premiereFois) {
-//			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
-//			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
-//			enCoursDAnimation = true;
-//			premiereFois = false;
-//			regroupement.getListePisteDeDepart().get(0).getVoiture()
-//					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-//							regroupement.getListePisteDeDepart().get(0).getY() + 10));
-//
-//			regroupement.getListePisteDeDepart().get(0).getVoiture2()
-//					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-//							regroupement.getListePisteDeDepart().get(0).getY() + 50));
-//
-//		}
-//
-//		Graphics2D g2d = (Graphics2D) g;
-//		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//
-//		regroupement.setPixelsParMetre(pixelsParMetre);
-//		regroupement.dessiner(g2d);
-//
-//	}
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		if (premiereFois) {
+			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
+			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
+			enCoursDAnimation = true;
+			premiereFois = false;
+			regroupement.getListePisteDeDepart().get(0).getVoiture()
+					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+							regroupement.getListePisteDeDepart().get(0).getY() + 10));
+
+			regroupement.getListePisteDeDepart().get(0).getVoiture2()
+					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+							regroupement.getListePisteDeDepart().get(0).getY() + 50));
+
+		}
+
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		regroupement.setPixelsParMetre(pixelsParMetre);
+		regroupement.dessiner(g2d);
+
+	}
 
 	/**
 	 * Méthode qui détecte quand plusieurs touches sont appuyés en même temps
@@ -324,10 +324,28 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 		}
 		if (haut == true) {
-			regroupement.getListePisteDeDepart().get(0).getVoiture()
-					.setAccel(new Vecteur2D(
-							20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
-							20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
+			if ((regroupement.getObjSpecial() != null
+					&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
+					&& regroupement.getObjSpecial().getTrouNoir()
+							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)
+					|| (regroupement.getObjSpecial2() != null
+							&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR
+							&& regroupement.getObjSpecial2().getTrouNoir().collisionDeLaVoiture(
+									regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)) {
+
+			} else if ((regroupement.getObjSpecial() != null && regroupement.getObjSpecial().getColle()
+					.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)
+					|| (regroupement.getObjSpecial2() != null && regroupement.getObjSpecial2().getColle()
+							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)) {
+
+			} else {
+			
+				regroupement.getListePisteDeDepart().get(0).getVoiture()
+						.setAccel(new Vecteur2D(
+								20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
+								20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
+			}
+
 		}
 
 		if (d == true) {
@@ -587,6 +605,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(valeurInit);
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setAccel(valeurInit);
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setAngle(0);
+		regroupement.getListePisteDeDepart().get(0).getVoiture().setLongueurTete(2.5);
+		regroupement.getListePisteDeDepart().get(0).getVoiture().setStrokeVoulu(0.5);
+		regroupement.getListePisteDeDepart().get(0).getVoiture().setDiametreFleche(16);
+		regroupement.getListePisteDeDepart().get(0).getVoiture2().setLongueurTete(2.5);
+		regroupement.getListePisteDeDepart().get(0).getVoiture2().setStrokeVoulu(0.5);
+		regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametreFleche(16);
 
 		angleVoitureDegre = 0;
 		angleVoitureDegre2 = 0;

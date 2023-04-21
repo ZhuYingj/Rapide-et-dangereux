@@ -115,7 +115,7 @@ public class FenetreJeuScientifique extends JPanel {
 		panelObjetEtGraphique.setLayout(null);
 
 		zoneVitesse2 = new ZoneVitesse();
-		zoneVitesse2.setBounds(260, 0, 311, 228);
+		zoneVitesse2.setBounds(281, 0, 311, 228);
 		panelObjetEtGraphique.add(zoneVitesse2);
 		zoneVitesse2.setLayout(null);
 
@@ -677,7 +677,7 @@ public class FenetreJeuScientifique extends JPanel {
 		progressBarFroce.setStringPainted(true);
 
 		progressBarFroce2 = new JProgressBar();
-		progressBarFroce2.setBounds(1288, 470, 211, 29);
+		progressBarFroce2.setBounds(1308, 470, 211, 29);
 		add(progressBarFroce2);
 		progressBarFroce2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		progressBarFroce2.setStringPainted(true);
@@ -689,7 +689,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		JLabel lblNewLabel_10_1 = new JLabel("Force de lancement voiture 2");
 		lblNewLabel_10_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_10_1.setBounds(1288, 445, 211, 14);
+		lblNewLabel_10_1.setBounds(1308, 445, 211, 14);
 		add(lblNewLabel_10_1);
 
 
