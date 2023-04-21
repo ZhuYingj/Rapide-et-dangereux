@@ -126,7 +126,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 						voiture.setVitesse(vit);
 					}
 					voiture.getPosition().setY(murHaut + 1);
-					System.out.println("en collisionD");
+			
 					if (Math.toDegrees(voiture.getAngle()) < 270 && Math.toDegrees(voiture.getAngle()) > 180) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
@@ -148,18 +148,17 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 						voiture.setVitesse(vit);
 					}
 					voiture.getPosition().setY(murBas - voiture.getDiametre());
-					System.out.println("en collisionD");
+			
 					if (Math.toDegrees(voiture.getAngle()) < 90 && Math.toDegrees(voiture.getAngle()) > 0) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
 					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
 						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle())
 								+ ((360 - (Math.toDegrees(voiture.getAngle())) * 2))));
-						System.out.println(
-								Math.toDegrees(voiture.getAngle()) + (360 - (Math.toDegrees(voiture.getAngle()) * 2)));
+					
 					}
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}
 			}
