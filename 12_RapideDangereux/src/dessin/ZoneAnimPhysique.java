@@ -45,6 +45,7 @@ import utilitaireObjets.Voiture;
 
 public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
+	/** Le nombre de boite mystere **/
 	private int nombreBlocMystere = 3;
 
 	/** Largeur du composant en metres. */
@@ -325,10 +326,25 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		if (haut == true) {
 
+
 			regroupement.getListePisteDeDepart().get(0).getVoiture()
 					.setAccel(new Vecteur2D(
 							20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
 							20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
+
+			} else if ((regroupement.getObjSpecial() != null && regroupement.getObjSpecial().getColle()
+					.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)
+					|| (regroupement.getObjSpecial2() != null && regroupement.getObjSpecial2().getColle()
+							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)) {
+
+			} else {
+
+				regroupement.getListePisteDeDepart().get(0).getVoiture()
+						.setAccel(new Vecteur2D(
+								20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
+								20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
+			}
+	
 
 		}
 
@@ -1186,7 +1202,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * 
 	 * @param nombreBlocMystere le nombre voulu
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void setNombreBlocMystere(int nombreBlocMystere) {
 		this.nombreBlocMystere = nombreBlocMystere;
 		regroupement.setNombreBoiteMystere(nombreBlocMystere);

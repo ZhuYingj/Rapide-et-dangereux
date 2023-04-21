@@ -229,7 +229,7 @@ public class Regroupement implements Dessinable, Serializable {
 		}
 
 		if (objSpecial == null) {
-		
+
 			pcs.firePropertyChange("reset1", 0, -1);
 		}
 		if (objSpecial2 == null) {
@@ -344,7 +344,6 @@ public class Regroupement implements Dessinable, Serializable {
 				if (objSpecial.getColle().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
 					objSpecial.fonctionColle(listePisteDeDepart.get(0).getVoiture());
-					
 
 				}
 			}
@@ -356,7 +355,8 @@ public class Regroupement implements Dessinable, Serializable {
 				objSpecial2.setTempsTemporaire(tempsTemp2);
 
 				objSpecial2.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule);
-				if (objSpecial2.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule) == false) {
+				if (objSpecial2.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(),
+						tempsTotalEcoule) == false) {
 					objSpecial2 = null;
 				}
 			} else if (objSpecial2.getType() == TypeObjetSpecial.BOULEDENEIGE) {
@@ -599,7 +599,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param voiture Voiture qui prend l'objet de type colle.
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void placerColleBonMorceauPisteVoiture2(Voiture voiture) {
 
 		if (objSpecial2 != null) {
@@ -727,7 +727,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param voiture Voiture qui prend l'objet de type colle.
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void placerColleBonMorceauPisteVoiture1(Voiture voiture) {
 
 		if (objSpecial != null) {
@@ -1127,7 +1127,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteDeDepart(int i) {
 		if (objSpecial != null) {
 			if (listePisteDeDepart.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
@@ -1151,7 +1151,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteHorizontale(int i) {
 		if (objSpecial != null) {
 			if (listePisteHorizontale.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
@@ -1176,7 +1176,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVerticale(int i) {
 		if (objSpecial != null) {
 			if (listePisteVerticale.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
@@ -1200,7 +1200,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageBas(int i) {
 
 		if (objSpecial != null) {
@@ -1229,7 +1229,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageDroit(int i) {
 
 		if (objSpecial != null) {
@@ -1259,7 +1259,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageGauche(int i) {
 
 		if (objSpecial != null) {
@@ -1289,7 +1289,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageHaut(int i) {
 		if (objSpecial != null) {
 			if (listePisteVirageHaut.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {

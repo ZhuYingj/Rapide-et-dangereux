@@ -64,7 +64,7 @@ public class JeuOptions extends JPanel {
 	private JSlider sliderNbBoites;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, };
-
+	/** Liste des couleurs de bordure de piste **/
 	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.YELLOW,
 			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private JLabel lblLongueurPiste;
@@ -161,7 +161,6 @@ public class JeuOptions extends JPanel {
 		txtArea.setText("Choisisez les paramètres!");
 		txtArea.setWrapStyleWord(true);
 		txtArea.setLineWrap(true);
-
 
 		btnMexique = new JButton("Mexique");
 		btnMexique.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));

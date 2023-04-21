@@ -55,8 +55,8 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	/**
 	 * Methode qui permet de construire la piste verticale a l'aide de parametre
 	 * 
-	 * @param x             position en x de la piste
-	 * @param y             position en y de la piste
+	 * @param x position en x de la piste
+	 * @param y position en y de la piste
 	 * 
 	 */
 	// Ludovic Julien
@@ -80,8 +80,8 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(bordure);
-		//Stroke stroke = new BasicStroke(0.5f);
-		g2d.setStroke( new BasicStroke(2) );
+		// Stroke stroke = new BasicStroke(0.5f);
+		g2d.setStroke(new BasicStroke(2));
 		g2d.drawLine(x, y + 1, x, y + taillePiste - 1);
 		g2d.drawLine(x + taillePiste, y + 1, x + taillePiste, y + taillePiste - 1);
 
@@ -310,6 +310,5 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	public void setBordure(Color bordure) {
 		this.bordure = bordure;
 	}
-	
-	
+
 }

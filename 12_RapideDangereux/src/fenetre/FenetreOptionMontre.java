@@ -34,6 +34,7 @@ import javax.swing.SwingConstants;
  * 
  * @author Alexis Pineda-Alvarado
  * @author Ludovic Julien
+ * @author Kevin Nguyen
  *
  */
 

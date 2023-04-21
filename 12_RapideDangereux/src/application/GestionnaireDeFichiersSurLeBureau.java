@@ -37,7 +37,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 	private int nombrePiste = 1;
 
-// fichiers binaires (objets)
+	// fichiers binaires (objets)
 	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String nomFichBinComboBox = "comboBox.dat";
@@ -56,20 +56,20 @@ public class GestionnaireDeFichiersSurLeBureau {
 	 * 
 	 * @param regroupement Le groupe que l'on sauvegarde
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 
 	public void ecrireFichierBinBureauRegroupement(Regroupement regroupement) {
 		nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
-// chemin d'acces au dossier
+		// chemin d'acces au dossier
 		File dossier = new File(System.getProperty("user.home"), "Desktop" + "\\" + sousDossierSurBureau);
 
-// on cree le dossier s'il n'existe pas
+		// on cree le dossier s'il n'existe pas
 		if (dossier.mkdir()) {
 			System.out.println("\nLe dossier " + dossier.toString() + " a été créé car il n'existait pas...");
 		}
 
-// chemin d'acces au fichier de travail
+		// chemin d'acces au fichier de travail
 		File fichierDeTravail = new File(dossier + "\\" + nomFichBinRegroupement);
 
 		ObjectOutputStream oos = null;
@@ -78,7 +78,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 			oos = new ObjectOutputStream(new FileOutputStream(fichierDeTravail));
 
-// on écrit chacun des objets
+			// on écrit chacun des objets
 			oos.writeObject(regroupement);
 			System.out.println(
 					"\nLes informations sur la voiture et le regroupement sont écrites avec succès. \nLe fichier "
@@ -92,7 +92,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 		}
 
 		finally {
-// on ex�cutera toujours ceci, erreur ou pas
+			// on ex�cutera toujours ceci, erreur ou pas
 			try {
 				oos.close();
 			} catch (IOException e) {
@@ -110,18 +110,18 @@ public class GestionnaireDeFichiersSurLeBureau {
 	 * @param nomFichierVoulu le nom du fichier voulu
 	 * @return le groupe lue
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 
 	public Regroupement lireFichierBinBureauRegroupement(String nomFichierVoulu) {
 		nomFichBinRegroupement = nomFichierVoulu;
 		Regroupement regroupement = null;
 		ObjectInputStream ois = null;
 
-// chemin d'acces au fichier de travail, qui sera sur le Bureau
+		// chemin d'acces au fichier de travail, qui sera sur le Bureau
 		File fichierDeTravail = new File(System.getProperty("user.home"),
 				"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
 
-// on teste si le fichier à lire existe
+		// on teste si le fichier à lire existe
 		if (!fichierDeTravail.exists()) {
 			JOptionPane.showMessageDialog(null,
 					"Probl�me! Le fichier " + fichierDeTravail.toString() + " n'existe pas...");
@@ -198,19 +198,19 @@ public class GestionnaireDeFichiersSurLeBureau {
 	 * @param nomVoulu     le nom voulu à sauvegarder
 	 * @param regroupement Le groupe que l'on sauvegarde
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void ecrireFichierBinBureauRegroupement2(Regroupement regroupement, String nomVoulu) {
 		nomFichBinRegroupement = nomVoulu;
 
-// chemin d'acces au dossier
+		// chemin d'acces au dossier
 		File dossier = new File(System.getProperty("user.home"), "Desktop" + "\\" + sousDossierSurBureau);
 
-// on cree le dossier s'il n'existe pas
+		// on cree le dossier s'il n'existe pas
 		if (dossier.mkdir()) {
 			System.out.println("\nLe dossier " + dossier.toString() + " a été créé car il n'existait pas...");
 		}
 
-// chemin d'acces au fichier de travail
+		// chemin d'acces au fichier de travail
 		File fichierDeTravail = new File(dossier + "\\" + nomFichBinRegroupement);
 
 		ObjectOutputStream oos = null;
@@ -219,7 +219,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 			oos = new ObjectOutputStream(new FileOutputStream(fichierDeTravail));
 
-// on �crit chacun des objets
+			// on �crit chacun des objets
 			oos.writeObject(regroupement);
 			System.out.println(
 					"\nLes informations sur la voiture et le regroupement sont écrites avec succès. \nLe fichier "
@@ -233,7 +233,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 		}
 
 		finally {
-// on ex�cutera toujours ceci, erreur ou pas
+			// on ex�cutera toujours ceci, erreur ou pas
 			try {
 				oos.close();
 			} catch (IOException e) {
@@ -254,7 +254,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 	 */
 	// Ludovic Julien
 	public static void ecrireFichier(String nomUtilisateur, double temps, String piste) {
-		String cheminFichier = System.getProperty("user.home") + "/Desktop/donnees.txt";	
+		String cheminFichier = System.getProperty("user.home") + "/Desktop/donnees.txt";
 
 		try {
 			// Créer le fichier s'il n'existe pas déjà
@@ -273,58 +273,56 @@ public class GestionnaireDeFichiersSurLeBureau {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * méthode qui permet de lire le fichier des donnes
 	 * 
-	 * @param nomFichier					nom du fichier en question
-	 * @return								liste avec les données
-	 * @throws FileNotFoundException		exeption si fichier introuvable
+	 * @param nomFichier nom du fichier en question
+	 * @return liste avec les données
+	 * @throws FileNotFoundException exeption si fichier introuvable
 	 */
-	//Ludovic Julien
-	 public static List<InfoLigne> lireFichier(String nomFichier) throws FileNotFoundException {
-	        List<InfoLigne> listeLignes = new ArrayList<>();
-	        File dossier = new File(System.getProperty("user.home") + "/Desktop/"+ nomFichier);
+	// Ludovic Julien
+	public static List<InfoLigne> lireFichier(String nomFichier) throws FileNotFoundException {
+		List<InfoLigne> listeLignes = new ArrayList<>();
+		File dossier = new File(System.getProperty("user.home") + "/Desktop/" + nomFichier);
 
-	        Scanner scanner = new Scanner(dossier);
-	        while (scanner.hasNextLine()) {
-	            String ligne = scanner.nextLine();
-	            String[] infos = ligne.split(";");
-	            String nom = infos[0];
-	            double temps = Double.parseDouble(infos[1]);
-	            String piste = infos[2];
-	            listeLignes.add(new InfoLigne(nom, temps, piste));
-	        }
+		Scanner scanner = new Scanner(dossier);
+		while (scanner.hasNextLine()) {
+			String ligne = scanner.nextLine();
+			String[] infos = ligne.split(";");
+			String nom = infos[0];
+			double temps = Double.parseDouble(infos[1]);
+			String piste = infos[2];
+			listeLignes.add(new InfoLigne(nom, temps, piste));
+		}
 
-	        scanner.close();
-	        return listeLignes;
-	    }
-	
-	 /**
-	  * méthode qui permet de retourner le meilleur temps de chaque piste 
-	  * 
-	  * @param listeLignes		liste des donner de temps 
-	  * @return					meilleur temps de chaque piste
-	  */
-	//Ludovic Julien
-	 public static Map<String, InfoLigne> trouverMeilleursTemps(List<InfoLigne> listeLignes) {
-	        Map<String, InfoLigne> meilleursTemps = new HashMap<>();
+		scanner.close();
+		return listeLignes;
+	}
 
-	        for (InfoLigne ligne : listeLignes) {
-	            String piste = ligne.getPiste();
-	            if (!meilleursTemps.containsKey(piste) || ligne.getTemps() < meilleursTemps.get(piste).getTemps()) {
-	                meilleursTemps.put(piste, ligne);
-	            }
-	        }
+	/**
+	 * méthode qui permet de retourner le meilleur temps de chaque piste
+	 * 
+	 * @param listeLignes liste des donner de temps
+	 * @return meilleur temps de chaque piste
+	 */
+	// Ludovic Julien
+	public static Map<String, InfoLigne> trouverMeilleursTemps(List<InfoLigne> listeLignes) {
+		Map<String, InfoLigne> meilleursTemps = new HashMap<>();
 
-	        return meilleursTemps;
-	    }
-	
+		for (InfoLigne ligne : listeLignes) {
+			String piste = ligne.getPiste();
+			if (!meilleursTemps.containsKey(piste) || ligne.getTemps() < meilleursTemps.get(piste).getTemps()) {
+				meilleursTemps.put(piste, ligne);
+			}
+		}
+
+		return meilleursTemps;
+	}
 
 	public static String getBureau() {
 		// TODO Auto-generated method stub
 		return System.getProperty("user.home");
 	}
-
 
 }
