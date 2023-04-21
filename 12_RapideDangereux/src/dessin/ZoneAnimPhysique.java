@@ -324,27 +324,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 		}
 		if (haut == true) {
-			if ((regroupement.getObjSpecial() != null
-					&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR
-					&& regroupement.getObjSpecial().getTrouNoir()
-							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)
-					|| (regroupement.getObjSpecial2() != null
-							&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR
-							&& regroupement.getObjSpecial2().getTrouNoir().collisionDeLaVoiture(
-									regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)) {
 
-			} else if ((regroupement.getObjSpecial() != null && regroupement.getObjSpecial().getColle()
-					.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)
-					|| (regroupement.getObjSpecial2() != null && regroupement.getObjSpecial2().getColle()
-							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)) {
-
-			} else {
-			
-				regroupement.getListePisteDeDepart().get(0).getVoiture()
-						.setAccel(new Vecteur2D(
-								20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
-								20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
-			}
+			regroupement.getListePisteDeDepart().get(0).getVoiture()
+					.setAccel(new Vecteur2D(
+							20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
+							20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
 
 		}
 
