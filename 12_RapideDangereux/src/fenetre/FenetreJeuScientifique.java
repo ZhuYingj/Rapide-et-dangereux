@@ -732,12 +732,12 @@ public class FenetreJeuScientifique extends JPanel {
 		add(lblImageObjet2);
 
 		JLabel lblObjet1;
-		lblObjet1 = new JLabel("Objet Spéciale Voiture 1");
+		lblObjet1 = new JLabel("Objet Spécial Voiture 1");
 		lblObjet1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblObjet1.setBounds(680, 650, 120, 14);
 		add(lblObjet1);
 
-		JLabel lblObjet2 = new JLabel("Objet Spéciale Voiture 2");
+		JLabel lblObjet2 = new JLabel("Objet Spécial Voiture 2");
 		lblObjet2.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblObjet2.setBounds(810, 650, 137, 14);
 		add(lblObjet2);
