@@ -143,7 +143,8 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
 						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle())
 								+ ((360 - (Math.toDegrees(voiture.getAngle())) * 2))));
-					
+						System.out.println(
+								Math.toDegrees(voiture.getAngle()) + (360 - (Math.toDegrees(voiture.getAngle()) * 2)));
 					}
 				} catch (Exception e) {
 
@@ -189,7 +190,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 				&& objetSpecial.getBouleDeNeige().getBoule().getY() < murBas) {
 			if (objetSpecial.getBouleDeNeige().getBoule().getY() < murHaut + 1) {
 				enCollision = true;
-		
+				System.out.println("sa");
 			} else if (objetSpecial.getBouleDeNeige().getBoule().getY() > murBas - objetSpecial.getDiametreObjet()) {
 				enCollision = true;
 			}

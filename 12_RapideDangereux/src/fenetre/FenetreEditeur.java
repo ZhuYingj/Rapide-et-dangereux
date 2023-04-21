@@ -818,20 +818,19 @@ public class FenetreEditeur extends JPanel {
 		verifierSiPisteFerme();
 		if (pisteFerme == true) {
 			sauvegardeUnePiste2();
-			actionSkin();
+
 			chargementUnePiste();
+
 			pcs.firePropertyChange("JOUEREDITEUR", null, -1);
-			pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
+
 			pcs.firePropertyChange("REGROUPEMENT", null, pisteCourante);
 
+			actionSkin();
 		} else {
 			JOptionPane.showMessageDialog(null,
 					"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU MAL PLACÉ POUR JOUER!");
 
 		}
-
-	
-	
 
 		resetValeur();
 	}
@@ -1588,6 +1587,10 @@ public class FenetreEditeur extends JPanel {
 		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
 		regroupement.setListeFumee(panelRegroupement.getListeFumee());
 		regroupement.setCouleurBordurePiste(couleursPiste[couleurPiste]);
+		regroupement.setIndexCouleurV1(indexCouleur);
+		regroupement.setIndexCouleurV2(indexCouleur2);
+		regroupement.setIndexPisteCouleur(couleurPiste);
+
 		gestionFich.ecrireFichierBinBureauRegroupement2(regroupement, pisteCourante);
 		boolean dejaDansComboBox = false;
 		for (int a = 0; a < comboBoxPiste.getItemCount(); a++) {
@@ -1631,6 +1634,11 @@ public class FenetreEditeur extends JPanel {
 		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
 		regroupement.setListeFumee(panelRegroupement.getListeFumee());
 		regroupement.setCouleurBordurePiste(couleursPiste[couleurPiste]);
+
+		regroupement.setIndexCouleurV1(indexCouleur);
+		regroupement.setIndexCouleurV2(indexCouleur2);
+		regroupement.setIndexPisteCouleur(couleurPiste);
+
 		gestionFich.ecrireFichierBinBureauRegroupement(regroupement);
 		boolean dejaDansComboBox = false;
 		for (int a = 0; a < comboBoxPiste.getItemCount(); a++) {
@@ -1726,9 +1734,25 @@ public class FenetreEditeur extends JPanel {
 
 		for (int a = 0; a < regroupementSauvegarde.getListePisteDeDepart().size(); a++) {
 			panelRegroupement.getListePisteDeDepart().add(regroupementSauvegarde.getListePisteDeDepart().get(a));
+
 			panelV1.setBackground(regroupementSauvegarde.getListePisteDeDepart().get(a).getVoiture().getSkin());
 			panelV2.setBackground(regroupementSauvegarde.getListePisteDeDepart().get(a).getVoiture2().getSkin());
 			panelCouleurPiste.setBackground(regroupementSauvegarde.getCouleurBordurePiste());
+
+			indexCouleur = regroupementSauvegarde.getIndexCouleurV1();
+			indexCouleur2 = regroupementSauvegarde.getIndexCouleurV2();
+			couleurPiste = regroupementSauvegarde.getIndexPisteCouleur();
+
+			panelObjet.getPisteDeDepart().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteDeDepart().getVoiture().setSkin(couleurs[indexCouleur]);
+			panelObjet.getPisteDeDepart().getVoiture2().setSkin(couleurs2[indexCouleur2]);
+			panelObjet.getPisteHorizontale().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteVerticale().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteVirageBas().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteVirageHaut().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteVirageDroit().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteVirageGauche().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+
 		}
 // Pour bloc mystere
 

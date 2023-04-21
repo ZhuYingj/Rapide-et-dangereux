@@ -100,7 +100,7 @@ public class ObjetSpecial implements Dessinable {
 		double fg = (trouNoir.getMasseTrouNoir() * 75) / (r * r);
 		forceApplied = forceApplied.multiplie(fg);
 		voiture.setSommeDesForces(forceApplied);
-
+		System.out.println(forceApplied.module());
 
 		return forceApplied;
 	}

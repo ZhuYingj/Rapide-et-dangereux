@@ -178,9 +178,11 @@ public class AppPrincipale12 extends JFrame {
 
 		fenEditeur.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience);
-				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
 				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience, fenEditeur);
+				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience);
+				
+				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
+				
 
 			}
 		});

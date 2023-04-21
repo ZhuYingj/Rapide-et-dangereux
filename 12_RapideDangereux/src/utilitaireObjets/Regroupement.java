@@ -130,8 +130,12 @@ public class Regroupement implements Dessinable, Serializable {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private transient Graphics2D g2d;
 	private BouleFumee smokeScreen;
-
 	private Color couleurBordurePiste;
+
+	private int indexCouleurV1;
+
+	private int indexCouleurV2;
+	private int indexPisteCouleur;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -1629,5 +1633,29 @@ public class Regroupement implements Dessinable, Serializable {
 
 	public void setNombreBoiteMystere(int nombreBoiteMystere) {
 		this.nombreBoiteMystere = nombreBoiteMystere;
+	}
+
+	public int getIndexCouleurV1() {
+		return indexCouleurV1;
+	}
+
+	public void setIndexCouleurV1(int indexCouleurV1) {
+		this.indexCouleurV1 = indexCouleurV1;
+	}
+
+	public int getIndexCouleurV2() {
+		return indexCouleurV2;
+	}
+
+	public void setIndexCouleurV2(int indexCouleurV2) {
+		this.indexCouleurV2 = indexCouleurV2;
+	}
+
+	public int getIndexPisteCouleur() {
+		return indexPisteCouleur;
+	}
+
+	public void setIndexPisteCouleur(int indexPisteCouleur) {
+		this.indexPisteCouleur = indexPisteCouleur;
 	}
 }
