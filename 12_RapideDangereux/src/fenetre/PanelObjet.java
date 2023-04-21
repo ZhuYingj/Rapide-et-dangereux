@@ -29,12 +29,7 @@ import utilitaireObjets.PisteVirageHaut;
  */
 
 public class PanelObjet extends JPanel {
-	/**
-	 * Constructeur par défaut de la fenetre objet.
-	 */
-	public PanelObjet() {
-	}
-
+	
 	private final int X_OBJET = 75;
 	private final int Y_OBJET = 21;
 	private BlocMystere blocMystere;
@@ -47,6 +42,21 @@ public class PanelObjet extends JPanel {
 	private PisteVirageHaut pisteVirageHaut;
 	private Accelerateur accelerateur;
 	private Fumee fumee;
+	
+	/**
+	 * Constructeur par défaut de la fenetre objet.
+	 */
+	public PanelObjet() {
+		
+		pisteDeDepart = new PisteDeDepart(X_OBJET * 3, Y_OBJET);
+		pisteHorizontale = new PisteHorizontale(X_OBJET, Y_OBJET * 7);
+		pisteVerticale = new PisteVerticale(X_OBJET * 3, Y_OBJET * 7);
+		pisteVirageBas = new PisteVirageBas(X_OBJET, Y_OBJET * 14);
+		pisteVirageDroit = new PisteVirageDroit(X_OBJET * 3, Y_OBJET * 21);
+		pisteVirageGauche = new PisteVirageGauche(X_OBJET * 3, Y_OBJET * 14);
+		pisteVirageHaut = new PisteVirageHaut(X_OBJET, Y_OBJET * 21);
+	}
+
 
 	/**
 	 * Méthode permettant de dessiner sur la fenetre
@@ -57,13 +67,6 @@ public class PanelObjet extends JPanel {
 		Graphics2D g2d = (Graphics2D) g;
 
 		blocMystere = new BlocMystere(87, new Vecteur2D(X_OBJET, Y_OBJET));
-		pisteDeDepart = new PisteDeDepart(X_OBJET * 3, Y_OBJET);
-		pisteHorizontale = new PisteHorizontale(X_OBJET, Y_OBJET * 7);
-		pisteVerticale = new PisteVerticale(X_OBJET * 3, Y_OBJET * 7);
-		pisteVirageBas = new PisteVirageBas(X_OBJET, Y_OBJET * 14);
-		pisteVirageDroit = new PisteVirageDroit(X_OBJET * 3, Y_OBJET * 21);
-		pisteVirageGauche = new PisteVirageGauche(X_OBJET * 3, Y_OBJET * 14);
-		pisteVirageHaut = new PisteVirageHaut(X_OBJET, Y_OBJET * 21);
 		accelerateur = new Accelerateur(X_OBJET, Y_OBJET * 28);
 		fumee = new Fumee(X_OBJET * 3, Y_OBJET * 28);
 
@@ -82,6 +85,62 @@ public class PanelObjet extends JPanel {
 				(int) this.blocMystere.getPosition().getY(), null);
 
 		boiteMystere.flush();
+	}
+
+	public PisteDeDepart getPisteDeDepart() {
+		return pisteDeDepart;
+	}
+
+	public void setPisteDeDepart(PisteDeDepart pisteDeDepart) {
+		this.pisteDeDepart = pisteDeDepart;
+	}
+
+	public PisteHorizontale getPisteHorizontale() {
+		return pisteHorizontale;
+	}
+
+	public void setPisteHorizontale(PisteHorizontale pisteHorizontale) {
+		this.pisteHorizontale = pisteHorizontale;
+	}
+
+	public PisteVerticale getPisteVerticale() {
+		return pisteVerticale;
+	}
+
+	public void setPisteVerticale(PisteVerticale pisteVerticale) {
+		this.pisteVerticale = pisteVerticale;
+	}
+
+	public PisteVirageBas getPisteVirageBas() {
+		return pisteVirageBas;
+	}
+
+	public void setPisteVirageBas(PisteVirageBas pisteVirageBas) {
+		this.pisteVirageBas = pisteVirageBas;
+	}
+
+	public PisteVirageDroit getPisteVirageDroit() {
+		return pisteVirageDroit;
+	}
+
+	public void setPisteVirageDroit(PisteVirageDroit pisteVirageDroit) {
+		this.pisteVirageDroit = pisteVirageDroit;
+	}
+
+	public PisteVirageGauche getPisteVirageGauche() {
+		return pisteVirageGauche;
+	}
+
+	public void setPisteVirageGauche(PisteVirageGauche pisteVirageGauche) {
+		this.pisteVirageGauche = pisteVirageGauche;
+	}
+
+	public PisteVirageHaut getPisteVirageHaut() {
+		return pisteVirageHaut;
+	}
+
+	public void setPisteVirageHaut(PisteVirageHaut pisteVirageHaut) {
+		this.pisteVirageHaut = pisteVirageHaut;
 	}
 
 }
