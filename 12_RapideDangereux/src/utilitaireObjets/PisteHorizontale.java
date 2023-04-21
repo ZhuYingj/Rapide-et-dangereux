@@ -145,7 +145,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 								Math.toDegrees(voiture.getAngle()) + (360 - (Math.toDegrees(voiture.getAngle()) * 2)));
 					}
 				} catch (Exception e) {
-				
+
 					e.printStackTrace();
 				}
 			}
@@ -321,6 +321,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	public void setNombrePisteColle(int nombrePisteColle) {
 		this.nombrePisteColle = nombrePisteColle;
 	}
+
 	public void setBordure(Color bordure) {
 		this.bordure = bordure;
 	}

@@ -30,9 +30,9 @@ public class DessinCollisionBouleDeNeige {
 	/**
 	 * Constructeur qui créé la forme du bloc de glace
 	 * 
-	 * @param pos Position de la voiture
-	 * @param dia Diametre de la voiture
-	 * @param col Couleur de la voiture
+	 * @param pos    Position de la voiture
+	 * @param dia    Diametre de la voiture
+	 * @param col    Couleur de la voiture
 	 * @param cercle Forme cercle de la voiture
 	 */
 	// Kevin Nguyen
