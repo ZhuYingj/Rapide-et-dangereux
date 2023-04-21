@@ -157,19 +157,11 @@ public class JeuOptions extends JPanel {
 		spPourMessage.setViewportView(txtArea);
 		txtArea.setEditable(false);
 		txtArea.setForeground(Color.RED);
-		txtArea.setFont(new Font("Dubai", Font.PLAIN, 18));
+		txtArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		txtArea.setText("Choisisez les paramètres!");
 		txtArea.setWrapStyleWord(true);
 		txtArea.setLineWrap(true);
 
-		txtArea = new JTextArea();
-		spPourMessage.setViewportView(txtArea);
-		txtArea.setEditable(false);
-		txtArea.setForeground(Color.RED);
-		txtArea.setFont(new Font("Dubai", Font.PLAIN, 18));
-		txtArea.setText("Choisisez les paramètres!");
-		txtArea.setWrapStyleWord(true);
-		txtArea.setLineWrap(true);
 
 		btnMexique = new JButton("Mexique");
 		btnMexique.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -370,7 +362,9 @@ public class JeuOptions extends JPanel {
 		panel_1.add(lblVitesseMaximale);
 
 		cbMatPiste = new JComboBox();
+
 		cbMatPiste.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+
 		cbMatPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -378,6 +372,7 @@ public class JeuOptions extends JPanel {
 		});
 		cbMatPiste.setModel(new DefaultComboBoxModel(new String[] { "Asphalt", "Sable", "Glace" }));
 		cbMatPiste.setBounds(165, 263, 75, 22);
+		cbMatPiste.setSelectedItem("Asphalt");
 		panel_1.add(cbMatPiste);
 
 		JLabel lblMatPiste = new JLabel("Matériel de la piste :");
@@ -558,18 +553,6 @@ public class JeuOptions extends JPanel {
 		pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
 		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
 
-	}
-
-	/**
-	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
-	 * levée d'évènements.
-	 * 
-	 */
-	// Alexis Pineda-Alvarado
-	private void actionMatierielPiste() {
-		pcs.firePropertyChange("MATERIEL", null, cbMatPiste.getItemAt(0));
-		pcs.firePropertyChange("MATERIEL2", null, cbMatPiste.getItemAt(1));
-		pcs.firePropertyChange("MATERIEL3", null, cbMatPiste.getItemAt(2));
 	}
 
 	/**
@@ -762,16 +745,18 @@ public class JeuOptions extends JPanel {
 	 */
 
 	// Alexis Pineda-Alvarado
-	private void actionSliderMasse1() {
-		txtArea.append("\nVous avez changé la masse de la première voiture à " + slider.getValue() + " kg !");
+	public void actionSliderMasse1() {
+		txtArea.append("\nVous avez choisi " + slider.getValue() + "kg pour la masse de la première voiture!");
+
 	}
 
 	/**
 	 * méthode qui dicte le message du slider de la masse de la deuxième voiture
 	 */
 	// Alexis Pineda-Alvarado
-	private void actionSliderMasse2() {
-		txtArea.append("\nVous avez changé la masse de la deuxième voiture à " + slider2.getValue() + " kg !");
+
+	public void actionSliderMasse2() {
+		txtArea.append("\nVous avez choisi " + slider2.getValue() + "kg pour la masse de la deuxième voiture!");
 	}
 
 	/**

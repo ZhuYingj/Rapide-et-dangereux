@@ -19,6 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
@@ -90,6 +92,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblAttractionEnXV2;
 	private JLabel lblNewLabel_9;
 	private JPanel panelObjetEtGraphique;
+	private JTextArea txtArea;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -151,9 +154,7 @@ public class FenetreJeuScientifique extends JPanel {
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("RetourDuJeuScience", null, -1);
-				pcs.firePropertyChange("Test", null, -1);
-
+				actionBtnRetour();
 				resetGraphique();
 				resetMusic();
 			}
@@ -162,12 +163,7 @@ public class FenetreJeuScientifique extends JPanel {
 		btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.setEnCoursDAnimation(false);
-				zoneAnimPhysique.demarrer();
-				btnNextImg.setEnabled(false);
-				btnStart.setEnabled(false);
-				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+				actionBtnStart();
 				actionStart();
 				musicStart();
 
@@ -181,32 +177,24 @@ public class FenetreJeuScientifique extends JPanel {
 		btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.arreter();
-				btnNextImg.setEnabled(true);
-				btnStart.setEnabled(true);
+				actionBtnStop();
 				stopGraphique();
 				arretMusic();
 			}
 		});
-		btnStop.setBounds(621, 650, 89, 76);
+		btnStop.setBounds(361, 650, 89, 76);
 		add(btnStop);
 
 		btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.restartPosPisteDepart();
-				btnNextImg.setEnabled(true);
-				btnStart.setEnabled(true);
-				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
-
+				actionBtnReset();
 				resetGraphique();
 				resetMusic();
 
 			}
 		});
-		btnReset.setBounds(197, 650, 89, 76);
+		btnReset.setBounds(119, 650, 89, 76);
 		add(btnReset);
 
 		btnNextImg = new JButton("Next Img");
@@ -214,9 +202,10 @@ public class FenetreJeuScientifique extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.avancerUnPas();
+				txtArea.append("\nVoici la prochaine image du jeu");
 			}
 		});
-		btnNextImg.setBounds(404, 650, 89, 76);
+		btnNextImg.setBounds(239, 650, 89, 76);
 		add(btnNextImg);
 
 		setLayout(null);
@@ -232,6 +221,7 @@ public class FenetreJeuScientifique extends JPanel {
 		zoneAnimPhysique.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				changementDeTextePendantLAnimation(evt);
+				changementMessageItemBox(evt);
 			}
 		});
 
@@ -672,6 +662,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel_8.setBounds(406, 13, 46, 14);
 		add(lblNewLabel_8);
 
+
 		lblNewLabel_9 = new JLabel("");
 
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -700,6 +691,28 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel_10_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_10_1.setBounds(1288, 445, 211, 14);
 		add(lblNewLabel_10_1);
+
+
+		JPanel panelPourMessage = new JPanel();
+		panelPourMessage.setBounds(479, 650, 264, 76);
+		add(panelPourMessage);
+		panelPourMessage.setLayout(null);
+
+		JScrollPane spPourMessage = new JScrollPane();
+		spPourMessage.setBounds(0, 0, 264, 76);
+		panelPourMessage.add(spPourMessage);
+
+		txtArea = new JTextArea();
+		txtArea.setText("Pessez sur le bouton Start pour démarrer le jeu!");
+		txtArea.setWrapStyleWord(true);
+		txtArea.setLineWrap(true);
+		txtArea.setForeground(Color.RED);
+		txtArea.setEditable(false);
+		spPourMessage.setViewportView(txtArea);
+
+		JLabel lblImageItem = new JLabel("");
+		lblImageItem.setBounds(753, 650, 195, 76);
+		add(lblImageItem);
 
 		graphiqueVitesse();
 	}
@@ -1004,6 +1017,91 @@ public class FenetreJeuScientifique extends JPanel {
 	public void arretMusic() {
 		if (clip != null) {
 			clip.stop();
+		}
+	}
+
+	/**
+	 * méthode qui permet de démarrer l'animation du jeu
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnStart() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.setEnCoursDAnimation(false);
+		zoneAnimPhysique.demarrer();
+		btnNextImg.setEnabled(false);
+		btnStart.setEnabled(false);
+		pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+		txtArea.append("\nVous avez démarrer le jeu");
+	}
+
+	/**
+	 * méthode qui permet d'arrêter l'animation du jeu
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnStop() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.arreter();
+		btnNextImg.setEnabled(true);
+		btnStart.setEnabled(true);
+		txtArea.append("\nVous avez arrêter le jeu");
+	}
+
+	/**
+	 * méthode qui permet reinitialiser le jeu
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnReset() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.restartPosPisteDepart();
+		btnNextImg.setEnabled(true);
+		btnStart.setEnabled(true);
+		pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
+		txtArea.append("\nVous avez reinitialiser le jeu");
+	}
+
+	/**
+	 * méthode qui appui l'événement pour retourner au panel précédent
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnRetour() {
+		pcs.firePropertyChange("RetourDuJeuScience", null, -1);
+		pcs.firePropertyChange("Test", null, -1);
+	}
+
+	/**
+	 * méthode qui rajoutera un message dans le JTextArea lorsqu'on va sur la boîte
+	 * mystère
+	 * 
+	 * @param evt Évènement lorsque l'information change
+	 */
+	//Alexis Pineda-Alvarado
+	public void changementMessageItemBox(PropertyChangeEvent evt) {
+		switch (evt.getPropertyName()) {
+
+		case "champignon1":
+			txtArea.append("\nVous avez obtenu le pouvoir du champignon!");
+			break;
+		case "bouleNeige1":
+			txtArea.append("\nVous avez obtenu la boule de neige!");
+			break;
+		case "trouNoir1":
+			txtArea.append("\nVous avez activé le trou noir!");
+			break;
+		case "colle1":
+			txtArea.append("\nVous avez activé la colle!");
+			break;
+		case "champignon2":
+			txtArea.append("\nVous avez obtenu le pouvoir du champignon!");
+			break;
+		case "bouleNeige2":
+			txtArea.append("\nVous avez obtenu la boule de neige!");
+			break;
+		case "trouNoir2":
+			txtArea.append("\nVous avez activé le trou noir!");
+			break;
+		case "colle2":
+			txtArea.append("\nVous avez activé la colle!");
+			break;
 		}
 	}
 }
