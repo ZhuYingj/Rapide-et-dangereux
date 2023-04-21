@@ -131,6 +131,8 @@ public class Regroupement implements Dessinable, Serializable {
 	private transient Graphics2D g2d;
 	private BouleFumee smokeScreen;
 
+	private Color couleurBordurePiste;
+
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
 	 * 
@@ -1596,6 +1598,14 @@ public class Regroupement implements Dessinable, Serializable {
 
 	public boolean isToucheWActive() {
 		return toucheWActive;
+	}
+
+	public Color getCouleurBordurePiste() {
+		return couleurBordurePiste;
+	}
+
+	public void setCouleurBordurePiste(Color couleurBordurePiste) {
+		this.couleurBordurePiste = couleurBordurePiste;
 	}
 
 	public void setToucheWActive(boolean toucheWActive) {

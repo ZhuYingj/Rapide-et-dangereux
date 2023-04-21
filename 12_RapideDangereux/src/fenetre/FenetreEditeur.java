@@ -24,7 +24,6 @@ import javax.swing.border.LineBorder;
 import application.GestionnaireDeFichiersSurLeBureau;
 import application.OutilsImage;
 import geometrie.Vecteur2D;
-import interfaces.TypeObjetSpecial;
 import interfaces.TypePiste;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BlocMystere;
@@ -495,6 +494,7 @@ public class FenetreEditeur extends JPanel {
 		});
 
 		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
+		lblCouleurBordureDe.setForeground(Color.WHITE);
 		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblCouleurBordureDe.setBounds(74, 97, 177, 43);
@@ -530,6 +530,7 @@ public class FenetreEditeur extends JPanel {
 		});
 
 		JLabel lblNewLabel = new JLabel("Couleur voiture #1");
+		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel.setBounds(89, 231, 134, 13);
@@ -567,6 +568,7 @@ public class FenetreEditeur extends JPanel {
 		});
 
 		JLabel lblNewLabel2 = new JLabel("Couleur Voiture #2");
+		lblNewLabel2.setForeground(Color.WHITE);
 		lblNewLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel2.setBounds(89, 350, 143, 13);
@@ -816,10 +818,10 @@ public class FenetreEditeur extends JPanel {
 		verifierSiPisteFerme();
 		if (pisteFerme == true) {
 			sauvegardeUnePiste2();
-
+			actionSkin();
 			chargementUnePiste();
 			pcs.firePropertyChange("JOUEREDITEUR", null, -1);
-
+			pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
 			pcs.firePropertyChange("REGROUPEMENT", null, pisteCourante);
 
 		} else {
@@ -828,8 +830,8 @@ public class FenetreEditeur extends JPanel {
 
 		}
 
-		actionSkin();
-		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
+	
+	
 
 		resetValeur();
 	}
@@ -1585,7 +1587,7 @@ public class FenetreEditeur extends JPanel {
 		regroupement.setListePisteVirageHaut(panelRegroupement.getListePisteVirageHaut());
 		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
 		regroupement.setListeFumee(panelRegroupement.getListeFumee());
-
+		regroupement.setCouleurBordurePiste(couleursPiste[couleurPiste]);
 		gestionFich.ecrireFichierBinBureauRegroupement2(regroupement, pisteCourante);
 		boolean dejaDansComboBox = false;
 		for (int a = 0; a < comboBoxPiste.getItemCount(); a++) {
@@ -1628,7 +1630,7 @@ public class FenetreEditeur extends JPanel {
 		regroupement.setListePisteVirageHaut(panelRegroupement.getListePisteVirageHaut());
 		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
 		regroupement.setListeFumee(panelRegroupement.getListeFumee());
-
+		regroupement.setCouleurBordurePiste(couleursPiste[couleurPiste]);
 		gestionFich.ecrireFichierBinBureauRegroupement(regroupement);
 		boolean dejaDansComboBox = false;
 		for (int a = 0; a < comboBoxPiste.getItemCount(); a++) {
@@ -1724,7 +1726,9 @@ public class FenetreEditeur extends JPanel {
 
 		for (int a = 0; a < regroupementSauvegarde.getListePisteDeDepart().size(); a++) {
 			panelRegroupement.getListePisteDeDepart().add(regroupementSauvegarde.getListePisteDeDepart().get(a));
-
+			panelV1.setBackground(regroupementSauvegarde.getListePisteDeDepart().get(a).getVoiture().getSkin());
+			panelV2.setBackground(regroupementSauvegarde.getListePisteDeDepart().get(a).getVoiture2().getSkin());
+			panelCouleurPiste.setBackground(regroupementSauvegarde.getCouleurBordurePiste());
 		}
 // Pour bloc mystere
 

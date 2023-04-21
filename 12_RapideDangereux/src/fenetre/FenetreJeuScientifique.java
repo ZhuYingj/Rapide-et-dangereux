@@ -992,9 +992,11 @@ public class FenetreJeuScientifique extends JPanel {
 
 		case "reset1":
 			progressBarFroce.setValue(0);
+			lblImageObjet1.setIcon(null);
 			break;
 		case "reset2":
 			progressBarFroce2.setValue(0);
+			lblImageObjet2.setIcon(null);
 			break;
 		}
 

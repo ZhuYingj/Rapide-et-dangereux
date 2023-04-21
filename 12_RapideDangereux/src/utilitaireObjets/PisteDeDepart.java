@@ -69,7 +69,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 		this.murHaut = y;
 		this.murBas = y + taillePiste;
 		voiture = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste / 4), Color.yellow, 50, 16, 0, 50);
-		voiture2 = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste * 3 / 4), Color.white, 50, 16, 0, 60);
+		voiture2 = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste * 3 / 4), Color.cyan, 50, 16, 0, 60);
 
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
