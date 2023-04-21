@@ -45,6 +45,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 	private JProgressBar progressBarFroce;
 	private JLabel lblImageObjet1;
 	private JLabel lblImageObjet2;
+	private JLabel lblBackgroundBleu;
 	private Image champignon;
 	private Image bouleNeige1;
 	private Image champignon2;
@@ -205,6 +206,16 @@ public class FenetreJeuSansScientifique extends JPanel {
 				actionBtnProchImage();
 			}
 		});
+		
+		lblBackgroundBleu = new JLabel("");
+		lblBackgroundBleu.setBounds(0, 0, 1600, 800);
+		add(lblBackgroundBleu);
+		
+		Image imgBleu = OutilsImage.lireImageEtRedimensionner("backgroundJeu.jpg", 1600, 800);
+		if (imgBleu != null) {
+			lblBackgroundBleu.setIcon(new ImageIcon(imgBleu));
+			imgBleu.flush();
+		}
 	}
 
 	/**
