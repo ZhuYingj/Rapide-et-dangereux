@@ -179,6 +179,8 @@ public class AppPrincipale12 extends JFrame {
 		fenEditeur.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience);
+				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
+				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience, fenEditeur);
 
 			}
 		});
@@ -204,7 +206,7 @@ public class AppPrincipale12 extends JFrame {
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionFenOptions2(evt, fenJeuScience, fenOptions, fenSansScience, fenRecord);
-				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre);
+				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
 			}
 		});
 
@@ -235,9 +237,9 @@ public class AppPrincipale12 extends JFrame {
 		fenOptionMontre.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 
-				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience);
+				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience, fenEditeur);
 
-				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre);
+				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
 
 			}
 		});
@@ -452,7 +454,7 @@ public class AppPrincipale12 extends JFrame {
 	 */
 	// Ludovic Julien
 	public void actionChangeJeuCourse2(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
-			FenetreJeuScientifique fenJeuScience, FenetreJeuSansScientifique fenSansScience) {
+			FenetreJeuScientifique fenJeuScience, FenetreJeuSansScientifique fenSansScience, FenetreEditeur fenEditeur) {
 		switch (evt.getPropertyName()) {
 		case "SKIN":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
@@ -473,7 +475,20 @@ public class AppPrincipale12 extends JFrame {
 		case "SKINOPTIONS2":
 			fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
 					.setSkin((Color) evt.getNewValue());
+
+			break;
+		case "SKINOPTIONS3":
+			fenEditeur.getPanelObjet().getPisteDeDepart().getVoiture().setSkin((Color) evt.getNewValue());
+			fenEditeur.getPanelRegroupement().getListePisteDeDepart().get(0).getVoiture().setSkin((Color) evt.getNewValue());
+			break;
+		case "SKINOPTIONS4":
+			fenEditeur.getPanelObjet().getPisteDeDepart().getVoiture2().setSkin((Color) evt.getNewValue());
+			fenEditeur.getPanelRegroupement().getListePisteDeDepart().get(0).getVoiture2().setSkin((Color) evt.getNewValue());
+			break;
 		}
+		
+		
+		
 	}
 
 	/**
@@ -857,7 +872,7 @@ public class AppPrincipale12 extends JFrame {
 	 */
 	// Kevin Nguyen
 	public void actionPisteCouleur(PropertyChangeEvent evt, JeuOptions fenOptions, FenetreJeuScientifique fenJeuScience,
-			FenetreJeuSansScientifique fenSansScience, FenetreOptionMontre fenOptionMontre) {
+			FenetreJeuSansScientifique fenSansScience, FenetreOptionMontre fenOptionMontre, FenetreEditeur fenEditeur) {
 		switch (evt.getPropertyName()) {
 		case "COULEURPISTE":
 
@@ -995,6 +1010,45 @@ public class AppPrincipale12 extends JFrame {
 				fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(i)
 						.setBordure((Color) evt.getNewValue());
 			}
+			break;
+		case "COULEURPISTE4":
+			fenEditeur.getPanelRegroupement().getListePisteDeDepart().get(0).setBordure((Color) evt.getNewValue());
+			for (int i = 0; i < fenEditeur.getPanelRegroupement().getListePisteHorizontale().size(); i++) {
+				fenEditeur.getPanelRegroupement().getListePisteHorizontale().get(i)
+						.setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i < fenEditeur.getPanelRegroupement().getListePisteVerticale().size(); i++) {
+				fenEditeur.getPanelRegroupement().getListePisteVerticale().get(i).setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i < fenEditeur.getPanelRegroupement().getListePisteVirageGauche().size(); i++) {
+				fenEditeur.getPanelRegroupement().getListePisteVirageGauche().get(i)
+						.setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i < fenEditeur.getPanelRegroupement().getListePisteVirageDroit().size(); i++) {
+				fenEditeur.getPanelRegroupement().getListePisteVirageDroit().get(i)
+						.setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i < fenEditeur.getPanelRegroupement().getListePisteVirageHaut().size(); i++) {
+				fenEditeur.getPanelRegroupement().getListePisteVirageHaut().get(i)
+						.setBordure((Color) evt.getNewValue());
+			}
+			for (int i = 0; i < fenEditeur.getPanelRegroupement().getListePisteVirageBas().size(); i++) {
+				fenEditeur.getPanelRegroupement().getListePisteVirageBas().get(i).setBordure((Color) evt.getNewValue());
+			}
+
+			fenEditeur.getPanelObjet().getPisteDeDepart().setBordure((Color) evt.getNewValue());
+
+			fenEditeur.getPanelObjet().getPisteHorizontale().setBordure((Color) evt.getNewValue());
+
+			fenEditeur.getPanelObjet().getPisteVerticale().setBordure((Color) evt.getNewValue());
+
+			fenEditeur.getPanelObjet().getPisteVirageGauche().setBordure((Color) evt.getNewValue());
+
+			fenEditeur.getPanelObjet().getPisteVirageDroit().setBordure((Color) evt.getNewValue());
+
+			fenEditeur.getPanelObjet().getPisteVirageHaut().setBordure((Color) evt.getNewValue());
+
+			fenEditeur.getPanelObjet().getPisteVirageBas().setBordure((Color) evt.getNewValue());
 			break;
 		}
 	}
