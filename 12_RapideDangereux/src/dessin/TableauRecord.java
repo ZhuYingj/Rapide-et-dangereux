@@ -95,60 +95,14 @@ public class TableauRecord extends JPanel {
 
     // Définir le modèle de données pour le tableau
     private class MyTableModel extends AbstractTableModel {
-        private String[] columnNames = {"Piste", "Record(temps en secondes)", "Record Par", "Nb fois ou lapiste a été joué", "moyenne(temps en secondes)"};
-        private Object[][] data;
+        private String[] columnNames = {"Piste", "Record(temps en secondes)", "Record Par", "Nb fois ou lapiste a été joué", "moyenne(temps en secondes)"};       
+               private Object[][] data = {
+            {"Mexique", "0:00","-", "0","0"},
+            {"Canada", "0:00","-","0","0"},
+            {"Italie", "0:00","-","0","0"}
+       };
         
-        //        private Object[][] data = {
-//            {"Mexique", "0:00","-", "0","0"},
-//            {"Canada", "0:00","-","0","0"},
-//            {"Italie", "0:00","-","0","0"}
-//       };
-        
-        public MyTableModel() {
-            // Initialize the table with default data
-            data = new Object[][]{
-                {"Mexique", "0:00","-", "0","0"},
-                {"Canada", "0:00","-","0","0"},
-                {"Italie", "0:00","-","0","0"}
-            };
-            
-            // Load data from file and update the table
-           // chargerDonnees();
-        }
-        
-//        private void chargerDonnees() {
-//            // Get the path to the file
-//            String cheminFichier = GestionnaireDeFichiersSurLeBureau.getBureau() + "/Desktop/donnees.txt";
-//            Path fichier = Paths.get(cheminFichier);
-//            
-//            try {
-//                // Read all lines from the file
-//                List<String> lignes = Files.readAllLines(fichier,StandardCharsets.UTF_8);
-//                
-//                // Create a new data array with the appropriate size
-//                Object[][] newData = new Object[lignes.size()][columnNames.length];
-//                
-//                // Parse each line and add the data to the new array
-//                for (int i = 0; i < lignes.size(); i++) {
-//                    String[] champs = lignes.get(i).split(";");
-//                    newData[i][0] = champs[2];
-//                    newData[i][1] = champs[1];
-//                    newData[i][2] = champs[0];
-//                  //  newData[i][3] = 1; // Set the number of times played to 1
-//                  //  newData[i][4] = champs[1]; // Set the average time to the initial time
-//                }
-//                
-//                // Replace the old data array with the new one
-//                data = newData;
-//                
-//                // Update the table
-//                fireTableDataChanged();
-//                
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-        
+
         private ArrayList<Object[]> donnees = new ArrayList<>();
 
         public void addRow(Object[] row) {

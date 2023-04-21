@@ -63,6 +63,8 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 
 	private boolean enContactAvecColle = false;
 	private int nombrePisteColle = 0;
+	/** Couleur de la bordure **/
+	private Color bordure = Color.red;
 
 	/**
 	 * Methode qui permet de construire la piste virage droit a l'aide de parametres
@@ -91,7 +93,7 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
-		g2d.setColor(Color.RED);
+		g2d.setColor(bordure);
 		Stroke stroke = new BasicStroke(2f);
 		g2d.setStroke(stroke);
 		g2d.drawLine(x, y + taillePiste, x + (taillePiste / 3), y + taillePiste);
@@ -370,6 +372,10 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 
 	public void setMurBas(int murBas) {
 		this.murBas = murBas;
+	}
+
+	public void setBordure(Color bordure) {
+		this.bordure = bordure;
 	}
 
 }

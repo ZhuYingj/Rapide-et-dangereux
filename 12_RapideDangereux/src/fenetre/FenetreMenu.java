@@ -1,6 +1,7 @@
 package fenetre;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -11,11 +12,13 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import application.OutilsImage;
+import fenetre.FenetreAPropos;
 
 /**
  * Classe qui crée la premiere fenêtre "Menu"
@@ -29,6 +32,7 @@ public class FenetreMenu extends JPanel {
 	private JButton btnJouer;
 	private JButton btnAide;
 	private JButton btnQuitter;
+	private FenetreInstruction fenInstructions;
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	/**
@@ -65,8 +69,14 @@ public class FenetreMenu extends JPanel {
 		btnJouer.setBounds(700, 245, 100, 49);
 		add(btnJouer);
 
+		FenetreInstruction fenInstructions = new FenetreInstruction();
 		btnAide = new JButton("AIDE");
 		btnAide.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		btnAide.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fenInstructions.setVisible(true);
+			}
+		});
 		btnAide.setBounds(700, 321, 100, 49);
 		add(btnAide);
 
@@ -79,6 +89,22 @@ public class FenetreMenu extends JPanel {
 		});
 		btnQuitter.setBounds(700, 402, 100, 49);
 		add(btnQuitter);
+
+		FenetreAPropos pnlAPropos = new FenetreAPropos();
+		pnlAPropos.setPreferredSize(new Dimension(500, 250));
+
+		JButton btnTesterAPropos = new JButton("À PROPOS");
+		btnTesterAPropos.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		btnQuitter.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		btnTesterAPropos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// on utilise simplement un JOptionPane ici
+				JOptionPane.showMessageDialog(null, pnlAPropos, "� Propos de cette application",
+						JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		btnTesterAPropos.setBounds(700, 483, 100, 49);
+		add(btnTesterAPropos);
 
 		JLabel lblPhoto = new JLabel("");
 		lblPhoto.setBounds(0, 0, 1600, 800);

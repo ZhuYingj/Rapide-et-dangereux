@@ -16,11 +16,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import application.AppPrincipale12;
 import dessin.ZoneAnimPhysique;
 import dessin.ZoneVitesse;
 
@@ -85,6 +88,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblAttractionEnXV2;
 
 	private JPanel panelObjetEtGraphique;
+	private JTextArea txtArea;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -100,7 +104,6 @@ public class FenetreJeuScientifique extends JPanel {
 	// Tan Tommy Rin
 	public FenetreJeuScientifique() {
 
-		
 		lireMusic();
 		panelObjetEtGraphique = new JPanel();
 		panelObjetEtGraphique.setBounds(975, 510, 613, 288);
@@ -141,15 +144,8 @@ public class FenetreJeuScientifique extends JPanel {
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("RetourDuJeuScience", null, -1);
-				pcs.firePropertyChange("Test", null, -1);
-
-				zoneVitesse.renouvlerTemps();
-				zoneVitesse.renouvlerVitesse();
-				zoneVitesse2.renouvlerTemps();
-				zoneVitesse2.renouvlerVitesse();
-				timerVitesse.stop();
-
+				actionBtnRetour();
+				resetGraphique();
 				resetMusic();
 			}
 		});
@@ -157,14 +153,9 @@ public class FenetreJeuScientifique extends JPanel {
 		btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.setEnCoursDAnimation(false);
-				zoneAnimPhysique.demarrer();
-				btnNextImg.setEnabled(false);
-				btnStart.setEnabled(false);
-				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
-				timerVitesse.start();
-				clip.start();
+				actionBtnStart();
+				actionStart();
+				musicStart();
 
 			}
 		});
@@ -176,38 +167,24 @@ public class FenetreJeuScientifique extends JPanel {
 		btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.arreter();
-				btnNextImg.setEnabled(true);
-				btnStart.setEnabled(true);
-
-				timerVitesse.stop();
-
+				actionBtnStop();
+				stopGraphique();
 				arretMusic();
 			}
 		});
-		btnStop.setBounds(621, 650, 89, 76);
+		btnStop.setBounds(361, 650, 89, 76);
 		add(btnStop);
 
 		btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.restartPosPisteDepart();
-				btnNextImg.setEnabled(true);
-				btnStart.setEnabled(true);
-				pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
-
-				zoneVitesse2.renouvlerTemps();
-				zoneVitesse2.renouvlerVitesse();
-				zoneVitesse.renouvlerTemps();
-				zoneVitesse.renouvlerVitesse();
-
+				actionBtnReset();
+				resetGraphique();
 				resetMusic();
 
 			}
 		});
-		btnReset.setBounds(197, 650, 89, 76);
+		btnReset.setBounds(119, 650, 89, 76);
 		add(btnReset);
 
 		btnNextImg = new JButton("Next Img");
@@ -215,9 +192,10 @@ public class FenetreJeuScientifique extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				zoneAnimPhysique.requestFocusInWindow();
 				zoneAnimPhysique.avancerUnPas();
+				txtArea.append("\nVoici la prochaine image du jeu");
 			}
 		});
-		btnNextImg.setBounds(404, 650, 89, 76);
+		btnNextImg.setBounds(239, 650, 89, 76);
 		add(btnNextImg);
 
 		setLayout(null);
@@ -241,6 +219,7 @@ public class FenetreJeuScientifique extends JPanel {
 		zoneAnimPhysique.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				changementDeTextePendantLAnimation(evt);
+				changementMessageItemBox(evt);
 			}
 		});
 
@@ -678,18 +657,38 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNewLabel_4.setBounds(948, 538, 46, 14);
 		add(lblNewLabel_4);
-		
+
 		JLabel lblNewLabel_7 = new JLabel("<---------------->");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_7.setBounds(361, 29, 120, 14);
 		add(lblNewLabel_7);
-		
+
 		JLabel lblNewLabel_8 = new JLabel("80 M");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_8.setBounds(406, 13, 46, 14);
 		add(lblNewLabel_8);
+
+		JPanel panelPourMessage = new JPanel();
+		panelPourMessage.setBounds(479, 650, 264, 76);
+		add(panelPourMessage);
+		panelPourMessage.setLayout(null);
+
+		JScrollPane spPourMessage = new JScrollPane();
+		spPourMessage.setBounds(0, 0, 264, 76);
+		panelPourMessage.add(spPourMessage);
+
+		txtArea = new JTextArea();
+		txtArea.setText("Pessez sur le bouton Start pour démarrer le jeu!");
+		txtArea.setWrapStyleWord(true);
+		txtArea.setLineWrap(true);
+		txtArea.setForeground(Color.RED);
+		txtArea.setEditable(false);
+		spPourMessage.setViewportView(txtArea);
+
+		JLabel lblImageItem = new JLabel("");
+		lblImageItem.setBounds(753, 650, 195, 76);
+		add(lblImageItem);
 		graphiqueVitesse();
-		audioMusic();
 	}
 
 	public JButton getBtnStart() {
@@ -862,7 +861,12 @@ public class FenetreJeuScientifique extends JPanel {
 			progressBarFroce2.setMaximum(100);
 			progressBarFroce2.setValue(valeur2 - 50);
 			break;
-
+		case "resetBar1":
+			progressBarFroce.setValue(0);
+			break;
+		case "resetBar2":
+			progressBarFroce2.setValue(0);
+			break;
 		}
 
 	}
@@ -892,26 +896,53 @@ public class FenetreJeuScientifique extends JPanel {
 			}
 		});
 	}
-	
+
+	/**
+	 * méthode qui retourn le timer des graphique
+	 * 
+	 * @return timerVitesse
+	 */
+	// Ludovic Julien
 	public static Timer getTimer() {
 		return timerVitesse;
 	}
 
 	/**
-	 * Méthode qui permet de lire un fichier audio et de l'affecter a une variable
+	 * méthode qui permet de reset les graphhique de vitesse en fonction du temps
 	 */
 	// Ludovic Julien
-	private void audioMusic() {
-		try {
+	public void resetGraphique() {
+		zoneVitesse.renouvlerTemps();
+		zoneVitesse.renouvlerVitesse();
+		zoneVitesse2.renouvlerTemps();
+		zoneVitesse2.renouvlerVitesse();
+		timerVitesse.stop();
+	}
 
-			clip = AudioSystem.getClip();
-			URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
-			AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
-			clip.open(inputStream);
+	/**
+	 * méthode qui permet de mettre en pause les graphique de vitesse en fonction du
+	 * temps
+	 */
+	// Ludovic Julien
+	public void stopGraphique() {
+		timerVitesse.stop();
+	}
 
-		} catch (Exception ex) {
-			ex.printStackTrace();
+	/**
+	 * méthode qui permet d'activer le timer pour les graphique
+	 */
+	// Ludovic Julien
+	public void actionStart() {
+		timerVitesse.start();
+	}
 
+	/**
+	 * méthode qui permet de lancer la piste audio
+	 */
+	// Ludovic Julien
+	public void musicStart() {
+		if (AppPrincipale12.getCheckAudio() == false) {
+			clip.start();
 		}
 	}
 
@@ -920,27 +951,27 @@ public class FenetreJeuScientifique extends JPanel {
 	 * 
 	 * @return clip
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public static Clip getClip() {
 		return clip;
 	}
-	
+
 	/**
-	 * méthode qui permet d'arreter et de recommencer la music au debut 
+	 * méthode qui permet d'arreter et de recommencer la music au debut
 	 * 
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void resetMusic() {
 		if (clip != null) {
 			clip.stop();
 			clip.setMicrosecondPosition(0);
 		}
 	}
-	
+
 	/**
 	 * méthode qui permet de lire un fichier audio
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void lireMusic() {
 		try {
 			clip = AudioSystem.getClip();
@@ -952,14 +983,92 @@ public class FenetreJeuScientifique extends JPanel {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * méthode qui permet d'arreter une music
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void arretMusic() {
 		if (clip != null) {
 			clip.stop();
+		}
+	}
+
+	/**
+	 * méthode qui permet de démarrer l'animation du jeu
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnStart() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.setEnCoursDAnimation(false);
+		zoneAnimPhysique.demarrer();
+		btnNextImg.setEnabled(false);
+		btnStart.setEnabled(false);
+		pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+		txtArea.append("\nVous avez démarrer le jeu");
+	}
+
+	/**
+	 * méthode qui permet d'arrêter l'animation du jeu
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnStop() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.arreter();
+		btnNextImg.setEnabled(true);
+		btnStart.setEnabled(true);
+		txtArea.append("\nVous avez arrêter le jeu");
+	}
+
+	/**
+	 * méthode qui permet reinitialiser le jeu
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnReset() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.restartPosPisteDepart();
+		btnNextImg.setEnabled(true);
+		btnStart.setEnabled(true);
+		pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
+		txtArea.append("\nVous avez reinitialiser le jeu");
+	}
+
+	/**
+	 * méthode qui appui l'événement pour retourner au panel précédent
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnRetour() {
+		pcs.firePropertyChange("RetourDuJeuScience", null, -1);
+		pcs.firePropertyChange("Test", null, -1);
+	}
+
+	public void changementMessageItemBox(PropertyChangeEvent evt) {
+		switch (evt.getPropertyName()) {
+
+		case "champignon1":
+			txtArea.append("\nVous avez obtenu le pouvoir du champignon!");
+			break;
+		case "bouleNeige1":
+			txtArea.append("\nVous avez obtenu la boule de neige!");
+			break;
+		case "trouNoir1":
+			txtArea.append("\nVous avez activé le trou noir!");
+			break;
+		case "colle1":
+			txtArea.append("\nVous avez activé la colle!");
+			break;
+		case "champignon2":
+			txtArea.append("\nVous avez obtenu le pouvoir du champignon!");
+			break;
+		case "bouleNeige2":
+			txtArea.append("\nVous avez obtenu la boule de neige!");
+			break;
+		case "trouNoir2":
+			txtArea.append("\nVous avez activé le trou noir!");
+			break;
+		case "colle2":
+			txtArea.append("\nVous avez activé la colle!");
+			break;
 		}
 	}
 }
