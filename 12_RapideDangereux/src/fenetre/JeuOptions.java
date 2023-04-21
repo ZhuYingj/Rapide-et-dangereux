@@ -157,7 +157,7 @@ public class JeuOptions extends JPanel {
 		spPourMessage.setViewportView(txtArea);
 		txtArea.setEditable(false);
 		txtArea.setForeground(Color.RED);
-		txtArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		txtArea.setFont(new Font("Dubai", Font.PLAIN, 18));
 		txtArea.setText("Choisisez les paramètres!");
 		txtArea.setWrapStyleWord(true);
 		txtArea.setLineWrap(true);
@@ -798,7 +798,7 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionRdbtnVitesseIntermediaire() {
 		txtArea.append("\nVous avez selectionné la difficulté <<Intermédiaire>> ");
-		pcs.firePropertyChange("VITESSEMAXFACILE", null, 80.0);
+		pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 80.0);
 	}
 
 	/**
@@ -808,7 +808,7 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionRdbtnVitesseAvance() {
 		txtArea.append("\nVous avez selectionné la difficulté <<Avancé>> ");
-		pcs.firePropertyChange("VITESSEMAXFACILE", null, 100.0);
+		pcs.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
 	}
 
 	/**
