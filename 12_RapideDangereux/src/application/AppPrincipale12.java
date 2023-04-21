@@ -387,7 +387,7 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.25);
 			break;
 			
-		case "ASPHALT" : 
+		case "ASPHALT": 
 			
 
 		case "MATPISTESABLE":
