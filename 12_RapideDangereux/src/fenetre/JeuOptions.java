@@ -181,7 +181,7 @@ public class JeuOptions extends JPanel {
 			}
 		});
 
-		btnMexique.setBounds(300, 74, 126, 78);
+		btnMexique.setBounds(424, 74, 126, 78);
 		add(btnMexique);
 
 		Image imgMexique = OutilsImage.lireImageEtRedimensionner("mexicano.png", 140, 77);
@@ -215,7 +215,7 @@ public class JeuOptions extends JPanel {
 				selectionImageItalie(e);
 			}
 		});
-		btnItalie.setBounds(874, 74, 126, 78);
+		btnItalie.setBounds(735, 74, 126, 78);
 		add(btnItalie);
 
 		Image imgItalia = OutilsImage.lireImageEtRedimensionner("italie-flag.jpg", 140, 77);
@@ -579,7 +579,7 @@ public class JeuOptions extends JPanel {
 	 * @param e evenement de la souris
 	 */
 	// Alexis Pineda-Alvarado
-	public void selectionImageCanada(MouseEvent e) {
+	private void selectionImageCanada(MouseEvent e) {
 		if (btnCanada.contains(e.getX(), e.getY())) {
 			txtArea.append("\nVous avez choisi la piste Canada!");
 			type = TypePiste.CANADA;
@@ -616,7 +616,7 @@ public class JeuOptions extends JPanel {
 	 * @param e evenement de la souris
 	 */
 	// Alexis Pineda-Alvarado
-	public void selectionImageMexique(MouseEvent e) {
+	private void selectionImageMexique(MouseEvent e) {
 		if (btnMexique.contains(e.getX(), e.getY())) {
 			type = TypePiste.MEXIQUE;
 			txtArea.append("\nVous avez choisi la piste Mexique!");
@@ -654,7 +654,7 @@ public class JeuOptions extends JPanel {
 	 * @param e evenement de la souris
 	 */
 	// Alexis Pineda-Alvarado
-	public void selectionImageItalie(MouseEvent e) {
+	private void selectionImageItalie(MouseEvent e) {
 		if (btnItalie.contains(e.getX(), e.getY())) {
 			type = TypePiste.ITALIE;
 			txtArea.append("\nVous avez choisi la piste Italie!");
@@ -703,7 +703,7 @@ public class JeuOptions extends JPanel {
 	 * @param direction changer de couleur vers la droite ou vers la geuche
 	 */
 	// Ludovic Julien
-	public void changementImage(int voiture, int direction) {
+	private void changementImage(int voiture, int direction) {
 
 		if (voiture == 1) {
 			if (direction == 1) {
@@ -739,7 +739,7 @@ public class JeuOptions extends JPanel {
 	 * Méthode pour changer la couleur des côtés de piste
 	 */
 	// Kevin Nguyen
-	public void changeCouleurPiste() {
+	private void changeCouleurPiste() {
 		if (gauche) {
 			couleurPiste--;
 			if (couleurPiste < 0) {
@@ -762,24 +762,34 @@ public class JeuOptions extends JPanel {
 	 */
 
 	// Alexis Pineda-Alvarado
-	public void actionSliderMasse1() {
-		txtArea.append("\nVous avez choisi la masse pour la première voiture!");
+	private void actionSliderMasse1() {
+		txtArea.append("\nVous avez changé la masse de la première voiture à " + slider.getValue() + " kg !");
 	}
 
 	/**
 	 * méthode qui dicte le message du slider de la masse de la deuxième voiture
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionSliderMasse2() {
-		txtArea.append("\nVous avez choisi la masse pour la deuxième voiture!");
+	private void actionSliderMasse2() {
+		txtArea.append("\nVous avez changé la masse de la deuxième voiture à " + slider2.getValue() + " kg !");
 	}
 
 	/**
 	 * méthode qui dicte le message du slider du nombre de boîte mystère choisi
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionSliderBloc() {
+	private void actionSliderBloc() {
 		txtArea.append("\nVous avez changé le nombre de boîte à " + sliderNbBoites.getValue() + " !");
+		changementPisteSelonBoite();
+
+	}
+
+	/**
+	 * Méthode qui actualise l'apercu de la piste lorsque l'on change le nombre de
+	 * boite
+	 */
+	// Tan Tommy Rin
+	private void changementPisteSelonBoite() {
 		zoneAnimPhysique.getRegroupement().getRegroupementBoiteMystere().clear();
 		zoneAnimPhysique.getRegroupement().setNombreBoiteMystere(sliderNbBoites.getValue());
 		zoneAnimPhysique.getRegroupement().creeBoiteDansListe();
@@ -791,8 +801,8 @@ public class JeuOptions extends JPanel {
 	 * choisi
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionRdbtnVitesseFacile() {
-		txtArea.append("\nVous avez choisi la difficulté <<Facile>> ");
+	private void actionRdbtnVitesseFacile() {
+		txtArea.append("\nVous avez selectionné la difficulté <<Facile>> ");
 		pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
 	}
 
@@ -801,8 +811,8 @@ public class JeuOptions extends JPanel {
 	 * choisi
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionRdbtnVitesseIntermediaire() {
-		txtArea.append("\nVous avez choisi la difficulté <<Intermédiaire>> ");
+	private void actionRdbtnVitesseIntermediaire() {
+		txtArea.append("\nVous avez selectionné la difficulté <<Intermédiaire>> ");
 		pcs.firePropertyChange("VITESSEMAXFACILE", null, 80.0);
 	}
 
@@ -811,8 +821,8 @@ public class JeuOptions extends JPanel {
 	 * choisi
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionRdbtnVitesseAvance() {
-		txtArea.append("\nVous avez choisi la difficulté <<Facile>> ");
+	private void actionRdbtnVitesseAvance() {
+		txtArea.append("\nVous avez selectionné la difficulté <<Avancé>> ");
 		pcs.firePropertyChange("VITESSEMAXFACILE", null, 100.0);
 	}
 

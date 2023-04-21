@@ -687,7 +687,7 @@ public class FenetreEditeur extends JPanel {
 
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU VIDE POUR JOUEZ");
+					"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU MAL PLACÉ POUR JOUER!");
 
 		}
 
