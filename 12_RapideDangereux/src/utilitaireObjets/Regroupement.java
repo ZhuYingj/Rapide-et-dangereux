@@ -177,6 +177,9 @@ public class Regroupement implements Dessinable, Serializable {
 					listePisteDeDepart.get(0).getVoiture()
 							.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
 					objSpecial = regroupementBoiteMystere.get(a).getObjetSpecial();
+					if (objSpecial.getType() != TypeObjetSpecial.BOULEDENEIGE) {
+						pcs.firePropertyChange("reset1", 0, -1);
+					}
 					boutonAppuye = false;
 					objSpecial.setTempsTemporaire(tempsTemp);
 					tempsTemp = tempsTotalEcoule;
@@ -204,6 +207,9 @@ public class Regroupement implements Dessinable, Serializable {
 							.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
 					boutonAppuye2 = false;
 					objSpecial2 = regroupementBoiteMystere.get(a).getObjetSpecial();
+					if (objSpecial2.getType() != TypeObjetSpecial.BOULEDENEIGE) {
+						pcs.firePropertyChange("reset2", 0, -1);
+					}
 					objSpecial2.setTempsTemporaire(tempsTemp2);
 					tempsTemp2 = tempsTotalEcoule;
 					regroupementBoiteMystere.remove(a).getObjetSpecial();

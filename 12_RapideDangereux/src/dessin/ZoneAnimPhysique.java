@@ -942,13 +942,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Tan Tommy Rin
 	public void arretQuandFini() {
-		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
+		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 				.getNombreToursFaits()) {
 			System.out.println("LA VOITURE 1 A GAGNÉE!!!");
 
 			arreter();
 
-		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
 				.getNombreToursFaits()) {
 			System.out.println("LA VOITURE 2 A GAGNÉE!!!");
 			arreter();
