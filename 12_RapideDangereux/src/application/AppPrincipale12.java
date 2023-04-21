@@ -263,7 +263,7 @@ public class AppPrincipale12 extends JFrame {
 		});
 		mnMenu.add(checkBoxModeNonScientifique);
 
-		checkBoxAudio = new JCheckBoxMenuItem("Supprimer effet Sonnor");
+		checkBoxAudio = new JCheckBoxMenuItem("Effet sonore");
 		checkBoxAudio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionCheckBox2();
