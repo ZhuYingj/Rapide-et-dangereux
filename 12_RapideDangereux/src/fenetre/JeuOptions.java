@@ -822,6 +822,7 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionCbAsphalt() {
 		pcs.firePropertyChange("MATPISTEASPHALT", null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("IMGASPHALT",null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi l'asphalt où le coefficient de frottement est 0.20");
 	}
 
@@ -831,7 +832,8 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void actionCbSable() {
-		pcs.firePropertyChange("MATPISTEASPHALT", null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("MATPISTESABLE", null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("IMGSABLE", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi le sable où le coefficient de frottement est 0.70");
 	}
 
@@ -841,7 +843,8 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void actionCbGlace() {
-		pcs.firePropertyChange("MATPISTEASPHALT", null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("MATPISTEGLACE", null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("IMGGLACE", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi la glace où le coefficient de frottement est 0.02");
 	}
 
