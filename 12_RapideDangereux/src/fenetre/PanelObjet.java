@@ -32,6 +32,7 @@ public class PanelObjet extends JPanel {
 	/**
 	 * Constructeur par défaut de la fenetre objet.
 	 */
+	// Tan Tommy Rin
 	public PanelObjet() {
 	}
 
@@ -50,6 +51,8 @@ public class PanelObjet extends JPanel {
 
 	/**
 	 * Méthode permettant de dessiner sur la fenetre
+	 * 
+	 * @param g Le composant graphique
 	 */
 //Tan Tommy Rin
 	public void paintComponent(Graphics g) {

@@ -40,6 +40,7 @@ import utilitaireObjets.Voiture;
  * Classe qui permet de créer et gérer la fenetre éditeur.
  * 
  * @author Tan Tommy Rin
+ * @author Alexis Pineda-Alvarado
  */
 
 public class FenetreEditeur extends JPanel {
@@ -66,6 +67,8 @@ public class FenetreEditeur extends JPanel {
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * 
+	 * @param listener L'écouteur
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -341,45 +344,45 @@ public class FenetreEditeur extends JPanel {
 		lblM.setBounds(315, 59, 71, 14);
 		panelObjet.add(lblM);
 
-		JLabel lblM_1 = new JLabel("80 M");
-		lblM_1.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_1.setBounds(315, 183, 71, 14);
-		panelObjet.add(lblM_1);
+		JLabel lblM2 = new JLabel("80 M");
+		lblM2.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM2.setBounds(315, 183, 71, 14);
+		panelObjet.add(lblM2);
 
-		JLabel lblM_2 = new JLabel("80 M");
-		lblM_2.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_2.setBounds(39, 183, 71, 14);
-		panelObjet.add(lblM_2);
+		JLabel lblM3 = new JLabel("80 M");
+		lblM3.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM3.setBounds(39, 183, 71, 14);
+		panelObjet.add(lblM3);
 
-		JLabel lblM_3 = new JLabel("80 M");
-		lblM_3.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_3.setBounds(39, 334, 71, 14);
-		panelObjet.add(lblM_3);
+		JLabel lblM4 = new JLabel("80 M");
+		lblM4.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM4.setBounds(39, 334, 71, 14);
+		panelObjet.add(lblM4);
 
-		JLabel lblM_4 = new JLabel("80 M");
-		lblM_4.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_4.setBounds(315, 334, 71, 14);
-		panelObjet.add(lblM_4);
+		JLabel lblM5 = new JLabel("80 M");
+		lblM5.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM5.setBounds(315, 334, 71, 14);
+		panelObjet.add(lblM5);
 
-		JLabel lblM_5 = new JLabel("80 M");
-		lblM_5.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_5.setBounds(34, 486, 71, 14);
-		panelObjet.add(lblM_5);
+		JLabel lblM6 = new JLabel("80 M");
+		lblM6.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM6.setBounds(34, 486, 71, 14);
+		panelObjet.add(lblM6);
 
-		JLabel lblM_6 = new JLabel("80 M");
-		lblM_6.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_6.setBounds(39, 621, 71, 14);
-		panelObjet.add(lblM_6);
+		JLabel lblM7 = new JLabel("80 M");
+		lblM7.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM7.setBounds(39, 621, 71, 14);
+		panelObjet.add(lblM7);
 
-		JLabel lblM_7 = new JLabel("80 M");
-		lblM_7.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_7.setBounds(315, 621, 71, 14);
-		panelObjet.add(lblM_7);
+		JLabel lblM8 = new JLabel("80 M");
+		lblM8.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM8.setBounds(315, 621, 71, 14);
+		panelObjet.add(lblM8);
 
-		JLabel lblM_7_1 = new JLabel("80 M");
-		lblM_7_1.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_7_1.setBounds(315, 486, 71, 14);
-		panelObjet.add(lblM_7_1);
+		JLabel lblM9 = new JLabel("80 M");
+		lblM9.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM9.setBounds(315, 486, 71, 14);
+		panelObjet.add(lblM9);
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
@@ -444,7 +447,7 @@ public class FenetreEditeur extends JPanel {
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
-		
+
 		Image background = OutilsImage.lireImageEtRedimensionner("BackgroundEdition.jpg", 1600, 800);
 		if (background != null) {
 			lblImage.setIcon(new ImageIcon(background));

@@ -69,6 +69,8 @@ public class ZoneVitesse extends JPanel {
 	/**
 	 * Methode qui permet de dessiner le graphiquet sur la zone d'animation a l'aide
 	 * de g2d
+	 * 
+	 * @param g Composant graphique
 	 */
 	// Ludovic Julien
 	public void paintComponent(Graphics g) {

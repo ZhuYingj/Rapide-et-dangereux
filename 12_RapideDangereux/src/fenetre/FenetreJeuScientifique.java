@@ -37,6 +37,7 @@ import geometrie.Vecteur2D;
  * 
  * @author Tan Tommy Rin
  * @author Ludovic Julien
+ * @author Alexis Pineda-Alvarado
  *
  */
 public class FenetreJeuScientifique extends JPanel {
@@ -90,12 +91,13 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblAttractionEnXV1;
 	private JLabel lblAttractionYV1;
 	private JLabel lblAttractionEnXV2;
-	private JLabel lblNewLabel_9;
+	private JLabel lblNewLabelImage;
 	private JPanel panelObjetEtGraphique;
 	private JTextArea txtArea;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
+	 * @param listener L'écouteur
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -119,23 +121,23 @@ public class FenetreJeuScientifique extends JPanel {
 		panelObjetEtGraphique.add(zoneVitesse2);
 		zoneVitesse2.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("Graphique de vitesse de la voiture2");
-		lblNewLabel_1.setBounds(53, 0, 227, 32);
-		zoneVitesse2.add(lblNewLabel_1);
+		JLabel lblNewLabel2 = new JLabel("Graphique de vitesse de la voiture2");
+		lblNewLabel2.setBounds(53, 0, 227, 32);
+		zoneVitesse2.add(lblNewLabel2);
 
-		JLabel lblNewLabel_6 = new JLabel("T(s)");
-		lblNewLabel_6.setBounds(221, 211, 46, 14);
-		zoneVitesse2.add(lblNewLabel_6);
+		JLabel lblNewLabel3 = new JLabel("T(s)");
+		lblNewLabel3.setBounds(221, 211, 46, 14);
+		zoneVitesse2.add(lblNewLabel3);
 
-		JLabel lblNewLabel_4_1 = new JLabel("(m/s)");
-		lblNewLabel_4_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblNewLabel_4_1.setBounds(23, 25, 46, 14);
-		zoneVitesse2.add(lblNewLabel_4_1);
+		JLabel lblNewLabel4 = new JLabel("(m/s)");
+		lblNewLabel4.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNewLabel4.setBounds(23, 25, 46, 14);
+		zoneVitesse2.add(lblNewLabel4);
 
-		JLabel lblNewLabel_2_1 = new JLabel("V");
-		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_2_1.setBounds(38, 11, 56, 14);
-		zoneVitesse2.add(lblNewLabel_2_1);
+		JLabel lblNewLabel5 = new JLabel("V");
+		lblNewLabel5.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel5.setBounds(38, 11, 56, 14);
+		zoneVitesse2.add(lblNewLabel5);
 
 		zoneVitesse = new ZoneVitesse();
 		zoneVitesse.setBounds(-41, 0, 329, 228);
@@ -147,9 +149,9 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel.setBounds(40, 0, 227, 32);
 		zoneVitesse.add(lblNewLabel);
 
-		JLabel lblNewLabel_3 = new JLabel("T(s)");
-		lblNewLabel_3.setBounds(221, 211, 46, 14);
-		zoneVitesse.add(lblNewLabel_3);
+		JLabel lblNewLabel6 = new JLabel("T(s)");
+		lblNewLabel6.setBounds(221, 211, 46, 14);
+		zoneVitesse.add(lblNewLabel6);
 
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
@@ -312,10 +314,10 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNV1.setBounds(258, 120, 34, 29);
 		panelDonneScientifique.add(lblNV1);
 
-		JLabel lblNV1_1 = new JLabel("N");
-		lblNV1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNV1_1.setBounds(523, 180, 38, 29);
-		panelDonneScientifique.add(lblNV1_1);
+		JLabel lblNV12 = new JLabel("N");
+		lblNV12.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNV12.setBounds(523, 180, 38, 29);
+		panelDonneScientifique.add(lblNV12);
 
 		JLabel lblKgMasse1 = new JLabel("Kg");
 		lblKgMasse1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -352,15 +354,15 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNum2.setBounds(287, 90, 30, 14);
 		panelDonneScientifique.add(lblNum2);
 
-		JLabel lblMCarreV1_1 = new JLabel("m/s");
-		lblMCarreV1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblMCarreV1_1.setBounds(523, 90, 56, 29);
-		panelDonneScientifique.add(lblMCarreV1_1);
+		JLabel lblMCarreV2 = new JLabel("m/s");
+		lblMCarreV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMCarreV2.setBounds(523, 90, 56, 29);
+		panelDonneScientifique.add(lblMCarreV2);
 
-		JLabel lblNum2_1 = new JLabel("2");
-		lblNum2_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNum2_1.setBounds(549, 90, 30, 14);
-		panelDonneScientifique.add(lblNum2_1);
+		JLabel lblNum3 = new JLabel("2");
+		lblNum3.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNum3.setBounds(549, 90, 30, 14);
+		panelDonneScientifique.add(lblNum3);
 
 		JLabel lblTempsEcoule = new JLabel("Temps écoulé :");
 		lblTempsEcoule.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -522,15 +524,15 @@ public class FenetreJeuScientifique extends JPanel {
 		lblDiametre.setBounds(10, 240, 109, 29);
 		panelDonneScientifique.add(lblDiametre);
 
-		JLabel lblNAttractionV1_1 = new JLabel("N");
-		lblNAttractionV1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNAttractionV1_1.setBounds(258, 180, 34, 29);
-		panelDonneScientifique.add(lblNAttractionV1_1);
+		JLabel lblNAttractionV12 = new JLabel("N");
+		lblNAttractionV12.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNAttractionV12.setBounds(258, 180, 34, 29);
+		panelDonneScientifique.add(lblNAttractionV12);
 
-		JLabel lblM_1 = new JLabel("m");
-		lblM_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblM_1.setBounds(523, 240, 34, 29);
-		panelDonneScientifique.add(lblM_1);
+		JLabel lblM2 = new JLabel("m");
+		lblM2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblM2.setBounds(523, 240, 34, 29);
+		panelDonneScientifique.add(lblM2);
 
 		lblDiametreV1 = new JLabel("0.00");
 		lblDiametreV1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -542,35 +544,35 @@ public class FenetreJeuScientifique extends JPanel {
 		lblDiametreV2.setBounds(396, 240, 65, 29);
 		panelDonneScientifique.add(lblDiametreV2);
 
-		JLabel lblVitesseV1Separator_1 = new JLabel("[               ,               ]");
-		lblVitesseV1Separator_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVitesseV1Separator_1.setBounds(108, 120, 162, 29);
-		panelDonneScientifique.add(lblVitesseV1Separator_1);
+		JLabel lblVitesseV1Separator3 = new JLabel("[               ,               ]");
+		lblVitesseV1Separator3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseV1Separator3.setBounds(108, 120, 162, 29);
+		panelDonneScientifique.add(lblVitesseV1Separator3);
 
-		JLabel lblVitesseV1Separator_1_1 = new JLabel("[               ,               ]");
-		lblVitesseV1Separator_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVitesseV1Separator_1_1.setBounds(108, 150, 162, 29);
-		panelDonneScientifique.add(lblVitesseV1Separator_1_1);
+		JLabel lblVitesseV1Separator4 = new JLabel("[               ,               ]");
+		lblVitesseV1Separator4.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseV1Separator4.setBounds(108, 150, 162, 29);
+		panelDonneScientifique.add(lblVitesseV1Separator4);
 
-		JLabel lblVitesseV1Separator_1_1_1 = new JLabel("[               ,               ]");
-		lblVitesseV1Separator_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVitesseV1Separator_1_1_1.setBounds(108, 180, 162, 29);
-		panelDonneScientifique.add(lblVitesseV1Separator_1_1_1);
+		JLabel lblVitesseV1Separator5 = new JLabel("[               ,               ]");
+		lblVitesseV1Separator5.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseV1Separator5.setBounds(108, 180, 162, 29);
+		panelDonneScientifique.add(lblVitesseV1Separator5);
 
-		JLabel lblVitesseV1Separator_1_1_2 = new JLabel("[               ,               ]");
-		lblVitesseV1Separator_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVitesseV1Separator_1_1_2.setBounds(350, 150, 162, 29);
-		panelDonneScientifique.add(lblVitesseV1Separator_1_1_2);
+		JLabel lblVitesseV1Separator6 = new JLabel("[               ,               ]");
+		lblVitesseV1Separator6.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseV1Separator6.setBounds(350, 150, 162, 29);
+		panelDonneScientifique.add(lblVitesseV1Separator6);
 
-		JLabel lblVitesseV1Separator_1_1_3 = new JLabel("[               ,               ]");
-		lblVitesseV1Separator_1_1_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVitesseV1Separator_1_1_3.setBounds(351, 120, 162, 29);
-		panelDonneScientifique.add(lblVitesseV1Separator_1_1_3);
+		JLabel lblVitesseV1Separator7 = new JLabel("[               ,               ]");
+		lblVitesseV1Separator7.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseV1Separator7.setBounds(351, 120, 162, 29);
+		panelDonneScientifique.add(lblVitesseV1Separator7);
 
-		JLabel lblVitesseV1Separator_1_1_4 = new JLabel("[               ,               ]");
-		lblVitesseV1Separator_1_1_4.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblVitesseV1Separator_1_1_4.setBounds(351, 180, 162, 29);
-		panelDonneScientifique.add(lblVitesseV1Separator_1_1_4);
+		JLabel lblVitesseV1Separator8 = new JLabel("[               ,               ]");
+		lblVitesseV1Separator8.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVitesseV1Separator8.setBounds(351, 180, 162, 29);
+		panelDonneScientifique.add(lblVitesseV1Separator8);
 
 		lblMasseV1 = new JLabel("0.00");
 		lblMasseV1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -642,33 +644,33 @@ public class FenetreJeuScientifique extends JPanel {
 		lblAttractionYV2.setBounds(433, 180, 65, 29);
 		panelDonneScientifique.add(lblAttractionYV2);
 
-		JLabel lblNewLabel_2 = new JLabel("V");
-		lblNewLabel_2.setBounds(963, 524, 56, 14);
-		add(lblNewLabel_2);
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel lblNewLabel9 = new JLabel("V");
+		lblNewLabel9.setBounds(963, 524, 56, 14);
+		add(lblNewLabel9);
+		lblNewLabel9.setHorizontalAlignment(SwingConstants.LEFT);
 
-		JLabel lblNewLabel_4 = new JLabel("(m/s)");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblNewLabel_4.setBounds(948, 538, 46, 14);
-		add(lblNewLabel_4);
+		JLabel lblNewLabel10 = new JLabel("(m/s)");
+		lblNewLabel10.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNewLabel10.setBounds(948, 538, 46, 14);
+		add(lblNewLabel10);
 
-		JLabel lblNewLabel_7 = new JLabel("<---------------->");
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_7.setBounds(361, 29, 120, 14);
-		add(lblNewLabel_7);
+		JLabel lblNewLabel11 = new JLabel("<---------------->");
+		lblNewLabel11.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel11.setBounds(361, 29, 120, 14);
+		add(lblNewLabel11);
 
-		JLabel lblNewLabel_8 = new JLabel("80 M");
-		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_8.setBounds(406, 13, 46, 14);
-		add(lblNewLabel_8);
+		JLabel lblNewLabel12 = new JLabel("80 M");
+		lblNewLabel12.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel12.setBounds(406, 13, 46, 14);
+		add(lblNewLabel12);
 
 
-		lblNewLabel_9 = new JLabel("");
+		lblNewLabelImage = new JLabel("");
 
-		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabelImage.setFont(new Font("Tahoma", Font.BOLD, 15));
 
-		lblNewLabel_9.setBounds(500, 13, 46, 14);
-		add(lblNewLabel_9);
+		lblNewLabelImage.setBounds(500, 13, 46, 14);
+		add(lblNewLabelImage);
 
 		progressBarFroce = new JProgressBar();
 		progressBarFroce.setBounds(985, 470, 211, 29);
@@ -682,15 +684,15 @@ public class FenetreJeuScientifique extends JPanel {
 		progressBarFroce2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		progressBarFroce2.setStringPainted(true);
 
-		JLabel lblNewLabel_10 = new JLabel("Force de lancement voiture 1");
-		lblNewLabel_10.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_10.setBounds(988, 445, 211, 14);
-		add(lblNewLabel_10);
+		JLabel lblNewLabel13 = new JLabel("Force de lancement voiture 1");
+		lblNewLabel13.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel13.setBounds(988, 445, 211, 14);
+		add(lblNewLabel13);
 
-		JLabel lblNewLabel_10_1 = new JLabel("Force de lancement voiture 2");
-		lblNewLabel_10_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_10_1.setBounds(1308, 445, 211, 14);
-		add(lblNewLabel_10_1);
+		JLabel lblNewLabel14 = new JLabel("Force de lancement voiture 2");
+		lblNewLabel14.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel14.setBounds(1308, 445, 211, 14);
+		add(lblNewLabel14);
 
 
 		JPanel panelPourMessage = new JPanel();

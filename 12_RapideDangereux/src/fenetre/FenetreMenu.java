@@ -37,6 +37,7 @@ public class FenetreMenu extends JPanel {
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * @param listener L'écouteur
 	 */
 //Ludovic Julien
 	public void addPropertyChangeListener(PropertyChangeListener listener) {

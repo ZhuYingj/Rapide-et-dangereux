@@ -77,6 +77,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	/**
 	 * Methode qui permet de dessiner la piste horizontale sur la zone d'animation a
 	 * l'aide de g2d
+	 * 	  @param g2d Le composant graphique
 	 */
 	// Ludovic Julien
 	@Override

@@ -85,7 +85,7 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 
 	/**
 	 * Méthode qui permet de dessiner le composant g2d
-	 * 
+	 * 	  @param g2d Le composant graphique
 	 */
 	// Ludovic Julien
 	@Override

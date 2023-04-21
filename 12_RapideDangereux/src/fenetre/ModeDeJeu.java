@@ -38,12 +38,13 @@ public class ModeDeJeu extends JPanel {
 	private JButton btnRetour;
 
 	/** ajouter le support pour lancer des evenements de type PropertyChange **/
-//	Alexis Pineda-Alvarado
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private JLabel lblNewLabel;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * 
+	 * @param listener L'écouteur
 	 */
 //	Alexis Pineda-Alvarado
 	public void addPropertyChangeListener(PropertyChangeListener listener) {

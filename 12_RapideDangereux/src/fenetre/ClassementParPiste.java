@@ -20,11 +20,13 @@ import java.awt.Color;
  * @author Ludovic Julien
  *
  */
-public class ClassementParPiste extends JPanel{
+public class ClassementParPiste extends JPanel {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * 
+	 * @param listener L'écouteur
 	 */
 //Ludovic Julien
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -34,11 +36,11 @@ public class ClassementParPiste extends JPanel{
 	/**
 	 * Creation de la fenetre.
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public ClassementParPiste() {
 		setBackground(Color.CYAN);
 		setOpaque(true);
-		
+
 		setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Tableau du classement par piste");
@@ -64,17 +66,17 @@ public class ClassementParPiste extends JPanel{
 		JButton btnColorer = new JButton("Colorer l'arriere plan");
 		btnColorer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				Color bgColor = JColorChooser.showDialog(ClassementParPiste.this,"Choisir une couleur", Color.WHITE);
-				
-		        if (bgColor != null) { // vérifier si l'utilisateur a choisi une couleur
-		            setBackground(bgColor); // changer la couleur de l'arrière-plan
-		        }
+
+				Color bgColor = JColorChooser.showDialog(ClassementParPiste.this, "Choisir une couleur", Color.WHITE);
+
+				if (bgColor != null) { // vérifier si l'utilisateur a choisi une couleur
+					setBackground(bgColor); // changer la couleur de l'arrière-plan
+				}
 			}
 		});
 		btnColorer.setBounds(519, 403, 189, 39);
 		add(btnColorer);
-		
+
 		TableauRecord tableauRecord = new TableauRecord();
 		tableauRecord.setBounds(183, 267, 452, 74);
 		add(tableauRecord);

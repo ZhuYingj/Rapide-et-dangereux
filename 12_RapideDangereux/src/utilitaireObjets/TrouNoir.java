@@ -122,7 +122,7 @@ public class TrouNoir {
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
 	 * voulu
 	 * 
-	 * @param pixelsParMetreVoulu
+	 * @param pixelsParMetreVoulu Le nombre de pixel par metre voulu
 	 */
 	// Alexis Pineda-Alvarado
 	public void setPixelsParMetre(double pixelsParMetreVoulu) {

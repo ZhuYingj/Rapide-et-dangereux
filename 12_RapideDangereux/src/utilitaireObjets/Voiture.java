@@ -108,6 +108,7 @@ public class Voiture implements Dessinable, Serializable {
 
 	/**
 	 * Création de la voiture à l'aide d'une ellipse et la flèche vectorielle
+	 * 
 	 */
 	// Kevin Nguyen
 	private void creerLaGeometrie() {
@@ -123,6 +124,8 @@ public class Voiture implements Dessinable, Serializable {
 
 	/**
 	 * Méthode qui permet de dessiner sur la zone d'animation à l'aide du g2d
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Kevin Nguyen
 	@Override
@@ -365,7 +368,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * Méthode qui permet de changer le nombre de pixel par mètre par un nombre
 	 * voulu
 	 * 
-	 * @param pixelsParMetreVoulu
+	 * @param pixelsParMetreVoulu le nombre de pixel par metre voulu
 	 */
 	// Tan Tommy Rin
 	public void setPixelsParMetre(double pixelsParMetreVoulu) {
@@ -411,8 +414,6 @@ public class Voiture implements Dessinable, Serializable {
 		this.voitureTransfo = voitureTransfo;
 	}
 
-	/** Méthode qui permet de retourner la masse en kg initiale de la voiture **/
-	// Par TanTommyRin
 	public double getMasseEnKgInitial() {
 		return masseEnKgInitial;
 	}
@@ -453,7 +454,7 @@ public class Voiture implements Dessinable, Serializable {
 	 * nouvelle vitesse d'impulsion de chacune des voitures
 	 * 
 	 * @param voiture1 La voiture du joueur 1
-	 * @throws Exception
+	 * @throws Exception L'exception trouvé
 	 */
 	// Kevin Nguyen
 

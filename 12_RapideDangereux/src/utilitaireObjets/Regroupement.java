@@ -23,6 +23,7 @@ import interfaces.TypePiste;
  * 
  * @author Tan Tommy Rin
  * @author Kevin Nguyen
+ * @author Alexis Pineda-Alvarado
  */
 
 public class Regroupement implements Dessinable, Serializable {
@@ -132,6 +133,8 @@ public class Regroupement implements Dessinable, Serializable {
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * 
+	 * @param listener L'écouteur
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {

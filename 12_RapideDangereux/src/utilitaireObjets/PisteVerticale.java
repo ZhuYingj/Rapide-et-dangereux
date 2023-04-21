@@ -73,6 +73,8 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	/**
 	 * Methode qui permet de dessiner la piste verticale sur la zone d'animation a
 	 * l'aide de g2d
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Ludovic Julien
 	@Override
@@ -210,6 +212,8 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 
 	/**
 	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 * 
+	 * @return si le clic contient la piste
 	 */
 	// Kevin Nguyen
 

@@ -84,6 +84,8 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 
 	/**
 	 * Méthode permettant de dessiner sur le composant graphique
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Ludovic Julien
 
@@ -311,6 +313,8 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 
 	/**
 	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 * 
+	 * @return si le clic contient la piste
 	 */
 	// Kevin Nguyen
 

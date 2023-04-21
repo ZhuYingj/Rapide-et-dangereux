@@ -27,13 +27,14 @@ import utilitaireObjets.Regroupement;
  * Classe offrant un ensemble de m�thodes pour illustrer le fonctionnement des
  * fichiers texte et binaires.
  * 
- * @author Caroline Houle
+ * // Caroline Houle Inspiration pour cette classe
+ * 
  * @author Tan Tommy Rin
  * @author Ludovic Julien
  */
 public class GestionnaireDeFichiersSurLeBureau {
 
-	String sousDossierSurBureau = "SauvegardePiste";
+	private String sousDossierSurBureau = "SauvegardePiste";
 
 	private int nombrePiste = 1;
 
@@ -45,6 +46,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 	/**
 	 * Constructeur par défault
 	 */
+	// Tan Tommy Rin
 	public GestionnaireDeFichiersSurLeBureau() {
 
 	}
@@ -321,7 +323,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 	}
 
 	public static String getBureau() {
-		// TODO Auto-generated method stub
+
 		return System.getProperty("user.home");
 	}
 

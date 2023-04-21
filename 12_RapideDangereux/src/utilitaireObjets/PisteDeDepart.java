@@ -77,6 +77,8 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	/**
 	 * Methode qui permet de dessiner la piste de d�part sur la zone d'animation a
 	 * l'aide de g2d
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Ludovic Julien
 	@Override
@@ -369,7 +371,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void setMurBas(int murBas) {
 		this.murBas = murBas;
 	}
-	
+
 	public Color getBordure() {
 		return bordure;
 	}
