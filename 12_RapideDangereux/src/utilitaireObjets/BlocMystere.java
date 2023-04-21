@@ -205,8 +205,15 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 	}
 
 	/**
-	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
-	 */
+	 * Méthode qui permet de détecter si le bloc mystere est contenue au clic de la
+	 * souris
+	 * 
+	 * @param xPix la coordonnée du clic en x
+	 * 
+	 * @param yPix la coordonnée du clic en y
+	 * 
+	 * @return si le clic contient le bloc mystere
+	 **/
 	// Tan Tommy Rin
 	@Override
 	public boolean contient(double xPix, double yPix) {

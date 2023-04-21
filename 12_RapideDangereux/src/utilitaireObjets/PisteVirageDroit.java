@@ -85,7 +85,8 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 
 	/**
 	 * Méthode qui permet de dessiner le composant g2d
-	 * 	  @param g2d Le composant graphique
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Ludovic Julien
 	@Override
@@ -268,6 +269,7 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 	 * et la boule de neige
 	 * 
 	 * @param objetSpecial L'objet special de type boule de neige
+	 * @return si la piste est en collision avec la boule de neige
 	 */
 	// Tan Tommy Rin
 
@@ -321,6 +323,11 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 
 	/**
 	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 * 
+	 * @param xPix la coordonnée du clic en x
+	 * @param yPix la coordonnée du clic en y
+	 * 
+	 * @return si le clic contient la piste
 	 */
 	// Kevin Nguyen
 

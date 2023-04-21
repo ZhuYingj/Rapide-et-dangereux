@@ -53,6 +53,8 @@ public class ObjetSpecial implements Dessinable {
 
 	/**
 	 * Méthode permettant de dessiner sur la zone d'animation à l'aide du g2d
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Tan Tommy Rin
 	@Override

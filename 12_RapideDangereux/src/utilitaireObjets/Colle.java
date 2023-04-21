@@ -45,7 +45,7 @@ public class Colle implements Dessinable {
 	 * @param pos      La position en vecteur2D
 	 * @param diametre Le diametre de la colle
 	 */
-	// Par Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public Colle(Vecteur2D pos, double diametre) {
 		this.diametre = diametre;
 		this.position = pos;
@@ -119,7 +119,7 @@ public class Colle implements Dessinable {
 	 * 
 	 * @param pixelsParMetreVoulu le nombre de pixel par metre voulu
 	 */
-	//  Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public void setPixelsParMetre(double pixelsParMetreVoulu) {
 		this.pixelsParMetre = pixelsParMetreVoulu;
 
@@ -156,7 +156,7 @@ public class Colle implements Dessinable {
 	 * 
 	 * @return nombre de pixel par metre
 	 */
-	// Par Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public double getPixelsParMetre() {
 		return this.pixelsParMetre;
 	}

@@ -7,10 +7,8 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
-
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
-
 
 /**
  * Classe permettant de gérer et créer un accélérateur
@@ -49,6 +47,8 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 	/**
 	 * Methode qui permet de dessiner l'accelerateur sur la zone d'animation a
 	 * l'aide de g2d
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Ludovic Julien
 	public void dessiner(Graphics2D g2d) {
@@ -78,8 +78,14 @@ public class Accelerateur implements Dessinable, Selectionnable, Serializable {
 	}
 
 	/**
-	 * Méthode qui permet de détecter si l'accelerateur est ocntenue au clic de la
+	 * Méthode qui permet de détecter si l'accelerateur est contenue au clic de la
 	 * souris
+	 * 
+	 * @param xPix la coordonnée du clic en x
+	 * 
+	 * @param yPix la coordonnée du clic en y
+	 * 
+	 * @return si le clic contient l'accelerateur
 	 **/
 	// Ludovic Julien
 

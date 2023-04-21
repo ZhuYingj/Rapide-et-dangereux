@@ -171,8 +171,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	 * et la boule de neige
 	 * 
 	 * @param objetSpecial L'objet special de type boule de neige
-	 * @return enCollision si la boule de neige est en contact avec les murs de la
-	 *         piste
+	 * @return si la piste est en collision avec la boule de neige
 	 */
 	// Tan Tommy Rin
 
@@ -279,6 +278,11 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 
 	/**
 	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 * 
+	 * @param xPix la coordonnée du clic en x
+	 * @param yPix la coordonnée du clic en y
+	 * 
+	 * @return si le clic contient la piste
 	 */
 	// Kevin Nguyen
 

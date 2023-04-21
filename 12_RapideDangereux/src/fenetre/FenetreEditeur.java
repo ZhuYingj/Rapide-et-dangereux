@@ -44,13 +44,10 @@ import javax.swing.SwingConstants;
  * Classe qui permet de créer et gérer la fenetre éditeur.
  * 
  * @author Tan Tommy Rin
-<<<<<<< HEAD
  * @author Alexis Pineda-Alvarado
-=======
  * @author Ludovic Julien
  * @author Kevin Nguyen
  * 
->>>>>>> branch 'master' of https://gitlab.com/alexiskp21/12_rapidedangereux.git
  */
 
 public class FenetreEditeur extends JPanel {
@@ -83,8 +80,8 @@ public class FenetreEditeur extends JPanel {
 
 	private JLabel lblImage;
 	private JPanel panelCouleurPiste;
-	private JPanel panel_V1;
-	private JPanel panel_V2;
+	private JPanel panelV1;
+	private JPanel panelV2;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -465,11 +462,11 @@ public class FenetreEditeur extends JPanel {
 		});
 		btnClear.setBounds(594, 575, 214, 63);
 		add(btnClear);
-		
+
 		JButton btnGauche3 = new JButton("<");
 		btnGauche3.setBounds(26, 161, 55, 23);
 		add(btnGauche3);
-		
+
 		btnGauche3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -478,18 +475,16 @@ public class FenetreEditeur extends JPanel {
 				gauche = false;
 			}
 		});
-		
+
 		panelCouleurPiste = new JPanel();
 		panelCouleurPiste.setBackground(Color.RED);
 		panelCouleurPiste.setBounds(89, 127, 143, 90);
 		add(panelCouleurPiste);
-		
-		
-		
+
 		JButton btnDroit3 = new JButton(">");
 		btnDroit3.setBounds(242, 161, 55, 23);
 		add(btnDroit3);
-		
+
 		btnDroit3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -498,85 +493,85 @@ public class FenetreEditeur extends JPanel {
 				droite = false;
 			}
 		});
-		
+
 		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
 		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblCouleurBordureDe.setBounds(74, 97, 177, 43);
 		add(lblCouleurBordureDe);
-		
+
 		JButton btnGauche1 = new JButton("<");
 		btnGauche1.setBounds(26, 287, 55, 23);
 		add(btnGauche1);
-		
+
 		btnGauche1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(1, 0);
-				setBackgroundV1(panel_V1);
+				setBackgroundV1(panelV1);
 				repaint();
 			}
 		});
-		
-		panel_V1 = new JPanel();
-		panel_V1.setBackground(Color.YELLOW);
-		panel_V1.setBounds(89, 249, 143, 90);
-		add(panel_V1);
-		
+
+		panelV1 = new JPanel();
+		panelV1.setBackground(Color.YELLOW);
+		panelV1.setBounds(89, 249, 143, 90);
+		add(panelV1);
+
 		JButton btnDroite1 = new JButton(">");
 		btnDroite1.setBounds(242, 287, 55, 23);
 		add(btnDroite1);
 		btnDroite1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changementImage(1, 1);
-				setBackgroundV1(panel_V1);
+				setBackgroundV1(panelV1);
 				repaint();
 			}
 		});
-		
+
 		JLabel lblNewLabel = new JLabel("Couleur voiture #1");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel.setBounds(89, 231, 134, 13);
 		add(lblNewLabel);
-		
+
 		JButton btnGauche2 = new JButton("<");
 		btnGauche2.setBounds(26, 403, 55, 23);
 		add(btnGauche2);
-		
+
 		btnGauche2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0, 0);
-				setBackgroundV2(panel_V2);
+				setBackgroundV2(panelV2);
 				repaint();
 			}
 		});
-		
-		panel_V2 = new JPanel();
-		panel_V2.setBackground(Color.CYAN);
-		panel_V2.setBounds(89, 375, 143, 90);
-		add(panel_V2);
-		
+
+		panelV2 = new JPanel();
+		panelV2.setBackground(Color.CYAN);
+		panelV2.setBounds(89, 375, 143, 90);
+		add(panelV2);
+
 		JButton btnDroite2 = new JButton(">");
 		btnDroite2.setBounds(242, 403, 55, 23);
 		add(btnDroite2);
-		
+
 		btnDroite2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0, 1);
-				setBackgroundV2(panel_V2);
+				setBackgroundV2(panelV2);
 				repaint();
 			}
 		});
-		
-		JLabel lblNewLabel_1 = new JLabel("Couleur Voiture #2");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(89, 350, 143, 13);
-		add(lblNewLabel_1);
-		
+
+		JLabel lblNewLabel2 = new JLabel("Couleur Voiture #2");
+		lblNewLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblNewLabel2.setBounds(89, 350, 143, 13);
+		add(lblNewLabel2);
+
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
@@ -588,7 +583,6 @@ public class FenetreEditeur extends JPanel {
 		}
 
 	}
-
 
 	/**
 	 * Méthode qui permet de supprimer tous les morceaux de piste qui sont sur le
@@ -833,7 +827,7 @@ public class FenetreEditeur extends JPanel {
 					"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU MAL PLACÉ POUR JOUER!");
 
 		}
-		
+
 		actionSkin();
 		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
 
@@ -1747,7 +1741,7 @@ public class FenetreEditeur extends JPanel {
 		repaint();
 
 	}
-	
+
 	/**
 	 * Méthode pour changer la couleur des côtés de piste
 	 */
@@ -1769,7 +1763,7 @@ public class FenetreEditeur extends JPanel {
 		pcs.firePropertyChange("COULEURPISTE4", null, couleursPiste[couleurPiste]);
 		repaint();
 	}
-	
+
 	/**
 	 * méthode qui permet le changement de couleur de la liste de couleur
 	 * 
@@ -1808,7 +1802,7 @@ public class FenetreEditeur extends JPanel {
 		pcs.firePropertyChange("SKINOPTIONS3", null, couleurs[indexCouleur]);
 		pcs.firePropertyChange("SKINOPTIONS4", null, couleurs2[indexCouleur2]);
 	}
-	
+
 	/**
 	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
 	 * levée d'évènements. pour faire le changement de couleur des voiture
@@ -1843,7 +1837,7 @@ public class FenetreEditeur extends JPanel {
 	public void setPanelRegroupement(PanelRegroupement panelRegroupement) {
 		this.panelRegroupement = panelRegroupement;
 	}
-	
+
 	public PanelObjet getPanelObjet() {
 		return panelObjet;
 	}
@@ -1851,7 +1845,7 @@ public class FenetreEditeur extends JPanel {
 	public void setPanelObjet(PanelObjet panelObjet) {
 		this.panelObjet = panelObjet;
 	}
-	
+
 	/**
 	 * méthode qui change la couleur du panel pour permettre de visualiser la
 	 * couleur choisit par l'utilisateur

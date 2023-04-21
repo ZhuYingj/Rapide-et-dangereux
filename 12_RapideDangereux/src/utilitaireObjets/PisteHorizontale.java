@@ -77,7 +77,8 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	/**
 	 * Methode qui permet de dessiner la piste horizontale sur la zone d'animation a
 	 * l'aide de g2d
-	 * 	  @param g2d Le composant graphique
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Ludovic Julien
 	@Override
@@ -175,7 +176,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	 * et la boule de neige
 	 * 
 	 * @param objetSpecial L'objet special de type boule de neige
-	 * @return enCollision Collision avec les murs de la piste.
+	 * @return si la piste est en collision avec la boule de neige
 	 */
 	// Tan Tommy Rin
 	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
@@ -262,9 +263,13 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 
 	/**
 	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 * 
+	 * @param xPix la coordonnée du clic en x
+	 * @param yPix la coordonnée du clic en y
+	 * 
+	 * @return si le clic contient la piste
 	 */
 	// Kevin Nguyen
-
 	@Override
 	public boolean contient(double xPix, double yPix) {
 		if (formeAire.contains(xPix, yPix)) {
