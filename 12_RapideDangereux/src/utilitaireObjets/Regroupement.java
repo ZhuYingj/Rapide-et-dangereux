@@ -229,6 +229,7 @@ public class Regroupement implements Dessinable, Serializable {
 		}
 
 		if (objSpecial == null) {
+		
 			pcs.firePropertyChange("reset1", 0, -1);
 		}
 		if (objSpecial2 == null) {
