@@ -9,8 +9,9 @@ package application;
 public class InfoLigne {
 
 	private String nom;
-    private double temps;
-    private String piste;
+	private double temps;
+	private String piste;
+
 
     /**
      * constructeur de la classe 
@@ -25,7 +26,6 @@ public class InfoLigne {
         this.temps = temps;
         this.piste = piste;
     }
-
     //Ludovic Julien
     public String getNom() {
         return nom;
@@ -40,10 +40,10 @@ public class InfoLigne {
     public String getPiste() {
         return piste;
     }
-
+    
     //Ludovic Julien
     public String toString() {
         return nom + ";" + temps + ";" + piste;
     }
-	
+
 }

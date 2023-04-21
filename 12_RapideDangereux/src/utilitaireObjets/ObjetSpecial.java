@@ -89,15 +89,16 @@ public class ObjetSpecial implements Dessinable {
 //Tan Tommy Rin
 
 	public Vecteur2D fonctionTrouNoir(Voiture voiture) {
-
+//Plus eloigné du centre, moins l'attraction est forte.
 		Vecteur2D forceApplied = new Vecteur2D(trouNoir.getPosition());
 		forceApplied = forceApplied.soustrait(voiture.getPosition());
 		// Distance entre la voiture et le trou noir
 		double r = forceApplied.module();
-
-		double fg = (trouNoir.getMasseTrouNoir() * 35) / (r * r);
+//Normalement x 9.8, mais sinon trop faible comme force et voiture peut s'échapper
+		double fg = (trouNoir.getMasseTrouNoir() * 75) / (r * r);
 		forceApplied = forceApplied.multiplie(fg);
 		voiture.setSommeDesForces(forceApplied);
+		System.out.println(forceApplied.module());
 
 		return forceApplied;
 	}
@@ -116,8 +117,8 @@ public class ObjetSpecial implements Dessinable {
 		Vecteur2D forceFrottement = new Vecteur2D();
 		// Coefficient de 2.75, colle.(Inventé)
 		forceFrottement = MoteurPhysique.calculerForceFrottement(2.75, voiture.getMasseEnKg(), voiture.getAngle());
-//		voiture.setAccel(new Vecteur2D(20 * Math.cos(voiture.getAngle()), 20 * Math.sin(voiture.getAngle())));
-		if (voiture.getVitesse().module() < 5) {
+
+		if (voiture.getVitesse().module() < 8) {
 			voiture.setSommeDesForces(new Vecteur2D(0, 0));
 		} else {
 			voiture.setSommeDesForces(forceFrottement);

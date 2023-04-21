@@ -46,7 +46,8 @@ import utilitaireObjets.Voiture;
 
 public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private GestionnaireDeFichiersSurLeBureau gestionFich;
-	private int nombreBlocMystere = 5;
+	/** Le nombre de boite mystere **/
+	private int nombreBlocMystere = 3;
 
 	/** Largeur du composant en metres. */
 	private double largeurDuComposantEnMetres = 640;
@@ -298,21 +299,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 			setAngle(angleVoitureDegre);
 
-			if (regroupement.getListePisteDeDepart().get(0).getVoiture().getAccel().getX() == 0) {
+			if (regroupement.getListePisteDeDepart().get(0).getVoiture().getAccel().module() == 0) {
 				regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse((new Vecteur2D(
 						voiture.getVitesse().module()
 								* Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
 						voiture.getVitesse().module()
 								* Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()))));
-			} else if (regroupement.getListePisteDeDepart().get(0).getVoiture().getAccel().getY() == 0) {
-				regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(new Vecteur2D(
-						voiture.getVitesse().module()
-								* Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
-						voiture.getVitesse().module()
-								* Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
-
 			}
-
 		}
 		if (gauche == true) {
 
@@ -324,23 +317,28 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				angleVoitureDegre = 360;
 			}
 			setAngle(angleVoitureDegre);
-			if (regroupement.getListePisteDeDepart().get(0).getVoiture().getAccel().getX() == 0) {
+			if (regroupement.getListePisteDeDepart().get(0).getVoiture().getAccel().module() == 0) {
 				regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(new Vecteur2D(
 						voiture.getVitesse().module()
 								* Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
 						voiture.getVitesse().module()
 								* Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
-			} else if (regroupement.getListePisteDeDepart().get(0).getVoiture().getAccel().getY() == 0) {
-				regroupement.getListePisteDeDepart().get(0).getVoiture().setVitesse(new Vecteur2D(
-						voiture.getVitesse().module()
-								* Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
-						voiture.getVitesse().module()
-								* Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
-
 			}
-
 		}
 		if (haut == true) {
+
+			regroupement.getListePisteDeDepart().get(0).getVoiture()
+					.setAccel(new Vecteur2D(
+							20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
+							20 * Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle())));
+
+		} else if ((regroupement.getObjSpecial() != null && regroupement.getObjSpecial().getColle()
+				.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)
+				|| (regroupement.getObjSpecial2() != null && regroupement.getObjSpecial2().getColle()
+						.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true)) {
+
+		} else {
+
 			regroupement.getListePisteDeDepart().get(0).getVoiture()
 					.setAccel(new Vecteur2D(
 							20 * Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()),
@@ -358,19 +356,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			}
 			setAngle2(angleVoitureDegre2);
 
-			if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getAccel().getX() == 0) {
+			if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getAccel().module() == 0) {
 				regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse((new Vecteur2D(
 						voiture2.getVitesse().module()
 								* Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()),
 						voiture2.getVitesse().module()
 								* Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()))));
-			} else if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getAccel().getY() == 0) {
-				regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(new Vecteur2D(
-						voiture2.getVitesse().module()
-								* Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()),
-						voiture2.getVitesse().module()
-								* Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle())));
-
 			}
 
 		}
@@ -384,21 +375,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				angleVoitureDegre2 = 360;
 			}
 			setAngle2(angleVoitureDegre2);
-			if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getAccel().getX() == 0) {
+			if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getAccel().module() == 0) {
 				regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(new Vecteur2D(
 						voiture2.getVitesse().module()
 								* Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()),
 						voiture2.getVitesse().module()
 								* Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle())));
-			} else if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getAccel().getY() == 0) {
-				regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(new Vecteur2D(
-						voiture2.getVitesse().module()
-								* Math.cos(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()),
-						voiture2.getVitesse().module()
-								* Math.sin(regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle())));
-
 			}
-
 		}
 		if (w == true) {
 			regroupement.getListePisteDeDepart().get(0).getVoiture2()
@@ -619,6 +602,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(valeurInit);
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setAccel(valeurInit);
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setAngle(0);
+		regroupement.getListePisteDeDepart().get(0).getVoiture().setLongueurTete(2.5);
+		regroupement.getListePisteDeDepart().get(0).getVoiture().setStrokeVoulu(0.5);
+		regroupement.getListePisteDeDepart().get(0).getVoiture().setDiametreFleche(16);
+		regroupement.getListePisteDeDepart().get(0).getVoiture2().setLongueurTete(2.5);
+		regroupement.getListePisteDeDepart().get(0).getVoiture2().setStrokeVoulu(0.5);
+		regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametreFleche(16);
 
 		angleVoitureDegre = 0;
 		angleVoitureDegre2 = 0;
@@ -727,6 +716,29 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	// Tan Tommy Rin
 	public void changementTexteParIteration() {
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
+		if (regroupement.getObjSpecial() != null) {
+			if (regroupement.getObjSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
+				pcs.firePropertyChange("champignon1", 0, -1);
+			} else if (regroupement.getObjSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+				pcs.firePropertyChange("bouleNeige1", 0, -1);
+			} else if (regroupement.getObjSpecial().getType() == TypeObjetSpecial.TROUNOIR) {
+				pcs.firePropertyChange("trouNoir1", 0, -1);
+			} else {
+				pcs.firePropertyChange("colle1", 0, -1);
+			}
+		}
+		if (regroupement.getObjSpecial2() != null) {
+			if (regroupement.getObjSpecial2().getType() == TypeObjetSpecial.CHAMPIGNON) {
+				pcs.firePropertyChange("champignon2", 0, -1);
+			} else if (regroupement.getObjSpecial2().getType() == TypeObjetSpecial.BOULEDENEIGE) {
+				pcs.firePropertyChange("bouleNeige2", 0, -1);
+			} else if (regroupement.getObjSpecial2().getType() == TypeObjetSpecial.TROUNOIR) {
+				pcs.firePropertyChange("trouNoir2", 0, -1);
+			} else {
+				pcs.firePropertyChange("colle2", 0, -1);
+			}
+		}
+
 		pcs.firePropertyChange("accEnXV1", 0, voiture.getAccel().getX());
 		pcs.firePropertyChange("accEnYV1", 0, voiture.getAccel().getY());
 		pcs.firePropertyChange("vitEnXV1", 0, voiture.getVitesse().getX());
@@ -754,21 +766,50 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
 			if (forceDeLancement > 150) {
 				forceDeLancement = 50;
+				regroupement.getListePisteDeDepart().get(0).getVoiture().setLongueurTete(2.5);
+				regroupement.getListePisteDeDepart().get(0).getVoiture().setStrokeVoulu(0.5);
+				regroupement.getListePisteDeDepart().get(0).getVoiture().setDiametreFleche(16);
 			} else if (forceDeLancement > 49 && forceDeLancement < 150) {
 				forceDeLancement = forceDeLancement + 0.3;
+				regroupement.getListePisteDeDepart().get(0).getVoiture().setLongueurTete(
+						regroupement.getListePisteDeDepart().get(0).getVoiture().getLongueurTete() + 0.03);
+				regroupement.getListePisteDeDepart().get(0).getVoiture().setStrokeVoulu(
+						regroupement.getListePisteDeDepart().get(0).getVoiture().getStrokeVoulu() + 0.01);
+				regroupement.getListePisteDeDepart().get(0).getVoiture().setDiametreFleche(
+						regroupement.getListePisteDeDepart().get(0).getVoiture().getDiametreFleche() + 0.03);
+
 			}
 
 			pcs.firePropertyChange("ForceLance", 0, forceDeLancement);
+		} else {
+			forceDeLancement = 50;
+			regroupement.getListePisteDeDepart().get(0).getVoiture().setLongueurTete(2.5);
+			regroupement.getListePisteDeDepart().get(0).getVoiture().setStrokeVoulu(0.5);
+			regroupement.getListePisteDeDepart().get(0).getVoiture().setDiametreFleche(16);
 		}
 		if (regroupement.getObjSpecial2() != null
 				&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.BOULEDENEIGE) {
 			if (forceDeLancement2 > 150) {
 				forceDeLancement2 = 50;
+				regroupement.getListePisteDeDepart().get(0).getVoiture2().setLongueurTete(2.5);
+				regroupement.getListePisteDeDepart().get(0).getVoiture2().setStrokeVoulu(0.5);
+				regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametreFleche(16);
 			} else if (forceDeLancement2 > 49 && forceDeLancement2 < 150) {
 				forceDeLancement2 = forceDeLancement2 + 0.3;
+				regroupement.getListePisteDeDepart().get(0).getVoiture2().setLongueurTete(
+						regroupement.getListePisteDeDepart().get(0).getVoiture2().getLongueurTete() + 0.03);
+				regroupement.getListePisteDeDepart().get(0).getVoiture2().setStrokeVoulu(
+						regroupement.getListePisteDeDepart().get(0).getVoiture2().getStrokeVoulu() + 0.01);
+				regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametreFleche(
+						regroupement.getListePisteDeDepart().get(0).getVoiture2().getDiametreFleche() + 0.03);
 			}
 
 			pcs.firePropertyChange("ForceLance2", 0, forceDeLancement2);
+		} else {
+			forceDeLancement2 = 50;
+			regroupement.getListePisteDeDepart().get(0).getVoiture2().setLongueurTete(2.5);
+			regroupement.getListePisteDeDepart().get(0).getVoiture2().setStrokeVoulu(0.5);
+			regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametreFleche(16);
 		}
 
 	}
@@ -782,7 +823,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		tempsTotalEcoule += deltaT;
 		changementTexteParIteration();
 
-		Vecteur2D forceTotal = new Vecteur2D(MoteurPhysique.calculerForceFrottement(0.45,
+		Vecteur2D forceTotal = new Vecteur2D(MoteurPhysique.calculerForceFrottement(testFrottement,
 				regroupement.getListePisteDeDepart().get(0).getVoiture().getMasseEnKg(),
 				regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()));
 		pcs.firePropertyChange("frottementEnXV1", 0, forceTotal.getX());
@@ -817,11 +858,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			} else if ((regroupement.getObjSpecial() != null
 					&& regroupement.getObjSpecial().getColle()
 							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture()) == true
-					&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 5)
+					&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 8)
 					|| (regroupement.getObjSpecial2() != null
 							&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
 									regroupement.getListePisteDeDepart().get(0).getVoiture()) == true
-							&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 5)) {
+							&& regroupement.getListePisteDeDepart().get(0).getVoiture().getVitesse().module() > 8)) {
 
 			}
 
@@ -836,7 +877,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 
-		Vecteur2D forceTotal2 = new Vecteur2D(MoteurPhysique.calculerForceFrottement(0.45,
+		Vecteur2D forceTotal2 = new Vecteur2D(MoteurPhysique.calculerForceFrottement(testFrottement,
 				regroupement.getListePisteDeDepart().get(0).getVoiture2().getMasseEnKg(),
 				regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()));
 		pcs.firePropertyChange("frottementEnXV2", 0, forceTotal2.getX());
@@ -870,17 +911,17 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			} else if ((regroupement.getObjSpecial() != null
 					&& regroupement.getObjSpecial().getColle()
 							.collisionDeLaVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true
-					&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 5)
+					&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 8)
 					|| (regroupement.getObjSpecial2() != null
 							&& regroupement.getObjSpecial2().getColle().collisionDeLaVoiture(
 									regroupement.getListePisteDeDepart().get(0).getVoiture2()) == true
-							&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 5)) {
+							&& regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() > 8)) {
 
 			}
 
 			else {
 				regroupement.getListePisteDeDepart().get(0).getVoiture2().setSommeDesForces(forceTotal2);
-				if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() < 0.3) {
+				if (regroupement.getListePisteDeDepart().get(0).getVoiture2().getVitesse().module() < 0.5) {
 					regroupement.getListePisteDeDepart().get(0).getVoiture2().setVitesse(new Vecteur2D(0, 0));
 				}
 			}
@@ -896,7 +937,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	//	meilleurTemps();
 		//moyenTemps();
 		//nbJouer();
-		
+	
+		// meilleurTemps();
 	}
 
 	/**
@@ -905,13 +947,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Tan Tommy Rin
 	public void arretQuandFini() {
-		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
+		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 				.getNombreToursFaits()) {
 			System.out.println("LA VOITURE 1 A GAGNÉE!!!");
 
 			arreter();
 
-		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
 				.getNombreToursFaits()) {
 			System.out.println("LA VOITURE 2 A GAGNÉE!!!");
 			arreter();
@@ -1158,7 +1200,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * 
 	 * @param nombreBlocMystere le nombre voulu
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void setNombreBlocMystere(int nombreBlocMystere) {
 		this.nombreBlocMystere = nombreBlocMystere;
 		regroupement.setNombreBoiteMystere(nombreBlocMystere);
@@ -1214,8 +1256,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 						.getNombreToursFaits()) {
 
 			String nomUtilisateur = "Inconnue";
-			 nomUtilisateur = JOptionPane.showInputDialog(
-					"félicitation pour cette belle victoire, entrez votre nom pour le classement !");
+			nomUtilisateur = JOptionPane
+					.showInputDialog("félicitation pour cette belle victoire, entrez votre nom pour le classement !");
 
 			if (typePiste == TypePiste.CANADA) {
 				piste = "Canada";
@@ -1226,36 +1268,37 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					piste = "Italie";
 				}
 			}
-			
 
-			GestionnaireDeFichiersSurLeBureau.ecrireFichier(nomUtilisateur,Math.round(tempsTotalEcoule * 100.0) / 100.0, piste);
+			GestionnaireDeFichiersSurLeBureau.ecrireFichier(nomUtilisateur,
+					Math.round(tempsTotalEcoule * 100.0) / 100.0, piste);
 		}
 	}
-	
-	public void meilleurTemps() {
-//		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
-//				.getNombreToursFaits()
-//				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
-//						.getNombreToursFaits()) {
-		
-		try {
-            List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-           //Map<String, InfoLigne> meilleurTempsMexique = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes,"Mexique");
-            Map<String, InfoLigne> meilleurTempsCanada = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
-          // Map<String, InfoLigne> meilleurTempsItalie = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes,"Italie");
 
-            System.out.println(meilleurTempsCanada);
-            
-            
-            //TableauRecord.getTableau().updateRecord("Mexique",meilleurTempsMexique);
-            TableauRecord.getTableau().updateRecord("Canada",meilleurTempsCanada);
-         //   TableauRecord.getTableau().updateRecord("Italie",meilleurTempsItalie);
-            
-            
-        } catch (FileNotFoundException e) {
-            System.err.println("Erreur : fichier introuvable");
-        }
-        }
+//	public void meilleurTemps() {
+////		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
+////				.getNombreToursFaits()
+////				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+////						.getNombreToursFaits()) {
+//		
+//		try {
+//
+//            List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+//           //Map<String, InfoLigne> meilleurTempsMexique = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes,"Mexique");
+//            Map<String, InfoLigne> meilleurTempsCanada = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
+//          // Map<String, InfoLigne> meilleurTempsItalie = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes,"Italie")
+//
+//            System.out.println(meilleurTempsCanada);
+//            
+//            
+//            //TableauRecord.getTableau().updateRecord("Mexique",meilleurTempsMexique);
+//            TableauRecord.getTableau().updateRecord("Canada",meilleurTempsCanada);
+//         //   TableauRecord.getTableau().updateRecord("Italie",meilleurTempsItalie);
+//            
+//            
+//        } catch (FileNotFoundException e) {
+//            System.err.println("Erreur : fichier introuvable");
+//        }
+//        }
        // }
 	
 	
@@ -1273,18 +1316,24 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		    }
 	}
 	
-	public void nbJouer() {
-		try {
-	        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-	        Map<String, Integer> comptages = GestionnaireDeFichiersSurLeBureau.compterPistes(listeLignes);
+//	public void nbJouer() {
+//		try {
+//	        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+//	        Map<String, Integer> comptages = GestionnaireDeFichiersSurLeBureau.compterPistes(listeLignes);
+//
+//	        for (String piste : comptages.keySet()) {
+//	            int comptage = comptages.get(piste);
+//	            System.out.println("La piste " + piste + " a été jouée " + comptage + " fois");
+//	        }
+//	    } catch (FileNotFoundException e) {
+//	        System.err.println("Erreur : fichier introuvable");
+//	    }
+//			for (InfoLigne meilleurTemps : meilleursTemps.values()) {
+//				System.out.println(meilleurTemps);
+//			}
+//		} catch (FileNotFoundException e) {
+//			System.err.println("Erreur : fichier introuvable");
+//		}
+//	}
 
-	        for (String piste : comptages.keySet()) {
-	            int comptage = comptages.get(piste);
-	            System.out.println("La piste " + piste + " a été jouée " + comptage + " fois");
-	        }
-	    } catch (FileNotFoundException e) {
-	        System.err.println("Erreur : fichier introuvable");
-	    }
-	}
-	
 }

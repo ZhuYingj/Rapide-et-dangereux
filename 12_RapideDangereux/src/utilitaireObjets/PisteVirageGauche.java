@@ -94,7 +94,7 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	// Ludovic Julien
 	@Override
 	public void dessiner(Graphics2D g2d) {
-//		g2d.scale(pixelsParMetre, pixelsParMetre);
+		// g2d.scale(pixelsParMetre, pixelsParMetre);
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
 		g2d.setColor(bordure);
@@ -382,6 +382,5 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	public void setBordure(Color bordure) {
 		this.bordure = bordure;
 	}
-	
 
 }

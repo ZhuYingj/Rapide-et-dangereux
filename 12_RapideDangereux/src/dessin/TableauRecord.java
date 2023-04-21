@@ -74,12 +74,10 @@ public class TableauRecord extends JPanel{
         public Object getValueAt(int row, int col) {
             return data[row][col];
         }
-
         
         public String getColumnName(int col) {
             return columnNames[col];
         }
-
        
         public Class getColumnClass(int c) {
             return getValueAt(0, c).getClass();
@@ -187,9 +185,5 @@ public class TableauRecord extends JPanel{
     public static MyTableModel getTableau() {
     	return tableModel;
     }
-    
-   
-    
-}
 
-
+	}

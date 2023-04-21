@@ -9,6 +9,8 @@ import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import application.OutilsImage;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
@@ -175,6 +177,9 @@ public class Regroupement implements Dessinable, Serializable {
 					listePisteDeDepart.get(0).getVoiture()
 							.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
 					objSpecial = regroupementBoiteMystere.get(a).getObjetSpecial();
+					if (objSpecial.getType() != TypeObjetSpecial.BOULEDENEIGE) {
+						pcs.firePropertyChange("reset1", 0, -1);
+					}
 					boutonAppuye = false;
 					objSpecial.setTempsTemporaire(tempsTemp);
 					tempsTemp = tempsTotalEcoule;
@@ -202,6 +207,9 @@ public class Regroupement implements Dessinable, Serializable {
 							.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
 					boutonAppuye2 = false;
 					objSpecial2 = regroupementBoiteMystere.get(a).getObjetSpecial();
+					if (objSpecial2.getType() != TypeObjetSpecial.BOULEDENEIGE) {
+						pcs.firePropertyChange("reset2", 0, -1);
+					}
 					objSpecial2.setTempsTemporaire(tempsTemp2);
 					tempsTemp2 = tempsTotalEcoule;
 					regroupementBoiteMystere.remove(a).getObjetSpecial();
@@ -224,6 +232,14 @@ public class Regroupement implements Dessinable, Serializable {
 			regroupementBoiteMystere = null;
 
 			creeBoiteDansListe();
+		}
+
+		if (objSpecial == null) {
+
+			pcs.firePropertyChange("reset1", 0, -1);
+		}
+		if (objSpecial2 == null) {
+			pcs.firePropertyChange("reset2", 0, -1);
 		}
 		fumeeFonction();
 		accelerateurFonction();
@@ -251,6 +267,10 @@ public class Regroupement implements Dessinable, Serializable {
 				objSpecial.setTempsTemporaire(tempsTemp);
 
 				objSpecial.fonctionChampignon(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule);
+
+				if (objSpecial.fonctionChampignon(listePisteDeDepart.get(0).getVoiture(), tempsTotalEcoule) == false) {
+					objSpecial = null;
+				}
 
 			} else if (objSpecial.getType() == TypeObjetSpecial.BOULEDENEIGE) {
 
@@ -341,7 +361,10 @@ public class Regroupement implements Dessinable, Serializable {
 				objSpecial2.setTempsTemporaire(tempsTemp2);
 
 				objSpecial2.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(), tempsTotalEcoule);
-
+				if (objSpecial2.fonctionChampignon(listePisteDeDepart.get(0).getVoiture2(),
+						tempsTotalEcoule) == false) {
+					objSpecial2 = null;
+				}
 			} else if (objSpecial2.getType() == TypeObjetSpecial.BOULEDENEIGE) {
 
 				// Si la boule de neige est lancé on avance d'un pas.
@@ -582,7 +605,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param voiture Voiture qui prend l'objet de type colle.
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void placerColleBonMorceauPisteVoiture2(Voiture voiture) {
 
 		if (objSpecial2 != null) {
@@ -710,7 +733,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param voiture Voiture qui prend l'objet de type colle.
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void placerColleBonMorceauPisteVoiture1(Voiture voiture) {
 
 		if (objSpecial != null) {
@@ -980,7 +1003,7 @@ public class Regroupement implements Dessinable, Serializable {
 			snowball.dessiner(g2d);
 		}
 	}
-	
+
 	/**
 	 * Méthode qui permet d'appliquer la fonction de l'accelerateur sur les 2
 	 * voitures lorsqu'ils sont en contact avec celui-ci.
@@ -1110,7 +1133,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteDeDepart(int i) {
 		if (objSpecial != null) {
 			if (listePisteDeDepart.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
@@ -1134,7 +1157,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteHorizontale(int i) {
 		if (objSpecial != null) {
 			if (listePisteHorizontale.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
@@ -1159,7 +1182,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVerticale(int i) {
 		if (objSpecial != null) {
 			if (listePisteVerticale.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {
@@ -1183,7 +1206,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageBas(int i) {
 
 		if (objSpecial != null) {
@@ -1212,7 +1235,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageDroit(int i) {
 
 		if (objSpecial != null) {
@@ -1242,7 +1265,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageGauche(int i) {
 
 		if (objSpecial != null) {
@@ -1272,7 +1295,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 * 
 	 * @param i La piste courante de la loop
 	 */
-//Tan Tommy Rin
+	// Tan Tommy Rin
 	public void collisionBouleDeNeigeAvecPisteVirageHaut(int i) {
 		if (objSpecial != null) {
 			if (listePisteVirageHaut.get(i).enCollisionAvecBouleDeNeige(objSpecial) == true && boutonAppuye == true) {

@@ -52,11 +52,6 @@ public class TestPhysique {
 		// System.out.println("Erreur calcul de l'accélération, masse nulle!");
 		// }
 		//
-		// for (int i = 1; pos.getX() < 60; i++) {
-		// vit = MoteurPhysique.calculVitesse(deltaT, vit, acc);
-		// pos = MoteurPhysique.calculPosition(deltaT, pos, vit);
-		// size = i;
-		// }//Fin boucle pour definir la taille des arraylist de la voiture A
 		// //Reinitialisation des vecteurs position et vitesse
 		// pos = new Vecteur2D(0, 0);
 		// vit = new Vecteur2D(40, 0);
