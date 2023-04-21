@@ -861,10 +861,10 @@ public class FenetreJeuScientifique extends JPanel {
 			progressBarFroce2.setMaximum(100);
 			progressBarFroce2.setValue(valeur2 - 50);
 			break;
-		case "resetBar1":
+		case "reset1":
 			progressBarFroce.setValue(0);
 			break;
-		case "resetBar2":
+		case "reset2":
 			progressBarFroce2.setValue(0);
 			break;
 		}
