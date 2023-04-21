@@ -385,9 +385,17 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().setNombreBlocMystere(valeur);
 			break;
 
-		case "MATERIEL":
-			// fenJeuScience.getZoneAnimPhysique().setTestFrottement(10);
+		case "MATPISTEASPHALT":
+			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.25);
+			break;
 
+		case "MATPISTESABLE":
+			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.70);
+			break;
+
+		case "MATPISTEGLACE":
+			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.02);
+			break;
 		}
 	}
 
@@ -464,6 +472,7 @@ public class AppPrincipale12 extends JFrame {
 		case "SKINOPTIONS2":
 			fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
 					.setSkin((Color) evt.getNewValue());
+
 			break;
 		case "SKINOPTIONS3":
 			fenEditeur.getPanelObjet().getPisteDeDepart().getVoiture().setSkin((Color) evt.getNewValue());

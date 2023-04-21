@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,6 +29,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import application.AppPrincipale12;
+import application.OutilsImage;
 import dessin.ZoneAnimPhysique;
 import dessin.ZoneVitesse;
 import geometrie.Vecteur2D;
@@ -93,6 +96,16 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblNewLabel_9;
 	private JPanel panelObjetEtGraphique;
 	private JTextArea txtArea;
+	private Image champignon;
+	private Image bouleNeige1;
+	private Image champignon2;
+	private Image bouleNeige2;
+	private Image trouNoir1;
+	private Image trouNoir2;
+	private Image colle1;
+	private Image colle2;
+	private JLabel lblImageObjet1;
+	private JLabel lblImageObjet2;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -182,7 +195,7 @@ public class FenetreJeuScientifique extends JPanel {
 				arretMusic();
 			}
 		});
-		btnStop.setBounds(361, 650, 89, 76);
+		btnStop.setBounds(307, 650, 89, 76);
 		add(btnStop);
 
 		btnReset = new JButton("Reset");
@@ -194,7 +207,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 			}
 		});
-		btnReset.setBounds(119, 650, 89, 76);
+		btnReset.setBounds(109, 650, 89, 76);
 		add(btnReset);
 
 		btnNextImg = new JButton("Next Img");
@@ -205,7 +218,7 @@ public class FenetreJeuScientifique extends JPanel {
 				txtArea.append("\nVoici la prochaine image du jeu");
 			}
 		});
-		btnNextImg.setBounds(239, 650, 89, 76);
+		btnNextImg.setBounds(208, 650, 89, 76);
 		add(btnNextImg);
 
 		setLayout(null);
@@ -662,7 +675,6 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel_8.setBounds(406, 13, 46, 14);
 		add(lblNewLabel_8);
 
-
 		lblNewLabel_9 = new JLabel("");
 
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -692,9 +704,8 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel_10_1.setBounds(1308, 445, 211, 14);
 		add(lblNewLabel_10_1);
 
-
 		JPanel panelPourMessage = new JPanel();
-		panelPourMessage.setBounds(479, 650, 264, 76);
+		panelPourMessage.setBounds(406, 650, 264, 76);
 		add(panelPourMessage);
 		panelPourMessage.setLayout(null);
 
@@ -710,10 +721,25 @@ public class FenetreJeuScientifique extends JPanel {
 		txtArea.setText("Pessez sur le bouton Start pour démarrer le jeu!");
 		txtArea.setWrapStyleWord(true);
 		txtArea.setLineWrap(true);
-		
-		JLabel lblImageItem = new JLabel("");
-		lblImageItem.setBounds(753, 650, 195, 76);
-		add(lblImageItem);
+
+		lblImageObjet1 = new JLabel("");
+		lblImageObjet1.setBounds(698, 662, 89, 76);
+		add(lblImageObjet1);
+
+		lblImageObjet2 = new JLabel("");
+		lblImageObjet2.setBounds(820, 662, 89, 76);
+		add(lblImageObjet2);
+
+		JLabel lblObjet1;
+		lblObjet1 = new JLabel("Objet Spéciale Voiture 1");
+		lblObjet1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblObjet1.setBounds(680, 650, 120, 14);
+		add(lblObjet1);
+
+		JLabel lblObjet2 = new JLabel("Objet Spéciale Voiture 2");
+		lblObjet2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblObjet2.setBounds(810, 650, 137, 14);
+		add(lblObjet2);
 
 		graphiqueVitesse();
 	}
@@ -888,6 +914,68 @@ public class FenetreJeuScientifique extends JPanel {
 			progressBarFroce2.setMaximum(100);
 			progressBarFroce2.setValue(valeur2 - 50);
 			break;
+
+		case "champignon1":
+			champignon = OutilsImage.lireImageEtRedimensionner("champignon.png", 89, 76);
+			if (champignon != null) {
+				lblImageObjet1.setIcon(new ImageIcon(champignon));
+
+			}
+			break;
+
+		case "bouleNeige1":
+			bouleNeige1 = OutilsImage.lireImageEtRedimensionner("snowball.png", 89, 76);
+			if (bouleNeige1 != null) {
+				lblImageObjet1.setIcon(new ImageIcon(bouleNeige1));
+			}
+			break;
+
+		case "trouNoir1":
+			trouNoir1 = OutilsImage.lireImageEtRedimensionner("blackhole.png", 89, 76);
+			if (trouNoir1 != null) {
+				lblImageObjet1.setIcon(new ImageIcon(trouNoir1));
+
+			}
+			break;
+
+		case "colle1":
+			colle1 = OutilsImage.lireImageEtRedimensionner("Colle.png", 89, 76);
+			if (colle1 != null) {
+				lblImageObjet1.setIcon(new ImageIcon(colle1));
+
+			}
+			break;
+
+		case "champignon2":
+			champignon2 = OutilsImage.lireImageEtRedimensionner("champignon.png", 89, 76);
+			if (champignon2 != null) {
+				lblImageObjet2.setIcon(new ImageIcon(champignon2));
+
+			}
+			break;
+
+		case "bouleNeige2":
+			bouleNeige2 = OutilsImage.lireImageEtRedimensionner("snowball.png", 89, 76);
+			if (bouleNeige2 != null) {
+				lblImageObjet2.setIcon(new ImageIcon(bouleNeige2));
+
+			}
+			break;
+		case "trouNoir2":
+			trouNoir2 = OutilsImage.lireImageEtRedimensionner("blackhole.png", 89, 76);
+			if (trouNoir2 != null) {
+				lblImageObjet2.setIcon(new ImageIcon(trouNoir2));
+
+			}
+			break;
+		case "colle2":
+			colle2 = OutilsImage.lireImageEtRedimensionner("Colle.png", 89, 76);
+			if (colle2 != null) {
+				lblImageObjet2.setIcon(new ImageIcon(colle2));
+
+			}
+			break;
+
 		case "reset1":
 			progressBarFroce.setValue(0);
 			break;
@@ -1075,7 +1163,7 @@ public class FenetreJeuScientifique extends JPanel {
 	 * 
 	 * @param evt Évènement lorsque l'information change
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	public void changementMessageItemBox(PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
 
