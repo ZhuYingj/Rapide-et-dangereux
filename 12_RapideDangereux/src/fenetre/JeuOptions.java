@@ -2,20 +2,20 @@ package fenetre;
 
 import java.awt.Color;
 import java.awt.Font;
-
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -26,12 +26,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import application.OutilsImage;
-import interfaces.TypePiste;
-
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import dessin.ZoneAnimPhysique;
 import geometrie.Vecteur2D;
+import interfaces.TypePiste;
 
 /**
  * Classe qui crée la fenêtre pour choisir les paramètres pour le mode de jeu
@@ -368,7 +365,15 @@ public class JeuOptions extends JPanel {
 
 		cbMatPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				if (cbMatPiste.getSelectedItem() == "Asphalt") {
+					actionCbAsphalt();
+				}
+				if (cbMatPiste.getSelectedItem() == "Sable") {
+					actionCbSable();
+				}
+				if (cbMatPiste.getSelectedItem() == "Glace") {
+					actionCbGlace();
+				}
 			}
 		});
 		cbMatPiste.setModel(new DefaultComboBoxModel(new String[] { "Asphalt", "Sable", "Glace" }));
@@ -813,11 +818,37 @@ public class JeuOptions extends JPanel {
 	}
 
 	/**
-	 * méthode qui change la couleur du panel pour permettre de visualiser la
-	 * couleur choisit par l'utilisateur
-	 * 
-	 * @param panel panel a changer la couleur pour la voiture 1
+	 * méthode qui fait un changement d'événement pour le frottement de la piste de
+	 * l'asphalt
 	 */
+	// Alexis Pineda-Alvarado
+	private void actionCbAsphalt() {
+		pcs.firePropertyChange("MATPISTEASPHALT", null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("IMGASPHALT",null, cbMatPiste.getSelectedItem());
+		txtArea.append("\nVous choisi l'asphalt où le coefficient de frottement est 0.20");
+	}
+
+	/**
+	 * méthode qui fait un changement d'événement pour le frottement de la piste de
+	 * sable
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionCbSable() {
+		pcs.firePropertyChange("MATPISTESABLE", null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("IMGSABLE", null, cbMatPiste.getSelectedItem());
+		txtArea.append("\nVous choisi le sable où le coefficient de frottement est 0.70");
+	}
+
+	/**
+	 * méthode qui fait un changement d'événement pour le frottement de la piste de
+	 * glace
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionCbGlace() {
+		pcs.firePropertyChange("MATPISTEGLACE", null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("IMGGLACE", null, cbMatPiste.getSelectedItem());
+		txtArea.append("\nVous choisi la glace où le coefficient de frottement est 0.02");
+	}
 
 	// Ludovic Julien
 	public void setBackgroundV1(JPanel panel) {

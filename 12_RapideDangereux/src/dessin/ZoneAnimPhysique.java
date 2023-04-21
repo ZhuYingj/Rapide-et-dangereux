@@ -168,30 +168,30 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 * @param g Contexte graphique
 	 */
 	// Kevin Nguyen
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		if (premiereFois) {
-			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
-			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
-			enCoursDAnimation = true;
-			premiereFois = false;
-			regroupement.getListePisteDeDepart().get(0).getVoiture()
-					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-							regroupement.getListePisteDeDepart().get(0).getY() + 10));
-
-			regroupement.getListePisteDeDepart().get(0).getVoiture2()
-					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
-							regroupement.getListePisteDeDepart().get(0).getY() + 50));
-
-		}
-
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-		regroupement.setPixelsParMetre(pixelsParMetre);
-		regroupement.dessiner(g2d);
-
-	}
+//	public void paintComponent(Graphics g) {
+//		super.paintComponent(g);
+//		if (premiereFois) {
+//			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
+//			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
+//			enCoursDAnimation = true;
+//			premiereFois = false;
+//			regroupement.getListePisteDeDepart().get(0).getVoiture()
+//					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+//							regroupement.getListePisteDeDepart().get(0).getY() + 10));
+//
+//			regroupement.getListePisteDeDepart().get(0).getVoiture2()
+//					.setPosition(new Vecteur2D(regroupement.getListePisteDeDepart().get(0).getX(),
+//							regroupement.getListePisteDeDepart().get(0).getY() + 50));
+//
+//		}
+//
+//		Graphics2D g2d = (Graphics2D) g;
+//		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//
+//		regroupement.setPixelsParMetre(pixelsParMetre);
+//		regroupement.dessiner(g2d);
+//
+//	}
 
 	/**
 	 * Méthode qui détecte quand plusieurs touches sont appuyés en même temps
@@ -824,7 +824,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		tempsTotalEcoule += deltaT;
 		changementTexteParIteration();
 
-		Vecteur2D forceTotal = new Vecteur2D(MoteurPhysique.calculerForceFrottement(0.45,
+		Vecteur2D forceTotal = new Vecteur2D(MoteurPhysique.calculerForceFrottement(testFrottement,
 				regroupement.getListePisteDeDepart().get(0).getVoiture().getMasseEnKg(),
 				regroupement.getListePisteDeDepart().get(0).getVoiture().getAngle()));
 		pcs.firePropertyChange("frottementEnXV1", 0, forceTotal.getX());
@@ -878,7 +878,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 
-		Vecteur2D forceTotal2 = new Vecteur2D(MoteurPhysique.calculerForceFrottement(0.45,
+		Vecteur2D forceTotal2 = new Vecteur2D(MoteurPhysique.calculerForceFrottement(testFrottement,
 				regroupement.getListePisteDeDepart().get(0).getVoiture2().getMasseEnKg(),
 				regroupement.getListePisteDeDepart().get(0).getVoiture2().getAngle()));
 		pcs.firePropertyChange("frottementEnXV2", 0, forceTotal2.getX());
