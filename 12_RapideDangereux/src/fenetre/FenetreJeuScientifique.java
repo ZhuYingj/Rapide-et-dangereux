@@ -1042,6 +1042,13 @@ public class FenetreJeuScientifique extends JPanel {
 		pcs.firePropertyChange("Test", null, -1);
 	}
 
+	/**
+	 * méthode qui rajoutera un message dans le JTextArea lorsqu'on va sur la boîte
+	 * mystère
+	 * 
+	 * @param evt Évènement lorsque l'information change
+	 */
+	//Alexis Pineda-Alvarado
 	public void changementMessageItemBox(PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
 
