@@ -678,6 +678,7 @@ public class FenetreJeuScientifique extends JPanel {
 		panelPourMessage.add(spPourMessage);
 
 		txtArea = new JTextArea();
+		txtArea.setFont(new Font("Dubai", Font.PLAIN, 13));
 		txtArea.setText("Pessez sur le bouton Start pour démarrer le jeu!");
 		txtArea.setWrapStyleWord(true);
 		txtArea.setLineWrap(true);

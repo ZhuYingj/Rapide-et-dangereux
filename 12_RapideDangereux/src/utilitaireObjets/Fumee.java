@@ -34,6 +34,7 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 
 	/** Prend la boule creer de la classe BouleFumee **/
 	private transient BouleFumee bouleFumee;
+	
 
 	/**
 	 * Methode qui permet de construire l'objet Fumee a l'aide de parametres
