@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
@@ -67,7 +68,7 @@ public class PanelObjet extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		blocMystere = new BlocMystere(87, new Vecteur2D(X_OBJET, Y_OBJET));
 		accelerateur = new Accelerateur(X_OBJET, Y_OBJET * 28);
 		fumee = new Fumee(X_OBJET * 3, Y_OBJET * 28);
