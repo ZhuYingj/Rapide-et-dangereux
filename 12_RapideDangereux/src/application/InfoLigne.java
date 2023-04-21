@@ -1,31 +1,49 @@
 package application;
 
+/**
+ * Classe qui permet de retourner les information d'une ligne 
+ * 
+ * @author Ludovic Julien
+ *
+ */
 public class InfoLigne {
 
 	private String nom;
 	private double temps;
 	private String piste;
 
-	public InfoLigne(String nom, double temps, String piste) {
-		this.nom = nom;
-		this.temps = temps;
-		this.piste = piste;
-	}
 
-	public String getNom() {
-		return nom;
-	}
+    /**
+     * constructeur de la classe 
+     * 
+     * @param nom		nom du joueur
+     * @param temps		temps effectué
+     * @param piste		piste jouer
+     */
+    //Ludovic Julien
+    public InfoLigne(String nom, double temps, String piste) {
+        this.nom = nom;
+        this.temps = temps;
+        this.piste = piste;
+    }
+    //Ludovic Julien
+    public String getNom() {
+        return nom;
+    }
 
-	public double getTemps() {
-		return temps;
-	}
+    //Ludovic Julien
+    public double getTemps() {
+        return temps;
+    }
 
-	public String getPiste() {
-		return piste;
-	}
-
-	public String toString() {
-		return nom + ";" + temps + ";" + piste;
-	}
+    //Ludovic Julien
+    public String getPiste() {
+        return piste;
+    }
+    
+    //Ludovic Julien
+    public String toString() {
+        return nom + ";" + temps + ";" + piste;
+    }
 
 }

@@ -72,6 +72,7 @@ public class ClassementParPiste extends JPanel {
 				if (bgColor != null) { // vérifier si l'utilisateur a choisi une couleur
 					setBackground(bgColor); // changer la couleur de l'arrière-plan
 				}
+
 			}
 		});
 		btnColorer.setBounds(519, 403, 189, 39);
