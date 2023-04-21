@@ -703,14 +703,14 @@ public class FenetreJeuScientifique extends JPanel {
 		panelPourMessage.add(spPourMessage);
 
 		txtArea = new JTextArea();
-		txtArea.setFont(new Font("Dubai", Font.PLAIN, 13));
+		spPourMessage.setViewportView(txtArea);
+		txtArea.setEditable(false);
+		txtArea.setForeground(Color.RED);
+		txtArea.setFont(new Font("Dubai", Font.PLAIN, 12));
 		txtArea.setText("Pessez sur le bouton Start pour démarrer le jeu!");
 		txtArea.setWrapStyleWord(true);
 		txtArea.setLineWrap(true);
-		txtArea.setForeground(Color.RED);
-		txtArea.setEditable(false);
-		spPourMessage.setViewportView(txtArea);
-
+		
 		JLabel lblImageItem = new JLabel("");
 		lblImageItem.setBounds(753, 650, 195, 76);
 		add(lblImageItem);
