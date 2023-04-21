@@ -966,6 +966,17 @@ public class Regroupement implements Dessinable, Serializable {
 		g2dCopie.setStroke(new BasicStroke(5));
 
 		g2dCopie.setColor(Color.WHITE);
+		if (listeFumee.size() == 0) {
+			g2dCopie.drawString("Voiture1",
+					(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getX()
+							- listePisteDeDepart.get(0).getVoiture().getDiametre() / 2),
+					(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getY()));
+			g2dCopie.drawString("Voiture2",
+					(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getX()
+							- listePisteDeDepart.get(0).getVoiture2().getDiametre() / 2),
+					(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
+		}
+
 		if (listeFumee.size() != 0) {
 			if (!listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
 					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
