@@ -28,6 +28,7 @@ import fenetre.FenetreMenu;
 import fenetre.FenetreOptionMontre;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
+import fenetre.PanelRegroupement;
 import interfaces.TypePiste;
 
 /**
@@ -46,13 +47,13 @@ public class AppPrincipale12 extends JFrame {
 	private JCheckBoxMenuItem checkBoxAudio;
 
 	private int nombrePiste = 1;
-	
+
 	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String sousDossierSurBureau = "SauvegardePiste";
 
 	private static int audio = 1;
-	
+
 	private static boolean pisteAudio;
 
 	private File fichierDeTravail = new File(System.getProperty("user.home"),
@@ -137,7 +138,6 @@ public class AppPrincipale12 extends JFrame {
 		FenetreJeuScientifique fenJeuScience = new FenetreJeuScientifique();
 		JeuOptions fenOptions = new JeuOptions();
 		FenetreOptionMontre fenOptionMontre = new FenetreOptionMontre();
-
 		ClassementParPiste fenRecord = new ClassementParPiste();
 
 		ajouterModeEditeurComboBox(fenEditeur);
@@ -182,9 +182,7 @@ public class AppPrincipale12 extends JFrame {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience, fenEditeur);
 				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience);
-				
 				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
-				
 
 			}
 		});

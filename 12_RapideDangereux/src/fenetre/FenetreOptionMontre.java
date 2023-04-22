@@ -69,14 +69,13 @@ public class FenetreOptionMontre extends JPanel {
 	private ZoneAnimPhysique zoneAnimPhysique;
 	private JLabel lblNombreTours;
 	private JLabel lblFlecheBasImage;
-
-	public ZoneAnimPhysique getZoneAnimPhysique() {
-		return zoneAnimPhysique;
-	}
-
-	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
-		this.zoneAnimPhysique = zoneAnimPhysique;
-	}
+	private JLabel lblNombreToursMsg;
+	private JLabel lblCouleurBordureDe;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel2;
+	private JLabel lblNewLabel3;
+	private JLabel lblLongueurPiste;
+	private JLabel lblTitre;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -104,17 +103,17 @@ public class FenetreOptionMontre extends JPanel {
 
 		lblNombreTours = new JLabel("1");
 		lblNombreTours.setForeground(Color.BLACK);
-		lblNombreTours.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
-		lblNombreTours.setBounds(1184, 129, 98, 85);
+		lblNombreTours.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 32));
+		lblNombreTours.setBounds(1173, 124, 98, 85);
 		add(lblNombreTours);
 
-		JLabel lblNombreToursMsg = new JLabel("TOURS À FAIRE");
+		lblNombreToursMsg = new JLabel("TOURS À FAIRE");
 		lblNombreToursMsg.setForeground(Color.BLACK);
 		lblNombreToursMsg.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
 		lblNombreToursMsg.setBounds(1203, 136, 194, 71);
 		add(lblNombreToursMsg);
 
-		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
+		lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
 		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblCouleurBordureDe.setBounds(58, 226, 177, 43);
@@ -169,7 +168,7 @@ public class FenetreOptionMontre extends JPanel {
 		spPourMessage.setBounds(0, 0, 549, 134);
 		panelPourMessage.add(spPourMessage);
 
-		JLabel lblTitre = new JLabel("Course Contre La Montre");
+		lblTitre = new JLabel("Course Contre La Montre");
 		lblTitre.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 44));
 		lblTitre.setBounds(537, 0, 540, 70);
 		add(lblTitre);
@@ -350,19 +349,19 @@ public class FenetreOptionMontre extends JPanel {
 		lblVitesseDifficile.setBounds(280, 237, 65, 14);
 		panel2.add(lblVitesseDifficile);
 
-		JLabel lblNewLabel = new JLabel("Couleur voiture #1");
+		lblNewLabel = new JLabel("Couleur voiture #1");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel.setBounds(73, 360, 134, 13);
 		add(lblNewLabel);
 
-		JLabel lblNewLabel2 = new JLabel("Couleur Voiture #2");
+		lblNewLabel2 = new JLabel("Couleur Voiture #2");
 		lblNewLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel2.setBounds(73, 479, 143, 13);
 		add(lblNewLabel2);
 
-		JLabel lblNewLabel3 = new JLabel("Aperçue piste");
+		lblNewLabel3 = new JLabel("Aperçue piste");
 		lblNewLabel3.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 34));
 		lblNewLabel3.setBounds(540, 136, 246, 70);
 		add(lblNewLabel3);
@@ -440,6 +439,12 @@ public class FenetreOptionMontre extends JPanel {
 		btnCommencer.setBounds(549, 691, 237, 29);
 		add(btnCommencer);
 
+		lblLongueurPiste = new JLabel("640 m");
+		lblLongueurPiste.setForeground(Color.DARK_GRAY);
+		lblLongueurPiste.setFont(new Font("Comic Sans MS", Font.BOLD, 26));
+		lblLongueurPiste.setBounds(606, 650, 89, 29);
+		add(lblLongueurPiste);
+
 		lblImage = new JLabel("");
 		lblImage.setBounds(10, 0, 1600, 800);
 		add(lblImage);
@@ -477,6 +482,15 @@ public class FenetreOptionMontre extends JPanel {
 				lblImage.setIcon(new ImageIcon(imgHiver));
 				imgHiver.flush();
 			}
+			lblNombreToursMsg.setForeground(Color.white);
+			lblCouleurBordureDe.setForeground(Color.white);
+			lblNewLabel.setForeground(Color.white);
+			lblNewLabel2.setForeground(Color.white);
+			lblNewLabel3.setForeground(Color.white);
+			lblLongueurPiste.setForeground(Color.white);
+			lblNombreTours.setForeground(Color.white);
+			lblFlecheBasImage.setForeground(Color.white);
+			lblTitre.setForeground(Color.white);
 		}
 	}
 
@@ -507,6 +521,15 @@ public class FenetreOptionMontre extends JPanel {
 				lblImage.setIcon(new ImageIcon(imgDesert));
 				imgDesert.flush();
 			}
+			lblNombreToursMsg.setForeground(Color.white);
+			lblCouleurBordureDe.setForeground(Color.white);
+			lblNewLabel.setForeground(Color.white);
+			lblNewLabel2.setForeground(Color.white);
+			lblNewLabel3.setForeground(Color.white);
+			lblLongueurPiste.setForeground(Color.white);
+			lblNombreTours.setForeground(Color.white);
+			lblFlecheBasImage.setForeground(Color.white);
+			lblTitre.setForeground(Color.white);
 		}
 	}
 
@@ -537,6 +560,15 @@ public class FenetreOptionMontre extends JPanel {
 				lblImage.setIcon(new ImageIcon(imgVenice));
 				imgVenice.flush();
 			}
+			lblNombreToursMsg.setForeground(Color.white);
+			lblCouleurBordureDe.setForeground(Color.white);
+			lblNewLabel.setForeground(Color.white);
+			lblNewLabel2.setForeground(Color.white);
+			lblNewLabel3.setForeground(Color.white);
+			lblLongueurPiste.setForeground(Color.white);
+			lblNombreTours.setForeground(Color.white);
+			lblFlecheBasImage.setForeground(Color.white);
+			lblTitre.setForeground(Color.white);
 		}
 	}
 
@@ -697,6 +729,14 @@ public class FenetreOptionMontre extends JPanel {
 	// Ludovic Julien
 	public void setBackgroundV1(JPanel panel) {
 		panel.setBackground(couleurs[indexCouleur]);
+	}
+
+	public ZoneAnimPhysique getZoneAnimPhysique() {
+		return zoneAnimPhysique;
+	}
+
+	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
+		this.zoneAnimPhysique = zoneAnimPhysique;
 	}
 
 	/**
