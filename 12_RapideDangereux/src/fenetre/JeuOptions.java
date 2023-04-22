@@ -892,10 +892,13 @@ public class JeuOptions extends JPanel {
             List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
             Map<String, InfoLigne> meilleurTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
           
-            TableauRecord.getTableau().updateRecord("Mexique",meilleurTemps);
-            TableauRecord.getTableau().updateRecord("Canada",meilleurTemps);
-            TableauRecord.getTableau().updateRecord("Italie",meilleurTemps);
+            for (String piste : meilleurTemps.keySet()) {
+                InfoLigne infoLigne = meilleurTemps.get(piste);
             
+                if (!infoLigne.getNom().equals(null)) {
+                    TableauRecord.getTableau().updateRecord(piste, meilleurTemps);
+                }
+            }
             
         } catch (FileNotFoundException e) {
             System.err.println("Erreur : fichier introuvable");
@@ -911,6 +914,8 @@ public class JeuOptions extends JPanel {
 		        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
 		        Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
 		        
+		       
+		        
 		        double moyenneMexique = moyennes.get("Mexique");
 		        double moyenneCanada = moyennes.get("Canada");
 		        double moyenneItalie = moyennes.get("Italie");
@@ -919,7 +924,6 @@ public class JeuOptions extends JPanel {
 		        TableauRecord.getTableau().updateMoyenne("Canada",""+moyenneCanada);
 		        TableauRecord.getTableau().updateMoyenne("Italie",""+moyenneItalie);
 		        
-		        System.out.println(moyennes);
 		        
 		    } catch (FileNotFoundException e) {
 		        System.err.println("Erreur : fichier introuvable");
@@ -935,6 +939,8 @@ public class JeuOptions extends JPanel {
 		        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
 		        Map<String, Integer> comptages = GestionnaireDeFichiersSurLeBureau.compterPistes(listeLignes);
 		        
+		       
+		        
 		        double nbMexique = comptages.get("Mexique");
 		        double nbCanada = comptages.get("Canada");
 		        double nbItalie = comptages.get("Italie");
@@ -942,6 +948,7 @@ public class JeuOptions extends JPanel {
 		        TableauRecord.getTableau().updateNombreDeFoisJoue("Mexique",""+nbMexique);
 		        TableauRecord.getTableau().updateNombreDeFoisJoue("Canada",""+nbCanada);
 		        TableauRecord.getTableau().updateNombreDeFoisJoue("Italie",""+nbItalie);
+		        
 		        
 		    } catch (FileNotFoundException e) {
 		        System.err.println("Erreur : fichier introuvable");
@@ -953,8 +960,8 @@ public class JeuOptions extends JPanel {
 	 */
 	//Ludovic Julien
 	public void actionRecord() {
-		nbjouer();
-		moyenTemps();
+		//nbjouer();
+		//moyenTemps();
 		meilleurTemps();
 	}
 	
