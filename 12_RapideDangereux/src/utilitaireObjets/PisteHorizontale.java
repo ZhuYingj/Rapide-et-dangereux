@@ -88,7 +88,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
 		g2dCopie.setColor(color);
 		g2dCopie.fillRect(x, y, taillePiste, taillePiste);
-		
+
 		g2dCopie.setColor(bordure);
 		Stroke stroke = new BasicStroke(2f);
 		g2dCopie.setStroke(stroke);
@@ -146,7 +146,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
 						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle())
 								+ ((360 - (Math.toDegrees(voiture.getAngle())) * 2))));
-						
+
 					}
 				} catch (Exception e) {
 
@@ -192,7 +192,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 				&& objetSpecial.getBouleDeNeige().getBoule().getY() < murBas) {
 			if (objetSpecial.getBouleDeNeige().getBoule().getY() < murHaut + 1) {
 				enCollision = true;
-		
+
 			} else if (objetSpecial.getBouleDeNeige().getBoule().getY() > murBas - objetSpecial.getDiametreObjet()) {
 				enCollision = true;
 			}
