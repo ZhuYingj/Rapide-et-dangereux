@@ -728,6 +728,18 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	}
 
+	public void changerTexture(Color color) {
+		if (regroupement.getListePisteDeDepart().size() != 0) {
+			regroupement.getListePisteDeDepart().get(0).setColor(color);
+		}
+		if (regroupement.getListePisteHorizontale().size() != 0) {
+			for (int a = 0; a < regroupement.getListePisteHorizontale().size(); a++) {
+				regroupement.getListePisteHorizontale().get(a).setColor(color);
+			}
+		}
+
+	}
+
 	/**
 	 * Méthode qui permet de détecter les levés d'évènement et d'envoyer la nouvelle
 	 * donnée
@@ -875,15 +887,15 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					.contient(regroupement.getListePisteDeDepart().get(0).getVoiture().getPosition().getX(),
 							regroupement.getListePisteDeDepart().get(0).getVoiture().getPosition().getY())) {
 
-			} else if (regroupement.getListeAccelerateur().size() == 2 && (regroupement.getListeAccelerateur()
-					.get(1).contient(regroupement.getListePisteDeDepart().get(0).getVoiture().getPosition().getX(),
+			} else if (regroupement.getListeAccelerateur().size() == 2 && (regroupement.getListeAccelerateur().get(1)
+					.contient(regroupement.getListePisteDeDepart().get(0).getVoiture().getPosition().getX(),
 							regroupement.getListePisteDeDepart().get(0).getVoiture().getPosition().getY())
 					|| regroupement.getListeAccelerateur().get(0).contient(
 							regroupement.getListePisteDeDepart().get(0).getVoiture().getPosition().getX(),
 							regroupement.getListePisteDeDepart().get(0).getVoiture().getPosition().getY()))) {
 
-			} else if (regroupement.getListeAccelerateur().size() == 3 && (regroupement.getListeAccelerateur()
-					.get(2).contient(regroupement.getListePisteDeDepart().get(0).getVoiture().getPosition().getX(),
+			} else if (regroupement.getListeAccelerateur().size() == 3 && (regroupement.getListeAccelerateur().get(2)
+					.contient(regroupement.getListePisteDeDepart().get(0).getVoiture().getPosition().getX(),
 							regroupement.getListePisteDeDepart().get(0).getVoiture().getPosition().getY())
 					|| regroupement.getListeAccelerateur().get(1).contient(
 							regroupement.getListePisteDeDepart().get(0).getVoiture().getPosition().getX(),
@@ -1305,4 +1317,5 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					Math.round(tempsTotalEcoule * 100.0) / 100.0, piste);
 		}
 	}
+
 }

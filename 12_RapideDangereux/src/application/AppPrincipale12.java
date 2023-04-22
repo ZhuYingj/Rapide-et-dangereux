@@ -401,8 +401,7 @@ public class AppPrincipale12 extends JFrame {
 			break;
 
 		case "COULEURMATPISTE":
-			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
-					.setColor((Color) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().changerTexture((Color) evt.getNewValue());
 			break;
 		}
 	}
