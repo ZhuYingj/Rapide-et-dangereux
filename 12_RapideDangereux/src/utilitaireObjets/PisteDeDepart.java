@@ -3,10 +3,12 @@ package utilitaireObjets;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import application.OutilsImage;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
@@ -85,6 +87,10 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
+		
+		Image deuxVoiture = OutilsImage.lireImageEtRedimensionner("blackhole.png", 80, 80);
+        g2d.drawImage(deuxVoiture, x, y, 80, 80, null);
+		
 		g2d.setColor(bordure);
 		Stroke stroke1 = new BasicStroke(2f);
 		g2d.setStroke(stroke1);
