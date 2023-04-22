@@ -131,6 +131,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Kevin Nguyen
 	public ZoneAnimPhysique() {
+		Color transparent = new Color(0, 0, 0, .0f);
+		setBackground(transparent);
 		gestionFich = new GestionnaireDeFichiersSurLeBureau();
 		pisteMexique = new PisteMexique(0, 0);
 		pisteItalie = new PisteItalie(0, 0);
@@ -936,10 +938,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		arretMusic();
 		arretGraphique();
 		gagnantCourse();
-	//	meilleurTemps();
-		//moyenTemps();
-		//nbJouer();
-	
+		// meilleurTemps();
+		// moyenTemps();
+		// nbJouer();
+
 		// meilleurTemps();
 	}
 
@@ -1301,23 +1303,22 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 //            System.err.println("Erreur : fichier introuvable");
 //        }
 //        }
-       // }
-	
-	
-	public void moyenTemps() {
-		 try {
-		        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-		        Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
+	// }
 
-		        for (String piste : moyennes.keySet()) {
-		            double moyenne = moyennes.get(piste);
-		            System.out.println("Moyenne de temps pour la piste " + piste + " : " + moyenne);
-		        }
-		    } catch (FileNotFoundException e) {
-		        System.err.println("Erreur : fichier introuvable");
-		    }
+	public void moyenTemps() {
+		try {
+			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+			Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
+
+			for (String piste : moyennes.keySet()) {
+				double moyenne = moyennes.get(piste);
+				System.out.println("Moyenne de temps pour la piste " + piste + " : " + moyenne);
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Erreur : fichier introuvable");
+		}
 	}
-	
+
 //	public void nbJouer() {
 //		try {
 //	        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");

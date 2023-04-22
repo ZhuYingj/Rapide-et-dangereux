@@ -127,7 +127,7 @@ public class FenetreEditeur extends JPanel {
 		JLabel lblTextEditeur = new JLabel("MODE ÉDITEUR");
 		lblTextEditeur.setForeground(new Color(255, 255, 255));
 		lblTextEditeur.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 30));
-		lblTextEditeur.setBounds(482, 15, 250, 71);
+		lblTextEditeur.setBounds(558, 15, 250, 71);
 		add(lblTextEditeur);
 
 		panelObjet = new PanelObjet();
@@ -573,6 +573,12 @@ public class FenetreEditeur extends JPanel {
 		lblNewLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel2.setBounds(89, 350, 143, 13);
 		add(lblNewLabel2);
+		
+		JLabel lblNombreTours = new JLabel("3 TOURS À FAIRE");
+		lblNombreTours.setForeground(new Color(240, 255, 240));
+		lblNombreTours.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
+		lblNombreTours.setBounds(895, 39, 194, 71);
+		add(lblNombreTours);
 
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);

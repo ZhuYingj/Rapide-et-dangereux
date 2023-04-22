@@ -83,6 +83,7 @@ public class JeuOptions extends JPanel {
 	private JPanel panelCouleurPiste;
 	private boolean gauche = false;
 	private boolean droite = false;
+	private JLabel lblNombreTours;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -538,6 +539,12 @@ public class JeuOptions extends JPanel {
 		lblNewLabelMonde2.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 34));
 		lblNewLabelMonde2.setBounds(540, 136, 246, 70);
 		add(lblNewLabelMonde2);
+		
+				lblNombreTours = new JLabel("3 TOURS À FAIRE");
+				lblNombreTours.setForeground(new Color(0, 0, 0));
+				lblNombreTours.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
+				lblNombreTours.setBounds(1199, 142, 194, 71);
+				add(lblNombreTours);
 
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
@@ -595,6 +602,7 @@ public class JeuOptions extends JPanel {
 			lblNewLabel.setForeground(Color.white);
 			lblNewLabel2.setForeground(Color.white);
 			lblCouleurBordureDe.setForeground(Color.white);
+			lblNombreTours.setForeground(Color.white);
 		}
 	}
 
@@ -631,8 +639,8 @@ public class JeuOptions extends JPanel {
 			lblNewLabel.setForeground(Color.white);
 			lblNewLabel2.setForeground(Color.white);
 			lblCouleurBordureDe.setForeground(Color.white);
+			lblNombreTours.setForeground(Color.white);
 
-			;
 		}
 	}
 
@@ -670,7 +678,7 @@ public class JeuOptions extends JPanel {
 			lblNewLabel.setForeground(Color.white);
 			lblNewLabel2.setForeground(Color.white);
 			lblCouleurBordureDe.setForeground(Color.white);
-
+			lblNombreTours.setForeground(Color.white);
 		}
 	}
 
@@ -824,7 +832,7 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionCbAsphalt() {
 		pcs.firePropertyChange("MATPISTEASPHALT", null, cbMatPiste.getSelectedItem());
-		pcs.firePropertyChange("IMGASPHALT",null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("IMGASPHALT", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi l'asphalt où le coefficient de frottement est 0.20");
 	}
 

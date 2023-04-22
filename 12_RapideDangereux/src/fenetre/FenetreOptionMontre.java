@@ -67,7 +67,7 @@ public class FenetreOptionMontre extends JPanel {
 	private boolean droite = false;
 	private JPanel panelCouleurPiste;
 	private ZoneAnimPhysique zoneAnimPhysique;
-
+	private JLabel lblNombreTours;
 	private JLabel lblFlecheBasImage;
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {
@@ -94,13 +94,25 @@ public class FenetreOptionMontre extends JPanel {
 	// Alexis Pineda-Alvarado
 	public FenetreOptionMontre() {
 		setLayout(null);
-
+		setBounds(0, 0, 1600, 800);
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("Retour", 0, -1);
 			}
 		});
+
+		lblNombreTours = new JLabel("1");
+		lblNombreTours.setForeground(Color.BLACK);
+		lblNombreTours.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
+		lblNombreTours.setBounds(1184, 129, 98, 85);
+		add(lblNombreTours);
+
+		JLabel lblNombreToursMsg = new JLabel("TOURS À FAIRE");
+		lblNombreToursMsg.setForeground(Color.BLACK);
+		lblNombreToursMsg.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
+		lblNombreToursMsg.setBounds(1203, 136, 194, 71);
+		add(lblNombreToursMsg);
 
 		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
 		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
@@ -672,6 +684,7 @@ public class FenetreOptionMontre extends JPanel {
 	// Alexis Pineda-Alvarado
 	public void actionSliderNbrTour() {
 		txtArea.append("\nVous avez choisi " + sliderNbrTour.getValue() + " tour à faire!");
+		lblNombreTours.setText(sliderNbrTour.getValue() + "");
 
 	}
 
