@@ -69,7 +69,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 		this.murHaut = y;
 		this.murBas = y + taillePiste;
 		voiture = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste / 4), Color.yellow, 50, 16, 0, 50);
-		voiture2 = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste * 3 / 4), Color.white, 50, 16, 0, 60);
+		voiture2 = new Voiture(new Vecteur2D(x + taillePiste / 4, y + taillePiste * 3 / 4), Color.cyan, 50, 16, 0, 60);
 
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
@@ -77,6 +77,8 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	/**
 	 * Methode qui permet de dessiner la piste de d�part sur la zone d'animation a
 	 * l'aide de g2d
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Ludovic Julien
 	@Override
@@ -169,8 +171,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	 * et la boule de neige
 	 * 
 	 * @param objetSpecial L'objet special de type boule de neige
-	 * @return enCollision si la boule de neige est en contact avec les murs de la
-	 *         piste
+	 * @return si la piste est en collision avec la boule de neige
 	 */
 	// Tan Tommy Rin
 
@@ -277,6 +278,11 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 
 	/**
 	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 * 
+	 * @param xPix la coordonnée du clic en x
+	 * @param yPix la coordonnée du clic en y
+	 * 
+	 * @return si le clic contient la piste
 	 */
 	// Kevin Nguyen
 
@@ -369,7 +375,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void setMurBas(int murBas) {
 		this.murBas = murBas;
 	}
-	
+
 	public Color getBordure() {
 		return bordure;
 	}

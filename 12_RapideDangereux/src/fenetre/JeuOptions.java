@@ -71,7 +71,7 @@ public class JeuOptions extends JPanel {
 	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.YELLOW,
 			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private JLabel lblLongueurPiste;
-	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabelMonde;
 	private JButton btnGauche2;
 	private JButton btnGauche1;
 	private JButton btnDroit1;
@@ -79,19 +79,22 @@ public class JeuOptions extends JPanel {
 	private JTextArea txtArea;
 	private JComboBox cbMatPiste;
 	private JLabel lblFlecheBasImage;
-	private JLabel lblNewLabel_2_1;
+	private JLabel lblNewLabelMonde2;
 	private ZoneAnimPhysique zoneAnimPhysique;
 	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel2;
 	private JLabel lblCouleurBordureDe;
 	private JButton btnGauche3;
 	private JButton btnDroit3;
 	private JPanel panelCouleurPiste;
 	private boolean gauche = false;
 	private boolean droite = false;
+	private JLabel lblNombreTours;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
+	 * 
+	 * @param listener L'écouteur
 	 */
 	// Alexis Pineda-Alvarado
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -222,13 +225,13 @@ public class JeuOptions extends JPanel {
 		JLabel feuGreen = new JLabel();
 		feuGreen.setIcon(feuVert);
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(255, 0, 0), 2, true));
+		JPanel panel2 = new JPanel();
+		panel2.setBorder(new LineBorder(new Color(255, 0, 0), 2, true));
 		Color a = new Color(240, 240, 240);
-		panel_1.setBackground(a);
-		panel_1.setBounds(1020, 345, 549, 309);
-		add(panel_1);
-		panel_1.setLayout(null);
+		panel2.setBackground(a);
+		panel2.setBounds(1020, 345, 549, 309);
+		add(panel2);
+		panel2.setLayout(null);
 
 		slider2 = new JSlider();
 		slider2.addMouseListener(new MouseAdapter() {
@@ -245,7 +248,7 @@ public class JeuOptions extends JPanel {
 		slider2.setMajorTickSpacing(10);
 		slider2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		slider2.setBounds(165, 84, 343, 40);
-		panel_1.add(slider2);
+		panel2.add(slider2);
 
 		slider = new JSlider();
 
@@ -264,17 +267,17 @@ public class JeuOptions extends JPanel {
 		slider.setMinorTickSpacing(10);
 		slider.setMinimum(50);
 		slider.setBounds(165, 33, 343, 40);
-		panel_1.add(slider);
+		panel2.add(slider);
 
 		JLabel lblMasse = new JLabel("Masse de la voiture 1 en kg : ");
 		lblMasse.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblMasse.setBounds(10, 39, 191, 20);
-		panel_1.add(lblMasse);
+		panel2.add(lblMasse);
 
 		JLabel lblDifficulte = new JLabel("Difficulté du jeu : ");
 		lblDifficulte.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblDifficulte.setBounds(10, 182, 110, 14);
-		panel_1.add(lblDifficulte);
+		panel2.add(lblDifficulte);
 
 		rdbtnFacile = new JRadioButton("Facile");
 		rdbtnFacile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -286,7 +289,7 @@ public class JeuOptions extends JPanel {
 			}
 		});
 		rdbtnFacile.setBounds(165, 182, 109, 23);
-		panel_1.add(rdbtnFacile);
+		panel2.add(rdbtnFacile);
 		buttonGroupDiff.add(rdbtnFacile);
 
 		rdbtnMedium = new JRadioButton("Intermédiaire");
@@ -298,7 +301,7 @@ public class JeuOptions extends JPanel {
 			}
 		});
 		rdbtnMedium.setBounds(165, 207, 109, 23);
-		panel_1.add(rdbtnMedium);
+		panel2.add(rdbtnMedium);
 		buttonGroupDiff.add(rdbtnMedium);
 
 		rdbtnDifficile = new JRadioButton("Avancé");
@@ -310,33 +313,33 @@ public class JeuOptions extends JPanel {
 			}
 		});
 		rdbtnDifficile.setBounds(165, 233, 109, 23);
-		panel_1.add(rdbtnDifficile);
+		panel2.add(rdbtnDifficile);
 		buttonGroupDiff.add(rdbtnDifficile);
 
 		JLabel lblVitesseFacile = new JLabel("60 m/s");
 		lblVitesseFacile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblVitesseFacile.setBounds(280, 186, 46, 14);
-		panel_1.add(lblVitesseFacile);
+		panel2.add(lblVitesseFacile);
 
 		JLabel lblVitesseIntermediaire = new JLabel("80 m/s");
 		lblVitesseIntermediaire.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblVitesseIntermediaire.setBounds(280, 211, 46, 14);
-		panel_1.add(lblVitesseIntermediaire);
+		panel2.add(lblVitesseIntermediaire);
 
 		JLabel lblVitesseAvance = new JLabel("100 m/s");
 		lblVitesseAvance.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblVitesseAvance.setBounds(280, 237, 46, 14);
-		panel_1.add(lblVitesseAvance);
+		panel2.add(lblVitesseAvance);
 
 		JLabel lblMasse2 = new JLabel("Masse de la voiture 2 en kg : ");
 		lblMasse2.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblMasse2.setBounds(10, 86, 177, 20);
-		panel_1.add(lblMasse2);
+		panel2.add(lblMasse2);
 
 		JLabel lblNombreBoiteMystere = new JLabel("Nombre de boite mystere : ");
 		lblNombreBoiteMystere.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblNombreBoiteMystere.setBounds(10, 135, 159, 14);
-		panel_1.add(lblNombreBoiteMystere);
+		panel2.add(lblNombreBoiteMystere);
 
 		sliderNbBoites = new JSlider();
 		sliderNbBoites.addMouseListener(new MouseAdapter() {
@@ -356,12 +359,12 @@ public class JeuOptions extends JPanel {
 		sliderNbBoites.setMajorTickSpacing(1);
 		sliderNbBoites.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		sliderNbBoites.setBounds(165, 135, 343, 40);
-		panel_1.add(sliderNbBoites);
+		panel2.add(sliderNbBoites);
 
 		JLabel lblVitesseMaximale = new JLabel("Vitesse maximale");
 		lblVitesseMaximale.setFont(new Font("Comic Sans MS", Font.PLAIN, 9));
 		lblVitesseMaximale.setBounds(20, 191, 80, 14);
-		panel_1.add(lblVitesseMaximale);
+		panel2.add(lblVitesseMaximale);
 
 		cbMatPiste = new JComboBox();
 
@@ -383,16 +386,16 @@ public class JeuOptions extends JPanel {
 		cbMatPiste.setModel(new DefaultComboBoxModel(new String[] { "Asphalt", "Sable", "Glace" }));
 		cbMatPiste.setBounds(165, 263, 75, 22);
 		cbMatPiste.setSelectedItem("Asphalt");
-		panel_1.add(cbMatPiste);
+		panel2.add(cbMatPiste);
 
 		JLabel lblMatPiste = new JLabel("Matériel de la piste :");
 		lblMatPiste.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblMatPiste.setBounds(10, 261, 110, 14);
-		panel_1.add(lblMatPiste);
+		panel2.add(lblMatPiste);
 
 		lblImage = new JLabel("");
 		lblImage.setBounds(-815, -417, 1600, 800);
-		panel_1.add(lblImage);
+		panel2.add(lblImage);
 
 		JButton btnCommencer = new JButton("COMMENCER!");
 		btnCommencer.setFont(new Font("Comic Sans MS", Font.PLAIN, 26));
@@ -406,10 +409,10 @@ public class JeuOptions extends JPanel {
 		btnCommencer.setBounds(549, 691, 237, 29);
 		add(btnCommencer);
 
-		JPanel panel_V1 = new JPanel();
-		panel_V1.setBackground(Color.YELLOW);
-		panel_V1.setBounds(73, 378, 143, 90);
-		add(panel_V1);
+		JPanel panelV1 = new JPanel();
+		panelV1.setBackground(Color.YELLOW);
+		panelV1.setBounds(73, 378, 143, 90);
+		add(panelV1);
 
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -421,11 +424,11 @@ public class JeuOptions extends JPanel {
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
-		JPanel panel_V2 = new JPanel();
+		JPanel panelV2 = new JPanel();
 
-		panel_V2.setBounds(73, 504, 143, 90);
-		panel_V2.setBackground(Color.CYAN);
-		add(panel_V2);
+		panelV2.setBounds(73, 504, 143, 90);
+		panelV2.setBackground(Color.CYAN);
+		add(panelV2);
 
 		lblNewLabel = new JLabel("Couleur voiture #1");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -433,11 +436,11 @@ public class JeuOptions extends JPanel {
 		lblNewLabel.setBounds(73, 360, 134, 13);
 		add(lblNewLabel);
 
-		lblNewLabel_1 = new JLabel("Couleur Voiture #2");
-		lblNewLabel_1.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(73, 479, 143, 13);
-		add(lblNewLabel_1);
+		lblNewLabel2 = new JLabel("Couleur Voiture #2");
+		lblNewLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblNewLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel2.setBounds(73, 479, 143, 13);
+		add(lblNewLabel2);
 
 		JButton btnGauche1 = new JButton("<");
 		btnGauche1.setBounds(10, 416, 55, 23);
@@ -446,11 +449,11 @@ public class JeuOptions extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				changementImage(1, 0);
 
-				panel_V1.setBackground(couleurs[indexCouleur]);
+				panelV1.setBackground(couleurs[indexCouleur]);
 
 				repaint();
 
-				setBackgroundV1(panel_V1);
+				setBackgroundV1(panelV1);
 
 			}
 		});
@@ -463,11 +466,11 @@ public class JeuOptions extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0, 0);
 
-				panel_V2.setBackground(couleurs2[indexCouleur2]);
+				panelV2.setBackground(couleurs2[indexCouleur2]);
 
 				repaint();
 
-				setBackgroundV2(panel_V2);
+				setBackgroundV2(panelV2);
 
 			}
 		});
@@ -481,7 +484,7 @@ public class JeuOptions extends JPanel {
 
 				changementImage(1, 1);
 
-				panel_V1.setBackground(couleurs[indexCouleur]);
+				panelV1.setBackground(couleurs[indexCouleur]);
 
 				repaint();
 
@@ -496,10 +499,10 @@ public class JeuOptions extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0, 1);
 
-				panel_V2.setBackground(couleurs2[indexCouleur2]);
+				panelV2.setBackground(couleurs2[indexCouleur2]);
 				repaint();
 
-				setBackgroundV2(panel_V2);
+				setBackgroundV2(panelV2);
 
 			}
 		});
@@ -530,19 +533,25 @@ public class JeuOptions extends JPanel {
 		lblLongueurPiste.setBounds(615, 651, 89, 29);
 		add(lblLongueurPiste);
 
-		lblNewLabel_2 = new JLabel("MONDE");
-		lblNewLabel_2.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 44));
-		lblNewLabel_2.setBounds(709, 0, 220, 43);
-		add(lblNewLabel_2);
+		lblNewLabelMonde = new JLabel("MONDE");
+		lblNewLabelMonde.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 44));
+		lblNewLabelMonde.setBounds(709, 0, 220, 43);
+		add(lblNewLabelMonde);
 
 		zoneAnimPhysique = new ZoneAnimPhysique();
 		zoneAnimPhysique.setBounds(300, 200, 700, 439);
 		add(zoneAnimPhysique);
 
-		lblNewLabel_2_1 = new JLabel("Aperçue piste");
-		lblNewLabel_2_1.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 34));
-		lblNewLabel_2_1.setBounds(540, 136, 246, 70);
-		add(lblNewLabel_2_1);
+		lblNewLabelMonde2 = new JLabel("Aperçue piste");
+		lblNewLabelMonde2.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 34));
+		lblNewLabelMonde2.setBounds(540, 136, 246, 70);
+		add(lblNewLabelMonde2);
+		
+				lblNombreTours = new JLabel("3 TOURS À FAIRE");
+				lblNombreTours.setForeground(new Color(0, 0, 0));
+				lblNombreTours.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
+				lblNombreTours.setBounds(1199, 142, 194, 71);
+				add(lblNombreTours);
 
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
@@ -595,11 +604,12 @@ public class JeuOptions extends JPanel {
 			}
 			lblLongueurPiste.setForeground(Color.white);
 			lblFlecheBasImage.setForeground(Color.white);
-			lblNewLabel_2_1.setForeground(Color.white);
-			lblNewLabel_2.setForeground(Color.white);
+			lblNewLabelMonde2.setForeground(Color.white);
+			lblNewLabelMonde.setForeground(Color.white);
 			lblNewLabel.setForeground(Color.white);
-			lblNewLabel_1.setForeground(Color.white);
+			lblNewLabel2.setForeground(Color.white);
 			lblCouleurBordureDe.setForeground(Color.white);
+			lblNombreTours.setForeground(Color.white);
 		}
 	}
 
@@ -631,13 +641,13 @@ public class JeuOptions extends JPanel {
 			}
 			lblLongueurPiste.setForeground(Color.white);
 			lblFlecheBasImage.setForeground(Color.white);
-			lblNewLabel_2_1.setForeground(Color.white);
-			lblNewLabel_2.setForeground(Color.white);
+			lblNewLabelMonde2.setForeground(Color.white);
+			lblNewLabelMonde.setForeground(Color.white);
 			lblNewLabel.setForeground(Color.white);
-			lblNewLabel_1.setForeground(Color.white);
+			lblNewLabel2.setForeground(Color.white);
 			lblCouleurBordureDe.setForeground(Color.white);
+			lblNombreTours.setForeground(Color.white);
 
-			;
 		}
 	}
 
@@ -670,12 +680,12 @@ public class JeuOptions extends JPanel {
 			}
 			lblLongueurPiste.setForeground(Color.white);
 			lblFlecheBasImage.setForeground(Color.white);
-			lblNewLabel_2_1.setForeground(Color.white);
-			lblNewLabel_2.setForeground(Color.white);
+			lblNewLabelMonde2.setForeground(Color.white);
+			lblNewLabelMonde.setForeground(Color.white);
 			lblNewLabel.setForeground(Color.white);
-			lblNewLabel_1.setForeground(Color.white);
+			lblNewLabel2.setForeground(Color.white);
 			lblCouleurBordureDe.setForeground(Color.white);
-
+			lblNombreTours.setForeground(Color.white);
 		}
 	}
 
@@ -829,7 +839,7 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionCbAsphalt() {
 		pcs.firePropertyChange("MATPISTEASPHALT", null, cbMatPiste.getSelectedItem());
-		pcs.firePropertyChange("IMGASPHALT",null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("IMGASPHALT", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi l'asphalt où le coefficient de frottement est 0.20");
 	}
 

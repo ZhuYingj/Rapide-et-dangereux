@@ -45,6 +45,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 	private JProgressBar progressBarFroce;
 	private JLabel lblImageObjet1;
 	private JLabel lblImageObjet2;
+	private JLabel lblBackgroundBleu;
 	private Image champignon;
 	private Image bouleNeige1;
 	private Image champignon2;
@@ -56,6 +57,8 @@ public class FenetreJeuSansScientifique extends JPanel {
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * 
+	 * @param listener L'écouteur
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -130,10 +133,10 @@ public class FenetreJeuSansScientifique extends JPanel {
 		lblNewLabel.setBounds(211, 698, 89, 14);
 		add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("<------------>");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(176, 688, 269, 14);
-		add(lblNewLabel_1);
+		JLabel lblNewLabel2 = new JLabel("<------------>");
+		lblNewLabel2.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel2.setBounds(176, 688, 269, 14);
+		add(lblNewLabel2);
 
 		JLabel lblTemps = new JLabel("Temps écoulé : ");
 		lblTemps.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -149,10 +152,10 @@ public class FenetreJeuSansScientifique extends JPanel {
 		lblS.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblS.setBounds(1500, 27, 36, 22);
 		add(lblS);
-		JLabel lblForce1 = new JLabel("Force lancement voiture 1 :");
-		lblForce1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblForce1.setBounds(1282, 70, 271, 22);
-		add(lblForce1);
+		JLabel lblForce = new JLabel("Force lancement voiture 1 :");
+		lblForce.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblForce.setBounds(1282, 70, 271, 22);
+		add(lblForce);
 
 		progressBarFroce = new JProgressBar();
 		progressBarFroce.setBounds(1282, 103, 248, 45);
@@ -160,10 +163,10 @@ public class FenetreJeuSansScientifique extends JPanel {
 		progressBarFroce.setFont(new Font("Tahoma", Font.BOLD, 12));
 		progressBarFroce.setStringPainted(true);
 
-		JLabel lblForce1_1 = new JLabel("Force lancement voiture 1 :");
-		lblForce1_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblForce1_1.setBounds(1282, 386, 271, 22);
-		add(lblForce1_1);
+		JLabel lblForce12 = new JLabel("Force lancement voiture 1 :");
+		lblForce12.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblForce12.setBounds(1282, 386, 271, 22);
+		add(lblForce12);
 
 		progressBarFroce2 = new JProgressBar();
 		progressBarFroce2.setStringPainted(true);
@@ -178,12 +181,12 @@ public class FenetreJeuSansScientifique extends JPanel {
 		lblImageObjet2 = new JLabel("");
 		lblImageObjet2.setBounds(1282, 508, 248, 169);
 		add(lblImageObjet2);
-		
+
 		JLabel lblObjetVoiture = new JLabel("Objet special voiture 1 :");
 		lblObjetVoiture.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblObjetVoiture.setBounds(1282, 173, 271, 22);
 		add(lblObjetVoiture);
-		
+
 		JLabel lblObjetSpecialVoiture = new JLabel("Objet special voiture 2 :");
 		lblObjetSpecialVoiture.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblObjetSpecialVoiture.setBounds(1282, 475, 271, 22);
@@ -205,6 +208,16 @@ public class FenetreJeuSansScientifique extends JPanel {
 				actionBtnProchImage();
 			}
 		});
+		
+		lblBackgroundBleu = new JLabel("");
+		lblBackgroundBleu.setBounds(0, 0, 1600, 800);
+		add(lblBackgroundBleu);
+		
+		Image imgBleu = OutilsImage.lireImageEtRedimensionner("backgroundJeu.jpg", 1600, 800);
+		if (imgBleu != null) {
+			lblBackgroundBleu.setIcon(new ImageIcon(imgBleu));
+			imgBleu.flush();
+		}
 	}
 
 	/**

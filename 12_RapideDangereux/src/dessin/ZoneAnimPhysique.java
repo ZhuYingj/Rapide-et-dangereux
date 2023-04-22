@@ -40,8 +40,8 @@ import utilitaireObjets.Voiture;
  * 
  * @author Kevin Nguyen
  * @author Tan Tommy Rin
- * @author Alexis Pineda
- * @author Julien Ludovic
+ * @author Alexis Pineda-Alvarado
+ * @author Ludovic Julien
  */
 
 public class ZoneAnimPhysique extends JPanel implements Runnable {
@@ -68,9 +68,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Valeur booléenne pour savoir si ces touches sont appuyés **/
 	private boolean droite, gauche, haut, bas, space, d, a, s, w, q;
 	/** Position x de la voiture **/
-	double x = 0;
+	private double x = 0;
 	/** Position y de la voiture **/
-	double y = 0;
+	private double y = 0;
 	/** L'angle de la voiture 1 en degré **/
 	private int angleVoitureDegre = 0;
 	/** L'angle de la voiture en rad **/
@@ -117,6 +117,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * 
+	 * @param listener L'écouteur
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -129,6 +131,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Kevin Nguyen
 	public ZoneAnimPhysique() {
+		Color transparent = new Color(0, 0, 0, .0f);
+		setBackground(transparent);
 		gestionFich = new GestionnaireDeFichiersSurLeBureau();
 		pisteMexique = new PisteMexique(0, 0);
 		pisteItalie = new PisteItalie(0, 0);
@@ -1268,11 +1272,4 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					Math.round(tempsTotalEcoule * 100.0) / 100.0, piste);
 		}
 	}
-	
-	
-	
-	
-	
-
-
 }

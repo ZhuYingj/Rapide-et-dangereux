@@ -53,7 +53,7 @@ public class AppPrincipale12 extends JFrame {
 	private static int audio = 1;
 	private static boolean pisteAudio;
 
-	File fichierDeTravail = new File(System.getProperty("user.home"),
+	private File fichierDeTravail = new File(System.getProperty("user.home"),
 			"Desktop" + "\\" + sousDossierSurBureau + "\\" + nomFichBinRegroupement);
 
 	/**
@@ -178,9 +178,11 @@ public class AppPrincipale12 extends JFrame {
 
 		fenEditeur.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience);
-				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
 				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience, fenEditeur);
+				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience);
+				
+				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
+				
 
 			}
 		});
@@ -199,7 +201,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenOptions.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionFenOptions(evt, fenJeuScience, fenOptions, fenOptionMontre, fenSansScience);
+				actionFenOptions(evt, fenJeuScience, fenOptions, fenSansScience);
 			}
 		});
 
@@ -333,7 +335,7 @@ public class AppPrincipale12 extends JFrame {
 
 	// Tan Tommy Rin
 	public void actionFenOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, JeuOptions fenOptions,
-			FenetreOptionMontre fenOptionMontre, FenetreJeuSansScientifique fenSansScience) {
+			FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
 
 		case "COMMENCER!":
@@ -374,7 +376,6 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
 					.setNombreToursFaits(0);
 			fenOptions.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
-			fenOptionMontre.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
 
 			break;
 		case "NBBOITE":
@@ -388,6 +389,8 @@ public class AppPrincipale12 extends JFrame {
 		case "MATPISTEASPHALT":
 			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.25);
 			break;
+
+		case "ASPHALT":
 
 		case "MATPISTESABLE":
 			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.70);
@@ -442,28 +445,30 @@ public class AppPrincipale12 extends JFrame {
 
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
-	 * à la fenetre FenetreOptionMontre
+	 * à la fenetre d'édition
 	 * 
 	 * @param evt             evenement
 	 * @param fenOptionMontre fenetre du mode course contre la montre
 	 * @param fenJeuScience   la fenetre de jeu avec mode science activé
 	 * @param fenSansScience  la fenetre non scientifique
+	 * @param fenEditeur      la fenetre d'édition
 	 */
 	// Ludovic Julien
 	public void actionChangeJeuCourse2(PropertyChangeEvent evt, FenetreOptionMontre fenOptionMontre,
-			FenetreJeuScientifique fenJeuScience, FenetreJeuSansScientifique fenSansScience, FenetreEditeur fenEditeur) {
+			FenetreJeuScientifique fenJeuScience, FenetreJeuSansScientifique fenSansScience,
+			FenetreEditeur fenEditeur) {
 		switch (evt.getPropertyName()) {
 		case "SKIN":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
 					.setSkin((Color) evt.getNewValue());
-			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
-					.setSkin((Color) evt.getNewValue());
+//			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
+//					.setSkin((Color) evt.getNewValue());
 			break;
 		case "SKIN2":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
 					.setSkin((Color) evt.getNewValue());
-			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
-					.setSkin((Color) evt.getNewValue());
+//			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+//					.setSkin((Color) evt.getNewValue());
 			break;
 		case "SKINOPTIONS1":
 			fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0).getVoiture()
@@ -476,16 +481,17 @@ public class AppPrincipale12 extends JFrame {
 			break;
 		case "SKINOPTIONS3":
 			fenEditeur.getPanelObjet().getPisteDeDepart().getVoiture().setSkin((Color) evt.getNewValue());
-			fenEditeur.getPanelRegroupement().getListePisteDeDepart().get(0).getVoiture().setSkin((Color) evt.getNewValue());
+			fenEditeur.getPanelRegroupement().getListePisteDeDepart().get(0).getVoiture()
+					.setSkin((Color) evt.getNewValue());
 			break;
 		case "SKINOPTIONS4":
 			fenEditeur.getPanelObjet().getPisteDeDepart().getVoiture2().setSkin((Color) evt.getNewValue());
-			fenEditeur.getPanelRegroupement().getListePisteDeDepart().get(0).getVoiture2().setSkin((Color) evt.getNewValue());
+			fenEditeur.getPanelRegroupement().getListePisteDeDepart().get(0).getVoiture2()
+					.setSkin((Color) evt.getNewValue());
 			break;
+
 		}
-		
-		
-		
+
 	}
 
 	/**
@@ -628,9 +634,12 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui change de la fenetre mode de jeu à la fenetre options avec les
 	 * levés d'évenements
 	 * 
-	 * @param evt        evenement
-	 * @param fenModeJeu la fenêtre du mode de jeu a choisir
-	 * @param fenOptions fenêtre des options du jeu qui va être activé
+	 * @param evt             evenement
+	 * @param fenModeJeu      la fenêtre du mode de jeu a choisir
+	 * @param fenOptionMontre la fenetre option du mode de jeu "Course contre la
+	 *                        montre"
+	 * @param fenOptions      fenêtre des options du jeu qui va être activé
+	 * 
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionChangeOption(PropertyChangeEvent evt, ModeDeJeu fenModeJeu, FenetreOptionMontre fenOptionMontre,
@@ -906,8 +915,8 @@ public class AppPrincipale12 extends JFrame {
 						.setBordure((Color) evt.getNewValue());
 			}
 
-			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
-					.setBordure((Color) evt.getNewValue());
+//			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+//					.setBordure((Color) evt.getNewValue());
 			for (int i = 0; i < fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale()
 					.size(); i++) {
 				fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(i)

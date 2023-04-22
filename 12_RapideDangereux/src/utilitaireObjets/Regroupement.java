@@ -23,6 +23,7 @@ import interfaces.TypePiste;
  * 
  * @author Tan Tommy Rin
  * @author Kevin Nguyen
+ * @author Alexis Pineda-Alvarado
  */
 
 public class Regroupement implements Dessinable, Serializable {
@@ -61,7 +62,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private ObjetSpecial objSpecial;
 	/** Notre deuxieme objet special **/
 	private ObjetSpecial objSpecial2;
-	private double nombreToursAFaire = 1;
+	private double nombreToursAFaire = 3;
 
 	private double tours = 0;
 
@@ -129,9 +130,17 @@ public class Regroupement implements Dessinable, Serializable {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private transient Graphics2D g2d;
 	private BouleFumee smokeScreen;
+	private Color couleurBordurePiste;
+
+	private int indexCouleurV1;
+
+	private int indexCouleurV2;
+	private int indexPisteCouleur;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * 
+	 * @param listener L'écouteur
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -961,6 +970,17 @@ public class Regroupement implements Dessinable, Serializable {
 		g2dCopie.setStroke(new BasicStroke(5));
 
 		g2dCopie.setColor(Color.WHITE);
+		if (listeFumee.size() == 0) {
+			g2dCopie.drawString("Voiture1",
+					(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getX()
+							- listePisteDeDepart.get(0).getVoiture().getDiametre() / 2),
+					(int) (listePisteDeDepart.get(0).getVoiture().getPosition().getY()));
+			g2dCopie.drawString("Voiture2",
+					(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getX()
+							- listePisteDeDepart.get(0).getVoiture2().getDiametre() / 2),
+					(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
+		}
+
 		if (listeFumee.size() != 0) {
 			if (!listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
 					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
@@ -1595,6 +1615,14 @@ public class Regroupement implements Dessinable, Serializable {
 		return toucheWActive;
 	}
 
+	public Color getCouleurBordurePiste() {
+		return couleurBordurePiste;
+	}
+
+	public void setCouleurBordurePiste(Color couleurBordurePiste) {
+		this.couleurBordurePiste = couleurBordurePiste;
+	}
+
 	public void setToucheWActive(boolean toucheWActive) {
 		this.toucheWActive = toucheWActive;
 	}
@@ -1605,5 +1633,29 @@ public class Regroupement implements Dessinable, Serializable {
 
 	public void setNombreBoiteMystere(int nombreBoiteMystere) {
 		this.nombreBoiteMystere = nombreBoiteMystere;
+	}
+
+	public int getIndexCouleurV1() {
+		return indexCouleurV1;
+	}
+
+	public void setIndexCouleurV1(int indexCouleurV1) {
+		this.indexCouleurV1 = indexCouleurV1;
+	}
+
+	public int getIndexCouleurV2() {
+		return indexCouleurV2;
+	}
+
+	public void setIndexCouleurV2(int indexCouleurV2) {
+		this.indexCouleurV2 = indexCouleurV2;
+	}
+
+	public int getIndexPisteCouleur() {
+		return indexPisteCouleur;
+	}
+
+	public void setIndexPisteCouleur(int indexPisteCouleur) {
+		this.indexPisteCouleur = indexPisteCouleur;
 	}
 }

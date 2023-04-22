@@ -30,13 +30,14 @@ import utilitaireObjets.Regroupement;
  * Classe offrant un ensemble de m�thodes pour illustrer le fonctionnement des
  * fichiers texte et binaires.
  * 
- * @author Caroline Houle
+ * // Caroline Houle Inspiration pour cette classe
+ * 
  * @author Tan Tommy Rin
  * @author Ludovic Julien
  */
 public class GestionnaireDeFichiersSurLeBureau {
 
-	String sousDossierSurBureau = "SauvegardePiste";
+	private String sousDossierSurBureau = "SauvegardePiste";
 
 	private int nombrePiste = 1;
 
@@ -48,6 +49,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 	/**
 	 * Constructeur par défault
 	 */
+	// Tan Tommy Rin
 	public GestionnaireDeFichiersSurLeBureau() {
 
 	}
@@ -302,53 +304,30 @@ public class GestionnaireDeFichiersSurLeBureau {
 		scanner.close();
 		return listeLignes;
 	}
+	 
 	
-	 /**
-	  * méthode qui permet de retourner la moyenne de temps de chaque piste 
-	  * 
-	  * @param listeLignes		liste des donner de temps 
-	  * @param piste			la piste en question (Mexique,Canada,Italie)
-	  * @return					la moyenne de temps de chaque piste
-	  */
-	 //Ludovic Julien
+	/**
+	 * méthode qui permet de retourner la moyenne de temps de chaque piste
+	 * 
+	 * @param listeLignes liste des donner de temps
+	 * @param piste       la piste en question (Mexique,Canada,Italie)
+	 * @return la moyenne de temps de chaque piste
+	 */
+	// Ludovic Julien
 	public static double calculerMoyenne(List<InfoLigne> listeLignes, String piste) {
-	    double totalTemps = 0.0;
-	    int nombreLignes = 0;
+		double totalTemps = 0.0;
+		int nombreLignes = 0;
 
-	    for (InfoLigne ligne : listeLignes) {
-	        if (ligne.getPiste().equals(piste)) {
-	            totalTemps += ligne.getTemps();
-	            nombreLignes++;
-	        }
-	    }
-
-	    return nombreLignes > 0 ? totalTemps / nombreLignes : 0.0;
-	}
-	 
-	 
-	 /**
-	  * méthode qui permet de retourner la moyenne de temps de chaque piste 
-	  * 
-	  * @param listeLignes		liste des donner de temps 
-	  * @return
-	  */
-	 //Ludovic Julien
-	 public static Map<String, Double> calculerMoyennes(List<InfoLigne> listeLignes) {
-		    Map<String, Double> moyennes = new HashMap<>();
-
-		    for (InfoLigne ligne : listeLignes) {
-		        String piste = ligne.getPiste();
-		        double moyenne = calculerMoyenne(listeLignes, piste);
-		        moyennes.put(piste, moyenne);
-		    }
-
-		    return moyennes;
+		for (InfoLigne ligne : listeLignes) {
+			if (ligne.getPiste().equals(piste)) {
+				totalTemps += ligne.getTemps();
+				nombreLignes++;
+			}
 		}
-	 
-	 
-	 
-	 
-	 
+
+		return nombreLignes > 0 ? totalTemps / nombreLignes : 0.0;
+	}
+
 	/**
 	 * méthode qui permet de retourner le meilleur temps de chaque piste
 	 * 
@@ -369,33 +348,50 @@ public class GestionnaireDeFichiersSurLeBureau {
 		return meilleursTemps;
 	}
 
-	 
-	 /**
-	  * méthode qui permet de retourner le nombre de fois que chaque piste à été joué
-	  * 
-	  * @param listeLignes		liste des donner de temps 
-	  * @return	comptage 		nombre de fois que la piste a été jouer
-	  */
-	 //Ludovic Julien
-	 public static Map<String, Integer> compterPistes(List<InfoLigne> listeLignes) {
-		    Map<String, Integer> comptages = new HashMap<>();
+	/**
+	 * méthode qui permet de retourner la moyenne de temps de chaque piste
+	 * 
+	 * @param listeLignes liste des donner de temps
+	 * @return
+	 */
+	// Ludovic Julien
+	public static Map<String, Double> calculerMoyennes(List<InfoLigne> listeLignes) {
+		Map<String, Double> moyennes = new HashMap<>();
 
-		    for (InfoLigne ligne : listeLignes) {
-		        String piste = ligne.getPiste();
-		        if (comptages.containsKey(piste)) {
-		            comptages.put(piste, comptages.get(piste) + 1);
-		        } else {
-		            comptages.put(piste, 1);
-		        }
-		    }
-
-		    return comptages;
+		for (InfoLigne ligne : listeLignes) {
+			String piste = ligne.getPiste();
+			double moyenne = calculerMoyenne(listeLignes, piste);
+			moyennes.put(piste, moyenne);
 		}
-	 
-	 public static void viderFichier() throws FileNotFoundException {
-	        PrintWriter writer = new PrintWriter(System.getProperty("user.home") + "/Desktop/donnes.txt");
-	        writer.print("");
-	        writer.close();
+
+		return moyennes;
+	}
+
+	/**
+	 * méthode qui permet de retourner le nombre de fois que chaque piste à été joué
+	 * 
+	 * @param listeLignes liste des donner de temps
+	 * @return comptage nombre de fois que la piste a été jouer
+	 */
+	// Ludovic Julien
+	public static Map<String, Integer> compterPistes(List<InfoLigne> listeLignes) {
+		Map<String, Integer> comptages = new HashMap<>();
+
+		for (InfoLigne ligne : listeLignes) {
+			String piste = ligne.getPiste();
+			if (comptages.containsKey(piste)) {
+				comptages.put(piste, comptages.get(piste) + 1);
+			} else {
+				comptages.put(piste, 1);
+			}
+		}
+		return comptages;
 	    }
 
+public static void viderFichier() throws FileNotFoundException {
+    PrintWriter writer = new PrintWriter(System.getProperty("user.home") + "/Desktop/donnes.txt");
+    writer.print("");
+    writer.close();
+
+}
 }

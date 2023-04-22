@@ -67,9 +67,7 @@ public class FenetreOptionMontre extends JPanel {
 	private boolean droite = false;
 	private JPanel panelCouleurPiste;
 	private ZoneAnimPhysique zoneAnimPhysique;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2_1;
+	private JLabel lblNombreTours;
 	private JLabel lblFlecheBasImage;
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {
@@ -80,6 +78,12 @@ public class FenetreOptionMontre extends JPanel {
 		this.zoneAnimPhysique = zoneAnimPhysique;
 	}
 
+	/**
+	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * 
+	 * @param listener L'écouteur
+	 */
+	// Alexis Pineda-Alvarado
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -90,13 +94,25 @@ public class FenetreOptionMontre extends JPanel {
 	// Alexis Pineda-Alvarado
 	public FenetreOptionMontre() {
 		setLayout(null);
-
+		setBounds(0, 0, 1600, 800);
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("Retour", 0, -1);
 			}
 		});
+
+		lblNombreTours = new JLabel("1");
+		lblNombreTours.setForeground(Color.BLACK);
+		lblNombreTours.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
+		lblNombreTours.setBounds(1184, 129, 98, 85);
+		add(lblNombreTours);
+
+		JLabel lblNombreToursMsg = new JLabel("TOURS À FAIRE");
+		lblNombreToursMsg.setForeground(Color.BLACK);
+		lblNombreToursMsg.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
+		lblNombreToursMsg.setBounds(1203, 136, 194, 71);
+		add(lblNombreToursMsg);
 
 		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
 		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
@@ -135,8 +151,8 @@ public class FenetreOptionMontre extends JPanel {
 		panelCouleurPiste.setBounds(73, 256, 143, 90);
 		add(panelCouleurPiste);
 
-		JLabel lblImage_1 = new JLabel("");
-		panelCouleurPiste.add(lblImage_1);
+		JLabel lblImage3 = new JLabel("");
+		panelCouleurPiste.add(lblImage3);
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
@@ -215,11 +231,11 @@ public class FenetreOptionMontre extends JPanel {
 			imgMexique.flush();
 		}
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(255, 0, 0), 2));
-		panel_1.setBounds(1020, 345, 549, 309);
-		add(panel_1);
-		panel_1.setLayout(null);
+		JPanel panel2 = new JPanel();
+		panel2.setBorder(new LineBorder(new Color(255, 0, 0), 2));
+		panel2.setBounds(1020, 345, 549, 309);
+		add(panel2);
+		panel2.setLayout(null);
 
 		rdbtnFacile = new JRadioButton("Facile");
 		rdbtnFacile.setSelected(true);
@@ -229,7 +245,7 @@ public class FenetreOptionMontre extends JPanel {
 			}
 		});
 		rdbtnFacile.setBounds(165, 182, 109, 23);
-		panel_1.add(rdbtnFacile);
+		panel2.add(rdbtnFacile);
 		buttonGroupDiff.add(rdbtnFacile);
 
 		rdbtnMedium = new JRadioButton("Intermédiaire");
@@ -239,7 +255,7 @@ public class FenetreOptionMontre extends JPanel {
 			}
 		});
 		rdbtnMedium.setBounds(165, 207, 109, 23);
-		panel_1.add(rdbtnMedium);
+		panel2.add(rdbtnMedium);
 		buttonGroupDiff.add(rdbtnMedium);
 
 		rdbtnDifficile = new JRadioButton("Avancé");
@@ -249,12 +265,12 @@ public class FenetreOptionMontre extends JPanel {
 			}
 		});
 		rdbtnDifficile.setBounds(165, 233, 109, 23);
-		panel_1.add(rdbtnDifficile);
+		panel2.add(rdbtnDifficile);
 		buttonGroupDiff.add(rdbtnDifficile);
 
 		JLabel lblDifficulte = new JLabel("Difficulté du jeu : ");
 		lblDifficulte.setBounds(10, 182, 110, 14);
-		panel_1.add(lblDifficulte);
+		panel2.add(lblDifficulte);
 
 		slider = new JSlider();
 		slider.addMouseListener(new MouseAdapter() {
@@ -272,7 +288,7 @@ public class FenetreOptionMontre extends JPanel {
 		slider.setMinorTickSpacing(10);
 		slider.setMinimum(50);
 		slider.setBounds(165, 33, 343, 40);
-		panel_1.add(slider);
+		panel2.add(slider);
 
 		slider2 = new JSlider();
 		slider2.addMouseListener(new MouseAdapter() {
@@ -289,7 +305,7 @@ public class FenetreOptionMontre extends JPanel {
 		slider2.setMajorTickSpacing(10);
 		slider2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		slider2.setBounds(165, 84, 343, 40);
-		panel_1.add(slider2);
+		panel2.add(slider2);
 
 		sliderNbrTour = new JSlider();
 		sliderNbrTour.addMouseListener(new MouseAdapter() {
@@ -308,48 +324,48 @@ public class FenetreOptionMontre extends JPanel {
 		sliderNbrTour.setMinimum(1);
 		sliderNbrTour.setMaximum(5);
 		sliderNbrTour.setBounds(165, 135, 343, 40);
-		panel_1.add(sliderNbrTour);
+		panel2.add(sliderNbrTour);
 
 		JLabel lblMasse = new JLabel("Masse de la voiture 1 en kg : ");
 		lblMasse.setBounds(10, 39, 191, 20);
-		panel_1.add(lblMasse);
+		panel2.add(lblMasse);
 
 		JLabel lblMasse2 = new JLabel("Masse de la voiture 2 en kg : ");
 		lblMasse2.setBounds(10, 86, 177, 20);
-		panel_1.add(lblMasse2);
+		panel2.add(lblMasse2);
 
 		JLabel lblNbrTour = new JLabel("Nombre de tour : \r\n");
 		lblNbrTour.setBounds(10, 135, 177, 14);
-		panel_1.add(lblNbrTour);
+		panel2.add(lblNbrTour);
 
 		JLabel lblVitesseFacile = new JLabel("60 m/s");
 		lblVitesseFacile.setBounds(280, 186, 46, 14);
-		panel_1.add(lblVitesseFacile);
+		panel2.add(lblVitesseFacile);
 
 		JLabel lblVitesseMedium = new JLabel("80 m/s");
 		lblVitesseMedium.setBounds(280, 211, 65, 14);
-		panel_1.add(lblVitesseMedium);
+		panel2.add(lblVitesseMedium);
 
 		lblVitesseDifficile = new JLabel("100 m/s");
 		lblVitesseDifficile.setBounds(280, 237, 65, 14);
-		panel_1.add(lblVitesseDifficile);
+		panel2.add(lblVitesseDifficile);
 
-		lblNewLabel = new JLabel("Couleur voiture #1");
+		JLabel lblNewLabel = new JLabel("Couleur voiture #1");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel.setBounds(73, 360, 134, 13);
 		add(lblNewLabel);
 
-		lblNewLabel_1 = new JLabel("Couleur Voiture #2");
-		lblNewLabel_1.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(73, 479, 143, 13);
-		add(lblNewLabel_1);
+		JLabel lblNewLabel2 = new JLabel("Couleur Voiture #2");
+		lblNewLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblNewLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel2.setBounds(73, 479, 143, 13);
+		add(lblNewLabel2);
 
-		lblNewLabel_2_1 = new JLabel("Aperçue piste");
-		lblNewLabel_2_1.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 34));
-		lblNewLabel_2_1.setBounds(540, 136, 246, 70);
-		add(lblNewLabel_2_1);
+		JLabel lblNewLabel3 = new JLabel("Aperçue piste");
+		lblNewLabel3.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 34));
+		lblNewLabel3.setBounds(540, 136, 246, 70);
+		add(lblNewLabel3);
 
 		lblFlecheBasImage = new JLabel(
 				"<------------------------------------------------------------------------------------->");
@@ -357,15 +373,15 @@ public class FenetreOptionMontre extends JPanel {
 		lblFlecheBasImage.setBounds(300, 638, 700, 23);
 		add(lblFlecheBasImage);
 
-		JPanel panel_V1 = new JPanel();
-		panel_V1.setBackground(Color.YELLOW);
-		panel_V1.setBounds(73, 378, 143, 90);
-		add(panel_V1);
+		JPanel panelV1 = new JPanel();
+		panelV1.setBackground(Color.YELLOW);
+		panelV1.setBounds(73, 378, 143, 90);
+		add(panelV1);
 
-		JPanel panel_V2 = new JPanel();
-		panel_V2.setBackground(Color.CYAN);
-		panel_V2.setBounds(73, 504, 143, 90);
-		add(panel_V2);
+		JPanel panelV2 = new JPanel();
+		panelV2.setBackground(Color.CYAN);
+		panelV2.setBounds(73, 504, 143, 90);
+		add(panelV2);
 
 		JButton btnGauche1 = new JButton("<");
 		btnGauche1.setBounds(10, 416, 55, 23);
@@ -373,7 +389,7 @@ public class FenetreOptionMontre extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(1, 0);
-				setBackgroundV1(panel_V1);
+				setBackgroundV1(panelV1);
 				repaint();
 			}
 		});
@@ -384,7 +400,7 @@ public class FenetreOptionMontre extends JPanel {
 		btnDroite1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changementImage(1, 1);
-				setBackgroundV1(panel_V1);
+				setBackgroundV1(panelV1);
 				repaint();
 			}
 		});
@@ -396,7 +412,7 @@ public class FenetreOptionMontre extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0, 0);
-				setBackgroundV2(panel_V2);
+				setBackgroundV2(panelV2);
 				repaint();
 			}
 		});
@@ -408,7 +424,7 @@ public class FenetreOptionMontre extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0, 1);
-				setBackgroundV2(panel_V2);
+				setBackgroundV2(panelV2);
 				repaint();
 			}
 		});
@@ -428,9 +444,9 @@ public class FenetreOptionMontre extends JPanel {
 		lblImage.setBounds(10, 0, 1600, 800);
 		add(lblImage);
 
-		JLabel lblImage_2 = new JLabel("");
-		lblImage_2.setBounds(19, 81, 1600, 800);
-		add(lblImage_2);
+		JLabel lblImage2 = new JLabel("");
+		lblImage2.setBounds(19, 81, 1600, 800);
+		add(lblImage2);
 
 	}
 
@@ -641,7 +657,7 @@ public class FenetreOptionMontre extends JPanel {
 		txtArea.append("\nVous avez selectionné la difficulté <<Avancé>> ");
 		pcs.firePropertyChange("VITESSEMAXAVANCE2", null, 100.0);
 	}
-	
+
 	/**
 	 * méthode qui dicte le message du slider de la masse de la première voiture
 	 */
@@ -660,7 +676,7 @@ public class FenetreOptionMontre extends JPanel {
 	public void actionSliderMasse2() {
 		txtArea.append("\nVous avez choisi " + slider2.getValue() + "kg pour la masse de la deuxième voiture!");
 	}
-	
+
 	/**
 	 * méthode qui dicte le message du slider de la masse de la première voiture
 	 */
@@ -668,6 +684,7 @@ public class FenetreOptionMontre extends JPanel {
 	// Alexis Pineda-Alvarado
 	public void actionSliderNbrTour() {
 		txtArea.append("\nVous avez choisi " + sliderNbrTour.getValue() + " tour à faire!");
+		lblNombreTours.setText(sliderNbrTour.getValue() + "");
 
 	}
 

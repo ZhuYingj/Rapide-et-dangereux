@@ -34,7 +34,6 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 
 	/** Prend la boule creer de la classe BouleFumee **/
 	private transient BouleFumee bouleFumee;
-	
 
 	/**
 	 * Methode qui permet de construire l'objet Fumee a l'aide de parametres
@@ -55,6 +54,8 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 	/**
 	 * Methode qui permet de dessiner la fumee sur la zone d'animation a l'aide de
 	 * g2d
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Alexis Pineda-Alvarado
 	public void dessiner(Graphics2D g2d) {
@@ -74,6 +75,12 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 
 	/**
 	 * Méthode qui permet de détecter si la fumee est contenue au clic de la souris
+	 * 
+	 * @param xPix la coordonnée du clic en x
+	 * 
+	 * @param yPix la coordonnée du clic en y
+	 * 
+	 * @return si le clic contient la piste
 	 **/
 	// Alexis Pineda-Alvarado
 	public boolean contient(double xPix, double yPix) {

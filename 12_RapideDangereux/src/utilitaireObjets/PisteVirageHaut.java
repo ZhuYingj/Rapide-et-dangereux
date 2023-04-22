@@ -91,6 +91,8 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	/**
 	 * Methode qui permet de dessiner la piste virage haut sur la zone d'animation a
 	 * l'aide de g2d
+	 * 
+	 * @param g2d Le composant graphique
 	 */
 	// Ludovic Julien
 	@Override
@@ -201,6 +203,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 	 * et la boule de neige
 	 * 
 	 * @param objetSpecial L'objet special de type boule de neige
+	 * @return si la piste est en collision avec la boule de neige
 	 */
 	// Tan Tommy Rin
 	public boolean enCollisionAvecBouleDeNeige(ObjetSpecial objetSpecial) {
@@ -318,6 +321,11 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 
 	/**
 	 * Méthode qui permet de savoir si le clic de la souris contient cet objet
+	 * 
+	 * @param xPix la coordonnée du clic en x
+	 * @param yPix la coordonnée du clic en y
+	 * 
+	 * @return si le clic contient la piste
 	 */
 	// Kevin Nguyen
 

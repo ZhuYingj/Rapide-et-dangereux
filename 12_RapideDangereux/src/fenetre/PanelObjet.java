@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
@@ -29,7 +30,7 @@ import utilitaireObjets.PisteVirageHaut;
  */
 
 public class PanelObjet extends JPanel {
-	
+
 	private final int X_OBJET = 75;
 	private final int Y_OBJET = 21;
 	private BlocMystere blocMystere;
@@ -42,12 +43,13 @@ public class PanelObjet extends JPanel {
 	private PisteVirageHaut pisteVirageHaut;
 	private Accelerateur accelerateur;
 	private Fumee fumee;
-	
+
 	/**
 	 * Constructeur par défaut de la fenetre objet.
 	 */
+	// Tan Tommy Rin
 	public PanelObjet() {
-		
+
 		pisteDeDepart = new PisteDeDepart(X_OBJET * 3, Y_OBJET);
 		pisteHorizontale = new PisteHorizontale(X_OBJET, Y_OBJET * 7);
 		pisteVerticale = new PisteVerticale(X_OBJET * 3, Y_OBJET * 7);
@@ -57,15 +59,16 @@ public class PanelObjet extends JPanel {
 		pisteVirageHaut = new PisteVirageHaut(X_OBJET, Y_OBJET * 21);
 	}
 
-
 	/**
 	 * Méthode permettant de dessiner sur la fenetre
+	 * 
+	 * @param g Le composant graphique
 	 */
 //Tan Tommy Rin
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		blocMystere = new BlocMystere(87, new Vecteur2D(X_OBJET, Y_OBJET));
 		accelerateur = new Accelerateur(X_OBJET, Y_OBJET * 28);
 		fumee = new Fumee(X_OBJET * 3, Y_OBJET * 28);

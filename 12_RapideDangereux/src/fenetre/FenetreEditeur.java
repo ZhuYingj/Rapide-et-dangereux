@@ -24,7 +24,6 @@ import javax.swing.border.LineBorder;
 import application.GestionnaireDeFichiersSurLeBureau;
 import application.OutilsImage;
 import geometrie.Vecteur2D;
-import interfaces.TypeObjetSpecial;
 import interfaces.TypePiste;
 import utilitaireObjets.Accelerateur;
 import utilitaireObjets.BlocMystere;
@@ -44,6 +43,7 @@ import javax.swing.SwingConstants;
  * Classe qui permet de créer et gérer la fenetre éditeur.
  * 
  * @author Tan Tommy Rin
+ * @author Alexis Pineda-Alvarado
  * @author Ludovic Julien
  * @author Kevin Nguyen
  * 
@@ -79,11 +79,13 @@ public class FenetreEditeur extends JPanel {
 
 	private JLabel lblImage;
 	private JPanel panelCouleurPiste;
-	private JPanel panel_V1;
-	private JPanel panel_V2;
+	private JPanel panelV1;
+	private JPanel panelV2;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * 
+	 * @param listener L'écouteur
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -125,7 +127,7 @@ public class FenetreEditeur extends JPanel {
 		JLabel lblTextEditeur = new JLabel("MODE ÉDITEUR");
 		lblTextEditeur.setForeground(new Color(255, 255, 255));
 		lblTextEditeur.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 30));
-		lblTextEditeur.setBounds(482, 15, 250, 71);
+		lblTextEditeur.setBounds(558, 15, 250, 71);
 		add(lblTextEditeur);
 
 		panelObjet = new PanelObjet();
@@ -359,45 +361,45 @@ public class FenetreEditeur extends JPanel {
 		lblM.setBounds(315, 59, 71, 14);
 		panelObjet.add(lblM);
 
-		JLabel lblM_1 = new JLabel("80 M");
-		lblM_1.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_1.setBounds(315, 183, 71, 14);
-		panelObjet.add(lblM_1);
+		JLabel lblM2 = new JLabel("80 M");
+		lblM2.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM2.setBounds(315, 183, 71, 14);
+		panelObjet.add(lblM2);
 
-		JLabel lblM_2 = new JLabel("80 M");
-		lblM_2.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_2.setBounds(39, 183, 71, 14);
-		panelObjet.add(lblM_2);
+		JLabel lblM3 = new JLabel("80 M");
+		lblM3.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM3.setBounds(39, 183, 71, 14);
+		panelObjet.add(lblM3);
 
-		JLabel lblM_3 = new JLabel("80 M");
-		lblM_3.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_3.setBounds(39, 334, 71, 14);
-		panelObjet.add(lblM_3);
+		JLabel lblM4 = new JLabel("80 M");
+		lblM4.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM4.setBounds(39, 334, 71, 14);
+		panelObjet.add(lblM4);
 
-		JLabel lblM_4 = new JLabel("80 M");
-		lblM_4.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_4.setBounds(315, 334, 71, 14);
-		panelObjet.add(lblM_4);
+		JLabel lblM5 = new JLabel("80 M");
+		lblM5.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM5.setBounds(315, 334, 71, 14);
+		panelObjet.add(lblM5);
 
-		JLabel lblM_5 = new JLabel("80 M");
-		lblM_5.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_5.setBounds(34, 486, 71, 14);
-		panelObjet.add(lblM_5);
+		JLabel lblM6 = new JLabel("80 M");
+		lblM6.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM6.setBounds(34, 486, 71, 14);
+		panelObjet.add(lblM6);
 
-		JLabel lblM_6 = new JLabel("80 M");
-		lblM_6.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_6.setBounds(39, 621, 71, 14);
-		panelObjet.add(lblM_6);
+		JLabel lblM7 = new JLabel("80 M");
+		lblM7.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM7.setBounds(39, 621, 71, 14);
+		panelObjet.add(lblM7);
 
-		JLabel lblM_7 = new JLabel("80 M");
-		lblM_7.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_7.setBounds(315, 621, 71, 14);
-		panelObjet.add(lblM_7);
+		JLabel lblM8 = new JLabel("80 M");
+		lblM8.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM8.setBounds(315, 621, 71, 14);
+		panelObjet.add(lblM8);
 
-		JLabel lblM_7_1 = new JLabel("80 M");
-		lblM_7_1.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
-		lblM_7_1.setBounds(315, 486, 71, 14);
-		panelObjet.add(lblM_7_1);
+		JLabel lblM9 = new JLabel("80 M");
+		lblM9.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblM9.setBounds(315, 486, 71, 14);
+		panelObjet.add(lblM9);
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
@@ -459,11 +461,11 @@ public class FenetreEditeur extends JPanel {
 		});
 		btnClear.setBounds(594, 575, 214, 63);
 		add(btnClear);
-		
+
 		JButton btnGauche3 = new JButton("<");
 		btnGauche3.setBounds(26, 161, 55, 23);
 		add(btnGauche3);
-		
+
 		btnGauche3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -472,18 +474,16 @@ public class FenetreEditeur extends JPanel {
 				gauche = false;
 			}
 		});
-		
+
 		panelCouleurPiste = new JPanel();
 		panelCouleurPiste.setBackground(Color.RED);
 		panelCouleurPiste.setBounds(89, 127, 143, 90);
 		add(panelCouleurPiste);
-		
-		
-		
+
 		JButton btnDroit3 = new JButton(">");
 		btnDroit3.setBounds(242, 161, 55, 23);
 		add(btnDroit3);
-		
+
 		btnDroit3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -492,89 +492,98 @@ public class FenetreEditeur extends JPanel {
 				droite = false;
 			}
 		});
-		
+
 		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
+		lblCouleurBordureDe.setForeground(Color.WHITE);
 		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblCouleurBordureDe.setBounds(74, 97, 177, 43);
 		add(lblCouleurBordureDe);
-		
+
 		JButton btnGauche1 = new JButton("<");
 		btnGauche1.setBounds(26, 287, 55, 23);
 		add(btnGauche1);
-		
+
 		btnGauche1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(1, 0);
-				setBackgroundV1(panel_V1);
+				setBackgroundV1(panelV1);
 				repaint();
 			}
 		});
-		
-		panel_V1 = new JPanel();
-		panel_V1.setBackground(Color.YELLOW);
-		panel_V1.setBounds(89, 249, 143, 90);
-		add(panel_V1);
-		
+
+		panelV1 = new JPanel();
+		panelV1.setBackground(Color.YELLOW);
+		panelV1.setBounds(89, 249, 143, 90);
+		add(panelV1);
+
 		JButton btnDroite1 = new JButton(">");
 		btnDroite1.setBounds(242, 287, 55, 23);
 		add(btnDroite1);
 		btnDroite1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changementImage(1, 1);
-				setBackgroundV1(panel_V1);
+				setBackgroundV1(panelV1);
 				repaint();
 			}
 		});
-		
+
 		JLabel lblNewLabel = new JLabel("Couleur voiture #1");
+		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel.setBounds(89, 231, 134, 13);
 		add(lblNewLabel);
-		
+
 		JButton btnGauche2 = new JButton("<");
 		btnGauche2.setBounds(26, 403, 55, 23);
 		add(btnGauche2);
-		
+
 		btnGauche2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0, 0);
-				setBackgroundV2(panel_V2);
+				setBackgroundV2(panelV2);
 				repaint();
 			}
 		});
-		
-		panel_V2 = new JPanel();
-		panel_V2.setBackground(Color.CYAN);
-		panel_V2.setBounds(89, 375, 143, 90);
-		add(panel_V2);
-		
+
+		panelV2 = new JPanel();
+		panelV2.setBackground(Color.CYAN);
+		panelV2.setBounds(89, 375, 143, 90);
+		add(panelV2);
+
 		JButton btnDroite2 = new JButton(">");
 		btnDroite2.setBounds(242, 403, 55, 23);
 		add(btnDroite2);
-		
+
 		btnDroite2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changementImage(0, 1);
-				setBackgroundV2(panel_V2);
+				setBackgroundV2(panelV2);
 				repaint();
 			}
 		});
+
+		JLabel lblNewLabel2 = new JLabel("Couleur Voiture #2");
+		lblNewLabel2.setForeground(Color.WHITE);
+		lblNewLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblNewLabel2.setBounds(89, 350, 143, 13);
+		add(lblNewLabel2);
 		
-		JLabel lblNewLabel_1 = new JLabel("Couleur Voiture #2");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(89, 350, 143, 13);
-		add(lblNewLabel_1);
-		
+		JLabel lblNombreTours = new JLabel("3 TOURS À FAIRE");
+		lblNombreTours.setForeground(new Color(240, 255, 240));
+		lblNombreTours.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
+		lblNombreTours.setBounds(895, 39, 194, 71);
+		add(lblNombreTours);
+
 		lblImage = new JLabel("");
 		lblImage.setBounds(0, 0, 1600, 800);
 		add(lblImage);
-		
+
 		Image background = OutilsImage.lireImageEtRedimensionner("BackgroundEdition.jpg", 1600, 800);
 		if (background != null) {
 			lblImage.setIcon(new ImageIcon(background));
@@ -582,7 +591,6 @@ public class FenetreEditeur extends JPanel {
 		}
 
 	}
-
 
 	/**
 	 * Méthode qui permet de supprimer tous les morceaux de piste qui sont sur le
@@ -818,18 +826,17 @@ public class FenetreEditeur extends JPanel {
 			sauvegardeUnePiste2();
 
 			chargementUnePiste();
+
 			pcs.firePropertyChange("JOUEREDITEUR", null, -1);
 
 			pcs.firePropertyChange("REGROUPEMENT", null, pisteCourante);
 
+			actionSkin();
 		} else {
 			JOptionPane.showMessageDialog(null,
 					"COMPLETEZ, FORMEZ BIEN LA PISTE OU ENLEVEZ LE MORCEAU MAL PLACÉ POUR JOUER!");
 
 		}
-		
-		actionSkin();
-		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
 
 		resetValeur();
 	}
@@ -1585,6 +1592,10 @@ public class FenetreEditeur extends JPanel {
 		regroupement.setListePisteVirageHaut(panelRegroupement.getListePisteVirageHaut());
 		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
 		regroupement.setListeFumee(panelRegroupement.getListeFumee());
+		regroupement.setCouleurBordurePiste(couleursPiste[couleurPiste]);
+		regroupement.setIndexCouleurV1(indexCouleur);
+		regroupement.setIndexCouleurV2(indexCouleur2);
+		regroupement.setIndexPisteCouleur(couleurPiste);
 
 		gestionFich.ecrireFichierBinBureauRegroupement2(regroupement, pisteCourante);
 		boolean dejaDansComboBox = false;
@@ -1628,6 +1639,11 @@ public class FenetreEditeur extends JPanel {
 		regroupement.setListePisteVirageHaut(panelRegroupement.getListePisteVirageHaut());
 		regroupement.setRegroupementObjet(panelRegroupement.getListeBlocMystere());
 		regroupement.setListeFumee(panelRegroupement.getListeFumee());
+		regroupement.setCouleurBordurePiste(couleursPiste[couleurPiste]);
+
+		regroupement.setIndexCouleurV1(indexCouleur);
+		regroupement.setIndexCouleurV2(indexCouleur2);
+		regroupement.setIndexPisteCouleur(couleurPiste);
 
 		gestionFich.ecrireFichierBinBureauRegroupement(regroupement);
 		boolean dejaDansComboBox = false;
@@ -1725,6 +1741,24 @@ public class FenetreEditeur extends JPanel {
 		for (int a = 0; a < regroupementSauvegarde.getListePisteDeDepart().size(); a++) {
 			panelRegroupement.getListePisteDeDepart().add(regroupementSauvegarde.getListePisteDeDepart().get(a));
 
+			panelV1.setBackground(regroupementSauvegarde.getListePisteDeDepart().get(a).getVoiture().getSkin());
+			panelV2.setBackground(regroupementSauvegarde.getListePisteDeDepart().get(a).getVoiture2().getSkin());
+			panelCouleurPiste.setBackground(regroupementSauvegarde.getCouleurBordurePiste());
+
+			indexCouleur = regroupementSauvegarde.getIndexCouleurV1();
+			indexCouleur2 = regroupementSauvegarde.getIndexCouleurV2();
+			couleurPiste = regroupementSauvegarde.getIndexPisteCouleur();
+
+			panelObjet.getPisteDeDepart().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteDeDepart().getVoiture().setSkin(couleurs[indexCouleur]);
+			panelObjet.getPisteDeDepart().getVoiture2().setSkin(couleurs2[indexCouleur2]);
+			panelObjet.getPisteHorizontale().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteVerticale().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteVirageBas().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteVirageHaut().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteVirageDroit().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+			panelObjet.getPisteVirageGauche().setBordure(regroupementSauvegarde.getCouleurBordurePiste());
+
 		}
 // Pour bloc mystere
 
@@ -1741,7 +1775,7 @@ public class FenetreEditeur extends JPanel {
 		repaint();
 
 	}
-	
+
 	/**
 	 * Méthode pour changer la couleur des côtés de piste
 	 */
@@ -1763,7 +1797,7 @@ public class FenetreEditeur extends JPanel {
 		pcs.firePropertyChange("COULEURPISTE4", null, couleursPiste[couleurPiste]);
 		repaint();
 	}
-	
+
 	/**
 	 * méthode qui permet le changement de couleur de la liste de couleur
 	 * 
@@ -1802,7 +1836,7 @@ public class FenetreEditeur extends JPanel {
 		pcs.firePropertyChange("SKINOPTIONS3", null, couleurs[indexCouleur]);
 		pcs.firePropertyChange("SKINOPTIONS4", null, couleurs2[indexCouleur2]);
 	}
-	
+
 	/**
 	 * Méthode qui permet d'envoyer des informations à la zone physique à l'aide de
 	 * levée d'évènements. pour faire le changement de couleur des voiture
@@ -1837,7 +1871,7 @@ public class FenetreEditeur extends JPanel {
 	public void setPanelRegroupement(PanelRegroupement panelRegroupement) {
 		this.panelRegroupement = panelRegroupement;
 	}
-	
+
 	public PanelObjet getPanelObjet() {
 		return panelObjet;
 	}
@@ -1845,7 +1879,7 @@ public class FenetreEditeur extends JPanel {
 	public void setPanelObjet(PanelObjet panelObjet) {
 		this.panelObjet = panelObjet;
 	}
-	
+
 	/**
 	 * méthode qui change la couleur du panel pour permettre de visualiser la
 	 * couleur choisit par l'utilisateur
