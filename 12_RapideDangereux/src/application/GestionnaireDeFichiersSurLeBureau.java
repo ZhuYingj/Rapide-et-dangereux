@@ -20,6 +20,7 @@ import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.util.HashMap;
 import java.io.BufferedReader;
+import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
 
@@ -303,21 +304,8 @@ public class GestionnaireDeFichiersSurLeBureau {
 		scanner.close();
 		return listeLignes;
 	}
-
-//	        for (InfoLigne ligne : listeLignes) {
-//	            String piste = ligne.getPiste();
-//	            
-//	            if (!meilleursTemps.containsKey(piste) || ligne.getTemps() < meilleursTemps.get(piste).getTemps()) {
-//	                meilleursTemps.put(piste, ligne);
-//	            }
-//	        }
-//	        Map<String, InfoLigne> meilleursTempsMexique = new HashMap<>();
-//	         String piste = "Mexique";
-//			//meilleursTempsMexique = meilleursTemps.get(piste);
-//	        
-//	        return meilleursTemps;
-//	    }
-
+	 
+	
 	/**
 	 * méthode qui permet de retourner la moyenne de temps de chaque piste
 	 * 
@@ -360,11 +348,6 @@ public class GestionnaireDeFichiersSurLeBureau {
 		return meilleursTemps;
 	}
 
-	public static String getBureau() {
-
-		return System.getProperty("user.home");
-	}
-
 	/**
 	 * méthode qui permet de retourner la moyenne de temps de chaque piste
 	 * 
@@ -402,19 +385,13 @@ public class GestionnaireDeFichiersSurLeBureau {
 				comptages.put(piste, 1);
 			}
 		}
-
 		return comptages;
-	}
+	    }
 
-	public static String trouverNomJoueurAvecTemps(List<InfoLigne> lignes, String piste, double temps) {
-		String nomJoueur = "";
-		for (InfoLigne ligne : lignes) {
-			if (ligne.getPiste().equalsIgnoreCase(piste) && ligne.getTemps() == temps) {
-				nomJoueur = ligne.getNom();
-				break;
-			}
-		}
-		return nomJoueur;
-	}
+public static void viderFichier() throws FileNotFoundException {
+    PrintWriter writer = new PrintWriter(System.getProperty("user.home") + "/Desktop/donnes.txt");
+    writer.print("");
+    writer.close();
 
+}
 }
