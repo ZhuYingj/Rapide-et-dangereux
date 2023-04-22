@@ -131,8 +131,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Kevin Nguyen
 	public ZoneAnimPhysique() {
-		Color transparent = new Color(0, 0, 0, .0f);
-		setBackground(transparent);
+		Color c1 = new Color( 0.5f, 1.0f, 1.0f, 1f);
+		setBackground(c1);
+		
 		gestionFich = new GestionnaireDeFichiersSurLeBureau();
 		pisteMexique = new PisteMexique(0, 0);
 		pisteItalie = new PisteItalie(0, 0);

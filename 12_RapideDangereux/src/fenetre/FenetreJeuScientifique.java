@@ -73,7 +73,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblPositionEnYV2;
 	private JLabel lblNombreToursVoiture2;
 	private JLabel lblBackgroundBleu;
-
+	private JLabel lblNewLabel11;
 	private static Clip clip;
 	private ZoneVitesse zoneVitesse2;
 	private ZoneVitesse zoneVitesse;
@@ -669,7 +669,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel10.setBounds(948, 538, 46, 14);
 		add(lblNewLabel10);
 
-		JLabel lblNewLabel11 = new JLabel("<---------------->");
+		lblNewLabel11 = new JLabel("<---------------->");
 		lblNewLabel11.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel11.setBounds(361, 29, 120, 14);
 		add(lblNewLabel11);
@@ -744,11 +744,11 @@ public class FenetreJeuScientifique extends JPanel {
 		lblObjet2.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblObjet2.setBounds(810, 650, 137, 14);
 		add(lblObjet2);
-		
+
 		lblBackgroundBleu = new JLabel("");
 		lblBackgroundBleu.setBounds(0, 0, 1600, 800);
 		add(lblBackgroundBleu);
-		
+
 		Image imgBleu = OutilsImage.lireImageEtRedimensionner("backgroundJeu.jpg", 1600, 800);
 		if (imgBleu != null) {
 			lblBackgroundBleu.setIcon(new ImageIcon(imgBleu));

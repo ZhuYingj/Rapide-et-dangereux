@@ -106,11 +106,11 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 							angleNormaleMurGauche);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setX(murGauche + 1);
-					System.out.println("en collisionV");
+				
 					if (Math.toDegrees(voiture.getAngle()) < 270 && Math.toDegrees(voiture.getAngle()) > 180) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) + ((270 - Math.toDegrees(voiture.getAngle())) * 2)));
-						System.out.println(Math.toDegrees(voiture.getAngle()));
+				
 					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 90) * 2)));
@@ -125,7 +125,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 							angleNormaleMurDroite);
 					voiture.setVitesse(vit);
 					voiture.getPosition().setX(murDroite - voiture.getDiametre());
-					System.out.println("en collisionV");
+				
 					if (Math.toDegrees(voiture.getAngle()) < 90 && Math.toDegrees(voiture.getAngle()) > 0) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) + ((90 - Math.toDegrees(voiture.getAngle())) * 2)));

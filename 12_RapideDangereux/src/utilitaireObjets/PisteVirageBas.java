@@ -153,7 +153,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 					if (Math.toDegrees(voiture.getAngle()) < 270 && Math.toDegrees(voiture.getAngle()) > 180) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) + ((270 - Math.toDegrees(voiture.getAngle())) * 2)));
-						System.out.println(Math.toDegrees(voiture.getAngle()));
+						
 					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 90) * 2)));

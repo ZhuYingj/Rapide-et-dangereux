@@ -46,11 +46,13 @@ public class AppPrincipale12 extends JFrame {
 	private JCheckBoxMenuItem checkBoxAudio;
 
 	private int nombrePiste = 1;
+	
 	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String sousDossierSurBureau = "SauvegardePiste";
 
 	private static int audio = 1;
+	
 	private static boolean pisteAudio;
 
 	private File fichierDeTravail = new File(System.getProperty("user.home"),
