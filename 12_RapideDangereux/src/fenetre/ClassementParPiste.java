@@ -58,13 +58,8 @@ public class ClassementParPiste extends JPanel {
 		JButton btnReinitialiser = new JButton("R\u00E9initialiser les statistiques");
 		btnReinitialiser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//MyTableModel.resetTableData();
-				try {
-					GestionnaireDeFichiersSurLeBureau.viderFichier();
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				MyTableModel.TTTT();
+				System.out.println("Reinitialiser");
 
 			}
 		});

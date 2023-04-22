@@ -2,15 +2,19 @@ package dessin;
 
 import java.awt.BorderLayout;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -53,8 +57,8 @@ public class TableauRecord extends JPanel{
 	 *
 	 */
     public class MyTableModel extends AbstractTableModel {
-        private String[] columnNames = {"Piste", "Record(temps en secondes)", "Record Par", "Nb fois ou lapiste a été joué", "moyenne(temps en secondes)"};
-        private Object[][] data = {
+    	private String[] columnNames = {"Piste", "Record(temps en secondes)", "Record Par", "Nb fois ou lapiste a été joué", "moyenne(temps en secondes)"};
+        private static Object[][] data = {
             {"Mexique", "0:00","-", "0","0"},
             {"Canada", "0:00","-","0","0"},
             {"Italie", "0:00","-","0","0"}
@@ -88,7 +92,7 @@ public class TableauRecord extends JPanel{
             data[row][col] = value;
             fireTableCellUpdated(row, col);
         }
-     
+        
         
         /**
          * pour mettre à jour le nombre de fois où chaque piste a été jouée
@@ -158,20 +162,46 @@ public class TableauRecord extends JPanel{
             	 setValueAt(meilleurTemps.getNom(), 2, 2);
             }  
         }
+     
         
         
-        
-        public void resetTableData() {
-            Object[][] newData = {
-                {"Mexique", "0:00","-", "0","0"},
-                {"Canada", "0:00","-","0","0"},
-                {"Italie", "0:00","-","0","0"}
-            };
-            data = newData;
-            fireTableDataChanged();
+        public void reinitialiserTableau() {
+        	  data = new Object[][] {
+        	        {"Mexique", "0:00","-", "0","0"},
+        	        {"Canada", "0:00","-","0","0"},
+        	        {"Italie", "0:00","-","0","0"}
+        	    };
+
+        	    // Mise à jour des cellules du tableau
+        	    for (int row = 0; row < data.length; row++) {
+        	        for (int col = 0; col < data[row].length; col++) {
+        	            setValueAt(data[row][col], row, col);
+        	        }
+        	    }
+
+        	    // Notification de la mise à jour du modèle de tableau
+        	    fireTableDataChanged();
         }
         
+        public static void supprimerContenuFichier(String nomFichier) {
+            try {
+                PrintWriter writer = new PrintWriter(new FileWriter(System.getProperty("user.home") + "/Desktop/" + nomFichier));
+                writer.print("");
+                writer.close();
+            } catch (IOException e) {
+                System.err.println("Erreur lors de la suppression du contenu du fichier");
+            }
+        }
+        
+        
+      public static void TTTT() {
+    	  tableModel.reinitialiserTableau();
+    	  supprimerContenuFichier("donnees.txt");
+      }
+        
     }
+    
+    
     
     /**
      * méthode qui retourne le tableau
