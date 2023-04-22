@@ -20,6 +20,7 @@ import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.util.HashMap;
 import java.io.BufferedReader;
+import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
 
@@ -301,21 +302,6 @@ public class GestionnaireDeFichiersSurLeBureau {
 		scanner.close();
 		return listeLignes;
 	}
-
-
-//	        for (InfoLigne ligne : listeLignes) {
-//	            String piste = ligne.getPiste();
-//	            
-//	            if (!meilleursTemps.containsKey(piste) || ligne.getTemps() < meilleursTemps.get(piste).getTemps()) {
-//	                meilleursTemps.put(piste, ligne);
-//	            }
-//	        }
-//	        Map<String, InfoLigne> meilleursTempsMexique = new HashMap<>();
-//	         String piste = "Mexique";
-//			//meilleursTempsMexique = meilleursTemps.get(piste);
-//	        
-//	        return meilleursTemps;
-//	    }
 	
 	 /**
 	  * méthode qui permet de retourner la moyenne de temps de chaque piste 
@@ -325,11 +311,11 @@ public class GestionnaireDeFichiersSurLeBureau {
 	  * @return					la moyenne de temps de chaque piste
 	  */
 	 //Ludovic Julien
-	 public static double calculerMoyenne(List<InfoLigne> listeLignes, String piste) {
-		    double totalTemps = 0.0;
-		    int nombreLignes = 0;
-		    
-		    for (InfoLigne ligne : listeLignes) {
+	public static double calculerMoyenne(List<InfoLigne> listeLignes, String piste) {
+	    double totalTemps = 0.0;
+	    int nombreLignes = 0;
+
+	    for (InfoLigne ligne : listeLignes) {
 	        if (ligne.getPiste().equals(piste)) {
 	            totalTemps += ligne.getTemps();
 	            nombreLignes++;
@@ -338,6 +324,31 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 	    return nombreLignes > 0 ? totalTemps / nombreLignes : 0.0;
 	}
+	 
+	 
+	 /**
+	  * méthode qui permet de retourner la moyenne de temps de chaque piste 
+	  * 
+	  * @param listeLignes		liste des donner de temps 
+	  * @return
+	  */
+	 //Ludovic Julien
+	 public static Map<String, Double> calculerMoyennes(List<InfoLigne> listeLignes) {
+		    Map<String, Double> moyennes = new HashMap<>();
+
+		    for (InfoLigne ligne : listeLignes) {
+		        String piste = ligne.getPiste();
+		        double moyenne = calculerMoyenne(listeLignes, piste);
+		        moyennes.put(piste, moyenne);
+		    }
+
+		    return moyennes;
+		}
+	 
+	 
+	 
+	 
+	 
 	/**
 	 * méthode qui permet de retourner le meilleur temps de chaque piste
 	 * 
@@ -358,25 +369,6 @@ public class GestionnaireDeFichiersSurLeBureau {
 		return meilleursTemps;
 	}
 
-	 
-	 /**
-	  * méthode qui permet de retourner la moyenne de temps de chaque piste 
-	  * 
-	  * @param listeLignes		liste des donner de temps 
-	  * @return
-	  */
-	 //Ludovic Julien
-	 public static Map<String, Double> calculerMoyennes(List<InfoLigne> listeLignes) {
-		    Map<String, Double> moyennes = new HashMap<>();
-
-		    for (InfoLigne ligne : listeLignes) {
-		        String piste = ligne.getPiste();
-		        double moyenne = calculerMoyenne(listeLignes, piste);
-		        moyennes.put(piste, moyenne);
-		    }
-
-		    return moyennes;
-		}
 	 
 	 /**
 	  * méthode qui permet de retourner le nombre de fois que chaque piste à été joué
@@ -400,19 +392,10 @@ public class GestionnaireDeFichiersSurLeBureau {
 		    return comptages;
 		}
 	 
-	
-	 
-	 
-	 
-	 public static String trouverNomJoueurAvecTemps(List<InfoLigne> lignes, String piste, double temps) {
-		    String nomJoueur = "";
-		    for (InfoLigne ligne : lignes) {
-		        if (ligne.getPiste().equalsIgnoreCase(piste) && ligne.getTemps() == temps) {
-		            nomJoueur = ligne.getNom();
-		            break;
-		        }
-		    }
-		    return nomJoueur;
-		}
+	 public static void viderFichier() throws FileNotFoundException {
+	        PrintWriter writer = new PrintWriter(System.getProperty("user.home") + "/Desktop/donnes.txt");
+	        writer.print("");
+	        writer.close();
+	    }
 
 }

@@ -934,11 +934,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		arretMusic();
 		arretGraphique();
 		gagnantCourse();
-	//	meilleurTemps();
-		//moyenTemps();
-		//nbJouer();
-	
-		// meilleurTemps();
 	}
 
 	/**
@@ -1273,67 +1268,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					Math.round(tempsTotalEcoule * 100.0) / 100.0, piste);
 		}
 	}
+	
+	
+	
+	
+	
 
-//	public void meilleurTemps() {
-////		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
-////				.getNombreToursFaits()
-////				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
-////						.getNombreToursFaits()) {
-//		
-//		try {
-//
-//            List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-//           //Map<String, InfoLigne> meilleurTempsMexique = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes,"Mexique");
-//            Map<String, InfoLigne> meilleurTempsCanada = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
-//          // Map<String, InfoLigne> meilleurTempsItalie = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes,"Italie")
-//
-//            System.out.println(meilleurTempsCanada);
-//            
-//            
-//            //TableauRecord.getTableau().updateRecord("Mexique",meilleurTempsMexique);
-//            TableauRecord.getTableau().updateRecord("Canada",meilleurTempsCanada);
-//         //   TableauRecord.getTableau().updateRecord("Italie",meilleurTempsItalie);
-//            
-//            
-//        } catch (FileNotFoundException e) {
-//            System.err.println("Erreur : fichier introuvable");
-//        }
-//        }
-       // }
-	
-	
-	public void moyenTemps() {
-		 try {
-		        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-		        Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
-
-		        for (String piste : moyennes.keySet()) {
-		            double moyenne = moyennes.get(piste);
-		            System.out.println("Moyenne de temps pour la piste " + piste + " : " + moyenne);
-		        }
-		    } catch (FileNotFoundException e) {
-		        System.err.println("Erreur : fichier introuvable");
-		    }
-	}
-	
-//	public void nbJouer() {
-//		try {
-//	        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-//	        Map<String, Integer> comptages = GestionnaireDeFichiersSurLeBureau.compterPistes(listeLignes);
-//
-//	        for (String piste : comptages.keySet()) {
-//	            int comptage = comptages.get(piste);
-//	            System.out.println("La piste " + piste + " a été jouée " + comptage + " fois");
-//	        }
-//	    } catch (FileNotFoundException e) {
-//	        System.err.println("Erreur : fichier introuvable");
-//	    }
-//			for (InfoLigne meilleurTemps : meilleursTemps.values()) {
-//				System.out.println(meilleurTemps);
-//			}
-//		} catch (FileNotFoundException e) {
-//			System.err.println("Erreur : fichier introuvable");
-//		}
-//	}
 
 }

@@ -9,6 +9,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -25,7 +28,10 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import application.GestionnaireDeFichiersSurLeBureau;
+import application.InfoLigne;
 import application.OutilsImage;
+import dessin.TableauRecord;
 import dessin.ZoneAnimPhysique;
 import geometrie.Vecteur2D;
 import interfaces.TypePiste;
@@ -507,6 +513,7 @@ public class JeuOptions extends JPanel {
 		btnRecorsPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("RECORD", null, -1);
+				actionRecord();
 			}
 		});
 		add(btnRecorsPiste);
@@ -862,8 +869,87 @@ public class JeuOptions extends JPanel {
 	// Ludovic Julien
 	public void setBackgroundV2(JPanel panel) {
 		panel.setBackground(couleurs2[indexCouleur2]);
-
 	}
+	
+	
+	/**
+	 * méthode qui vas appeler d'autre pour permettre de mettre les donner des meilleurs temps dans le tableau
+	 */
+	//Ludovic Julien
+	public void meilleurTemps() {
+		try {
+
+            List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+            Map<String, InfoLigne> meilleurTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
+          
+            TableauRecord.getTableau().updateRecord("Mexique",meilleurTemps);
+            TableauRecord.getTableau().updateRecord("Canada",meilleurTemps);
+            TableauRecord.getTableau().updateRecord("Italie",meilleurTemps);
+            
+            
+        } catch (FileNotFoundException e) {
+            System.err.println("Erreur : fichier introuvable");
+        }
+        }
+	
+	/**
+	 * méthode qui vas appeler d'autre pour permettre de mettre les donner de la moyen de temps effectuer par tout les gagant de la piste en question dans le tableau
+	 */
+	//Ludovic Julien
+	public void moyenTemps() {
+		 try {
+		        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+		        Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
+		        
+		        double moyenneMexique = moyennes.get("Mexique");
+		        double moyenneCanada = moyennes.get("Canada");
+		        double moyenneItalie = moyennes.get("Italie");
+		        
+		        TableauRecord.getTableau().updateMoyenne("Mexique",""+moyenneMexique);
+		        TableauRecord.getTableau().updateMoyenne("Canada",""+moyenneCanada);
+		        TableauRecord.getTableau().updateMoyenne("Italie",""+moyenneItalie);
+		        
+		        System.out.println(moyennes);
+		        
+		    } catch (FileNotFoundException e) {
+		        System.err.println("Erreur : fichier introuvable");
+		    }
+	}
+	
+	/**
+	 * méthode qui vas appeler d'autre pour permettre de mettre les donner du nombre de fois ou chaque piste a été joué dans le tableau
+	 */
+	//Ludovic Julien
+	public void nbjouer() {
+		 try {
+		        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+		        Map<String, Integer> comptages = GestionnaireDeFichiersSurLeBureau.compterPistes(listeLignes);
+		        
+		        double nbMexique = comptages.get("Mexique");
+		        double nbCanada = comptages.get("Canada");
+		        double nbItalie = comptages.get("Italie");
+		        
+		        TableauRecord.getTableau().updateNombreDeFoisJoue("Mexique",""+nbMexique);
+		        TableauRecord.getTableau().updateNombreDeFoisJoue("Canada",""+nbCanada);
+		        TableauRecord.getTableau().updateNombreDeFoisJoue("Italie",""+nbItalie);
+		        
+		    } catch (FileNotFoundException e) {
+		        System.err.println("Erreur : fichier introuvable");
+		    }
+	}
+	
+	/**
+	 * méthode d'action pour le bouton Classement par piste
+	 */
+	//Ludovic Julien
+	public void actionRecord() {
+		nbjouer();
+		moyenTemps();
+		meilleurTemps();
+	}
+	
+	
+	
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {
 		return zoneAnimPhysique;

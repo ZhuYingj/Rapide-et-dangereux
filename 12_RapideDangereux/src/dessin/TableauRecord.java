@@ -96,14 +96,19 @@ public class TableauRecord extends JPanel{
          * @param piste
          * @param nombreDeFoisJoue
          */
-        public void updateNombreDeFoisJoue(String piste, int nombreDeFoisJoue) {
-            for (int i = 0; i < data.length; i++) {
-                if (data[i][0].equals(piste)) {
-                    data[i][3] = nombreDeFoisJoue;
-                    fireTableDataChanged();
-                    break;
-                }
+        public void updateNombreDeFoisJoue(String piste, String nombreDeFoisJoue) {
+            if (piste.equals("Mexique")) {
+                setValueAt(nombreDeFoisJoue, 0, 3);
             }
+            if (piste.equals("Canada")) {
+                setValueAt(nombreDeFoisJoue, 1, 3);
+            }
+            if (piste.equals("Italie")) {
+                setValueAt(nombreDeFoisJoue, 2, 3);
+            }
+            
+            
+            
         }
         
         /**
@@ -113,77 +118,70 @@ public class TableauRecord extends JPanel{
          * @param moyenne
          */
         public void updateMoyenne(String piste, String moyenne) {
-            for (int i = 0; i < data.length; i++) {
-                if (data[i][0].equals(piste)) {
-                    data[i][4] = moyenne;
-                    fireTableDataChanged();
-                    break;
-                }
+            
+            if (piste.equals("Mexique")) {
+                setValueAt(Double.parseDouble(moyenne), 0, 4);
             }
+            if (piste.equals("Canada")) {
+                setValueAt(Double.parseDouble(moyenne), 1, 4);
+            }
+            if (piste.equals("Italie")) {
+                setValueAt(Double.parseDouble(moyenne), 2, 4);
+            }
+            
+        }
+        
+        
+        /**
+         * méthode qui permet de modifier le tableau classement
+         * 
+         * @param piste				piste en question 
+         * @param meilleursTemps	temps meilleur
+         */
+        //Ludovic Julien
+        public void updateRecord(String piste, Map<String, InfoLigne> meilleursTemps) {        	
+            if (piste.equals("Mexique")) {          	
+            	InfoLigne meilleurTemps = meilleursTemps.get("Mexique");            
+               setValueAt(""+meilleurTemps.getTemps(), 0, 1);               
+                setValueAt(meilleurTemps.getNom(), 0, 2);             
+            }
+            
+            if (piste.equals("Canada")) {         	
+            	InfoLigne meilleurTemps = meilleursTemps.get("Canada");           	
+            	 setValueAt(""+meilleurTemps.getTemps(), 1, 1);                
+                 setValueAt(meilleurTemps.getNom(), 1, 2);
+            }
+            
+            if (piste.equals("Italie")) {            	
+            	InfoLigne meilleurTemps = meilleursTemps.get("Italie");            	
+            	 setValueAt(""+meilleurTemps.getTemps(), 2, 1);    
+            	 setValueAt(meilleurTemps.getNom(), 2, 2);
+            }  
         }
         
         
         
-        
-        public void updateRecord(String piste, Map<String, InfoLigne> meilleursTemps) {
-            if (piste.equals("Mexique")) {
-            	
-            	InfoLigne meilleurTemps = meilleursTemps.get("Mexique");
-                
-               // setValueAt(meilleurTemps.getTemps(), 0, 1);
-              
-                //setValueAt(meilleurTemps.getNom(), 0, 2);
-            	
-            	
-//                for (int i = 0; i < data.length; i++) {
-//                  if (data[i][0].equals(piste)) {
-//                      data[i][1] = meilleurTemps.getTemps();
-//                      data[i][2] = meilleurTemps.getNom();
-//                      fireTableDataChanged();
-//                      break;
-//                  }
-//              }
-            	
-            	System.out.println(piste);
-            	System.out.println(""+meilleurTemps.getTemps());
-            	System.out.println(meilleurTemps.getNom());
-            	
-            	
-               
-               setValueAt(""+meilleurTemps.getTemps(), 0, 1);
-                
-                setValueAt(meilleurTemps.getNom(), 0, 2);
-                
-               // setValueAt(meilleurTemps.getNbFoisJoue(), 0, 3);
-             
-              //  setValueAt(meilleurTemps.getMoyenne(), 0, 4);
-            }
-            
-            if (piste.equals("Canada")) {
-            	
-            	InfoLigne meilleurTemps = meilleursTemps.get("Canada");
-            	
-            	 setValueAt(""+meilleurTemps.getTemps(), 1, 1);
-                 
-                 setValueAt(meilleurTemps.getNom(), 1, 2);
-            }
-            
-            if (piste.equals("Italie")) {
-            	
-            	InfoLigne meilleurTemps = meilleursTemps.get("Italie");
-            	
-            	 setValueAt(""+meilleurTemps.getTemps(), 2, 1);
-                 
-                 setValueAt(meilleurTemps.getNom(), 2, 2);
-            }
-            
-            
+        public void resetTableData() {
+            Object[][] newData = {
+                {"Mexique", "0:00","-", "0","0"},
+                {"Canada", "0:00","-","0","0"},
+                {"Italie", "0:00","-","0","0"}
+            };
+            data = newData;
+            fireTableDataChanged();
         }
         
     }
     
+    /**
+     * méthode qui retourne le tableau
+     * 
+     */
     public static MyTableModel getTableau() {
     	return tableModel;
     }
+    
+    
+    
 
-	}
+}

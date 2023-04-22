@@ -3,6 +3,9 @@ package fenetre;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import application.GestionnaireDeFichiersSurLeBureau;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -10,8 +13,11 @@ import javax.swing.JColorChooser;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.FileNotFoundException;
 import java.awt.event.ActionEvent;
 import dessin.TableauRecord;
+import dessin.TableauRecord.MyTableModel;
+
 import java.awt.Color;
 
 /**
@@ -48,6 +54,18 @@ public class ClassementParPiste extends JPanel{
 		add(lblNewLabel);
 
 		JButton btnReinitialiser = new JButton("R\u00E9initialiser les statistiques");
+		btnReinitialiser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//MyTableModel.resetTableData();
+				try {
+					GestionnaireDeFichiersSurLeBureau.viderFichier();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
 		btnReinitialiser.setBounds(94, 403, 197, 39);
 		add(btnReinitialiser);
 
@@ -79,4 +97,7 @@ public class ClassementParPiste extends JPanel{
 		tableauRecord.setBounds(183, 267, 452, 74);
 		add(tableauRecord);
 	}
+	
+	
+	
 }
