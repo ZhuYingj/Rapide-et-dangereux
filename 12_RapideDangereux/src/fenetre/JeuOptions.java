@@ -32,6 +32,7 @@ import application.GestionnaireDeFichiersSurLeBureau;
 import application.InfoLigne;
 import application.OutilsImage;
 import dessin.TableauRecord;
+import dessin.TableauRecord.MyTableModel;
 import dessin.ZoneAnimPhysique;
 import geometrie.Vecteur2D;
 import interfaces.TypePiste;
@@ -910,25 +911,38 @@ public class JeuOptions extends JPanel {
 	 */
 	//Ludovic Julien
 	public void moyenTemps() {
-		 try {
-		        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-		        Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
-		        
-		       
-		        
-		        double moyenneMexique = moyennes.get("Mexique");
-		        double moyenneCanada = moyennes.get("Canada");
-		        double moyenneItalie = moyennes.get("Italie");
-		        
-		        TableauRecord.getTableau().updateMoyenne("Mexique",""+moyenneMexique);
-		        TableauRecord.getTableau().updateMoyenne("Canada",""+moyenneCanada);
-		        TableauRecord.getTableau().updateMoyenne("Italie",""+moyenneItalie);
-		        
-		        
-		    } catch (FileNotFoundException e) {
-		        System.err.println("Erreur : fichier introuvable");
-		    }
+	    try {
+	        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+	        boolean nomsExistants = false;
+	        
+	        for (InfoLigne infoLigne : listeLignes) {
+	            if (!infoLigne.getNom().equals(null)) {
+	                nomsExistants = true;
+	                break;
+	            }
+	        }
+	        
+	        if (nomsExistants) {
+	            Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
+
+	            double moyenneMexique = moyennes.get("Mexique");
+	            double moyenneCanada = moyennes.get("Canada");
+	            double moyenneItalie = moyennes.get("Italie");
+
+	            TableauRecord.getTableau().updateMoyenne("Mexique", "" + moyenneMexique);
+	            TableauRecord.getTableau().updateMoyenne("Canada", "" + moyenneCanada);
+	            TableauRecord.getTableau().updateMoyenne("Italie", "" + moyenneItalie);
+	        } else {
+	            System.out.println("Il n'y a pas de noms dans la liste.");
+	        }
+	    } catch (FileNotFoundException e) {
+	        System.err.println("Erreur : fichier introuvable");
+	    }
 	}
+	
+	
+	
+	
 	
 	/**
 	 * méthode qui vas appeler d'autre pour permettre de mettre les donner du nombre de fois ou chaque piste a été joué dans le tableau
@@ -955,13 +969,18 @@ public class JeuOptions extends JPanel {
 		    }
 	}
 	
+	
+	
+	
+	
+	
 	/**
 	 * méthode d'action pour le bouton Classement par piste
 	 */
 	//Ludovic Julien
 	public void actionRecord() {
-		//nbjouer();
-		//moyenTemps();
+		nbjouer();
+		moyenTemps();
 		meilleurTemps();
 	}
 	

@@ -58,7 +58,7 @@ public class ClassementParPiste extends JPanel {
 		JButton btnReinitialiser = new JButton("R\u00E9initialiser les statistiques");
 		btnReinitialiser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MyTableModel.TTTT();
+				MyTableModel.actionReinitialiser();		
 				System.out.println("Reinitialiser");
 
 			}

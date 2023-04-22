@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ public class TableauRecord extends JPanel{
 	/**
 	 * Constructeur de la classe qui permet de creer le tableau
 	 */
+	//Ludovic Julien
 	public TableauRecord() {
         setLayout(new BorderLayout());
         fichierRecord = new GestionnaireDeFichiersSurLeBureau();
@@ -56,6 +58,7 @@ public class TableauRecord extends JPanel{
 	 * @author Ludovic Julien
 	 *
 	 */
+	//Ludovic Julien
     public class MyTableModel extends AbstractTableModel {
     	private String[] columnNames = {"Piste", "Record(temps en secondes)", "Record Par", "Nb fois ou lapiste a été joué", "moyenne(temps en secondes)"};
         private static Object[][] data = {
@@ -87,7 +90,10 @@ public class TableauRecord extends JPanel{
             return getValueAt(0, c).getClass();
         }
 
-        
+        /**
+         * méthode qui modifie une emplacement de tableaux
+         */
+        //Ludovic Julien
         public void setValueAt(Object value, int row, int col) {
             data[row][col] = value;
             fireTableCellUpdated(row, col);
@@ -100,6 +106,7 @@ public class TableauRecord extends JPanel{
          * @param piste
          * @param nombreDeFoisJoue
          */
+        //Ludovic Julien
         public void updateNombreDeFoisJoue(String piste, String nombreDeFoisJoue) {
             if (piste.equals("Mexique")) {
                 setValueAt(nombreDeFoisJoue, 0, 3);
@@ -121,6 +128,7 @@ public class TableauRecord extends JPanel{
          * @param piste
          * @param moyenne
          */
+        //Ludovic Julien
         public void updateMoyenne(String piste, String moyenne) {
             
             if (piste.equals("Mexique")) {
@@ -164,25 +172,32 @@ public class TableauRecord extends JPanel{
         }
      
         
-        
+        /**
+         * méthode qui permet de set les donner du tableaux, aux données initial
+         * 
+         */
+        //Ludovic Julien
         public void reinitialiserTableau() {
         	  data = new Object[][] {
         	        {"Mexique", "0:00","-", "0","0"},
         	        {"Canada", "0:00","-","0","0"},
         	        {"Italie", "0:00","-","0","0"}
         	    };
-
-        	    // Mise à jour des cellules du tableau
         	    for (int row = 0; row < data.length; row++) {
         	        for (int col = 0; col < data[row].length; col++) {
         	            setValueAt(data[row][col], row, col);
         	        }
         	    }
-
-        	    // Notification de la mise à jour du modèle de tableau
         	    fireTableDataChanged();
         }
         
+        
+        /**
+         * méthode qui permet de supprmier tout les données d'un fichier 
+         * 
+         * @param nomFichier	nom du fichier
+         */
+        //Ludovic Julien
         public static void supprimerContenuFichier(String nomFichier) {
             try {
                 PrintWriter writer = new PrintWriter(new FileWriter(System.getProperty("user.home") + "/Desktop/" + nomFichier));
@@ -192,26 +207,26 @@ public class TableauRecord extends JPanel{
                 System.err.println("Erreur lors de la suppression du contenu du fichier");
             }
         }
-        
-        
-      public static void TTTT() {
-    	  tableModel.reinitialiserTableau();
-    	  supprimerContenuFichier("donnees.txt");
-      }
-        
+
+        /**
+     	* méthode qui renvoie 2 méthode pour permettre l'appel de ceux ci dans une autre classe
+     	* 
+     	*/
+        //Ludovic Julien
+		public static void actionReinitialiser() {
+			tableModel.reinitialiserTableau();
+	    	  supprimerContenuFichier("donnees.txt");
+			
+		}
     }
-    
-    
     
     /**
      * méthode qui retourne le tableau
      * 
      */
+    //Ludovic Julien
     public static MyTableModel getTableau() {
     	return tableModel;
-    }
-    
-    
-    
+    }  
 
 }
