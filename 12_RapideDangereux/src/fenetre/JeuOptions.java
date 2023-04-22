@@ -377,22 +377,17 @@ public class JeuOptions extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (cbMatPiste.getSelectedItem() == "Asphalt") {
 					actionCbAsphalt();
+					couleurMatPiste = 1;
 				}
 				if (cbMatPiste.getSelectedItem() == "Sable") {
+					couleurMatPiste = 0;
 					actionCbSable();
 				}
 				if (cbMatPiste.getSelectedItem() == "Glace") {
+					couleurMatPiste = 2;
 					actionCbGlace();
 				}
-				if(cbMatPiste.getSelectedIndex() == 0) {
-					changeMaterielPiste();
-				}
-				if(cbMatPiste.getSelectedIndex() == 1) {
-					System.out.println("yo");
-				}
-				if(cbMatPiste.getSelectedIndex() == 2) {
-					System.out.println("yo2");
-				}
+
 			}
 		});
 		cbMatPiste.setModel(new DefaultComboBoxModel(new String[] { "Asphalt", "Sable", "Glace" }));
@@ -777,7 +772,7 @@ public class JeuOptions extends JPanel {
 	 * Méthode qui change la couleur de la piste pour simuler un changement de
 	 * matériel de piste pour la course
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	private void changeMaterielPiste() {
 		pcs.firePropertyChange("COULEURMATPISTE", null, couleursMaterielPiste[couleurMatPiste]);
 	}
@@ -949,33 +944,33 @@ public class JeuOptions extends JPanel {
 			System.err.println("Erreur : fichier introuvable");
 		}
 
-	    try {
-	        List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-	        boolean nomsExistants = false;
-	        
-	        for (InfoLigne infoLigne : listeLignes) {
-	            if (!infoLigne.getNom().equals(null)) {
-	                nomsExistants = true;
-	                break;
-	            }
-	        }
-	        
-	        if (nomsExistants) {
-	            Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
+		try {
+			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+			boolean nomsExistants = false;
 
-	            double moyenneMexique = moyennes.get("Mexique");
-	            double moyenneCanada = moyennes.get("Canada");
-	            double moyenneItalie = moyennes.get("Italie");
+			for (InfoLigne infoLigne : listeLignes) {
+				if (!infoLigne.getNom().equals(null)) {
+					nomsExistants = true;
+					break;
+				}
+			}
 
-	            TableauRecord.getTableau().updateMoyenne("Mexique", "" + moyenneMexique);
-	            TableauRecord.getTableau().updateMoyenne("Canada", "" + moyenneCanada);
-	            TableauRecord.getTableau().updateMoyenne("Italie", "" + moyenneItalie);
-	        } else {
-	            System.out.println("Il n'y a pas de noms dans la liste.");
-	        }
-	    } catch (FileNotFoundException e) {
-	        System.err.println("Erreur : fichier introuvable");
-	    }
+			if (nomsExistants) {
+				Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
+
+				double moyenneMexique = moyennes.get("Mexique");
+				double moyenneCanada = moyennes.get("Canada");
+				double moyenneItalie = moyennes.get("Italie");
+
+				TableauRecord.getTableau().updateMoyenne("Mexique", "" + moyenneMexique);
+				TableauRecord.getTableau().updateMoyenne("Canada", "" + moyenneCanada);
+				TableauRecord.getTableau().updateMoyenne("Italie", "" + moyenneItalie);
+			} else {
+				System.out.println("Il n'y a pas de noms dans la liste.");
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Erreur : fichier introuvable");
+		}
 	}
 
 	/**
