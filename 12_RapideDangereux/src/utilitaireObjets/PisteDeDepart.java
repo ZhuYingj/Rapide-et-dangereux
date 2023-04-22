@@ -88,9 +88,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
 		
-		Image deuxVoiture = OutilsImage.lireImageEtRedimensionner("blackhole.png", 80, 80);
-        g2d.drawImage(deuxVoiture, x, y, 80, 80, null);
-		
+
 		g2d.setColor(bordure);
 		Stroke stroke1 = new BasicStroke(2f);
 		g2d.setStroke(stroke1);

@@ -3,11 +3,13 @@ package utilitaireObjets;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Stroke;
 
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import application.OutilsImage;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
@@ -86,6 +88,8 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 		Graphics2D g2dCopie = (Graphics2D) g2d.create();
 		g2dCopie.setColor(color);
 		g2dCopie.fillRect(x, y, taillePiste, taillePiste);
+		
+		
 		g2dCopie.setColor(bordure);
 		Stroke stroke = new BasicStroke(2f);
 		g2dCopie.setStroke(stroke);

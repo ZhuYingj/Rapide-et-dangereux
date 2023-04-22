@@ -2,6 +2,8 @@ package utilitaireObjets;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 
@@ -29,6 +31,8 @@ public class BouleFumee implements Dessinable,  Serializable {
 	private Ellipse2D circle;
 	/** Nombre de boule de fumee qui aura dans le jeu **/
 	int nbrSmoke;
+	
+	private transient Shape fumeeShape;
 
 	/**
 	 * Méthode qui permet de creer la boule de fumee a l'aide des parametres
@@ -44,6 +48,7 @@ public class BouleFumee implements Dessinable,  Serializable {
 
 		creerLaGeometrie();
 	}
+
 
 	/**
 	 * Méthode qui permet de créer la boule selon la position
@@ -65,9 +70,19 @@ public class BouleFumee implements Dessinable,  Serializable {
 	// Alexis Pineda-Alvarado
 	public void dessiner(Graphics2D g2d) {
 		Graphics2D g2dCop = (Graphics2D) g2d.create();
+		AffineTransform mat = new AffineTransform();
 
 		g2dCop.setColor(Color.gray);
-		g2dCop.fill(circle);
+		fumeeShape = mat.createTransformedShape(circle);
+		g2dCop.fill(fumeeShape);
+	}
+	
+	public Vecteur2D getPosition() {
+		return position;
+	}
+
+	public void setPosition(Vecteur2D position) {
+		this.position = position;
 	}
 
 }

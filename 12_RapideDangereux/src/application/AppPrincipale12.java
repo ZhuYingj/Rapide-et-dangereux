@@ -180,9 +180,8 @@ public class AppPrincipale12 extends JFrame {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience, fenEditeur);
 				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience);
-				
+
 				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
-				
 
 			}
 		});
@@ -388,9 +387,8 @@ public class AppPrincipale12 extends JFrame {
 
 		case "MATPISTEASPHALT":
 			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.25);
-			break;
 
-		case "ASPHALT":
+			break;
 
 		case "MATPISTESABLE":
 			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.70);
@@ -398,6 +396,11 @@ public class AppPrincipale12 extends JFrame {
 
 		case "MATPISTEGLACE":
 			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.02);
+			break;
+
+		case "COULEURMATPISTE":
+			fenJeuScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+					.setColor((Color) evt.getNewValue());
 			break;
 		}
 	}
