@@ -386,12 +386,5 @@ public class GestionnaireDeFichiersSurLeBureau {
 			}
 		}
 		return comptages;
-	    }
-
-public static void viderFichier() throws FileNotFoundException {
-    PrintWriter writer = new PrintWriter(System.getProperty("user.home") + "/Desktop/donnes.txt");
-    writer.print("");
-    writer.close();
-
-}
+	}
 }
