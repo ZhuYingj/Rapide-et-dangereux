@@ -130,7 +130,7 @@ public class Regroupement implements Dessinable, Serializable {
 	/** support pour lancer des evenements de type PropertyChange **/
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private transient Graphics2D g2d;
-	private BouleFumee smokeScreen;
+
 	private Color couleurBordurePiste;
 
 	private int indexCouleurV1;
