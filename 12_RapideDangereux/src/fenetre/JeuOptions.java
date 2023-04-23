@@ -995,19 +995,28 @@ public class JeuOptions extends JPanel {
 		try {
 			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
 			Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
-
-			double moyenneMexique = moyennes.get("Mexique");
-			double moyenneCanada = moyennes.get("Canada");
-			double moyenneItalie = moyennes.get("Italie");
-
-			TableauRecord.getTableau().updateMoyenne("Mexique", "" + moyenneMexique);
-			TableauRecord.getTableau().updateMoyenne("Canada", "" + moyenneCanada);
-			TableauRecord.getTableau().updateMoyenne("Italie", "" + moyenneItalie);
+			
+			System.out.println(moyennes);
+			
+			if (moyennes.containsKey("Mexique")) {
+			TableauRecord.getTableau().updateMoyenne("Mexique", ""+moyennes.get("Mexique"));
+			}
+			if (moyennes.containsKey("Canada")) {
+			TableauRecord.getTableau().updateMoyenne("Canada", "" + moyennes.get("Canada"));
+			}
+			if (moyennes.containsKey("Italie")) {
+			TableauRecord.getTableau().updateMoyenne("Italie", "" + moyennes.get("Italie"));
+			}
 
 		} catch (FileNotFoundException e) {
 			System.err.println("Erreur : fichier introuvable");
 		}
 	}
+	
+	//double moyenneMexique = moyennes.get("Mexique");
+	//double moyenneCanada = moyennes.get("Canada");
+	//double moyenneItalie = moyennes.get("Italie");
+
 	
 	
 
@@ -1043,8 +1052,9 @@ public class JeuOptions extends JPanel {
 	// Ludovic Julien
 	public void actionRecord() {
 		nbjouer();
-	//	moyenTemps();
+		moyenTemps();
 		meilleurTemps();
+		//MyTableModel.trierTableau();
 	}
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {

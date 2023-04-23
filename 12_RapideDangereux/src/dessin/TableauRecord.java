@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,13 +133,13 @@ public class TableauRecord extends JPanel{
         public void updateMoyenne(String piste, String moyenne) {
             
             if (piste.equals("Mexique")) {
-                setValueAt(Double.parseDouble(moyenne), 0, 4);
+                setValueAt(moyenne, 0, 4);
             }
             if (piste.equals("Canada")) {
-                setValueAt(Double.parseDouble(moyenne), 1, 4);
+                setValueAt(moyenne, 1, 4);
             }
             if (piste.equals("Italie")) {
-                setValueAt(Double.parseDouble(moyenne), 2, 4);
+                setValueAt(moyenne, 2, 4);
             }
             
         }
@@ -216,7 +217,13 @@ public class TableauRecord extends JPanel{
 		public static void actionReinitialiser() {
 			tableModel.reinitialiserTableau();
 	    	  supprimerContenuFichier("donnees.txt");
-			
+		}
+		
+		
+		
+		public void trierTableau() {
+		    Arrays.sort(data, new LigneComparator());
+		    fireTableDataChanged();
 		}
     }
     
@@ -228,5 +235,35 @@ public class TableauRecord extends JPanel{
     public static MyTableModel getTableau() {
     	return tableModel;
     }  
+    
+    
+    public class LigneComparator implements Comparator<Object[]> {
+        @Override
+        public int compare(Object[] ligne1, Object[] ligne2) {
+            // convertir les temps en secondes pour la comparaison
+            int temps1 = convertirEnSecondes((String)ligne1[1]);
+            int temps2 = convertirEnSecondes((String)ligne2[1]);
+            
+            // si les deux temps sont égaux, on compare les noms des pistes
+            if (temps1 == temps2) {
+                return ((String)ligne1[0]).compareTo((String)ligne2[0]);
+            }
+            
+            // sinon, on compare les temps
+            return Integer.compare(temps1, temps2);
+        }
+        
+        /**
+         * Convertir un temps au format "mm:ss" en secondes
+         */
+        private int convertirEnSecondes(String temps) {
+            String[] tempsArray = temps.split(":");
+            int minutes = Integer.parseInt(tempsArray[0]);
+            int secondes = Integer.parseInt(tempsArray[1]);
+            return minutes * 60 + secondes;
+        }
+    }
+    
+    
 
 }
