@@ -189,6 +189,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
 
 		regroupement.setPixelsParMetre(pixelsParMetre);
 		regroupement.dessiner(g2d);
@@ -600,7 +601,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		regroupement.enCollisionAvec(voiture);
 		regroupement.enCollisionAvec(voiture2);
-		
+
 		regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture());
 		regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture2());
 
