@@ -156,16 +156,6 @@ public class FenetreJeuSansScientifique extends JPanel {
 		btnStart.setBounds(30, 177, 97, 58);
 		add(btnStart);
 
-		JLabel lblNewLabel = new JLabel("80 M");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(211, 698, 89, 14);
-		add(lblNewLabel);
-
-		JLabel lblNewLabel2 = new JLabel("<------------>");
-		lblNewLabel2.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel2.setBounds(176, 688, 269, 14);
-		add(lblNewLabel2);
-
 		JLabel lblTemps = new JLabel("Temps écoulé : ");
 		lblTemps.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblTemps.setBounds(1282, 27, 153, 22);
@@ -265,6 +255,16 @@ public class FenetreJeuSansScientifique extends JPanel {
 		lblBackgroundBleu = new JLabel("");
 		lblBackgroundBleu.setBounds(0, 0, 1600, 800);
 		add(lblBackgroundBleu);
+		
+		JLabel lblpixelsm = new JLabel("1.4640625pixels/m                                                   ");
+		lblpixelsm.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblpixelsm.setBounds(165, 705, 1026, 14);
+		add(lblpixelsm);
+		
+		JLabel lblNewLabel12 = new JLabel("80m/Morceau de piste");
+		lblNewLabel12.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+		lblNewLabel12.setBounds(1033, 705, 158, 14);
+		add(lblNewLabel12);
 
 		Image imgBleu = OutilsImage.lireImageEtRedimensionner("backgroundJeu.jpg", 1600, 800);
 		if (imgBleu != null) {
