@@ -12,6 +12,9 @@ import java.beans.PropertyChangeSupport;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -915,23 +918,44 @@ public class JeuOptions extends JPanel {
 	 */
 	// Ludovic Julien
 	public void meilleurTemps() {
-		try {
+	    try {
+	        List<InfoLigne> listeLignes = new ArrayList<>();
+	        File dossier = new File(System.getProperty("user.home") + "/Desktop/donnees.txt");
+	        Scanner scanner = new Scanner(dossier);
 
-			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-			Map<String, InfoLigne> meilleurTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
+	        while (scanner.hasNextLine()) {
+	            String ligne = scanner.nextLine();
+	            String[] infos = ligne.split(";");
+	            String nom = infos[0];
+	            double temps = Double.parseDouble(infos[1]);
+	            String piste = infos[2];
+	            listeLignes.add(new InfoLigne(nom, temps, piste));
+	        }
+	        scanner.close();
 
-			for (String piste : meilleurTemps.keySet()) {
-				InfoLigne infoLigne = meilleurTemps.get(piste);
+	        Map<String, InfoLigne> meilleurTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
 
-				if (!infoLigne.getNom().equals(null)) {
-					TableauRecord.getTableau().updateRecord(piste, meilleurTemps);
-				}
-			}
+	        for (String piste : meilleurTemps.keySet()) {
+	            InfoLigne infoLigne = meilleurTemps.get(piste);
 
-		} catch (FileNotFoundException e) {
-			System.err.println("Erreur : fichier introuvable");
-		}
+	            if (!infoLigne.getNom().equals(null)) {
+	                TableauRecord.getTableau().updateRecord(piste, meilleurTemps);
+	            }
+	        }
+
+	    } catch (FileNotFoundException e) {
+	        System.err.println("Erreur : fichier introuvable");
+	    }
 	}
+
+
+
+
+	
+	
+	
+	
+	
 
 	/**
 	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
@@ -983,35 +1007,9 @@ public class JeuOptions extends JPanel {
 		} catch (FileNotFoundException e) {
 			System.err.println("Erreur : fichier introuvable");
 		}
-
-		try {
-			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
-			boolean nomsExistants = false;
-
-			for (InfoLigne infoLigne : listeLignes) {
-				if (!infoLigne.getNom().equals(null)) {
-					nomsExistants = true;
-					break;
-				}
-			}
-
-			if (nomsExistants) {
-				Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
-
-				double moyenneMexique = moyennes.get("Mexique");
-				double moyenneCanada = moyennes.get("Canada");
-				double moyenneItalie = moyennes.get("Italie");
-
-				TableauRecord.getTableau().updateMoyenne("Mexique", "" + moyenneMexique);
-				TableauRecord.getTableau().updateMoyenne("Canada", "" + moyenneCanada);
-				TableauRecord.getTableau().updateMoyenne("Italie", "" + moyenneItalie);
-			} else {
-				System.out.println("Il n'y a pas de noms dans la liste.");
-			}
-		} catch (FileNotFoundException e) {
-			System.err.println("Erreur : fichier introuvable");
-		}
 	}
+	
+	
 
 	/**
 	 * méthode qui vas appeler d'autre pour permettre de mettre les donner du nombre
@@ -1022,15 +1020,18 @@ public class JeuOptions extends JPanel {
 		try {
 			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
 			Map<String, Integer> comptages = GestionnaireDeFichiersSurLeBureau.compterPistes(listeLignes);
-
-			double nbMexique = comptages.get("Mexique");
-			double nbCanada = comptages.get("Canada");
-			double nbItalie = comptages.get("Italie");
-
-			TableauRecord.getTableau().updateNombreDeFoisJoue("Mexique", "" + nbMexique);
-			TableauRecord.getTableau().updateNombreDeFoisJoue("Canada", "" + nbCanada);
-			TableauRecord.getTableau().updateNombreDeFoisJoue("Italie", "" + nbItalie);
-
+			
+			if (comptages.containsKey("Mexique")) {
+			    TableauRecord.getTableau().updateNombreDeFoisJoue("Mexique", "" + comptages.get("Mexique"));
+			}
+			if (comptages.containsKey("Canada")) {
+			    TableauRecord.getTableau().updateNombreDeFoisJoue("Canada", "" + comptages.get("Canada"));
+			}
+			if (comptages.containsKey("Italie")) {
+			    TableauRecord.getTableau().updateNombreDeFoisJoue("Italie", "" + comptages.get("Italie"));
+			} else {
+			    TableauRecord.getTableau().updateNombreDeFoisJoue("Italie", "0");
+			}
 		} catch (FileNotFoundException e) {
 			System.err.println("Erreur : fichier introuvable");
 		}
@@ -1041,8 +1042,8 @@ public class JeuOptions extends JPanel {
 	 */
 	// Ludovic Julien
 	public void actionRecord() {
-		//nbjouer();
-		moyenTemps();
+		nbjouer();
+	//	moyenTemps();
 		meilleurTemps();
 	}
 
