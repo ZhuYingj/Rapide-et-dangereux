@@ -999,9 +999,6 @@ public class Regroupement implements Dessinable, Serializable {
 						(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
 			}
 		}
-		g2dCopie.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
-		g2dCopie.drawString("80m/Morceau de piste", 530, 380);
-		g2dCopie.drawString(this.pixelsParMetre + " pixels/m", 540, 400);
 
 	}
 
