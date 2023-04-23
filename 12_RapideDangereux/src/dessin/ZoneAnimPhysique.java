@@ -427,6 +427,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			regroupement.enCollisionAvec(voiture);
 			regroupement.enCollisionAvec(voiture2);
+			
+			regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture());
+			regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture2());
 			try {
 				regroupement.getListePisteDeDepart().get(0).getVoiture()
 						.collisionEntreVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2());
@@ -1028,13 +1031,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Tan Tommy Rin
 	public void arretQuandFini() {
-		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
 				.getNombreToursFaits()) {
-			System.out.println("LA VOITURE 1 A GAGNÉE!!!");
+			System.out.println("LA VOITURE  A GAGNÉE!!!");
 
 			arreter();
 
-		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
+		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 				.getNombreToursFaits()) {
 			System.out.println("LA VOITURE 2 A GAGNÉE!!!");
 			arreter();

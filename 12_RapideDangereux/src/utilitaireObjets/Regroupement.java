@@ -62,7 +62,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private ObjetSpecial objSpecial;
 	/** Notre deuxieme objet special **/
 	private ObjetSpecial objSpecial2;
-	private double nombreToursAFaire = 3;
+	private double nombreToursAFaire = 1;
 
 	private double tours = 0;
 
@@ -1214,7 +1214,6 @@ public class Regroupement implements Dessinable, Serializable {
 		listePisteDeDepart.get(0).traverserPiste(voiture);
 		collisionBouleDeNeigeAvecPisteDeDepart(0);
 
-		tourComplet(voiture);
 	}
 
 	/**
