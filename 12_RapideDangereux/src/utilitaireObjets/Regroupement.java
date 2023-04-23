@@ -63,7 +63,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private ObjetSpecial objSpecial;
 	/** Notre deuxieme objet special **/
 	private ObjetSpecial objSpecial2;
-	private double nombreToursAFaire = 1;
+	private double nombreToursAFaire = 3;
 
 	private double tours = 0;
 
@@ -130,7 +130,7 @@ public class Regroupement implements Dessinable, Serializable {
 	/** support pour lancer des evenements de type PropertyChange **/
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private transient Graphics2D g2d;
-	private BouleFumee smokeScreen;
+
 	private Color couleurBordurePiste;
 
 	private int indexCouleurV1;
@@ -999,9 +999,6 @@ public class Regroupement implements Dessinable, Serializable {
 						(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
 			}
 		}
-		g2dCopie.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
-		g2dCopie.drawString("80m/Morceau de piste", 530, 380);
-		g2dCopie.drawString(this.pixelsParMetre + " pixels/m", 540, 400);
 
 	}
 
