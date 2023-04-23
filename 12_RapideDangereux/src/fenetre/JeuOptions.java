@@ -1053,4 +1053,13 @@ public class JeuOptions extends JPanel {
 	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
 		this.zoneAnimPhysique = zoneAnimPhysique;
 	}
+
+	public JTextArea getTxtArea() {
+		return txtArea;
+	}
+
+	public void setTxtArea(JTextArea txtArea) {
+		this.txtArea = txtArea;
+	}
+
 }

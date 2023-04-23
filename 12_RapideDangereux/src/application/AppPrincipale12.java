@@ -453,6 +453,7 @@ public class AppPrincipale12 extends JFrame {
 		}
 	}
 
+
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
 	 * à la fenetre d'édition
@@ -1197,6 +1198,7 @@ public class AppPrincipale12 extends JFrame {
 		case "VITESSEMAXFACILE2":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().arretTempFacile();
 			break;
 		case "VITESSEMAXINTERMEDIAIRE2":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
