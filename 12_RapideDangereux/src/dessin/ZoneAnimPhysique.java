@@ -172,6 +172,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (premiereFois) {
+			pcs.firePropertyChange("NBTOURSAFAIRE", 0, regroupement.getNombreToursAFaire());
 			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
 			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
 			enCoursDAnimation = true;
@@ -188,6 +189,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
 
 		regroupement.setPixelsParMetre(pixelsParMetre);
 		regroupement.dessiner(g2d);
@@ -427,8 +429,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			regroupement.enCollisionAvec(voiture);
 			regroupement.enCollisionAvec(voiture2);
+
+			regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture());
+			regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture2());
 			try {
-				voiture.collisionEntreVoiture(voiture2);
+				regroupement.getListePisteDeDepart().get(0).getVoiture()
+						.collisionEntreVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2());
 			} catch (Exception e1) {
 
 				e1.printStackTrace();
@@ -596,8 +602,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.enCollisionAvec(voiture);
 		regroupement.enCollisionAvec(voiture2);
 
+		regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture());
+		regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture2());
+
 		try {
-			voiture.collisionEntreVoiture(voiture2);
+			regroupement.getListePisteDeDepart().get(0).getVoiture()
+					.collisionEntreVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2());
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -628,6 +638,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setLongueurTete(2.5);
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setStrokeVoulu(0.5);
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametreFleche(16);
+		regroupement.getListePisteDeDepart().get(0).getVoiture().setNombreToursFaits(0);
+		regroupement.getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
 
 		angleVoitureDegre = 0;
 		angleVoitureDegre2 = 0;
@@ -671,6 +683,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			angleVoitureDegre2 = 0;
 			regroupement.resetTour();
 			pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
+			pcs.firePropertyChange("nombreToursV1", 0, 0.00);
+			pcs.firePropertyChange("nombreToursV2", 0, 0.00);
 			regroupement.creeBoiteDansListe();
 
 			repaint();
@@ -1027,12 +1041,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	 */
 	// Tan Tommy Rin
 	public void arretQuandFini() {
-		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
+		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
 				.getNombreToursFaits()) {
 			System.out.println("LA VOITURE 1 A GAGNÉE!!!");
 			arreter();
 
-		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
+		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 				.getNombreToursFaits()) {
 			System.out.println("LA VOITURE 2 A GAGNÉE!!!");
 			arreter();

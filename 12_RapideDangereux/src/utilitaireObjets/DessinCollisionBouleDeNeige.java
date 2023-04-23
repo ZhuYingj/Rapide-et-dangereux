@@ -17,15 +17,15 @@ import geometrie.Vecteur2D;
  */
 public class DessinCollisionBouleDeNeige {
 	/** Position du bloc de glace **/
-	Vecteur2D position;
+	private Vecteur2D position;
 	/** Diametre de la voiture pour un bloc de glace symmétrique **/
-	double diametre;
+	private double diametre;
 	/** La forme du dessin **/
-	Rectangle2D.Double rectangle;
+	private Rectangle2D.Double rectangle;
 	/** Couleur de la voiture **/
-	Color couleur;
+	private Color couleur;
 	/** Forme de la voiture **/
-	Ellipse2D circle;
+	private Ellipse2D circle;
 
 	/**
 	 * Constructeur qui créé la forme du bloc de glace

@@ -2,6 +2,7 @@ package utilitaireObjets;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.beans.PropertyChangeListener;
@@ -62,7 +63,7 @@ public class Regroupement implements Dessinable, Serializable {
 	private ObjetSpecial objSpecial;
 	/** Notre deuxieme objet special **/
 	private ObjetSpecial objSpecial2;
-	private double nombreToursAFaire = 3;
+	private double nombreToursAFaire = 1;
 
 	private double tours = 0;
 
@@ -998,6 +999,9 @@ public class Regroupement implements Dessinable, Serializable {
 						(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
 			}
 		}
+		g2dCopie.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		g2dCopie.drawString("80m/Morceau de piste", 530, 380);
+		g2dCopie.drawString(this.pixelsParMetre + " pixels/m", 540, 400);
 
 	}
 
@@ -1214,7 +1218,6 @@ public class Regroupement implements Dessinable, Serializable {
 		listePisteDeDepart.get(0).traverserPiste(voiture);
 		collisionBouleDeNeigeAvecPisteDeDepart(0);
 
-		tourComplet(voiture);
 	}
 
 	/**

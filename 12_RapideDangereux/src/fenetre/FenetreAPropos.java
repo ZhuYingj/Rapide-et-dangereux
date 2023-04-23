@@ -31,9 +31,7 @@ public class FenetreAPropos extends JPanel {
 		JPanel pnlAuteurs = new JPanel();
 		tabOnglets.addTab("Auteurs", null, pnlAuteurs, null);
 
-		JLabel lblAuteurs = new JLabel("<html>" + "Équipe 12 " + "<br>" + "<br>Kevin Nguyen" + "<br>Ludovic Julien"
-				+ "<br>Alexis Pineda" + "<br>Tan Tommy Rin" + "<br><br>Cours 420-SCD"
-				+ "<br>Intégration des apprentissages en SIM" + "<br>Hiver 20XX</html>");
+		JLabel lblAuteurs = new JLabel("<html>Équipe 12 <br><br>Kevin Nguyen<br>Ludovic Julien<br>Alexis Pineda<br>Tan Tommy Rin<br><br>Cours 420-SCD<br>Intégration des apprentissages en SIM<br>Hiver 2023</html>");
 		lblAuteurs.setVerticalAlignment(SwingConstants.TOP);
 		pnlAuteurs.add(lblAuteurs);
 

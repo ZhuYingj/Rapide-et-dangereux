@@ -1255,9 +1255,14 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui change la couleur des bordures de pistes selon l'option choisi
 	 * dans le panel option
 	 * 
-	 * @param evt            evenement
-	 * @param fenJeuScience  fenètre jeu scientifique
-	 * @param fenSansScience fenètre jeu non-scientifique
+	 * @param evt             evenement
+	 * @param fenJeuScience   fenètre jeu scientifique
+	 * @param fenOptions      fenètre choix des options du jeu monde
+	 * @param fenSansScience  fenètre jeu non-scientifique
+	 * @param fenOptionMontre fenètre choix des options du jeu course contre la
+	 *                        montre
+	 * @param fenEditeur      fenètre éditeur
+	 * 
 	 */
 	// Kevin Nguyen
 	public void actionPisteCouleur(PropertyChangeEvent evt, JeuOptions fenOptions, FenetreJeuScientifique fenJeuScience,
@@ -1298,8 +1303,8 @@ public class AppPrincipale12 extends JFrame {
 						.setBordure((Color) evt.getNewValue());
 			}
 
-//			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
-//					.setBordure((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+					.setBordure((Color) evt.getNewValue());
 			for (int i = 0; i < fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale()
 					.size(); i++) {
 				fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(i)

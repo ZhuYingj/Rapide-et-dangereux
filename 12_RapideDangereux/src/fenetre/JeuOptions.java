@@ -381,6 +381,7 @@ public class JeuOptions extends JPanel {
 					repaint();
 				}
 				if (cbMatPiste.getSelectedIndex() == 1) {
+
 					couleurMatPiste = 0;
 					couleurPisteSable();
 					actionCbSable();
@@ -1040,8 +1041,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Ludovic Julien
 	public void actionRecord() {
-
-		nbjouer();
+		//nbjouer();
 		moyenTemps();
 		meilleurTemps();
 	}
