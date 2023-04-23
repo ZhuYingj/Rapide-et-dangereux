@@ -172,6 +172,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (premiereFois) {
+			pcs.firePropertyChange("NBTOURSAFAIRE", 0, regroupement.getNombreToursAFaire());
 			pixelsParMetre = getWidth() / largeurDuComposantEnMetres;
 			hauteurDuComposantEnMetres = getHeight() / pixelsParMetre;
 			enCoursDAnimation = true;
@@ -427,7 +428,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 			regroupement.enCollisionAvec(voiture);
 			regroupement.enCollisionAvec(voiture2);
-			
+
 			regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture());
 			regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture2());
 			try {
@@ -633,6 +634,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setLongueurTete(2.5);
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setStrokeVoulu(0.5);
 		regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametreFleche(16);
+		regroupement.getListePisteDeDepart().get(0).getVoiture().setNombreToursFaits(0);
+		regroupement.getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
 
 		angleVoitureDegre = 0;
 		angleVoitureDegre2 = 0;
@@ -676,6 +679,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			angleVoitureDegre2 = 0;
 			regroupement.resetTour();
 			pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
+			pcs.firePropertyChange("nombreToursV1", 0, 0.00);
+			pcs.firePropertyChange("nombreToursV2", 0, 0.00);
 			regroupement.creeBoiteDansListe();
 
 			repaint();

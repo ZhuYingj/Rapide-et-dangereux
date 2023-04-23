@@ -108,6 +108,8 @@ public class FenetreJeuScientifique extends JPanel {
 	private Image colle2;
 	private JLabel lblImageObjet1;
 	private JLabel lblImageObjet2;
+	private JLabel lblNbToursAFaire;
+	private JLabel lblNbToursAFaire2;
 
 	/**
 	 * Méthode qui permet de placer un écouteur
@@ -516,7 +518,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		lblNombreToursVoiture1 = new JLabel("0");
 		lblNombreToursVoiture1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNombreToursVoiture1.setBounds(154, 300, 65, 29);
+		lblNombreToursVoiture1.setBounds(154, 300, 30, 29);
 		panelDonneScientifique.add(lblNombreToursVoiture1);
 
 		JLabel lblNombreTourV1 = new JLabel("Tours");
@@ -526,7 +528,7 @@ public class FenetreJeuScientifique extends JPanel {
 
 		lblNombreToursVoiture2 = new JLabel("0");
 		lblNombreToursVoiture2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNombreToursVoiture2.setBounds(396, 300, 65, 29);
+		lblNombreToursVoiture2.setBounds(396, 300, 38, 29);
 		panelDonneScientifique.add(lblNombreToursVoiture2);
 
 		JLabel lblNombreTourV2 = new JLabel("Tours");
@@ -658,6 +660,26 @@ public class FenetreJeuScientifique extends JPanel {
 		lblAttractionYV2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAttractionYV2.setBounds(433, 180, 65, 29);
 		panelDonneScientifique.add(lblAttractionYV2);
+
+		JLabel lblSurNbTours = new JLabel("/");
+		lblSurNbTours.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblSurNbTours.setBounds(183, 300, 17, 29);
+		panelDonneScientifique.add(lblSurNbTours);
+
+		JLabel lblSurNbTours2 = new JLabel("/");
+		lblSurNbTours2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblSurNbTours2.setBounds(433, 300, 24, 29);
+		panelDonneScientifique.add(lblSurNbTours2);
+
+		lblNbToursAFaire = new JLabel("3");
+		lblNbToursAFaire.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNbToursAFaire.setBounds(205, 300, 30, 29);
+		panelDonneScientifique.add(lblNbToursAFaire);
+
+		lblNbToursAFaire2 = new JLabel("3");
+		lblNbToursAFaire2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNbToursAFaire2.setBounds(468, 300, 30, 29);
+		panelDonneScientifique.add(lblNbToursAFaire2);
 
 		JLabel lblNewLabel9 = new JLabel("V");
 		lblNewLabel9.setBounds(963, 524, 56, 14);
@@ -927,6 +949,12 @@ public class FenetreJeuScientifique extends JPanel {
 			progressBarFroce2.setMinimum(0);
 			progressBarFroce2.setMaximum(100);
 			progressBarFroce2.setValue(valeur2 - 50);
+			break;
+		case "NBTOURSAFAIRE":
+			Double newData3 = new Double((double) evt.getNewValue());
+			int valeur3 = newData3.intValue();
+			lblNbToursAFaire.setText(valeur3 + "");
+			lblNbToursAFaire2.setText(valeur3 + "");
 			break;
 
 		case "champignon1":
