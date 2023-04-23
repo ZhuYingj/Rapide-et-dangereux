@@ -599,6 +599,9 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		regroupement.enCollisionAvec(voiture);
 		regroupement.enCollisionAvec(voiture2);
+		
+		regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture());
+		regroupement.tourComplet(regroupement.getListePisteDeDepart().get(0).getVoiture2());
 
 		try {
 			regroupement.getListePisteDeDepart().get(0).getVoiture()
