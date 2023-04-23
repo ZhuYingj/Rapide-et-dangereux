@@ -378,6 +378,7 @@ public class JeuOptions extends JPanel {
 				if (cbMatPiste.getSelectedItem() == "Asphalt") {
 					actionCbAsphalt();
 					couleurMatPiste = 1;
+					couleurPisteAsphalt();
 				}
 				if (cbMatPiste.getSelectedItem() == "Sable") {
 					couleurMatPiste = 0;
@@ -918,6 +919,10 @@ public class JeuOptions extends JPanel {
 		} catch (FileNotFoundException e) {
 			System.err.println("Erreur : fichier introuvable");
 		}
+	}
+
+	private void couleurPisteAsphalt() {
+		pcs.firePropertyChange("COULEURPISTEASPHALT", null, couleursMaterielPiste[couleurMatPiste]);
 	}
 
 	/**

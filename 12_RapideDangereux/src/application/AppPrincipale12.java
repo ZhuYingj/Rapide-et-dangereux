@@ -210,6 +210,8 @@ public class AppPrincipale12 extends JFrame {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionFenOptions2(evt, fenJeuScience, fenOptions, fenSansScience, fenRecord);
 				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
+				actionChangeCouleurMatPiste(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre,
+						fenEditeur);
 			}
 		});
 
@@ -493,6 +495,83 @@ public class AppPrincipale12 extends JFrame {
 					.setSkin((Color) evt.getNewValue());
 			break;
 
+		}
+
+	}
+
+	/**
+	 * 
+	 * Méthode qui permet de montrer la couleur de la piste dans les fenêtres
+	 * d'options dependant de le matériel de la piste choisi
+	 * 
+	 * @param evt             evenement
+	 * @param fenOptionMontre fenetre du mode course contre la montre
+	 * @param fenJeuScience   la fenetre de jeu avec mode science activé
+	 * @param fenSansScience  la fenetre non scientifique
+	 * @param fenEditeur      la fenetre d'édition
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionChangeCouleurMatPiste(PropertyChangeEvent evt, JeuOptions fenOptions,
+			FenetreJeuScientifique fenJeuScience, FenetreJeuSansScientifique fenSansScience,
+			FenetreOptionMontre fenOptionMontre, FenetreEditeur fenEditeur) {
+		switch (evt.getPropertyName()) {
+
+		case "COULEURPISTEASPHALT":
+			
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().size() != 0) {
+				fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+						.setColor((Color) evt.getNewValue());
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			break;
 		}
 
 	}

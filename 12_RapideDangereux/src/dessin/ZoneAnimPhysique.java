@@ -728,6 +728,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	}
 
+	/**
+	 * methode qui set la couleur de la piste dependant le materiel prise
+	 * 
+	 * @param color parametre qui choisi la couleur
+	 */
+	// Alexis Pineda-Alvarado
 	public void changerTexture(Color color) {
 		if (regroupement.getListePisteDeDepart().size() != 0) {
 			regroupement.getListePisteDeDepart().get(0).setColor(color);
@@ -737,7 +743,36 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				regroupement.getListePisteHorizontale().get(a).setColor(color);
 			}
 		}
-
+		if (regroupement.getListePisteVerticale().size() != 0) {
+			for (int a = 0; a < regroupement.getListePisteVerticale().size(); a++) {
+				regroupement.getListePisteVerticale().get(a).setColor(color);
+			}
+		}
+		if (regroupement.getListePisteVirageBas().size() != 0) {
+			for (int a = 0; a < regroupement.getListePisteVirageBas().size(); a++) {
+				regroupement.getListePisteVirageBas().get(a).setColor(color);
+			}
+		}
+		if (regroupement.getListePisteVirageDroit().size() != 0) {
+			for (int a = 0; a < regroupement.getListePisteVirageBas().size(); a++) {
+				regroupement.getListePisteVirageBas().get(a).setColor(color);
+			}
+		}
+		if (regroupement.getListePisteVirageDroit().size() != 0) {
+			for (int a = 0; a < regroupement.getListePisteVirageDroit().size(); a++) {
+				regroupement.getListePisteVirageDroit().get(a).setColor(color);
+			}
+		}
+		if (regroupement.getListePisteVirageGauche().size() != 0) {
+			for (int a = 0; a < regroupement.getListePisteVirageGauche().size(); a++) {
+				regroupement.getListePisteVirageGauche().get(a).setColor(color);
+			}
+		}
+		if (regroupement.getListePisteVirageHaut().size() != 0) {
+			for (int a = 0; a < regroupement.getListePisteVirageHaut().size(); a++) {
+				regroupement.getListePisteVirageHaut().get(a).setColor(color);
+			}
+		}
 	}
 
 	/**
@@ -1176,7 +1211,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
 			regroupement.creeBoiteDansListe();
-
+			regroupement.getListeAccelerateur().clear();
+			regroupement.getListeFumee().clear();
 		}
 		if (typePiste == TypePiste.ITALIE) {
 			regroupement.setListePisteDeDepart(pisteItalie.getDepart());
@@ -1189,6 +1225,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
 			regroupement.creeBoiteDansListe();
+			regroupement.getListeAccelerateur().clear();
+			regroupement.getListeFumee().clear();
 		}
 		if (typePiste == TypePiste.CANADA) {
 			regroupement.setListePisteDeDepart(pisteCanada.getDepart());
@@ -1201,6 +1239,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).setVoiture(voiture);
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
 			regroupement.creeBoiteDansListe();
+			regroupement.getListeAccelerateur().clear();
+			regroupement.getListeFumee().clear();
 		}
 		if (typePiste == TypePiste.AUTRE) {
 
@@ -1224,6 +1264,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).setVoiture2(voiture2);
 			regroupement.setNombreBoiteMystere(regroupementTempo.getRegroupementBoiteMystere().size());
 			regroupement.setRegroupementObjet(regroupementTempo.getRegroupementBoiteMystere());
+
 		}
 	}
 

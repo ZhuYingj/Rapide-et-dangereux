@@ -613,6 +613,7 @@ public class FenetreEditeur extends JPanel {
 		repaint();
 
 	}
+	
 
 	/**
 	 * Méthode qui permet de supprimer un accelerateur
