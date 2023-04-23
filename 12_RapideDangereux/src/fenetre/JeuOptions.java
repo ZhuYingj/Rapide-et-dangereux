@@ -979,7 +979,7 @@ public class JeuOptions extends JPanel {
 	 */
 	//Ludovic Julien
 	public void actionRecord() {
-		nbjouer();
+		//nbjouer();
 		moyenTemps();
 		meilleurTemps();
 	}
