@@ -428,7 +428,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.enCollisionAvec(voiture);
 			regroupement.enCollisionAvec(voiture2);
 			try {
-				voiture.collisionEntreVoiture(voiture2);
+				regroupement.getListePisteDeDepart().get(0).getVoiture()
+						.collisionEntreVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2());
 			} catch (Exception e1) {
 
 				e1.printStackTrace();
@@ -597,7 +598,8 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.enCollisionAvec(voiture2);
 
 		try {
-			voiture.collisionEntreVoiture(voiture2);
+			regroupement.getListePisteDeDepart().get(0).getVoiture()
+					.collisionEntreVoiture(regroupement.getListePisteDeDepart().get(0).getVoiture2());
 		} catch (Exception e) {
 
 			e.printStackTrace();
