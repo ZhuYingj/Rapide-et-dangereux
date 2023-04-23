@@ -375,16 +375,20 @@ public class JeuOptions extends JPanel {
 		cbMatPiste.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		cbMatPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (cbMatPiste.getSelectedItem() == "Asphalt") {
+				if (cbMatPiste.getSelectedIndex() == 0) {
+					couleurPisteAsphalt();
 					actionCbAsphalt();
 					couleurMatPiste = 1;
-					couleurPisteAsphalt();
+					repaint();
 				}
-				if (cbMatPiste.getSelectedItem() == "Sable") {
+				if (cbMatPiste.getSelectedIndex() == 1) {
+					couleurPisteSable();
 					couleurMatPiste = 0;
 					actionCbSable();
+					repaint();
 				}
-				if (cbMatPiste.getSelectedItem() == "Glace") {
+				if (cbMatPiste.getSelectedIndex() == 2) {
+					couleurPisteGlace();
 					couleurMatPiste = 2;
 					actionCbGlace();
 				}
@@ -604,6 +608,9 @@ public class JeuOptions extends JPanel {
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
 							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 50)));
 			changeCouleurPiste();
+			couleurPisteAsphalt();
+			couleurPisteSable();
+			couleurPisteGlace();
 
 			Image imgHiver = OutilsImage.lireImageEtRedimensionner("canadaWinter.jpg", 1600, 800);
 			if (imgHiver != null) {
@@ -641,6 +648,9 @@ public class JeuOptions extends JPanel {
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
 							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 50)));
 			changeCouleurPiste();
+			couleurPisteAsphalt();
+			couleurPisteSable();
+			couleurPisteGlace();
 
 			Image imgDesert = OutilsImage.lireImageEtRedimensionner("mexico-building.jpg", 1600, 800);
 			if (imgDesert != null) {
@@ -680,6 +690,9 @@ public class JeuOptions extends JPanel {
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
 							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 50)));
 			changeCouleurPiste();
+			couleurPisteAsphalt();
+			couleurPisteSable();
+			couleurPisteGlace();
 
 			Image imgVenice = OutilsImage.lireImageEtRedimensionner("italie-rome.jpg", 1600, 800);
 			if (imgVenice != null) {
@@ -923,6 +936,14 @@ public class JeuOptions extends JPanel {
 
 	private void couleurPisteAsphalt() {
 		pcs.firePropertyChange("COULEURPISTEASPHALT", null, couleursMaterielPiste[couleurMatPiste]);
+	}
+
+	private void couleurPisteSable() {
+		pcs.firePropertyChange("COULEURPISTESABLE", null, couleursMaterielPiste[couleurMatPiste]);
+	}
+	
+	private void couleurPisteGlace() {
+		pcs.firePropertyChange("COULEURPISTEGLACE", null, couleursMaterielPiste[couleurMatPiste]);
 	}
 
 	/**

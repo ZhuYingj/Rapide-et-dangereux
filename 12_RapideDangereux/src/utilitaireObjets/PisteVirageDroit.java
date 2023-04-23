@@ -57,7 +57,7 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 	/** Boolean collision initié à faux **/
 	private boolean collision = false;
 	/** Couleur de la piste initié à noir **/
-	private Color color = Color.black;
+	private Color color = new Color(128, 126, 120);
 	/** Aire du morceau de piste **/
 	private Rectangle2D.Double formeAire;
 

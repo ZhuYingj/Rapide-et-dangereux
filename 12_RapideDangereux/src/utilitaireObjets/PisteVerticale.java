@@ -45,7 +45,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	private int murHaut;
 	private int murBas;
 	private boolean collision = false;
-	private Color color = Color.black;
+	private Color color = new Color(128, 126, 120);
 	private Rectangle2D.Double formeAire;
 	private boolean enContactAvecColle = false;
 	private int nombrePisteColle = 0;

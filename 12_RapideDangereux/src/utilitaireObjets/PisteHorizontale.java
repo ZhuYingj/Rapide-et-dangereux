@@ -48,7 +48,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	private double angleNormaleMurHaut = 90;
 	/** Normale du mur bas **/
 	private double angleNormaleMurBas = 270;
-	private Color color = Color.black;
+	private Color color = new Color(128, 126, 120);
 	private boolean collision = false;
 	private Rectangle2D.Double formeAire;
 	private int nombrePisteColle = 0;
