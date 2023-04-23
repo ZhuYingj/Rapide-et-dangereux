@@ -5,27 +5,29 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import application.OutilsImage;
 import dessin.ZoneAnimPhysique;
 import geometrie.Vecteur2D;
 import interfaces.TypePiste;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.SwingConstants;
 
 /**
  * 
@@ -55,13 +57,17 @@ public class FenetreOptionMontre extends JPanel {
 	private JButton btnCanada;
 	private JButton btnMexique;
 	private JButton btnItalie;
+	private JComboBox cbMatPiste;
 	private int indexCouleur = 0;
 	private int indexCouleur2 = 0;
 	private int couleurPiste = 0;
+	private int couleurMatPiste = 0;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK };
 	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.YELLOW,
 			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
+	private Color[] couleursMaterielPiste = { new Color(194, 178, 128), new Color(128, 126, 120),
+			new Color(185, 232, 234) };
 	private JTextArea txtArea;
 	private boolean gauche = false;
 	private boolean droite = false;
@@ -69,14 +75,13 @@ public class FenetreOptionMontre extends JPanel {
 	private ZoneAnimPhysique zoneAnimPhysique;
 	private JLabel lblNombreTours;
 	private JLabel lblFlecheBasImage;
-
-	public ZoneAnimPhysique getZoneAnimPhysique() {
-		return zoneAnimPhysique;
-	}
-
-	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
-		this.zoneAnimPhysique = zoneAnimPhysique;
-	}
+	private JLabel lblNombreToursMsg;
+	private JLabel lblCouleurBordureDe;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel2;
+	private JLabel lblNewLabel3;
+	private JLabel lblLongueurPiste;
+	private JLabel lblTitre;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -104,17 +109,17 @@ public class FenetreOptionMontre extends JPanel {
 
 		lblNombreTours = new JLabel("1");
 		lblNombreTours.setForeground(Color.BLACK);
-		lblNombreTours.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
-		lblNombreTours.setBounds(1184, 129, 98, 85);
+		lblNombreTours.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 32));
+		lblNombreTours.setBounds(1173, 124, 98, 85);
 		add(lblNombreTours);
 
-		JLabel lblNombreToursMsg = new JLabel("TOURS À FAIRE");
+		lblNombreToursMsg = new JLabel("TOURS À FAIRE");
 		lblNombreToursMsg.setForeground(Color.BLACK);
 		lblNombreToursMsg.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
 		lblNombreToursMsg.setBounds(1203, 136, 194, 71);
 		add(lblNombreToursMsg);
 
-		JLabel lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
+		lblCouleurBordureDe = new JLabel("Couleur bordure\r\n piste");
 		lblCouleurBordureDe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCouleurBordureDe.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblCouleurBordureDe.setBounds(58, 226, 177, 43);
@@ -169,7 +174,7 @@ public class FenetreOptionMontre extends JPanel {
 		spPourMessage.setBounds(0, 0, 549, 134);
 		panelPourMessage.add(spPourMessage);
 
-		JLabel lblTitre = new JLabel("Course Contre La Montre");
+		lblTitre = new JLabel("Course Contre La Montre");
 		lblTitre.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 44));
 		lblTitre.setBounds(537, 0, 540, 70);
 		add(lblTitre);
@@ -326,6 +331,36 @@ public class FenetreOptionMontre extends JPanel {
 		sliderNbrTour.setBounds(165, 135, 343, 40);
 		panel2.add(sliderNbrTour);
 
+		cbMatPiste = new JComboBox();
+		cbMatPiste.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		cbMatPiste.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (cbMatPiste.getSelectedIndex() == 0) {
+					couleurMatPiste = 1;
+					couleurPisteAsphalt();
+					actionCbAsphalt();
+					repaint();
+				}
+				if (cbMatPiste.getSelectedIndex() == 1) {
+					couleurMatPiste = 0;
+					couleurPisteSable();
+					actionCbSable();
+					repaint();
+				}
+				if (cbMatPiste.getSelectedIndex() == 2) {
+					couleurMatPiste = 2;
+					couleurPisteGlace();
+					actionCbGlace();
+					repaint();
+				}
+
+			}
+		});
+		cbMatPiste.setModel(new DefaultComboBoxModel(new String[] { "Asphalt", "Sable", "Glace" }));
+		cbMatPiste.setBounds(165, 263, 75, 22);
+		cbMatPiste.setSelectedItem("Asphalt");
+		panel2.add(cbMatPiste);
+
 		JLabel lblMasse = new JLabel("Masse de la voiture 1 en kg : ");
 		lblMasse.setBounds(10, 39, 191, 20);
 		panel2.add(lblMasse);
@@ -350,19 +385,19 @@ public class FenetreOptionMontre extends JPanel {
 		lblVitesseDifficile.setBounds(280, 237, 65, 14);
 		panel2.add(lblVitesseDifficile);
 
-		JLabel lblNewLabel = new JLabel("Couleur voiture #1");
+		lblNewLabel = new JLabel("Couleur voiture #1");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel.setBounds(73, 360, 134, 13);
 		add(lblNewLabel);
 
-		JLabel lblNewLabel2 = new JLabel("Couleur Voiture #2");
+		lblNewLabel2 = new JLabel("Couleur Voiture #2");
 		lblNewLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel2.setBounds(73, 479, 143, 13);
 		add(lblNewLabel2);
 
-		JLabel lblNewLabel3 = new JLabel("Aperçue piste");
+		lblNewLabel3 = new JLabel("Aperçue piste");
 		lblNewLabel3.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 34));
 		lblNewLabel3.setBounds(540, 136, 246, 70);
 		add(lblNewLabel3);
@@ -435,10 +470,17 @@ public class FenetreOptionMontre extends JPanel {
 		btnCommencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionCommencer();
+				changeMaterielPiste();
 			}
 		});
 		btnCommencer.setBounds(549, 691, 237, 29);
 		add(btnCommencer);
+
+		lblLongueurPiste = new JLabel("640 m");
+		lblLongueurPiste.setForeground(Color.DARK_GRAY);
+		lblLongueurPiste.setFont(new Font("Comic Sans MS", Font.BOLD, 26));
+		lblLongueurPiste.setBounds(606, 650, 89, 29);
+		add(lblLongueurPiste);
 
 		lblImage = new JLabel("");
 		lblImage.setBounds(10, 0, 1600, 800);
@@ -471,12 +513,24 @@ public class FenetreOptionMontre extends JPanel {
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
 							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 50)));
 			changeCouleurPiste();
+			couleurPisteAsphalt();
+			couleurPisteSable();
+			couleurPisteGlace();
 
 			Image imgHiver = OutilsImage.lireImageEtRedimensionner("canadaWinter.jpg", 1600, 800);
 			if (imgHiver != null) {
 				lblImage.setIcon(new ImageIcon(imgHiver));
 				imgHiver.flush();
 			}
+			lblNombreToursMsg.setForeground(Color.white);
+			lblCouleurBordureDe.setForeground(Color.white);
+			lblNewLabel.setForeground(Color.white);
+			lblNewLabel2.setForeground(Color.white);
+			lblNewLabel3.setForeground(Color.white);
+			lblLongueurPiste.setForeground(Color.white);
+			lblNombreTours.setForeground(Color.white);
+			lblFlecheBasImage.setForeground(Color.white);
+			lblTitre.setForeground(Color.white);
 		}
 	}
 
@@ -501,12 +555,24 @@ public class FenetreOptionMontre extends JPanel {
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
 							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 50)));
 			changeCouleurPiste();
+			couleurPisteAsphalt();
+			couleurPisteSable();
+			couleurPisteGlace();
 
 			Image imgDesert = OutilsImage.lireImageEtRedimensionner("mexico-building.jpg", 1600, 800);
 			if (imgDesert != null) {
 				lblImage.setIcon(new ImageIcon(imgDesert));
 				imgDesert.flush();
 			}
+			lblNombreToursMsg.setForeground(Color.white);
+			lblCouleurBordureDe.setForeground(Color.white);
+			lblNewLabel.setForeground(Color.white);
+			lblNewLabel2.setForeground(Color.white);
+			lblNewLabel3.setForeground(Color.white);
+			lblLongueurPiste.setForeground(Color.white);
+			lblNombreTours.setForeground(Color.white);
+			lblFlecheBasImage.setForeground(Color.white);
+			lblTitre.setForeground(Color.white);
 		}
 	}
 
@@ -531,12 +597,24 @@ public class FenetreOptionMontre extends JPanel {
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
 							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 50)));
 			changeCouleurPiste();
+			couleurPisteAsphalt();
+			couleurPisteSable();
+			couleurPisteGlace();
 
 			Image imgVenice = OutilsImage.lireImageEtRedimensionner("italie-rome.jpg", 1600, 800);
 			if (imgVenice != null) {
 				lblImage.setIcon(new ImageIcon(imgVenice));
 				imgVenice.flush();
 			}
+			lblNombreToursMsg.setForeground(Color.white);
+			lblCouleurBordureDe.setForeground(Color.white);
+			lblNewLabel.setForeground(Color.white);
+			lblNewLabel2.setForeground(Color.white);
+			lblNewLabel3.setForeground(Color.white);
+			lblLongueurPiste.setForeground(Color.white);
+			lblNombreTours.setForeground(Color.white);
+			lblFlecheBasImage.setForeground(Color.white);
+			lblTitre.setForeground(Color.white);
 		}
 	}
 
@@ -689,6 +767,74 @@ public class FenetreOptionMontre extends JPanel {
 	}
 
 	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
+	private void couleurPisteAsphalt() {
+		pcs.firePropertyChange("COULEURPISTEASPHALT2", null, couleursMaterielPiste[couleurMatPiste]);
+	}
+
+	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
+	private void couleurPisteSable() {
+		pcs.firePropertyChange("COULEURPISTESABLE2", null, couleursMaterielPiste[couleurMatPiste]);
+	}
+
+	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
+	private void couleurPisteGlace() {
+		pcs.firePropertyChange("COULEURPISTEGLACE2", null, couleursMaterielPiste[couleurMatPiste]);
+	}
+
+	/**
+	 * méthode qui fait un changement d'événement pour le frottement de la piste de
+	 * l'asphalt
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionCbAsphalt() {
+		pcs.firePropertyChange("MATPISTEASPHALT", null, cbMatPiste.getSelectedItem());
+		txtArea.append("\nVous choisi l'asphalt où le coefficient de frottement est 0.20");
+	}
+
+	/**
+	 * méthode qui fait un changement d'événement pour le frottement de la piste de
+	 * sable
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionCbSable() {
+		pcs.firePropertyChange("MATPISTESABLE", null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("IMGSABLE", null, cbMatPiste.getSelectedItem());
+		txtArea.append("\nVous choisi le sable où le coefficient de frottement est 0.70");
+	}
+
+	/**
+	 * méthode qui fait un changement d'événement pour le frottement de la piste de
+	 * glace
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionCbGlace() {
+		pcs.firePropertyChange("MATPISTEGLACE", null, cbMatPiste.getSelectedItem());
+		pcs.firePropertyChange("IMGGLACE", null, cbMatPiste.getSelectedItem());
+		txtArea.append("\nVous choisi la glace où le coefficient de frottement est 0.02");
+	}
+	
+	/**
+	 * Méthode qui change la couleur de la piste pour simuler un changement de
+	 * matériel de piste pour la course
+	 */
+	// Alexis Pineda-Alvarado
+	private void changeMaterielPiste() {
+		pcs.firePropertyChange("COULEURMATPISTE", null, couleursMaterielPiste[couleurMatPiste]);
+	}
+
+	/**
 	 * méthode qui change la couleur du panel pour permettre de visualiser la
 	 * couleur choisit par l'utilisateur
 	 * 
@@ -697,6 +843,14 @@ public class FenetreOptionMontre extends JPanel {
 	// Ludovic Julien
 	public void setBackgroundV1(JPanel panel) {
 		panel.setBackground(couleurs[indexCouleur]);
+	}
+
+	public ZoneAnimPhysique getZoneAnimPhysique() {
+		return zoneAnimPhysique;
+	}
+
+	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
+		this.zoneAnimPhysique = zoneAnimPhysique;
 	}
 
 	/**

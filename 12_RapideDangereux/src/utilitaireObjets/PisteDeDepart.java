@@ -3,10 +3,14 @@ package utilitaireObjets;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import javax.swing.ImageIcon;
+
+import application.OutilsImage;
 import geometrie.Vecteur2D;
 import interfaces.Dessinable;
 import interfaces.Selectionnable;
@@ -43,7 +47,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	private int murHaut;
 	private int murBas;
 	private boolean collision = false;
-	private Color color = Color.black;
+	private Color color = new Color(128, 126, 120);
 	private Rectangle2D.Double formeAire;
 	private Voiture voiture;
 
@@ -85,6 +89,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	public void dessiner(Graphics2D g2d) {
 		g2d.setColor(color);
 		g2d.fillRect(x, y, taillePiste, taillePiste);
+
 		g2d.setColor(bordure);
 		Stroke stroke1 = new BasicStroke(2f);
 		g2d.setStroke(stroke1);
@@ -126,7 +131,7 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 						voiture.setVitesse(vit);
 					}
 					voiture.getPosition().setY(murHaut + 1);
-					System.out.println("en collisionD");
+
 					if (Math.toDegrees(voiture.getAngle()) < 270 && Math.toDegrees(voiture.getAngle()) > 180) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
@@ -148,15 +153,14 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 						voiture.setVitesse(vit);
 					}
 					voiture.getPosition().setY(murBas - voiture.getDiametre());
-					System.out.println("en collisionD");
+
 					if (Math.toDegrees(voiture.getAngle()) < 90 && Math.toDegrees(voiture.getAngle()) > 0) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 180) * 2)));
 					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
 						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle())
 								+ ((360 - (Math.toDegrees(voiture.getAngle())) * 2))));
-						System.out.println(
-								Math.toDegrees(voiture.getAngle()) + (360 - (Math.toDegrees(voiture.getAngle()) * 2)));
+
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

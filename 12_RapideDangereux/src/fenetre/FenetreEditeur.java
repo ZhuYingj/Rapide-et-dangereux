@@ -53,6 +53,7 @@ public class FenetreEditeur extends JPanel {
 
 	private int nombrePisteFerme = 0;
 	private JButton btnAjouterAccelerateur;
+
 	private boolean pisteFerme = false;
 	private Regroupement regroupement;
 	private PanelRegroupement panelRegroupement;
@@ -144,6 +145,7 @@ public class FenetreEditeur extends JPanel {
 				ajoutAccelerateur();
 			}
 		});
+	
 		btnAjouterAccelerateur.setBounds(74, 686, 41, 23);
 		panelObjet.add(btnAjouterAccelerateur);
 
@@ -573,7 +575,7 @@ public class FenetreEditeur extends JPanel {
 		lblNewLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel2.setBounds(89, 350, 143, 13);
 		add(lblNewLabel2);
-		
+
 		JLabel lblNombreTours = new JLabel("3 TOURS À FAIRE");
 		lblNombreTours.setForeground(new Color(240, 255, 240));
 		lblNombreTours.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 20));
@@ -611,13 +613,15 @@ public class FenetreEditeur extends JPanel {
 		repaint();
 
 	}
+	
 
 	/**
 	 * Méthode qui permet de supprimer un accelerateur
 	 */
 	// Tan Tommy Rin
 	public void supprimerAccelerateur() {
-		if (panelRegroupement.getListeAccelerateur().size() != 0) {
+		if (panelRegroupement.getListeAccelerateur().size() <= 3
+				&& panelRegroupement.getListeAccelerateur().size() != 0) {
 			panelRegroupement.getListeAccelerateur().remove(panelRegroupement.getListeAccelerateur().size() - 1);
 			repaint();
 			btnAjouterAccelerateur.setEnabled(true);
@@ -848,7 +852,10 @@ public class FenetreEditeur extends JPanel {
 	public void ajoutAccelerateur() {
 		Accelerateur accelerateur = new Accelerateur(650, 50);
 		panelRegroupement.getListeAccelerateur().add(accelerateur);
-		btnAjouterAccelerateur.setEnabled(false);
+		if (panelRegroupement.getListeAccelerateur().size() == 3) {
+			btnAjouterAccelerateur.setEnabled(false);
+		}
+
 		repaint();
 	}
 
@@ -1874,6 +1881,14 @@ public class FenetreEditeur extends JPanel {
 
 	public PanelObjet getPanelObjet() {
 		return panelObjet;
+	}
+
+	public JButton getBtnAjouterAccelerateur() {
+		return btnAjouterAccelerateur;
+	}
+
+	public void setBtnAjouterAccelerateur(JButton btnAjouterAccelerateur) {
+		this.btnAjouterAccelerateur = btnAjouterAccelerateur;
 	}
 
 	public void setPanelObjet(PanelObjet panelObjet) {

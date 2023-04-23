@@ -2,6 +2,7 @@ package utilitaireObjets;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.beans.PropertyChangeListener;
@@ -998,6 +999,9 @@ public class Regroupement implements Dessinable, Serializable {
 						(int) (listePisteDeDepart.get(0).getVoiture2().getPosition().getY()));
 			}
 		}
+		g2dCopie.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		g2dCopie.drawString("80m/Morceau de piste", 530, 380);
+		g2dCopie.drawString(this.pixelsParMetre + " pixels/m", 540, 400);
 
 	}
 
@@ -1031,7 +1035,8 @@ public class Regroupement implements Dessinable, Serializable {
 	// Tan Tommy Rin
 	private void accelerateurFonction() {
 
-		if (listeAccelerateur.size() != 0) {
+		if (listeAccelerateur.size() == 1) {
+
 			// Voiture 1
 			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
 					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
@@ -1057,6 +1062,75 @@ public class Regroupement implements Dessinable, Serializable {
 				listePisteDeDepart.get(0).getVoiture2().setVitesseMaxSelonNiveau(
 						listePisteDeDepart.get(0).getVoiture2().getVitesseMaxSelonNiveauInitiale());
 			}
+
+		} else if (listeAccelerateur.size() == 2) {
+
+			// Voiture 1
+			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture().getPosition().getY())
+					|| listeAccelerateur.get(1).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
+							listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
+
+				listePisteDeDepart.get(0).getVoiture().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture().getVitesseMaxSelonNiveau() + 20);
+				listePisteDeDepart.get(0).getVoiture()
+						.setAccel(new Vecteur2D(200 * Math.cos(listePisteDeDepart.get(0).getVoiture().getAngle()),
+								200 * Math.sin(listePisteDeDepart.get(0).getVoiture().getAngle())));
+			} else {
+				listePisteDeDepart.get(0).getVoiture().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture().getVitesseMaxSelonNiveauInitiale());
+			}
+			// Voiture 2
+			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture2().getPosition().getY())
+					|| listeAccelerateur.get(1).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
+							listePisteDeDepart.get(0).getVoiture2().getPosition().getY())) {
+				listePisteDeDepart.get(0).getVoiture2().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture2().getVitesseMaxSelonNiveau() + 20);
+				listePisteDeDepart.get(0).getVoiture2()
+						.setAccel(new Vecteur2D(200 * Math.cos(listePisteDeDepart.get(0).getVoiture2().getAngle()),
+								200 * Math.sin(listePisteDeDepart.get(0).getVoiture2().getAngle())));
+			} else {
+				listePisteDeDepart.get(0).getVoiture2().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture2().getVitesseMaxSelonNiveauInitiale());
+			}
+
+		} else if (listeAccelerateur.size() == 3) {
+
+			// Voiture 1
+			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture().getPosition().getY())
+					|| listeAccelerateur.get(1).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
+							listePisteDeDepart.get(0).getVoiture().getPosition().getY())
+					|| listeAccelerateur.get(2).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
+							listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
+
+				listePisteDeDepart.get(0).getVoiture().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture().getVitesseMaxSelonNiveau() + 20);
+				listePisteDeDepart.get(0).getVoiture()
+						.setAccel(new Vecteur2D(200 * Math.cos(listePisteDeDepart.get(0).getVoiture().getAngle()),
+								200 * Math.sin(listePisteDeDepart.get(0).getVoiture().getAngle())));
+			} else {
+				listePisteDeDepart.get(0).getVoiture().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture().getVitesseMaxSelonNiveauInitiale());
+			}
+			// Voiture 2
+			if (listeAccelerateur.get(0).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
+					listePisteDeDepart.get(0).getVoiture2().getPosition().getY())
+					|| listeAccelerateur.get(1).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
+							listePisteDeDepart.get(0).getVoiture2().getPosition().getY())
+					|| listeAccelerateur.get(2).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
+							listePisteDeDepart.get(0).getVoiture2().getPosition().getY())) {
+				listePisteDeDepart.get(0).getVoiture2().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture2().getVitesseMaxSelonNiveau() + 20);
+				listePisteDeDepart.get(0).getVoiture2()
+						.setAccel(new Vecteur2D(200 * Math.cos(listePisteDeDepart.get(0).getVoiture2().getAngle()),
+								200 * Math.sin(listePisteDeDepart.get(0).getVoiture2().getAngle())));
+			} else {
+				listePisteDeDepart.get(0).getVoiture2().setVitesseMaxSelonNiveau(
+						listePisteDeDepart.get(0).getVoiture2().getVitesseMaxSelonNiveauInitiale());
+			}
+
 		}
 	}
 
@@ -1144,7 +1218,6 @@ public class Regroupement implements Dessinable, Serializable {
 		listePisteDeDepart.get(0).traverserPiste(voiture);
 		collisionBouleDeNeigeAvecPisteDeDepart(0);
 
-		tourComplet(voiture);
 	}
 
 	/**

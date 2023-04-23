@@ -54,6 +54,9 @@ public class FenetreJeuSansScientifique extends JPanel {
 	private Image trouNoir2;
 	private Image colle1;
 	private Image colle2;
+	private JLabel lblNombreToursVoiture2;
+	private JLabel lblNombreToursVoiture1;
+	private JLabel lblNbToursAFaire2;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -74,6 +77,31 @@ public class FenetreJeuSansScientifique extends JPanel {
 		setBounds(100, 100, 1600, 800);
 
 		lireMusic();
+
+		JLabel lblNombreToursV2 = new JLabel("Nombre de tours :");
+		lblNombreToursV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNombreToursV2.setBounds(1282, 449, 132, 29);
+		add(lblNombreToursV2);
+
+		JLabel lblNombreTourV2 = new JLabel("Tours");
+		lblNombreTourV2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNombreTourV2.setBounds(1528, 449, 59, 29);
+		add(lblNombreTourV2);
+
+		lblNombreToursVoiture2 = new JLabel("0");
+		lblNombreToursVoiture2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNombreToursVoiture2.setBounds(1424, 449, 30, 29);
+		add(lblNombreToursVoiture2);
+
+		JLabel lblSurNbTours2 = new JLabel("/");
+		lblSurNbTours2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblSurNbTours2.setBounds(1453, 449, 17, 29);
+		add(lblSurNbTours2);
+
+		lblNbToursAFaire2 = new JLabel("3");
+		lblNbToursAFaire2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNbToursAFaire2.setBounds(1475, 449, 30, 29);
+		add(lblNbToursAFaire2);
 		zoneAnimPhysique = new ZoneAnimPhysique();
 		zoneAnimPhysique.setBorder(null);
 		zoneAnimPhysique.setBounds(165, 27, 1026, 650);
@@ -165,13 +193,13 @@ public class FenetreJeuSansScientifique extends JPanel {
 
 		JLabel lblForce12 = new JLabel("Force lancement voiture 1 :");
 		lblForce12.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblForce12.setBounds(1282, 386, 271, 22);
+		lblForce12.setBounds(1282, 373, 271, 22);
 		add(lblForce12);
 
 		progressBarFroce2 = new JProgressBar();
 		progressBarFroce2.setStringPainted(true);
 		progressBarFroce2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		progressBarFroce2.setBounds(1282, 419, 248, 45);
+		progressBarFroce2.setBounds(1282, 406, 248, 45);
 		add(progressBarFroce2);
 
 		lblImageObjet1 = new JLabel("");
@@ -189,7 +217,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 
 		JLabel lblObjetSpecialVoiture = new JLabel("Objet special voiture 2 :");
 		lblObjetSpecialVoiture.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblObjetSpecialVoiture.setBounds(1282, 475, 271, 22);
+		lblObjetSpecialVoiture.setBounds(1282, 477, 271, 22);
 		add(lblObjetSpecialVoiture);
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -208,11 +236,36 @@ public class FenetreJeuSansScientifique extends JPanel {
 				actionBtnProchImage();
 			}
 		});
-		
+
+		JLabel lblNombreToursV1 = new JLabel("Nombre de tours :");
+		lblNombreToursV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNombreToursV1.setBounds(1282, 148, 132, 29);
+		add(lblNombreToursV1);
+
+		JLabel lblNbToursAFaire = new JLabel("3");
+		lblNbToursAFaire.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNbToursAFaire.setBounds(1475, 148, 30, 29);
+		add(lblNbToursAFaire);
+
+		lblNombreToursVoiture1 = new JLabel("0");
+		lblNombreToursVoiture1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNombreToursVoiture1.setBounds(1424, 148, 30, 29);
+		add(lblNombreToursVoiture1);
+
+		JLabel lblNombreTourV1 = new JLabel("Tours");
+		lblNombreTourV1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNombreTourV1.setBounds(1528, 148, 59, 29);
+		add(lblNombreTourV1);
+
+		JLabel lblSurNbTours = new JLabel("/");
+		lblSurNbTours.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblSurNbTours.setBounds(1453, 148, 17, 29);
+		add(lblSurNbTours);
+
 		lblBackgroundBleu = new JLabel("");
 		lblBackgroundBleu.setBounds(0, 0, 1600, 800);
 		add(lblBackgroundBleu);
-		
+
 		Image imgBleu = OutilsImage.lireImageEtRedimensionner("backgroundJeu.jpg", 1600, 800);
 		if (imgBleu != null) {
 			lblBackgroundBleu.setIcon(new ImageIcon(imgBleu));
@@ -232,7 +285,12 @@ public class FenetreJeuSansScientifique extends JPanel {
 		case "tempsEcoule":
 			lblTempsEcouleValeur.setText(String.format("%.2f", evt.getNewValue()));
 			break;
-
+		case "nombreToursV1":
+			lblNombreToursVoiture1.setText(String.format("%.0f", evt.getNewValue()));
+			break;
+		case "nombreToursV2":
+			lblNombreToursVoiture2.setText(String.format("%.0f", evt.getNewValue()));
+			break;
 		case "ForceLance":
 
 			Double newData = new Double((double) evt.getNewValue());
@@ -249,7 +307,11 @@ public class FenetreJeuSansScientifique extends JPanel {
 			progressBarFroce2.setMaximum(100);
 			progressBarFroce2.setValue(valeur2 - 50);
 			break;
-
+		case "lblNombreToursVoiture2":
+			Double newData3 = new Double((double) evt.getNewValue());
+			int valeur3 = newData3.intValue();
+			lblNombreToursVoiture2.setText(valeur3 + "");
+			break;
 		case "champignon1":
 			champignon = OutilsImage.lireImageEtRedimensionner("champignon.png", 248, 169);
 			if (champignon != null) {

@@ -57,7 +57,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 	/** Boolean collision initié à faux **/
 	private boolean collision = false;
 	/** Couleur de la piste initié à noir **/
-	private Color color = Color.black;
+	private Color color = new Color(128, 126, 120);
 	/** Aire du morceau de piste **/
 	private Rectangle2D.Double formeAire;
 	private boolean enContactAvecColle = false;
@@ -153,7 +153,7 @@ public class PisteVirageBas implements Dessinable, Selectionnable, Serializable 
 					if (Math.toDegrees(voiture.getAngle()) < 270 && Math.toDegrees(voiture.getAngle()) > 180) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) + ((270 - Math.toDegrees(voiture.getAngle())) * 2)));
-						System.out.println(Math.toDegrees(voiture.getAngle()));
+						
 					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 90) * 2)));

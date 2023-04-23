@@ -28,6 +28,7 @@ import fenetre.FenetreMenu;
 import fenetre.FenetreOptionMontre;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
+import fenetre.PanelRegroupement;
 import interfaces.TypePiste;
 
 /**
@@ -46,11 +47,13 @@ public class AppPrincipale12 extends JFrame {
 	private JCheckBoxMenuItem checkBoxAudio;
 
 	private int nombrePiste = 1;
+
 	private String nomFichBinRegroupement = "Piste" + nombrePiste + ".dat";
 
 	private String sousDossierSurBureau = "SauvegardePiste";
 
 	private static int audio = 1;
+
 	private static boolean pisteAudio;
 
 	private File fichierDeTravail = new File(System.getProperty("user.home"),
@@ -135,7 +138,6 @@ public class AppPrincipale12 extends JFrame {
 		FenetreJeuScientifique fenJeuScience = new FenetreJeuScientifique();
 		JeuOptions fenOptions = new JeuOptions();
 		FenetreOptionMontre fenOptionMontre = new FenetreOptionMontre();
-
 		ClassementParPiste fenRecord = new ClassementParPiste();
 
 		ajouterModeEditeurComboBox(fenEditeur);
@@ -180,9 +182,8 @@ public class AppPrincipale12 extends JFrame {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience, fenEditeur);
 				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience);
-				
+
 				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
-				
 
 			}
 		});
@@ -209,6 +210,8 @@ public class AppPrincipale12 extends JFrame {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionFenOptions2(evt, fenJeuScience, fenOptions, fenSansScience, fenRecord);
 				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
+				actionChangeCouleurMatPiste(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre,
+						fenEditeur);
 			}
 		});
 
@@ -240,7 +243,8 @@ public class AppPrincipale12 extends JFrame {
 			public void propertyChange(PropertyChangeEvent evt) {
 
 				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience, fenEditeur);
-
+				actionChangeCouleurMatPiste(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre,
+						fenEditeur);
 				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
 
 			}
@@ -388,16 +392,22 @@ public class AppPrincipale12 extends JFrame {
 
 		case "MATPISTEASPHALT":
 			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.25);
+			fenSansScience.getZoneAnimPhysique().setTestFrottement(0.25);
 			break;
-
-		case "ASPHALT":
 
 		case "MATPISTESABLE":
 			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.70);
+			fenSansScience.getZoneAnimPhysique().setTestFrottement(0.70);
 			break;
 
 		case "MATPISTEGLACE":
 			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.02);
+			fenSansScience.getZoneAnimPhysique().setTestFrottement(0.02);
+			break;
+
+		case "COULEURMATPISTE":
+			fenJeuScience.getZoneAnimPhysique().changerTexture((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().changerTexture((Color) evt.getNewValue());
 			break;
 		}
 	}
@@ -490,6 +500,362 @@ public class AppPrincipale12 extends JFrame {
 					.setSkin((Color) evt.getNewValue());
 			break;
 
+		}
+
+	}
+
+	/**
+	 * 
+	 * Méthode qui permet de montrer la couleur de la piste dans les fenêtres
+	 * d'options dependant de le matériel de la piste choisi
+	 * 
+	 * @param evt             evenement
+	 * @param fenOptions      fenetre des paramètres du mode monde
+	 * @param fenOptionMontre fenetre du mode course contre la montre
+	 * @param fenJeuScience   la fenetre de jeu avec mode science activé
+	 * @param fenSansScience  la fenetre non scientifique
+	 * @param fenEditeur      la fenetre d'édition
+	 */
+	// Alexis Pineda-Alvarado
+	public void actionChangeCouleurMatPiste(PropertyChangeEvent evt, JeuOptions fenOptions,
+			FenetreJeuScientifique fenJeuScience, FenetreJeuSansScientifique fenSansScience,
+			FenetreOptionMontre fenOptionMontre, FenetreEditeur fenEditeur) {
+		switch (evt.getPropertyName()) {
+
+		case "COULEURPISTEASPHALT":
+
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().size() != 0) {
+				fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+						.setColor((Color) evt.getNewValue());
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			break;
+
+		case "COULEURPISTESABLE":
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().size() != 0) {
+				fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+						.setColor((Color) evt.getNewValue());
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			break;
+
+		case "COULEURPISTEGLACE":
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().size() != 0) {
+				fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+						.setColor((Color) evt.getNewValue());
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().size() != 0) {
+				for (int a = 0; a < fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut()
+						.size(); a++) {
+					fenOptions.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			break;
+		case "COULEURPISTEASPHALT2":
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().size() != 0) {
+				fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+						.setColor((Color) evt.getNewValue());
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVerticale()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			break;
+		case "COULEURPISTESABLE2":
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().size() != 0) {
+				fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+						.setColor((Color) evt.getNewValue());
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVerticale()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			break;
+
+		case "COULEURPISTEGLACE2":
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().size() != 0) {
+				fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+						.setColor((Color) evt.getNewValue());
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVerticale()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVerticale().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageBas().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageDroit().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageGauche().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			if (fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().size() != 0) {
+				for (int a = 0; a < fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut()
+						.size(); a++) {
+					fenOptionMontre.getZoneAnimPhysique().getRegroupement().getListePisteVirageHaut().get(a)
+							.setColor((Color) evt.getNewValue());
+				}
+			}
+			break;
 		}
 
 	}
@@ -844,6 +1210,21 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
 			break;
+		case "MATPISTEASPHALT":
+			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.25);
+			break;
+
+		case "MATPISTESABLE":
+			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.70);
+			break;
+
+		case "MATPISTEGLACE":
+			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.02);
+			break;
+
+		case "COULEURMATPISTE":
+			fenJeuScience.getZoneAnimPhysique().changerTexture((Color) evt.getNewValue());
+			break;
 		}
 	}
 
@@ -872,9 +1253,14 @@ public class AppPrincipale12 extends JFrame {
 	 * Méthode qui change la couleur des bordures de pistes selon l'option choisi
 	 * dans le panel option
 	 * 
-	 * @param evt            evenement
-	 * @param fenJeuScience  fenètre jeu scientifique
-	 * @param fenSansScience fenètre jeu non-scientifique
+	 * @param evt             evenement
+	 * @param fenJeuScience   fenètre jeu scientifique
+	 * @param fenOptions      fenètre choix des options du jeu monde
+	 * @param fenSansScience  fenètre jeu non-scientifique
+	 * @param fenOptionMontre fenètre choix des options du jeu course contre la
+	 *                        montre
+	 * @param fenEditeur      fenètre éditeur
+	 * 
 	 */
 	// Kevin Nguyen
 	public void actionPisteCouleur(PropertyChangeEvent evt, JeuOptions fenOptions, FenetreJeuScientifique fenJeuScience,
@@ -915,8 +1301,8 @@ public class AppPrincipale12 extends JFrame {
 						.setBordure((Color) evt.getNewValue());
 			}
 
-//			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
-//					.setBordure((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+					.setBordure((Color) evt.getNewValue());
 			for (int i = 0; i < fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale()
 					.size(); i++) {
 				fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(i)

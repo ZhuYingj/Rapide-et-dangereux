@@ -80,7 +80,6 @@ public class PanelRegroupement extends JPanel {
 	private ArrayList<PisteVirageDroit> listePisteVirageDroit = new ArrayList<PisteVirageDroit>();
 	private ArrayList<PisteVirageHaut> listePisteVirageHaut = new ArrayList<PisteVirageHaut>();
 
-
 	private boolean objetSelectionne = false;
 	private boolean jouer = false;
 
@@ -89,6 +88,7 @@ public class PanelRegroupement extends JPanel {
 	private int longueur;
 	private int hauteur;
 	private int indexObjetPris;
+
 	/** L'image de la poubelle **/
 	private JLabel lblPoubelle;
 
@@ -137,7 +137,7 @@ public class PanelRegroupement extends JPanel {
 
 				// Pour la piste de virage haut
 				pisteVirageHautDrag(e);
-				
+
 				// Pour la morceau de fumee
 				fumeeDrag(e);
 
@@ -211,7 +211,7 @@ public class PanelRegroupement extends JPanel {
 
 			listePisteDeDepart.get(a).dessiner(g2d);
 			if (listePisteDeDepart.get(0).getNombrePisteColle() != 2 && jouer == true) {
-			
+
 				Rectangle2D.Double pisteIncomplete = new Rectangle2D.Double(listePisteDeDepart.get(a).getX(),
 						listePisteDeDepart.get(a).getY(), listePisteDeDepart.get(a).getTaillePiste(),
 						listePisteDeDepart.get(a).getTaillePiste());
@@ -334,6 +334,7 @@ public class PanelRegroupement extends JPanel {
 				&& poubelle.contains(listeAccelerateur.get(indexObjetPris).getFormeAire())) {
 			listeAccelerateur.remove(indexObjetPris);
 			poubelleVide = false;
+
 		} else if (type == TypeObjetDeplacable.PISTEVIRAGEBAS
 				&& poubelle.contains(listePisteVirageBas.get(indexObjetPris).getFormeAire())) {
 			listePisteVirageBas.remove(indexObjetPris);
@@ -403,14 +404,18 @@ public class PanelRegroupement extends JPanel {
 			yPrecedent = e.getY();
 			pisteDeDepart.setX(collerX(e));
 			pisteDeDepart.setY(collerY(e));
+
 			pisteDeDepart.getVoiture()
 					.setPosition(new Vecteur2D(pisteDeDepart.getX() + pisteDeDepart.getTaillePiste() / 4,
 							pisteDeDepart.getY() + pisteDeDepart.getTaillePiste() / 4));
+
 			pisteDeDepart.getVoiture2()
 					.setPosition(new Vecteur2D(pisteDeDepart.getX() + pisteDeDepart.getTaillePiste() / 4,
 							pisteDeDepart.getY() + pisteDeDepart.getTaillePiste() * 3 / 4));
+
 			pisteDeDepart.getFormeAire().setRect(pisteDeDepart.getX(), pisteDeDepart.getY(),
 					pisteDeDepart.getTaillePiste(), pisteDeDepart.getTaillePiste());
+
 			pisteDeDepart.setMurHaut((int) collerY(e));
 			pisteDeDepart.setMurBas((int) collerY(e) + tailleDuCarre);
 			pisteDeDepart.setMurDroite((int) collerX(e) + tailleDuCarre);
@@ -789,23 +794,24 @@ public class PanelRegroupement extends JPanel {
 			} // Fin loop
 		}
 	}
+
 	/**
-	 * Méthode qui permet de determiner si un fumée est contenue dans le clic
-	 * de la souris
+	 * Méthode qui permet de determiner si un fumée est contenue dans le clic de la
+	 * souris
 	 * 
 	 * @param e Évenement de souris
 	 */
 	// Alexis Pineda-Alvarado
-	private void fumeePressed(MouseEvent e) { 
-		if(objetSelectionne == false) {
-			for(int a = 0; a < listeFumee.size(); a++) {
-				if(listeFumee.get(a).contient(e.getX(), e.getY())) {
+	private void fumeePressed(MouseEvent e) {
+		if (objetSelectionne == false) {
+			for (int a = 0; a < listeFumee.size(); a++) {
+				if (listeFumee.get(a).contient(e.getX(), e.getY())) {
 					indexObjetPris = a;
 					xPrecedent = e.getX();
 					yPrecedent = e.getY();
-					
+
 					fumee = listeFumee.get(a);
-					
+
 					objetSelectionne = true;
 					type = TypeObjetDeplacable.FUMEE;
 					break;
@@ -863,20 +869,20 @@ public class PanelRegroupement extends JPanel {
 
 		}
 	}
-	
+
 	/**
-	 * Méthode qui permet de modifier la postion de la fumée en la bougeant
-	 * avec la souris
+	 * Méthode qui permet de modifier la postion de la fumée en la bougeant avec la
+	 * souris
 	 * 
 	 * @param e Évenement de souris
 	 */
-	//Alexis Pineda-Alvarado
+	// Alexis Pineda-Alvarado
 	private void fumeeDrag(MouseEvent e) {
-		if(listeFumee.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.FUMEE) {
-			
+		if (listeFumee.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.FUMEE) {
+
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
-			
+
 			fumee.setX(collerX(e));
 			fumee.setY(collerY(e));
 			fumee.getFormeAire().setRect(fumee.getX(), fumee.getY(), fumee.getTaillePiste(), fumee.getTaillePiste());
