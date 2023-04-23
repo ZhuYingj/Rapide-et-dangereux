@@ -382,8 +382,9 @@ public class JeuOptions extends JPanel {
 					repaint();
 				}
 				if (cbMatPiste.getSelectedIndex() == 1) {
-					couleurPisteSable();
+				
 					couleurMatPiste = 0;
+					couleurPisteSable();
 					actionCbSable();
 					repaint();
 				}

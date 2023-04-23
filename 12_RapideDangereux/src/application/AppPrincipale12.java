@@ -1109,8 +1109,8 @@ public class AppPrincipale12 extends JFrame {
 						.setBordure((Color) evt.getNewValue());
 			}
 
-//			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
-//					.setBordure((Color) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteDeDepart().get(0)
+					.setBordure((Color) evt.getNewValue());
 			for (int i = 0; i < fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale()
 					.size(); i++) {
 				fenSansScience.getZoneAnimPhysique().getRegroupement().getListePisteHorizontale().get(i)
