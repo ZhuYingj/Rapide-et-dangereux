@@ -72,7 +72,6 @@ public class JeuOptions extends JPanel {
 	/** Liste des couleurs de bordure de piste **/
 	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.YELLOW,
 			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
-
 	private Color[] couleursMaterielPiste = { new Color(194, 178, 128), new Color(128, 126, 120),
 			new Color(185, 232, 234) };
 	private JLabel lblLongueurPiste;
@@ -376,21 +375,22 @@ public class JeuOptions extends JPanel {
 		cbMatPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (cbMatPiste.getSelectedIndex() == 0) {
+					couleurMatPiste = 1;
 					couleurPisteAsphalt();
 					actionCbAsphalt();
-					couleurMatPiste = 1;
 					repaint();
 				}
 				if (cbMatPiste.getSelectedIndex() == 1) {
-					couleurPisteSable();
 					couleurMatPiste = 0;
+					couleurPisteSable();
 					actionCbSable();
 					repaint();
 				}
 				if (cbMatPiste.getSelectedIndex() == 2) {
-					couleurPisteGlace();
 					couleurMatPiste = 2;
+					couleurPisteGlace();
 					actionCbGlace();
+					repaint();
 				}
 
 			}
@@ -879,7 +879,6 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionCbSable() {
 		pcs.firePropertyChange("MATPISTESABLE", null, cbMatPiste.getSelectedItem());
-		pcs.firePropertyChange("IMGSABLE", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi le sable où le coefficient de frottement est 0.70");
 	}
 
@@ -890,7 +889,6 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionCbGlace() {
 		pcs.firePropertyChange("MATPISTEGLACE", null, cbMatPiste.getSelectedItem());
-		pcs.firePropertyChange("IMGGLACE", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi la glace où le coefficient de frottement est 0.02");
 	}
 
@@ -934,14 +932,29 @@ public class JeuOptions extends JPanel {
 		}
 	}
 
+	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
 	private void couleurPisteAsphalt() {
 		pcs.firePropertyChange("COULEURPISTEASPHALT", null, couleursMaterielPiste[couleurMatPiste]);
 	}
 
+	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
 	private void couleurPisteSable() {
 		pcs.firePropertyChange("COULEURPISTESABLE", null, couleursMaterielPiste[couleurMatPiste]);
 	}
-	
+
+	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
 	private void couleurPisteGlace() {
 		pcs.firePropertyChange("COULEURPISTEGLACE", null, couleursMaterielPiste[couleurMatPiste]);
 	}
