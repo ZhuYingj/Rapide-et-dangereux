@@ -1196,6 +1196,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		this.testFrottement = testFrottement;
 	}
 
+	public double getTempsMontreFacile() {
+		return tempsMontreFacile;
+	}
+
+	public void setTempsMontreFacile(double tempsMontreFacile) {
+		this.tempsMontreFacile = tempsMontreFacile;
+	}
+	
 	/**
 	 * Méthode qui permet de retourner le type de piste
 	 * 
