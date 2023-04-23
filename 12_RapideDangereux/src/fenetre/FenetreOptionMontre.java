@@ -713,6 +713,7 @@ public class FenetreOptionMontre extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionRdbtnVitesseFacile() {
 		txtArea.append("\nVous avez selectionné la difficulté <<Facile>> ");
+		txtArea.append("\nVous avez 130 seconde pour terminer la course");
 		pcs.firePropertyChange("VITESSEMAXFACILE2", null, 60.0);
 	}
 
@@ -723,6 +724,7 @@ public class FenetreOptionMontre extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionRdbtnVitesseIntermediaire() {
 		txtArea.append("\nVous avez selectionné la difficulté <<Intermédiaire>> ");
+		txtArea.append("\nVous avez 110 seconde pour terminer la course");
 		pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE2", null, 80.0);
 	}
 
@@ -733,6 +735,7 @@ public class FenetreOptionMontre extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionRdbtnVitesseAvance() {
 		txtArea.append("\nVous avez selectionné la difficulté <<Avancé>> ");
+		txtArea.append("\nVous avez 90 seconde pour terminer la course");
 		pcs.firePropertyChange("VITESSEMAXAVANCE2", null, 100.0);
 	}
 

@@ -1202,17 +1202,17 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenJeuScience.getZoneAnimPhysique().arretTempFacile();
-			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(65.0);
+			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(130.0);
 			break;
 		case "VITESSEMAXINTERMEDIAIRE2":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
-			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(45.0);
+			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(110.0);
 			break;
 		case "VITESSEMAXAVANCE2":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
-			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(35.0);
+			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(80.0);
 			break;
 		case "NBRDETOUR":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
