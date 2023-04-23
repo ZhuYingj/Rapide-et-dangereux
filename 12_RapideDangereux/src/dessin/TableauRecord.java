@@ -34,24 +34,24 @@ import application.InfoLigne;
  *
  */
 
-public class TableauRecord extends JPanel{
+public class TableauRecord extends JPanel {
 	private GestionnaireDeFichiersSurLeBureau fichierRecord;
 	private static MyTableModel tableModel;
-	
+
 	/**
 	 * Constructeur de la classe qui permet de creer le tableau
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public TableauRecord() {
-        setLayout(new BorderLayout());
-        fichierRecord = new GestionnaireDeFichiersSurLeBureau();
+		setLayout(new BorderLayout());
+		fichierRecord = new GestionnaireDeFichiersSurLeBureau();
 
-        tableModel = new MyTableModel();
-       JTable table = new JTable(tableModel);
+		tableModel = new MyTableModel();
+		JTable table = new JTable(tableModel);
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        add(scrollPane, BorderLayout.CENTER);
-    }
+		JScrollPane scrollPane = new JScrollPane(table);
+		add(scrollPane, BorderLayout.CENTER);
+	}
 
 	/**
 	 * class qui initalise le tableau et permet de la modifier
@@ -59,37 +59,17 @@ public class TableauRecord extends JPanel{
 	 * @author Ludovic Julien
 	 *
 	 */
-	//Ludovic Julien
-    public class MyTableModel extends AbstractTableModel {
-    	private String[] columnNames = {"Piste", "Record(temps en secondes)", "Record Par", "Nb fois ou lapiste a été joué", "moyenne(temps en secondes)"};
-        private static Object[][] data = {
-            {"Mexique", "0:00","-", "0","0"},
-            {"Canada", "0:00","-","0","0"},
-            {"Italie", "0:00","-","0","0"}
-        };
 
-        @Override
-        public int getRowCount() {
-            return data.length;
-        }
+	public class MyTableModel extends AbstractTableModel {
+		private String[] columnNames = { "Piste", "Record(temps en secondes)", "Record Par",
+				"Nb fois ou lapiste a été joué", "moyenne(temps en secondes)" };
+		private static Object[][] data = { { "Mexique", "0:00", "-", "0", "0" }, { "Canada", "0:00", "-", "0", "0" },
+				{ "Italie", "0:00", "-", "0", "0" } };
 
-        
-        public int getColumnCount() {
-            return columnNames.length;
-        }
-
-        
-        public Object getValueAt(int row, int col) {
-            return data[row][col];
-        }
-        
-        public String getColumnName(int col) {
-            return columnNames[col];
-        }
-       
-        public Class getColumnClass(int c) {
-            return getValueAt(0, c).getClass();
-        }
+		@Override
+		public int getRowCount() {
+			return data.length;
+		}
 
         /**
          * méthode qui modifie une emplacement de tableaux
@@ -208,12 +188,28 @@ public class TableauRecord extends JPanel{
                 System.err.println("Erreur lors de la suppression du contenu du fichier");
             }
         }
+		public int getColumnCount() {
+			return columnNames.length;
+		}
 
-        /**
-     	* méthode qui renvoie 2 méthode pour permettre l'appel de ceux ci dans une autre classe
-     	* 
-     	*/
-        //Ludovic Julien
+		public Object getValueAt(int row, int col) {
+			return data[row][col];
+		}
+
+		public String getColumnName(int col) {
+			return columnNames[col];
+		}
+
+		public Class getColumnClass(int c) {
+			return getValueAt(0, c).getClass();
+		}
+
+		/**
+		 * méthode qui renvoie 2 méthode pour permettre l'appel de ceux ci dans une
+		 * autre classe
+		 * 
+		 */
+		// Ludovic Julien
 		public static void actionReinitialiser() {
 			tableModel.reinitialiserTableau();
 	    	  supprimerContenuFichier("donnees.txt");
@@ -227,29 +223,17 @@ public class TableauRecord extends JPanel{
 		}
     }
     
-    /**
-     * méthode qui retourne le tableau
-     * 
-     */
-    //Ludovic Julien
-    public static MyTableModel getTableau() {
-    	return tableModel;
-    }  
-    
     
     public class LigneComparator implements Comparator<Object[]> {
         @Override
         public int compare(Object[] ligne1, Object[] ligne2) {
-            // convertir les temps en secondes pour la comparaison
             int temps1 = convertirEnSecondes((String)ligne1[1]);
             int temps2 = convertirEnSecondes((String)ligne2[1]);
-            
-            // si les deux temps sont égaux, on compare les noms des pistes
+
             if (temps1 == temps2) {
                 return ((String)ligne1[0]).compareTo((String)ligne2[0]);
             }
-            
-            // sinon, on compare les temps
+        
             return Integer.compare(temps1, temps2);
         }
         
@@ -263,7 +247,15 @@ public class TableauRecord extends JPanel{
             return minutes * 60 + secondes;
         }
     }
-    
-    
+
+	/**
+	 * méthode qui retourne le tableau
+	 * 
+	 */
+	// Ludovic Julien
+	public static MyTableModel getTableau() {
+		return tableModel;
+	}
+
 
 }

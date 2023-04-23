@@ -189,7 +189,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		
 
 		regroupement.setPixelsParMetre(pixelsParMetre);
 		regroupement.dessiner(g2d);
@@ -685,8 +684,16 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
 			pcs.firePropertyChange("nombreToursV1", 0, 0.00);
 			pcs.firePropertyChange("nombreToursV2", 0, 0.00);
+			pcs.firePropertyChange("frottementEnXV1", 0, 0.00);
+			pcs.firePropertyChange("frottementEnYV1", 0, 0.00);
+			pcs.firePropertyChange("freinageEnXV1", 0, 0.00);
+			pcs.firePropertyChange("freinageEnYV1", 0, 0.00);
+			pcs.firePropertyChange("frottementEnXV2", 0, 0.00);
+			pcs.firePropertyChange("frottementEnYV2", 0, 0.00);
+			pcs.firePropertyChange("freinageEnXV2", 0, 0.00);
+			pcs.firePropertyChange("freinageEnYV2", 0, 0.00);
 			regroupement.creeBoiteDansListe();
-
+			changementTexteParIteration();
 			repaint();
 		}
 
@@ -1203,7 +1210,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void setTempsMontreFacile(double tempsMontreFacile) {
 		this.tempsMontreFacile = tempsMontreFacile;
 	}
-	
+
 	/**
 	 * Méthode qui permet de retourner le type de piste
 	 * 

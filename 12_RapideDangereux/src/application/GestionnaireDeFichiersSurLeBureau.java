@@ -304,8 +304,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 		scanner.close();
 		return listeLignes;
 	}
-	 
-	
+
 	/**
 	 * méthode qui permet de retourner la moyenne de temps de chaque piste
 	 * 
@@ -352,7 +351,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 	 * méthode qui permet de retourner la moyenne de temps de chaque piste
 	 * 
 	 * @param listeLignes liste des donner de temps
-	 * @return
+	 * @return la moyenne de temps de chaque piste
 	 */
 	// Ludovic Julien
 	public static Map<String, Double> calculerMoyennes(List<InfoLigne> listeLignes) {
