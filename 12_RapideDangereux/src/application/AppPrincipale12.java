@@ -361,14 +361,17 @@ public class AppPrincipale12 extends JFrame {
 		case "VITESSEMAXFACILE":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(100000.0);
 			break;
 		case "VITESSEMAXINTERMEDIAIRE":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(100000.0);
 			break;
 		case "VITESSEMAXAVANCE":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(100000.0);
 			break;
 		case "TYPEPISTE":
 			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
@@ -452,6 +455,7 @@ public class AppPrincipale12 extends JFrame {
 					.setSkin((Color) evt.getNewValue());
 		}
 	}
+
 
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
@@ -1197,14 +1201,18 @@ public class AppPrincipale12 extends JFrame {
 		case "VITESSEMAXFACILE2":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().arretTempFacile();
+			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(65.0);
 			break;
 		case "VITESSEMAXINTERMEDIAIRE2":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(45.0);
 			break;
 		case "VITESSEMAXAVANCE2":
 			fenJeuScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setVoitureVitesseMax((double) evt.getNewValue());
+			fenJeuScience.getZoneAnimPhysique().setTempsMontreFacile(35.0);
 			break;
 		case "NBRDETOUR":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());

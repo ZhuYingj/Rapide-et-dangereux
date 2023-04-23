@@ -8,16 +8,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.Map;
 
 import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import application.GestionnaireDeFichiersSurLeBureau;
-import application.InfoLigne;
 import fenetre.FenetreJeuScientifique;
 import geometrie.Vecteur2D;
 import interfaces.TypeObjetSpecial;
@@ -86,6 +82,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private Vecteur2D valeurInit = new Vecteur2D(0.0, 0.0);
 	/** Temps écoulé depuis le début de l'animation **/
 	private double tempsTotalEcoule = 0;
+	/**
+	 * Temps total pour la difficulter facile dans le mode course contre la montre
+	 **/
+	private double tempsMontreFacile = 30.0;
 	/** support pour lancer des evenements de type PropertyChange **/
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	/** La premiere piste affiché **/
@@ -1030,6 +1030,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.avancerGroupe(deltaT, tempsTotalEcoule);
 		arretQuandFini();
 		arretMusic();
+		arretTempFacile();
 		arretGraphique();
 		gagnantCourse();
 	}
@@ -1043,7 +1044,6 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
 				.getNombreToursFaits()) {
 			System.out.println("LA VOITURE 1 A GAGNÉE!!!");
-
 			arreter();
 
 		} else if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
@@ -1053,6 +1053,17 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 
+	}
+
+	/**
+	 * Methode qui arrete le jeu lorsque le temps a ete ecouler
+	 */
+	// Alexis Pineda-Alvarado
+	public void arretTempFacile() {
+		if (tempsTotalEcoule >= tempsMontreFacile) {
+			System.out.println("TEMPS ECOULE");
+			arreter();
+		}
 	}
 
 	/**
@@ -1185,6 +1196,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		this.testFrottement = testFrottement;
 	}
 
+	public double getTempsMontreFacile() {
+		return tempsMontreFacile;
+	}
+
+	public void setTempsMontreFacile(double tempsMontreFacile) {
+		this.tempsMontreFacile = tempsMontreFacile;
+	}
+	
 	/**
 	 * Méthode qui permet de retourner le type de piste
 	 * 

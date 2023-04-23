@@ -73,7 +73,6 @@ public class FenetreJeuScientifique extends JPanel {
 	private JLabel lblPositionEnYV2;
 	private JLabel lblNombreToursVoiture2;
 	private JLabel lblBackgroundBleu;
-	private JLabel lblNewLabel11;
 	private static Clip clip;
 	private ZoneVitesse zoneVitesse2;
 	private ZoneVitesse zoneVitesse;
@@ -691,14 +690,9 @@ public class FenetreJeuScientifique extends JPanel {
 		lblNewLabel10.setBounds(948, 538, 46, 14);
 		add(lblNewLabel10);
 
-		lblNewLabel11 = new JLabel("<---------------->");
-		lblNewLabel11.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel11.setBounds(361, 29, 120, 14);
-		add(lblNewLabel11);
-
-		JLabel lblNewLabel12 = new JLabel("80 M");
-		lblNewLabel12.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel12.setBounds(406, 13, 46, 14);
+		JLabel lblNewLabel12 = new JLabel("80m/Morceau de piste");
+		lblNewLabel12.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblNewLabel12.setBounds(810, 33, 137, 14);
 		add(lblNewLabel12);
 
 		lblNewLabelImage = new JLabel("");
@@ -766,6 +760,11 @@ public class FenetreJeuScientifique extends JPanel {
 		lblObjet2.setFont(new Font("Tahoma", Font.BOLD, 9));
 		lblObjet2.setBounds(810, 650, 120, 20);
 		add(lblObjet2);
+		
+		JLabel lblPixelParMetre = new JLabel("1.4640625pixels/m");
+		lblPixelParMetre.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblPixelParMetre.setBounds(546, 34, 120, 14);
+		add(lblPixelParMetre);
 
 		lblBackgroundBleu = new JLabel("");
 		lblBackgroundBleu.setBounds(0, 0, 1600, 800);
