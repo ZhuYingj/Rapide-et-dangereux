@@ -1033,7 +1033,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	public void arretQuandFini() {
 		if (regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture()
 				.getNombreToursFaits()) {
-			System.out.println("LA VOITURE  A GAGNÉE!!!");
+			System.out.println("LA VOITURE 1 A GAGNÉE!!!");
 
 			arreter();
 
