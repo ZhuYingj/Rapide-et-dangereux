@@ -82,8 +82,8 @@ public class ClassementParPiste extends JPanel {
 
 				Color bgColor = JColorChooser.showDialog(ClassementParPiste.this, "Choisir une couleur", Color.WHITE);
 
-				if (bgColor != null) { // vérifier si l'utilisateur a choisi une couleur
-					setBackground(bgColor); // changer la couleur de l'arrière-plan
+				if (bgColor != null) { 
+					setBackground(bgColor); 
 				}
 
 			}
@@ -92,7 +92,7 @@ public class ClassementParPiste extends JPanel {
 		add(btnColorer);
 
 		TableauRecord tableauRecord = new TableauRecord();
-		tableauRecord.setBounds(146, 169, 902, 158);
+		tableauRecord.setBounds(146, 169, 902, 145);
 		add(tableauRecord);
 	}
 	

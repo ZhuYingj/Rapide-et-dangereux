@@ -528,7 +528,7 @@ public class JeuOptions extends JPanel {
 		btnRecorsPiste.setForeground(new Color(0, 0, 0));
 		btnRecorsPiste.setBackground(Color.CYAN);
 		btnRecorsPiste.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
-		btnRecorsPiste.setBounds(58, 73, 158, 78);
+		btnRecorsPiste.setBounds(58, 73, 176, 78);
 		btnRecorsPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PCS.firePropertyChange("RECORD", null, -1);
@@ -934,7 +934,7 @@ public class JeuOptions extends JPanel {
 	        scanner.close();
 
 	        Map<String, InfoLigne> meilleurTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
-
+	        
 	        for (String piste : meilleurTemps.keySet()) {
 	            InfoLigne infoLigne = meilleurTemps.get(piste);
 
@@ -948,40 +948,40 @@ public class JeuOptions extends JPanel {
 	    }
 	}
 
-
-
-
-	
-	
-	
-	
-	
-
 	/**
-	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
-	 * d'événement
+	 * méthode qui prend tout les donner du fichier et appel une autre méthode pour classer le tableau en ordre croissant
 	 */
-	// Alexis Pineda-Alvarado
-	private void couleurPisteAsphalt() {
-		PCS.firePropertyChange("COULEURPISTEASPHALT", null, couleursMaterielPiste[couleurMatPiste]);
-	}
-
-	/**
-	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
-	 * d'événement
-	 */
-	// Alexis Pineda-Alvarado
-	private void couleurPisteSable() {
-		PCS.firePropertyChange("COULEURPISTESABLE", null, couleursMaterielPiste[couleurMatPiste]);
-	}
-
-	/**
-	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
-	 * d'événement
-	 */
-	// Alexis Pineda-Alvarado
-	private void couleurPisteGlace() {
-		PCS.firePropertyChange("COULEURPISTEGLACE", null, couleursMaterielPiste[couleurMatPiste]);
+	//Ludovic Julien
+	public void trierTableau() {
+		try {
+			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+			Map<String, InfoLigne> meilleurTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
+			Map<String, Integer> comptages = GestionnaireDeFichiersSurLeBureau.compterPistes(listeLignes);
+			Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
+			InfoLigne ligneNull = new InfoLigne("-", 0, "0");
+	 
+			if (!meilleurTemps.containsKey("Italie")) {
+				meilleurTemps.put("Italie", ligneNull);
+				comptages.put("Italie", 0);
+				moyennes.put("Italie", 0.0);
+			}
+			if (!meilleurTemps.containsKey("Canada")) {
+				meilleurTemps.put("Canada", ligneNull);
+				comptages.put("Canada", 0);
+				moyennes.put("Canada", 0.0);
+			}
+			if (!meilleurTemps.containsKey("Mexique")) {
+				meilleurTemps.put("Mexique", ligneNull);
+				comptages.put("Mexique", 0);
+				moyennes.put("Mexique", 0.0);
+			}
+	 
+	 
+			MyTableModel.trierTableau(meilleurTemps,comptages,moyennes);
+		}catch (FileNotFoundException e) {
+					System.err.println("Erreur : fichier introuvable");
+		}
+	 
 	}
 
 	/**
@@ -996,7 +996,6 @@ public class JeuOptions extends JPanel {
 			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
 			Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
 			
-			System.out.println(moyennes);
 			
 			if (moyennes.containsKey("Mexique")) {
 			TableauRecord.getTableau().updateMoyenne("Mexique", ""+moyennes.get("Mexique"));
@@ -1012,13 +1011,6 @@ public class JeuOptions extends JPanel {
 			System.err.println("Erreur : fichier introuvable");
 		}
 	}
-	
-	//double moyenneMexique = moyennes.get("Mexique");
-	//double moyenneCanada = moyennes.get("Canada");
-	//double moyenneItalie = moyennes.get("Italie");
-
-	
-	
 
 	/**
 	 * méthode qui vas appeler d'autre pour permettre de mettre les donner du nombre
@@ -1054,7 +1046,35 @@ public class JeuOptions extends JPanel {
 		nbjouer();
 		moyenTemps();
 		meilleurTemps();
-		//MyTableModel.trierTableau();
+		trierTableau();
+	}
+	
+	
+	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
+	private void couleurPisteAsphalt() {
+		PCS.firePropertyChange("COULEURPISTEASPHALT", null, couleursMaterielPiste[couleurMatPiste]);
+	}
+
+	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
+	private void couleurPisteSable() {
+		PCS.firePropertyChange("COULEURPISTESABLE", null, couleursMaterielPiste[couleurMatPiste]);
+	}
+
+	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
+	private void couleurPisteGlace() {
+		PCS.firePropertyChange("COULEURPISTEGLACE", null, couleursMaterielPiste[couleurMatPiste]);
 	}
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {
