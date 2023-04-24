@@ -181,8 +181,7 @@ public class AppPrincipale12 extends JFrame {
 		fenEditeur.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience, fenEditeur);
-				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience);
-
+				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience, fenSansScience);
 				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
 
 			}
@@ -455,7 +454,6 @@ public class AppPrincipale12 extends JFrame {
 					.setSkin((Color) evt.getNewValue());
 		}
 	}
-
 
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
@@ -978,24 +976,29 @@ public class AppPrincipale12 extends JFrame {
 	 * selon des levés d'évènements liés entre la fenetre du jeu sans le mode
 	 * scientifique et celui du mode éditeur
 	 * 
-	 * @param evt        evenement
-	 * @param fenEditeur fenêtre du mode editeur
-	 * @param fenScience la fenetre de jeu avec le mode scientifique
+	 * @param evt            evenement
+	 * @param fenEditeur     fenêtre du mode editeur
+	 * @param fenScience     la fenetre de jeu avec le mode scientifique
+	 * @param fenSansScience la fenetre de jeu sans le mode scientifique
 	 */
 	// Tan Tommy Rin
 
 	public void actionJouerDeEditeur(PropertyChangeEvent evt, FenetreEditeur fenEditeur,
-			FenetreJeuScientifique fenScience) {
+			FenetreJeuScientifique fenScience, FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
 		case "JOUEREDITEUR":
 			fenScience.setVisible(true);
 			fenEditeur.setVisible(false);
 			setContentPane(fenScience);
 			fenScience.getZoneAnimPhysique().setTempsMontreFacile(100000.0);
+			fenSansScience.getZoneAnimPhysique().setTempsMontreFacile(100000.0);
+			checkBoxModeNonScientifique.setEnabled(true);
 			break;
 		case "REGROUPEMENT":
 			fenScience.getZoneAnimPhysique().setNomFichierRegroupement((String) evt.getNewValue());
 			fenScience.getZoneAnimPhysique().setTypePiste(TypePiste.AUTRE);
+			fenSansScience.getZoneAnimPhysique().setNomFichierRegroupement((String) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setTypePiste(TypePiste.AUTRE);
 
 		}
 	}
@@ -1119,7 +1122,6 @@ public class AppPrincipale12 extends JFrame {
 		fenJeuScience.setVisible(false);
 		setContentPane(fenSansScience);
 		fenJeuScience.getZoneAnimPhysique().requestFocusInWindow();
-
 		checkBoxModeNonScientifique.setEnabled(true);
 		pushingP(fenSansScience);
 

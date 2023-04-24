@@ -806,6 +806,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		pcs.firePropertyChange("tempsEcoule", 0, tempsTotalEcoule);
 		if (regroupement.getObjSpecial() != null) {
 			if (regroupement.getObjSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
+				regroupement.getListePisteDeDepart().get(0).getVoiture().setDiametreFleche(32);
 				pcs.firePropertyChange("champignon1", 0, -1);
 			} else if (regroupement.getObjSpecial().getType() == TypeObjetSpecial.BOULEDENEIGE) {
 				pcs.firePropertyChange("bouleNeige1", 0, -1);
@@ -817,6 +818,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		}
 		if (regroupement.getObjSpecial2() != null) {
 			if (regroupement.getObjSpecial2().getType() == TypeObjetSpecial.CHAMPIGNON) {
+				regroupement.getListePisteDeDepart().get(0).getVoiture().setDiametreFleche(32);
 				pcs.firePropertyChange("champignon2", 0, -1);
 			} else if (regroupement.getObjSpecial2().getType() == TypeObjetSpecial.BOULEDENEIGE) {
 				pcs.firePropertyChange("bouleNeige2", 0, -1);
@@ -873,7 +875,13 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			forceDeLancement = 50;
 			regroupement.getListePisteDeDepart().get(0).getVoiture().setLongueurTete(2.5);
 			regroupement.getListePisteDeDepart().get(0).getVoiture().setStrokeVoulu(0.5);
-			regroupement.getListePisteDeDepart().get(0).getVoiture().setDiametreFleche(16);
+			if (regroupement.getObjSpecial() != null
+					&& regroupement.getObjSpecial().getType() == TypeObjetSpecial.CHAMPIGNON) {
+
+			} else {
+				regroupement.getListePisteDeDepart().get(0).getVoiture().setDiametreFleche(16);
+			}
+
 		}
 		if (regroupement.getObjSpecial2() != null
 				&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.BOULEDENEIGE) {
@@ -897,7 +905,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			forceDeLancement2 = 50;
 			regroupement.getListePisteDeDepart().get(0).getVoiture2().setLongueurTete(2.5);
 			regroupement.getListePisteDeDepart().get(0).getVoiture2().setStrokeVoulu(0.5);
-			regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametreFleche(16);
+			if (regroupement.getObjSpecial2() != null
+					&& regroupement.getObjSpecial2().getType() == TypeObjetSpecial.CHAMPIGNON) {
+
+			} else {
+				regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametreFleche(16);
+			}
 		}
 
 	}

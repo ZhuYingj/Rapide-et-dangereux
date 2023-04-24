@@ -50,9 +50,9 @@ public class ClassementParPiste extends JPanel {
 		setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Tableau du classement par piste");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblNewLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(188, 99, 428, 83);
+		lblNewLabel.setBounds(395, 87, 428, 83);
 		add(lblNewLabel);
 
 		JButton btnReinitialiser = new JButton("R\u00E9initialiser les statistiques");
@@ -63,17 +63,17 @@ public class ClassementParPiste extends JPanel {
 
 			}
 		});
-		btnReinitialiser.setBounds(94, 403, 197, 39);
+		btnReinitialiser.setBounds(218, 361, 197, 39);
 		add(btnReinitialiser);
 
-		JButton btnFermer = new JButton("QUITTER");
+		JButton btnFermer = new JButton("Retour");
 		btnFermer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pcs.firePropertyChange("QUITTER", null, -1);
 
 			}
 		});
-		btnFermer.setBounds(315, 479, 139, 39);
+		btnFermer.setBounds(10, 11, 107, 23);
 		add(btnFermer);
 
 		JButton btnColorer = new JButton("Colorer l'arriere plan");
@@ -88,11 +88,11 @@ public class ClassementParPiste extends JPanel {
 
 			}
 		});
-		btnColorer.setBounds(519, 403, 189, 39);
+		btnColorer.setBounds(786, 361, 189, 39);
 		add(btnColorer);
 
 		TableauRecord tableauRecord = new TableauRecord();
-		tableauRecord.setBounds(183, 267, 452, 74);
+		tableauRecord.setBounds(146, 169, 902, 158);
 		add(tableauRecord);
 	}
 	
