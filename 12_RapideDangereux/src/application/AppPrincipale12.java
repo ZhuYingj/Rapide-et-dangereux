@@ -1071,6 +1071,7 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenJeuScience.getBtnStart().setEnabled(true);
 			checkBoxModeNonScientifique.setEnabled(false);
+			checkBoxModeNonScientifique.setSelected(false);
 			break;
 
 		case "STARTBUTTONACTIVE":
@@ -1102,6 +1103,8 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenModeJeu);
 			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenSansScience.getBtnStart().setEnabled(true);
+			checkBoxModeNonScientifique.setEnabled(false);
+			checkBoxModeNonScientifique.setSelected(false);
 			break;
 
 		}
