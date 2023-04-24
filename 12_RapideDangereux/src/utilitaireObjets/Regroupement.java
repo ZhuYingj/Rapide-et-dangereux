@@ -1216,6 +1216,15 @@ public class Regroupement implements Dessinable, Serializable {
 
 	}
 
+	/**
+	 * Méthode permettant de savoir si une voiture est passée sur un morceau de
+	 * piste afin de savoir si l'utilisateur a fait un tour complet légitime
+	 * 
+	 * @param voiture  La voiture 1 controllée
+	 * @param voiture2 La voiture 2 controllée
+	 * 
+	 */
+	// Kevin Nguyen
 	public void traverserPiste(Voiture voiture, Voiture voiture2) {
 
 		for (int i = 0; i < listePisteHorizontale.size(); i++) {
@@ -1445,7 +1454,9 @@ public class Regroupement implements Dessinable, Serializable {
 	 * Méthode permettant de savoir si la voiture à fait un tour complet en sachant
 	 * si elle est passée par chaque morceau de piste
 	 * 
-	 * @param voiture La voiture controllée
+	 * @param voiture  La voiture 1 controllée
+	 * @param voiture2 La voiture 2 controllée
+	 * 
 	 */
 	// Kevin Nguyen
 	public void tourComplet(Voiture voiture, Voiture voiture2) {
@@ -1490,7 +1501,7 @@ public class Regroupement implements Dessinable, Serializable {
 		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
 			if (listePisteVirageDroit.get(i).isCollision() == true) {
 				count++;
-			} 
+			}
 			if (listePisteVirageDroit.get(i).isCollision2() == true) {
 				count2++;
 			}
@@ -1513,7 +1524,7 @@ public class Regroupement implements Dessinable, Serializable {
 				count2++;
 			}
 		}
-		
+
 		System.out.println(count);
 		System.out.println(count2);
 
@@ -1540,7 +1551,7 @@ public class Regroupement implements Dessinable, Serializable {
 	}
 
 	/**
-	 * Méthode permettant de compter le nombre de tour fait par la voiture  1et
+	 * Méthode permettant de compter le nombre de tour fait par la voiture 1et
 	 * réinitialise le boolean de passage de la voiture d'un morceau de piste
 	 */
 	// Kevin Nguyen
@@ -1580,7 +1591,7 @@ public class Regroupement implements Dessinable, Serializable {
 		}
 
 	}
-	
+
 	/**
 	 * Méthode permettant de compter le nombre de tour fait par la voiture 2 et
 	 * réinitialise le boolean de passage de la voiture d'un morceau de piste
