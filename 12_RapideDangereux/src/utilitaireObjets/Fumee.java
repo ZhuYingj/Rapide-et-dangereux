@@ -21,6 +21,7 @@ import interfaces.Selectionnable;
 
 public class Fumee implements Dessinable, Selectionnable, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 	/** la position en x de depart que l'objet piste vas etre creer **/
@@ -43,12 +44,6 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 		this.x = x;
 		this.y = y;
 
-//		bouleFumee = new BouleFumee(new Vecteur2D(x + taillePiste / 4, y + taillePiste / 4), 16, 1);
-//		bouleFumee2 = new BouleFumee(new Vecteur2D(x + taillePiste / 9, y + 55), 16, 1);
-//		bouleFumee3 = new BouleFumee(new Vecteur2D(x + taillePiste / 3, y + 60), 16, 1);
-//		bouleFumee4 = new BouleFumee(new Vecteur2D(x + 60, y + taillePiste / 3), 16, 1);
-//		bouleFumee5 = new BouleFumee(new Vecteur2D(x + taillePiste / 2, y + taillePiste / 6), 16, 1);
-//		bouleFumee6 = new BouleFumee(new Vecteur2D(x + taillePiste / 2, y + taillePiste / 2), 16, 1);
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 
 	}
@@ -71,12 +66,7 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 		g2d.drawLine(x, y, x, y + taillePiste);
 		g2d.drawLine(x + taillePiste, y, x + taillePiste, y + taillePiste);
 
-//		bouleFumee.dessiner(g2d);
-//		bouleFumee2.dessiner(g2d);
-//		bouleFumee3.dessiner(g2d);
-//		bouleFumee4.dessiner(g2d);
-//		bouleFumee5.dessiner(g2d);
-//		bouleFumee6.dessiner(g2d);
+
 	}
 
 	/**
