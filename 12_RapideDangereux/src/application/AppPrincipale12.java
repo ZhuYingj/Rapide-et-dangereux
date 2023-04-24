@@ -28,7 +28,6 @@ import fenetre.FenetreMenu;
 import fenetre.FenetreOptionMontre;
 import fenetre.JeuOptions;
 import fenetre.ModeDeJeu;
-import fenetre.PanelRegroupement;
 import interfaces.TypePiste;
 
 /**
@@ -1064,8 +1063,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenModeJeu    la fenêtre du mode de jeu a choisir qui va être acrivé
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience,
-			ModeDeJeu fenModeJeu) {
+	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, ModeDeJeu fenModeJeu) {
 
 		switch (evt.getPropertyName()) {
 		case "RetourDuJeuScience":
@@ -1074,7 +1072,6 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenModeJeu);
 			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenJeuScience.getBtnStart().setEnabled(true);
-
 			checkBoxModeNonScientifique.setEnabled(false);
 			checkBoxModeNonScientifique.setSelected(false);
 			break;
@@ -1095,7 +1092,7 @@ public class AppPrincipale12 extends JFrame {
 	 * 
 	 * @param evt            evenement
 	 * @param fenSansScience fenêtre du jeu sans les paramètres scientifiques
-	 * @param fenModeJeu     la fenetre mode de jeu 
+	 * @param fenModeJeu     la fenetre mode de jeu
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourOptions2(PropertyChangeEvent evt, FenetreJeuSansScientifique fenSansScience,

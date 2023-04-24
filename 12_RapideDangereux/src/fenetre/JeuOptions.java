@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -581,13 +582,16 @@ public class JeuOptions extends JPanel {
 	 */
 	// Tan Tommy Rin
 	private void actionCommencer() {
-		PCS.firePropertyChange("COMMENCER!", null, -1);
-		PCS.firePropertyChange("MASSE1", null, (double) slider.getValue());
-		PCS.firePropertyChange("MASSE2", null, (double) slider2.getValue());
-		PCS.firePropertyChange("TYPEPISTE", null, type);
-		PCS.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
-		PCS.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
-
+		if (!rdbtnFacile.isSelected() && !rdbtnMedium.isSelected() && !rdbtnDifficile.isSelected()) {
+			JOptionPane.showMessageDialog(null, "Choisissez une difficulter");
+		} else {
+			PCS.firePropertyChange("COMMENCER!", null, -1);
+			PCS.firePropertyChange("MASSE1", null, (double) slider.getValue());
+			PCS.firePropertyChange("MASSE2", null, (double) slider2.getValue());
+			PCS.firePropertyChange("TYPEPISTE", null, type);
+			PCS.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
+			PCS.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
+		}
 	}
 
 	/**
@@ -932,10 +936,10 @@ public class JeuOptions extends JPanel {
 			}
 			scanner.close();
 
-	        Map<String, InfoLigne> meilleurTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
-	        
-	        for (String piste : meilleurTemps.keySet()) {
-	            InfoLigne infoLigne = meilleurTemps.get(piste);
+			Map<String, InfoLigne> meilleurTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
+
+			for (String piste : meilleurTemps.keySet()) {
+				InfoLigne infoLigne = meilleurTemps.get(piste);
 				if (!infoLigne.getNom().equals(null)) {
 					TableauRecord.getTableau().updateRecord(piste, meilleurTemps);
 				}
@@ -947,9 +951,10 @@ public class JeuOptions extends JPanel {
 	}
 
 	/**
-	 * méthode qui prend tout les donner du fichier et appel une autre méthode pour classer le tableau en ordre croissant
+	 * méthode qui prend tout les donner du fichier et appel une autre méthode pour
+	 * classer le tableau en ordre croissant
 	 */
-	//Ludovic Julien
+	// Ludovic Julien
 	public void trierTableau() {
 		try {
 			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
@@ -957,7 +962,7 @@ public class JeuOptions extends JPanel {
 			Map<String, Integer> comptages = GestionnaireDeFichiersSurLeBureau.compterPistes(listeLignes);
 			Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
 			InfoLigne ligneNull = new InfoLigne("-", 0, "0");
-	 
+
 			if (!meilleurTemps.containsKey("Italie")) {
 				meilleurTemps.put("Italie", ligneNull);
 				comptages.put("Italie", 0);
@@ -973,13 +978,12 @@ public class JeuOptions extends JPanel {
 				comptages.put("Mexique", 0);
 				moyennes.put("Mexique", 0.0);
 			}
-	 
-	 
-			MyTableModel.trierTableau(meilleurTemps,comptages,moyennes);
-		}catch (FileNotFoundException e) {
-					System.err.println("Erreur : fichier introuvable");
+
+			MyTableModel.trierTableau(meilleurTemps, comptages, moyennes);
+		} catch (FileNotFoundException e) {
+			System.err.println("Erreur : fichier introuvable");
 		}
-	 
+
 	}
 
 	/**
@@ -1043,8 +1047,7 @@ public class JeuOptions extends JPanel {
 		moyenTemps();
 		meilleurTemps();
 	}
-	
-	
+
 	/**
 	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
 	 * d'événement
@@ -1088,4 +1091,27 @@ public class JeuOptions extends JPanel {
 		this.txtArea = txtArea;
 	}
 
+	public JRadioButton getRdbtnFacile() {
+		return rdbtnFacile;
+	}
+
+	public void setRdbtnFacile(JRadioButton rdbtnFacile) {
+		this.rdbtnFacile = rdbtnFacile;
+	}
+
+	public JRadioButton getRdbtnMedium() {
+		return rdbtnMedium;
+	}
+
+	public void setRdbtnMedium(JRadioButton rdbtnMedium) {
+		this.rdbtnMedium = rdbtnMedium;
+	}
+
+	public JRadioButton getRdbtnDifficile() {
+		return rdbtnDifficile;
+	}
+
+	public void setRdbtnDifficile(JRadioButton rdbtnDifficile) {
+		this.rdbtnDifficile = rdbtnDifficile;
+	}
 }

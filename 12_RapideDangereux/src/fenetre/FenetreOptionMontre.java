@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -64,8 +65,8 @@ public class FenetreOptionMontre extends JPanel {
 	private int couleurMatPiste = 0;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK };
-	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW,
-			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
+	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW, Color.CYAN,
+			Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleursMaterielPiste = { new Color(194, 178, 128), new Color(128, 126, 120),
 			new Color(185, 232, 234) };
 	private JTextArea txtArea;
@@ -675,14 +676,18 @@ public class FenetreOptionMontre extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionCommencer() {
-		PCS.firePropertyChange("COMMENCER COURSE MONTRE", null, -1);
-		PCS.firePropertyChange("TYPEPISTE", null, type);
-		PCS.firePropertyChange("MASSEMONTRE1", null, (double) slider.getValue());
-		PCS.firePropertyChange("MASSEMONTRE2", null, (double) slider2.getValue());
-		PCS.firePropertyChange("NBRDETOUR", null, (double) sliderNbrTour.getValue());
-		PCS.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
+		if (!rdbtnFacile.isSelected() && !rdbtnMedium.isSelected() && !rdbtnDifficile.isSelected()) {
+			JOptionPane.showMessageDialog(null, "Choisissez une difficulter");
+		} else {
+			PCS.firePropertyChange("COMMENCER COURSE MONTRE", null, -1);
+			PCS.firePropertyChange("TYPEPISTE", null, type);
+			PCS.firePropertyChange("MASSEMONTRE1", null, (double) slider.getValue());
+			PCS.firePropertyChange("MASSEMONTRE2", null, (double) slider2.getValue());
+			PCS.firePropertyChange("NBRDETOUR", null, (double) sliderNbrTour.getValue());
+			PCS.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
+			actionSkin();
+		}
 
-		actionSkin();
 	}
 
 	/**
@@ -828,7 +833,7 @@ public class FenetreOptionMontre extends JPanel {
 		PCS.firePropertyChange("IMGGLACE", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi la glace où le coefficient de frottement est 0.02");
 	}
-	
+
 	/**
 	 * Méthode qui change la couleur de la piste pour simuler un changement de
 	 * matériel de piste pour la course
@@ -867,4 +872,5 @@ public class FenetreOptionMontre extends JPanel {
 	public void setBackgroundV2(JPanel panel) {
 		panel.setBackground(couleurs2[indexCouleur2]);
 	}
+
 }
