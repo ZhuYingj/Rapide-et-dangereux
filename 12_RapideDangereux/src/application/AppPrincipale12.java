@@ -1185,6 +1185,7 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenJeuScience);
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreBoiteMystere(0);
 			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreBoiteMystere(0);
+			checkBoxModeNonScientifique.setEnabled(true);
 			break;
 		case "TYPEPISTE":
 			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
