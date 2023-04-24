@@ -143,9 +143,10 @@ public class ObjetSpecial implements Dessinable {
 
 		if ((tempsTemporaire + 8 > tempsTotalEcoule)) {
 			champignon.fonctionChampignonActivation(voiture);
-
+			voiture.setDiametreFleche(32);
 			fonctionActive = true;
 		} else {
+//			voiture.setDiametreFleche(16);
 			voiture.setMasseEnKg(voiture.getMasseEnKgInitial());
 			voiture.setDiametre(voiture.getDiametreInitial());
 

@@ -109,7 +109,7 @@ public class BlocMystere implements Dessinable, Selectionnable, Serializable {
 
 		// Crée nombre au hasard de 0 - 1
 
-		double nombreRandom = Math.random();
+		double nombreRandom = 0.1;
 
 		// 20 % de chance que ce soit un champignon
 		if (nombreRandom < 0.2) {

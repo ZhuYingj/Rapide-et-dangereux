@@ -194,7 +194,7 @@ public class Regroupement implements Dessinable, Serializable {
 					objSpecial.setTempsTemporaire(tempsTemp);
 					tempsTemp = tempsTotalEcoule;
 					regroupementBoiteMystere.remove(a).getObjetSpecial();
-
+					listePisteDeDepart.get(0).getVoiture().setDiametreFleche(16);
 					enContactAvecColle = false;
 					collePisteHorizontale = false;
 					collePisteVerticale = false;
@@ -211,10 +211,11 @@ public class Regroupement implements Dessinable, Serializable {
 						.enCollisionAvecVoiture(listePisteDeDepart.get(0).getVoiture2()) == true) {
 					// Si le champignon etait en fonction et un autre objet a été pris, on remet le
 					// diametre et masse aux valeurs initiales.
-					listePisteDeDepart.get(0).getVoiture()
+					listePisteDeDepart.get(0).getVoiture2()
 							.setMasseEnKg(listePisteDeDepart.get(0).getVoiture2().getMasseEnKgInitial());
-					listePisteDeDepart.get(0).getVoiture()
+					listePisteDeDepart.get(0).getVoiture2()
 							.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());
+					listePisteDeDepart.get(0).getVoiture2().setDiametreFleche(16);
 					boutonAppuye2 = false;
 					objSpecial2 = regroupementBoiteMystere.get(a).getObjetSpecial();
 					if (objSpecial2.getType() != TypeObjetSpecial.BOULEDENEIGE) {
