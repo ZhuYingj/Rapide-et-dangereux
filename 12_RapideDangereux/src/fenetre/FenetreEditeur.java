@@ -69,7 +69,7 @@ public class FenetreEditeur extends JPanel {
 	private int couleurPiste = 0;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK };
-	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.YELLOW,
+	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW,
 			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private boolean gauche = false;
 	private boolean droite = false;

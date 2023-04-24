@@ -73,7 +73,7 @@ public class JeuOptions extends JPanel {
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, };
 	/** Liste des couleurs de bordure de piste **/
-	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.YELLOW,
+	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW,
 			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleursMaterielPiste = { new Color(194, 178, 128), new Color(128, 126, 120),
 			new Color(185, 232, 234) };
