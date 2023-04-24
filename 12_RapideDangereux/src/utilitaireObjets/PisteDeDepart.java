@@ -47,6 +47,8 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	private int murHaut;
 	private int murBas;
 	private boolean collision = false;
+	private boolean collision2 = false;
+	
 	private Color color = new Color(128, 126, 120);
 	private Rectangle2D.Double formeAire;
 	private Voiture voiture;
@@ -205,11 +207,15 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 	 * @param voiture La voiture controllée
 	 */
 	// Kevin Nguyen
-	public void traverserPiste(Voiture voiture) {
+	public void traverserPiste(Voiture voiture, Voiture voiture2) {
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
 			setCollision(true);
 
+		}
+		if (voiture2.getPosition().getX() > murGauche && voiture2.getPosition().getX() < murDroite
+				&& voiture2.getPosition().getY() > murHaut && voiture2.getPosition().getY() < murBas) {
+			setCollision2(true);
 		}
 
 	}
@@ -262,6 +268,14 @@ public class PisteDeDepart implements Dessinable, Selectionnable, Serializable {
 
 	public void setCollision(boolean collision) {
 		this.collision = collision;
+	}
+
+	public boolean isCollision2() {
+		return collision2;
+	}
+
+	public void setCollision2(boolean collision2) {
+		this.collision2 = collision2;
 	}
 
 	public Color getColor() {

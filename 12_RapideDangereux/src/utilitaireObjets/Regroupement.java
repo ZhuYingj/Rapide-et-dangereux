@@ -1170,49 +1170,88 @@ public class Regroupement implements Dessinable, Serializable {
 
 		for (int i = 0; i < listePisteHorizontale.size(); i++) {
 			listePisteHorizontale.get(i).enCollisionAvec(voiture);
-			listePisteHorizontale.get(i).traverserPiste(voiture);
+
 			collisionBouleDeNeigeAvecPisteHorizontale(i);
 
 		}
 
 		for (int i = 0; i < listePisteVerticale.size(); i++) {
 			listePisteVerticale.get(i).enCollisionAvec(voiture);
-			listePisteVerticale.get(i).traverserPiste(voiture);
+
 			collisionBouleDeNeigeAvecPisteVerticale(i);
 
 		}
 
 		for (int i = 0; i < listePisteVirageBas.size(); i++) {
 			listePisteVirageBas.get(i).enCollisionAvec(voiture);
-			listePisteVirageBas.get(i).traverserPiste(voiture);
+
 			collisionBouleDeNeigeAvecPisteVirageBas(i);
 
 		}
 
 		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
 			listePisteVirageGauche.get(i).enCollisionAvec(voiture);
-			listePisteVirageGauche.get(i).traverserPiste(voiture);
+
 			collisionBouleDeNeigeAvecPisteVirageGauche(i);
 
 		}
 
 		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
 			listePisteVirageDroit.get(i).enCollisionAvec(voiture);
-			listePisteVirageDroit.get(i).traverserPiste(voiture);
+
 			collisionBouleDeNeigeAvecPisteVirageDroit(i);
 
 		}
 
 		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
 			listePisteVirageHaut.get(i).enCollisionAvec(voiture);
-			listePisteVirageHaut.get(i).traverserPiste(voiture);
+
 			collisionBouleDeNeigeAvecPisteVirageHaut(i);
 
 		}
 
 		listePisteDeDepart.get(0).enCollisionAvec(voiture);
-		listePisteDeDepart.get(0).traverserPiste(voiture);
+
 		collisionBouleDeNeigeAvecPisteDeDepart(0);
+
+	}
+
+	public void traverserPiste(Voiture voiture, Voiture voiture2) {
+
+		for (int i = 0; i < listePisteHorizontale.size(); i++) {
+			listePisteHorizontale.get(i).traverserPiste(voiture, voiture2);
+
+		}
+
+		for (int i = 0; i < listePisteVerticale.size(); i++) {
+			listePisteVerticale.get(i).traverserPiste(voiture, voiture2);
+
+		}
+
+		for (int i = 0; i < listePisteVirageBas.size(); i++) {
+			listePisteVirageBas.get(i).traverserPiste(voiture, voiture2);
+
+		}
+
+		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
+
+			listePisteVirageGauche.get(i).traverserPiste(voiture, voiture2);
+
+		}
+
+		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
+
+			listePisteVirageDroit.get(i).traverserPiste(voiture, voiture2);
+
+		}
+
+		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
+
+			listePisteVirageHaut.get(i).traverserPiste(voiture, voiture2);
+
+		}
+
+		listePisteDeDepart.get(0).traverserPiste(voiture, voiture2);
 
 	}
 
@@ -1409,69 +1448,74 @@ public class Regroupement implements Dessinable, Serializable {
 	 * @param voiture La voiture controllée
 	 */
 	// Kevin Nguyen
-	public void tourComplet(Voiture voiture) {
+	public void tourComplet(Voiture voiture, Voiture voiture2) {
 		int count = 0;
+		int count2 = 0;
 		for (int i = 0; i < listePisteHorizontale.size(); i++) {
 			if (listePisteHorizontale.get(i).isCollision() == true) {
 				count++;
 			}
-		}
-
-		for (int i = 0; i < listePisteVirageBas.size(); i++) {
-			listePisteVirageBas.get(i).isCollision();
+			if (listePisteHorizontale.get(i).isCollision2() == true) {
+				count2++;
+			}
 		}
 
 		for (int i = 0; i < listePisteVirageBas.size(); i++) {
 			if (listePisteVirageBas.get(i).isCollision() == true) {
 				count++;
 			}
-		}
-
-		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
-			listePisteVirageHaut.get(i).isCollision();
+			if (listePisteVirageBas.get(i).isCollision2() == true) {
+				count2++;
+			}
 		}
 
 		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
 			if (listePisteVirageHaut.get(i).isCollision() == true) {
 				count++;
 			}
-		}
-		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
-			listePisteVirageGauche.get(i).isCollision();
+			if (listePisteVirageHaut.get(i).isCollision2() == true) {
+				count2++;
+			}
 		}
 
 		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
 			if (listePisteVirageGauche.get(i).isCollision() == true) {
 				count++;
 			}
-		}
-		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
-			listePisteVirageDroit.get(i).isCollision();
+			if (listePisteVirageGauche.get(i).isCollision2() == true) {
+				count2++;
+			}
 		}
 
 		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
 			if (listePisteVirageDroit.get(i).isCollision() == true) {
 				count++;
+			} 
+			if (listePisteVirageDroit.get(i).isCollision2() == true) {
+				count2++;
 			}
-		}
-		for (int i = 0; i < listePisteDeDepart.size(); i++) {
-			listePisteDeDepart.get(i).isCollision();
 		}
 
 		for (int i = 0; i < listePisteDeDepart.size(); i++) {
 			if (listePisteDeDepart.get(i).isCollision() == true) {
 				count++;
 			}
-		}
-		for (int i = 0; i < listePisteVerticale.size(); i++) {
-			listePisteVerticale.get(i).isCollision();
+			if (listePisteDeDepart.get(i).isCollision2() == true) {
+				count2++;
+			}
 		}
 
 		for (int i = 0; i < listePisteVerticale.size(); i++) {
 			if (listePisteVerticale.get(i).isCollision() == true) {
 				count++;
 			}
+			if (listePisteVerticale.get(i).isCollision2() == true) {
+				count2++;
+			}
 		}
+		
+		System.out.println(count);
+		System.out.println(count2);
 
 		if (count == listePisteHorizontale.size() + listePisteVerticale.size() + listePisteVirageBas.size()
 				+ listePisteVirageHaut.size() + listePisteVirageGauche.size() + listePisteVirageDroit.size()
@@ -1483,10 +1527,20 @@ public class Regroupement implements Dessinable, Serializable {
 
 			}
 		}
+
+		if (count2 == listePisteHorizontale.size() + listePisteVerticale.size() + listePisteVirageBas.size()
+				+ listePisteVirageHaut.size() + listePisteVirageGauche.size() + listePisteVirageDroit.size()
+				+ listePisteDeDepart.size()) {
+			if (listePisteDeDepart.get(0).resetTout(voiture2)) {
+				voiture2.setNombreToursFaits(voiture2.getNombreToursFaits() + 1);
+				resetTour2();
+
+			}
+		}
 	}
 
 	/**
-	 * Méthode permettant de compter le nombre de tour fait par une voiture et
+	 * Méthode permettant de compter le nombre de tour fait par la voiture  1et
 	 * réinitialise le boolean de passage de la voiture d'un morceau de piste
 	 */
 	// Kevin Nguyen
@@ -1522,6 +1576,48 @@ public class Regroupement implements Dessinable, Serializable {
 
 		for (int i = 0; i < listePisteVirageBas.size(); i++) {
 			listePisteVirageBas.get(i).setCollision(false);
+
+		}
+
+	}
+	
+	/**
+	 * Méthode permettant de compter le nombre de tour fait par la voiture 2 et
+	 * réinitialise le boolean de passage de la voiture d'un morceau de piste
+	 */
+	// Kevin Nguyen
+	public void resetTour2() {
+
+		for (int i = 0; i < listePisteVirageDroit.size(); i++) {
+			listePisteVirageDroit.get(i).setCollision2(false);
+
+		}
+		for (int i = 0; i < listePisteDeDepart.size(); i++) {
+			listePisteDeDepart.get(i).setCollision2(false);
+
+		}
+
+		for (int i = 0; i < listePisteHorizontale.size(); i++) {
+			listePisteHorizontale.get(i).setCollision2(false);
+
+		}
+		for (int i = 0; i < listePisteVerticale.size(); i++) {
+			listePisteVerticale.get(i).setCollision2(false);
+
+		}
+
+		for (int i = 0; i < listePisteVirageGauche.size(); i++) {
+			listePisteVirageGauche.get(i).setCollision2(false);
+
+		}
+
+		for (int i = 0; i < listePisteVirageHaut.size(); i++) {
+			listePisteVirageHaut.get(i).setCollision2(false);
+
+		}
+
+		for (int i = 0; i < listePisteVirageBas.size(); i++) {
+			listePisteVirageBas.get(i).setCollision2(false);
 
 		}
 
