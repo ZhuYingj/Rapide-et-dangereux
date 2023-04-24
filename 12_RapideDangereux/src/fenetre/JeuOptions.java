@@ -51,8 +51,8 @@ import interfaces.TypePiste;
  */
 
 public class JeuOptions extends JPanel {
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	private final ButtonGroup buttonGroupDiff = new ButtonGroup();
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
+	private final ButtonGroup BUTTON_GROUP_DIFF = new ButtonGroup();
 	private JRadioButton rdbtnFacile;
 	private JRadioButton rdbtnMedium;
 	private JRadioButton rdbtnDifficile;
@@ -105,7 +105,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
+		PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -297,7 +297,7 @@ public class JeuOptions extends JPanel {
 		});
 		rdbtnFacile.setBounds(165, 182, 109, 23);
 		panel2.add(rdbtnFacile);
-		buttonGroupDiff.add(rdbtnFacile);
+		BUTTON_GROUP_DIFF.add(rdbtnFacile);
 
 		rdbtnMedium = new JRadioButton("Intermédiaire");
 		rdbtnMedium.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -309,7 +309,7 @@ public class JeuOptions extends JPanel {
 		});
 		rdbtnMedium.setBounds(165, 207, 109, 23);
 		panel2.add(rdbtnMedium);
-		buttonGroupDiff.add(rdbtnMedium);
+		BUTTON_GROUP_DIFF.add(rdbtnMedium);
 
 		rdbtnDifficile = new JRadioButton("Avancé");
 		rdbtnDifficile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -321,7 +321,7 @@ public class JeuOptions extends JPanel {
 		});
 		rdbtnDifficile.setBounds(165, 233, 109, 23);
 		panel2.add(rdbtnDifficile);
-		buttonGroupDiff.add(rdbtnDifficile);
+		BUTTON_GROUP_DIFF.add(rdbtnDifficile);
 
 		JLabel lblVitesseFacile = new JLabel("60 m/s");
 		lblVitesseFacile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -434,7 +434,7 @@ public class JeuOptions extends JPanel {
 		btnRetour.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("Retour", 0, -1);
+				PCS.firePropertyChange("Retour", 0, -1);
 			}
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
@@ -531,7 +531,7 @@ public class JeuOptions extends JPanel {
 		btnRecorsPiste.setBounds(58, 73, 158, 78);
 		btnRecorsPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("RECORD", null, -1);
+				PCS.firePropertyChange("RECORD", null, -1);
 				actionRecord();
 			}
 		});
@@ -582,12 +582,12 @@ public class JeuOptions extends JPanel {
 	 */
 	// Tan Tommy Rin
 	private void actionCommencer() {
-		pcs.firePropertyChange("COMMENCER!", null, -1);
-		pcs.firePropertyChange("MASSE1", null, (double) slider.getValue());
-		pcs.firePropertyChange("MASSE2", null, (double) slider2.getValue());
-		pcs.firePropertyChange("TYPEPISTE", null, type);
-		pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
-		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
+		PCS.firePropertyChange("COMMENCER!", null, -1);
+		PCS.firePropertyChange("MASSE1", null, (double) slider.getValue());
+		PCS.firePropertyChange("MASSE2", null, (double) slider2.getValue());
+		PCS.firePropertyChange("TYPEPISTE", null, type);
+		PCS.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
+		PCS.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
 
 	}
 
@@ -720,8 +720,8 @@ public class JeuOptions extends JPanel {
 	 */
 	// Ludovic Julien
 	private void actionSkin() {
-		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
-		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+		PCS.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+		PCS.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
 
 	}
 
@@ -760,8 +760,8 @@ public class JeuOptions extends JPanel {
 			}
 
 		}
-		pcs.firePropertyChange("SKINOPTIONS1", null, couleurs[indexCouleur]);
-		pcs.firePropertyChange("SKINOPTIONS2", null, couleurs2[indexCouleur2]);
+		PCS.firePropertyChange("SKINOPTIONS1", null, couleurs[indexCouleur]);
+		PCS.firePropertyChange("SKINOPTIONS2", null, couleurs2[indexCouleur2]);
 	}
 
 	/**
@@ -782,7 +782,7 @@ public class JeuOptions extends JPanel {
 			}
 		}
 		panelCouleurPiste.setBackground(couleursPiste[couleurPiste]);
-		pcs.firePropertyChange("COULEURPISTE2", null, couleursPiste[couleurPiste]);
+		PCS.firePropertyChange("COULEURPISTE2", null, couleursPiste[couleurPiste]);
 		repaint();
 	}
 
@@ -792,7 +792,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void changeMaterielPiste() {
-		pcs.firePropertyChange("COULEURMATPISTE", null, couleursMaterielPiste[couleurMatPiste]);
+		PCS.firePropertyChange("COULEURMATPISTE", null, couleursMaterielPiste[couleurMatPiste]);
 	}
 
 	/**
@@ -843,7 +843,7 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionRdbtnVitesseFacile() {
 		txtArea.append("\nVous avez selectionné la difficulté <<Facile>> ");
-		pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
+		PCS.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
 	}
 
 	/**
@@ -853,7 +853,7 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionRdbtnVitesseIntermediaire() {
 		txtArea.append("\nVous avez selectionné la difficulté <<Intermédiaire>> ");
-		pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 80.0);
+		PCS.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 80.0);
 	}
 
 	/**
@@ -863,7 +863,7 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionRdbtnVitesseAvance() {
 		txtArea.append("\nVous avez selectionné la difficulté <<Avancé>> ");
-		pcs.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
+		PCS.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
 	}
 
 	/**
@@ -872,7 +872,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void actionCbAsphalt() {
-		pcs.firePropertyChange("MATPISTEASPHALT", null, cbMatPiste.getSelectedItem());
+		PCS.firePropertyChange("MATPISTEASPHALT", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi l'asphalt où le coefficient de frottement est 0.20");
 	}
 
@@ -882,7 +882,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void actionCbSable() {
-		pcs.firePropertyChange("MATPISTESABLE", null, cbMatPiste.getSelectedItem());
+		PCS.firePropertyChange("MATPISTESABLE", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi le sable où le coefficient de frottement est 0.70");
 	}
 
@@ -892,7 +892,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void actionCbGlace() {
-		pcs.firePropertyChange("MATPISTEGLACE", null, cbMatPiste.getSelectedItem());
+		PCS.firePropertyChange("MATPISTEGLACE", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi la glace où le coefficient de frottement est 0.02");
 	}
 
@@ -963,7 +963,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void couleurPisteAsphalt() {
-		pcs.firePropertyChange("COULEURPISTEASPHALT", null, couleursMaterielPiste[couleurMatPiste]);
+		PCS.firePropertyChange("COULEURPISTEASPHALT", null, couleursMaterielPiste[couleurMatPiste]);
 	}
 
 	/**
@@ -972,7 +972,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void couleurPisteSable() {
-		pcs.firePropertyChange("COULEURPISTESABLE", null, couleursMaterielPiste[couleurMatPiste]);
+		PCS.firePropertyChange("COULEURPISTESABLE", null, couleursMaterielPiste[couleurMatPiste]);
 	}
 
 	/**
@@ -981,7 +981,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void couleurPisteGlace() {
-		pcs.firePropertyChange("COULEURPISTEGLACE", null, couleursMaterielPiste[couleurMatPiste]);
+		PCS.firePropertyChange("COULEURPISTEGLACE", null, couleursMaterielPiste[couleurMatPiste]);
 	}
 
 	/**

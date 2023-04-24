@@ -77,7 +77,7 @@ public class FenetreEditeur extends JPanel {
 
 	private PanelObjet panelObjet;
 
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 
 	private JLabel lblImage;
 	private JPanel panelCouleurPiste;
@@ -91,7 +91,7 @@ public class FenetreEditeur extends JPanel {
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
+		PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class FenetreEditeur extends JPanel {
 		btnRetour.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("Retour", null, -1);
+				PCS.firePropertyChange("Retour", null, -1);
 			}
 		});
 
@@ -855,9 +855,9 @@ public class FenetreEditeur extends JPanel {
 
 			chargementUnePiste();
 
-			pcs.firePropertyChange("JOUEREDITEUR", null, -1);
+			PCS.firePropertyChange("JOUEREDITEUR", null, -1);
 
-			pcs.firePropertyChange("REGROUPEMENT", null, pisteCourante);
+			PCS.firePropertyChange("REGROUPEMENT", null, pisteCourante);
 
 			actionSkin();
 		} else {
@@ -1832,7 +1832,7 @@ public class FenetreEditeur extends JPanel {
 			}
 		}
 		panelCouleurPiste.setBackground(couleursPiste[couleurPiste]);
-		pcs.firePropertyChange("COULEURPISTE4", null, couleursPiste[couleurPiste]);
+		PCS.firePropertyChange("COULEURPISTE4", null, couleursPiste[couleurPiste]);
 		repaint();
 	}
 
@@ -1871,8 +1871,8 @@ public class FenetreEditeur extends JPanel {
 			}
 
 		}
-		pcs.firePropertyChange("SKINOPTIONS3", null, couleurs[indexCouleur]);
-		pcs.firePropertyChange("SKINOPTIONS4", null, couleurs2[indexCouleur2]);
+		PCS.firePropertyChange("SKINOPTIONS3", null, couleurs[indexCouleur]);
+		PCS.firePropertyChange("SKINOPTIONS4", null, couleurs2[indexCouleur2]);
 	}
 
 	/**
@@ -1881,8 +1881,8 @@ public class FenetreEditeur extends JPanel {
 	 */
 	// Ludovic Julien
 	private void actionSkin() {
-		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
-		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+		PCS.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+		PCS.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
 
 	}
 

@@ -27,7 +27,7 @@ import java.awt.Color;
  *
  */
 public class ClassementParPiste extends JPanel {
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -36,7 +36,7 @@ public class ClassementParPiste extends JPanel {
 	 */
 //Ludovic Julien
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		this.pcs.addPropertyChangeListener(listener);
+		this.PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class ClassementParPiste extends JPanel {
 		JButton btnFermer = new JButton("Retour");
 		btnFermer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("QUITTER", null, -1);
+				PCS.firePropertyChange("QUITTER", null, -1);
 
 			}
 		});

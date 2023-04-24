@@ -128,7 +128,7 @@ public class Regroupement implements Dessinable, Serializable {
 
 	private DessinCollisionBouleDeNeige snowball;
 	/** support pour lancer des evenements de type PropertyChange **/
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 	private transient Graphics2D g2d;
 
 	private Color couleurBordurePiste;
@@ -145,7 +145,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		this.pcs.addPropertyChangeListener(listener);
+		this.PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -188,7 +188,7 @@ public class Regroupement implements Dessinable, Serializable {
 							.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
 					objSpecial = regroupementBoiteMystere.get(a).getObjetSpecial();
 					if (objSpecial.getType() != TypeObjetSpecial.BOULEDENEIGE) {
-						pcs.firePropertyChange("reset1", 0, -1);
+						PCS.firePropertyChange("reset1", 0, -1);
 					}
 					boutonAppuye = false;
 					objSpecial.setTempsTemporaire(tempsTemp);
@@ -219,7 +219,7 @@ public class Regroupement implements Dessinable, Serializable {
 					boutonAppuye2 = false;
 					objSpecial2 = regroupementBoiteMystere.get(a).getObjetSpecial();
 					if (objSpecial2.getType() != TypeObjetSpecial.BOULEDENEIGE) {
-						pcs.firePropertyChange("reset2", 0, -1);
+						PCS.firePropertyChange("reset2", 0, -1);
 					}
 					objSpecial2.setTempsTemporaire(tempsTemp2);
 					tempsTemp2 = tempsTotalEcoule;
@@ -247,10 +247,10 @@ public class Regroupement implements Dessinable, Serializable {
 
 		if (objSpecial == null) {
 
-			pcs.firePropertyChange("reset1", 0, -1);
+			PCS.firePropertyChange("reset1", 0, -1);
 		}
 		if (objSpecial2 == null) {
-			pcs.firePropertyChange("reset2", 0, -1);
+			PCS.firePropertyChange("reset2", 0, -1);
 		}
 		fumeeFonction();
 		accelerateurFonction();
@@ -325,10 +325,10 @@ public class Regroupement implements Dessinable, Serializable {
 					if (objSpecial.getTrouNoir().collisionDeLaVoiture(listePisteDeDepart.get(0).getVoiture()) == true) {
 
 						Vecteur2D forceAttraction = objSpecial.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture());
-						pcs.firePropertyChange("attractionV1X", 0, forceAttraction.getX());
-						pcs.firePropertyChange("attractionV1Y", 0, forceAttraction.getY());
+						PCS.firePropertyChange("attractionV1X", 0, forceAttraction.getX());
+						PCS.firePropertyChange("attractionV1Y", 0, forceAttraction.getY());
 					} else {
-						pcs.firePropertyChange("attractionV1Reset", 0, -1);
+						PCS.firePropertyChange("attractionV1Reset", 0, -1);
 
 					}
 					if (objSpecial.getTrouNoir()
@@ -336,17 +336,17 @@ public class Regroupement implements Dessinable, Serializable {
 						Vecteur2D forceAttraction = objSpecial
 								.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture2());
 						objSpecial.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture2());
-						pcs.firePropertyChange("attractionV2X", 0, forceAttraction.getX());
-						pcs.firePropertyChange("attractionV2Y", 0, forceAttraction.getY());
+						PCS.firePropertyChange("attractionV2X", 0, forceAttraction.getX());
+						PCS.firePropertyChange("attractionV2Y", 0, forceAttraction.getY());
 					} else {
-						pcs.firePropertyChange("attractionV2Reset", 0, -1);
+						PCS.firePropertyChange("attractionV2Reset", 0, -1);
 
 					}
 
 				} else {
 					objSpecial = null;
-					pcs.firePropertyChange("attractionV1Reset", 0, -1);
-					pcs.firePropertyChange("attractionV2Reset", 0, -1);
+					PCS.firePropertyChange("attractionV1Reset", 0, -1);
+					PCS.firePropertyChange("attractionV2Reset", 0, -1);
 				}
 
 			} else if (objSpecial.getType() == TypeObjetSpecial.COLLE) {
@@ -420,10 +420,10 @@ public class Regroupement implements Dessinable, Serializable {
 						objSpecial2.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture());
 						Vecteur2D forceAttraction = objSpecial2
 								.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture());
-						pcs.firePropertyChange("attractionV1X", 0, forceAttraction.getX());
-						pcs.firePropertyChange("attractionV1Y", 0, forceAttraction.getY());
+						PCS.firePropertyChange("attractionV1X", 0, forceAttraction.getX());
+						PCS.firePropertyChange("attractionV1Y", 0, forceAttraction.getY());
 					} else {
-						pcs.firePropertyChange("attractionV1Reset", 0, -1);
+						PCS.firePropertyChange("attractionV1Reset", 0, -1);
 
 					}
 					if (objSpecial2.getTrouNoir()
@@ -431,17 +431,17 @@ public class Regroupement implements Dessinable, Serializable {
 						objSpecial2.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture2());
 						Vecteur2D forceAttraction = objSpecial2
 								.fonctionTrouNoir(listePisteDeDepart.get(0).getVoiture2());
-						pcs.firePropertyChange("attractionV2X", 0, forceAttraction.getX());
-						pcs.firePropertyChange("attractionV2Y", 0, forceAttraction.getY());
+						PCS.firePropertyChange("attractionV2X", 0, forceAttraction.getX());
+						PCS.firePropertyChange("attractionV2Y", 0, forceAttraction.getY());
 					} else {
-						pcs.firePropertyChange("attractionV2Reset", 0, -1);
+						PCS.firePropertyChange("attractionV2Reset", 0, -1);
 
 					}
 
 				} else {
 					objSpecial2 = null;
-					pcs.firePropertyChange("attractionV1Reset", 0, -1);
-					pcs.firePropertyChange("attractionV2Reset", 0, -1);
+					PCS.firePropertyChange("attractionV1Reset", 0, -1);
+					PCS.firePropertyChange("attractionV2Reset", 0, -1);
 				}
 
 			} else if (objSpecial2.getType() == TypeObjetSpecial.COLLE) {

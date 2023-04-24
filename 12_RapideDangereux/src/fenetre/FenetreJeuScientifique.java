@@ -45,7 +45,7 @@ import geometrie.Vecteur2D;
  */
 public class FenetreJeuScientifique extends JPanel {
 
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
 
 	private JProgressBar progressBarFroce;
@@ -117,7 +117,7 @@ public class FenetreJeuScientifique extends JPanel {
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
+		PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -1160,7 +1160,7 @@ public class FenetreJeuScientifique extends JPanel {
 		zoneAnimPhysique.demarrer();
 		btnNextImg.setEnabled(false);
 		btnStart.setEnabled(false);
-		pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+		PCS.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 		txtArea.append("\nVous avez démarrer le jeu");
 	}
 
@@ -1185,7 +1185,7 @@ public class FenetreJeuScientifique extends JPanel {
 		zoneAnimPhysique.restartPosPisteDepart();
 		btnNextImg.setEnabled(true);
 		btnStart.setEnabled(true);
-		pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
+		PCS.firePropertyChange("CHECKBOXACTIVE", null, -1);
 		txtArea.append("\nVous avez reinitialiser le jeu");
 	}
 
@@ -1194,8 +1194,8 @@ public class FenetreJeuScientifique extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void actionBtnRetour() {
-		pcs.firePropertyChange("RetourDuJeuScience", null, -1);
-		pcs.firePropertyChange("Test", null, -1);
+		PCS.firePropertyChange("RetourDuJeuScience", null, -1);
+		PCS.firePropertyChange("Test", null, -1);
 	}
 
 	/**

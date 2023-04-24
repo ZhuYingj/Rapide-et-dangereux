@@ -33,7 +33,7 @@ public class FenetreMenu extends JPanel {
 	private JButton btnAide;
 	private JButton btnQuitter;
 	private FenetreInstruction fenInstructions;
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -41,7 +41,7 @@ public class FenetreMenu extends JPanel {
 	 */
 //Ludovic Julien
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
+		PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class FenetreMenu extends JPanel {
 		btnJouer.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnJouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("JOUER", 0, -1);
+				PCS.firePropertyChange("JOUER", 0, -1);
 			}
 		});
 		btnJouer.setBounds(700, 245, 100, 49);

@@ -89,7 +89,7 @@ public class PanelRegroupement extends JPanel {
 	private int hauteur;
 	private int indexObjetPris;
 	/** support pour lancer des evenements de type PropertyChange **/
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 	/** L'image de la poubelle **/
 	private JLabel lblPoubelle;
 
@@ -101,7 +101,7 @@ public class PanelRegroupement extends JPanel {
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 
-		this.pcs.addPropertyChangeListener(listener);
+		this.PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -345,7 +345,7 @@ public class PanelRegroupement extends JPanel {
 		} else if (type == TypeObjetDeplacable.ACCELERATEUR
 				&& poubelle.contains(listeAccelerateur.get(indexObjetPris).getFormeAire())) {
 			listeAccelerateur.remove(indexObjetPris);
-			pcs.firePropertyChange("POUBELLEACC", 0, -1);
+			PCS.firePropertyChange("POUBELLEACC", 0, -1);
 			poubelleVide = false;
 
 		} else if (type == TypeObjetDeplacable.PISTEVIRAGEBAS
