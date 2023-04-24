@@ -872,7 +872,11 @@ public class PanelRegroupement extends JPanel {
 	// Tan Tommy Rin
 	private void accelerateurDrag(MouseEvent e) {
 		if (listeAccelerateur.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.ACCELERATEUR) {
-
+			if (poubelle.contains(acc.getFormeAire())) {
+				acc.setTaillePiste(30);
+			} else {
+				acc.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 

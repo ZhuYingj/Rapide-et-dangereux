@@ -445,6 +445,7 @@ public class FenetreEditeur extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				pisteCourante = (String) comboBoxPiste.getSelectedItem();
 				chargementUnePiste();
+				
 
 			}
 		});
@@ -1801,7 +1802,10 @@ public class FenetreEditeur extends JPanel {
 //		for (int a = 0; a < regroupementSauvegarde.getListeFumee().size(); a++) {
 //			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
 //		}
-
+		lblNbAcc.setText(regroupementSauvegarde.getListeAccelerateur().size() + "");
+		if(regroupementSauvegarde.getListeAccelerateur().size() == 3) {
+			btnAjouterAccelerateur.setEnabled(false);
+		}
 		resetValeur();
 		repaint();
 
