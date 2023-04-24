@@ -992,6 +992,7 @@ public class AppPrincipale12 extends JFrame {
 			fenScience.setVisible(true);
 			fenEditeur.setVisible(false);
 			setContentPane(fenScience);
+			fenScience.getZoneAnimPhysique().setTempsMontreFacile(100000.0);
 			break;
 		case "REGROUPEMENT":
 			fenScience.getZoneAnimPhysique().setNomFichierRegroupement((String) evt.getNewValue());

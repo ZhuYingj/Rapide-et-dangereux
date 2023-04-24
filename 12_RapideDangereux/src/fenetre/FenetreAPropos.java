@@ -39,8 +39,13 @@ public class FenetreAPropos extends JPanel {
 		tabOnglets.addTab("Sources", null, pnlSources, null);
 
 		JLabel lblSources = new JLabel(
-				"<html>" + "<br>Image de telle chose: truc.org" + "<br>Image de telle chose: chose.com" + "<br>"
-						+ "<br>Module de code pour telle chose: aaa.bbb.org" + "<br>(etc etc) </html>");
+				"<html>" + "Music du jeux : https://www.auboutdufil.com/index.php?id=647" + "<br>Boite mystere : https://unturned.fandom.com/wiki/Chrome_Plated_Mystery_Box"
+						+ "<br>Fenêtre Éditeur : https://www.wallpaperflare.com/blue-dazzling-lines<br>-dark-background-4k-hd-technology-data-wireless-technology-wallpaper-mxjce" + "<br>champignon : https://icones8.fr/icon/6OUwhiZ6iy_O/champignon"				
+						+ "<br>Boule de neige : http://clipart-library.com/clipart/ziXGaj4iB.htm" + "<br>Colle : https://www.seekpng.com/ima/u2q8r5i1i1r5e6i1/"						
+						+ "<br>Trou noir : https://icons8.com/icons/set/black-hole" + "<br>Glace : https://en.ac-illust.com/clip-art/2061036/ground-ice"						
+						+ "<br>Sable : https://www.dreamstime.com/cartoon-sand-seamless-vector-<br>pattern-summer-background-cartoon-sand-pattern-image158757125" + "<br>Asphalte : https://fr.depositphotos.com/15737199/stock-illustration-<br>seamless-asphalt-texture.html");
+						
+					//	+ "<br>Module de code pour telle chose: aaa.bbb.org" + "<br>(etc etc) </html>");
 		lblSources.setVerticalAlignment(SwingConstants.TOP);
 		pnlSources.add(lblSources);
 	}
