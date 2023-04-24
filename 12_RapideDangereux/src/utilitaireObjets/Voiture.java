@@ -475,29 +475,29 @@ public class Voiture implements Dessinable, Serializable {
 
 			double d = delta.module();
 
-			Vecteur2D mtd;
+			Vecteur2D deplacement;
 			if (d != 0) {
-				mtd = delta.multiplie((distanceRayons - d) / d);
+				deplacement = delta.multiplie((distanceRayons - d) / d);
 			} else {
 				d = distanceRayons - 1;
 				delta = new Vecteur2D(distanceRayons, 0);
-				mtd = delta.multiplie((distanceRayons - d) / d);
+				deplacement = delta.multiplie((distanceRayons - d) / d);
 			}
 
 			double masse1 = 1 / getMasseEnKg();
 			double masse2 = 1 / voiture1.getMasseEnKg();
 
-			setPosition(getPosition().additionne(mtd.multiplie(masse1 / (masse1 + masse2))));
-			voiture1.setPosition(voiture1.getPosition().soustrait(mtd.multiplie(masse2 / (masse1 + masse2))));
+			setPosition(getPosition().additionne(deplacement.multiplie(masse1 / (masse1 + masse2))));
+			voiture1.setPosition(voiture1.getPosition().soustrait(deplacement.multiplie(masse2 / (masse1 + masse2))));
 
 			Vecteur2D v = getVitesse().soustrait(voiture1.getVitesse());
-			double vn = v.prodScalaire(mtd.normalise());
+			double vn = v.prodScalaire(deplacement.normalise());
 
 			if (vn > 0)
 				return;
 
 			double i = (-(1 + 0.8) * vn) / (masse1 + masse2);
-			Vecteur2D impulsion = mtd.normalise().multiplie(i);
+			Vecteur2D impulsion = deplacement.normalise().multiplie(i);
 
 			setVitesse(getVitesse().additionne(impulsion.multiplie(masse1)));
 			voiture1.setVitesse(voiture1.getVitesse().soustrait(impulsion.multiplie(masse2)));
