@@ -1,5 +1,4 @@
-package fenetre;
-
+package aproposetaide;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -13,29 +12,29 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import fenetre.PanelImagesAvecDefilement;
 
 /**
  * Exemple de fenetre qui cree un JPanel dans lequel sera affichees (et bien ajustees) une suite d'images representant du texte
  * continu. Les boutons places sur cette fenetre permettent de passer a l'image precedente/suicante.
  * 
  * @author Caroline Houle
+ * @author Ludovic Julien
  *
  */
-public class FenetreInstruction extends JFrame {
+public class FenetreAideInstructions extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnPagePrecedente;
 	private JButton btnPageSuivante;
 	
 	// c'est ici que l'on declare un tableau ou on enumere toutes les pages d'aide desirees
-	private String tableauImages[] = {"intro.jpg","general.jpg", "touches.jpg", "aide4.jpg","aide5.jpg", "aide6.jpg", "page6.jpg"};
+	private String tableauImages[] = {"aide+aPropos-1.jpg","aide+aPropos-2.jpg","aide+aPropos-3.jpg","aide+aPropos-4.jpg","aide+aPropos-5.jpg","aide+aPropos-6.jpg","aide+aPropos-7.jpg","aide+aPropos-8.jpg","aide+aPropos-9.jpg"};
 	private JLabel lblAttention;
 
 	/**
 	 * Constructeur: cr�e une fen�tre qui inclut une instance d'image avec d�filement
 	 */
-	public FenetreInstruction() {
+	public FenetreAideInstructions() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 886, 808);
 		contentPane = new JPanel();
@@ -87,13 +86,13 @@ public class FenetreInstruction extends JFrame {
 		lblAideInstructions.setBounds(264, 11, 342, 34);
 		contentPane.add(lblAideInstructions);
 		
-		lblAttention = new JLabel("---> Exemples al\u00E9atoires de pages sans liens entre elles! <---");
+		lblAttention = new JLabel("---> Rapide et dangeruex <---");
 		lblAttention.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAttention.setForeground(Color.MAGENTA);
 		lblAttention.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblAttention.setBounds(139, 43, 657, 34);
+		lblAttention.setBounds(100, 43, 657, 34);
 		contentPane.add(lblAttention);
 		
 	
 	}//fin constructeur
-}
+}//fin classe

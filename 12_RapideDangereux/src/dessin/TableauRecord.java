@@ -84,8 +84,8 @@ public class TableauRecord extends JPanel {
         /**
          * pour mettre à jour le nombre de fois où chaque piste a été jouée
          * 
-         * @param piste
-         * @param nombreDeFoisJoue
+         * @param piste					piste en question
+         * @param nombreDeFoisJoue		nombre de fois jouer de chaque piste
          */
         //Ludovic Julien
         public void updateNombreDeFoisJoue(String piste, String nombreDeFoisJoue) {
@@ -106,8 +106,8 @@ public class TableauRecord extends JPanel {
         /**
          * mettre à jour la moyenne des temps pour chaque piste
          * 
-         * @param piste
-         * @param moyenne
+         * @param piste			piste ne question
+         * @param moyenne		moyen de tout les piste
          */
         //Ludovic Julien
         public void updateMoyenne(String piste, String moyenne) {
@@ -247,11 +247,12 @@ public class TableauRecord extends JPanel {
             return minutes * 60 + secondes;
         }
     }
-
-	/**
-	 * méthode qui retourne le tableau
-	 * 
-	 */
+    
+    /**
+     * méthode qui retourne le tableau
+     * 
+     * @return tableaumodel
+     */
 	// Ludovic Julien
 	public static MyTableModel getTableau() {
 		return tableModel;
