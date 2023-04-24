@@ -243,7 +243,7 @@ public class FenetreOptionMontre extends JPanel {
 		panel2.setLayout(null);
 
 		rdbtnFacile = new JRadioButton("Facile");
-		rdbtnFacile.setSelected(true);
+		rdbtnFacile.setSelected(false);
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionRdbtnVitesseFacile();

@@ -288,7 +288,6 @@ public class JeuOptions extends JPanel {
 
 		rdbtnFacile = new JRadioButton("Facile");
 		rdbtnFacile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
-		rdbtnFacile.setSelected(true);
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionRdbtnVitesseFacile();
