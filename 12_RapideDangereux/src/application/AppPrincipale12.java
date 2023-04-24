@@ -229,7 +229,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenSansScience.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionRetourOptions2(evt, fenSansScience, fenOptions);
+				actionRetourOptions2(evt, fenSansScience, fenModeJeu);
 			}
 		});
 
@@ -988,10 +988,10 @@ public class AppPrincipale12 extends JFrame {
 			FenetreJeuScientifique fenScience) {
 		switch (evt.getPropertyName()) {
 		case "JOUEREDITEUR":
-
 			fenScience.setVisible(true);
 			fenEditeur.setVisible(false);
 			setContentPane(fenScience);
+			fenScience.getZoneAnimPhysique().setTempsMontreFacile(100000.0);
 			break;
 		case "REGROUPEMENT":
 			fenScience.getZoneAnimPhysique().setNomFichierRegroupement((String) evt.getNewValue());
@@ -1090,13 +1090,15 @@ public class AppPrincipale12 extends JFrame {
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourOptions2(PropertyChangeEvent evt, FenetreJeuSansScientifique fenSansScience,
-			JeuOptions fenOptions) {
+			ModeDeJeu fenModeJeu) {
 
 		switch (evt.getPropertyName()) {
 		case "Retour":
 			fenSansScience.setVisible(false);
-			fenOptions.setVisible(true);
-			setContentPane(fenOptions);
+			fenModeJeu.setVisible(true);
+			setContentPane(fenModeJeu);
+			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
+			fenSansScience.getBtnStart().setEnabled(true);
 			break;
 
 		}

@@ -1799,9 +1799,12 @@ public class FenetreEditeur extends JPanel {
 		}
 // Pour la fumee		
 
-//		for (int a = 0; a < regroupementSauvegarde.getListeFumee().size(); a++) {
-//			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
-//		}
+
+		for (int a = 0; a < regroupementSauvegarde.getListeFumee().size(); a++) {
+			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
+		}
+
+
 		lblNbAcc.setText(regroupementSauvegarde.getListeAccelerateur().size() + "");
 		if(regroupementSauvegarde.getListeAccelerateur().size() == 3) {
 			btnAjouterAccelerateur.setEnabled(false);

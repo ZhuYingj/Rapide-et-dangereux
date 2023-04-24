@@ -218,9 +218,7 @@ public class FenetreJeuScientifique extends JPanel {
 		btnNextImg = new JButton("Next Img");
 		btnNextImg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.avancerUnPas();
-				txtArea.append("\nVoici la prochaine image du jeu");
+				actionBtnProchImage();
 			}
 		});
 		btnNextImg.setBounds(208, 650, 89, 76);
@@ -760,7 +758,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblObjet2.setFont(new Font("Tahoma", Font.BOLD, 9));
 		lblObjet2.setBounds(810, 650, 120, 20);
 		add(lblObjet2);
-		
+
 		JLabel lblPixelParMetre = new JLabel("1.4640625pixels/m");
 		lblPixelParMetre.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
 		lblPixelParMetre.setBounds(546, 34, 120, 14);
@@ -1198,6 +1196,16 @@ public class FenetreJeuScientifique extends JPanel {
 	private void actionBtnRetour() {
 		pcs.firePropertyChange("RetourDuJeuScience", null, -1);
 		pcs.firePropertyChange("Test", null, -1);
+	}
+
+	/**
+	 * méthode qui permet de simuler la prochaine image du jeu
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnProchImage() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.avancerUnPas();
+		txtArea.append("\nVoici la prochaine image du jeu");
 	}
 
 	/**

@@ -21,6 +21,7 @@ import interfaces.Selectionnable;
 
 public class Fumee implements Dessinable, Selectionnable, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	/** Taille de la piste qui est toujours constante **/
 	private int taillePiste = 80;
 	/** la position en x de depart que l'objet piste vas etre creer **/
@@ -64,6 +65,7 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 		g2d.drawLine(x, y + taillePiste - 1, x + taillePiste, y + taillePiste - 1);
 		g2d.drawLine(x, y, x, y + taillePiste);
 		g2d.drawLine(x + taillePiste, y, x + taillePiste, y + taillePiste);
+
 
 	}
 
