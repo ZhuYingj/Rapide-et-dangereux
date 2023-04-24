@@ -1,6 +1,7 @@
 package dessin;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -48,6 +49,9 @@ public class TableauRecord extends JPanel {
 
 		tableModel = new MyTableModel();
 		JTable table = new JTable(tableModel);
+		table.setRowHeight(40);
+		table.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		add(scrollPane, BorderLayout.CENTER);
@@ -70,10 +74,30 @@ public class TableauRecord extends JPanel {
 		public int getRowCount() {
 			return data.length;
 		}
+		public int getColumnCount() {
+			return columnNames.length;
+		}
 
-        /**
-         * méthode qui modifie une emplacement de tableaux
-         */
+		public Object getValueAt(int row, int col) {
+			return data[row][col];
+		}
+
+		public String getColumnName(int col) {
+			return columnNames[col];
+		}
+
+		public Class getColumnClass(int c) {
+			return getValueAt(0, c).getClass();
+		}
+		
+		
+		/**
+		 * méthode qui modifie une emplacement de tableaux
+		 * 
+		 * @param value 	valeur qu'on veux placer dans le tableau
+         * @param row		ligne du tableau
+         * @param col		colone du tableau
+		 */
         //Ludovic Julien
         public void setValueAt(Object value, int row, int col) {
             data[row][col] = value;
@@ -84,8 +108,8 @@ public class TableauRecord extends JPanel {
         /**
          * pour mettre à jour le nombre de fois où chaque piste a été jouée
          * 
-         * @param piste
-         * @param nombreDeFoisJoue
+         * @param piste					piste en question
+         * @param nombreDeFoisJoue		nombre de fois jouer de chaque piste
          */
         //Ludovic Julien
         public void updateNombreDeFoisJoue(String piste, String nombreDeFoisJoue) {
@@ -97,21 +121,17 @@ public class TableauRecord extends JPanel {
             }
             if (piste.equals("Italie")) {
                 setValueAt(nombreDeFoisJoue, 2, 3);
-            }
-            
-            
-            
+            }      
         }
         
         /**
          * mettre à jour la moyenne des temps pour chaque piste
          * 
-         * @param piste
-         * @param moyenne
+         * @param piste			piste ne question
+         * @param moyenne		moyen de tout les piste
          */
         //Ludovic Julien
-        public void updateMoyenne(String piste, String moyenne) {
-            
+        public void updateMoyenne(String piste, String moyenne) {          
             if (piste.equals("Mexique")) {
                 setValueAt(moyenne, 0, 4);
             }
@@ -120,8 +140,7 @@ public class TableauRecord extends JPanel {
             }
             if (piste.equals("Italie")) {
                 setValueAt(moyenne, 2, 4);
-            }
-            
+            }            
         }
         
         
@@ -137,19 +156,57 @@ public class TableauRecord extends JPanel {
             	InfoLigne meilleurTemps = meilleursTemps.get("Mexique");            
                setValueAt(""+meilleurTemps.getTemps(), 0, 1);               
                 setValueAt(meilleurTemps.getNom(), 0, 2);             
-            }
-            
+            }          
             if (piste.equals("Canada")) {         	
             	InfoLigne meilleurTemps = meilleursTemps.get("Canada");           	
             	 setValueAt(""+meilleurTemps.getTemps(), 1, 1);                
                  setValueAt(meilleurTemps.getNom(), 1, 2);
-            }
-            
+            }           
             if (piste.equals("Italie")) {            	
             	InfoLigne meilleurTemps = meilleursTemps.get("Italie");            	
             	 setValueAt(""+meilleurTemps.getTemps(), 2, 1);    
             	 setValueAt(meilleurTemps.getNom(), 2, 2);
             }  
+        }
+        
+        /**
+         * méthode qui permet de chamnger les parametre du tableau pour trier les ligne en fonction du meilleur temps effuctuer sur la piste (ordre croissant)
+         * 
+         * @param meilleursTemps		meilleur temps de toutes les pistes
+         * @param comptages				nombre de fois jouer de toutes les pistes
+         * @param moyenne				moyenne de temps sur toutes les pistes
+         */
+        //Ludovic Julien
+        public static void trierTableau(Map<String, InfoLigne> meilleursTemps, Map<String, Integer> comptages, Map<String, Double> moyenne) {
+            InfoLigne meilleurTempsMexique = meilleursTemps.get("Mexique");   
+            InfoLigne meilleurTempsCanada = meilleursTemps.get("Canada");   
+            InfoLigne meilleurTempsItalie = meilleursTemps.get("Italie");   
+            double[] meilleursTempsArray = { meilleurTempsMexique.getTemps(), meilleurTempsCanada.getTemps(), meilleurTempsItalie.getTemps() };
+
+            Arrays.sort(meilleursTempsArray);
+            for (int i = 0; i < meilleursTempsArray.length; i++) {
+                double temps = meilleursTempsArray[i];
+
+                if (temps == meilleurTempsMexique.getTemps()) {
+                	tableModel.setValueAt("Mexique", i, 0);
+                	tableModel.setValueAt(meilleurTempsMexique.getTemps(), i, 1);
+                	tableModel.setValueAt(meilleurTempsMexique.getNom(), i, 2);
+                	tableModel.setValueAt(""+comptages.get("Mexique"), i, 3);
+                	tableModel.setValueAt(""+moyenne.get("Mexique"), i, 4);
+                } else if (temps == meilleurTempsCanada.getTemps()) {
+                	tableModel.setValueAt("Canada", i, 0);
+                	tableModel.setValueAt(meilleurTempsCanada.getTemps(), i, 1);
+                	tableModel.setValueAt(meilleurTempsCanada.getNom(), i, 2);
+                	tableModel.setValueAt(""+comptages.get("Canada"), i, 3);
+                	tableModel.setValueAt(""+moyenne.get("Canada"), i, 4);
+                } else if (temps == meilleurTempsItalie.getTemps()) {
+                	tableModel.setValueAt("Italie", i, 0);
+                	tableModel.setValueAt(meilleurTempsItalie.getTemps(), i, 1);
+                	tableModel.setValueAt(meilleurTempsItalie.getNom(), i, 2);
+                	tableModel.setValueAt(""+comptages.get("Italie"), i, 3);
+                	tableModel.setValueAt(""+moyenne.get("Italie"), i, 4);
+                }
+            }
         }
      
         
@@ -188,22 +245,7 @@ public class TableauRecord extends JPanel {
                 System.err.println("Erreur lors de la suppression du contenu du fichier");
             }
         }
-		public int getColumnCount() {
-			return columnNames.length;
-		}
-
-		public Object getValueAt(int row, int col) {
-			return data[row][col];
-		}
-
-		public String getColumnName(int col) {
-			return columnNames[col];
-		}
-
-		public Class getColumnClass(int c) {
-			return getValueAt(0, c).getClass();
-		}
-
+		
 		/**
 		 * méthode qui renvoie 2 méthode pour permettre l'appel de ceux ci dans une
 		 * autre classe
@@ -214,48 +256,17 @@ public class TableauRecord extends JPanel {
 			tableModel.reinitialiserTableau();
 	    	  supprimerContenuFichier("donnees.txt");
 		}
-		
-		
-		
-		public void trierTableau() {
-		    Arrays.sort(data, new LigneComparator());
-		    fireTableDataChanged();
-		}
-    }
-    
-    
-    public class LigneComparator implements Comparator<Object[]> {
-        @Override
-        public int compare(Object[] ligne1, Object[] ligne2) {
-            int temps1 = convertirEnSecondes((String)ligne1[1]);
-            int temps2 = convertirEnSecondes((String)ligne2[1]);
+    }    
 
-            if (temps1 == temps2) {
-                return ((String)ligne1[0]).compareTo((String)ligne2[0]);
-            }
-        
-            return Integer.compare(temps1, temps2);
-        }
-        
-        /**
-         * Convertir un temps au format "mm:ss" en secondes
-         */
-        private int convertirEnSecondes(String temps) {
-            String[] tempsArray = temps.split(":");
-            int minutes = Integer.parseInt(tempsArray[0]);
-            int secondes = Integer.parseInt(tempsArray[1]);
-            return minutes * 60 + secondes;
-        }
-    }
 
 	/**
 	 * méthode qui retourne le tableau
 	 * 
+	 * @return tableaumodel
 	 */
 	// Ludovic Julien
 	public static MyTableModel getTableau() {
+		// TODO Auto-generated method stub
 		return tableModel;
 	}
-
-
 }

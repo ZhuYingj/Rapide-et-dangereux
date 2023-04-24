@@ -257,20 +257,16 @@ public class GestionnaireDeFichiersSurLeBureau {
 	// Ludovic Julien
 	public static void ecrireFichier(String nomUtilisateur, double temps, String piste) {
 		String cheminFichier = System.getProperty("user.home") + "/Desktop/donnees.txt";
-
 		try {
 			// Créer le fichier s'il n'existe pas déjà
 			Path fichier = Paths.get(cheminFichier);
 			if (!Files.exists(fichier)) {
 				Files.createFile(fichier);
 			}
-
 			BufferedWriter writer = new BufferedWriter(new FileWriter(cheminFichier, true));
-
 			writer.write(nomUtilisateur + ";" + temps + ";" + piste);
 			writer.newLine();
 			writer.close();
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -297,7 +293,6 @@ public class GestionnaireDeFichiersSurLeBureau {
 			String piste = infos[2];
 			listeLignes.add(new InfoLigne(nom, temps, piste));
 		}
-
 		scanner.close();
 		return listeLignes;
 	}
@@ -320,7 +315,6 @@ public class GestionnaireDeFichiersSurLeBureau {
 				nombreLignes++;
 			}
 		}
-
 		return nombreLignes > 0 ? totalTemps / nombreLignes : 0.0;
 	}
 
@@ -340,7 +334,6 @@ public class GestionnaireDeFichiersSurLeBureau {
 				meilleursTemps.put(piste, ligne);
 			}
 		}
-
 		return meilleursTemps;
 	}
 
@@ -359,7 +352,6 @@ public class GestionnaireDeFichiersSurLeBureau {
 			double moyenne = calculerMoyenne(listeLignes, piste);
 			moyennes.put(piste, moyenne);
 		}
-
 		return moyennes;
 	}
 

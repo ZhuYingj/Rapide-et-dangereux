@@ -27,7 +27,7 @@ import java.awt.Color;
  *
  */
 public class ClassementParPiste extends JPanel {
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -36,7 +36,7 @@ public class ClassementParPiste extends JPanel {
 	 */
 //Ludovic Julien
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		this.pcs.addPropertyChangeListener(listener);
+		this.PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class ClassementParPiste extends JPanel {
 		JButton btnFermer = new JButton("Retour");
 		btnFermer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("QUITTER", null, -1);
+				PCS.firePropertyChange("QUITTER", null, -1);
 
 			}
 		});
@@ -82,8 +82,8 @@ public class ClassementParPiste extends JPanel {
 
 				Color bgColor = JColorChooser.showDialog(ClassementParPiste.this, "Choisir une couleur", Color.WHITE);
 
-				if (bgColor != null) { // vérifier si l'utilisateur a choisi une couleur
-					setBackground(bgColor); // changer la couleur de l'arrière-plan
+				if (bgColor != null) { 
+					setBackground(bgColor); 
 				}
 
 			}
@@ -92,7 +92,7 @@ public class ClassementParPiste extends JPanel {
 		add(btnColorer);
 
 		TableauRecord tableauRecord = new TableauRecord();
-		tableauRecord.setBounds(146, 169, 902, 158);
+		tableauRecord.setBounds(146, 169, 902, 145);
 		add(tableauRecord);
 	}
 	

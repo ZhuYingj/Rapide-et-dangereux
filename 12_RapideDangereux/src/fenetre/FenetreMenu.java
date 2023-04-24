@@ -18,7 +18,8 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import application.OutilsImage;
-import fenetre.FenetreAPropos;
+import aproposetaide.FenetreAPropos;
+import aproposetaide.FenetreAideInstructions;
 
 /**
  * Classe qui crée la premiere fenêtre "Menu"
@@ -32,8 +33,9 @@ public class FenetreMenu extends JPanel {
 	private JButton btnJouer;
 	private JButton btnAide;
 	private JButton btnQuitter;
-	private FenetreInstruction fenInstructions;
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+
+	private FenetreAideInstructions fenInstructions;
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -41,7 +43,7 @@ public class FenetreMenu extends JPanel {
 	 */
 //Ludovic Julien
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
+		PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -64,13 +66,13 @@ public class FenetreMenu extends JPanel {
 		btnJouer.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnJouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("JOUER", 0, -1);
+				PCS.firePropertyChange("JOUER", 0, -1);
 			}
 		});
 		btnJouer.setBounds(700, 245, 100, 49);
 		add(btnJouer);
 
-		FenetreInstruction fenInstructions = new FenetreInstruction();
+		FenetreAideInstructions fenInstructions = new FenetreAideInstructions();
 		btnAide = new JButton("AIDE");
 		btnAide.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnAide.addActionListener(new ActionListener() {

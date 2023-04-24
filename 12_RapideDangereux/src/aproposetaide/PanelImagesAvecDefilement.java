@@ -1,4 +1,4 @@
-package fenetre;
+package aproposetaide;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -175,12 +175,8 @@ public class PanelImagesAvecDefilement extends JPanel {
 
 	}
 
-	/**
-	 * Méthode permettant de dessiner sur le composant graphique
-	 * 
-	 * @param g Le composant graphique
-	 */
 	@Override
+
 	public void paintComponent(Graphics g) {
 		if (pasDeSize) {
 			// si setFichiersdImage avait ete appele avant que laes dimensions du panel ne

@@ -8,5 +8,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="ImagePanel"/>
 	<classpathentry kind="src" path="Image"/>
+	<classpathentry kind="src" path="ressourses"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

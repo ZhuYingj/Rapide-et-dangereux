@@ -51,8 +51,8 @@ import interfaces.TypePiste;
  */
 
 public class JeuOptions extends JPanel {
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	private final ButtonGroup buttonGroupDiff = new ButtonGroup();
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
+	private final ButtonGroup BUTTON_GROUP_DIFF = new ButtonGroup();
 	private JRadioButton rdbtnFacile;
 	private JRadioButton rdbtnMedium;
 	private JRadioButton rdbtnDifficile;
@@ -73,8 +73,8 @@ public class JeuOptions extends JPanel {
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, };
 	/** Liste des couleurs de bordure de piste **/
-	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW,
-			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
+	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW, Color.CYAN,
+			Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleursMaterielPiste = { new Color(194, 178, 128), new Color(128, 126, 120),
 			new Color(185, 232, 234) };
 	private JLabel lblLongueurPiste;
@@ -105,7 +105,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
+		PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -296,7 +296,7 @@ public class JeuOptions extends JPanel {
 		});
 		rdbtnFacile.setBounds(165, 182, 109, 23);
 		panel2.add(rdbtnFacile);
-		buttonGroupDiff.add(rdbtnFacile);
+		BUTTON_GROUP_DIFF.add(rdbtnFacile);
 
 		rdbtnMedium = new JRadioButton("Intermédiaire");
 		rdbtnMedium.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -308,7 +308,7 @@ public class JeuOptions extends JPanel {
 		});
 		rdbtnMedium.setBounds(165, 207, 109, 23);
 		panel2.add(rdbtnMedium);
-		buttonGroupDiff.add(rdbtnMedium);
+		BUTTON_GROUP_DIFF.add(rdbtnMedium);
 
 		rdbtnDifficile = new JRadioButton("Avancé");
 		rdbtnDifficile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -320,7 +320,7 @@ public class JeuOptions extends JPanel {
 		});
 		rdbtnDifficile.setBounds(165, 233, 109, 23);
 		panel2.add(rdbtnDifficile);
-		buttonGroupDiff.add(rdbtnDifficile);
+		BUTTON_GROUP_DIFF.add(rdbtnDifficile);
 
 		JLabel lblVitesseFacile = new JLabel("60 m/s");
 		lblVitesseFacile.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
@@ -360,7 +360,7 @@ public class JeuOptions extends JPanel {
 		sliderNbBoites.setPaintLabels(true);
 		sliderNbBoites.setValue(3);
 		sliderNbBoites.setMinorTickSpacing(1);
-		sliderNbBoites.setMaximum(12);
+		sliderNbBoites.setMaximum(10);
 		sliderNbBoites.setMinimum(3);
 		sliderNbBoites.setMajorTickSpacing(1);
 		sliderNbBoites.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -433,7 +433,7 @@ public class JeuOptions extends JPanel {
 		btnRetour.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("Retour", 0, -1);
+				PCS.firePropertyChange("Retour", 0, -1);
 			}
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
@@ -527,10 +527,10 @@ public class JeuOptions extends JPanel {
 		btnRecorsPiste.setForeground(new Color(0, 0, 0));
 		btnRecorsPiste.setBackground(Color.CYAN);
 		btnRecorsPiste.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
-		btnRecorsPiste.setBounds(58, 73, 158, 78);
+		btnRecorsPiste.setBounds(58, 73, 176, 78);
 		btnRecorsPiste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("RECORD", null, -1);
+				PCS.firePropertyChange("RECORD", null, -1);
 				actionRecord();
 			}
 		});
@@ -581,12 +581,12 @@ public class JeuOptions extends JPanel {
 	 */
 	// Tan Tommy Rin
 	private void actionCommencer() {
-		pcs.firePropertyChange("COMMENCER!", null, -1);
-		pcs.firePropertyChange("MASSE1", null, (double) slider.getValue());
-		pcs.firePropertyChange("MASSE2", null, (double) slider2.getValue());
-		pcs.firePropertyChange("TYPEPISTE", null, type);
-		pcs.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
-		pcs.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
+		PCS.firePropertyChange("COMMENCER!", null, -1);
+		PCS.firePropertyChange("MASSE1", null, (double) slider.getValue());
+		PCS.firePropertyChange("MASSE2", null, (double) slider2.getValue());
+		PCS.firePropertyChange("TYPEPISTE", null, type);
+		PCS.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
+		PCS.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
 
 	}
 
@@ -719,8 +719,8 @@ public class JeuOptions extends JPanel {
 	 */
 	// Ludovic Julien
 	private void actionSkin() {
-		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
-		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+		PCS.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+		PCS.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
 
 	}
 
@@ -759,8 +759,8 @@ public class JeuOptions extends JPanel {
 			}
 
 		}
-		pcs.firePropertyChange("SKINOPTIONS1", null, couleurs[indexCouleur]);
-		pcs.firePropertyChange("SKINOPTIONS2", null, couleurs2[indexCouleur2]);
+		PCS.firePropertyChange("SKINOPTIONS1", null, couleurs[indexCouleur]);
+		PCS.firePropertyChange("SKINOPTIONS2", null, couleurs2[indexCouleur2]);
 	}
 
 	/**
@@ -781,7 +781,7 @@ public class JeuOptions extends JPanel {
 			}
 		}
 		panelCouleurPiste.setBackground(couleursPiste[couleurPiste]);
-		pcs.firePropertyChange("COULEURPISTE2", null, couleursPiste[couleurPiste]);
+		PCS.firePropertyChange("COULEURPISTE2", null, couleursPiste[couleurPiste]);
 		repaint();
 	}
 
@@ -791,7 +791,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void changeMaterielPiste() {
-		pcs.firePropertyChange("COULEURMATPISTE", null, couleursMaterielPiste[couleurMatPiste]);
+		PCS.firePropertyChange("COULEURMATPISTE", null, couleursMaterielPiste[couleurMatPiste]);
 	}
 
 	/**
@@ -842,7 +842,7 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionRdbtnVitesseFacile() {
 		txtArea.append("\nVous avez selectionné la difficulté <<Facile>> ");
-		pcs.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
+		PCS.firePropertyChange("VITESSEMAXFACILE", null, 60.0);
 	}
 
 	/**
@@ -852,7 +852,7 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionRdbtnVitesseIntermediaire() {
 		txtArea.append("\nVous avez selectionné la difficulté <<Intermédiaire>> ");
-		pcs.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 80.0);
+		PCS.firePropertyChange("VITESSEMAXINTERMEDIAIRE", null, 80.0);
 	}
 
 	/**
@@ -862,7 +862,7 @@ public class JeuOptions extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void actionRdbtnVitesseAvance() {
 		txtArea.append("\nVous avez selectionné la difficulté <<Avancé>> ");
-		pcs.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
+		PCS.firePropertyChange("VITESSEMAXAVANCE", null, 100.0);
 	}
 
 	/**
@@ -871,7 +871,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void actionCbAsphalt() {
-		pcs.firePropertyChange("MATPISTEASPHALT", null, cbMatPiste.getSelectedItem());
+		PCS.firePropertyChange("MATPISTEASPHALT", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi l'asphalt où le coefficient de frottement est 0.20");
 	}
 
@@ -881,7 +881,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void actionCbSable() {
-		pcs.firePropertyChange("MATPISTESABLE", null, cbMatPiste.getSelectedItem());
+		PCS.firePropertyChange("MATPISTESABLE", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi le sable où le coefficient de frottement est 0.70");
 	}
 
@@ -891,7 +891,7 @@ public class JeuOptions extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void actionCbGlace() {
-		pcs.firePropertyChange("MATPISTEGLACE", null, cbMatPiste.getSelectedItem());
+		PCS.firePropertyChange("MATPISTEGLACE", null, cbMatPiste.getSelectedItem());
 		txtArea.append("\nVous choisi la glace où le coefficient de frottement est 0.02");
 	}
 
@@ -917,70 +917,69 @@ public class JeuOptions extends JPanel {
 	 */
 	// Ludovic Julien
 	public void meilleurTemps() {
-	    try {
-	        List<InfoLigne> listeLignes = new ArrayList<>();
-	        File dossier = new File(System.getProperty("user.home") + "/Desktop/donnees.txt");
-	        Scanner scanner = new Scanner(dossier);
+		try {
+			List<InfoLigne> listeLignes = new ArrayList<>();
+			File dossier = new File(System.getProperty("user.home") + "/Desktop/donnees.txt");
+			Scanner scanner = new Scanner(dossier);
 
-	        while (scanner.hasNextLine()) {
-	            String ligne = scanner.nextLine();
-	            String[] infos = ligne.split(";");
-	            String nom = infos[0];
-	            double temps = Double.parseDouble(infos[1]);
-	            String piste = infos[2];
-	            listeLignes.add(new InfoLigne(nom, temps, piste));
-	        }
-	        scanner.close();
+			while (scanner.hasNextLine()) {
+				String ligne = scanner.nextLine();
+				String[] infos = ligne.split(";");
+				String nom = infos[0];
+				double temps = Double.parseDouble(infos[1]);
+				String piste = infos[2];
+				listeLignes.add(new InfoLigne(nom, temps, piste));
+			}
+			scanner.close();
 
 	        Map<String, InfoLigne> meilleurTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
-
+	        
 	        for (String piste : meilleurTemps.keySet()) {
 	            InfoLigne infoLigne = meilleurTemps.get(piste);
+				if (!infoLigne.getNom().equals(null)) {
+					TableauRecord.getTableau().updateRecord(piste, meilleurTemps);
+				}
+			}
 
-	            if (!infoLigne.getNom().equals(null)) {
-	                TableauRecord.getTableau().updateRecord(piste, meilleurTemps);
-	            }
-	        }
-
-	    } catch (FileNotFoundException e) {
-	        System.err.println("Erreur : fichier introuvable");
-	    }
-	}
-
-
-
-
-	
-	
-	
-	
-	
-
-	/**
-	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
-	 * d'événement
-	 */
-	// Alexis Pineda-Alvarado
-	private void couleurPisteAsphalt() {
-		pcs.firePropertyChange("COULEURPISTEASPHALT", null, couleursMaterielPiste[couleurMatPiste]);
+		} catch (FileNotFoundException e) {
+			System.err.println("Erreur : fichier introuvable");
+		}
 	}
 
 	/**
-	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
-	 * d'événement
+	 * méthode qui prend tout les donner du fichier et appel une autre méthode pour classer le tableau en ordre croissant
 	 */
-	// Alexis Pineda-Alvarado
-	private void couleurPisteSable() {
-		pcs.firePropertyChange("COULEURPISTESABLE", null, couleursMaterielPiste[couleurMatPiste]);
-	}
-
-	/**
-	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
-	 * d'événement
-	 */
-	// Alexis Pineda-Alvarado
-	private void couleurPisteGlace() {
-		pcs.firePropertyChange("COULEURPISTEGLACE", null, couleursMaterielPiste[couleurMatPiste]);
+	//Ludovic Julien
+	public void trierTableau() {
+		try {
+			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
+			Map<String, InfoLigne> meilleurTemps = GestionnaireDeFichiersSurLeBureau.trouverMeilleursTemps(listeLignes);
+			Map<String, Integer> comptages = GestionnaireDeFichiersSurLeBureau.compterPistes(listeLignes);
+			Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
+			InfoLigne ligneNull = new InfoLigne("-", 0, "0");
+	 
+			if (!meilleurTemps.containsKey("Italie")) {
+				meilleurTemps.put("Italie", ligneNull);
+				comptages.put("Italie", 0);
+				moyennes.put("Italie", 0.0);
+			}
+			if (!meilleurTemps.containsKey("Canada")) {
+				meilleurTemps.put("Canada", ligneNull);
+				comptages.put("Canada", 0);
+				moyennes.put("Canada", 0.0);
+			}
+			if (!meilleurTemps.containsKey("Mexique")) {
+				meilleurTemps.put("Mexique", ligneNull);
+				comptages.put("Mexique", 0);
+				moyennes.put("Mexique", 0.0);
+			}
+	 
+	 
+			MyTableModel.trierTableau(meilleurTemps,comptages,moyennes);
+		}catch (FileNotFoundException e) {
+					System.err.println("Erreur : fichier introuvable");
+		}
+	 
 	}
 
 	/**
@@ -994,30 +993,20 @@ public class JeuOptions extends JPanel {
 		try {
 			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
 			Map<String, Double> moyennes = GestionnaireDeFichiersSurLeBureau.calculerMoyennes(listeLignes);
-			
-			System.out.println(moyennes);
-			
 			if (moyennes.containsKey("Mexique")) {
-			TableauRecord.getTableau().updateMoyenne("Mexique", ""+moyennes.get("Mexique"));
+				TableauRecord.getTableau().updateMoyenne("Mexique", "" + moyennes.get("Mexique"));
 			}
 			if (moyennes.containsKey("Canada")) {
-			TableauRecord.getTableau().updateMoyenne("Canada", "" + moyennes.get("Canada"));
+				TableauRecord.getTableau().updateMoyenne("Canada", "" + moyennes.get("Canada"));
 			}
 			if (moyennes.containsKey("Italie")) {
-			TableauRecord.getTableau().updateMoyenne("Italie", "" + moyennes.get("Italie"));
+				TableauRecord.getTableau().updateMoyenne("Italie", "" + moyennes.get("Italie"));
 			}
 
 		} catch (FileNotFoundException e) {
 			System.err.println("Erreur : fichier introuvable");
 		}
 	}
-	
-	//double moyenneMexique = moyennes.get("Mexique");
-	//double moyenneCanada = moyennes.get("Canada");
-	//double moyenneItalie = moyennes.get("Italie");
-
-	
-	
 
 	/**
 	 * méthode qui vas appeler d'autre pour permettre de mettre les donner du nombre
@@ -1028,17 +1017,17 @@ public class JeuOptions extends JPanel {
 		try {
 			List<InfoLigne> listeLignes = GestionnaireDeFichiersSurLeBureau.lireFichier("donnees.txt");
 			Map<String, Integer> comptages = GestionnaireDeFichiersSurLeBureau.compterPistes(listeLignes);
-			
+
 			if (comptages.containsKey("Mexique")) {
-			    TableauRecord.getTableau().updateNombreDeFoisJoue("Mexique", "" + comptages.get("Mexique"));
+				TableauRecord.getTableau().updateNombreDeFoisJoue("Mexique", "" + comptages.get("Mexique"));
 			}
 			if (comptages.containsKey("Canada")) {
-			    TableauRecord.getTableau().updateNombreDeFoisJoue("Canada", "" + comptages.get("Canada"));
+				TableauRecord.getTableau().updateNombreDeFoisJoue("Canada", "" + comptages.get("Canada"));
 			}
 			if (comptages.containsKey("Italie")) {
-			    TableauRecord.getTableau().updateNombreDeFoisJoue("Italie", "" + comptages.get("Italie"));
+				TableauRecord.getTableau().updateNombreDeFoisJoue("Italie", "" + comptages.get("Italie"));
 			} else {
-			    TableauRecord.getTableau().updateNombreDeFoisJoue("Italie", "0");
+				TableauRecord.getTableau().updateNombreDeFoisJoue("Italie", "0");
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("Erreur : fichier introuvable");
@@ -1053,7 +1042,34 @@ public class JeuOptions extends JPanel {
 		nbjouer();
 		moyenTemps();
 		meilleurTemps();
-		//MyTableModel.trierTableau();
+	}
+	
+	
+	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
+	private void couleurPisteAsphalt() {
+		PCS.firePropertyChange("COULEURPISTEASPHALT", null, couleursMaterielPiste[couleurMatPiste]);
+	}
+
+	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
+	private void couleurPisteSable() {
+		PCS.firePropertyChange("COULEURPISTESABLE", null, couleursMaterielPiste[couleurMatPiste]);
+	}
+
+	/**
+	 * méthode qui permet de dicter la couleur de la piste a l'aide du changement
+	 * d'événement
+	 */
+	// Alexis Pineda-Alvarado
+	private void couleurPisteGlace() {
+		PCS.firePropertyChange("COULEURPISTEGLACE", null, couleursMaterielPiste[couleurMatPiste]);
 	}
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {
