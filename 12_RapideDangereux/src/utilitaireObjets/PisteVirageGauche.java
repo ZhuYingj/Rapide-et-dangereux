@@ -221,7 +221,8 @@ public class PisteVirageGauche implements Dessinable, Selectionnable, Serializab
 	/**
 	 * Méthode permettant de savoir si la voiture est passée sur la piste
 	 * 
-	 * @param voiture La voiture controllée
+	 * @param voiture  La voiture 1 controllée
+	 * @param voiture2 La voiture 2 controllée
 	 */
 	// Kevin Nguyen
 	public void traverserPiste(Voiture voiture, Voiture voiture2) {
