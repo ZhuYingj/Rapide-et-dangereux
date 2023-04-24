@@ -1095,7 +1095,7 @@ public class AppPrincipale12 extends JFrame {
 	 * 
 	 * @param evt            evenement
 	 * @param fenSansScience fenêtre du jeu sans les paramètres scientifiques
-	 * @param fenOptions     la fenetre des options du jeu qui va être activé
+	 * @param fenModeJeu     la fenetre mode de jeu 
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourOptions2(PropertyChangeEvent evt, FenetreJeuSansScientifique fenSansScience,
