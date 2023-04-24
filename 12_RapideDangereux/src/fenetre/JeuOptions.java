@@ -292,7 +292,6 @@ public class JeuOptions extends JPanel {
 		rdbtnFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionRdbtnVitesseFacile();
-
 			}
 		});
 		rdbtnFacile.setBounds(165, 182, 109, 23);

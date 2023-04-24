@@ -221,7 +221,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenJeuScience.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionRetourOptions(evt, fenJeuScience, fenModeJeu);
+				actionRetourOptions(evt, fenJeuScience, fenModeJeu, fenOptions);
 			}
 		});
 
@@ -1063,7 +1063,8 @@ public class AppPrincipale12 extends JFrame {
 	 * @param fenModeJeu    la fenêtre du mode de jeu a choisir qui va être acrivé
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, ModeDeJeu fenModeJeu) {
+	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, ModeDeJeu fenModeJeu,
+			JeuOptions fenOptions) {
 
 		switch (evt.getPropertyName()) {
 		case "RetourDuJeuScience":
@@ -1074,6 +1075,9 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getBtnStart().setEnabled(true);
 			checkBoxModeNonScientifique.setEnabled(false);
 			checkBoxModeNonScientifique.setSelected(false);
+			fenOptions.getRdbtnFacile().setSelected(false);
+			fenOptions.getRdbtnMedium().setSelected(false);
+			fenOptions.getRdbtnDifficile().setSelected(false);
 			break;
 
 		case "STARTBUTTONACTIVE":
@@ -1193,6 +1197,7 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreBoiteMystere(0);
 			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreBoiteMystere(0);
 			checkBoxModeNonScientifique.setEnabled(true);
+
 			break;
 		case "TYPEPISTE":
 			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
