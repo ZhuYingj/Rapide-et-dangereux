@@ -113,6 +113,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	private double forceDeLancement2 = 50;
 	private Clip newClip;
 	private String piste;
+	private boolean modeMonde = false;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -681,6 +682,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 			regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametre(16);
 			regroupement.getListePisteDeDepart().get(0).getVoiture2().setNombreToursFaits(0);
 			regroupement.setObjSpecial2(null);
+			regroupement.setNombreToursAFaire(3);
 
 			angleVoitureDegre = 0;
 			angleVoitureDegre2 = 0;
@@ -916,6 +918,7 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				regroupement.getListePisteDeDepart().get(0).getVoiture2().setDiametreFleche(16);
 			}
 		}
+		PCS.firePropertyChange("NBTOURSAFAIRE", 0, regroupement.getNombreToursAFaire());
 
 	}
 
@@ -1056,7 +1059,10 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		arretMusic();
 		arretTempFacile();
 		arretGraphique();
-		gagnantCourse();
+		if(modeMonde == true) {
+			gagnantCourse();
+		}
+	
 	}
 
 	/**
@@ -1214,6 +1220,14 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 	public double getTestFrottement() {
 		return testFrottement;
+	}
+
+	public boolean isModeMonde() {
+		return modeMonde;
+	}
+
+	public void setModeMonde(boolean modeMonde) {
+		this.modeMonde = modeMonde;
 	}
 
 	public void setTestFrottement(double testFrottement) {

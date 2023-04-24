@@ -777,6 +777,22 @@ public class FenetreJeuScientifique extends JPanel {
 		graphiqueVitesse();
 	}
 
+	public JLabel getLblNbToursAFaire() {
+		return lblNbToursAFaire;
+	}
+
+	public void setLblNbToursAFaire(JLabel lblNbToursAFaire) {
+		this.lblNbToursAFaire = lblNbToursAFaire;
+	}
+
+	public JLabel getLblNbToursAFaire2() {
+		return lblNbToursAFaire2;
+	}
+
+	public void setLblNbToursAFaire2(JLabel lblNbToursAFaire2) {
+		this.lblNbToursAFaire2 = lblNbToursAFaire2;
+	}
+
 	public JButton getBtnStart() {
 		return btnStart;
 	}

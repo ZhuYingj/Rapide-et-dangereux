@@ -361,7 +361,7 @@ public class JeuOptions extends JPanel {
 		sliderNbBoites.setPaintLabels(true);
 		sliderNbBoites.setValue(3);
 		sliderNbBoites.setMinorTickSpacing(1);
-		sliderNbBoites.setMaximum(12);
+		sliderNbBoites.setMaximum(10);
 		sliderNbBoites.setMinimum(3);
 		sliderNbBoites.setMajorTickSpacing(1);
 		sliderNbBoites.setFont(new Font("Tahoma", Font.PLAIN, 12));

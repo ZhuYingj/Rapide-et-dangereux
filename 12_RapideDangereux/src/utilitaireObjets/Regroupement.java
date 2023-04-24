@@ -1525,9 +1525,6 @@ public class Regroupement implements Dessinable, Serializable {
 			}
 		}
 
-		System.out.println(count);
-		System.out.println(count2);
-
 		if (count == listePisteHorizontale.size() + listePisteVerticale.size() + listePisteVirageBas.size()
 				+ listePisteVirageHaut.size() + listePisteVirageGauche.size() + listePisteVirageDroit.size()
 				+ listePisteDeDepart.size()) {

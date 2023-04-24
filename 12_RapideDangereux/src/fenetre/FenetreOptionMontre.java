@@ -681,6 +681,7 @@ public class FenetreOptionMontre extends JPanel {
 		PCS.firePropertyChange("MASSEMONTRE2", null, (double) slider2.getValue());
 		PCS.firePropertyChange("NBRDETOUR", null, (double) sliderNbrTour.getValue());
 		PCS.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
+
 		actionSkin();
 	}
 

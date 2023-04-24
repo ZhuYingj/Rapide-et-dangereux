@@ -343,6 +343,8 @@ public class AppPrincipale12 extends JFrame {
 
 		case "COMMENCER!":
 			fenJeuScience.setVisible(true);
+			fenJeuScience.getZoneAnimPhysique().setModeMonde(true);
+
 			fenOptions.setVisible(false);
 			setContentPane(fenJeuScience);
 			checkBoxModeNonScientifique.setEnabled(true);
@@ -992,6 +994,7 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenScience);
 			fenScience.getZoneAnimPhysique().setTempsMontreFacile(100000.0);
 			fenSansScience.getZoneAnimPhysique().setTempsMontreFacile(100000.0);
+
 			checkBoxModeNonScientifique.setEnabled(true);
 			break;
 		case "REGROUPEMENT":
@@ -1046,6 +1049,7 @@ public class AppPrincipale12 extends JFrame {
 		case "Retour":
 			fenModeJeu.setVisible(true);
 			fenOptions.setVisible(false);
+			fenOptions.getZoneAnimPhysique().setModeMonde(false);
 			setContentPane(fenModeJeu);
 			break;
 		}
@@ -1070,6 +1074,7 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenModeJeu);
 			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenJeuScience.getBtnStart().setEnabled(true);
+
 			checkBoxModeNonScientifique.setEnabled(false);
 			checkBoxModeNonScientifique.setSelected(false);
 			break;
@@ -1225,6 +1230,8 @@ public class AppPrincipale12 extends JFrame {
 		case "NBRDETOUR":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
+			fenJeuScience.getLblNbToursAFaire().setText(String.format("%.0f", evt.getNewValue()));
+			fenJeuScience.getLblNbToursAFaire2().setText(String.format("%.0f", evt.getNewValue()));
 			break;
 		case "MATPISTEASPHALT":
 			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.25);

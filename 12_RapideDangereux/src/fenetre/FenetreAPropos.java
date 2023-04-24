@@ -31,21 +31,25 @@ public class FenetreAPropos extends JPanel {
 		JPanel pnlAuteurs = new JPanel();
 		tabOnglets.addTab("Auteurs", null, pnlAuteurs, null);
 
-		JLabel lblAuteurs = new JLabel("<html>Équipe 12 <br><br>Kevin Nguyen<br>Ludovic Julien<br>Alexis Pineda<br>Tan Tommy Rin<br><br>Cours 420-SCD<br>Intégration des apprentissages en SIM<br>Hiver 2023</html>");
+		JLabel lblAuteurs = new JLabel(
+				"<html>Équipe 12 <br><br>Kevin Nguyen<br>Ludovic Julien<br>Alexis Pineda-Alvarado<br>Tan Tommy Rin<br><br>Cours 420-SCD<br>Intégration des apprentissages en SIM<br>Hiver 2023</html>");
 		lblAuteurs.setVerticalAlignment(SwingConstants.TOP);
 		pnlAuteurs.add(lblAuteurs);
 
 		JPanel pnlSources = new JPanel();
 		tabOnglets.addTab("Sources", null, pnlSources, null);
 
-		JLabel lblSources = new JLabel(
-				"<html>" + "Music du jeux : https://www.auboutdufil.com/index.php?id=647" + "<br>Boite mystere : https://unturned.fandom.com/wiki/Chrome_Plated_Mystery_Box"
-						+ "<br>Fenêtre Éditeur : https://www.wallpaperflare.com/blue-dazzling-lines<br>-dark-background-4k-hd-technology-data-wireless-technology-wallpaper-mxjce" + "<br>champignon : https://icones8.fr/icon/6OUwhiZ6iy_O/champignon"				
-						+ "<br>Boule de neige : http://clipart-library.com/clipart/ziXGaj4iB.htm" + "<br>Colle : https://www.seekpng.com/ima/u2q8r5i1i1r5e6i1/"						
-						+ "<br>Trou noir : https://icons8.com/icons/set/black-hole" + "<br>Glace : https://en.ac-illust.com/clip-art/2061036/ground-ice"						
-						+ "<br>Sable : https://www.dreamstime.com/cartoon-sand-seamless-vector-<br>pattern-summer-background-cartoon-sand-pattern-image158757125" + "<br>Asphalte : https://fr.depositphotos.com/15737199/stock-illustration-<br>seamless-asphalt-texture.html");
-						
-					//	+ "<br>Module de code pour telle chose: aaa.bbb.org" + "<br>(etc etc) </html>");
+		JLabel lblSources = new JLabel("<html>" + "Music du jeu : https://www.auboutdufil.com/index.php?id=647"
+				+ "<br>Boite mystere : https://unturned.fandom.com/wiki/Chrome_Plated_Mystery_Box"
+				+ "<br>Fenêtre éditeur : https://www.wallpaperflare.com/blue-dazzling-lines<br>-dark-background-4k-hd-technology-data-wireless-technology-wallpaper-mxjce"
+				+ "<br>Champignon : https://icones8.fr/icon/6OUwhiZ6iy_O/champignon"
+				+ "<br>Boule de neige : http://clipart-library.com/clipart/ziXGaj4iB.htm"
+				+ "<br>Colle : https://www.seekpng.com/ima/u2q8r5i1i1r5e6i1/"
+				+ "<br>Trou noir : https://icons8.com/icons/set/black-hole"
+				+ "<br>Glace : https://en.ac-illust.com/clip-art/2061036/ground-ice"
+				+ "<br>Sable : https://www.dreamstime.com/cartoon-sand-seamless-vector-<br>pattern-summer-background-cartoon-sand-pattern-image158757125"
+				+ "<br>Asphalte : https://fr.depositphotos.com/15737199/stock-illustration-<br>seamless-asphalt-texture.html");
+
 		lblSources.setVerticalAlignment(SwingConstants.TOP);
 		pnlSources.add(lblSources);
 	}
