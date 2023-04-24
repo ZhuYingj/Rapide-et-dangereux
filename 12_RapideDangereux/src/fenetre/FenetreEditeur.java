@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.net.URL;
@@ -53,7 +54,7 @@ public class FenetreEditeur extends JPanel {
 
 	private int nombrePisteFerme = 0;
 	private JButton btnAjouterAccelerateur;
-
+	private JLabel lblNbAcc;
 	private boolean pisteFerme = false;
 	private Regroupement regroupement;
 	private PanelRegroupement panelRegroupement;
@@ -68,7 +69,7 @@ public class FenetreEditeur extends JPanel {
 	private int couleurPiste = 0;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK };
-	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, Color.YELLOW,
+	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW,
 			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private boolean gauche = false;
 	private boolean droite = false;
@@ -76,7 +77,7 @@ public class FenetreEditeur extends JPanel {
 
 	private PanelObjet panelObjet;
 
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 
 	private JLabel lblImage;
 	private JPanel panelCouleurPiste;
@@ -90,7 +91,7 @@ public class FenetreEditeur extends JPanel {
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
+		PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -109,7 +110,7 @@ public class FenetreEditeur extends JPanel {
 		btnRetour.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("Retour", null, -1);
+				PCS.firePropertyChange("Retour", null, -1);
 			}
 		});
 
@@ -124,7 +125,18 @@ public class FenetreEditeur extends JPanel {
 			PisteDeDepart pisteDeDepart = new PisteDeDepart(320, 160);
 			panelRegroupement.getListePisteDeDepart().add(pisteDeDepart);
 		}
+		panelRegroupement.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				switch (evt.getPropertyName()) {
+				case "POUBELLEACC":
+					btnAjouterAccelerateur.setEnabled(true);
+					lblNbAcc.setText(panelRegroupement.getListeAccelerateur().size() + "");
+					repaint();
+					break;
 
+				}
+			}
+		});
 		JLabel lblTextEditeur = new JLabel("MODE ÉDITEUR");
 		lblTextEditeur.setForeground(new Color(255, 255, 255));
 		lblTextEditeur.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 30));
@@ -145,7 +157,7 @@ public class FenetreEditeur extends JPanel {
 				ajoutAccelerateur();
 			}
 		});
-	
+
 		btnAjouterAccelerateur.setBounds(74, 686, 41, 23);
 		panelObjet.add(btnAjouterAccelerateur);
 
@@ -402,6 +414,16 @@ public class FenetreEditeur extends JPanel {
 		lblM9.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
 		lblM9.setBounds(315, 486, 71, 14);
 		panelObjet.add(lblM9);
+
+		JLabel lblDiv = new JLabel("/ 3");
+		lblDiv.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblDiv.setBounds(114, 671, 27, 14);
+		panelObjet.add(lblDiv);
+
+		lblNbAcc = new JLabel("0");
+		lblNbAcc.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblNbAcc.setBounds(95, 672, 20, 13);
+		panelObjet.add(lblNbAcc);
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
@@ -423,6 +445,7 @@ public class FenetreEditeur extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				pisteCourante = (String) comboBoxPiste.getSelectedItem();
 				chargementUnePiste();
+				
 
 			}
 		});
@@ -613,7 +636,6 @@ public class FenetreEditeur extends JPanel {
 		repaint();
 
 	}
-	
 
 	/**
 	 * Méthode qui permet de supprimer un accelerateur
@@ -626,6 +648,8 @@ public class FenetreEditeur extends JPanel {
 			repaint();
 			btnAjouterAccelerateur.setEnabled(true);
 		}
+		lblNbAcc.setText(panelRegroupement.getListeAccelerateur().size() + "");
+
 	}
 
 	/**
@@ -831,9 +855,9 @@ public class FenetreEditeur extends JPanel {
 
 			chargementUnePiste();
 
-			pcs.firePropertyChange("JOUEREDITEUR", null, -1);
+			PCS.firePropertyChange("JOUEREDITEUR", null, -1);
 
-			pcs.firePropertyChange("REGROUPEMENT", null, pisteCourante);
+			PCS.firePropertyChange("REGROUPEMENT", null, pisteCourante);
 
 			actionSkin();
 		} else {
@@ -855,6 +879,7 @@ public class FenetreEditeur extends JPanel {
 		if (panelRegroupement.getListeAccelerateur().size() == 3) {
 			btnAjouterAccelerateur.setEnabled(false);
 		}
+		lblNbAcc.setText(panelRegroupement.getListeAccelerateur().size() + "");
 
 		repaint();
 	}
@@ -1774,10 +1799,16 @@ public class FenetreEditeur extends JPanel {
 		}
 // Pour la fumee		
 
-//		for (int a = 0; a < regroupementSauvegarde.getListeFumee().size(); a++) {
-//			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
-//		}
 
+		for (int a = 0; a < regroupementSauvegarde.getListeFumee().size(); a++) {
+			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
+		}
+
+
+		lblNbAcc.setText(regroupementSauvegarde.getListeAccelerateur().size() + "");
+		if(regroupementSauvegarde.getListeAccelerateur().size() == 3) {
+			btnAjouterAccelerateur.setEnabled(false);
+		}
 		resetValeur();
 		repaint();
 
@@ -1801,7 +1832,7 @@ public class FenetreEditeur extends JPanel {
 			}
 		}
 		panelCouleurPiste.setBackground(couleursPiste[couleurPiste]);
-		pcs.firePropertyChange("COULEURPISTE4", null, couleursPiste[couleurPiste]);
+		PCS.firePropertyChange("COULEURPISTE4", null, couleursPiste[couleurPiste]);
 		repaint();
 	}
 
@@ -1840,8 +1871,8 @@ public class FenetreEditeur extends JPanel {
 			}
 
 		}
-		pcs.firePropertyChange("SKINOPTIONS3", null, couleurs[indexCouleur]);
-		pcs.firePropertyChange("SKINOPTIONS4", null, couleurs2[indexCouleur2]);
+		PCS.firePropertyChange("SKINOPTIONS3", null, couleurs[indexCouleur]);
+		PCS.firePropertyChange("SKINOPTIONS4", null, couleurs2[indexCouleur2]);
 	}
 
 	/**
@@ -1850,8 +1881,8 @@ public class FenetreEditeur extends JPanel {
 	 */
 	// Ludovic Julien
 	private void actionSkin() {
-		pcs.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
-		pcs.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
+		PCS.firePropertyChange("SKIN", null, couleurs[indexCouleur]);
+		PCS.firePropertyChange("SKIN2", null, couleurs2[indexCouleur2]);
 
 	}
 

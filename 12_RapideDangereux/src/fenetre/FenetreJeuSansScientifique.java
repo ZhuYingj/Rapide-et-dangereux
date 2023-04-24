@@ -1,5 +1,6 @@
 package fenetre;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.beans.PropertyChangeEvent;
@@ -23,6 +24,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  * Classe qui permet de créer une fenetre de jeu sans le mode scientifique
@@ -35,7 +38,7 @@ import java.awt.event.ActionEvent;
 
 public class FenetreJeuSansScientifique extends JPanel {
 
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
 	private JButton btnNextImg;
 	private JButton btnStart;
@@ -57,6 +60,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 	private JLabel lblNombreToursVoiture2;
 	private JLabel lblNombreToursVoiture1;
 	private JLabel lblNbToursAFaire2;
+	private JTextArea txtArea;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -65,7 +69,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
+		PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -77,12 +81,30 @@ public class FenetreJeuSansScientifique extends JPanel {
 		setBounds(100, 100, 1600, 800);
 
 		lireMusic();
-		
+
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 373, 145, 304);
+		add(panel);
+		panel.setLayout(null);
+
+		JScrollPane spPourMessage = new JScrollPane();
+		spPourMessage.setBounds(0, 0, 145, 304);
+		panel.add(spPourMessage);
+
+		txtArea = new JTextArea();
+		spPourMessage.setViewportView(txtArea);
+		txtArea.setEditable(false);
+		txtArea.setForeground(Color.RED);
+		txtArea.setFont(new Font("Dubai", Font.PLAIN, 12));
+		txtArea.setText("Pessez sur le bouton Start pour démarrer le jeu!");
+		txtArea.setWrapStyleWord(true);
+		txtArea.setLineWrap(true);
+
 		JLabel lblpixelsm = new JLabel("1.4640625pixels/m                                                   ");
 		lblpixelsm.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblpixelsm.setBounds(165, 705, 1026, 14);
 		add(lblpixelsm);
-		
+
 		JLabel lblNewLabel12 = new JLabel("80m/Morceau de piste");
 		lblNewLabel12.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		lblNewLabel12.setBounds(1033, 705, 158, 14);
@@ -130,7 +152,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("Retour", 0, -1);
+				actionBtnRetour();
 			}
 		});
 		btnRetour.setBounds(10, 11, 89, 23);
@@ -143,7 +165,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 
 			}
 		});
-		btnReset.setBounds(30, 345, 97, 58);
+		btnReset.setBounds(30, 219, 97, 58);
 		add(btnReset);
 
 		JButton btnStop = new JButton("Stop");
@@ -155,15 +177,15 @@ public class FenetreJeuSansScientifique extends JPanel {
 				arretMusic();
 			}
 		});
-		btnStop.setBounds(30, 441, 97, 58);
+		btnStop.setBounds(30, 288, 97, 58);
 		add(btnStop);
 
 		btnNextImg = new JButton("Next Img");
-		btnNextImg.setBounds(30, 260, 97, 58);
+		btnNextImg.setBounds(30, 150, 97, 58);
 		add(btnNextImg);
 
 		btnStart = new JButton("Start");
-		btnStart.setBounds(30, 177, 97, 58);
+		btnStart.setBounds(30, 81, 97, 58);
 		add(btnStart);
 
 		JLabel lblTemps = new JLabel("Temps écoulé : ");
@@ -221,12 +243,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 		add(lblObjetSpecialVoiture);
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.setEnCoursDAnimation(false);
-				zoneAnimPhysique.demarrer();
-				btnNextImg.setEnabled(false);
-				btnStart.setEnabled(false);
-				pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+				actionBtnStart();
 				musicStart();
 
 			}
@@ -272,6 +289,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 			imgBleu.flush();
 		}
 	}
+
 
 	/**
 	 * Méthode qui change le texte/l'information durant l'animation
@@ -383,53 +401,60 @@ public class FenetreJeuSansScientifique extends JPanel {
 	}
 
 	/**
-	 * Méthode qui va reinitialiser tous les valeurs du jeu
+	 * méthode qui permet de démarrer l'animation du jeu
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionBtnReset() {
-
-		zoneAnimPhysique.requestFocusInWindow();
-		zoneAnimPhysique.restartPosPisteDepart();
-		btnNextImg.setEnabled(true);
-		btnStart.setEnabled(true);
-		pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
-
-		resetMusic();
-
-	}
-
-	/**
-	 * Méthode qui arrêtre l'animation du jeu
-	 */
-	// Alexis Pineda-Alvarado
-	public void actionBtnStop() {
-		zoneAnimPhysique.requestFocusInWindow();
-		zoneAnimPhysique.arreter();
-		btnNextImg.setEnabled(true);
-		btnStart.setEnabled(true);
-		arretMusic();
-	}
-
-	/**
-	 * Méthode qui commence l'animation du jeu
-	 */
-	// Alexis Pineda-Alvarado
-	public void actionBtnStart() {
+	private void actionBtnStart() {
 		zoneAnimPhysique.requestFocusInWindow();
 		zoneAnimPhysique.setEnCoursDAnimation(false);
 		zoneAnimPhysique.demarrer();
 		btnNextImg.setEnabled(false);
 		btnStart.setEnabled(false);
-		pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+		PCS.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+		txtArea.append("\nVous avez démarrer le jeu");
 	}
 
 	/**
-	 * Méthode qui prend la prochaine image du jeu
+	 * méthode qui permet d'arrêter l'animation du jeu
 	 */
 	// Alexis Pineda-Alvarado
-	public void actionBtnProchImage() {
+	private void actionBtnStop() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.arreter();
+		btnNextImg.setEnabled(true);
+		btnStart.setEnabled(true);
+		txtArea.append("\nVous avez arrêter le jeu");
+	}
+
+	/**
+	 * méthode qui permet reinitialiser le jeu
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnReset() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.restartPosPisteDepart();
+		btnNextImg.setEnabled(true);
+		btnStart.setEnabled(true);
+		PCS.firePropertyChange("CHECKBOXACTIVE", null, -1);
+		txtArea.append("\nVous avez reinitialiser le jeu");
+	}
+
+	/**
+	 * méthode qui appui l'événement pour retourner au panel précédent
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnRetour() {
+		PCS.firePropertyChange("Retour", 0, -1);
+	}
+
+	/**
+	 * méthode qui permet de simuler la prochaine image du jeu
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnProchImage() {
 		zoneAnimPhysique.requestFocusInWindow();
 		zoneAnimPhysique.avancerUnPas();
+		txtArea.append("\nVoici la prochaine image du jeu");
 	}
 
 	public ZoneAnimPhysique getZoneAnimPhysique() {
@@ -438,6 +463,14 @@ public class FenetreJeuSansScientifique extends JPanel {
 
 	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
 		this.zoneAnimPhysique = zoneAnimPhysique;
+	}
+	
+	public JButton getBtnStart() {
+		return btnStart;
+	}
+
+	public void setBtnStart(JButton btnStart) {
+		this.btnStart = btnStart;
 	}
 
 	/**

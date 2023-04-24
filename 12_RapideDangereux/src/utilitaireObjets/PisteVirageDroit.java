@@ -56,6 +56,7 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 	private transient Area aireTriangle;
 	/** Boolean collision initié à faux **/
 	private boolean collision = false;
+	private boolean collision2 = false;
 	/** Couleur de la piste initié à noir **/
 	private Color color = new Color(128, 126, 120);
 	/** Aire du morceau de piste **/
@@ -251,14 +252,19 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 	/**
 	 * Méthode permettant de savoir si la voiture est passée sur la piste
 	 * 
-	 * @param voiture La voiture controllée
+	 * @param voiture  La voiture 1 controllée
+	 * @param voiture2 La voiture 2 controllée
 	 */
 	// Kevin Nguyen
-	public void traverserPiste(Voiture voiture) {
+	public void traverserPiste(Voiture voiture, Voiture voiture2) {
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
 			setCollision(true);
 
+		}
+		if (voiture2.getPosition().getX() > murGauche && voiture2.getPosition().getX() < murDroite
+				&& voiture2.getPosition().getY() > murHaut && voiture2.getPosition().getY() < murBas) {
+			setCollision2(true);
 		}
 
 	}
@@ -382,6 +388,14 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 
 	public void setBordure(Color bordure) {
 		this.bordure = bordure;
+	}
+
+	public boolean isCollision2() {
+		return collision2;
+	}
+
+	public void setCollision2(boolean collision2) {
+		this.collision2 = collision2;
 	}
 
 }

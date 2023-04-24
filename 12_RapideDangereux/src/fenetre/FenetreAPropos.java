@@ -1,0 +1,56 @@
+package fenetre;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
+
+/**
+ * Panel qui affiche dans des onglets de l'information sur les auteurs et sur
+ * les sources // Caroline Houle Inspiration de cette classe
+ * 
+ * @author Ludovic Julien
+ *
+ */
+
+public class FenetreAPropos extends JPanel {
+	private static final long serialVersionUID = -3110011146750233775L;
+
+	/**
+	 * Cr�ation du panel
+	 */
+	// Ludovic Julien
+	public FenetreAPropos() {
+		// noter: aucun layout précisé: le conteneur à onglets prendra la largeur de la
+		// plus longue ligne de texte
+		JTabbedPane tabOnglets = new JTabbedPane(JTabbedPane.TOP);
+		tabOnglets.setBounds(0, 0, 500, 250);
+		add(tabOnglets);
+
+		JPanel pnlAuteurs = new JPanel();
+		tabOnglets.addTab("Auteurs", null, pnlAuteurs, null);
+
+		JLabel lblAuteurs = new JLabel(
+				"<html>Équipe 12 <br><br>Kevin Nguyen<br>Ludovic Julien<br>Alexis Pineda-Alvarado<br>Tan Tommy Rin<br><br>Cours 420-SCD<br>Intégration des apprentissages en SIM<br>Hiver 2023</html>");
+		lblAuteurs.setVerticalAlignment(SwingConstants.TOP);
+		pnlAuteurs.add(lblAuteurs);
+
+		JPanel pnlSources = new JPanel();
+		tabOnglets.addTab("Sources", null, pnlSources, null);
+
+		JLabel lblSources = new JLabel("<html>" + "Music du jeu : https://www.auboutdufil.com/index.php?id=647"
+				+ "<br>Boite mystere : https://unturned.fandom.com/wiki/Chrome_Plated_Mystery_Box"
+				+ "<br>Fenêtre éditeur : https://www.wallpaperflare.com/blue-dazzling-lines<br>-dark-background-4k-hd-technology-data-wireless-technology-wallpaper-mxjce"
+				+ "<br>Champignon : https://icones8.fr/icon/6OUwhiZ6iy_O/champignon"
+				+ "<br>Boule de neige : http://clipart-library.com/clipart/ziXGaj4iB.htm"
+				+ "<br>Colle : https://www.seekpng.com/ima/u2q8r5i1i1r5e6i1/"
+				+ "<br>Trou noir : https://icons8.com/icons/set/black-hole"
+				+ "<br>Glace : https://en.ac-illust.com/clip-art/2061036/ground-ice"
+				+ "<br>Sable : https://www.dreamstime.com/cartoon-sand-seamless-vector-<br>pattern-summer-background-cartoon-sand-pattern-image158757125"
+				+ "<br>Asphalte : https://fr.depositphotos.com/15737199/stock-illustration-<br>seamless-asphalt-texture.html");
+
+		lblSources.setVerticalAlignment(SwingConstants.TOP);
+		pnlSources.add(lblSources);
+	}
+}

@@ -38,7 +38,7 @@ public class ModeDeJeu extends JPanel {
 	private JButton btnRetour;
 
 	/** ajouter le support pour lancer des evenements de type PropertyChange **/
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 	private JLabel lblNewLabel;
 
 	/**
@@ -48,7 +48,7 @@ public class ModeDeJeu extends JPanel {
 	 */
 //	Alexis Pineda-Alvarado
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
+		PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class ModeDeJeu extends JPanel {
 		btnMonde.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				pcs.firePropertyChange("PISTECREATION", 0, TypePiste.MEXIQUE);
+				PCS.firePropertyChange("PISTECREATION", 0, TypePiste.MEXIQUE);
 				if (btnMonde.contains(e.getX(), e.getY())) {
 					URL urlPlanete = getClass().getClassLoader().getResource("earth.gif");
 					ImageIcon planete = new ImageIcon(urlPlanete);
@@ -76,7 +76,7 @@ public class ModeDeJeu extends JPanel {
 		});
 		btnMonde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("MONDE", 0, -1);
+				PCS.firePropertyChange("MONDE", 0, -1);
 			}
 		});
 
@@ -98,7 +98,7 @@ public class ModeDeJeu extends JPanel {
 		});
 		btnCourseMontre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("COURSE CONTRE LA MONTRE", 0, -1);
+				PCS.firePropertyChange("COURSE CONTRE LA MONTRE", 0, -1);
 			}
 		});
 		btnCourseMontre.setForeground(Color.BLACK);
@@ -119,7 +119,7 @@ public class ModeDeJeu extends JPanel {
 		});
 		btnEditeur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("EDITEUR", 0, -1);
+				PCS.firePropertyChange("EDITEUR", 0, -1);
 			}
 		});
 		btnEditeur.setForeground(Color.BLACK);
@@ -137,7 +137,7 @@ public class ModeDeJeu extends JPanel {
 		btnRetour.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pcs.firePropertyChange("Retour", null, -1);
+				PCS.firePropertyChange("Retour", null, -1);
 			}
 		});
 		btnRetour.setBounds(10, 11, 89, 23);

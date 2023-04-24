@@ -88,9 +88,21 @@ public class PanelRegroupement extends JPanel {
 	private int longueur;
 	private int hauteur;
 	private int indexObjetPris;
-
+	/** support pour lancer des evenements de type PropertyChange **/
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 	/** L'image de la poubelle **/
 	private JLabel lblPoubelle;
+
+	/**
+	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
+	 * 
+	 * @param listener L'écouteur
+	 */
+	// Tan Tommy Rin
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+
+		this.PCS.addPropertyChangeListener(listener);
+	}
 
 	/**
 	 * Constructeur du panel de regroupement
@@ -333,6 +345,7 @@ public class PanelRegroupement extends JPanel {
 		} else if (type == TypeObjetDeplacable.ACCELERATEUR
 				&& poubelle.contains(listeAccelerateur.get(indexObjetPris).getFormeAire())) {
 			listeAccelerateur.remove(indexObjetPris);
+			PCS.firePropertyChange("POUBELLEACC", 0, -1);
 			poubelleVide = false;
 
 		} else if (type == TypeObjetDeplacable.PISTEVIRAGEBAS
@@ -859,7 +872,11 @@ public class PanelRegroupement extends JPanel {
 	// Tan Tommy Rin
 	private void accelerateurDrag(MouseEvent e) {
 		if (listeAccelerateur.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.ACCELERATEUR) {
-
+			if (poubelle.contains(acc.getFormeAire())) {
+				acc.setTaillePiste(30);
+			} else {
+				acc.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 

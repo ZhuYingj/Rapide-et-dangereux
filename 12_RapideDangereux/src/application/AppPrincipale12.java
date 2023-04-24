@@ -181,8 +181,7 @@ public class AppPrincipale12 extends JFrame {
 		fenEditeur.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				actionChangeJeuCourse2(evt, fenOptionMontre, fenJeuScience, fenSansScience, fenEditeur);
-				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience);
-
+				actionJouerDeEditeur(evt, fenEditeur, fenJeuScience, fenSansScience);
 				actionPisteCouleur(evt, fenOptions, fenJeuScience, fenSansScience, fenOptionMontre, fenEditeur);
 
 			}
@@ -229,7 +228,7 @@ public class AppPrincipale12 extends JFrame {
 
 		fenSansScience.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				actionRetourOptions2(evt, fenSansScience, fenOptions);
+				actionRetourOptions2(evt, fenSansScience, fenModeJeu);
 			}
 		});
 
@@ -344,6 +343,8 @@ public class AppPrincipale12 extends JFrame {
 
 		case "COMMENCER!":
 			fenJeuScience.setVisible(true);
+			fenJeuScience.getZoneAnimPhysique().setModeMonde(true);
+
 			fenOptions.setVisible(false);
 			setContentPane(fenJeuScience);
 			checkBoxModeNonScientifique.setEnabled(true);
@@ -455,7 +456,6 @@ public class AppPrincipale12 extends JFrame {
 					.setSkin((Color) evt.getNewValue());
 		}
 	}
-
 
 	/**
 	 * Méthode permettant d'accomplir des actions selon des levés d'évènements liés
@@ -978,24 +978,30 @@ public class AppPrincipale12 extends JFrame {
 	 * selon des levés d'évènements liés entre la fenetre du jeu sans le mode
 	 * scientifique et celui du mode éditeur
 	 * 
-	 * @param evt        evenement
-	 * @param fenEditeur fenêtre du mode editeur
-	 * @param fenScience la fenetre de jeu avec le mode scientifique
+	 * @param evt            evenement
+	 * @param fenEditeur     fenêtre du mode editeur
+	 * @param fenScience     la fenetre de jeu avec le mode scientifique
+	 * @param fenSansScience la fenetre de jeu sans le mode scientifique
 	 */
 	// Tan Tommy Rin
 
 	public void actionJouerDeEditeur(PropertyChangeEvent evt, FenetreEditeur fenEditeur,
-			FenetreJeuScientifique fenScience) {
+			FenetreJeuScientifique fenScience, FenetreJeuSansScientifique fenSansScience) {
 		switch (evt.getPropertyName()) {
 		case "JOUEREDITEUR":
-
 			fenScience.setVisible(true);
 			fenEditeur.setVisible(false);
 			setContentPane(fenScience);
+			fenScience.getZoneAnimPhysique().setTempsMontreFacile(100000.0);
+			fenSansScience.getZoneAnimPhysique().setTempsMontreFacile(100000.0);
+
+			checkBoxModeNonScientifique.setEnabled(true);
 			break;
 		case "REGROUPEMENT":
 			fenScience.getZoneAnimPhysique().setNomFichierRegroupement((String) evt.getNewValue());
 			fenScience.getZoneAnimPhysique().setTypePiste(TypePiste.AUTRE);
+			fenSansScience.getZoneAnimPhysique().setNomFichierRegroupement((String) evt.getNewValue());
+			fenSansScience.getZoneAnimPhysique().setTypePiste(TypePiste.AUTRE);
 
 		}
 	}
@@ -1043,6 +1049,7 @@ public class AppPrincipale12 extends JFrame {
 		case "Retour":
 			fenModeJeu.setVisible(true);
 			fenOptions.setVisible(false);
+			fenOptions.getZoneAnimPhysique().setModeMonde(false);
 			setContentPane(fenModeJeu);
 			break;
 		}
@@ -1068,6 +1075,8 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().restartPosPisteDepart();
 			fenJeuScience.getBtnStart().setEnabled(true);
 
+			checkBoxModeNonScientifique.setEnabled(false);
+			checkBoxModeNonScientifique.setSelected(false);
 			break;
 
 		case "STARTBUTTONACTIVE":
@@ -1090,13 +1099,17 @@ public class AppPrincipale12 extends JFrame {
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourOptions2(PropertyChangeEvent evt, FenetreJeuSansScientifique fenSansScience,
-			JeuOptions fenOptions) {
+			ModeDeJeu fenModeJeu) {
 
 		switch (evt.getPropertyName()) {
 		case "Retour":
 			fenSansScience.setVisible(false);
-			fenOptions.setVisible(true);
-			setContentPane(fenOptions);
+			fenModeJeu.setVisible(true);
+			setContentPane(fenModeJeu);
+			fenSansScience.getZoneAnimPhysique().restartPosPisteDepart();
+			fenSansScience.getBtnStart().setEnabled(true);
+			checkBoxModeNonScientifique.setEnabled(false);
+			checkBoxModeNonScientifique.setSelected(false);
 			break;
 
 		}
@@ -1117,7 +1130,6 @@ public class AppPrincipale12 extends JFrame {
 		fenJeuScience.setVisible(false);
 		setContentPane(fenSansScience);
 		fenJeuScience.getZoneAnimPhysique().requestFocusInWindow();
-
 		checkBoxModeNonScientifique.setEnabled(true);
 		pushingP(fenSansScience);
 
@@ -1183,6 +1195,7 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenJeuScience);
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreBoiteMystere(0);
 			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreBoiteMystere(0);
+			checkBoxModeNonScientifique.setEnabled(true);
 			break;
 		case "TYPEPISTE":
 			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
@@ -1217,6 +1230,8 @@ public class AppPrincipale12 extends JFrame {
 		case "NBRDETOUR":
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreToursAFaire((double) evt.getNewValue());
+			fenJeuScience.getLblNbToursAFaire().setText(String.format("%.0f", evt.getNewValue()));
+			fenJeuScience.getLblNbToursAFaire2().setText(String.format("%.0f", evt.getNewValue()));
 			break;
 		case "MATPISTEASPHALT":
 			fenJeuScience.getZoneAnimPhysique().setTestFrottement(0.25);

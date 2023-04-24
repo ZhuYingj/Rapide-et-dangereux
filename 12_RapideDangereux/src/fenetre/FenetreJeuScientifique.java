@@ -45,7 +45,7 @@ import geometrie.Vecteur2D;
  */
 public class FenetreJeuScientifique extends JPanel {
 
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport PCS = new PropertyChangeSupport(this);
 	private ZoneAnimPhysique zoneAnimPhysique;
 
 	private JProgressBar progressBarFroce;
@@ -117,7 +117,7 @@ public class FenetreJeuScientifique extends JPanel {
 	 */
 	// Tan Tommy Rin
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
+		PCS.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -218,9 +218,7 @@ public class FenetreJeuScientifique extends JPanel {
 		btnNextImg = new JButton("Next Img");
 		btnNextImg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				zoneAnimPhysique.requestFocusInWindow();
-				zoneAnimPhysique.avancerUnPas();
-				txtArea.append("\nVoici la prochaine image du jeu");
+				actionBtnProchImage();
 			}
 		});
 		btnNextImg.setBounds(208, 650, 89, 76);
@@ -760,7 +758,7 @@ public class FenetreJeuScientifique extends JPanel {
 		lblObjet2.setFont(new Font("Tahoma", Font.BOLD, 9));
 		lblObjet2.setBounds(810, 650, 120, 20);
 		add(lblObjet2);
-		
+
 		JLabel lblPixelParMetre = new JLabel("1.4640625pixels/m");
 		lblPixelParMetre.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
 		lblPixelParMetre.setBounds(546, 34, 120, 14);
@@ -777,6 +775,22 @@ public class FenetreJeuScientifique extends JPanel {
 		}
 
 		graphiqueVitesse();
+	}
+
+	public JLabel getLblNbToursAFaire() {
+		return lblNbToursAFaire;
+	}
+
+	public void setLblNbToursAFaire(JLabel lblNbToursAFaire) {
+		this.lblNbToursAFaire = lblNbToursAFaire;
+	}
+
+	public JLabel getLblNbToursAFaire2() {
+		return lblNbToursAFaire2;
+	}
+
+	public void setLblNbToursAFaire2(JLabel lblNbToursAFaire2) {
+		this.lblNbToursAFaire2 = lblNbToursAFaire2;
 	}
 
 	public JButton getBtnStart() {
@@ -1162,7 +1176,7 @@ public class FenetreJeuScientifique extends JPanel {
 		zoneAnimPhysique.demarrer();
 		btnNextImg.setEnabled(false);
 		btnStart.setEnabled(false);
-		pcs.firePropertyChange("STARTBUTTONACTIVE", null, -1);
+		PCS.firePropertyChange("STARTBUTTONACTIVE", null, -1);
 		txtArea.append("\nVous avez démarrer le jeu");
 	}
 
@@ -1187,7 +1201,7 @@ public class FenetreJeuScientifique extends JPanel {
 		zoneAnimPhysique.restartPosPisteDepart();
 		btnNextImg.setEnabled(true);
 		btnStart.setEnabled(true);
-		pcs.firePropertyChange("CHECKBOXACTIVE", null, -1);
+		PCS.firePropertyChange("CHECKBOXACTIVE", null, -1);
 		txtArea.append("\nVous avez reinitialiser le jeu");
 	}
 
@@ -1196,8 +1210,18 @@ public class FenetreJeuScientifique extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	private void actionBtnRetour() {
-		pcs.firePropertyChange("RetourDuJeuScience", null, -1);
-		pcs.firePropertyChange("Test", null, -1);
+		PCS.firePropertyChange("RetourDuJeuScience", null, -1);
+		PCS.firePropertyChange("Test", null, -1);
+	}
+
+	/**
+	 * méthode qui permet de simuler la prochaine image du jeu
+	 */
+	// Alexis Pineda-Alvarado
+	private void actionBtnProchImage() {
+		zoneAnimPhysique.requestFocusInWindow();
+		zoneAnimPhysique.avancerUnPas();
+		txtArea.append("\nVoici la prochaine image du jeu");
 	}
 
 	/**
