@@ -1063,6 +1063,7 @@ public class AppPrincipale12 extends JFrame {
 	 * @param evt           evenement
 	 * @param fenJeuScience fenêtre du jeu avec les paramètres scientifiques
 	 * @param fenModeJeu    la fenêtre du mode de jeu a choisir qui va être acrivé
+	 * @param fenOptions    la fenetre avec les options dans monde
 	 */
 	// Alexis Pineda-Alvarado
 	public void actionRetourOptions(PropertyChangeEvent evt, FenetreJeuScientifique fenJeuScience, ModeDeJeu fenModeJeu,
@@ -1201,7 +1202,7 @@ public class AppPrincipale12 extends JFrame {
 			fenJeuScience.getZoneAnimPhysique().setModeMonde(false);
 			fenSansScience.getZoneAnimPhysique().setModeMonde(false);
 			checkBoxModeNonScientifique.setEnabled(true);
-			
+
 			fenJeuScience.getZoneAnimPhysique().setModeMonde(false);
 			fenSansScience.getZoneAnimPhysique().setModeMonde(false);
 			break;
