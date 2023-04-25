@@ -1001,7 +1001,8 @@ public class AppPrincipale12 extends JFrame {
 			fenScience.getZoneAnimPhysique().setTypePiste(TypePiste.AUTRE);
 			fenSansScience.getZoneAnimPhysique().setNomFichierRegroupement((String) evt.getNewValue());
 			fenSansScience.getZoneAnimPhysique().setTypePiste(TypePiste.AUTRE);
-
+			fenScience.getZoneAnimPhysique().setModeMonde(false);
+			fenSansScience.getZoneAnimPhysique().setModeMonde(false);
 		}
 	}
 
@@ -1049,6 +1050,7 @@ public class AppPrincipale12 extends JFrame {
 			fenModeJeu.setVisible(true);
 			fenOptions.setVisible(false);
 			fenOptions.getZoneAnimPhysique().setModeMonde(false);
+
 			setContentPane(fenModeJeu);
 			break;
 		}
@@ -1196,8 +1198,12 @@ public class AppPrincipale12 extends JFrame {
 			setContentPane(fenJeuScience);
 			fenJeuScience.getZoneAnimPhysique().getRegroupement().setNombreBoiteMystere(0);
 			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreBoiteMystere(0);
+			fenJeuScience.getZoneAnimPhysique().setModeMonde(false);
+			fenSansScience.getZoneAnimPhysique().setModeMonde(false);
 			checkBoxModeNonScientifique.setEnabled(true);
-
+			
+			fenJeuScience.getZoneAnimPhysique().setModeMonde(false);
+			fenSansScience.getZoneAnimPhysique().setModeMonde(false);
 			break;
 		case "TYPEPISTE":
 			fenJeuScience.getZoneAnimPhysique().setTypePiste((TypePiste) evt.getNewValue());
