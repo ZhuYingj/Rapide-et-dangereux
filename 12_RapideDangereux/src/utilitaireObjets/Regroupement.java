@@ -1144,6 +1144,8 @@ public class Regroupement implements Dessinable, Serializable {
 			if (listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
 					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
 				listePisteDeDepart.get(0).getVoiture().setDiametre(0);
+				listePisteDeDepart.get(0).getVoiture().setDiametreFleche(0);
+				listePisteDeDepart.get(0).getVoiture().setLongueurTete(0);
 			} else {
 				listePisteDeDepart.get(0).getVoiture()
 						.setDiametre(listePisteDeDepart.get(0).getVoiture().getDiametreInitial());
@@ -1152,6 +1154,8 @@ public class Regroupement implements Dessinable, Serializable {
 			if (listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture2().getPosition().getX(),
 					listePisteDeDepart.get(0).getVoiture2().getPosition().getY())) {
 				listePisteDeDepart.get(0).getVoiture2().setDiametre(0);
+				listePisteDeDepart.get(0).getVoiture2().setDiametreFleche(0);
+				listePisteDeDepart.get(0).getVoiture2().setLongueurTete(0);
 			} else {
 				listePisteDeDepart.get(0).getVoiture2()
 						.setDiametre(listePisteDeDepart.get(0).getVoiture2().getDiametreInitial());

@@ -56,7 +56,7 @@ public class Fumee implements Dessinable, Selectionnable, Serializable {
 	 */
 	// Alexis Pineda-Alvarado
 	public void dessiner(Graphics2D g2d) {
-		g2d.setColor(Color.gray);
+		g2d.setColor(Color.black);
 
 		Stroke stroke = new BasicStroke(3f);
 		g2d.setStroke(stroke);
