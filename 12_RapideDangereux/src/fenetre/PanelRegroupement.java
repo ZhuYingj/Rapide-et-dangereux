@@ -896,7 +896,11 @@ public class PanelRegroupement extends JPanel {
 	// Alexis Pineda-Alvarado
 	private void fumeeDrag(MouseEvent e) {
 		if (listeFumee.size() != 0 && objetSelectionne == true && type == TypeObjetDeplacable.FUMEE) {
-
+			if(poubelle.contains(fumee.getFormeAire())) {
+				fumee.setTaillePiste(30);
+			} else {
+				fumee.setTaillePiste(80);
+			}
 			xPrecedent = e.getX();
 			yPrecedent = e.getY();
 

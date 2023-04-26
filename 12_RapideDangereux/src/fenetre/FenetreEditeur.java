@@ -69,11 +69,13 @@ public class FenetreEditeur extends JPanel {
 	private int couleurPiste = 0;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK };
-	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW,
-			Color.CYAN, Color.GREEN, Color.BLUE, Color.ORANGE };
+	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW, Color.CYAN,
+			Color.GREEN, Color.BLUE, Color.ORANGE };
 	private boolean gauche = false;
 	private boolean droite = false;
 	private Regroupement regroupementSauvegarde;
+	private JButton btnAjouterFumee;
+	private JLabel lblNbrSmoke;
 
 	private PanelObjet panelObjet;
 
@@ -297,7 +299,7 @@ public class FenetreEditeur extends JPanel {
 		btnSupprimerPisteVirageHaut.setBounds(114, 535, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageHaut);
 
-		JButton btnAjouterFumee = new JButton("+");
+		btnAjouterFumee = new JButton("+");
 		btnAjouterFumee.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ajouterFumee();
@@ -424,6 +426,16 @@ public class FenetreEditeur extends JPanel {
 		lblNbAcc.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
 		lblNbAcc.setBounds(95, 672, 20, 13);
 		panelObjet.add(lblNbAcc);
+
+		JLabel lblMaxFumee = new JLabel("/  1");
+		lblMaxFumee.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblMaxFumee.setBounds(265, 671, 27, 14);
+		panelObjet.add(lblMaxFumee);
+
+		lblNbrSmoke = new JLabel("0");
+		lblNbrSmoke.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblNbrSmoke.setBounds(239, 671, 20, 14);
+		panelObjet.add(lblNbrSmoke);
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
@@ -445,7 +457,6 @@ public class FenetreEditeur extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				pisteCourante = (String) comboBoxPiste.getSelectedItem();
 				chargementUnePiste();
-				
 
 			}
 		});
@@ -633,6 +644,8 @@ public class FenetreEditeur extends JPanel {
 		panelRegroupement.getListePisteHorizontale().clear();
 		panelRegroupement.getListeBlocMystere().clear();
 		panelRegroupement.getListeFumee().clear();
+		btnAjouterFumee.setEnabled(true);
+		lblNbrSmoke.setText("0");
 		repaint();
 
 	}
@@ -814,8 +827,14 @@ public class FenetreEditeur extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void ajouterFumee() {
+
 		Fumee fumee = new Fumee(650, 190);
 		panelRegroupement.getListeFumee().add(fumee);
+		if (panelRegroupement.getListeFumee().size() == 1) {
+			btnAjouterFumee.setEnabled(false);
+
+		}
+		lblNbrSmoke.setText(panelRegroupement.getListeFumee().size() + "");
 		repaint();
 	}
 
@@ -824,10 +843,12 @@ public class FenetreEditeur extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void supprimerFumee() {
-		if (panelRegroupement.getListeFumee().size() != 0) {
+		if (panelRegroupement.getListeFumee().size() < 2 && panelRegroupement.getListeFumee().size() != 0) {
 			panelRegroupement.getListeFumee().remove(panelRegroupement.getListeFumee().size() - 1);
 			repaint();
+			btnAjouterFumee.setEnabled(true);
 		}
+		lblNbrSmoke.setText("0");
 	}
 
 	/**
@@ -1799,16 +1820,20 @@ public class FenetreEditeur extends JPanel {
 		}
 // Pour la fumee		
 
-
 		for (int a = 0; a < regroupementSauvegarde.getListeFumee().size(); a++) {
 			panelRegroupement.getListeFumee().add(regroupementSauvegarde.getListeFumee().get(a));
 		}
 
-
 		lblNbAcc.setText(regroupementSauvegarde.getListeAccelerateur().size() + "");
-		if(regroupementSauvegarde.getListeAccelerateur().size() == 3) {
+		if (regroupementSauvegarde.getListeAccelerateur().size() == 3) {
 			btnAjouterAccelerateur.setEnabled(false);
 		}
+
+		lblNbrSmoke.setText(regroupementSauvegarde.getListeFumee().size() + "");
+		if (regroupementSauvegarde.getListeFumee().size() == 1) {
+			btnAjouterFumee.setEnabled(false);
+		}
+
 		resetValeur();
 		repaint();
 
