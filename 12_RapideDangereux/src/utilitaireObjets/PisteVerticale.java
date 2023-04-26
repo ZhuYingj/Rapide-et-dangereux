@@ -100,7 +100,7 @@ public class PisteVerticale implements Dessinable, Selectionnable, Serializable 
 	public void enCollisionAvec(Voiture voiture) {
 
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
-				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+				&& voiture.getPosition().getY() > murHaut - voiture.getDiametre() && voiture.getPosition().getY() < murBas) {
 			if (voiture.getPosition().getX() < murGauche + 1) {
 				try {
 					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(),
