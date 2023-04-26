@@ -107,7 +107,7 @@ public class PisteHorizontale implements Dessinable, Selectionnable, Serializabl
 	// Kevin Nguyen
 	public void enCollisionAvec(Voiture voiture) {
 
-		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
+		if (voiture.getPosition().getX() > murGauche - voiture.getDiametre() && voiture.getPosition().getX() < murDroite
 				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
 			if (voiture.getPosition().getY() < murHaut + 1) {
 				try {

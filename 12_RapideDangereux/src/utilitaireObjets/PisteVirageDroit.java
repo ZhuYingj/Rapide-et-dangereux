@@ -166,8 +166,8 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 		cercle.intersect(aireTriangle);
 		double pos = 3;
 
-		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
-				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+		if (voiture.getPosition().getX() > murGauche - voiture.getDiametre() && voiture.getPosition().getX() < murDroite
+				&& voiture.getPosition().getY() > murHaut - voiture.getDiametre() && voiture.getPosition().getY() < murBas) {
 			if (voiture.getPosition().getX() > murDroite - voiture.getDiametre()) {
 				try {
 					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(),
