@@ -80,7 +80,7 @@ public class PisteVirageDroit implements Dessinable, Selectionnable, Serializabl
 		this.murDroite = x + taillePiste + 1;
 		this.murGauche = x + 1;
 		this.murHaut = y + 1;
-		this.murBas = y + taillePiste + 1;
+		this.murBas = y + taillePiste;
 		formeAire = new Rectangle2D.Double(this.x, this.y, taillePiste, taillePiste);
 	}
 
