@@ -416,9 +416,14 @@ public class JeuOptions extends JPanel {
 		btnCommencer.setFont(new Font("Comic Sans MS", Font.PLAIN, 26));
 		btnCommencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actionCommencer();
-				actionSkin();
-				changeMaterielPiste();
+				if (!rdbtnFacile.isSelected() && !rdbtnMedium.isSelected() && !rdbtnDifficile.isSelected()) {
+					JOptionPane.showMessageDialog(null, "Choisissez une difficulté");
+				} else {
+					actionCommencer();
+					actionSkin();
+					changeMaterielPiste();
+				}
+
 			}
 		});
 		btnCommencer.setBounds(549, 691, 237, 29);
@@ -581,16 +586,14 @@ public class JeuOptions extends JPanel {
 	 */
 	// Tan Tommy Rin
 	private void actionCommencer() {
-		if (!rdbtnFacile.isSelected() && !rdbtnMedium.isSelected() && !rdbtnDifficile.isSelected()) {
-			JOptionPane.showMessageDialog(null, "Choisissez une difficulter");
-		} else {
-			PCS.firePropertyChange("COMMENCER!", null, -1);
-			PCS.firePropertyChange("MASSE1", null, (double) slider.getValue());
-			PCS.firePropertyChange("MASSE2", null, (double) slider2.getValue());
-			PCS.firePropertyChange("TYPEPISTE", null, type);
-			PCS.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
-			PCS.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
-		}
+
+		PCS.firePropertyChange("COMMENCER!", null, -1);
+		PCS.firePropertyChange("MASSE1", null, (double) slider.getValue());
+		PCS.firePropertyChange("MASSE2", null, (double) slider2.getValue());
+		PCS.firePropertyChange("TYPEPISTE", null, type);
+		PCS.firePropertyChange("NBBOITE", null, (double) sliderNbBoites.getValue());
+		PCS.firePropertyChange("COULEURPISTE", null, couleursPiste[couleurPiste]);
+
 	}
 
 	/**

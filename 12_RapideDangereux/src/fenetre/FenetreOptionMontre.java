@@ -677,7 +677,7 @@ public class FenetreOptionMontre extends JPanel {
 	// Alexis Pineda-Alvarado
 	public void actionCommencer() {
 		if (!rdbtnFacile.isSelected() && !rdbtnMedium.isSelected() && !rdbtnDifficile.isSelected()) {
-			JOptionPane.showMessageDialog(null, "Choisissez une difficulter");
+			JOptionPane.showMessageDialog(null, "Choisissez une difficulté");
 		} else {
 			PCS.firePropertyChange("COMMENCER COURSE MONTRE", null, -1);
 			PCS.firePropertyChange("TYPEPISTE", null, type);
