@@ -111,7 +111,7 @@ public class ModeDeJeu extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (btnEditeur.contains(e.getX(), e.getY())) {
-					URL urlPlanete = getClass().getClassLoader().getResource("editeur.gif");
+					URL urlPlanete = getClass().getClassLoader().getResource("Editeur.gif");
 					ImageIcon planete = new ImageIcon(urlPlanete);
 					lblNewLabel.setIcon(planete);
 				}

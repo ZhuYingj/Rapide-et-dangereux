@@ -607,7 +607,7 @@ public class JeuOptions extends JPanel {
 		if (btnCanada.contains(e.getX(), e.getY())) {
 			txtArea.append("\nVous avez choisi la piste Canada!");
 			type = TypePiste.CANADA;
-			imageActuelle = OutilsImage.lireImage("PisteCanada.png");
+
 
 			zoneAnimPhysique.setTypePiste(type);
 			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().setPosition(
@@ -648,7 +648,7 @@ public class JeuOptions extends JPanel {
 		if (btnMexique.contains(e.getX(), e.getY())) {
 			type = TypePiste.MEXIQUE;
 			txtArea.append("\nVous avez choisi la piste Mexique!");
-			imageActuelle = OutilsImage.lireImage("PisteMexique.png");
+		
 			zoneAnimPhysique.setTypePiste(type);
 			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().setPosition(
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
@@ -689,7 +689,7 @@ public class JeuOptions extends JPanel {
 		if (btnItalie.contains(e.getX(), e.getY())) {
 			type = TypePiste.ITALIE;
 			txtArea.append("\nVous avez choisi la piste Italie!");
-			imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
+		
 
 			zoneAnimPhysique.setTypePiste(type);
 			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().setPosition(
