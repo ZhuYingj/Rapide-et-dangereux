@@ -74,6 +74,8 @@ public class FenetreEditeur extends JPanel {
 	private boolean gauche = false;
 	private boolean droite = false;
 	private Regroupement regroupementSauvegarde;
+	private JButton btnAjouterFumee;
+	private JLabel lblNbrSmoke;
 
 	private PanelObjet panelObjet;
 
@@ -151,14 +153,15 @@ public class FenetreEditeur extends JPanel {
 		add(panelObjet);
 		panelObjet.setLayout(null);
 
-		btnAjouterAccelerateur = new JButton("+");
+		btnAjouterAccelerateur = new JButton("");
+		btnAjouterAccelerateur.setOpaque(false);
 		btnAjouterAccelerateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ajoutAccelerateur();
 			}
 		});
 
-		btnAjouterAccelerateur.setBounds(74, 686, 41, 23);
+		btnAjouterAccelerateur.setBounds(74, 587, 81, 82);
 		panelObjet.add(btnAjouterAccelerateur);
 
 		JButton btnSupprimerAccelerateur = new JButton("-");
@@ -167,7 +170,7 @@ public class FenetreEditeur extends JPanel {
 				supprimerAccelerateur();
 			}
 		});
-		btnSupprimerAccelerateur.setBounds(114, 686, 41, 23);
+		btnSupprimerAccelerateur.setBounds(95, 686, 41, 23);
 		panelObjet.add(btnSupprimerAccelerateur);
 
 		JButton btnAjouterBlocMystere = new JButton("");
@@ -304,13 +307,14 @@ public class FenetreEditeur extends JPanel {
 		btnSupprimerPisteVirageHaut.setBounds(95, 535, 41, 23);
 		panelObjet.add(btnSupprimerPisteVirageHaut);
 
-		JButton btnAjouterFumee = new JButton("+");
+		btnAjouterFumee = new JButton("");
+		btnAjouterFumee.setOpaque(false);
 		btnAjouterFumee.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ajouterFumee();
 			}
 		});
-		btnAjouterFumee.setBounds(225, 686, 41, 23);
+		btnAjouterFumee.setBounds(225, 587, 81, 82);
 		panelObjet.add(btnAjouterFumee);
 
 		JButton btnSupprimerFumee = new JButton("-");
@@ -319,7 +323,7 @@ public class FenetreEditeur extends JPanel {
 				supprimerFumee();
 			}
 		});
-		btnSupprimerFumee.setBounds(265, 686, 41, 23);
+		btnSupprimerFumee.setBounds(245, 686, 41, 23);
 		panelObjet.add(btnSupprimerFumee);
 
 		JLabel lblAcc = new JLabel("Accelerateur");
@@ -431,6 +435,16 @@ public class FenetreEditeur extends JPanel {
 		lblNbAcc.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
 		lblNbAcc.setBounds(95, 672, 20, 13);
 		panelObjet.add(lblNbAcc);
+
+		JLabel lblMaxFumee = new JLabel("/  1");
+		lblMaxFumee.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblMaxFumee.setBounds(265, 671, 27, 14);
+		panelObjet.add(lblMaxFumee);
+
+		lblNbrSmoke = new JLabel("0");
+		lblNbrSmoke.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+		lblNbrSmoke.setBounds(239, 671, 20, 14);
+		panelObjet.add(lblNbrSmoke);
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
@@ -639,6 +653,8 @@ public class FenetreEditeur extends JPanel {
 		panelRegroupement.getListePisteHorizontale().clear();
 		panelRegroupement.getListeBlocMystere().clear();
 		panelRegroupement.getListeFumee().clear();
+		btnAjouterFumee.setEnabled(true);
+		lblNbrSmoke.setText("0");
 		lblNbAcc.setText(panelRegroupement.getListeAccelerateur().size() + "");
 		btnAjouterAccelerateur.setEnabled(true);
 		repaint();
@@ -822,8 +838,14 @@ public class FenetreEditeur extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void ajouterFumee() {
+
 		Fumee fumee = new Fumee(650, 190);
 		panelRegroupement.getListeFumee().add(fumee);
+		if (panelRegroupement.getListeFumee().size() == 1) {
+			btnAjouterFumee.setEnabled(false);
+
+		}
+		lblNbrSmoke.setText(panelRegroupement.getListeFumee().size() + "");
 		repaint();
 	}
 
@@ -832,10 +854,12 @@ public class FenetreEditeur extends JPanel {
 	 */
 	// Alexis Pineda-Alvarado
 	public void supprimerFumee() {
-		if (panelRegroupement.getListeFumee().size() != 0) {
+		if (panelRegroupement.getListeFumee().size() < 2 && panelRegroupement.getListeFumee().size() != 0) {
 			panelRegroupement.getListeFumee().remove(panelRegroupement.getListeFumee().size() - 1);
 			repaint();
+			btnAjouterFumee.setEnabled(true);
 		}
+		lblNbrSmoke.setText("0");
 	}
 
 	/**
@@ -1815,6 +1839,13 @@ public class FenetreEditeur extends JPanel {
 		if (regroupementSauvegarde.getListeAccelerateur().size() == 3) {
 			btnAjouterAccelerateur.setEnabled(false);
 		}
+
+
+		lblNbrSmoke.setText(regroupementSauvegarde.getListeFumee().size() + "");
+		if (regroupementSauvegarde.getListeFumee().size() == 1) {
+			btnAjouterFumee.setEnabled(false);
+		}
+
 		resetValeur();
 		repaint();
 

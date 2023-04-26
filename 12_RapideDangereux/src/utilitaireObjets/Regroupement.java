@@ -1139,7 +1139,7 @@ public class Regroupement implements Dessinable, Serializable {
 	 */
 	// Alexis Pineda-Alvarado
 	private void fumeeFonction() {
-		if (listeFumee.size() != 0) {
+		if (listeFumee.size() == 1) {
 			// Voiture 1
 			if (listeFumee.get(0).contient(listePisteDeDepart.get(0).getVoiture().getPosition().getX(),
 					listePisteDeDepart.get(0).getVoiture().getPosition().getY())) {
