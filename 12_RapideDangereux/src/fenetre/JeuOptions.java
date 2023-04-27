@@ -72,7 +72,7 @@ public class JeuOptions extends JPanel {
 	private JButton btnItalie;
 	private JSlider sliderNbBoites;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
-	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, };
+	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.magenta, Color.PINK, };
 	/** Liste des couleurs de bordure de piste **/
 	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW, Color.CYAN,
 			Color.GREEN, Color.BLUE, Color.ORANGE };

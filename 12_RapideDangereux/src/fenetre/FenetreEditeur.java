@@ -68,7 +68,7 @@ public class FenetreEditeur extends JPanel {
 	private int indexCouleur2 = 0;
 	private int couleurPiste = 0;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
-	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK };
+	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.magenta, Color.PINK };
 	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW, Color.CYAN,
 			Color.GREEN, Color.BLUE, Color.ORANGE };
 	private boolean gauche = false;
@@ -1839,7 +1839,6 @@ public class FenetreEditeur extends JPanel {
 		if (regroupementSauvegarde.getListeAccelerateur().size() == 3) {
 			btnAjouterAccelerateur.setEnabled(false);
 		}
-
 
 		lblNbrSmoke.setText(regroupementSauvegarde.getListeFumee().size() + "");
 		if (regroupementSauvegarde.getListeFumee().size() == 1) {

@@ -64,7 +64,7 @@ public class FenetreOptionMontre extends JPanel {
 	private int couleurPiste = 0;
 	private int couleurMatPiste = 0;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
-	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK };
+	private Color[] couleurs2 = { Color.cyan, Color.WHITE,  Color.magenta, Color.PINK };
 	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW, Color.CYAN,
 			Color.GREEN, Color.BLUE, Color.ORANGE };
 	private Color[] couleursMaterielPiste = { new Color(194, 178, 128), new Color(128, 126, 120),
