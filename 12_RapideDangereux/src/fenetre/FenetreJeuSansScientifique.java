@@ -61,6 +61,8 @@ public class FenetreJeuSansScientifique extends JPanel {
 	private JLabel lblNombreToursVoiture1;
 	private JLabel lblNbToursAFaire2;
 	private JTextArea txtArea;
+	private JButton btnReset;
+	private JButton btnStop;
 
 	/**
 	 * Methode qui permettra de s'ajouter en tant qu'ecouteur
@@ -158,17 +160,23 @@ public class FenetreJeuSansScientifique extends JPanel {
 		btnRetour.setBounds(10, 11, 89, 23);
 		add(btnRetour);
 
-		JButton btnReset = new JButton("Reset");
+		btnReset = new JButton("");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionBtnReset();
-				
+
 			}
 		});
 		btnReset.setBounds(30, 219, 97, 58);
 		add(btnReset);
 
-		JButton btnStop = new JButton("Stop");
+		Image reset = OutilsImage.lireImageEtRedimensionner("reset.png", 97, 58);
+		if (reset != null) {
+			btnReset.setIcon(new ImageIcon(reset));
+			reset.flush();
+		}
+
+		btnStop = new JButton("");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -180,13 +188,31 @@ public class FenetreJeuSansScientifique extends JPanel {
 		btnStop.setBounds(30, 288, 97, 58);
 		add(btnStop);
 
-		btnNextImg = new JButton("Next Img");
+		Image stop = OutilsImage.lireImageEtRedimensionner("stop.png", 97, 58);
+		if (stop != null) {
+			btnStop.setIcon(new ImageIcon(stop));
+			stop.flush();
+		}
+		
+		btnNextImg = new JButton("");
 		btnNextImg.setBounds(30, 150, 97, 58);
 		add(btnNextImg);
+		
+		Image nextImage = OutilsImage.lireImageEtRedimensionner("prochimage.png", 97, 58);
+		if (nextImage != null) {
+			btnNextImg.setIcon(new ImageIcon(nextImage));
+			nextImage.flush();
+		}
 
-		btnStart = new JButton("Start");
+		btnStart = new JButton("");
 		btnStart.setBounds(30, 81, 97, 58);
 		add(btnStart);
+		
+		Image start = OutilsImage.lireImageEtRedimensionner("demarrer.png", 97, 58);
+		if (start != null) {
+			btnStart.setIcon(new ImageIcon(start));
+			start.flush();
+		}
 
 		JLabel lblTemps = new JLabel("Temps écoulé : ");
 		lblTemps.setFont(new Font("Tahoma", Font.BOLD, 18));
