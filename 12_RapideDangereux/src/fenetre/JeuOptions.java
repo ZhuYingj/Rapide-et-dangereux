@@ -182,6 +182,7 @@ public class JeuOptions extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				selectionImageMexique(e);
+				FenetreJeuScientifique.setmusicPiste("Mexique");
 
 			}
 		});
@@ -201,6 +202,7 @@ public class JeuOptions extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				selectionImageCanada(e);
+				FenetreJeuScientifique.setmusicPiste("Canada");
 			}
 		});
 		btnCanada.setBounds(578, 74, 126, 78);
@@ -218,6 +220,7 @@ public class JeuOptions extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				selectionImageItalie(e);
+				FenetreJeuScientifique.setmusicPiste("Italie");
 			}
 		});
 		btnItalie.setBounds(735, 74, 126, 78);
@@ -610,7 +613,6 @@ public class JeuOptions extends JPanel {
 
 
 			zoneAnimPhysique.setTypePiste(type);
-			FenetreJeuScientifique.setmusicPiste("Canada");
 			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().setPosition(
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
 							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 10)));
@@ -652,7 +654,6 @@ public class JeuOptions extends JPanel {
 		
 			zoneAnimPhysique.setTypePiste(type);
 			zoneAnimPhysique.musicPiste(type);
-			FenetreJeuScientifique.setmusicPiste("Mexique");
 			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().setPosition(
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
 							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 10)));
@@ -691,7 +692,6 @@ public class JeuOptions extends JPanel {
 	private void selectionImageItalie(MouseEvent e) {
 		if (btnItalie.contains(e.getX(), e.getY())) {
 			type = TypePiste.ITALIE;
-			FenetreJeuScientifique.setmusicPiste("Italie");
 			txtArea.append("\nVous avez choisi la piste Italie!");
 		
 

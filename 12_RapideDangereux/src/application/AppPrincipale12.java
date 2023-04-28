@@ -310,25 +310,45 @@ public class AppPrincipale12 extends JFrame {
 			if (FenetreJeuScientifique.getAnnim() == true) {
 			if (FenetreJeuScientifique.getMusicPiste() == "Mexique") {
 				FenetreJeuScientifique.getClip().start();
-				FenetreJeuSansScientifique.getClip().start();
+			
 				}else {
 					if (FenetreJeuScientifique.getMusicPiste() == "Italie") {
 						FenetreJeuScientifique.getClip2().start();
-						FenetreJeuSansScientifique.getClip2().start();
+						;
 						}else {
 							if (FenetreJeuScientifique.getMusicPiste() == "Canada") {
 								FenetreJeuScientifique.getClip3().start();
-								FenetreJeuSansScientifique.getClip3().start();
+								
 							}else {
 								if (FenetreJeuScientifique.getMusicPiste() == "Autre") {
 									FenetreJeuScientifique.getClip4().start();
-									FenetreJeuSansScientifique.getClip4().start();
+									
 							}
 						}
 						}
 				}
-			pisteAudio = false;
+			if (FenetreJeuSansScientifique.getAnnim() == true) {
+				if (FenetreJeuScientifique.getMusicPiste() == "Mexique") {
+					FenetreJeuSansScientifique.getClip().start();
+					}else {
+						if (FenetreJeuScientifique.getMusicPiste() == "Italie") {
+							
+							FenetreJeuSansScientifique.getClip2().start();
+							}else {
+								if (FenetreJeuScientifique.getMusicPiste() == "Canada") {
+									
+									FenetreJeuSansScientifique.getClip3().start();
+								}else {
+									if (FenetreJeuScientifique.getMusicPiste() == "Autre") {
+										
+										FenetreJeuSansScientifique.getClip4().start();
+								}
+							}
+							}
+					}
+					}
 			}
+			pisteAudio = false;
 		}
 	}
 

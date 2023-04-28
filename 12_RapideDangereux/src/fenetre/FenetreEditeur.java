@@ -479,6 +479,7 @@ public class FenetreEditeur extends JPanel {
 		btnJouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jouer();
+				FenetreJeuScientifique.setmusicPiste("Autre");
 			}
 		});
 

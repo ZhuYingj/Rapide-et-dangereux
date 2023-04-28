@@ -1138,7 +1138,6 @@ public class FenetreJeuScientifique extends JPanel {
 	// Ludovic Julien
 	public void stopGraphique() {
 		timerVitesse.stop();
-		annim = false;
 	}
 
 	/**
@@ -1150,6 +1149,8 @@ public class FenetreJeuScientifique extends JPanel {
 		annim = true;
 	}
 	
+	
+	//Ludovic Julien
 	public static boolean getAnnim() {
 		return annim;
 	}
@@ -1200,11 +1201,21 @@ public class FenetreJeuScientifique extends JPanel {
 		return clip4;
 	}
 	
+	/**
+	 * methode qui chnage la variable pistemusic en le nom de la piste selectionner
+	 * 
+	 * @param piste 	nom de la piste selectionner
+	 */
+	//Ludovic Julien
 	public static void setmusicPiste(String piste) {
 		pistemusic = piste;
-		System.out.println(pistemusic);
 	}
-	
+	/**
+	 * méthode qui retourne la piste selectionner
+	 *  
+	 * @return pistemusic		string de la piste selectionner
+	 */
+	//Ludovic Julien
 	public static String getMusicPiste() {
 		return pistemusic;
 	}
@@ -1215,6 +1226,7 @@ public class FenetreJeuScientifique extends JPanel {
 	 */
 	// Ludovic Julien
 	public void resetMusic() {
+		annim = false;
 		if (clip != null) {
 			clip.stop();
 			clip.setMicrosecondPosition(0);
@@ -1241,7 +1253,7 @@ public class FenetreJeuScientifique extends JPanel {
 		try {
 			
 			clip = AudioSystem.getClip();
-			URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
+			URL resource = getClass().getClassLoader().getResource("Mexico.wav");
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
 
 			clip.open(inputStream);
@@ -1252,11 +1264,15 @@ public class FenetreJeuScientifique extends JPanel {
 		}
 	}
 	
+	/**
+	 * méthode qui permet de lire un fichier audio
+	 */
+	// Ludovic Julien
 	public void lireMusic2() {
 		try {
 			
 			clip2 = AudioSystem.getClip();
-			URL resource2 = getClass().getClassLoader().getResource("retro-city-14099.wav");
+			URL resource2 = getClass().getClassLoader().getResource("Italie.wav");
 			AudioInputStream inputStream2 = AudioSystem.getAudioInputStream(resource2);
 			clip2.open(inputStream2);
 					
@@ -1265,12 +1281,15 @@ public class FenetreJeuScientifique extends JPanel {
 		}
 	}
 	
-	
+	/**
+	 * méthode qui permet de lire un fichier audio
+	 */
+	// Ludovic Julien
 	public void lireMusic3() {
 		try {
 			
 			clip3 = AudioSystem.getClip();
-			URL resource3 = getClass().getClassLoader().getResource("retro-city-14099.wav");
+			URL resource3 = getClass().getClassLoader().getResource("Canada.wav");
 			AudioInputStream inputStream3 = AudioSystem.getAudioInputStream(resource3);
 			clip3.open(inputStream3);
 					
@@ -1279,12 +1298,15 @@ public class FenetreJeuScientifique extends JPanel {
 		}
 	}
 	
-	
+	/**
+	 * méthode qui permet de lire un fichier audio
+	 */
+	// Ludovic Julien
 	public void lireMusic4() {
 		try {
 			
 			clip4 = AudioSystem.getClip();
-			URL resource4 = getClass().getClassLoader().getResource("retro-city-14099.wav");
+			URL resource4 = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
 			AudioInputStream inputStream4 = AudioSystem.getAudioInputStream(resource4);
 			clip4.open(inputStream4);
 					
@@ -1293,19 +1315,13 @@ public class FenetreJeuScientifique extends JPanel {
 		}
 	}
 	
-	
-//	public void setClip(Clip clip2) {
-//		clip = clip2;
-//	}
-//	
-	
 
 	/**
 	 * méthode qui permet d'arreter une music
 	 */
 	// Ludovic Julien
 	public void arretMusic() {
-		
+		annim = false;
 		if (clip != null) {
 			clip.stop();
 		}

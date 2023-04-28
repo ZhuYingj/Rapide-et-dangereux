@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import application.GestionnaireDeFichiersSurLeBureau;
+import fenetre.FenetreJeuSansScientifique;
 import fenetre.FenetreJeuScientifique;
 import geometrie.Vecteur2D;
 import interfaces.TypeObjetSpecial;
@@ -1405,15 +1406,18 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 		regroupement.setType(typePiste);
 		if (typePiste == TypePiste.MEXIQUE) {
 			FenetreJeuScientifique.setmusicPiste("Mexique");
+			FenetreJeuSansScientifique.setmusicPiste("Mexique");
 		}
 		if (typePiste == TypePiste.ITALIE) {
 			FenetreJeuScientifique.setmusicPiste("Italie");
+			FenetreJeuSansScientifique.setmusicPiste("Italie");
 		}
 		if (typePiste == TypePiste.CANADA) {
 			FenetreJeuScientifique.setmusicPiste("Canada");
+			FenetreJeuSansScientifique.setmusicPiste("Canada");
 		}
 		if (typePiste == TypePiste.AUTRE) {
-			FenetreJeuScientifique.setmusicPiste("Mexique");
+			FenetreJeuSansScientifique.setmusicPiste("Mexique");
 			
 		}
 	}
