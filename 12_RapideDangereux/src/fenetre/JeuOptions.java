@@ -72,7 +72,7 @@ public class JeuOptions extends JPanel {
 	private JButton btnItalie;
 	private JSlider sliderNbBoites;
 	private Color[] couleurs = { Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE };
-	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.GRAY, Color.magenta, Color.PINK, };
+	private Color[] couleurs2 = { Color.cyan, Color.WHITE, Color.magenta, Color.PINK, };
 	/** Liste des couleurs de bordure de piste **/
 	private Color[] couleursPiste = { Color.RED, Color.WHITE, Color.magenta, Color.PINK, Color.YELLOW, Color.CYAN,
 			Color.GREEN, Color.BLUE, Color.ORANGE };
@@ -607,7 +607,7 @@ public class JeuOptions extends JPanel {
 		if (btnCanada.contains(e.getX(), e.getY())) {
 			txtArea.append("\nVous avez choisi la piste Canada!");
 			type = TypePiste.CANADA;
-			imageActuelle = OutilsImage.lireImage("PisteCanada.png");
+
 
 			zoneAnimPhysique.setTypePiste(type);
 			FenetreJeuScientifique.setmusicPiste("Canada");
@@ -649,7 +649,7 @@ public class JeuOptions extends JPanel {
 		if (btnMexique.contains(e.getX(), e.getY())) {
 			type = TypePiste.MEXIQUE;
 			txtArea.append("\nVous avez choisi la piste Mexique!");
-			imageActuelle = OutilsImage.lireImage("PisteMexique.png");
+		
 			zoneAnimPhysique.setTypePiste(type);
 			zoneAnimPhysique.musicPiste(type);
 			FenetreJeuScientifique.setmusicPiste("Mexique");
@@ -693,7 +693,7 @@ public class JeuOptions extends JPanel {
 			type = TypePiste.ITALIE;
 			FenetreJeuScientifique.setmusicPiste("Italie");
 			txtArea.append("\nVous avez choisi la piste Italie!");
-			imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
+		
 
 			zoneAnimPhysique.setTypePiste(type);
 			zoneAnimPhysique.musicPiste(type);

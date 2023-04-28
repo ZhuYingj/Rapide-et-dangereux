@@ -51,11 +51,11 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 	/** Nombre de pixels pas metre. */
 	private double pixelsParMetre;
 	/** Temps du deltaT par d�faut */
-	private double deltaT = 0.01;
-	/** Booleen de l'animation initialise a false */
+	private double deltaT = 0.003;
+	/** Booleen de l'animation initialise a false */ 
 	private boolean enCoursDAnimation = false;
 	/** Temps du sleep de l'application */
-	private int tempsDuSleep = 5;
+	private int tempsDuSleep = 1;
 	/** Notre objet voiture 1 **/
 	private Voiture voiture;
 	/** Valeur booléenne pour savoir si c'est la première fois qu'on dessine **/

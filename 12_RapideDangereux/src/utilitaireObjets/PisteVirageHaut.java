@@ -134,7 +134,8 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 		double pos = 3;
 
 		if (voiture.getPosition().getX() > murGauche && voiture.getPosition().getX() < murDroite
-				&& voiture.getPosition().getY() > murHaut && voiture.getPosition().getY() < murBas) {
+				&& voiture.getPosition().getY() > murHaut - voiture.getDiametre()
+				&& voiture.getPosition().getY() < murBas) {
 			if (voiture.getPosition().getX() < murGauche + 1) {
 				try {
 					Vecteur2D vit = MoteurPhysique.calculerVitesseCollisionAngle(voiture.getVitesse(),
@@ -144,7 +145,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 					if (Math.toDegrees(voiture.getAngle()) < 270 && Math.toDegrees(voiture.getAngle()) > 180) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) + ((270 - Math.toDegrees(voiture.getAngle())) * 2)));
-						
+
 					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
 						voiture.setAngle(Math.toRadians(
 								Math.toDegrees(voiture.getAngle()) - ((Math.toDegrees(voiture.getAngle()) - 90) * 2)));
@@ -165,7 +166,7 @@ public class PisteVirageHaut implements Dessinable, Selectionnable, Serializable
 					} else if (Math.toDegrees(voiture.getAngle()) > 90 && Math.toDegrees(voiture.getAngle()) < 180) {
 						voiture.setAngle(Math.toRadians(Math.toDegrees(voiture.getAngle())
 								+ ((360 - (Math.toDegrees(voiture.getAngle())) * 2))));
-						
+
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

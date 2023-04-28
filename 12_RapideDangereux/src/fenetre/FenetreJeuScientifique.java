@@ -185,8 +185,10 @@ public class FenetreJeuScientifique extends JPanel {
 				resetMusic();
 			}
 		});
+		btnRetour.setBounds(10, 11, 89, 23);
+		add(btnRetour);
 
-		btnStart = new JButton("Start");
+		btnStart = new JButton("");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionBtnStart();
@@ -197,10 +199,14 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnStart.setBounds(10, 650, 89, 76);
 		add(btnStart);
-		btnRetour.setBounds(10, 11, 89, 23);
-		add(btnRetour);
 
-		btnStop = new JButton("Stop");
+		Image start = OutilsImage.lireImageEtRedimensionner("demarrer.png", 89, 76);
+		if (start != null) {
+			btnStart.setIcon(new ImageIcon(start));
+			start.flush();
+		}
+
+		btnStop = new JButton("");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionBtnStop();
@@ -211,7 +217,13 @@ public class FenetreJeuScientifique extends JPanel {
 		btnStop.setBounds(307, 650, 89, 76);
 		add(btnStop);
 
-		btnReset = new JButton("Reset");
+		Image stop = OutilsImage.lireImageEtRedimensionner("stop.png", 89, 76);
+		if (stop != null) {
+			btnStop.setIcon(new ImageIcon(stop));
+			stop.flush();
+		}
+
+		btnReset = new JButton("");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionBtnReset();
@@ -223,7 +235,13 @@ public class FenetreJeuScientifique extends JPanel {
 		btnReset.setBounds(109, 650, 89, 76);
 		add(btnReset);
 
-		btnNextImg = new JButton("Next Img");
+		Image reset = OutilsImage.lireImageEtRedimensionner("reset.png", 89, 76);
+		if (reset != null) {
+			btnReset.setIcon(new ImageIcon(reset));
+			reset.flush();
+		}
+
+		btnNextImg = new JButton("");
 		btnNextImg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionBtnProchImage();
@@ -231,6 +249,12 @@ public class FenetreJeuScientifique extends JPanel {
 		});
 		btnNextImg.setBounds(208, 650, 89, 76);
 		add(btnNextImg);
+
+		Image nextImage = OutilsImage.lireImageEtRedimensionner("prochimage.png", 89, 76);
+		if (nextImage != null) {
+			btnNextImg.setIcon(new ImageIcon(nextImage));
+			nextImage.flush();
+		}
 
 		setLayout(null);
 		setBounds(100, 100, 1556, 836);
@@ -831,6 +855,14 @@ public class FenetreJeuScientifique extends JPanel {
 		this.zoneAnimPhysique = zoneAnimPhysique;
 	}
 
+	public JButton getBtnNextImg() {
+		return btnNextImg;
+	}
+
+	public void setBtnNextImg(JButton btnNextImg) {
+		this.btnNextImg = btnNextImg;
+	}
+
 	/**
 	 * Méthode qui change le texte/l'information durant l'animation
 	 * 
@@ -1321,7 +1353,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private void actionBtnReset() {
 		zoneAnimPhysique.requestFocusInWindow();
 		zoneAnimPhysique.restartPosPisteDepart();
-		btnNextImg.setEnabled(true);
+		btnNextImg.setEnabled(false);
 		btnStart.setEnabled(true);
 		PCS.firePropertyChange("CHECKBOXACTIVE", null, -1);
 		txtArea.append("\nVous avez reinitialiser le jeu");
