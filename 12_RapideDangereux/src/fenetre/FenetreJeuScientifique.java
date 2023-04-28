@@ -823,6 +823,14 @@ public class FenetreJeuScientifique extends JPanel {
 		this.zoneAnimPhysique = zoneAnimPhysique;
 	}
 
+	public JButton getBtnNextImg() {
+		return btnNextImg;
+	}
+
+	public void setBtnNextImg(JButton btnNextImg) {
+		this.btnNextImg = btnNextImg;
+	}
+
 	/**
 	 * Méthode qui change le texte/l'information durant l'animation
 	 * 
@@ -1199,7 +1207,7 @@ public class FenetreJeuScientifique extends JPanel {
 	private void actionBtnReset() {
 		zoneAnimPhysique.requestFocusInWindow();
 		zoneAnimPhysique.restartPosPisteDepart();
-		btnNextImg.setEnabled(true);
+		btnNextImg.setEnabled(false);
 		btnStart.setEnabled(true);
 		PCS.firePropertyChange("CHECKBOXACTIVE", null, -1);
 		txtArea.append("\nVous avez reinitialiser le jeu");

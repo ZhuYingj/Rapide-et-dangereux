@@ -162,7 +162,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionBtnReset();
-
+				
 			}
 		});
 		btnReset.setBounds(30, 219, 97, 58);
@@ -289,7 +289,6 @@ public class FenetreJeuSansScientifique extends JPanel {
 			imgBleu.flush();
 		}
 	}
-
 
 	/**
 	 * Méthode qui change le texte/l'information durant l'animation
@@ -433,7 +432,7 @@ public class FenetreJeuSansScientifique extends JPanel {
 	private void actionBtnReset() {
 		zoneAnimPhysique.requestFocusInWindow();
 		zoneAnimPhysique.restartPosPisteDepart();
-		btnNextImg.setEnabled(true);
+		btnNextImg.setEnabled(false);
 		btnStart.setEnabled(true);
 		PCS.firePropertyChange("CHECKBOXACTIVE", null, -1);
 		txtArea.append("\nVous avez reinitialiser le jeu");
@@ -464,13 +463,21 @@ public class FenetreJeuSansScientifique extends JPanel {
 	public void setZoneAnimPhysique(ZoneAnimPhysique zoneAnimPhysique) {
 		this.zoneAnimPhysique = zoneAnimPhysique;
 	}
-	
+
 	public JButton getBtnStart() {
 		return btnStart;
 	}
 
 	public void setBtnStart(JButton btnStart) {
 		this.btnStart = btnStart;
+	}
+
+	public JButton getBtnNextImg() {
+		return btnNextImg;
+	}
+
+	public void setBtnNextImg(JButton btnNextImg) {
+		this.btnNextImg = btnNextImg;
 	}
 
 	/**

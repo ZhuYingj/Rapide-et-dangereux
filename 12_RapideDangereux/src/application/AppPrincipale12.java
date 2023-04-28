@@ -343,7 +343,8 @@ public class AppPrincipale12 extends JFrame {
 		case "COMMENCER!":
 			fenJeuScience.setVisible(true);
 			fenJeuScience.getZoneAnimPhysique().setModeMonde(true);
-
+			fenJeuScience.getBtnNextImg().setEnabled(false);
+			fenSansScience.getBtnNextImg().setEnabled(false);
 			fenOptions.setVisible(false);
 			setContentPane(fenJeuScience);
 			checkBoxModeNonScientifique.setEnabled(true);
@@ -1201,6 +1202,8 @@ public class AppPrincipale12 extends JFrame {
 			fenSansScience.getZoneAnimPhysique().getRegroupement().setNombreBoiteMystere(0);
 			fenJeuScience.getZoneAnimPhysique().setModeMonde(false);
 			fenSansScience.getZoneAnimPhysique().setModeMonde(false);
+			fenJeuScience.getBtnNextImg().setEnabled(false);
+			fenSansScience.getBtnNextImg().setEnabled(false);
 			checkBoxModeNonScientifique.setEnabled(true);
 
 			fenJeuScience.getZoneAnimPhysique().setModeMonde(false);
