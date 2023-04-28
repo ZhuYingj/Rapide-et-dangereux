@@ -1399,6 +1399,25 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 
 		}
 	}
+	
+	public void musicPiste(TypePiste typePiste) {
+		this.typePiste = typePiste;
+		regroupement.setType(typePiste);
+		if (typePiste == TypePiste.MEXIQUE) {
+			FenetreJeuScientifique.setmusicPiste("Mexique");
+		}
+		if (typePiste == TypePiste.ITALIE) {
+			FenetreJeuScientifique.setmusicPiste("Italie");
+		}
+		if (typePiste == TypePiste.CANADA) {
+			FenetreJeuScientifique.setmusicPiste("Canada");
+		}
+		if (typePiste == TypePiste.AUTRE) {
+			FenetreJeuScientifique.setmusicPiste("Mexique");
+			
+		}
+	}
+	
 
 	/**
 	 * méthode qui permet de récolter les information du gagnant de la course
@@ -1411,9 +1430,12 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 				|| regroupement.getNombreToursAFaire() == regroupement.getListePisteDeDepart().get(0).getVoiture2()
 						.getNombreToursFaits()) {
 
-			String nomUtilisateur = "Inconnue";
+			String nomUtilisateur;
 			nomUtilisateur = JOptionPane
 					.showInputDialog("félicitation pour cette belle victoire, entrez votre nom pour le classement !");
+			if (nomUtilisateur == null) {
+				nomUtilisateur = "Secret Legend";
+			}
 
 			if (typePiste == TypePiste.CANADA) {
 				piste = "Canada";
@@ -1429,5 +1451,5 @@ public class ZoneAnimPhysique extends JPanel implements Runnable {
 					Math.round(tempsTotalEcoule * 100.0) / 100.0, piste);
 		}
 	}
-
+	
 }

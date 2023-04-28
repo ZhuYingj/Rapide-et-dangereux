@@ -286,13 +286,49 @@ public class AppPrincipale12 extends JFrame {
 	// Ludovic Julien
 	public void actionCheckBox2() {
 		if (checkBoxAudio.isSelected()) {
-			FenetreJeuScientifique.getClip().stop();
-			FenetreJeuSansScientifique.getClip().stop();
+			if (FenetreJeuScientifique.getMusicPiste() == "Mexique") {
+				FenetreJeuScientifique.getClip().stop();
+				FenetreJeuSansScientifique.getClip().stop();
+				}else {
+					if (FenetreJeuScientifique.getMusicPiste() == "Italie") {
+						FenetreJeuScientifique.getClip2().stop();
+					FenetreJeuSansScientifique.getClip2().stop();
+						}else {
+							if (FenetreJeuScientifique.getMusicPiste() == "Canada") {
+								FenetreJeuScientifique.getClip3().stop();
+								FenetreJeuSansScientifique.getClip3().stop();
+							}else {
+								if (FenetreJeuScientifique.getMusicPiste() == "Autre") {
+									FenetreJeuScientifique.getClip4().stop();
+									FenetreJeuSansScientifique.getClip4().stop();
+							}
+						}
+						}
+				}
 			pisteAudio = true;
 		} else {
-			FenetreJeuScientifique.getClip().start();
-			FenetreJeuSansScientifique.getClip().start();
+			if (FenetreJeuScientifique.getAnnim() == true) {
+			if (FenetreJeuScientifique.getMusicPiste() == "Mexique") {
+				FenetreJeuScientifique.getClip().start();
+				FenetreJeuSansScientifique.getClip().start();
+				}else {
+					if (FenetreJeuScientifique.getMusicPiste() == "Italie") {
+						FenetreJeuScientifique.getClip2().start();
+						FenetreJeuSansScientifique.getClip2().start();
+						}else {
+							if (FenetreJeuScientifique.getMusicPiste() == "Canada") {
+								FenetreJeuScientifique.getClip3().start();
+								FenetreJeuSansScientifique.getClip3().start();
+							}else {
+								if (FenetreJeuScientifique.getMusicPiste() == "Autre") {
+									FenetreJeuScientifique.getClip4().start();
+									FenetreJeuSansScientifique.getClip4().start();
+							}
+						}
+						}
+				}
 			pisteAudio = false;
+			}
 		}
 	}
 

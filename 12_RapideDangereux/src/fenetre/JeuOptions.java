@@ -610,6 +610,7 @@ public class JeuOptions extends JPanel {
 			imageActuelle = OutilsImage.lireImage("PisteCanada.png");
 
 			zoneAnimPhysique.setTypePiste(type);
+			FenetreJeuScientifique.setmusicPiste("Canada");
 			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().setPosition(
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
 							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 10)));
@@ -650,6 +651,8 @@ public class JeuOptions extends JPanel {
 			txtArea.append("\nVous avez choisi la piste Mexique!");
 			imageActuelle = OutilsImage.lireImage("PisteMexique.png");
 			zoneAnimPhysique.setTypePiste(type);
+			zoneAnimPhysique.musicPiste(type);
+			FenetreJeuScientifique.setmusicPiste("Mexique");
 			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().setPosition(
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
 							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 10)));
@@ -688,10 +691,13 @@ public class JeuOptions extends JPanel {
 	private void selectionImageItalie(MouseEvent e) {
 		if (btnItalie.contains(e.getX(), e.getY())) {
 			type = TypePiste.ITALIE;
+			FenetreJeuScientifique.setmusicPiste("Italie");
 			txtArea.append("\nVous avez choisi la piste Italie!");
 			imageActuelle = OutilsImage.lireImage("pisteItalie.PNG");
 
 			zoneAnimPhysique.setTypePiste(type);
+			zoneAnimPhysique.musicPiste(type);
+			
 			zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getVoiture().setPosition(
 					(new Vecteur2D(zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getX(),
 							zoneAnimPhysique.getRegroupement().getListePisteDeDepart().get(0).getY() + 10)));

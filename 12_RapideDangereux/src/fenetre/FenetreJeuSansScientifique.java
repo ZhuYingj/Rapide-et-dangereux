@@ -44,6 +44,10 @@ public class FenetreJeuSansScientifique extends JPanel {
 	private JButton btnStart;
 	private JLabel lblTempsEcouleValeur;
 	private static Clip clip;
+	private static Clip clip2;
+	private static Clip clip3;
+	private static Clip clip4;
+	private static String pistemusic;
 	private JProgressBar progressBarFroce2;
 	private JProgressBar progressBarFroce;
 	private JLabel lblImageObjet1;
@@ -81,6 +85,9 @@ public class FenetreJeuSansScientifique extends JPanel {
 		setBounds(100, 100, 1600, 800);
 
 		lireMusic();
+		lireMusic2();
+		lireMusic3();
+		lireMusic4();
 
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 373, 145, 304);
@@ -185,6 +192,11 @@ public class FenetreJeuSansScientifique extends JPanel {
 		add(btnNextImg);
 
 		btnStart = new JButton("Start");
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				musicStart();
+			}
+		});
 		btnStart.setBounds(30, 81, 97, 58);
 		add(btnStart);
 
@@ -479,7 +491,21 @@ public class FenetreJeuSansScientifique extends JPanel {
 	// Ludovic Julien
 	public void musicStart() {
 		if (AppPrincipale12.getCheckAudio() == false) {
+			if (pistemusic == "Mexique") {
 			clip.start();
+			}else {
+				if (pistemusic == "Italie") {
+					clip2.start();
+					}else {
+						if (pistemusic == "Canada") {
+							clip3.start();
+						}else {
+							if (pistemusic == "Autre") {
+								clip4.start();
+						}
+					}
+					}
+			}
 		}
 	}
 
@@ -492,7 +518,27 @@ public class FenetreJeuSansScientifique extends JPanel {
 	public static Clip getClip() {
 		return clip;
 	}
-
+	
+	public static Clip getClip2() {
+		return clip2;
+	}
+	
+	public static Clip getClip3() {
+		return clip3;
+	}
+	
+	public static Clip getClip4() {
+		return clip4;
+	}
+	
+	public static void setmusicPiste(String piste) {
+		pistemusic = piste;
+		System.out.println(pistemusic);
+	}
+	
+	public static String getMusicPiste() {
+		return pistemusic;
+	}
 	/**
 	 * méthode qui permet d'arreter et de recommencer la music au debut
 	 * 
@@ -503,6 +549,18 @@ public class FenetreJeuSansScientifique extends JPanel {
 			clip.stop();
 			clip.setMicrosecondPosition(0);
 		}
+		if (clip2 != null) {
+			clip2.stop();
+			clip2.setMicrosecondPosition(0);
+		}
+		if (clip3 != null) {
+			clip3.stop();
+			clip3.setMicrosecondPosition(0);
+		}
+		if (clip4 != null) {
+			clip4.stop();
+			clip4.setMicrosecondPosition(0);
+		}
 	}
 
 	/**
@@ -511,11 +569,54 @@ public class FenetreJeuSansScientifique extends JPanel {
 	// Ludovic Julien
 	public void lireMusic() {
 		try {
+			
 			clip = AudioSystem.getClip();
 			URL resource = getClass().getClassLoader().getResource("Kosmorider-Night.wav");
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(resource);
 			clip.open(inputStream);
-
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void lireMusic2() {
+		try {
+			
+			clip2 = AudioSystem.getClip();
+			URL resource2 = getClass().getClassLoader().getResource("retro-city-14099.wav");
+			AudioInputStream inputStream2 = AudioSystem.getAudioInputStream(resource2);
+			clip2.open(inputStream2);
+					
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	
+	public void lireMusic3() {
+		try {
+			
+			clip3 = AudioSystem.getClip();
+			URL resource3 = getClass().getClassLoader().getResource("retro-city-14099.wav");
+			AudioInputStream inputStream3 = AudioSystem.getAudioInputStream(resource3);
+			clip3.open(inputStream3);
+					
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	
+	public void lireMusic4() {
+		try {
+			
+			clip4 = AudioSystem.getClip();
+			URL resource4 = getClass().getClassLoader().getResource("retro-city-14099.wav");
+			AudioInputStream inputStream4 = AudioSystem.getAudioInputStream(resource4);
+			clip4.open(inputStream4);
+					
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -526,8 +627,18 @@ public class FenetreJeuSansScientifique extends JPanel {
 	 */
 	// Ludovic Julien
 	public void arretMusic() {
-		if (clip != null) {
-			clip.stop();
+			
+			if (clip != null) {
+				clip.stop();
+			}
+			if (clip2 != null) {
+				clip2.stop();
+			}
+			if (clip3 != null) {
+				clip3.stop();
+			}
+			if (clip4 != null) {
+				clip4.stop();
+			}
 		}
-	}
 }
