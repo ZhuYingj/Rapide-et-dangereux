@@ -68,7 +68,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 		// on cree le dossier s'il n'existe pas
 		if (dossier.mkdir()) {
-			System.out.println("\nLe dossier " + dossier.toString() + " a été créé car il n'existait pas...");
+		
 		}
 
 		// chemin d'acces au fichier de travail
@@ -82,9 +82,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 			// on écrit chacun des objets
 			oos.writeObject(regroupement);
-			System.out.println(
-					"\nLes informations sur la voiture et le regroupement sont écrites avec succès. \nLe fichier "
-							+ fichierDeTravail.toString() + " est pret pour la lecture!");
+		
 
 		}
 
@@ -209,7 +207,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 		// on cree le dossier s'il n'existe pas
 		if (dossier.mkdir()) {
-			System.out.println("\nLe dossier " + dossier.toString() + " a été créé car il n'existait pas...");
+	
 		}
 
 		// chemin d'acces au fichier de travail
@@ -223,9 +221,7 @@ public class GestionnaireDeFichiersSurLeBureau {
 
 			// on �crit chacun des objets
 			oos.writeObject(regroupement);
-			System.out.println(
-					"\nLes informations sur la voiture et le regroupement sont écrites avec succès. \nLe fichier "
-							+ fichierDeTravail.toString() + " est pret pour la lecture!");
+
 
 		}
 
