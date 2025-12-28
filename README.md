@@ -1,4 +1,4 @@
-# Jeu de course inspiré de Mario Kart
+# Jeu de course inspiré de Mario Kart 🏎️ 🏁
 Ce projet est un jeu de course arcade inspiré de Mario Kart où les joueurs s'affrontent sur des circuits colorés en utilisant des power-ups/objets pour prendre l'avantage. 
 Développé entièrement en Java avec l'interface graphique JavaSwing. Déveoppé à travers une méthodologie Agile Scrum. 
 C'est un jeu multijoueur qui se joue sur un même clavier. 
