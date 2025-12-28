@@ -4,11 +4,11 @@ Développé entièrement en Java avec l'interface graphique JavaSwing. Déveopp�
 C'est un jeu multijoueur qui se joue sur un même clavier. 
 
 # Contrôles
-⬆️ / W Flèche haut pour accélérer 
-⬇️ / S Flèche bas pour freiner / reculer
-⬅️ / A Flèche gauche pour tourner à gauche
-➡️ / D Flèche droite pour tourner à droite
-Espace / E pour utiliser l'item
+- ⬆️ / W Flèche haut pour accélérer
+- ⬇️ / S Flèche bas pour freiner / reculer
+- ⬅️ / A Flèche gauche pour tourner à gauche
+- ➡️ / D Flèche droite pour tourner à droite
+- Espace / E pour utiliser l'item
 
 # Sections
 - Éditeur de piste
