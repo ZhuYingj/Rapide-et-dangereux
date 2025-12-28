@@ -14,3 +14,5 @@ Espace / E pour utiliser l'item
 - Éditeur de piste
 - Information
 - Jouer
+
+<img width="1579" height="784" alt="image" src="https://github.com/user-attachments/assets/15c7af3f-b581-451d-9632-78035c63e6d4" />
