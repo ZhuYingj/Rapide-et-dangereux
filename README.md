@@ -3,7 +3,7 @@ Ce projet est un jeu de course arcade inspiré de Mario Kart où les joueurs s'a
 Développé entièrement en Java avec l'interface graphique JavaSwing. Déveoppé à travers une méthodologie Agile Scrum. 
 C'est un jeu multijoueur à 2 qui se joue sur un même clavier. 
 
-# 🧰 Barre outils option en haut à droite
+# 🧰 Barre outils option en haut à gauche
 - Mode non-scientifique : Permet de supprimer durant le jeu les données scientifiques et les graphiques associés
 - Supprimer effet sonore : Permet d'enlever les effets sonores durant le jeu
 
